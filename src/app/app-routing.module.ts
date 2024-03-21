@@ -4,7 +4,7 @@ import { HomeComponent } from './modulos/home/home.component';
 const routes: Routes = [
   {
     path:'',
-    component:HomeComponent
+    component:HomeComponent 
   },
   {
     path:'registrar',
@@ -12,7 +12,7 @@ const routes: Routes = [
   }
 ];
 
-@NgModule({
+@NgModule({ 
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
