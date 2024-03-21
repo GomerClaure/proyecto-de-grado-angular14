@@ -9,6 +9,9 @@ import { HomeComponent } from './modulos/home/home.component';
 import { RegistrarPlatilloComponent } from './modulos/propietario/registro/registrar-platillo/registrar-platillo.component';
 import { RegistrarCategoriaComponent } from './modulos/propietario/registro/registrar-categoria/registrar-categoria.component';
 import { RegistrarEmpleadoComponent } from './modulos/propietario/registro/registrar-empleado/registrar-empleado.component';
+import { ListaCategoriaComponent } from './modulos/propietario/listas/lista-categoria/lista-categoria.component';
+import { ListaPlatilloComponent } from './modulos/propietario/listas/lista-platillo/lista-platillo.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,11 +21,14 @@ import { RegistrarEmpleadoComponent } from './modulos/propietario/registro/regis
     HomeComponent,
     RegistrarPlatilloComponent,
     RegistrarCategoriaComponent,
-    RegistrarEmpleadoComponent
+    RegistrarEmpleadoComponent,
+    ListaCategoriaComponent,
+    ListaPlatilloComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

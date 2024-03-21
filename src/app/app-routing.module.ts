@@ -9,7 +9,12 @@ const routes: Routes = [
   {
     path:'registrar',
     loadChildren:()=>import('../app/modulos/propietario/registro/registro.module').then(m=>m.RegistroModule)
+  },
+  {
+    path:'lista',
+    loadChildren:()=>import('../app/modulos/propietario/listas/listas.module').then(m=>m.ListasModule)
   }
+  
 ];
 
 @NgModule({ 

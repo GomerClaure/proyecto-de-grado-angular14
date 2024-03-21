@@ -1,2 +1,50 @@
 <app-nav></app-nav><br><br><br>
-<p>registrar-platillo works!</p>
+<div class="fondo">
+<div class="container">
+    <h2 class="titulo">Registrar Platillo</h2>
+    <div class="form">
+        <form [formGroup]="formularioPlatillo">
+            <div class="row">
+            <div class=" col-md-6">
+                <div class="form-group col-12">
+                  <label>Nombre del platillo</label>
+                  <input type="text" class="form-control" formGroupName="nombre"> 
+                </div>
+                <div class="form-group col-12">
+                    <label for="exampleFormControlSelect1">Categoria</label>
+                    <select class="form-control" formControlName="categoria">
+                      <option>Postres</option>
+                      <option>Carnes</option>
+                    </select>
+                </div> 
+                <div class="form-group col-12">
+                    <label>Precio</label>
+                    <input type="text" class="form-control" formArrayName="precio">
+                </div>
+                <div class="form-group col-12">
+                    <label>Descripcion</label>
+                    <textarea class="form-control" formControlName="descripcion"></textarea>
+                </div>
+            </div> 
+            <br>
+            <div class="col-md-6 col-xs-12">
+            <div class="apartadoImg">
+                <label>Imagen</label>
+                <img src="../../../../../assets//image/bistec.avif" class="img-fluid">
+                <div class="btn-flex">
+                <label for="archivo" class="btn-img">Seleccionar</label>
+                <input type="file" id="archivo" class="hidden">
+            </div> 
+            </div>
+        </div>
+    </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="botones-group">
+         <button class="btn">Atras</button>
+         <button class="btn" >Registrar</button>
+        </div>
+     </div>
+</div>
+</div>
