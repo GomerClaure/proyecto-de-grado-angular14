@@ -6,3 +6,14 @@
 .titulo{
     text-align: center;
 }
+.btn{
+  background-color: #cc3931;
+  color: white;
+}
+.fondo {
+  background-image: url('./assets/image/background_transp1.png');
+  background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el contenedor */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  height: 100vh;
+}

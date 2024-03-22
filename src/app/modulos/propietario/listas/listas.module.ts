@@ -4,10 +4,11 @@ import { ListaRoutingModule } from './lista-routing.module';
 
  
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     CommonModule,
-    ListaRoutingModule
+    ListaRoutingModule,
   ]
 })
-export class ListasModule { }
+export class ListasModule { } 

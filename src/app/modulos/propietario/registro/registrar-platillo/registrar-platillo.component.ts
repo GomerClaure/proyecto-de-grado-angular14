@@ -15,7 +15,7 @@ export class RegistrarPlatilloComponent{
       categoria: [''],
       precio: [''],
       descripcion: [''],
-      //imagen:['']
+      imagen:['']
     });
   }
   onSubmit() {

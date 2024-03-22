@@ -12,7 +12,7 @@ import { RegistrarEmpleadoComponent } from './modulos/propietario/registro/regis
 import { ListaCategoriaComponent } from './modulos/propietario/listas/lista-categoria/lista-categoria.component';
 import { ListaPlatilloComponent } from './modulos/propietario/listas/lista-platillo/lista-platillo.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { EditarPlatilloComponent } from './modulos/propietario/editar/editar-platillo/editar-platillo.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     RegistrarEmpleadoComponent,
     ListaCategoriaComponent,
     ListaPlatilloComponent,
+    EditarPlatilloComponent
   ],
   imports: [
     BrowserModule,

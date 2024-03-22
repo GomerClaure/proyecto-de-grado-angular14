@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-lista-platillo',
   templateUrl: './lista-platillo.component.html',
   styleUrls: ['./lista-platillo.component.scss']
 })
-export class ListaPlatilloComponent implements OnInit {
+export class ListaPlatilloComponent {
 
-  constructor() { }
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {
-  }
+  Propietario() {
+    this.router.navigate(['lista/editar-platillo']); 
+    }
 
 }

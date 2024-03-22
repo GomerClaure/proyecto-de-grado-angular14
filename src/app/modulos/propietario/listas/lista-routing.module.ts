@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes,RouterModule } from '@angular/router';
 import { ListaCategoriaComponent } from './lista-categoria/lista-categoria.component';
 import { ListaPlatilloComponent } from './lista-platillo/lista-platillo.component';
+import { EditarPlatilloComponent } from '../editar/editar-platillo/editar-platillo.component';
 
 const routes:Routes=[
   {
@@ -15,7 +16,11 @@ const routes:Routes=[
       {
         path:'platillo',
         component:ListaPlatilloComponent
-      } 
+      },
+      {
+        path:'editar-platillo',
+        component:EditarPlatilloComponent
+      }
     ]
   }
 ]
