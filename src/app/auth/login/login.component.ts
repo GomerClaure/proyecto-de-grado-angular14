@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/auth/session.service';
+import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -11,17 +11,20 @@ import { SessionService } from 'src/app/services/auth/session.service';
 export class LoginComponent {
   formularioLogin: FormGroup;
 
-  constructor(private formBuilder:FormBuilder,
-    private sessionService: SessionService, private router: Router) { 
-   this.formularioLogin=this.formBuilder.group({
-    usuario:[''],
-    password:['']
+  constructor(private formBuilder:FormBuilder, private sessionService: SessionService, private router: Router) { 
+   this.formularioLogin=this.formBuilder.group({ 
+       nombre:[null,Validators.required],
+       password:[null,[Validators.required,Validators.minLength(8)]]
    });
   } 
     onSubmit(){
-      const datosLogin=this.formularioLogin.value;
+      if(this.formularioLogin.valid){
+        const datosLogin=this.formularioLogin.value;
       console.log(datosLogin); 
       this.login();
+      }else{
+        alert('Datos incorrectos');
+      }
     }
 
     public login() {

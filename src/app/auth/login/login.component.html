@@ -34,14 +34,20 @@
             <div class="card-body"> 
               <form [formGroup]="formularioLogin"> 
                 <div class="mb-3">
-                  <label for="usuario" class="form-label" >Usuario o Correo</label>
+                  <label for="email" class="form-label" >Usuario o Correo</label>
                   <input class="form-control" formControlName="usuario">
+                  <div *ngIf="formularioLogin.get('usuario')?.invalid && formularioLogin.get('usuario')?.touched" class="text-danger">
+                    El nombre es obligatorio y debe tener al menos 3 caracteres.
+                  </div>
                 </div>
                 <div class="mb-3">
                   <label for="password" class="form-label" >Contraseña</label>
-                  <input type="password" class="form-control" formControlName="password">
+                  <input type="password" class="form-control" formControlName="password" required>
+                  <div *ngIf="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched" class="text-danger">
+                    La contraseña es obligatoria y debe tener al menos 8 caracteres.
+                  </div>
                 </div>
-                <div class="d-grid gap-2">
+                <div class="d-grid gap-2"> 
                   <button type="submit" class="btn btn-block" (click)="onSubmit()">Iniciar Sesión</button>
                 </div>
               </form>
