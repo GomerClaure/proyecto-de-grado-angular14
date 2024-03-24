@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthRouthingModule } from './auth-routhing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [],

@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EditarPlatilloComponent } from './modulos/propietario/editar/editar-platillo/editar-platillo.component';
 import { HomePageComponent } from './auth/home-page/home-page.component';
 import { LoginComponent } from './auth/login/login.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { LoginComponent } from './auth/login/login.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

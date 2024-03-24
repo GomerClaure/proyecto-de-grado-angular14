@@ -34,12 +34,12 @@
             <div class="card-body"> 
               <form [formGroup]="formularioLogin"> 
                 <div class="mb-3">
-                  <label for="email" class="form-label" >Nombre</label>
-                  <input class="form-control" formControlName="nombre">
+                  <label for="usuario" class="form-label" >Usuario o Correo</label>
+                  <input class="form-control" formControlName="usuario">
                 </div>
                 <div class="mb-3">
                   <label for="password" class="form-label" >Contraseña</label>
-                  <input type="password" class="form-control" formControlName="pass">
+                  <input type="password" class="form-control" formControlName="password">
                 </div>
                 <div class="d-grid gap-2">
                   <button type="submit" class="btn btn-block" (click)="onSubmit()">Iniciar Sesión</button>
