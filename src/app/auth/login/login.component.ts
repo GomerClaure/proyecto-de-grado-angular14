@@ -17,7 +17,7 @@ export class LoginComponent {
   } 
     onSubmit(){
       const datosLogin=this.formularioLogin.value;
-      console.log(datosLogin);
+      console.log(datosLogin); 
     }
   } 
 

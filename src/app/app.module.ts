@@ -35,7 +35,7 @@ import { LoginComponent } from './auth/login/login.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

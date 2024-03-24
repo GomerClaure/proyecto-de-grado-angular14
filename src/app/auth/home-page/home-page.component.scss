@@ -6,3 +6,38 @@
     top: 0; /* La barra de navegación se fija en la parte superior */
     z-index: 1000; 
 }
+.paginaInicial{
+    margin: 0;
+    padding: 0;
+    background-image: url('../../../assets/image/Fondo1.jpg'); 
+    background-size: cover;
+    background-position: center;
+    height: 90vh;
+  }
+h1{
+  font-size: 4vw;
+}
+  .container {
+    text-align: center;
+    backdrop-filter: blur(10px);
+    position: absolute;
+    font-size: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    color: white; 
+  }
+  .animated-heading, .animated-text {
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
