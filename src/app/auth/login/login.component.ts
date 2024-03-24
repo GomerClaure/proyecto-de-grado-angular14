@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormGroup } from '@angular/forms';
+import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,14 +10,18 @@ export class LoginComponent {
   formularioLogin: FormGroup;
 
   constructor(private formBuilder:FormBuilder) { 
-   this.formularioLogin=this.formBuilder.group({
-       nombre:[''],
-       pass:['']
+   this.formularioLogin=this.formBuilder.group({ 
+       nombre:[null,Validators.required],
+       password:[null,[Validators.required,Validators.minLength(8)]]
    });
   } 
     onSubmit(){
-      const datosLogin=this.formularioLogin.value;
+      if(this.formularioLogin.valid){
+        const datosLogin=this.formularioLogin.value;
       console.log(datosLogin); 
+      }else{
+        //Formulario Invalido
+      }
     }
   } 
 
