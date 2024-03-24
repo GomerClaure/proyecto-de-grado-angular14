@@ -19,5 +19,5 @@ export class LoginComponent {
       const datosLogin=this.formularioLogin.value;
       console.log(datosLogin);
     }
-  }
+  } 
 

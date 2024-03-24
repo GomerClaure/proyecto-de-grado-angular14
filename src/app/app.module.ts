@@ -28,7 +28,8 @@ import { LoginComponent } from './auth/login/login.component';
     ListaCategoriaComponent,
     ListaPlatilloComponent,
     EditarPlatilloComponent,
-    HomePageComponent,LoginComponent
+    HomePageComponent,
+    //LoginComponent
 
   ],
   imports: [
