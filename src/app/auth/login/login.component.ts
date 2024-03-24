@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { SessionService } from 'src/app/services/auth/session.service';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -9,9 +11,9 @@ import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 export class LoginComponent {
   formularioLogin: FormGroup;
 
-  constructor(private formBuilder:FormBuilder) { 
+  constructor(private formBuilder:FormBuilder, private sessionService: SessionService, private router: Router) { 
    this.formularioLogin=this.formBuilder.group({ 
-       nombre:[null,[Validators.required,Validators.minLength(4)]],
+       usuario:[null,[Validators.required,Validators.minLength(4)]],
        password:[null,[Validators.required,Validators.minLength(8)]]
    });
   } 
@@ -24,5 +26,22 @@ export class LoginComponent {
         alert("No validos")
       }
     }
+
+    public login() {
+      const { user, password } = this.formularioLogin.value;
+      this.sessionService.login(user, password).subscribe(
+        res => {
+          if (res) {
+            alert('Inicio de sesión exitoso.');
+            this.router.navigate(['/']);
+          }
+        },
+        err => {
+          console.log(err);
+          console.log(err.error.message);
+         alert('Usuario o contraseña incorrectos.');
+        });
+    }
+    
   } 
 

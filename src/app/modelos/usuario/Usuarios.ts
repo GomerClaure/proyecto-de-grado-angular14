@@ -7,7 +7,7 @@ export interface Usuario{
     correo:string;
     nickname:string;
     foto_perfil:string;
-    access_token:string;
+    token:string;
 }
 
 export interface Administrador{

@@ -9,16 +9,16 @@ import { of } from 'rxjs';
 })
 export class SessionService {
 
-  private BASE_URL = 'http://localhost:3000/api/auth';
+  private BASE_URL = 'http://localhost:3000/api';
 
   constructor(private http: HttpClient) { }
 
-  public login(user: string, passwprd: string) {
-    return this.http.post<any>(`${this.BASE_URL}/login`, { user, passwprd }).pipe(
+  public login(user: string, password: string) {
+    return this.http.post<any>(`${this.BASE_URL}/login`, { user, password }).pipe(
       tap (res => {
         if (res) {
           let usuario: Usuario = res.data.usuario;
-          localStorage.setItem('token', usuario.access_token);
+          localStorage.setItem('token', usuario.token);
           localStorage.setItem('id_user', usuario.id.toString());
           localStorage.setItem('nombre', usuario.nombre);
           localStorage.setItem('apellido_paterno', usuario.apellido_paterno);
