@@ -11,16 +11,17 @@ export class LoginComponent {
 
   constructor(private formBuilder:FormBuilder) { 
    this.formularioLogin=this.formBuilder.group({ 
-       nombre:[null,Validators.required],
+       nombre:[null,[Validators.required,Validators.minLength(4)]],
        password:[null,[Validators.required,Validators.minLength(8)]]
    });
   } 
     onSubmit(){
       if(this.formularioLogin.valid){
         const datosLogin=this.formularioLogin.value;
-      console.log(datosLogin); 
+        console.log(datosLogin); 
+        alert("Usuario correcto")
       }else{
-        //Formulario Invalido
+        alert("No validos")
       }
     }
   } 
