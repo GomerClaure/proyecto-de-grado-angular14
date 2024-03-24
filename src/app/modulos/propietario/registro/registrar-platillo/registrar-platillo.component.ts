@@ -8,7 +8,7 @@ import { FormBuilder,FormGroup } from '@angular/forms';
 })
 export class RegistrarPlatilloComponent{
   formularioPlatillo: FormGroup;
-
+ 
   constructor(private formBuilder: FormBuilder) {
     this.formularioPlatillo = this.formBuilder.group({
       nombre: [''],

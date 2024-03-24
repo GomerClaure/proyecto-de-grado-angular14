@@ -13,6 +13,9 @@ import { ListaCategoriaComponent } from './modulos/propietario/listas/lista-cate
 import { ListaPlatilloComponent } from './modulos/propietario/listas/lista-platillo/lista-platillo.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditarPlatilloComponent } from './modulos/propietario/editar/editar-platillo/editar-platillo.component';
+import { HomePageComponent } from './auth/home-page/home-page.component';
+import { LoginComponent } from './auth/login/login.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +27,9 @@ import { EditarPlatilloComponent } from './modulos/propietario/editar/editar-pla
     RegistrarEmpleadoComponent,
     ListaCategoriaComponent,
     ListaPlatilloComponent,
-    EditarPlatilloComponent
+    EditarPlatilloComponent,
+    HomePageComponent,LoginComponent
+
   ],
   imports: [
     BrowserModule,
