@@ -9,6 +9,10 @@ import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 export class RegistrarPlatilloComponent{
   formularioPlatillo: FormGroup;
   static numbersOnlyPattern: RegExp = /^[0-9]*$/;
+  //imageUrl: any;
+  imageUrl: string | ArrayBuffer | null;
+  imageWidth: number = 450; 
+  imageHeight: number = 300;
  
   constructor(private formBuilder: FormBuilder) {
     this.formularioPlatillo = this.formBuilder.group({
@@ -18,7 +22,21 @@ export class RegistrarPlatilloComponent{
       descripcion: [null,Validators.required],
       imagen:[null,Validators.required]
     });
+    this.imageUrl = 'assets/image/27002.jpg';
   }
+
+  // Función para previsualizar la imagen seleccionada
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.imageUrl = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   onSubmit() {
     if(this.formularioPlatillo.valid){
       // Obtener los valores del formulario
