@@ -34,16 +34,17 @@
             <div class="card-body"> 
               <form [formGroup]="formularioLogin"> 
                 <div class="mb-3">
-                  <label for="email" class="form-label" >Usuario o Correo</label>
-                  <input class="form-control" formControlName="usuario">
-                  <div *ngIf="formularioLogin.get('usuario')?.invalid && formularioLogin.get('usuario')?.touched" class="text-danger">
-                    El nombre es obligatorio y debe tener al menos 3 caracteres.
+                  <label for="validationServer03" class="form-label">Nombre</label>
+                  <input class="form-control" aria-describedby="validationServer03Feedback" formControlName="usuario" [class.is-invalid]="formularioLogin.get('usuario')?.invalid && formularioLogin.get('usuario')?.touched">
+                  <div *ngIf="formularioLogin.get('usuario')?.invalid && formularioLogin.get('usuario')?.touched" class="invalid-feedback">
+                      El nombre es obligatorio y debe tener al menos 3 caracteres.
                   </div>
-                </div>
+              </div>
+              
                 <div class="mb-3">
-                  <label for="password" class="form-label" >Contraseña</label>
-                  <input type="password" class="form-control" formControlName="password" required>
-                  <div *ngIf="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched" class="text-danger">
+                  <label for="validationServer03" class="form-label" >Contraseña</label>
+                  <input type="password" class="form-control" aria-describedby="validationServer03Feedback" formControlName="password" [class.is-invalid]="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched">
+                  <div *ngIf="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched"  class="invalid-feedback">
                     La contraseña es obligatoria y debe tener al menos 8 caracteres.
                   </div>
                 </div>
