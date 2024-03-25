@@ -18,7 +18,7 @@ export class RegistrarPlatilloComponent{
     this.formularioPlatillo = this.formBuilder.group({
       nombre: [null,Validators.required],
       categoria: [null,Validators.required],
-      precio: [null,Validators.required,Validators.pattern(RegistrarPlatilloComponent.numbersOnlyPattern)],
+      precio: [null, [Validators.required, Validators.pattern(RegistrarPlatilloComponent.numbersOnlyPattern)]],
       descripcion: [null,Validators.required],
       imagen:[null,Validators.required]
     });

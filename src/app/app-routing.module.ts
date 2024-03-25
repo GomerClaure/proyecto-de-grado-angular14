@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-//import { HomePageComponent } from './auth/home-page/home-page.component';
+import { HomeComponent } from './modulos/home/home.component';
 
-const routes: Routes = [
+const routes: Routes = [ 
   {
     path:'',
-    //component:HomePageComponent,
     loadChildren:()=>import('../app/auth/auth.module').then(m=>m.AuthModule)
   },
   { 
@@ -15,9 +14,11 @@ const routes: Routes = [
   {
     path:'lista',
     loadChildren:()=>import('../app/modulos/propietario/listas/listas.module').then(m=>m.ListasModule)
-  },{
-  path: 'login',
-  loadChildren: () => import('../app/auth/login/login.component').then(m => m.LoginComponent)
+  },
+  {
+  path:'home',
+  component:HomeComponent
+  //loadChildren: () => import('../app/auth/login/login.component').then(m => m.LoginComponent)
   }
 ];
  

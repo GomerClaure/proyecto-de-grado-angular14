@@ -10,7 +10,7 @@
                 <div class="form-group col-12">
                   <label>Nombre del platillo</label>
                   <input type="text" class="form-control" formControlName="nombre"> 
-                  <div *ngIf="formularioPlatillo.get('nombre')?.invalid && formularioPlatillo.get('nombre')?.touched" class="text-danger">
+                   <div *ngIf="formularioPlatillo.get('nombre')?.invalid && formularioPlatillo.get('nombre')?.touched" class="text-danger">
                     El nombre es obligatorio y debe tener al menos 3 caracteres.
                   </div>
                 </div>
@@ -27,6 +27,9 @@
                 <div class="form-group col-12">
                     <label>Precio</label>
                     <input type="text" class="form-control" formControlName="precio">
+                    <div *ngIf="formularioPlatillo.get('precio')?.invalid && formularioPlatillo.get('precio')?.touched" class="text-danger">
+                        Ingrese solo numeros 
+                      </div>
                 </div>
                 <div class="form-group col-12">
                     <label>Descripcion</label>
