@@ -34,4 +34,5 @@ export interface Empleado{
     fecha_contratacion:Date;
     direccion:string;
     usuario: Usuario;
+    id_rol:number;
 }
