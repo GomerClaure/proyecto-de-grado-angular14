@@ -14,6 +14,7 @@ export class RegistrarPlatilloComponent {
   imageUrl: string | ArrayBuffer | null;
   imageWidth: number = 450; 
   imageHeight: number = 300;
+  selectedFile: File = new File([''], '');
  
   constructor(private formBuilder: FormBuilder,private platillosService:PlatillosService) {
     this.formularioPlatillo = this.formBuilder.group({
@@ -28,6 +29,7 @@ export class RegistrarPlatilloComponent {
 
   // Función para previsualizar la imagen seleccionada
   onFileSelected(event: any) {
+    this.selectedFile = <File>event.target.files[0];
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -43,6 +45,8 @@ export class RegistrarPlatilloComponent {
       // Obtener los valores del formulario
       const datosPlatillo = this.formularioPlatillo.value;
       console.log(datosPlatillo);
+      console.log(this.selectedFile);
+      this.registrarPlatillo();
       // Aquí puedes agregar la lógica para enviar los datos a través de una solicitud HTTP o realizar cualquier otra acción que desees con los datos.
     }
     else {
@@ -58,7 +62,7 @@ export class RegistrarPlatilloComponent {
       let datosForm = this.formularioPlatillo.value;
       console.log(datosForm);
       const formData = new FormData();
-      formData.append('imagen', datosForm.imagen);
+      formData.append('imagen', this.selectedFile);
       formData.append('nombre', datosForm.nombre);
       formData.append('id_categoria', datosForm.categoria);
       formData.append('precio', datosForm.precio);

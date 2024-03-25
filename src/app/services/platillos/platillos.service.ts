@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Platillo } from 'src/app/modelos/Platillo';
 
 @Injectable({
@@ -8,6 +8,12 @@ import { Platillo } from 'src/app/modelos/Platillo';
 export class PlatillosService {
 
   private BASE_URL = 'http://localhost:8000/api';
+  // private csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  private headers = {
+    'Authorization': 'Bearer ' + sessionStorage.getItem('token_access'),
+    // 'Content-Type': 'multipart/form-data'
+  };
+
 
   constructor(private http: HttpClient) { }
 
@@ -15,7 +21,7 @@ export class PlatillosService {
     return this.http.get<Platillo>(`${this.BASE_URL}/platillos`);
   }
 
-  storePlatillo(platillo: any) {
-    return this.http.post<Platillo>(`${this.BASE_URL}/platillos`, platillo);
+  storePlatillo(formData: FormData) {
+    return this.http.post<any>(`${this.BASE_URL}/menu/platillo`, formData, { headers: this.headers });
   }
 }
