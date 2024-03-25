@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionService } from 'src/app/services/auth/session.service';
 
 @Component({
   selector: 'app-nav',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sessionService: SessionService) { }
 
   ngOnInit(): void {
   }
+  esAdministrador(): boolean {
+    return sessionStorage.getItem('tipo') === 'Administrador';
+  }
+
+  esPropietario(): boolean {
+    return sessionStorage.getItem('tipo') === 'Propietario';
+  }
+
+  esEmpleado(): boolean {
+    return sessionStorage.getItem('tipo') === 'Empleado';
+  }
+
+  cerrarSesion() {
+    this.sessionService.logout();
+  }
 
 }

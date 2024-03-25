@@ -36,7 +36,7 @@ export class LoginComponent {
           if (res) {
             alert('Inicio de sesión exitoso.');
 
-            this.router.navigate(['/']);
+            this.router.navigate(['/home']);
           }
         },
         err => {
