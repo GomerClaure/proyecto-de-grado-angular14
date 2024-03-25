@@ -13,7 +13,7 @@ export class LoginComponent {
 
   constructor(private formBuilder:FormBuilder, private sessionService: SessionService, private router: Router) { 
    this.formularioLogin=this.formBuilder.group({ 
-       nombre:[null,Validators.required],
+       usuario:[null,Validators.required],
        password:[null,[Validators.required,Validators.minLength(8)]]
    });
   } 
@@ -28,8 +28,9 @@ export class LoginComponent {
     }
 
     public login() {
-      const { user, password } = this.formularioLogin.value;
-      this.sessionService.login(user, password).subscribe(
+      const { usuario, password } = this.formularioLogin.value;
+      console.log(usuario, password);
+      this.sessionService.login(usuario, password).subscribe(
         res => {
           if (res) {
             alert('Inicio de sesión exitoso.');

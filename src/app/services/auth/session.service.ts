@@ -9,42 +9,43 @@ import { of } from 'rxjs';
 })
 export class SessionService {
 
-  private BASE_URL = 'http://localhost:3000/api';
+  private BASE_URL = 'http://localhost:8000/api';
 
   constructor(private http: HttpClient) { }
 
-  public login(user: string, password: string) {
-    return this.http.post<any>(`${this.BASE_URL}/login`, { user, password }).pipe(
+  public login(usuario: string, password: string) {
+    return this.http.post<any>(`${this.BASE_URL}/login`, { usuario, password }).pipe(
       tap (res => {
+        console.log(res);
         if (res) {
-          let usuario: Usuario = res.data.usuario;
-          localStorage.setItem('token', usuario.token);
-          localStorage.setItem('id_user', usuario.id.toString());
-          localStorage.setItem('nombre', usuario.nombre);
-          localStorage.setItem('apellido_paterno', usuario.apellido_paterno);
-          localStorage.setItem('apellido_materno', usuario.apellido_materno);
-          localStorage.setItem('correo', usuario.correo);
-          localStorage.setItem('nickname', usuario.nickname);
-          localStorage.setItem('foto_perfil', usuario.foto_perfil);
-          if (res.usuario.tipo === 'Administrador') {
-            localStorage.setItem('tipo', 'Administrador');
-          } else if (res.usuario.tipo === 'Propietario') {
-            let propietario: Propietario = res.data;
-            localStorage.setItem('id_administrador', propietario.id_administrador.toString());
-            localStorage.setItem('id_usuario', propietario.id_usuario.toString());
-            localStorage.setItem('id_restaurante', propietario.id_restaurante.toString());
-            localStorage.setItem('ci', propietario.ci.toString());
-            localStorage.setItem('fecha_registro', propietario.fecha_registro.toString());
-            localStorage.setItem('pais', propietario.pais);
-            localStorage.setItem('departamento', propietario.departamento);
-            localStorage.setItem('tipo', 'Propietario');
-          } else if (res.usuario.tipo === 'Empleado') {
-            let empleado: Empleado = res.data;
-            localStorage.setItem('ci', empleado.ci.toString());
-            localStorage.setItem('fecha_nacimiento', empleado.fecha_nacimiento.toString());
-            localStorage.setItem('fecha_contratacion', empleado.fecha_contratacion.toString());
-            localStorage.setItem('direccion', empleado.direccion);
-            localStorage.setItem('tipo', 'Empleado');
+          let usuario: Usuario = res.user.usuario;
+          sessionStorage.setItem('token_access', res.token);
+          sessionStorage.setItem('id_user', usuario.id.toString());
+          sessionStorage.setItem('nombre', usuario.nombre);
+          sessionStorage.setItem('apellido_paterno', usuario.apellido_paterno);
+          sessionStorage.setItem('apellido_materno', usuario.apellido_materno);
+          sessionStorage.setItem('correo', usuario.correo);
+          sessionStorage.setItem('nickname', usuario.nickname);
+          sessionStorage.setItem('foto_perfil', usuario.foto_perfil);
+          if (res.user.tipo === 'Administrador') {
+            sessionStorage.setItem('tipo', 'Administrador');
+          } else if (res.user.tipo === 'Propietario') {
+            let propietario: Propietario = res.user;
+            sessionStorage.setItem('id_administrador', propietario.id_administrador.toString());
+            sessionStorage.setItem('id_usuario', propietario.id_usuario.toString());
+            sessionStorage.setItem('id_restaurante', propietario.id_restaurante.toString());
+            sessionStorage.setItem('ci', propietario.ci.toString());
+            sessionStorage.setItem('fecha_registro', propietario.fecha_registro.toString());
+            sessionStorage.setItem('pais', propietario.pais);
+            sessionStorage.setItem('departamento', propietario.departamento);
+            sessionStorage.setItem('tipo', 'Propietario');
+          } else if (res.user.tipo === 'Empleado') {
+            let empleado: Empleado = res.user;
+            sessionStorage.setItem('ci', empleado.ci.toString());
+            sessionStorage.setItem('fecha_nacimiento', empleado.fecha_nacimiento.toString());
+            sessionStorage.setItem('fecha_contratacion', empleado.fecha_contratacion.toString());
+            sessionStorage.setItem('direccion', empleado.direccion);
+            sessionStorage.setItem('tipo', 'Empleado');
           }
         }
         // return {message: 'Inicio de sesión exitoso.'}
@@ -54,5 +55,10 @@ export class SessionService {
         return of(false);
       })
     );
+  }
+
+  public logout() {
+    return this.http.get<any>(`${this.BASE_URL}/logout`);
+
   }
 }
