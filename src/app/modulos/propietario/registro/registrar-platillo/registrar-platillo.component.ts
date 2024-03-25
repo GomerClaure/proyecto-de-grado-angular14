@@ -36,11 +36,17 @@ export class RegistrarPlatilloComponent {
 
     if (this.formularioPlatillo.valid) {
       // Obtener los valores del formulario
+      let id_restaurante = sessionStorage.getItem('id_restaurante')||'';
       let datosForm = this.formularioPlatillo.value;
+      console.log(datosForm);
       const formData = new FormData();
+      formData.append('imagen', datosForm.imagen);
       formData.append('nombre', datosForm.nombre);
-      const datosPlatillo = datosForm.value;
-      this.platillosService.storePlatillo(datosPlatillo).subscribe(
+      formData.append('id_categoria', datosForm.categoria);
+      formData.append('precio', datosForm.precio);
+      formData.append('descripcion', datosForm.descripcion);
+      formData.append('id_restaurante', id_restaurante);
+      this.platillosService.storePlatillo(formData).subscribe(
         success => {
           console.log(success);
         },

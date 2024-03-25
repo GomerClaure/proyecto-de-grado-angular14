@@ -17,8 +17,8 @@
                 <div class="form-group col-12">
                     <label for="exampleFormControlSelect1">Categoria</label>
                     <select class="form-control" formControlName="categoria">
-                      <option>Postres</option>
-                      <option>Carnes</option>
+                      <option [value]="1">Postres</option>
+                      <option [value]="2">Carnes</option>
                     </select>
                     <div *ngIf="formularioPlatillo.get('categoria')?.invalid && formularioPlatillo.get('categoria')?.touched" class="text-danger">
                         Seleccione una categoria

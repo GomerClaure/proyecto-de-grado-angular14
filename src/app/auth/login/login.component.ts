@@ -20,6 +20,7 @@ export class LoginComponent {
     onSubmit(){
       if(this.formularioLogin.valid){
         const datosLogin=this.formularioLogin.value;
+        this.login();
         console.log(datosLogin); 
         alert("Usuario correcto")
       }else{
@@ -34,6 +35,7 @@ export class LoginComponent {
         res => {
           if (res) {
             alert('Inicio de sesión exitoso.');
+
             this.router.navigate(['/']);
           }
         },
