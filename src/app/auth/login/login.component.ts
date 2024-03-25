@@ -28,8 +28,9 @@ export class LoginComponent {
     }
 
     public login() {
-      const { user, password } = this.formularioLogin.value;
-      this.sessionService.login(user, password).subscribe(
+      const { usuario, password } = this.formularioLogin.value;
+      console.log(usuario, password);
+      this.sessionService.login(usuario, password).subscribe(
         res => {
           if (res) {
             alert('Inicio de sesión exitoso.');
