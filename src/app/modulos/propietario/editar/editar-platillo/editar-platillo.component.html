@@ -4,7 +4,7 @@
     <br>
     <h2 class="titulo">Editar Platillo</h2>
     <div class="form">
-        <form>
+        <form [formGroup]="formularioEditarPlatillo">
             <div class="row">
             <div class=" col-md-6">
                 <div class="form-group col-12">
@@ -29,15 +29,12 @@
             </div> 
             <br>
             <div class="col-md-6 col-xs-12">
-            <div class="apartadoImg">
-                <label>Imagen</label>
-                <img src="../../../../../assets//image/platillo2.avif" class="img-fluid" formControlName="imagen">
-                <div class="btn-flex">
-                <label for="archivo" class="btn-img">Seleccionar</label>
-                <input type="file" id="archivo" class="hidden">
-            </div> 
+                <div class="apartadoImg">
+                    <img [src]="imageUrl" class="img-fluid" alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
+                    <input type="file" id="archivo" class="hidden" (change)="onFileSelected($event)">
+                    <label for="archivo" class="btn-img">Seleccionar</label>
+                </div>
             </div>
-        </div>
     </div>
         </form>
     </div>

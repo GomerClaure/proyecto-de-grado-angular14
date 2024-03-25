@@ -15,9 +15,8 @@ export class RegistrarCategoriaComponent {
    }
    guardarCategoria(){
     if(this.formularioCategoria.valid){
-      const datoCategoroia=this.formularioCategoria.value;
-      console.log(datoCategoroia);
-      this.formularioCategoria.reset();
+      const datoCategoria=this.formularioCategoria.value;
+      console.log(datoCategoria);
     }else{
      //Formulario Invalido
     }
