@@ -10,7 +10,7 @@
                 <div class="form-group col-12">
                   <label>Nombre del platillo</label>
                   <input type="text" class="form-control" formControlName="nombre"> 
-                  <div *ngIf="formularioPlatillo.get('nombre')?.invalid && formularioPlatillo.get('nombre')?.touched" class="text-danger">
+                   <div *ngIf="formularioPlatillo.get('nombre')?.invalid && formularioPlatillo.get('nombre')?.touched" class="text-danger">
                     El nombre es obligatorio y debe tener al menos 3 caracteres.
                   </div>
                 </div>
@@ -27,6 +27,9 @@
                 <div class="form-group col-12">
                     <label>Precio</label>
                     <input type="text" class="form-control" formControlName="precio">
+                    <div *ngIf="formularioPlatillo.get('precio')?.invalid && formularioPlatillo.get('precio')?.touched" class="text-danger">
+                        Ingrese solo numeros 
+                      </div>
                 </div>
                 <div class="form-group col-12">
                     <label>Descripcion</label>
@@ -35,15 +38,12 @@
             </div> 
             <br>
             <div class="col-md-6 col-xs-12">
-            <div class="apartadoImg">
-                <label>Imagen</label>
-                <img src="../../../../../assets//image/bistec.avif" class="img-fluid" formControlName="imagen">
-                <div class="btn-flex">
-                <label for="archivo" class="btn-img">Seleccionar</label>
-                <input type="file" id="archivo" class="hidden">
-            </div> 
+                <div class="apartadoImg">
+                    <img [src]="imageUrl" class="img-fluid" alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
+                    <input type="file" id="archivo" class="hidden" (change)="onFileSelected($event)">
+                    <label for="archivo" class="btn-img">Seleccionar</label>
+                </div>
             </div>
-        </div>
     </div>
         </form>
     </div>

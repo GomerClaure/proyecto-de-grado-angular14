@@ -10,16 +10,34 @@ import { PlatillosService } from 'src/app/services/platillos/platillos.service';
 export class RegistrarPlatilloComponent {
   formularioPlatillo: FormGroup;
   static numbersOnlyPattern: RegExp = /^[0-9]*$/;
-
-  constructor(private formBuilder: FormBuilder, private platillosService: PlatillosService) {
+  //imageUrl: any;
+  imageUrl: string | ArrayBuffer | null;
+  imageWidth: number = 450; 
+  imageHeight: number = 300;
+ 
+  constructor(private formBuilder: FormBuilder,private platillosService:PlatillosService) {
     this.formularioPlatillo = this.formBuilder.group({
-      nombre: [null, Validators.required],
-      categoria: [null, Validators.required],
-      precio: [null, Validators.required, Validators.pattern(RegistrarPlatilloComponent.numbersOnlyPattern)],
-      descripcion: [null, Validators.required],
-      imagen: [null, Validators.required]
+      nombre: [null,Validators.required],
+      categoria: [null,Validators.required],
+      precio: [null, [Validators.required, Validators.pattern(RegistrarPlatilloComponent.numbersOnlyPattern)]],
+      descripcion: [null,Validators.required],
+      imagen:['']
     });
+    this.imageUrl = 'assets/image/27002.jpg';
   }
+
+  // Función para previsualizar la imagen seleccionada
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.imageUrl = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   onSubmit() {
     if (this.formularioPlatillo.valid) {
       // Obtener los valores del formulario
