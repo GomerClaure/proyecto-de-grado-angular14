@@ -1,7 +1,7 @@
-
+<!--Barra de navegacion para el propietario-->
 <nav *ngIf="esPropietario()" class="navbar navbar-expand-lg custom-navbar-color navbar-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="">Restaurant X</a>
+    <a class="navbar-brand" href="">Nombre del Restaurante</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button> 
@@ -38,21 +38,18 @@
     </div>
   </div>
 </nav>
-
+<!--Barra de navegacion para el administrador-->
 <nav *ngIf="esAdministrador()"
   class="navbar navbar-expand-lg custom-navbar-color navbar-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="">Restaurant Admin</a>
+    <a class="navbar-brand" href="">Administrador</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="login">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="registro">Registro</a>
+          <a class="nav-link active" aria-current="page" href="">Solicitudes</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="" (click)="cerrarSesion()"> Logout</a>
@@ -62,20 +59,21 @@
   </div>
 </nav>
 
+<!--Barra de navegacion del empleado-->
 <nav *ngIf="esEmpleado()"
   class="navbar navbar-expand-lg custom-navbar-color navbar-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="">Empleado</a>
+    <a class="navbar-brand" href="">Empleado Mesero</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="login">Login</a>
+          <a class="nav-link active" aria-current="page" href="">Tomar Orden</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="registro">Registro</a>
+          <a class="nav-link" href="">Lista de ordenes</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="" (click)="cerrarSesion()"> Logout</a>
@@ -84,7 +82,7 @@
     </div>
   </div>
 </nav>
-
+<!--Barra de navegacion generica-->
 <nav *ngIf="!esPropietario() && !esEmpleado() && !esAdministrador()"
   class="navbar navbar-expand-lg custom-navbar-color navbar-dark">
   <div class="container-fluid">
@@ -99,6 +97,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="registro">Registro</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="" (click)="cerrarSesion()"> Logout</a>
         </li>
       </ul>
     </div>
