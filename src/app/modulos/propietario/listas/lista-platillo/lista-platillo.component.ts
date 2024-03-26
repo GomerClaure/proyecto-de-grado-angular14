@@ -1,3 +1,4 @@
+import { query } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platillo } from 'src/app/modelos/Platillo';
@@ -11,7 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ListaPlatilloComponent {
 
-  platillos: Platillo[] = [];	
+  platillos: Platillo[] = [];
   storageUrl = environment.backendStorageUrl;
   constructor(private router: Router, private platilloService: PlatillosService) {
   }
@@ -20,8 +21,8 @@ export class ListaPlatilloComponent {
     this.getPlatillos();
   }
 
-  editarPlatillo() {
-    this.router.navigate(['lista/editar-platillo']);
+  editarPlatillo(id: number) {
+    this.router.navigate(['lista/editar-platillo'], { queryParams: { platilloId: id } });
   }
 
   getPlatillos() {

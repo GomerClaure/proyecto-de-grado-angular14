@@ -4,23 +4,32 @@
     <br>
     <h2 class="titulo">Editar Platillo</h2>
     <div class="form">
-        <form>
+        <form [formGroup]="formularioPlatillo">
             <div class="row">
             <div class=" col-md-6">
                 <div class="form-group col-12">
                   <label>Nombre del platillo</label>
-                  <input type="text" class="form-control" formControlName="nombre"> 
+                  <input type="text" class="form-control" formControlName="nombre" > 
+                   <div *ngIf="formularioPlatillo.get('nombre')?.invalid && formularioPlatillo.get('nombre')?.touched" class="text-danger">
+                    El nombre es obligatorio y debe tener al menos 3 caracteres.
+                  </div>
                 </div>
                 <div class="form-group col-12">
                     <label for="exampleFormControlSelect1">Categoria</label>
-                    <select class="form-control" formControlName="categoria">
-                      <option>Postres</option>
-                      <option>Carnes</option> 
+                    <select class="form-control form-select" formControlName="categoria">
+                      <option [value]="1">Postres</option>
+                      <option [value]="2">Carnes</option>
                     </select>
+                    <div *ngIf="formularioPlatillo.get('categoria')?.invalid && formularioPlatillo.get('categoria')?.touched" class="text-danger">
+                        Seleccione una categoria
+                      </div>
                 </div> 
                 <div class="form-group col-12">
                     <label>Precio</label>
                     <input type="text" class="form-control" formControlName="precio">
+                    <div *ngIf="formularioPlatillo.get('precio')?.invalid && formularioPlatillo.get('precio')?.touched" class="text-danger">
+                        Ingrese solo numeros 
+                      </div>
                 </div>
                 <div class="form-group col-12">
                     <label>Descripcion</label>
@@ -29,22 +38,19 @@
             </div> 
             <br>
             <div class="col-md-6 col-xs-12">
-            <div class="apartadoImg">
-                <label>Imagen</label>
-                <img src="../../../../../assets//image/platillo2.avif" class="img-fluid" formControlName="imagen">
-                <div class="btn-flex">
-                <label for="archivo" class="btn-img">Seleccionar</label>
-                <input type="file" id="archivo" class="hidden">
-            </div> 
+                <div class="apartadoImg">
+                    <img [src]="imageUrl" id="image-platillo" class="img-fluid" alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
+                    <input type="file" id="archivo" class="hidden" (change)="onFileSelected($event)">
+                    <label for="archivo" class="btn-img">Seleccionar</label>
+                </div>
             </div>
-        </div>
     </div>
         </form>
     </div>
     <div class="row">
         <div class="botones-group">
          <button class="btn">Atras</button>
-         <button class="btn">Guardar</button>
+         <button class="btn" (click)="registrarPlatillo()">Guardar</button>
         </div>
      </div>
 </div>

@@ -25,4 +25,12 @@ export class PlatillosService {
   storePlatillo(formData: FormData) {
     return this.http.post<any>(`${this.BASE_URL}/menu/platillo`, formData, { headers: this.headers });
   }
+
+  updatePlatillo(formData: FormData, id: number) {
+    return this.http.post<any>(`${this.BASE_URL}/menu/platillo/${id}`, formData, { headers: this.headers });
+  }
+
+  showPlatillo(id: number) {
+    return this.http.get<any>(`${this.BASE_URL}/menu/platillo/${id}`, { headers: this.headers });
+  }
 }

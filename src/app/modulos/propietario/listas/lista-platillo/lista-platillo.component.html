@@ -27,7 +27,7 @@
             <td class="table-nombre ">
               <div class="row">
                 <div class="col-lg-4 d-flex justify-content-center">
-                  <img [src]="storageUrl+platillo.imagen" alt="Imagen de {{ platillo.nombre }}">
+                  <img [src]="storageUrl+platillo.imagen" alt="Imagen de {{ platillo.nombre }}" loading="lazy">
                 </div>
                 <div class="col text-center ">
                   <span>{{ platillo.nombre }}</span>
@@ -39,7 +39,7 @@
             <td class="text-left">{{ platillo.descripcion }}</td>
             <td>
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" (click)="editarPlatillo(platillo.id)">
                   <i class="bi bi-pencil-square"></i> Editar
                 </button>
                 <button type="button" class="btn btn-danger">
