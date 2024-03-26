@@ -18,12 +18,12 @@ export class EditarPlatilloComponent implements OnInit {
   imageWidth: number = 450;
   imageHeight: number = 300;
   selectedFile: File = new File([''], '');
-  formularioPlatillo: FormGroup;
+  formularioEditarPlatillo: FormGroup;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute,
     private platilloservice: PlatillosService, private formBuilder: FormBuilder) {
     this.imageUrl = 'assets/image/27002.jpg';
-    this.formularioPlatillo = this.formBuilder.group({
+    this.formularioEditarPlatillo = this.formBuilder.group({
       nombre: [null, Validators.required],
       categoria: [null, Validators.required],
       precio: [null, [Validators.required, Validators.pattern(RegistrarPlatilloComponent.numbersOnlyPattern)]],
@@ -62,7 +62,7 @@ export class EditarPlatilloComponent implements OnInit {
 
   fillFormWithPlatilloData() {
     // Llenar el formulario con los datos del platillo
-    this.formularioPlatillo.patchValue({
+    this.formularioEditarPlatillo.patchValue({
       nombre: this.platillo.nombre,
       // categoria: this.platillo.categoria.nombre,
       precio: this.platillo.precio,
@@ -72,9 +72,9 @@ export class EditarPlatilloComponent implements OnInit {
   }
   registrarPlatillo() {
 
-    if (this.formularioPlatillo.valid) {
+    if (this.formularioEditarPlatillo.valid) {
       // Obtener los valores del formulario
-      let datosForm = this.formularioPlatillo.value;
+      let datosForm = this.formularioEditarPlatillo.value;
       console.log(datosForm);
       const formData = new FormData();
       if (this.selectedFile.name != '') {
@@ -99,4 +99,5 @@ export class EditarPlatilloComponent implements OnInit {
       //Formulario Invalido
     }
   }
+
 }
