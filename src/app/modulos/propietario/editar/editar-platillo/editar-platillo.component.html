@@ -39,7 +39,7 @@
             <br>
             <div class="col-md-6 col-xs-12">
                 <div class="apartadoImg">
-                    <img [src]="imageUrl" id="image-platillo" class="img-fluid" alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
+                    <img [src]="imageUrl"  class="img-fluid" alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
                     <input type="file" id="archivo" class="hidden" (change)="onFileSelected($event)">
                     <label for="archivo" class="btn-img">Seleccionar</label>
                 </div>

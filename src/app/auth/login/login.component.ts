@@ -21,8 +21,6 @@ export class LoginComponent {
       if(this.formularioLogin.valid){
         const datosLogin=this.formularioLogin.value;
         this.login();
-        console.log(datosLogin); 
-        alert("Usuario correcto")
       }else{
         alert("No validos")
       }

@@ -1,4 +1,4 @@
-import { Categoria } from "./Categoria";
+import { Categoria } from "./Categoria"
 
 export interface Platillo {
     id: number;

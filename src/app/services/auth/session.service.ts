@@ -10,7 +10,7 @@ import { of } from 'rxjs';
 })
 export class SessionService {
 
-  private BASE_URL = environment;
+  private BASE_URL = environment.backendUrl;
 
   constructor(private http: HttpClient) { }
 
