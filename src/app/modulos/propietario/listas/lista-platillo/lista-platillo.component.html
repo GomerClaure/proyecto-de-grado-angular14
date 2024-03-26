@@ -3,10 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="input-group">
-      <input type="text" class="form-control">
-      <div class="input-group-append">
-        <button class="btn " type="btn">Buscar</button>
-      </div>
+      <input type="text" class="form-control" placeholder="Buscar...">
     </div>
   </div>
   <div class="table-responsive-xl">
@@ -26,9 +23,6 @@
           <tr *ngFor="let platillo of platillos" class="align-middle">
             <td class="table-nombre ">
               <div class="row">
-                <div class="col-lg-4 d-flex justify-content-center">
-                  <img [src]="storageUrl+platillo.imagen" alt="Imagen de {{ platillo.nombre }}" loading="lazy">
-                </div>
                 <div class="col text-center ">
                   <span>{{ platillo.nombre }}</span>
                 </div>
@@ -42,15 +36,16 @@
                 <button type="button" class="btn btn-primary" (click)="editarPlatillo(platillo.id)">
                   <i class="bi bi-pencil-square"></i> Editar
                 </button>
-                <button type="button" class="btn btn-danger">
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalEliminar">
                   <i class="bi bi-trash3"></i> Eliminar
-                </button>
+              </button>
               </div>
             </td>
-          </tr>
+          </tr> 
           <!-- Puedes agregar más filas según sea necesario -->
         </tbody>
       </table>
     </div>
-  </div>
+  </div> 
 </div>
+<app-modal-eliminar></app-modal-eliminar>

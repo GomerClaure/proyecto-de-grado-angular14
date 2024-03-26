@@ -16,6 +16,7 @@ import { EditarPlatilloComponent } from './modulos/propietario/editar/editar-pla
 import { HomePageComponent } from './auth/home-page/home-page.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ModalEliminarComponent } from './modulos/propietario/listas/modal-eliminar/modal-eliminar.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
     ListaPlatilloComponent,
     EditarPlatilloComponent,
     HomePageComponent,
-    LoginComponent
+    LoginComponent,
+    ModalEliminarComponent
 
   ],
   imports: [

@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./lista-platillo.component.scss']
 })
 export class ListaPlatilloComponent {
-
+  filterPlatillos='';
   platillos: Platillo[] = [];
   storageUrl = environment.backendStorageUrl;
   constructor(private router: Router, private platilloService: PlatillosService) {
