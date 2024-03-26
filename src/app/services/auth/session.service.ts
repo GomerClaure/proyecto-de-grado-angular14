@@ -46,6 +46,7 @@ export class SessionService {
             sessionStorage.setItem('fecha_contratacion', empleado.fecha_contratacion.toString());
             sessionStorage.setItem('direccion', empleado.direccion);
             sessionStorage.setItem('tipo', 'Empleado');
+            sessionStorage.setItem('rol_empleado',empleado.id_rol.toString());
           }
         }
         // return {message: 'Inicio de sesión exitoso.'}
