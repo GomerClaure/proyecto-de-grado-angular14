@@ -11,17 +11,16 @@ import { environment } from 'src/environments/environment';
 })
 export class ListaPlatilloComponent {
 
-  private platillos: [Platillo];
-  private storageUrl = environment.backendStorageUrl;
+  platillos: Platillo[] = [];	
+  storageUrl = environment.backendStorageUrl;
   constructor(private router: Router, private platilloService: PlatillosService) {
-    this.platillos = [{} as Platillo];
   }
 
   ngOnInit(): void {
     this.getPlatillos();
   }
 
-  Propietario() {
+  editarPlatillo() {
     this.router.navigate(['lista/editar-platillo']);
   }
 
