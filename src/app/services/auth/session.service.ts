@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Empleado, Propietario, Usuario } from 'src/app/modelos/usuario/Usuarios';
 import { catchError, tap } from 'rxjs/operators';
+import {environment} from "../../../environments/environment";
 import { of } from 'rxjs';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { of } from 'rxjs';
 })
 export class SessionService {
 
-  private BASE_URL = 'http://localhost:8000/api';
+  private BASE_URL = environment;
 
   constructor(private http: HttpClient) { }
 
