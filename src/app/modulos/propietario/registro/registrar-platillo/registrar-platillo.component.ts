@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlatillosService } from 'src/app/services/platillos/platillos.service';
 
@@ -10,7 +10,6 @@ import { PlatillosService } from 'src/app/services/platillos/platillos.service';
 export class RegistrarPlatilloComponent {
   formularioPlatillo: FormGroup;
   static numbersOnlyPattern: RegExp = /^[0-9]*$/;
-  //imageUrl: any;
   imageUrl: string | ArrayBuffer | null;
   imageWidth: number = 450; 
   imageHeight: number = 300;
