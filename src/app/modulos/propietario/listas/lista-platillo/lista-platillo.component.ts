@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 export class ListaPlatilloComponent {
   filterPlatillos='';
   platillos: Platillo[] = [];
+  selectedPlatilloId: number | null = null;
   storageUrl = environment.backendStorageUrl;
   constructor(private router: Router, private platilloService: PlatillosService) {
   }

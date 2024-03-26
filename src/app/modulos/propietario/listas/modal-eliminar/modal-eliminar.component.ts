@@ -12,5 +12,4 @@ export class ModalEliminarComponent{
     console.log("Platillo eliminado")
   }
 
-
 }
