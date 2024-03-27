@@ -1,28 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalService } from '../../../../services/modales/modal.service';
+import { ModalEliminarPlatilloService } from 'src/app/services/modales/modal-eliminar-platillo.service';
+import { PlatillosService } from '../../../../services/platillos/platillos.service';
 
 @Component({
   selector: 'app-modal-eliminar',
   templateUrl: './modal-eliminar.component.html',
   styleUrls: ['./modal-eliminar.component.scss']
 })
-export class ModalEliminarComponent{ 
+export class ModalEliminarComponent {
   showModal = false;
 
-  constructor(private modalService: ModalService) {
-    this.modalService.getModalStatus().subscribe(status => {
-      this.showModal = status;
-    });
-    this.modalService.getModalAction().subscribe(action => {
-      if (action === 'save') {
-        console.log('Se presionó "Save changes"');
-      } else if (action === 'close') {
-        console.log('Se presionó "Close"');
+  constructor(private modalService: ModalEliminarPlatilloService,
+     private platillosService: PlatillosService) {
+
+  }
+  eliminarPlatillo() {
+    console.log("Platillo eliminado" + this.modalService.idPlatilloModal());
+    this.platillosService.deletePlatillo(this.modalService.idPlatilloModal()).subscribe(
+      res => {
+        console.log(this.modalService.listaPlatillos());
+        this.modalService.listaPlatillos()
+          .splice(this.modalService.listaPlatillos()
+            .findIndex(platillo => platillo.id === this.modalService.idPlatilloModal()), 1);
+        alert("Platillo eliminado corredtamente.");
+        console.log(res);
+      },
+      err => {
+        console.log(err);
       }
-    });
-   }
-  eliminarPlatillo(){
-    console.log("Platillo eliminado"+this.modalService.idPlatilloModal());
+    );
+
   }
 
 
