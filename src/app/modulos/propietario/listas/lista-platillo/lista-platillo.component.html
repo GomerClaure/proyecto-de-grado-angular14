@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Buscar...">
+      <input type="text" class="form-control" placeholder="Buscar..." [ngModel]="textoBuscador" (ngModelChange)="onSearchChange($event)">
     </div>
   </div>
   <div class="table-responsive-xl">
