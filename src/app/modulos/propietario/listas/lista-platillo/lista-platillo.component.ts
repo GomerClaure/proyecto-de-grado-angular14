@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Platillo } from 'src/app/modelos/Platillo';
 import { PlatillosService } from 'src/app/services/platillos/platillos.service';
 import { environment } from 'src/environments/environment';
-import { ModalEliminarComponent } from '../modal-eliminar/modal-eliminar.component';
+import { ModalEliminarPlatilloService } from 'src/app/services/modales/modal-eliminar-platillo.service';
 
 @Component({
   selector: 'app-lista-platillo',
@@ -17,7 +17,8 @@ export class ListaPlatilloComponent {
   platillosFiltrados:Platillo[]=[];
   storageUrl = environment.backendStorageUrl;
   textoBuscador:string = '';
-  constructor(private router: Router, private platilloService: PlatillosService) {
+  constructor(private router: Router, private platilloService: PlatillosService,
+    private modalService: ModalEliminarPlatilloService) {
   }
 
   ngOnInit(): void {
@@ -39,6 +40,10 @@ export class ListaPlatilloComponent {
         console.log(err);
       }
     );
+  }
+
+  eliminarPlatillo(id: number) {
+  this.modalService.openModal(id,this.platillos);
   }
 
   onSearchChange(searchValue: string): void {  
