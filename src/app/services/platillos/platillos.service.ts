@@ -12,7 +12,6 @@ export class PlatillosService {
   // private csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   private headers = {
     'Authorization': 'Bearer ' + sessionStorage.getItem('token_access'),
-    // 'Content-Type': 'multipart/form-data'
   };
 
 
