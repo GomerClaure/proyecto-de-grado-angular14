@@ -22,7 +22,7 @@ export class ListaCategoriaComponent implements OnInit {
   }
 
   editarCategoria(id: number) {
-    this.router.navigate(['lista/editar-platillo'], { queryParams: { platilloId: id } });
+    //this.router.navigate(['lista/editar-platillo'], { queryParams: { platilloId: id } });
   }
 
   getCategorias() {

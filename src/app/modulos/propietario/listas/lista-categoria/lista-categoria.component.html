@@ -14,7 +14,7 @@
         <div class="card-body">
           <h5 class="card-title">{{ categoria.nombre }}</h5>
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#ModalEditarC">
+            <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#ModalEditarC" (click)="editarCategoria(categoria.id)">
               <i class="bi bi-pencil-square"></i> Editar
             </button>
             <button type="button" class="btn btn-danger">
