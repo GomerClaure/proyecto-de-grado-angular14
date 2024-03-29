@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Categoria } from 'src/app/modelos/Categoria';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-lista-categoria',
@@ -13,10 +15,14 @@ export class ListaCategoriaComponent implements OnInit {
   categorias:Categoria[]=[];
   storageUrl = environment.backendStorageUrl;
 
-  constructor(private categoriasService:CategoriaService) { 
+  constructor(private router:Router,private categoriasService:CategoriaService) { 
   }
   ngOnInit(): void {
     this.getCategorias();
+  }
+
+  editarCategoria(id: number) {
+    this.router.navigate(['lista/editar-platillo'], { queryParams: { platilloId: id } });
   }
 
   getCategorias() {
