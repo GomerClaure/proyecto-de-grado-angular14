@@ -13,6 +13,7 @@ import { ListaCategoriaComponent } from './modulos/propietario/listas/lista-cate
 import { ListaPlatilloComponent } from './modulos/propietario/listas/lista-platillo/lista-platillo.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditarPlatilloComponent } from './modulos/propietario/editar/editar-platillo/editar-platillo.component';
+import { EditarCategoriaComponent } from './modulos/propietario/editar/editar-categoria/editar-categoria.component';
 import { HomePageComponent } from './auth/home-page/home-page.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -30,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
     ListaPlatilloComponent,
     EditarPlatilloComponent,
     HomePageComponent,
-    LoginComponent
+    LoginComponent,
+    EditarCategoriaComponent
 
   ],
   imports: [
