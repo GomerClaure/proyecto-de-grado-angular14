@@ -34,6 +34,11 @@ export class ListaPlatilloComponent {
     this.platilloService.getPlatillos().subscribe(
       res => {
         this.platillos = res.platillo;
+                // Ordenar los platillos por nombre en orden alfabético
+                this.platillos.sort((a, b) => a.nombre.localeCompare(b.nombre));
+                // Tomar los primeros 10 platillos
+                this.platillos = this.platillos.slice(0, 10);
+                this.platillosFiltrados=this.platillos;
         console.log(this.platillos);
       },
       err => {
