@@ -15,10 +15,8 @@ export class CategoriaService {
 
   // Obtiene todas las categorias de platillos
   getCategorias(){
-
     return this.http.get(`${this.BASE_URL}/menu/categoria`, { headers: this.headers });
   }
-
   // Obtiene una categoria de platillos por su id
   getCategoria(id: string){
     return this.http.get(`${this.BASE_URL}/menu/categoria/` + id);

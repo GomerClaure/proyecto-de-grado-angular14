@@ -7,7 +7,7 @@
         <form [formGroup]="formularioPlatillo">
             <div class="row">
             <div class=" col-md-6">
-                <div class="form-group col-12">
+                <div class="form-group col-12"> 
                   <label>Nombre del platillo</label>
                   <input type="text" class="form-control" formControlName="nombre"> 
                    <div *ngIf="formularioPlatillo.get('nombre')?.invalid && formularioPlatillo.get('nombre')?.touched" class="text-danger">
