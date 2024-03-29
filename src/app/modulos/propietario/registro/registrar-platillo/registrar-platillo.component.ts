@@ -69,6 +69,8 @@ export class RegistrarPlatilloComponent {
       formData.append('id_restaurante', id_restaurante);
       this.platillosService.storePlatillo(formData).subscribe(
         success => {
+          this.formularioPlatillo.reset();
+          this.imageUrl = 'assets/image/27002.jpg';
           console.log(success);
         },
         error => {
