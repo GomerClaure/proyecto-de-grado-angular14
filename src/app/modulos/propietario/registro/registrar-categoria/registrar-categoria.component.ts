@@ -32,26 +32,27 @@ export class RegistrarCategoriaComponent {
       reader.readAsDataURL(file);
     }
   }
-   guardarCategoria(){
-    if(this.formularioCategoria.valid){
-      let nombre=this.formularioCategoria.value;
-
-      console.log(nombre);
-      console.log(this.imageUrl);
-      this.categoriaService.saveCategoria(nombre).subscribe(
-        res=>{
-          alert('Categoria Guardada');
-          console.log(res);
+  guardarCategoria() {
+    if (this.formularioCategoria.valid && this.selectedFile) {
+      const nombre = this.formularioCategoria.get('nombre')?.value;
+  
+      const formData = new FormData();
+      formData.append('imagen', this.selectedFile);
+      formData.append('nombre', nombre);
+  
+      this.categoriaService.saveCategoria(formData).subscribe(
+        success => {
+          console.log('Categoría guardada exitosamente:', success);
+          // Aquí puedes agregar lógica adicional, como mostrar un mensaje de éxito o redirigir a otra página.
         },
-        err=>{
-          console.log(err);
+        error => {
+          console.error('Error al guardar la categoría:', error);
+          // Aquí puedes manejar errores, como mostrar un mensaje de error al usuario.
         }
-      )
-      this.imageUrl='assets/image/27002.jpg';
-    }else{
-     //Formulario Invalido
+      );
+    } else {
+      console.error('Formulario inválido o no se ha seleccionado ninguna imagen.');
+      // Aquí puedes manejar el caso en que el formulario no sea válido o no se haya seleccionado ninguna imagen.
     }
-   }
-
-
+  }
 }

@@ -23,8 +23,8 @@ export class CategoriaService {
   }
 
   // Guarda una nueva categoria de platillos
-  saveCategoria(nombre: any){
-    return this.http.post(`${this.BASE_URL}/menu/categoria`, nombre, { headers: this.headers });
+  saveCategoria(formData:FormData){
+    return this.http.post(`${this.BASE_URL}/menu/categoria`, formData, { headers: this.headers });
   }
 
   // Actualiza una categoria de platillos
