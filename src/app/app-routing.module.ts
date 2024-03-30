@@ -18,8 +18,13 @@ const routes: Routes = [
   {
   path:'home',
   component:HomeComponent
-  //loadChildren: () => import('../app/auth/login/login.component').then(m => m.LoginComponent)
+  },
+  {
+    path:'mesero',
+    loadChildren:()=>import('../app/modulos/mesero/mesero.module').then(m=>m.MeseroModule)
+    
   }
+
 ];
  
 @NgModule({ 

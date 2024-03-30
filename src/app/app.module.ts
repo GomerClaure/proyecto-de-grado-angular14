@@ -17,6 +17,8 @@ import { HomePageComponent } from './auth/home-page/home-page.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalEliminarComponent } from './modulos/propietario/listas/modal-eliminar/modal-eliminar.component';
+import { RegistrarPedidoComponent } from './modulos/mesero/registrar-pedido/registrar-pedido.component';
+import { ListaPedidosComponent } from './modulos/mesero/lista-pedidos/lista-pedidos.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { ModalEliminarComponent } from './modulos/propietario/listas/modal-elimi
     EditarPlatilloComponent,
     HomePageComponent,
     LoginComponent,
-    ModalEliminarComponent
+    ModalEliminarComponent,
+    RegistrarPedidoComponent,
+    ListaPedidosComponent
 
   ],
   imports: [
