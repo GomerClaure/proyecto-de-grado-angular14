@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let categoria of categorias">
+    <div class="col-md-3 mb-3" *ngFor="let categoria of categorias">
       <div class="card">
         <img class="card-img-top" [src]="storageUrl+categoria.imagen" alt="{{ categoria.nombre }}">
         <div class="card-body">
@@ -17,7 +17,7 @@
             <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#ModalEditarC" (click)="editarCategoria(categoria.id)">
               <i class="bi bi-pencil-square"></i> Editar
             </button>
-            <button type="button" class="btn btn-danger">
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalEliminarC" (click)="eliminarCategoria(categoria.id)">
               <i class="bi bi-trash3"></i> Eliminar
             </button>
           </div>
@@ -27,3 +27,4 @@
   </div>
 </div>
 <app-editar-categoria></app-editar-categoria>
+<app-modal-eliminar-categoria></app-modal-eliminar-categoria>

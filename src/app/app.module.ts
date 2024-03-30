@@ -17,6 +17,7 @@ import { EditarCategoriaComponent } from './modulos/propietario/editar/editar-ca
 import { HomePageComponent } from './auth/home-page/home-page.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ModalEliminarCategoriaComponent } from './modulos/propietario/listas/modal-eliminar-categoria/modal-eliminar-categoria.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     EditarPlatilloComponent,
     HomePageComponent,
     LoginComponent,
-    EditarCategoriaComponent
+    EditarCategoriaComponent,
+    ModalEliminarCategoriaComponent
 
   ],
   imports: [

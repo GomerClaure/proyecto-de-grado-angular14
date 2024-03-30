@@ -33,8 +33,8 @@ export class CategoriaService {
   }
 
   // Elimina una categoria de platillos
-  deleteCategoria(id: string){
-    return this.http.delete('http://localhost:3000/categoria/' + id);
+  deleteCategoria(id: number){
+    return this.http.delete<any>(`${this.BASE_URL}/menu/categoria/${id}`, { headers: this.headers });
   }
   
 }

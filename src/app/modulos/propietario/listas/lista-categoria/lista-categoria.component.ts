@@ -4,6 +4,7 @@ import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.s
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { ModalEditarCategoriaService } from 'src/app/services/modales/modal-editar-categoria.service';
+import { ModalEliminarCategoriaService } from 'src/app/services/modales/modal-eliminar-categoria.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class ListaCategoriaComponent implements OnInit {
   storageUrl = environment.backendStorageUrl;
 
   constructor(private router:Router,private categoriasService:CategoriaService,
-    private modalEditarCategoriaService:ModalEditarCategoriaService) { 
+    private modalEditarCategoriaService:ModalEditarCategoriaService,private modalService:ModalEliminarCategoriaService ) { 
   }
   ngOnInit(): void {
     this.getCategorias();
@@ -28,6 +29,12 @@ export class ListaCategoriaComponent implements OnInit {
     || {id: 0, nombre: '', imagen: ''};
     this.modalEditarCategoriaService.openModal(categoria);
   }
+
+  eliminarCategoria(id:number){
+   console.log("Categoria eliminada")
+   this.modalService.openModal(id,this.categorias);
+
+  } 
 
   getCategorias() {
     this.categoriasService.getCategorias().subscribe(
