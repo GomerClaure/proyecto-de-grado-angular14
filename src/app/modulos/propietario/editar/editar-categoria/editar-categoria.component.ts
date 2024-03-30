@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Categoria } from 'src/app/modelos/Categoria';
 import { ModalEditarCategoriaService } from 'src/app/services/modales/modal-editar-categoria.service';
 import { environment } from 'src/environments/environment';
+import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
 
 @Component({
   selector: 'app-editar-categoria',
@@ -19,8 +20,10 @@ export class EditarCategoriaComponent implements OnInit {
   public formularioCategoria: FormGroup;
   private categoria: Categoria;
   public backendStorageUrl = environment.backendStorageUrl;
+  //idCategoria:string='';
 
-  constructor(private formBuilder: FormBuilder, private modalEditarCategoriaService: ModalEditarCategoriaService) {
+  constructor(private formBuilder: FormBuilder, private modalEditarCategoriaService: ModalEditarCategoriaService
+    ,private categoriaService:CategoriaService) {
     this.imageUrl = 'assets/image/27002.jpg';
     this.formularioCategoria = this.formBuilder.group({
       nombre: [null, Validators.required],
@@ -52,11 +55,26 @@ export class EditarCategoriaComponent implements OnInit {
 
 
   guardarCategoria() {
-    console.log(this.formularioCategoria.value.nombre);
-    if ( this.selectedFile.size > 0 ) {
-      console.log('Imagen seleccionada');
-      console.log(this.selectedFile);
+    let datosForm = this.formularioCategoria.value;
+    const formData = new FormData();
+    console.log(this.formularioCategoria.value)
+    // Verificar si se ha seleccionado un archivo
+    if (this.selectedFile.size > 0) {
+      formData.append('imagen', this.selectedFile);
+      console.log(this.selectedFile)
     }
+    formData.append('nombre', datosForm.nombre);
+    
+    this.categoriaService.updateCategoria(this.categoria.id, formData).subscribe(
+      (response) => {
+        // Manejo de la respuesta, si es necesario
+        console.log('Categoría actualizada correctamente', response);
+      },
+      (error) => {
+        // Manejo de errores
+        console.error('Error al actualizar categoría', error);
+      }
+    );
   }
 
   fillFormWithCategoriaData() {
