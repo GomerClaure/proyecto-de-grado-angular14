@@ -28,8 +28,8 @@ export class CategoriaService {
   }
 
   // Actualiza una categoria de platillos
-  updateCategoria(id: number, categoria: any){
-    return this.http.put(`${this.BASE_URL}/menu/categoria/` + id, categoria, { headers: this.headers });
+  updateCategoria(id: number, formData:FormData){
+    return this.http.post(`${this.BASE_URL}/menu/categoria/` + id, formData, { headers: this.headers });
   }
 
   // Elimina una categoria de platillos
