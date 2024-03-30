@@ -5,7 +5,7 @@
         <h5 class="modal-title" id="exampleModalLabel">Editar Categoría</h5>
       </div>
       <div class="modal-body">
-        <div class="form-group" >
+        <div class="form-group" [formGroup]="formularioCategoria" >
           <label for="categoriaInput">Nombre de la Categoría</label>
           <input type="text" class="form-control" id="categoriaInput" formControlName="nombre">
           <div class="text-danger">
@@ -22,7 +22,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+        <button type="button" class="btn btn-primary" (click)="guardarCategoria()" data-bs-dismiss="modal">Guardar</button>
       </div>
     </div>
   </div>

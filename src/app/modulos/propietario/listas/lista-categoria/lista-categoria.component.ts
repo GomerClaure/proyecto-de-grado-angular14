@@ -3,6 +3,7 @@ import { Categoria } from 'src/app/modelos/Categoria';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { ModalEditarCategoriaService } from 'src/app/services/modales/modal-editar-categoria.service';
 
 
 @Component({
@@ -15,14 +16,17 @@ export class ListaCategoriaComponent implements OnInit {
   categorias:Categoria[]=[];
   storageUrl = environment.backendStorageUrl;
 
-  constructor(private router:Router,private categoriasService:CategoriaService) { 
+  constructor(private router:Router,private categoriasService:CategoriaService,
+    private modalEditarCategoriaService:ModalEditarCategoriaService) { 
   }
   ngOnInit(): void {
     this.getCategorias();
   }
 
   editarCategoria(id: number) {
-    //this.router.navigate(['lista/editar-platillo'], { queryParams: { platilloId: id } });
+    let categoria = this.categorias.find(categoria => categoria.id == id) 
+    || {id: 0, nombre: '', imagen: ''};
+    this.modalEditarCategoriaService.openModal(categoria);
   }
 
   getCategorias() {
