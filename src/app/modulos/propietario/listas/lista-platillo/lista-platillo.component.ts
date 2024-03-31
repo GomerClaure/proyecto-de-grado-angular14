@@ -15,6 +15,7 @@ export class ListaPlatilloComponent {
   filterPlatillos='';
   platillos: Platillo[] = [];
   platillosFiltrados:Platillo[]=[];
+  selectedPlatilloId: number | null = null;
   storageUrl = environment.backendStorageUrl;
   textoBuscador:string = '';
   constructor(private router: Router, private platilloService: PlatillosService,
