@@ -33,4 +33,8 @@ export class PlatillosService {
   showPlatillo(id: number) {
     return this.http.get<any>(`${this.BASE_URL}/menu/platillo/${id}`, { headers: this.headers });
   }
+
+  deletePlatillo(id: number) {
+    return this.http.delete<any>(`${this.BASE_URL}/menu/platillo/${id}`, { headers: this.headers });
+  }
 }
