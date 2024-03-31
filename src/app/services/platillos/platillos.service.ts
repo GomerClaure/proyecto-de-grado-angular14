@@ -12,7 +12,6 @@ export class PlatillosService {
   // private csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   private headers = {
     'Authorization': 'Bearer ' + sessionStorage.getItem('token_access'),
-    // 'Content-Type': 'multipart/form-data'
   };
 
 
@@ -32,5 +31,9 @@ export class PlatillosService {
 
   showPlatillo(id: number) {
     return this.http.get<any>(`${this.BASE_URL}/menu/platillo/${id}`, { headers: this.headers });
+  }
+
+  deletePlatillo(id: number) {
+    return this.http.delete<any>(`${this.BASE_URL}/menu/platillo/${id}`, { headers: this.headers });
   }
 }

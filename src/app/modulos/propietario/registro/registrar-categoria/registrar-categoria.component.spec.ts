@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RegistrarCategoriaComponent } from './registrar-categoria.component';
 
 describe('RegistrarCategoriaComponent', () => {

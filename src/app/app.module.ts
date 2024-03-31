@@ -13,12 +13,16 @@ import { ListaCategoriaComponent } from './modulos/propietario/listas/lista-cate
 import { ListaPlatilloComponent } from './modulos/propietario/listas/lista-platillo/lista-platillo.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditarPlatilloComponent } from './modulos/propietario/editar/editar-platillo/editar-platillo.component';
+import { EditarCategoriaComponent } from './modulos/propietario/editar/editar-categoria/editar-categoria.component';
 import { HomePageComponent } from './auth/home-page/home-page.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ModalEliminarCategoriaComponent } from './modulos/propietario/listas/modal-eliminar-categoria/modal-eliminar-categoria.component';
 import { ModalEliminarComponent } from './modulos/propietario/listas/modal-eliminar/modal-eliminar.component';
 import { RegistrarPedidoComponent } from './modulos/mesero/registrar-pedido/registrar-pedido.component';
 import { ListaPedidosComponent } from './modulos/mesero/lista-pedidos/lista-pedidos.component';
+import { FormsModule } from '@angular/forms';
+//mport { EditarCategoriaComponent } from './modulos/propietario/editar/editar-categoria/editar-categoria.component';
 
 @NgModule({
   declarations: [
@@ -36,14 +40,18 @@ import { ListaPedidosComponent } from './modulos/mesero/lista-pedidos/lista-pedi
     LoginComponent,
     ModalEliminarComponent,
     RegistrarPedidoComponent,
-    ListaPedidosComponent
+    ListaPedidosComponent,
+    EditarCategoriaComponent,
+    ModalEliminarCategoriaComponent,
+    ModalEliminarComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
