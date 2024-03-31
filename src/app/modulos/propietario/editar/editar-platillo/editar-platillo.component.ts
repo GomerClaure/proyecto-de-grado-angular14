@@ -99,5 +99,5 @@ export class EditarPlatilloComponent implements OnInit {
       //Formulario Invalido
     }
   }
-
 }
+ 

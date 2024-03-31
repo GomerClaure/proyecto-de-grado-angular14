@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private sessionService: SessionService, private router: Router) { }
+  constructor(private sessionService: SessionService,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -34,5 +34,6 @@ export class NavComponent implements OnInit {
     this.router.navigateByUrl('/registrar/categoria');
   }
  
-}
+} 
 
+ 
