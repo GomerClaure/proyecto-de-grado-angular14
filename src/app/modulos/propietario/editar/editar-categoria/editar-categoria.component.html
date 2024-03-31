@@ -1,1 +1,26 @@
-<p>editar-categoria works!</p>
+<div class="modal fade" id="ModalEditarC" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Categoría</h5>
+      </div>
+      <div class="modal-body">
+        <div class="form-group" [formGroup]="formularioCategoria" >
+          <label for="categoriaInput">Nombre de la Categoría</label>
+          <input type="text" class="form-control" id="categoriaInput" formControlName="nombre">
+        </div>
+        <div class="col-md-6 col-xs-12 d-flex justify-content-center align-items-center">
+          <div class="apartadoImg">
+              <img [src]="imageUrl" id="image-categoria" class="img-fluid" alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
+              <input #fileInput type="file" id="archivo" class="hidden">
+              <label for="archivo" class="btn btn-secondary btn-img">Seleccionar</label>
+          </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="guardarCategoria()" data-bs-dismiss="modal">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

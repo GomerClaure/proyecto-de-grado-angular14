@@ -7,7 +7,7 @@
         <form [formGroup]="formularioPlatillo">
             <div class="row">
             <div class=" col-md-6">
-                <div class="form-group col-12">
+                <div class="form-group col-12"> 
                   <label>Nombre del platillo</label>
                   <input type="text" class="form-control" formControlName="nombre"> 
                    <div *ngIf="formularioPlatillo.get('nombre')?.invalid && formularioPlatillo.get('nombre')?.touched" class="text-danger">
@@ -17,12 +17,11 @@
                 <div class="form-group col-12">
                     <label for="exampleFormControlSelect1">Categoria</label>
                     <select class="form-control form-select" formControlName="categoria">
-                      <option [value]="1">Postres</option>
-                      <option [value]="2">Carnes</option>
+                        <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
                     </select>
                     <div *ngIf="formularioPlatillo.get('categoria')?.invalid && formularioPlatillo.get('categoria')?.touched" class="text-danger">
                         Seleccione una categoria
-                      </div>
+                    </div>
                 </div> 
                 <div class="form-group col-12">
                     <label>Precio</label>

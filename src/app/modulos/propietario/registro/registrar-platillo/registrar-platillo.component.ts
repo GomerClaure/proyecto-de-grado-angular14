@@ -1,21 +1,27 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlatillosService } from 'src/app/services/platillos/platillos.service';
+import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
 
 @Component({
   selector: 'app-registrar-platillo',
   templateUrl: './registrar-platillo.component.html',
   styleUrls: ['./registrar-platillo.component.scss']
 })
-export class RegistrarPlatilloComponent {
+export class RegistrarPlatilloComponent implements OnInit{
   formularioPlatillo: FormGroup;
   static numbersOnlyPattern: RegExp = /^[0-9]*$/;
   imageUrl: string | ArrayBuffer | null;
   imageWidth: number = 450; 
   imageHeight: number = 300;
-  selectedFile: File = new File([''], '');
+  selectedFile: File = new File([''], ''); 
+  categorias:any[]=[];
+
+  ngOnInit(): void {
+      this.obtenerCategorias();
+  }
  
-  constructor(private formBuilder: FormBuilder,private platillosService:PlatillosService) {
+  constructor(private formBuilder: FormBuilder,private platillosService:PlatillosService,private categoriasService:CategoriaService) {
     this.formularioPlatillo = this.formBuilder.group({
       nombre: [null,Validators.required],
       categoria: [null,Validators.required],
@@ -84,5 +90,16 @@ export class RegistrarPlatilloComponent {
     }
   }
 
-
+  // Método para obtener las categorías del servicio
+  obtenerCategorias() {
+    this.categoriasService.getCategorias().subscribe(
+      (data: any) => { // Ajusta el tipo de datos esperado
+        this.categorias = data.categorias; // Almacena las categorías obtenidas en la variable categorias
+        console.log(data)
+      },
+      error => {
+        console.error('Error obteniendo categorías:', error);
+      }
+    );
+  }
 }
