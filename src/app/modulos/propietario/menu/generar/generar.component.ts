@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Collapse, Modal } from 'bootstrap';
 import { Categoria } from 'src/app/modelos/Categoria';
 import { Platillo } from 'src/app/modelos/Platillo';
 
@@ -47,8 +48,8 @@ export class GenerarComponent implements OnInit {
       { id: 6, nombre: "Bebidas", imagen: "http://localhost:8000/storage/categorias/15cf2210972a9fb8c61f9a6c557e189c.jpg" },
       { id: 7, nombre: "Snacks", imagen: "http://localhost:8000/storage/categorias/15cf2210972a9fb8c61f9a6c557e189c.jpg" },
     ];
-    const imagenes = ['http://localhost:8000/storage/platillos/b7a44a65420f3efeb010b040e43ece42.webp',
-     'http://localhost:8000/storage/platillos/125bfeb29dc08066308218a092f664fb.jpg',
+    const imagenes = ['http://localhost:8000/storage/platillos/85d976ac0070153290060f9bd67b304b.jpg',
+     'http://localhost:8000/storage/platillos/b4616ff52c8e0eef2d04f07048d40167.jpg',
   ];
       
     this.categorias = categorias;
@@ -77,8 +78,20 @@ export class GenerarComponent implements OnInit {
       reader.onload = (e: any) => {
         //set imgURL with the base64 string
         this.imgURL = e.target.result;
+        let collapse = document.getElementById('collapseImgPortada');
+        
+        if (collapse && !collapse.classList.contains('show')) new Collapse(collapse);
       };
       reader.readAsDataURL(file);
+    }
+  }
+
+  openModal() {
+    let modalE = document.getElementById('imageModal');
+    console.log(modalE);
+    if (modalE) {
+      const modal = new Modal(modalE);
+      modal.show();
     }
   }
 }
