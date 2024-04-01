@@ -2,7 +2,7 @@
 <div class="section-portada position-relative">
 
 
-    <div class="collapse" id="collapseImgPortada" (click)="openModal()">
+    <div class="collapse" id="collapseImgPortada" data-bs-toggle="modal" data-bs-target="#imageModal">
         <img [src]=" imgURL" id="img-portada" class="img-fluid position-absolute top-0 start-50 translate-middle-x"
         style="z-index: -1;" alt="Portada">
 
@@ -77,7 +77,7 @@
                     <h5 class="modal-title" id="imageModalLabel">Portada</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body d-flex align-self-center">
                     <img [src]="imgURL" class="img-fluid" alt="Portada">
                 </div>
             </div>

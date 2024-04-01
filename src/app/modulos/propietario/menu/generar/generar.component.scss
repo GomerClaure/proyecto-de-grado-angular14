@@ -44,6 +44,10 @@
     position: relative;
 }
 
+#collapseImgPortada {
+    cursor: pointer;
+}
+
 @media (max-width: 576px) { /* Pantallas más pequeñas que el punto de quiebre de SM */
     .col-12.col-sm-6.col-md-4.col-lg-3.col-xl-3 {
         flex: 0 0 50% !important; /* Establecer el ancho de la columna al 50% en pantallas pequeñas */

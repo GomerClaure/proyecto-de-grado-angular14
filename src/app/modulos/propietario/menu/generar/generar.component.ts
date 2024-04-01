@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Collapse, Modal } from 'bootstrap';
+import { Collapse } from 'bootstrap';
 import { Categoria } from 'src/app/modelos/Categoria';
 import { Platillo } from 'src/app/modelos/Platillo';
 
@@ -80,18 +80,10 @@ export class GenerarComponent implements OnInit {
         this.imgURL = e.target.result;
         let collapse = document.getElementById('collapseImgPortada');
         
-        if (collapse && !collapse.classList.contains('show')) new Collapse(collapse);
+        if (collapse && !collapse.classList.contains('show')) collapse.classList.add('show');
       };
       reader.readAsDataURL(file);
     }
   }
 
-  openModal() {
-    let modalE = document.getElementById('imageModal');
-    console.log(modalE);
-    if (modalE) {
-      const modal = new Modal(modalE);
-      modal.show();
-    }
-  }
 }
