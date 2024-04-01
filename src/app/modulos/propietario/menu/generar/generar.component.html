@@ -1,79 +1,88 @@
 <app-nav></app-nav><br><br><br>
-<div class="section-portada position-relative">
+<body id="body-generar-menu">
+    <div class="section-portada position-relative">
 
-    <h1 class="title">Genera tu Menu </h1>
-    <div class="collapse" id="collapseImgPortada" data-bs-toggle="modal" data-bs-target="#imageModal">
-        <img [src]=" imgPortada" id="img-portada" class="img-fluid position-absolute top-0 start-50 translate-middle-x"
-        style="z-index: -1;" alt="Portada">
+        <h1 class="title">Genera tu Menu </h1>
+        <div class="collapse" id="collapseImgPortada" data-bs-toggle="modal" data-bs-target="#imageModal">
+            <img [src]=" imgPortada" id="img-portada"
+                class="img-fluid position-absolute top-0 start-50 translate-middle-x" style="z-index: -1;"
+                alt="Portada">
 
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-    </div>
-</div>
-
-
-<div class="container mt-0">
-    <div class="apartadoImg text-center ">
-        <input type="file" id="archivo-portada" class="visually-hidden" (change)="onFileSelected($event)">
-        <label for="archivo-portada" class="btn" data-bs-toggle="collapse" data-bs-target="#collapseImgPortada">
-            <i class="bi bi-plus-square-dotted"></i> Subir Portada
-        </label>
-    </div>
-    <div class="row row-nav">
-        <ul class="nav nav-underline justify-content-center mb-4">
-            <li class="nav-item" (click)="cambiarCategoria(0)">
-                <a class="nav-link" [class.active]="activeCategoria === 0" role="tab" aria-controls="categoria0"
-                    aria-selected="true">Todas</a>
-            </li>
-            <li class="nav-item" *ngFor="let categoria of categorias;" (click)="cambiarCategoria(categoria.id)">
-                <a class="nav-link" [class.active]="activeCategoria === categoria.id" role="tab"
-                    aria-selected="false">{{ categoria.nombre }}</a>
-            </li>
-            <!-- Agrega más elementos de navegación según sea necesario -->
-        </ul>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
     </div>
 
-    <div class="platillos row">
-        
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" *ngFor="let platillo of platillosFiltrados">
-            <div class="card mb-3 position-relative" style="background-color: #2c2c2c; color: white;">
-              <input type="checkbox" class="position-absolute top-0 end-0 m-3 check-img"  id="{{ 'check-plat' + platillo.id }}"
-              [checked]="platillo.plato_disponible">
-              <!-- <label class="card-check-label" for="{{ 'check-plat' + platillo.id }}"></label> -->
-              <img [src]="platillo.imagen" id="{{ 'img-card-plat' + platillo.id }}" class="card-img-top img-fluid w-100" alt="Platillo" (error)="onImgError($event)"/>
-              <div class="card-body">
-                <div class="row">
-                  <h6 class="card-title mb-1">{{ platillo.nombre }}</h6>
-                  <p class="card-text small mb-0">{{ platillo.descripcion }}</p>
+
+    <div class="container mt-0">
+        <div class="apartadoImg text-center ">
+            <input type="file" id="archivo-portada" class="visually-hidden" (change)="onFileSelected($event)">
+            <label for="archivo-portada" class="btn" data-bs-toggle="collapse" data-bs-target="#collapseImgPortada">
+                <i class="bi bi-plus-square-dotted"></i> Subir Portada
+            </label>
+        </div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="themeSwitch" (change)="cambiarTema($event)">
+            <label class="form-check-label" for="themeSwitch">Tema Oscuro</label>
+        </div>
+        <div class="row row-nav">
+            <ul class="nav nav-underline justify-content-center mb-4">
+                <li class="nav-item" (click)="cambiarCategoria(0)">
+                    <a class="nav-link" [class.active]="activeCategoria === 0" role="tab" aria-controls="categoria0"
+                        aria-selected="true">Todas</a>
+                </li>
+                <li class="nav-item" *ngFor="let categoria of categorias;" (click)="cambiarCategoria(categoria.id)">
+                    <a class="nav-link" [class.active]="activeCategoria === categoria.id" role="tab"
+                        aria-selected="false">{{ categoria.nombre }}</a>
+                </li>
+                <!-- Agrega más elementos de navegación según sea necesario -->
+            </ul>
+        </div>
+
+        <div class="platillos row">
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" *ngFor="let platillo of platillosFiltrados">
+                <div class="card mb-3 position-relative" >
+                    <input type="checkbox" class="position-absolute top-0 end-0 m-3 check-img "
+                        id="{{ 'check-plat' + platillo.id }}" [checked]="platillo.plato_disponible">
+                    <!-- <label class="card-check-label" for="{{ 'check-plat' + platillo.id }}"></label> -->
+                    <img [src]="platillo.imagen" id="{{ 'img-card-plat' + platillo.id }}"
+                        class="card-img-top img-fluid w-100" alt="Platillo" (error)="onImgError($event)" />
+                    <div class="card-body">
+                        <div class="row">
+                            <h6 class="card-title mb-1">{{ platillo.nombre }}</h6>
+                            <p class="card-text small mb-0">{{ platillo.descripcion }}</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="d-flex justify-content-between">
+                                <small class="text-body-secondary mb-0">{{ platillo.categoria.nombre }}</small>
+                                <small class="card-text mb-0">{{ platillo.precio+' bs' }}</small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="card-footer">
-                <div class="row">
-                  <div class="d-flex justify-content-between">
-                    <small class="text-body-secondary mb-0">{{ platillo.categoria.nombre }}</small>
-                    <small class="card-text mb-0">{{ platillo.precio+' bs' }}</small>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
-    </div>
+        </div>
 
-    <!-- Modal de imagen -->
-    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="imageModalLabel">Portada</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex align-self-center">
-                    <img [src]="imgPortada" class="img-fluid" alt="Portada">
+        <!-- Modal de imagen -->
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel">Portada</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex align-self-center">
+                        <img [src]="imgPortada" class="img-fluid" alt="Portada">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</body>

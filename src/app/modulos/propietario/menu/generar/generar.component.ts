@@ -21,6 +21,7 @@ export class GenerarComponent implements OnInit {
     this.platillosFiltrados = [];
     this.selectedFile = new File([''], ''); 
     this.imgPortada =  'assets/image/27002.jpg';
+    // this.themeSwitch = new ElementRef(null);
   }
 
   ngOnInit(): void {
@@ -88,6 +89,18 @@ export class GenerarComponent implements OnInit {
 
   onImgError(event: any){
     event.target.src = 'assets/image/27002.jpg';
+  }
+
+  cambiarTema(event: any) {
+    const switchValue = event.target.checked;
+    console.log(switchValue);
+    let body = document.getElementById('body-generar-menu');
+    if (switchValue) {
+      body?.classList.add('dark-theme');
+    } else {
+      // Cambiar a tema claro
+      body?.classList.remove('dark-theme');
+    }
   }
 
 }
