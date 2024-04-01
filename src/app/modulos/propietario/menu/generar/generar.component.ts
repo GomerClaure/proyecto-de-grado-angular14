@@ -12,11 +12,15 @@ export class GenerarComponent implements OnInit {
   public platillos: Platillo[];
   public categorias: Categoria[];
   public platillosFiltrados: Platillo[];
+  public imgURL: string ;
+  public selectedFile: File; 
 
   constructor() {
     this.platillos = [];
     this.categorias = [];
     this.platillosFiltrados = [];
+    this.selectedFile = new File([''], ''); 
+    this.imgURL =  'assets/image/27002.jpg';
   }
 
   ngOnInit(): void {
@@ -43,8 +47,8 @@ export class GenerarComponent implements OnInit {
       { id: 6, nombre: "Bebidas", imagen: "http://localhost:8000/storage/categorias/15cf2210972a9fb8c61f9a6c557e189c.jpg" },
       { id: 7, nombre: "Snacks", imagen: "http://localhost:8000/storage/categorias/15cf2210972a9fb8c61f9a6c557e189c.jpg" },
     ];
-    const imagenes = ['http://192.168.0.30:8000/storage/platillos/b7a44a65420f3efeb010b040e43ece42.webp',
-     'http://192.168.0.30:8000/storage/platillos/125bfeb29dc08066308218a092f664fb.jpg',
+    const imagenes = ['http://localhost:8000/storage/platillos/b7a44a65420f3efeb010b040e43ece42.webp',
+     'http://localhost:8000/storage/platillos/125bfeb29dc08066308218a092f664fb.jpg',
   ];
       
     this.categorias = categorias;
@@ -62,5 +66,19 @@ export class GenerarComponent implements OnInit {
       });
     }
     this.platillosFiltrados = this.platillos;
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = <File>event.target.files[0];
+    console.log(this.selectedFile);
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        //set imgURL with the base64 string
+        this.imgURL = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 }

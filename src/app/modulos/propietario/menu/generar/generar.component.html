@@ -1,47 +1,68 @@
 <app-nav></app-nav><br><br><br>
-<div class="container">
-    <div class="row row-nav">
-        <ul class="nav nav-underline justify-content-center mb-4 mt-4">
-            <li class="nav-item" (click)="cambiarCategoria(0)">
-                <a class="nav-link" [class.active]="activeCategoria === 0" role="tab" aria-controls="categoria0"
-                    aria-selected="true">Todas</a>
-            </li>
-            <li class="nav-item" *ngFor="let categoria of categorias;" (click)="cambiarCategoria(categoria.id)">
-                <a class="nav-link" [class.active]="activeCategoria === categoria.id" role="tab" 
-                    aria-selected="false">{{ categoria.nombre }}</a>
-            </li>
-            <!-- Agrega más elementos de navegación según sea necesario -->
-        </ul>
+<div class="section-portada text-center position-relative">
+    <div class="apartadoImg">
+        <input type="file" id="archivo" class="visually-hidden"  (change)="onFileSelected($event)">
+        <label for="archivo" class="btn"  >
+            <i class="bi bi-plus-square-dotted"></i> Subir Portada
+        </label>
     </div>
-    
-    <div class="platillos row">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 " *ngFor="let platillo of platillosFiltrados">
-            <div class="card mb-3 ">
-                <img [src]="platillo.imagen" class="card-img-top img-fluid w-100"  alt="...">
-                <div class="card-body">
-                    <div class="row">
-                        <h6 class="card-title mb-1"> <!-- Tamaño de texto para el título -->
-                            {{ platillo.nombre }}
-                        </h6>
-                        <p class="card-text small mb-0"> <!-- Tamaño de texto para la descripción -->
-                            {{ platillo.descripcion }}
-                        </p>
-                    </div>
-                    
-                </div>
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="d-flex justify-content-between">
-                            <small class="text-body-secondary mb-0"> 
-                                {{ platillo.categoria.nombre }}
-                            </small>
-                            <small class="card-text mb-0"> 
-                                {{ platillo.precio+' bs' }}
-                            </small>
-                        </div>
-                    </div>
-                    
-            </div>  
-        </div>
+
+    <div class="collapse" id="collapseExample" >
+        <img [src]="imgURL" id="img-portada" class="img-fluid position-absolute top-0 start-50 translate-middle-x"
+            style="z-index: -1;" alt="Portada">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
     </div>
 </div>
+
+
+    <div class="container">
+        <div class="row row-nav">
+            <ul class="nav nav-underline justify-content-center mb-4 mt-4">
+                <li class="nav-item" (click)="cambiarCategoria(0)">
+                    <a class="nav-link" [class.active]="activeCategoria === 0" role="tab" aria-controls="categoria0"
+                        aria-selected="true">Todas</a>
+                </li>
+                <li class="nav-item" *ngFor="let categoria of categorias;" (click)="cambiarCategoria(categoria.id)">
+                    <a class="nav-link" [class.active]="activeCategoria === categoria.id" role="tab"
+                        aria-selected="false">{{ categoria.nombre }}</a>
+                </li>
+                <!-- Agrega más elementos de navegación según sea necesario -->
+            </ul>
+        </div>
+
+        <div class="platillos row">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 " *ngFor="let platillo of platillosFiltrados">
+                <div class="card mb-3 ">
+                    <img [src]="platillo.imagen" class="card-img-top img-fluid w-100" alt="...">
+                    <div class="card-body">
+                        <div class="row">
+                            <h6 class="card-title mb-1"> <!-- Tamaño de texto para el título -->
+                                {{ platillo.nombre }}
+                            </h6>
+                            <p class="card-text small mb-0"> <!-- Tamaño de texto para la descripción -->
+                                {{ platillo.descripcion }}
+                            </p>
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="d-flex justify-content-between">
+                                <small class="text-body-secondary mb-0">
+                                    {{ platillo.categoria.nombre }}
+                                </small>
+                                <small class="card-text mb-0">
+                                    {{ platillo.precio+' bs' }}
+                                </small>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
