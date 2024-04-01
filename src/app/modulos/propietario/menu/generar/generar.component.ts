@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Collapse } from 'bootstrap';
 import { Categoria } from 'src/app/modelos/Categoria';
 import { Platillo } from 'src/app/modelos/Platillo';
 
@@ -10,10 +9,10 @@ import { Platillo } from 'src/app/modelos/Platillo';
 })
 export class GenerarComponent implements OnInit {
 
-  public platillos: Platillo[];
+  public platillos: any[];
   public categorias: Categoria[];
-  public platillosFiltrados: Platillo[];
-  public imgURL: string ;
+  public platillosFiltrados: any[];
+  public imgPortada: string ;
   public selectedFile: File; 
 
   constructor() {
@@ -21,7 +20,7 @@ export class GenerarComponent implements OnInit {
     this.categorias = [];
     this.platillosFiltrados = [];
     this.selectedFile = new File([''], ''); 
-    this.imgURL =  'assets/image/27002.jpg';
+    this.imgPortada =  'assets/image/27002.jpg';
   }
 
   ngOnInit(): void {
@@ -63,7 +62,8 @@ export class GenerarComponent implements OnInit {
         precio: Math.floor(Math.random() * 100) + 50,
         imagen: Math.random() > 0.5 ? imagenes[0] : imagenes[1],
         id_menu: 1,
-        categoria: { ...categoria }
+        categoria: { ...categoria },
+        plato_disponible: true,
       });
     }
     this.platillosFiltrados = this.platillos;
@@ -76,14 +76,18 @@ export class GenerarComponent implements OnInit {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        //set imgURL with the base64 string
-        this.imgURL = e.target.result;
+        //set imgPortada with the base64 string
+        this.imgPortada = e.target.result;
         let collapse = document.getElementById('collapseImgPortada');
         
         if (collapse && !collapse.classList.contains('show')) collapse.classList.add('show');
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  onImgError(event: any){
+    event.target.src = 'assets/image/27002.jpg';
   }
 
 }
