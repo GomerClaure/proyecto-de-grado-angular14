@@ -1,8 +1,8 @@
-<app-nav></app-nav><br><br><br>
-<body id="body-generar-menu">
+<app-nav></app-nav><br><br>
+<div id="body-generar-menu">
     <div class="section-portada position-relative">
 
-        <h1 class="title">Genera tu Menu </h1>
+        
         <div class="collapse" id="collapseImgPortada" data-bs-toggle="modal" data-bs-target="#imageModal">
             <img [src]=" imgPortada" id="img-portada"
                 class="img-fluid position-absolute top-0 start-50 translate-middle-x" style="z-index: -1;"
@@ -19,16 +19,23 @@
 
 
     <div class="container mt-0">
-        <div class="apartadoImg text-center ">
+        <div class="apartadoImg text-center">
+            <div class="d-flex justify-content-between align-items-center">
+                <label class="form-check form-switch mb-0">
+                    <input class="form-check-input" type="checkbox" id="themeSwitch" (change)="cambiarTema($event)">
+                    <span class="form-check-label" for="themeSwitch">Tema Oscuro</span>
+                </label>
+                <label for="archivo-portada" class="btn" data-bs-toggle="collapse" data-bs-target="#collapseImgPortada">
+                    <i class="bi bi-plus-square-dotted"></i> Subir Portada
+                </label>
+                <label class="btn" (click)="guardarMenu()">
+                    <i class="bi bi-save
+                    "></i> Guardar
+                </label>
+            </div>
             <input type="file" id="archivo-portada" class="visually-hidden" (change)="onFileSelected($event)">
-            <label for="archivo-portada" class="btn" data-bs-toggle="collapse" data-bs-target="#collapseImgPortada">
-                <i class="bi bi-plus-square-dotted"></i> Subir Portada
-            </label>
         </div>
-        <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="themeSwitch" (change)="cambiarTema($event)">
-            <label class="form-check-label" for="themeSwitch">Tema Oscuro</label>
-        </div>
+        
         <div class="row row-nav">
             <ul class="nav nav-underline justify-content-center mb-4">
                 <li class="nav-item" (click)="cambiarCategoria(0)">
@@ -48,8 +55,7 @@
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" *ngFor="let platillo of platillosFiltrados">
                 <div class="card mb-3 position-relative" >
                     <input type="checkbox" class="position-absolute top-0 end-0 m-3 check-img "
-                        id="{{ 'check-plat' + platillo.id }}" [checked]="platillo.plato_disponible">
-                    <!-- <label class="card-check-label" for="{{ 'check-plat' + platillo.id }}"></label> -->
+                        id="{{ 'check-plat' + platillo.id }}" (click)="cambiarDisponibilidadPlato($event,platillo.id)" [checked]="platillo.plato_disponible">
                     <img [src]="platillo.imagen" id="{{ 'img-card-plat' + platillo.id }}"
                         class="card-img-top img-fluid w-100" alt="Platillo" (error)="onImgError($event)" />
                     <div class="card-body">
@@ -85,4 +91,4 @@
             </div>
         </div>
     </div>
-</body>
+</div>

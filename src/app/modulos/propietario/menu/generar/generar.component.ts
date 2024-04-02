@@ -12,15 +12,15 @@ export class GenerarComponent implements OnInit {
   public platillos: any[];
   public categorias: Categoria[];
   public platillosFiltrados: any[];
-  public imgPortada: string ;
-  public selectedFile: File; 
+  public imgPortada: string;
+  public selectedFile: File;
 
   constructor() {
     this.platillos = [];
     this.categorias = [];
     this.platillosFiltrados = [];
-    this.selectedFile = new File([''], ''); 
-    this.imgPortada =  'assets/image/27002.jpg';
+    this.selectedFile = new File([''], '');
+    this.imgPortada = 'assets/image/27002.jpg';
     // this.themeSwitch = new ElementRef(null);
   }
 
@@ -33,7 +33,7 @@ export class GenerarComponent implements OnInit {
     this.activeCategoria = idCategoria; // Cambia la categoría activa al hacer clic en un enlace de categoría
     if (idCategoria === 0) {
       this.platillosFiltrados = this.platillos;
-    }else{
+    } else {
       this.platillosFiltrados = this.platillos.filter(platillo => platillo.categoria.id === idCategoria);
     }
   }
@@ -49,9 +49,9 @@ export class GenerarComponent implements OnInit {
       { id: 7, nombre: "Snacks", imagen: "http://localhost:8000/storage/categorias/15cf2210972a9fb8c61f9a6c557e189c.jpg" },
     ];
     const imagenes = ['http://localhost:8000/storage/platillos/85d976ac0070153290060f9bd67b304b.jpg',
-     'http://localhost:8000/storage/platillos/b4616ff52c8e0eef2d04f07048d40167.jpg',
-  ];
-      
+      'http://localhost:8000/storage/platillos/b4616ff52c8e0eef2d04f07048d40167.jpg',
+    ];
+
     this.categorias = categorias;
     for (let i = 1; i <= 30; i++) {
       const categoriaIndex = Math.floor(Math.random() * categorias.length);
@@ -80,14 +80,14 @@ export class GenerarComponent implements OnInit {
         //set imgPortada with the base64 string
         this.imgPortada = e.target.result;
         let collapse = document.getElementById('collapseImgPortada');
-        
+
         if (collapse && !collapse.classList.contains('show')) collapse.classList.add('show');
       };
       reader.readAsDataURL(file);
     }
   }
 
-  onImgError(event: any){
+  onImgError(event: any) {
     event.target.src = 'assets/image/27002.jpg';
   }
 
@@ -103,4 +103,17 @@ export class GenerarComponent implements OnInit {
     }
   }
 
-}
+  cambiarDisponibilidadPlato(event: any, idPlato: number) {
+    const index = this.platillos.findIndex(platillo => platillo.id === idPlato);
+    if (index !== -1) {
+      const platillo = this.platillos[index]; // Obtiene el platillo usando el índice
+      platillo.plato_disponible = false;
+    }
+    
+    }
+
+    guardarMenu() {
+      console.log('Guardando menú');
+    }
+
+  }
