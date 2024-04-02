@@ -15,7 +15,7 @@ const routes:Routes=[
       },
       {
         path:'registrar-pedido',
-        component:RegistrarPedidoComponent
+        component:RegistrarPedidoComponent 
       },
       {
         path:'lista-mesa',

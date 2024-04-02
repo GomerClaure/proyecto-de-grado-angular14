@@ -1,2 +1,40 @@
 <app-nav></app-nav><br><br><br>
-<p>lista-mesas works!</p>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulación de Mesas</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Mesas</h1>
+    <div class="row">
+      <div class="card-deck">
+        <div class="col-sm-4 mb-3">
+          <div class="card" id="mesa1" (click)="seleccionarMesa('mesa1')">
+            <div class="card-body">
+              <h5 class="card-title">Mesa 1</h5>
+              <p class="card-text">Descripción de la mesa 1.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 mb-3">
+          <div class="card" id="mesa2" (click)="seleccionarMesa('mesa2')">
+            <div class="card-body">
+              <h5 class="card-title">Mesa 2</h5>
+              <p class="card-text">Descripción de la mesa 2.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 mb-3">
+          <div class="card" id="mesa3" (click)="seleccionarMesa('mesa3')">
+            <div class="card-body">
+              <h5 class="card-title">Mesa 3</h5>
+              <p class="card-text">Descripción de la mesa 3.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" (click)="RegistrarMesa(mesaSeleccionada)">Siguiente</button>
+  </div>
+</body>
