@@ -1,2 +1,57 @@
-<app-nav></app-nav><br><br><br>
-<p>registrar-pedido works!</p>
+<app-nav></app-nav>
+
+<br><br><br>
+
+<h2 class="titulo">Tomar Orden</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Buscar...">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <select class="form-select" aria-label="Default select example" >
+                <option selected disabled>Categoria</option>
+                <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
+            </select>
+        </div> 
+    </div>
+    <br>
+    <div class="row">
+    <div class="col-md-2 mb-2" *ngFor="let categoria of platillos" (click)="AgregarPlatillo(categoria.nombre)">
+            <div class="card">
+                <img class="card-img-top" [src]="storageUrl+categoria.imagen" alt="{{ categoria.nombre }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ categoria.nombre }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasOrders" aria-controls="offcanvasOrders">
+    Ver Órdenes
+</button>
+
+<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasOrders" aria-labelledby="offcanvasOrdersLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasOrdersLabel">Órdenes</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <!-- Mostrar la lista de selecciones -->
+      <ng-container *ngIf="pedidoselectService.categoriasSeleccionadas.length > 0; else noSelection">
+          <ul>
+              <li *ngFor="let categoria of pedidoselectService.categoriasSeleccionadas; let i = index">
+                  {{ categoria }}
+                  <button class="btn btn-danger btn-sm">Borrar</button>
+              </li>
+          </ul>
+      </ng-container> 
+      <ng-template #noSelection>
+          <p>No se ha seleccionado ninguna categoría.</p>
+      </ng-template>
+  </div>
+  
+</div>
