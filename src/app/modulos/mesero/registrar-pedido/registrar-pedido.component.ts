@@ -51,7 +51,8 @@ export class RegistrarPedidoComponent implements OnInit {
   } 
 
   borrarSeleccion() {
-    this.categoriaSeleccionada = ''; // Borra la selección al hacer clic en el botón
+    console.log("Entra a Borrar")
+    this.pedidoselectService.limpiarSelecciones();
   }
 
   AgregarPlatillo(categoria:string){

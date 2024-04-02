@@ -22,7 +22,7 @@ import { ModalEliminarComponent } from './modulos/propietario/listas/modal-elimi
 import { RegistrarPedidoComponent } from './modulos/mesero/registrar-pedido/registrar-pedido.component';
 import { ListaPedidosComponent } from './modulos/mesero/lista-pedidos/lista-pedidos.component';
 import { FormsModule } from '@angular/forms';
-//mport { EditarCategoriaComponent } from './modulos/propietario/editar/editar-categoria/editar-categoria.component';
+import { ListaMesasComponent } from './modulos/mesero/lista-mesas/lista-mesas.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,8 @@ import { FormsModule } from '@angular/forms';
     ListaPedidosComponent,
     EditarCategoriaComponent,
     ModalEliminarCategoriaComponent,
-    ModalEliminarComponent
+    ModalEliminarComponent,
+    ListaMesasComponent
 
   ],
   imports: [

@@ -19,11 +19,11 @@
     </div>
     <br>
     <div class="row">
-    <div class="col-md-2 mb-2" *ngFor="let categoria of platillos" (click)="AgregarPlatillo(categoria.nombre)">
+    <div class="col-md-2 mb-2" *ngFor="let platillo of platillos" (click)="AgregarPlatillo(platillo.nombre)">
             <div class="card">
-                <img class="card-img-top" [src]="storageUrl+categoria.imagen" alt="{{ categoria.nombre }}">
+                <img class="card-img-top" [src]="storageUrl+platillo.imagen" alt="{{ platillo.nombre }}">
                 <div class="card-body">
-                    <h5 class="card-title">{{ categoria.nombre }}</h5>
+                    <h5 class="card-title">{{ platillo.nombre }}</h5>
                 </div>
             </div>
         </div>
@@ -36,22 +36,42 @@
 
 <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasOrders" aria-labelledby="offcanvasOrdersLabel">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasOrdersLabel">Órdenes</h5>
+        <h5 class="offcanvas-title" id="offcanvasOrdersLabel"><P>Pedido</P></h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
       <!-- Mostrar la lista de selecciones -->
-      <ng-container *ngIf="pedidoselectService.categoriasSeleccionadas.length > 0; else noSelection">
-          <ul>
-              <li *ngFor="let categoria of pedidoselectService.categoriasSeleccionadas; let i = index">
-                  {{ categoria }}
-                  <button class="btn btn-danger btn-sm">Borrar</button>
-              </li>
-          </ul>
-      </ng-container> 
+      <ng-container *ngIf="pedidoselectService.platillosSeleccionados.length > 0; else noSelection">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Platillo</th>
+                    <th>Cantidad</th>
+                    <th>Accion  </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let platillo of pedidoselectService.platillosSeleccionados; let i = index">
+                    <td>{{ platillo }}</td>
+                    <td>
+                        <div class="number-input">
+                            <input type="number" name="quantity" min="1" max="100" value="1">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="acciones">
+                        <button class="btn btn-agregar"><i class="bi bi-journals"></i></button>
+                        <button class="btn btn-agregar">-</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+     
       <ng-template #noSelection>
-          <p>No se ha seleccionado ninguna categoría.</p>
+          <p>No se ha seleccionado ningun platillo.</p>
       </ng-template>
   </div>
-  
+  <button class="btn btn-danger btn-sm" (click)="borrarSeleccion()">Confirmar Pedido</button>
 </div>

@@ -1,0 +1,70 @@
+.card:active {
+    transform: scale(0.95); /* Reduce el tamaño del card al hacer clic */
+    transition: transform 0.2s; /* Agrega una transición suave al efecto */
+}
+.btn-agregar {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 30%; /* Hace que el botón sea redondo */
+    background-color: #f96e04; /* Color de fondo del botón */
+    color: white; /* Color del texto */
+    font-size: 20px; /* Tamaño del símbolo de más */
+    line-height: 40px; /* Centra el símbolo verticalmente */
+    text-align: center; /* Centra el símbolo horizontalmente */
+    text-decoration: none; /* Quita el subrayado del texto */
+    transition: background-color 0.3s; /* Transición suave para el cambio de color de fondo */
+}
+.acciones{
+    margin: 2px;
+}
+
+.btn-agregar:hover {
+    background-color: #f8b203; /* Cambia el color de fondo al pasar el ratón por encima */
+}
+
+.btn-agregar:focus {
+    outline: none; /* Quita el contorno al enfocar el botón */
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.number-input {
+    display: flex;
+    align-items: center;
+}
+
+.number-input input {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border: none;
+    border-radius: 50%;
+    font-size: 16px;
+}
+
+.number-input .quantity-button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.number-input .quantity-button:hover {
+    background-color: #0056b3;
+}
