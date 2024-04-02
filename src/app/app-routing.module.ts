@@ -4,6 +4,10 @@ import { HomeComponent } from './modulos/home/home.component';
 
 const routes: Routes = [ 
   {
+    path:'home',
+    component:HomeComponent
+  },
+  {
     path:'',
     loadChildren:()=>import('../app/auth/auth.module').then(m=>m.AuthModule)
   },
@@ -16,9 +20,8 @@ const routes: Routes = [
     loadChildren:()=>import('../app/modulos/propietario/listas/listas.module').then(m=>m.ListasModule)
   },
   {
-  path:'home',
-  component:HomeComponent
-  //loadChildren: () => import('../app/auth/login/login.component').then(m => m.LoginComponent)
+  path:'menu',
+  loadChildren:()=>import('../app/modulos/propietario/menu/menu.module').then(m=>m.MenuModule)
   }
 ];
  

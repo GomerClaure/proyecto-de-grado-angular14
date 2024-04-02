@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModalEliminarCategoriaComponent } from './modulos/propietario/listas/modal-eliminar-categoria/modal-eliminar-categoria.component';
 import { ModalEliminarComponent } from './modulos/propietario/listas/modal-eliminar/modal-eliminar.component';
 import { FormsModule } from '@angular/forms';
+import { GenerarComponent } from './modulos/propietario/menu/generar/generar.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     EditarCategoriaComponent,
     ModalEliminarCategoriaComponent,
-    ModalEliminarComponent
+    ModalEliminarComponent,
+    GenerarComponent
 
   ],
   imports: [
