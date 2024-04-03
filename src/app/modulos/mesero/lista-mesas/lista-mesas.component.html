@@ -4,20 +4,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simulación de Mesas</title>
 </head>
-<body>
-  <div class="container">
-    <h1>Mesas</h1>
-    <div class="row">
-      <div class="card-deck">
-        <div class="col-sm-4 mb-3">
-          <div class="card" id="mesa1" (click)="seleccionarMesa('mesa1')">
+<div class="container">
+  <h1>Mesas</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 mb-3">
+          <div class="card" id="mesa3" (click)="seleccionarMesa('mesa3')">
             <div class="card-body">
-              <h5 class="card-title">Mesa 1</h5>
-              <p class="card-text">Descripción de la mesa 1.</p>
+              <h5 class="card-title">Mesa 3</h5>
+              <p class="card-text">Descripción de la mesa 3.</p>
             </div>
           </div>
-        </div>
-        <div class="col-sm-4 mb-3">
+        </div> 
+        <div class="col-lg-6 col-md-6 col-sm-6 mb-3">
           <div class="card" id="mesa2" (click)="seleccionarMesa('mesa2')">
             <div class="card-body">
               <h5 class="card-title">Mesa 2</h5>
@@ -25,16 +25,28 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-4 mb-3">
-          <div class="card" id="mesa3" (click)="seleccionarMesa('mesa3')">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 mb-3">
+          <div class="card" id="mesa5" (click)="seleccionarMesa('mesa5')">
             <div class="card-body">
-              <h5 class="card-title">Mesa 3</h5>
-              <p class="card-text">Descripción de la mesa 3.</p>
+              <h5 class="card-title">Mesa 5</h5>
+              <p class="card-text">Descripción de la mesa 5.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 mb-3">
+          <div class="card" id="mesa8" (click)="seleccionarMesa('mesa8')">
+            <div class="card-body">
+              <h5 class="card-title">Mesa 8</h5>
+              <p class="card-text">Descripción de la mesa 8.</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <button class="btn btn-primary" (click)="RegistrarMesa(mesaSeleccionada)">Siguiente</button>
   </div>
-</body>
+  <button class="btn btn-primary" (click)="RegistrarMesa(mesaSeleccionada)">Siguiente</button>
+</div>

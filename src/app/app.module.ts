@@ -23,6 +23,7 @@ import { RegistrarPedidoComponent } from './modulos/mesero/registrar-pedido/regi
 import { ListaPedidosComponent } from './modulos/mesero/lista-pedidos/lista-pedidos.component';
 import { FormsModule } from '@angular/forms';
 import { ListaMesasComponent } from './modulos/mesero/lista-mesas/lista-mesas.component';
+import { ModalPedidoComponent } from './modulos/mesero/modal-pedido/modal-pedido.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ListaMesasComponent } from './modulos/mesero/lista-mesas/lista-mesas.co
     EditarCategoriaComponent,
     ModalEliminarCategoriaComponent,
     ModalEliminarComponent,
-    ListaMesasComponent
+    ListaMesasComponent,
+    ModalPedidoComponent
 
   ],
   imports: [

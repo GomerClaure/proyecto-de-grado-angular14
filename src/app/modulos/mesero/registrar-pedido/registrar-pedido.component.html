@@ -3,25 +3,28 @@
 <br><br><br>
 
 <h2 class="titulo">Tomar Orden</h2>
-<div class="container">
-    <p>Número de Mesa Seleccionado: {{ numeroMesa }}</p>
-
-    <div class="row">
-        <div class="col-md-8">
+<div class="container text-center">
+    <p>Mesa : {{ numeroMesa }}</p>
+<div class="row">
+    <div class="col">
+        <div class="col-md-12">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Buscar...">
             </div>
         </div>
+    </div> 
+    <div class="col">
         <div class="col-md-4">
-            <select class="form-select" aria-label="Default select example" >
+            <select class="form-select" aria-label="Default select example">
                 <option selected disabled>Categoria</option>
                 <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
-            </select>
+              </select>
         </div> 
     </div>
+</div>
     <br>
     <div class="row">
-    <div class="col-md-2 mb-2" *ngFor="let platillo of platillos" (click)="AgregarPlatillo(platillo.nombre)">
+    <div class="col-md-2 mb-2" *ngFor="let platillo of platillos" (click)="AgregarPlatillo(platillo)">
             <div class="card">
                 <img class="card-img-top" [src]="storageUrl+platillo.imagen" alt="{{ platillo.nombre }}">
                 <div class="card-body">
@@ -31,11 +34,6 @@
         </div>
     </div>
 </div>
-
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasOrders" aria-controls="offcanvasOrders">
-    Ver Órdenes
-</button>
-
 <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasOrders" aria-labelledby="offcanvasOrdersLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasOrdersLabel"><P>Pedido</P></h5>
@@ -54,7 +52,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let platillo of pedidoselectService.platillosSeleccionados; let i = index">
-                    <td>{{ platillo }}</td>
+                    <td>{{ platillo.nombre }}</td>
                     <td>
                         <div class="number-input">
                             <input type="number" name="quantity" min="1" max="100" value="1">
@@ -62,8 +60,8 @@
                     </td>
                     <td>
                         <div class="acciones">
-                        <button class="btn btn-agregar"><i class="bi bi-journals"></i></button>
-                        <button class="btn btn-agregar">-</button>
+                            <button class="btn btn-agregar" data-bs-toggle="modal" data-bs-target="#agregarDescripcion" (click)="setDescripcion(platillo.nombre)"><i class="bi bi-journals"></i></button>
+                        <button class="btn" (click)="retirarPlatillo(i)">Retirar</button>
                         </div>
                     </td>
                 </tr>
@@ -75,5 +73,12 @@
           <p>No se ha seleccionado ningun platillo.</p>
       </ng-template>
   </div>
-  <button class="btn btn-danger btn-sm" (click)="borrarSeleccion()">Confirmar Pedido</button>
+  <button class="btn btn-danger btn-sm" (click)="guardarPedido()">Confirmar Pedido</button>
 </div>
+<div style="text-align: end;">
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasOrders" aria-controls="offcanvasOrders">
+        Ver Órdenes
+    </button>
+</div>
+<app-modal-pedido></app-modal-pedido>
+

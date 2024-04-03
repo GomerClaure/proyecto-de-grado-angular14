@@ -4,16 +4,20 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PedidoService {
-  platillosSeleccionados: string[] = [];
+  platillosSeleccionados: { nombre: string; descripcion: string; }[] = [];
 
   constructor() { }
 
-  agregarSeleccion(categoria: string) {
-    this.platillosSeleccionados.push(categoria);
-  }
-  limpiarSelecciones(){
-    this.platillosSeleccionados = [];
+  getpedido(){
+    return this.platillosSeleccionados;
   }
 
+  agregarSeleccion(platillo: { nombre: string; descripcion: string; }) {
+    this.platillosSeleccionados.push(platillo);
+  }
+
+  limpiarSelecciones() {
+    this.platillosSeleccionados = [];
+  }
 }
  

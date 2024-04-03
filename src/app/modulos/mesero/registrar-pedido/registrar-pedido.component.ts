@@ -6,6 +6,7 @@ import { Categoria } from 'src/app/modelos/Categoria';
 import { environment } from 'src/environments/environment';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { ActivatedRoute } from '@angular/router';
+import { DescripcionPedidoService } from 'src/app/services/detalle-pedido/descripcion-pedido.service';
 
 @Component({
   selector: 'app-registrar-pedido',
@@ -14,20 +15,24 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RegistrarPedidoComponent implements OnInit {
   categoriaSeleccionada: string = '';
-  numeroMesa:string='';
-  platillos:Platillo[]=[];
-  categoria:Categoria[]=[];
-  categorias:any[]=[];
+  numeroMesa: string = '';
+  platillos: Platillo[] = [];
+  categoria: Categoria[] = [];
+  categorias: any[] = [];
+  descripcion: string = '';
   storageUrl = environment.backendStorageUrl;
-  constructor(private route:ActivatedRoute,private platilloService:PlatillosService,public pedidoselectService:PedidoService,private categoriaService:CategoriaService) { }
+  constructor(private sharedDataService: DescripcionPedidoService, private route: ActivatedRoute, private platilloService: PlatillosService, public pedidoselectService: PedidoService, private categoriaService: CategoriaService) { }
 
   ngOnInit(): void {
     this.getPlatillos();
+    this.getCategorias();
+    this.descripcion = this.sharedDataService.getDescripcion();
+    console.log(this.descripcion)
     this.route.queryParams.subscribe(params => {
       this.numeroMesa = params['mesaSeleccionada'];
     });
   }
-  getPlatillos() {
+  getPlatillos() { 
     this.platilloService.getPlatillos().subscribe(
       res => {
         this.platillos = res.platillo;
@@ -38,12 +43,29 @@ export class RegistrarPedidoComponent implements OnInit {
       }
     );
   }
-  
+  retirarPlatillo(index: number) {
+    this.pedidoselectService.platillosSeleccionados.splice(index, 1);
+  }
+
+  guardarPedido() {
+    if (this.categoriaSeleccionada !== '' && this.descripcion !== '') {
+      // Obtener el nombre del platillo seleccionado
+      const nombrePlatillo = this.categoriaSeleccionada;
+      // Crear el objeto platillo con su descripción
+      const platillo = { nombre: nombrePlatillo, descripcion: this.descripcion };
+      // Agregar el platillo al arreglo de platillos seleccionados en el servicio
+      this.pedidoselectService.agregarSeleccion(platillo);
+      // Limpiar los campos de categoría y descripción
+      this.categoriaSeleccionada = '';
+      this.descripcion = '';
+    }
+    console.log(this.pedidoselectService.getpedido())
+  }
+
   getCategorias() {
     this.categoriaService.getCategorias().subscribe(
       (data: any) => { // Ajusta el tipo de datos esperado
-        this.categoria = data.categorias; // Almacena las categorías obtenidas en la variable categorias
-        console.log(data)
+        this.categorias = data.categorias; // Cambia this.categoria a this.categorias
       },
       error => {
         console.error('Error obteniendo categorías:', error);
@@ -51,16 +73,17 @@ export class RegistrarPedidoComponent implements OnInit {
     );
   }
 
-  seleccionarCategoria(categoria: string) {
-    this.pedidoselectService.agregarSeleccion(categoria);
-  } 
-
   borrarSeleccion() {
     console.log("Entra a Borrar")
     this.pedidoselectService.limpiarSelecciones();
   }
 
-  AgregarPlatillo(categoria:string){
-    this.pedidoselectService.agregarSeleccion(categoria);
+  AgregarPlatillo(platillo: Platillo) {
+    this.categoriaSeleccionada = platillo.nombre;
+    this.pedidoselectService.agregarSeleccion(platillo);
+  }
+
+  setDescripcion(platilloNombre: string) {
+    this.sharedDataService.setDescripcion(platilloNombre);
   }
 }
