@@ -21,13 +21,11 @@ export class RegistrarPedidoComponent implements OnInit {
   categorias: any[] = [];
   descripcion: string = '';
   storageUrl = environment.backendStorageUrl;
-  constructor(private sharedDataService: DescripcionPedidoService, private route: ActivatedRoute, private platilloService: PlatillosService, public pedidoselectService: PedidoService, private categoriaService: CategoriaService) { }
+  constructor(private descripcionPedidoService: DescripcionPedidoService, private route: ActivatedRoute, private platilloService: PlatillosService, public pedidoselectService: PedidoService, private categoriaService: CategoriaService) { }
 
   ngOnInit(): void {
     this.getPlatillos();
     this.getCategorias();
-    this.descripcion = this.sharedDataService.getDescripcion();
-    console.log(this.descripcion)
     this.route.queryParams.subscribe(params => {
       this.numeroMesa = params['mesaSeleccionada'];
     });
@@ -43,25 +41,6 @@ export class RegistrarPedidoComponent implements OnInit {
       }
     );
   }
-  retirarPlatillo(index: number) {
-    this.pedidoselectService.platillosSeleccionados.splice(index, 1);
-  }
-
-  guardarPedido() {
-    if (this.categoriaSeleccionada !== '' && this.descripcion !== '') {
-      // Obtener el nombre del platillo seleccionado
-      const nombrePlatillo = this.categoriaSeleccionada;
-      // Crear el objeto platillo con su descripción
-      const platillo = { nombre: nombrePlatillo, descripcion: this.descripcion };
-      // Agregar el platillo al arreglo de platillos seleccionados en el servicio
-      this.pedidoselectService.agregarSeleccion(platillo);
-      // Limpiar los campos de categoría y descripción
-      this.categoriaSeleccionada = '';
-      this.descripcion = '';
-    }
-    console.log(this.pedidoselectService.getpedido())
-  }
-
   getCategorias() {
     this.categoriaService.getCategorias().subscribe(
       (data: any) => { // Ajusta el tipo de datos esperado
@@ -72,18 +51,16 @@ export class RegistrarPedidoComponent implements OnInit {
       }
     );
   }
-
-  borrarSeleccion() {
-    console.log("Entra a Borrar")
-    this.pedidoselectService.limpiarSelecciones();
-  }
-
-  AgregarPlatillo(platillo: Platillo) {
-    this.categoriaSeleccionada = platillo.nombre;
+  agregarPlatillo(platillo: Platillo) {
     this.pedidoselectService.agregarSeleccion(platillo);
+    console.log(platillo);
+  }
+  //Aqui se manda en que pos de la lista de platillos seleccionados esta el platillo
+  setPlatilloSeleccionado(index: number) {
+    console.log('Índice del platillo en el array:', index);
+}
+  retirarPlatillo(index: number) {
+    this.pedidoselectService.platillosSeleccionados.splice(index, 1);
   }
 
-  setDescripcion(platilloNombre: string) {
-    this.sharedDataService.setDescripcion(platilloNombre);
-  }
 }

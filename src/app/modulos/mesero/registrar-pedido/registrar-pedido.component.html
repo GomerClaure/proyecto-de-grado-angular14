@@ -24,7 +24,7 @@
 </div>
     <br>
     <div class="row">
-    <div class="col-md-2 mb-2" *ngFor="let platillo of platillos" (click)="AgregarPlatillo(platillo)">
+    <div class="col-md-2 mb-2" *ngFor="let platillo of platillos" (click)="agregarPlatillo(platillo)">
             <div class="card">
                 <img class="card-img-top" [src]="storageUrl+platillo.imagen" alt="{{ platillo.nombre }}">
                 <div class="card-body">
@@ -34,6 +34,7 @@
         </div>
     </div>
 </div>
+
 <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasOrders" aria-labelledby="offcanvasOrdersLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasOrdersLabel"><P>Pedido</P></h5>
@@ -60,7 +61,12 @@
                     </td>
                     <td>
                         <div class="acciones">
-                            <button class="btn btn-agregar" data-bs-toggle="modal" data-bs-target="#agregarDescripcion" (click)="setDescripcion(platillo.nombre)"><i class="bi bi-journals"></i></button>
+                            <button class="btn btn-agregar" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#agregarDescripcion" 
+                                    (click)="setPlatilloSeleccionado(i)">
+                                   <i class="bi bi-journals"></i>
+                            </button>
                         <button class="btn" (click)="retirarPlatillo(i)">Retirar</button>
                         </div>
                     </td>
@@ -73,7 +79,7 @@
           <p>No se ha seleccionado ningun platillo.</p>
       </ng-template>
   </div>
-  <button class="btn btn-danger btn-sm" (click)="guardarPedido()">Confirmar Pedido</button>
+  <button class="btn btn-danger btn-sm" >Confirmar Pedido</button>
 </div>
 <div style="text-align: end;">
     <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasOrders" aria-controls="offcanvasOrders">
