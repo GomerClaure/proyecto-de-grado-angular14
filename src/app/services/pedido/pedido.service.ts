@@ -4,21 +4,24 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PedidoService {
-  platillosSeleccionados: { nombre: string; descripcion: string;}[] = [];
-  pedidos: { nombre: string; descripcion: string; }[] = [];
-
+  platillosSeleccionados: { nombre: string; 
+                            descripcion: string;
+                            id:number;
+                          }[] = [];
+  descripcion:string='';
   constructor() { }
-  getpedido(){
-    return this.platillosSeleccionados;
-  }
-  agregarPedido(pedido: { nombre: string; descripcion: string; }) {
-    this.pedidos.push(pedido);
-  }
-  agregarSeleccion(platillo: { nombre: string; descripcion: string; }) {
+  agregarSeleccion(platillo: { nombre: string; descripcion: string;id:number }) {
     this.platillosSeleccionados.push(platillo);
   }
-  limpiarSelecciones() {
-    this.platillosSeleccionados = [];
+  guardarPedido(listaDescripciones: { id: number; descripcion: string; }[]) {
+    this.platillosSeleccionados.forEach((platilloSeleccionado) => {
+      const descripcion = listaDescripciones.find((desc: { id: number; descripcion: string; }) => desc.id === platilloSeleccionado.id)?.descripcion;
+      // Si se encuentra una descripción correspondiente, añádela al platillo seleccionado
+      if (descripcion) {
+        platilloSeleccionado.descripcion = descripcion;
+      }
+    });
   }
-}
+  }
+
  

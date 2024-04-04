@@ -20,6 +20,7 @@ export class RegistrarPedidoComponent implements OnInit {
   categoria: Categoria[] = [];
   categorias: any[] = [];
   descripcion: string = '';
+  //lista:any;
   storageUrl = environment.backendStorageUrl;
   constructor(private descripcionPedidoService: DescripcionPedidoService, private route: ActivatedRoute, private platilloService: PlatillosService, public pedidoselectService: PedidoService, private categoriaService: CategoriaService) { }
 
@@ -53,14 +54,14 @@ export class RegistrarPedidoComponent implements OnInit {
   }
   agregarPlatillo(platillo: Platillo) {
     this.pedidoselectService.agregarSeleccion(platillo);
-    console.log(platillo);
   }
-  //Aqui se manda en que pos de la lista de platillos seleccionados esta el platillo
   setPlatilloSeleccionado(index: number) {
-    console.log('Índice del platillo en el array:', index);
-}
+    this.descripcionPedidoService.platilloNombreSeleccionado(index);
+  }
   retirarPlatillo(index: number) {
     this.pedidoselectService.platillosSeleccionados.splice(index, 1);
   }
-
+  guardarPedido(){
+    this.pedidoselectService.guardarPedido(this.descripcionPedidoService.getDescripciones());
+  }
 }

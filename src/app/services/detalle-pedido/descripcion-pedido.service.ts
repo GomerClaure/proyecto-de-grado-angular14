@@ -4,31 +4,22 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DescripcionPedidoService {
-  descripciones: { platillo: string, descripcion: string }[] = [];
-  platilloSeleccionado: string = '';
-
+  descripciones: { id:number, descripcion: string }[] = [];
+  index:number=0;
   constructor() { }
-
-  setDescripcion(platillo: string, descripcion: string) {
-    const index = this.descripciones.findIndex(item => item.platillo === platillo);
-    if (index !== -1) {
-      this.descripciones[index].descripcion = descripcion;
-    } else {
-      this.descripciones.push({ platillo, descripcion });
-    }
-  }
-
   platilloNombreSeleccionado(id:number){
-    console.log(id);
-    //this.platilloSeleccionado=id;
+    this.index=id;
   }
-
-  getplatilloSeleccionado(){
-    return this.platilloSeleccionado;
-  }
-
-  getDescripcion(platillo: string) {
-    const descripcionObj = this.descripciones.find(item => item.platillo === platillo);
-    return descripcionObj ? descripcionObj.descripcion : '';
+  addDescripcion(descripcion:string){
+        // Asegúrate de que index tenga un valor válido
+        if (this.index >= 0 && this.index < this.descripciones.length) {
+          // Agrega la descripción y el ID al arreglo descripciones
+          this.descripciones.push({ id: this.index, descripcion: descripcion });
+        }
+        console.log(descripcion)
+        console.log(this.index)
+  }  
+  getDescripciones(){
+    return this.descripciones;
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DescripcionPedidoService } from 'src/app/services/detalle-pedido/descripcion-pedido.service';
+import { PedidoService } from 'src/app/services/pedido/pedido.service';
 
 @Component({
   selector: 'app-modal-pedido',
@@ -8,15 +9,12 @@ import { DescripcionPedidoService } from 'src/app/services/detalle-pedido/descri
 })
 export class ModalPedidoComponent implements OnInit {
   descripcion: string = '';
-  platilloS:any;
-  constructor(private sharedDataService: DescripcionPedidoService) { }
+  constructor(private descripcionPedidoService:DescripcionPedidoService) { }
 
   ngOnInit(): void {
-    this.platilloS=this.sharedDataService.getplatilloSeleccionado;
-
+        
   } 
   agregarDescripcion() {
-    console.log(this.platilloS)
-    console.log('Descripción guardada:', this.descripcion);
+    this.descripcionPedidoService.addDescripcion(this.descripcion)
   }
 } 
