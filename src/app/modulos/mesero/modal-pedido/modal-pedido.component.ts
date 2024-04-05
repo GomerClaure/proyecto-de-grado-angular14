@@ -16,5 +16,6 @@ export class ModalPedidoComponent implements OnInit {
   } 
   agregarDescripcion() {
     this.descripcionPedidoService.addDescripcion(this.descripcion)
+    this.descripcion = ''; 
   }
 } 
