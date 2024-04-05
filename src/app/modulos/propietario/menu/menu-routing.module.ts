@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GenerarComponent } from './generar/generar.component';
-import { VisualizarComponent } from './visualizar/visualizar.component';
+import { VisualizarQrComponent } from './visualizar-qr/visualizar-qr.component';
 import { Routes,RouterModule } from '@angular/router';
 
 const routes:Routes=[
@@ -13,8 +13,8 @@ const routes:Routes=[
         component:GenerarComponent
       },
       {
-        path:'visualizar',
-        component:VisualizarComponent
+        path:'qr',
+        component:VisualizarQrComponent
       }
     ]
   }

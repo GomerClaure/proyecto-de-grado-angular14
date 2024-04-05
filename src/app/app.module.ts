@@ -21,7 +21,7 @@ import { ModalEliminarCategoriaComponent } from './modulos/propietario/listas/mo
 import { ModalEliminarComponent } from './modulos/propietario/listas/modal-eliminar/modal-eliminar.component';
 import { FormsModule } from '@angular/forms';
 import { GenerarComponent } from './modulos/propietario/menu/generar/generar.component';
-
+import { VisualizarQrComponent } from './modulos/propietario/menu/visualizar-qr/visualizar-qr.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +39,8 @@ import { GenerarComponent } from './modulos/propietario/menu/generar/generar.com
     EditarCategoriaComponent,
     ModalEliminarCategoriaComponent,
     ModalEliminarComponent,
-    GenerarComponent
+    GenerarComponent,
+    VisualizarQrComponent
 
   ],
   imports: [
