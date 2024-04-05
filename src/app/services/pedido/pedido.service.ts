@@ -14,18 +14,14 @@ export class PedidoService {
     this.platillosSeleccionados.push(platillo);
   }
   guardarPedido(listaDescripciones: { id: number; descripcion: string; }[]) {
-    // Agregar los platillos seleccionados a la lista platillosAGuardar
-    this.platillosSeleccionados.forEach(platilloSeleccionado => {
-      this.platillosAGuardar.push({ platillo: platilloSeleccionado, descripcion: '' });
+    // Limpiamos platillosAGuardar para evitar duplicados si la función se llama varias veces
+    this.platillosAGuardar = [];
+
+    this.platillosSeleccionados.forEach((platilloSeleccionado, index) => {
+      const descripcion = listaDescripciones.find(desc => desc.id === index)?.descripcion || '';
+      this.platillosAGuardar.push({ platillo: platilloSeleccionado, descripcion });
     });
 
-    // Buscar descripciones correspondientes y agregarlas a platillosAGuardar
-    this.platillosAGuardar.forEach(platilloAGuardar => {
-      const descripcion = listaDescripciones.find(desc => desc.id === platilloAGuardar.platillo.id)?.descripcion;
-      if (descripcion) {
-        platilloAGuardar.descripcion = descripcion;
-      }
-    });
     console.log(this.platillosAGuardar);
   }
   }

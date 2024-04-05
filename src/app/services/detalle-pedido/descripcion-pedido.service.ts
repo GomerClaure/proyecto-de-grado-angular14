@@ -7,6 +7,7 @@ export class DescripcionPedidoService {
   descripciones: { id:number, descripcion: string }[] = [];
   index:number=0;
   constructor() { }
+  
   platilloNombreSeleccionado(id:number){
     this.index=id;
   }
