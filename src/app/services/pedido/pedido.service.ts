@@ -1,26 +1,32 @@
 import { Injectable } from '@angular/core';
+import { Platillo } from 'src/app/modelos/Platillo';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PedidoService {
-  platillosSeleccionados: { nombre: string; 
-                            descripcion: string;
-                            id:number;
-                          }[] = [];
+  platillosSeleccionados: Platillo[] = [];
   descripcion:string='';
+  platillosAGuardar:{platillo:Platillo,descripcion:string}[]=[];
+
   constructor() { }
-  agregarSeleccion(platillo: { nombre: string; descripcion: string;id:number }) {
+  agregarSeleccion(platillo: Platillo) {
     this.platillosSeleccionados.push(platillo);
   }
   guardarPedido(listaDescripciones: { id: number; descripcion: string; }[]) {
-    this.platillosSeleccionados.forEach((platilloSeleccionado) => {
-      const descripcion = listaDescripciones.find((desc: { id: number; descripcion: string; }) => desc.id === platilloSeleccionado.id)?.descripcion;
-      // Si se encuentra una descripción correspondiente, añádela al platillo seleccionado
+    // Agregar los platillos seleccionados a la lista platillosAGuardar
+    this.platillosSeleccionados.forEach(platilloSeleccionado => {
+      this.platillosAGuardar.push({ platillo: platilloSeleccionado, descripcion: '' });
+    });
+
+    // Buscar descripciones correspondientes y agregarlas a platillosAGuardar
+    this.platillosAGuardar.forEach(platilloAGuardar => {
+      const descripcion = listaDescripciones.find(desc => desc.id === platilloAGuardar.platillo.id)?.descripcion;
       if (descripcion) {
-        platilloSeleccionado.descripcion = descripcion;
+        platilloAGuardar.descripcion = descripcion;
       }
     });
+    console.log(this.platillosAGuardar);
   }
   }
 
