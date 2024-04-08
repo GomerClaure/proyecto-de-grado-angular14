@@ -95,4 +95,19 @@ export class RegistrarPedidoComponent implements OnInit {
   guardarPedido(){
     this.pedidoselectService.guardarPedido(this.descripcionPedidoService.getDescripciones());
   }
+  increment(platilloId: number) {
+    const quantityInput = document.getElementById('quantityP' + platilloId) as HTMLInputElement;
+    //input cast
+    let cantidad = parseInt(quantityInput.value);
+    if ( cantidad < 100) cantidad++;
+    quantityInput.value = cantidad.toString();
+
+  }
+
+  decrement(platilloId: number) {
+    const quantityInput = document.getElementById('quantityP' + platilloId) as HTMLInputElement;
+    let cantidad = parseInt(quantityInput.value);
+    if ( cantidad > 1) cantidad--;
+    quantityInput.value = cantidad.toString();
+  }
 }

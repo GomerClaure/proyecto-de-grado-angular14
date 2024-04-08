@@ -55,19 +55,22 @@
                 <tr *ngFor="let platillo of pedidoselectService.platillosSeleccionados; let i = index">
                     <td>{{ platillo.nombre }}</td>
                     <td>
-                        <div class="number-input">
-                            <input type="number" name="quantity" min="1" max="100" value="1">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" type="button" (click)="decrement(i)">-</button>
+                            </div>
+                            <input type="number" [id]="'quantityP'+i" name="quantity" min="1" max="100" value="1" class="form-control text-center" readonly>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" (click)="increment(i)">+</button>
+                            </div>
                         </div>
                     </td>
                     <td>
-                        <div class="acciones">
-                            <button class="btn btn-agregar" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#agregarDescripcion" 
-                                    (click)="setPlatilloSeleccionado(i)">
-                                   <i class="bi bi-journals"></i>
+                        <div class="btn-group" role="group" aria-label="Acciones">
+                            <button class="btn btn-agregar" data-bs-toggle="modal" data-bs-target="#agregarDescripcion" (click)="setPlatilloSeleccionado(i)" >
+                                <i class="bi bi-journals"></i> 
                             </button>
-                        <button class="btn" (click)="retirarPlatillo(i)">Retirar</button>
+                            <button class="btn btn-retirar" (click)="retirarPlatillo(i)">Retirar</button>
                         </div>
                     </td>
                 </tr>
