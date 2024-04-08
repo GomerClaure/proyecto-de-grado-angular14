@@ -9,16 +9,16 @@
     <div class="col">
         <div class="col-md-12">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar...">
+                <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="busquedaNombre" (keyup)="onBuscar()">
             </div>
         </div>
     </div> 
     <div class="col">
         <div class="col-md-4">
-            <select class="form-select" aria-label="Default select example">
+            <select class="form-select" aria-label="Default select example" (change)="onChangeCategoria($event)">
                 <option selected disabled>Categoria</option>
                 <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
-              </select>
+            </select>
         </div> 
     </div>
 </div>

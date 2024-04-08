@@ -15,12 +15,13 @@ import { DescripcionPedidoService } from 'src/app/services/detalle-pedido/descri
 })
 export class RegistrarPedidoComponent implements OnInit {
   categoriaSeleccionada: string = '';
+  idCategoriaSeleccionada: number | undefined;
+  busquedaNombre: string = '';
   numeroMesa: string = '';
   platillos: Platillo[] = [];
   categoria: Categoria[] = [];
   categorias: any[] = [];
   descripcion: string = '';
-  //lista:any;
   storageUrl = environment.backendStorageUrl;
   constructor(private descripcionPedidoService: DescripcionPedidoService, private route: ActivatedRoute, private platilloService: PlatillosService, public pedidoselectService: PedidoService, private categoriaService: CategoriaService) { }
 
@@ -33,19 +34,47 @@ export class RegistrarPedidoComponent implements OnInit {
   }
   getPlatillos() { 
     this.platilloService.getPlatillos().subscribe(
-      res => {
-        this.platillos = res.platillo;
+      (res: any) => {
+        // Filtrar solo los platillos de la categoría seleccionada y que coincidan con el término de búsqueda
+        let filteredPlatillos = res.platillo.filter((platillo: any) => {
+          if (this.idCategoriaSeleccionada && this.idCategoriaSeleccionada !== 0) {
+            return platillo.id_categoria === this.idCategoriaSeleccionada && platillo.disponible === true && platillo.nombre.toLowerCase().includes(this.busquedaNombre.toLowerCase());
+          } else {
+            return platillo.disponible === true && platillo.nombre.toLowerCase().includes(this.busquedaNombre.toLowerCase());
+          }
+        });
+  
+        // Si el término de búsqueda está vacío, mostrar los 10 primeros platillos de la categoría seleccionada
+        if (!this.busquedaNombre && this.idCategoriaSeleccionada && this.idCategoriaSeleccionada !== 0) {
+          filteredPlatillos = filteredPlatillos.slice(0, 10);
+        }
+  
+        this.platillos = filteredPlatillos;
         console.log(this.platillos);
       },
       err => {
         console.log(err);
       }
-    );
+    );}
+
+  onChangeCategoria(event: any) {
+    this.idCategoriaSeleccionada = parseInt(event.target.value); // Convierte el valor a un número entero
+    this.getPlatillos(); // Llama a getPlatillos() para actualizar la lista de platillos según la categoría seleccionada
+  }
+  onBuscar() {
+    // Elimina los espacios en blanco extra al principio y al final del término de búsqueda
+    const searchTerm = this.busquedaNombre.trim().toLowerCase();
+    
+    // Filtra los platillos según el término de búsqueda
+    this.platillos = this.platillos.filter((platillo: Platillo) => {
+      return platillo.nombre.toLowerCase().includes(searchTerm);
+    });
   }
   getCategorias() {
     this.categoriaService.getCategorias().subscribe(
-      (data: any) => { // Ajusta el tipo de datos esperado
-        this.categorias = data.categorias; // Cambia this.categoria a this.categorias
+      (data: any) => {
+        // Añade la opción "Todos" al principio de la lista de categorías
+        this.categorias = [{ id: 0, nombre: 'Todos' }, ...data.categorias];
       },
       error => {
         console.error('Error obteniendo categorías:', error);
@@ -57,6 +86,8 @@ export class RegistrarPedidoComponent implements OnInit {
   }
   setPlatilloSeleccionado(index: number) {
     this.descripcionPedidoService.platilloNombreSeleccionado(index);
+    this.descripcionPedidoService.obtenerDescripcion();
+    //this.descripcion = this.platilloSeleccionado.descripcion;
   }
   retirarPlatillo(index: number) {
     this.pedidoselectService.platillosSeleccionados.splice(index, 1);
