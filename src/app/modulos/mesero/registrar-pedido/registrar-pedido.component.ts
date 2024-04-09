@@ -24,7 +24,7 @@ export class RegistrarPedidoComponent implements OnInit {
   descripcion: string = '';
   storageUrl = environment.backendStorageUrl;
   constructor(private descripcionPedidoService: DescripcionPedidoService, private route: ActivatedRoute, private platilloService: PlatillosService, public pedidoselectService: PedidoService, private categoriaService: CategoriaService) { }
-
+ 
   ngOnInit(): void {
     this.getPlatillos();
     this.getCategorias();
@@ -43,9 +43,11 @@ export class RegistrarPedidoComponent implements OnInit {
             return platillo.disponible === true && platillo.nombre.toLowerCase().includes(this.busquedaNombre.toLowerCase());
           }
         });
-  
-        // Si el término de búsqueda está vacío, mostrar los 10 primeros platillos de la categoría seleccionada
-        if (!this.busquedaNombre && this.idCategoriaSeleccionada && this.idCategoriaSeleccionada !== 0) {
+        // Si el término de búsqueda está vacío, mostrar todos los platillos
+        if (!this.busquedaNombre) {
+          filteredPlatillos = res.platillo.filter((platillo: any) => platillo.disponible === true);
+        } else if (!this.busquedaNombre) {
+          // Si el término de búsqueda está vacío y hay una categoría seleccionada, mostrar los 10 primeros platillos de esa categoría
           filteredPlatillos = filteredPlatillos.slice(0, 10);
         }
   
@@ -53,10 +55,13 @@ export class RegistrarPedidoComponent implements OnInit {
         console.log(this.platillos);
       },
       err => {
-        console.log(err);
+        console.log(err); 
       }
-    );}
-
+    );
+  }
+  
+  
+  
   onChangeCategoria(event: any) {
     this.idCategoriaSeleccionada = parseInt(event.target.value); // Convierte el valor a un número entero
     this.getPlatillos(); // Llama a getPlatillos() para actualizar la lista de platillos según la categoría seleccionada
@@ -103,7 +108,6 @@ export class RegistrarPedidoComponent implements OnInit {
     quantityInput.value = cantidad.toString();
 
   }
-
   decrement(platilloId: number) {
     const quantityInput = document.getElementById('quantityP' + platilloId) as HTMLInputElement;
     let cantidad = parseInt(quantityInput.value);
