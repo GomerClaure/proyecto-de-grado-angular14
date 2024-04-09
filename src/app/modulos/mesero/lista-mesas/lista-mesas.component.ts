@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Mesa } from 'src/app/modelos/Mesa';
+import { MesaService } from 'src/app/services/mesas/mesa.service';
 
 @Component({
   selector: 'app-lista-mesas',
@@ -8,10 +10,22 @@ import { Router } from '@angular/router';
 })
 export class ListaMesasComponent implements OnInit {
   mesaSeleccionada: string = '';
+  mesas: Mesa[]
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private mesaService: MesaService) {
+    this.mesas = [];
+   }
 
   ngOnInit(): void {
+    this.mesaService.getMesas().subscribe(
+      (res: any) => {
+        this.mesas = res.mesas;
+        console.log(this.mesas);
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   RegistrarMesa(mesaSeleccionada:string){
