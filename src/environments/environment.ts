@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   backendUrl: 'http://localhost:8000/api',
-  backendStorageUrl: 'http://localhost:8000'
+  backendStorageUrl: 'http://localhost:8000',
+  frontDominio: 'http://localhost:4200'
 };
 
 /*

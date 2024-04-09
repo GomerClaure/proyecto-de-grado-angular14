@@ -19,4 +19,7 @@ export class MenuService {
   public saveMenu(formData: FormData) {
     return this.http.post<any>(`${this.BASE_URL}/menu`, formData, { headers: this.headers });
   } 
+  public generarQr(direccion_url_menu: string) {
+    return this.http.post<any>(`${this.BASE_URL}/menu/menu/generar/qr`, {direccion_url_menu}, { headers: this.headers });
+  }
 }
