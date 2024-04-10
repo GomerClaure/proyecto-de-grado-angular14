@@ -7,42 +7,12 @@
 <div class="container">
   <h1>Mesas</h1>
   <div class="row">
-    <div class="col-md-6">
-      <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 mb-3">
-          <div class="card" id="mesa3" (click)="seleccionarMesa('mesa3')">
-            <div class="card-body">
-              <h5 class="card-title">Mesa 3</h5>
-              <p class="card-text">Descripción de la mesa 3.</p>
-            </div>
-          </div>
-        </div> 
-        <div class="col-lg-6 col-md-6 col-sm-6 mb-3">
-          <div class="card" id="mesa2" (click)="seleccionarMesa('mesa2')">
-            <div class="card-body">
-              <h5 class="card-title">Mesa 2</h5>
-              <p class="card-text">Descripción de la mesa 2.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 mb-3">
-          <div class="card" id="mesa5" (click)="seleccionarMesa('mesa5')">
-            <div class="card-body">
-              <h5 class="card-title">Mesa 5</h5>
-              <p class="card-text">Descripción de la mesa 5.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 mb-3">
-          <div class="card" id="mesa8" (click)="seleccionarMesa('mesa8')">
-            <div class="card-body">
-              <h5 class="card-title">Mesa 8</h5>
-              <p class="card-text">Descripción de la mesa 8.</p>
-            </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 mb-3" *ngFor="let mesa of mesas">
+        <div class="card" [attr.id]="mesa.id" (click)="seleccionarMesa(mesa.id)">
+          <div class="card-body">
+            <h5 class="card-title">{{ mesa.nombre }}</h5>
+            <p class="card-text">{{ 'la descripcion es esta'+mesa.id }}</p>
           </div>
         </div>
       </div>
