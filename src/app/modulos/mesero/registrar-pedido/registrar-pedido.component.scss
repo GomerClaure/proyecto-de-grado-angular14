@@ -2,19 +2,9 @@
     transform: scale(0.95); /* Reduce el tamaño del card al hacer clic */
     transition: transform 0.2s; /* Agrega una transición suave al efecto */
 }
-// .btn-agregar {
-//     display: inline-block;
-//     width: 40px;
-//     height: 40px;
-//     border-radius: 30%; /* Hace que el botón sea redondo */
-//     background-color: #f96e04; /* Color de fondo del botón */
-//     color: white; /* Color del texto */
-//     font-size: 20px; /* Tamaño del símbolo de más */
-//     line-height: 40px; /* Centra el símbolo verticalmente */
-//     text-align: center; /* Centra el símbolo horizontalmente */
-//     text-decoration: none; /* Quita el subrayado del texto */
-//     transition: background-color 0.3s; /* Transición suave para el cambio de color de fondo */
-// }
+.form-check{
+    margin-left: 150px;
+}
 .acciones{
     margin: 2px;
 }

@@ -43,11 +43,20 @@ export class RegistrarPedidoComponent implements OnInit {
             return platillo.disponible === true && platillo.nombre.toLowerCase().includes(this.busquedaNombre.toLowerCase());
           }
         });
+  
         // Si el término de búsqueda está vacío, mostrar todos los platillos
         if (!this.busquedaNombre) {
-          filteredPlatillos = res.platillo.filter((platillo: any) => platillo.disponible === true);
-        } else if (!this.busquedaNombre) {
-          // Si el término de búsqueda está vacío y hay una categoría seleccionada, mostrar los 10 primeros platillos de esa categoría
+          filteredPlatillos = res.platillo.filter((platillo: any) => {
+            if (this.idCategoriaSeleccionada && this.idCategoriaSeleccionada !== 0) {
+              return platillo.id_categoria === this.idCategoriaSeleccionada && platillo.disponible === true;
+            } else {
+              return platillo.disponible === true;
+            }
+          });
+        }
+  
+        // Limitar a los 10 primeros platillos si se ha seleccionado una categoría y el término de búsqueda está vacío
+        if (!this.busquedaNombre && this.idCategoriaSeleccionada && this.idCategoriaSeleccionada !== 0) {
           filteredPlatillos = filteredPlatillos.slice(0, 10);
         }
   
@@ -59,7 +68,6 @@ export class RegistrarPedidoComponent implements OnInit {
       }
     );
   }
-  
   
   
   onChangeCategoria(event: any) {
