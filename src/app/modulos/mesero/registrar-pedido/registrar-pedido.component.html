@@ -1,18 +1,15 @@
 <app-nav></app-nav>
 <br><br><br>
 <h2 class="titulo">Tomar Orden</h2>
-<div class="form-check">
-    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-    <label class="form-check-label" for="flexRadioDefault1">
-      Local
-    </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-    <label class="form-check-label" for="flexRadioDefault2">
-      Para Llevar
-    </label>
-  </div>
+<div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" [(ngModel)]="switchState" (ngModelChange)="switchStateChanged()" >
+    <label class="form-check-label" for="flexSwitchCheckChecked">Para llevar</label> 
+</div>
+  <div style="text-align:center">
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasOrders" aria-controls="offcanvasOrders">
+        Ver Órdenes
+    </button>
+</div>
 <div class="container">
     <p>Mesa : {{ numeroMesa }}</p>
 <div class="row">
@@ -69,7 +66,7 @@
                             <div class="input-group-prepend">
                                 <button class="btn btn-outline-secondary" type="button" (click)="decrement(i)">-</button>
                             </div>
-                            <input type="number" [id]="'quantityP'+i" name="quantity" min="1" max="100" value="1" class="form-control text-center" readonly>
+                            <input #quantityInput type="number" [id]="'quantityP'+i" name="quantity" min="1" max="100" value="1" class="form-control text-center" readonly>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button" (click)="increment(i)">+</button>
                             </div>
@@ -93,11 +90,6 @@
       </ng-template>
   </div>
   <button class="btn btn-danger btn-sm" (click)="guardarPedido()">Confirmar Pedido</button>
-</div>
-<div style="text-align: end;">
-    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasOrders" aria-controls="offcanvasOrders">
-        Ver Órdenes
-    </button>
 </div>
 <app-modal-pedido></app-modal-pedido>
 

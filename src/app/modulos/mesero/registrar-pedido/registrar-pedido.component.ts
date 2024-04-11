@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
 import { PlatillosService } from 'src/app/services/platillos/platillos.service';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
 import { Platillo } from 'src/app/modelos/Platillo';
+import{PlatilloPedido} from 'src/app/modelos/PlatilloPedido';
 import { Categoria } from 'src/app/modelos/Categoria';
 import { environment } from 'src/environments/environment';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
@@ -17,10 +18,19 @@ export class RegistrarPedidoComponent implements OnInit {
   categoriaSeleccionada: string = '';
   idCategoriaSeleccionada: number | undefined;
   busquedaNombre: string = '';
+  //Array donde estan los platillos seleccionados
+  platillosAGuardar:Platillo[]=[];
+  //Array de descripciones 
+  platillosDescripciones:{ id:number, descripcion: string }[] = [];
+  //El pedido a mandar
+  //cantidad a sacar de cada uno con index
+  cantidadSeleccionada:number=0;
   numeroMesa: string = '';
   platillos: Platillo[] = [];
   categoria: Categoria[] = [];
   categorias: any[] = [];
+  switchState: boolean = false;
+  tipo:string='Local';
   descripcion: string = '';
   storageUrl = environment.backendStorageUrl;
   constructor(private descripcionPedidoService: DescripcionPedidoService, private route: ActivatedRoute, private platilloService: PlatillosService, public pedidoselectService: PedidoService, private categoriaService: CategoriaService) { }
@@ -31,6 +41,15 @@ export class RegistrarPedidoComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.numeroMesa = params['mesaSeleccionada'];
     });
+  }
+  switchStateChanged() {
+    if (this.switchState) {
+      this.tipo='Para llevar'
+      console.log(this.tipo);
+    } else {
+      this.tipo='Local'
+      console.log(this.tipo)
+    }
   }
   getPlatillos() { 
     this.platilloService.getPlatillos().subscribe(
@@ -43,7 +62,6 @@ export class RegistrarPedidoComponent implements OnInit {
             return platillo.disponible === true && platillo.nombre.toLowerCase().includes(this.busquedaNombre.toLowerCase());
           }
         });
-  
         // Si el término de búsqueda está vacío, mostrar todos los platillos
         if (!this.busquedaNombre) {
           filteredPlatillos = res.platillo.filter((platillo: any) => {
@@ -68,8 +86,6 @@ export class RegistrarPedidoComponent implements OnInit {
       }
     );
   }
-  
-  
   onChangeCategoria(event: any) {
     this.idCategoriaSeleccionada = parseInt(event.target.value); // Convierte el valor a un número entero
     this.getPlatillos(); // Llama a getPlatillos() para actualizar la lista de platillos según la categoría seleccionada
@@ -99,14 +115,33 @@ export class RegistrarPedidoComponent implements OnInit {
   }
   setPlatilloSeleccionado(index: number) {
     this.descripcionPedidoService.platilloNombreSeleccionado(index);
-    this.descripcionPedidoService.obtenerDescripcion();
+    //this.descripcionPedidoService.obtenerDescripcion();
     //this.descripcion = this.platilloSeleccionado.descripcion;
   }
   retirarPlatillo(index: number) {
     this.pedidoselectService.platillosSeleccionados.splice(index, 1);
   }
   guardarPedido(){
-    this.pedidoselectService.guardarPedido(this.descripcionPedidoService.getDescripciones());
+    this.platillosAGuardar=this.pedidoselectService.getPlatillosSeleccionados();
+    this.platillosDescripciones=this.descripcionPedidoService.getDescripciones();
+    console.log(this.platillosAGuardar)
+    console.log(this.platillosDescripciones)
+    const platillosConDescripciones:PlatilloPedido[] = [];
+    this.platillosAGuardar.forEach((platillo, index) => {
+      // Obtener la descripción correspondiente utilizando el índice
+      const descripcion =this.platillosDescripciones[index]?.descripcion || '';
+      // Crear un nuevo objeto PlatilloPedido con la información del platillo y su descripción
+      const platilloConDescripcion: PlatilloPedido = {
+        id_platillo: platillo.id,
+        precio_unitario: platillo.precio,
+        cantidad: 1, // La cantidad es 1 para todos los platillos
+        detalle: descripcion
+      };
+      // Agregar el platillo combinado con su descripción al arreglo platillosConDescripciones
+      platillosConDescripciones.push(platilloConDescripcion);
+    });
+    // Ahora platillosConDescripciones contiene todos los platillos seleccionados con sus descripciones correspondientes
+    console.log(platillosConDescripciones);
   }
   increment(platilloId: number) {
     const quantityInput = document.getElementById('quantityP' + platilloId) as HTMLInputElement;

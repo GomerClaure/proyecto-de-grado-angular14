@@ -30,7 +30,4 @@ export class DescripcionPedidoService {
   getDescripciones(){
     return this.descripciones; 
 } 
-obtenerDescripcion(){
-  
-}
 }
