@@ -22,9 +22,10 @@ export class RegistrarPedidoComponent implements OnInit {
   platillosAGuardar:Platillo[]=[];
   //Array de descripciones 
   platillosDescripciones:{ id:number, descripcion: string }[] = [];
+  //Array de cantidades
+  listaCantidades:{index:number,cant:number}[]=[];
   //El pedido a mandar
-  //cantidad a sacar de cada uno con index
-  cantidadSeleccionada:number=0;
+  //cantidadSeleccionada:number=0;
   numeroMesa: string = '';
   platillos: Platillo[] = [];
   categoria: Categoria[] = [];
@@ -115,46 +116,70 @@ export class RegistrarPedidoComponent implements OnInit {
   }
   setPlatilloSeleccionado(index: number) {
     this.descripcionPedidoService.platilloNombreSeleccionado(index);
-    //this.descripcionPedidoService.obtenerDescripcion();
-    //this.descripcion = this.platilloSeleccionado.descripcion;
   }
+
   retirarPlatillo(index: number) {
     this.pedidoselectService.platillosSeleccionados.splice(index, 1);
   }
   guardarPedido(){
     this.platillosAGuardar=this.pedidoselectService.getPlatillosSeleccionados();
     this.platillosDescripciones=this.descripcionPedidoService.getDescripciones();
-    console.log(this.platillosAGuardar)
-    console.log(this.platillosDescripciones)
+    
     const platillosConDescripciones:PlatilloPedido[] = [];
+    
     this.platillosAGuardar.forEach((platillo, index) => {
-      // Obtener la descripción correspondiente utilizando el índice
-      const descripcion =this.platillosDescripciones[index]?.descripcion || '';
-      // Crear un nuevo objeto PlatilloPedido con la información del platillo y su descripción
-      const platilloConDescripcion: PlatilloPedido = {
-        id_platillo: platillo.id,
-        precio_unitario: platillo.precio,
-        cantidad: 1, // La cantidad es 1 para todos los platillos
-        detalle: descripcion
-      };
-      // Agregar el platillo combinado con su descripción al arreglo platillosConDescripciones
-      platillosConDescripciones.push(platilloConDescripcion);
+        // Obtener la cantidad del platillo utilizando el índice
+        const cantidad = this.listaCantidades.find(item => item.index === index)?.cant || 1;
+        
+        // Obtener la descripción correspondiente utilizando el índice
+        const descripcion = this.platillosDescripciones[index]?.descripcion || '';
+        
+        // Crear un nuevo objeto PlatilloPedido con la información del platillo, su cantidad y su descripción
+        const platilloConDescripcion: PlatilloPedido = {
+            id_platillo: platillo.id,
+            precio_unitario: platillo.precio,
+            cantidad: cantidad,
+            detalle: descripcion
+        };
+        
+        // Agregar el platillo combinado con su descripción al arreglo platillosConDescripciones
+        platillosConDescripciones.push(platilloConDescripcion);
     });
-    // Ahora platillosConDescripciones contiene todos los platillos seleccionados con sus descripciones correspondientes
+    
+    // Ahora platillosConDescripciones contiene todos los platillos seleccionados con sus cantidades y descripciones correspondientes
     console.log(platillosConDescripciones);
-  }
-  increment(platilloId: number) {
-    const quantityInput = document.getElementById('quantityP' + platilloId) as HTMLInputElement;
+}
+
+
+  increment(index: number) {
+    const quantityInput = document.getElementById('quantityP' + index) as HTMLInputElement;
     //input cast
     let cantidad = parseInt(quantityInput.value);
     if ( cantidad < 100) cantidad++;
     quantityInput.value = cantidad.toString();
+    const existingIndex = this.listaCantidades.findIndex(item => item.index === index);
+    if (existingIndex !== -1) {
+        // Si el índice ya existe, actualizar la cantidad
+        this.listaCantidades[existingIndex].cant = cantidad;
+    } else {
+        // Si el índice no existe, agregar un nuevo objeto al array
+        this.listaCantidades.push({ index, cant: cantidad });
+    }
 
   }
-  decrement(platilloId: number) {
-    const quantityInput = document.getElementById('quantityP' + platilloId) as HTMLInputElement;
+  decrement(index: number) {
+    const quantityInput = document.getElementById('quantityP' + index) as HTMLInputElement;
     let cantidad = parseInt(quantityInput.value);
     if ( cantidad > 1) cantidad--;
     quantityInput.value = cantidad.toString();
-  }
+    const existingIndex = this.listaCantidades.findIndex(item => item.index === index);
+    if (existingIndex !== -1) {
+        // Si el índice ya existe, actualizar la cantidad
+        this.listaCantidades[existingIndex].cant = cantidad;
+    } else {
+        // Si el índice no existe, agregar un nuevo objeto al array
+        this.listaCantidades.push({ index, cant: cantidad });
+    }
+ }
+
 }
