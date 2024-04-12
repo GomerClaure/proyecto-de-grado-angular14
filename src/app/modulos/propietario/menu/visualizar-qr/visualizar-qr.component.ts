@@ -73,6 +73,13 @@ export class VisualizarQrComponent implements OnInit {
     }
   }
 
+  ocultarElemento(idBoton: string) {
+    let boton = document.getElementById(idBoton);
+    if (boton) {
+      boton.style.display = 'none';
+    }
+  }
+
   obtenerRestaurante() {
     this.restauranteService.getRestaurante().subscribe(
       (res: any) => {
@@ -89,6 +96,8 @@ export class VisualizarQrComponent implements OnInit {
     this.menuService.generarQr(direccionUrlMenu).subscribe(
       (res: any) => {
         this.menu.qr = res.qr;
+        this.mostrarElemento('campoImprimirQr');
+        this.ocultarElemento('btnGenerarQr');
       },
       err => {
         console.log(err);
