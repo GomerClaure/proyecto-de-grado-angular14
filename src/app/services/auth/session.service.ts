@@ -64,4 +64,14 @@ export class SessionService {
     return this.http.get<any>(`${this.BASE_URL}/logout`);
 
   }
-}
+
+  getUsuario(){
+    const usuario = {
+      id: sessionStorage.getItem('id_user'),
+      nombre: sessionStorage.getItem('nombre'),
+      apellido_paterno: sessionStorage.getItem('apellido_paterno')
+    };
+    return usuario;
+  }
+  }
+

@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { ActivatedRoute } from '@angular/router';
 import { DescripcionPedidoService } from 'src/app/services/detalle-pedido/descripcion-pedido.service';
+import { SessionService } from 'src/app/services/auth/session.service';
 
 @Component({
   selector: 'app-registrar-pedido',
@@ -24,8 +25,6 @@ export class RegistrarPedidoComponent implements OnInit {
   platillosDescripciones:{ id:number, descripcion: string }[] = [];
   //Array de cantidades
   listaCantidades:{index:number,cant:number}[]=[];
-  //El pedido a mandar
-  //cantidadSeleccionada:number=0;
   numeroMesa: string = '';
   platillos: Platillo[] = [];
   categoria: Categoria[] = [];
@@ -34,7 +33,12 @@ export class RegistrarPedidoComponent implements OnInit {
   tipo:string='Local';
   descripcion: string = '';
   storageUrl = environment.backendStorageUrl;
-  constructor(private descripcionPedidoService: DescripcionPedidoService, private route: ActivatedRoute, private platilloService: PlatillosService, public pedidoselectService: PedidoService, private categoriaService: CategoriaService) { }
+  constructor(private descripcionPedidoService: DescripcionPedidoService,
+              private route: ActivatedRoute, 
+              private platilloService: PlatillosService,
+              public pedidoselectService: PedidoService, 
+              private categoriaService: CategoriaService,
+              private sessionService:SessionService) { }
  
   ngOnInit(): void {
     this.getPlatillos();
@@ -141,13 +145,19 @@ export class RegistrarPedidoComponent implements OnInit {
             cantidad: cantidad,
             detalle: descripcion
         };
-        
         // Agregar el platillo combinado con su descripción al arreglo platillosConDescripciones
         platillosConDescripciones.push(platilloConDescripcion);
     });
-    
-    // Ahora platillosConDescripciones contiene todos los platillos seleccionados con sus cantidades y descripciones correspondientes
-    console.log(platillosConDescripciones);
+    let id_mesa=this.numeroMesa;
+    let id_empleado=(this.sessionService.getUsuario()).id;
+
+    const pedidoCompleto={
+      platillos:platillosConDescripciones,
+      id_mesa:id_mesa,
+      tipo:this.tipo.toLowerCase(),
+      id_empleado:id_empleado
+    };
+     console.log(pedidoCompleto)
 }
 
 
