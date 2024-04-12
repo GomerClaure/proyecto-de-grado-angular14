@@ -4,6 +4,7 @@ import { GenerarComponent } from './generar/generar.component';
 import { VisualizarQrComponent } from './visualizar-qr/visualizar-qr.component';
 import { Routes,RouterModule } from '@angular/router';
 import { VistaMenuComponent } from './vista-menu/vista-menu.component';
+import { PlantillaQrComponent } from './plantilla-qr/plantilla-qr.component';
 
 const routes:Routes=[
   {
@@ -20,6 +21,9 @@ const routes:Routes=[
       {
         path:'vista',
         component:VistaMenuComponent
+      },
+      { path:'imprimir/qr',
+        component:PlantillaQrComponent
       }
     ]
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Menu } from 'src/app/modelos/Menu';
 import { Restaurante } from 'src/app/modelos/Restaurante';
 import { MenuService } from 'src/app/services/menu/menu.service';
@@ -12,12 +13,14 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./visualizar-qr.component.scss']
 })
 export class VisualizarQrComponent implements OnInit {
+  public cantidadQr: number;
   public menu!: Menu;
   public restaurante!: Restaurante;
   public baseUrl = environment.backendStorageUrl;
 
 
-  constructor(private menuService: MenuService, private restauranteService: RestauranteService) {
+  constructor(private menuService: MenuService, private restauranteService: RestauranteService,
+    private router: Router) {
     this.menu = {
       id: 0,
       portada: '',
@@ -34,6 +37,7 @@ export class VisualizarQrComponent implements OnInit {
       correo: '',
       licencia_funcionamiento: '',
     };
+    this.cantidadQr = 1;
 
   }
 
@@ -48,9 +52,9 @@ export class VisualizarQrComponent implements OnInit {
       (res: any) => {
         this.menu = res.menu;
         if(this.menu.qr){
-          this.mostrarBoton('btnImprimirQr');
+          this.mostrarElemento('campoImprimirQr');
         }else{
-          this.mostrarBoton('btnGenerarQr');
+          this.mostrarElemento('btnGenerarQr');
         }
         console.log(this.menu);
       },
@@ -60,8 +64,10 @@ export class VisualizarQrComponent implements OnInit {
     );
   }
 
-  mostrarBoton(idBoton: string) {
+  mostrarElemento(idBoton: string) {
+    console.log(idBoton); 
     let boton = document.getElementById(idBoton);
+    
     if (boton) {
       boton.style.display = 'block';
     }
@@ -91,7 +97,10 @@ export class VisualizarQrComponent implements OnInit {
   }
 
   imprimirQr() {
-    window.print();
+    localStorage.setItem('url_qr', this.baseUrl+this.menu.qr);
+    localStorage.setItem('nombre_restaurante', this.restaurante.nombre);
+    localStorage.setItem('cantidad_qr', this.cantidadQr.toString());
+    this.router.navigate(['menu/imprimir/qr']);
   }
 
   onImgError(event: any) {

@@ -19,9 +19,12 @@
                             <button class="btn btn-primary " id="btnGenerarQr" style="display: none;" (click)="generarQr()">
                                 Generar Nuevo QR
                             </button>
-                            <button class="btn  btn-primary " id="btnImprimirQr" style="display: none;" (click)="imprimirQr()">
-                                ImprimirQR
-                            </button>
+                            <div id="campoImprimirQr" class="d-flex justify-content-center align-items-center mb-3" style="display: none;">
+                                <button class="btn btn-primary mx-2" id="btnImprimirQr" (click)="imprimirQr()">Imprimir QR</button>
+                                <!-- Input para la cantidad de copias -->
+                                <input class="form-control w-25" type="number" id="cantidadQr" [(ngModel)]="cantidadQr" name="cantidadQr" min="1">
+                            </div>
+                            
                         </div>
                     </form>
                 </div>
