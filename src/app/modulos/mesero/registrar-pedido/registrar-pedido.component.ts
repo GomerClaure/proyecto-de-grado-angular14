@@ -125,11 +125,11 @@ export class RegistrarPedidoComponent implements OnInit {
   retirarPlatillo(index: number) {
     this.pedidoselectService.platillosSeleccionados.splice(index, 1);
   }
-  guardarPedido(){
-    this.platillosAGuardar=this.pedidoselectService.getPlatillosSeleccionados();
-    this.platillosDescripciones=this.descripcionPedidoService.getDescripciones();
+  guardarPedido() {
+    this.platillosAGuardar = this.pedidoselectService.getPlatillosSeleccionados();
+    this.platillosDescripciones = this.descripcionPedidoService.getDescripciones();
     
-    const platillosConDescripciones:PlatilloPedido[] = [];
+    const platillosConDescripciones: PlatilloPedido[] = [];
     
     this.platillosAGuardar.forEach((platillo, index) => {
         // Obtener la cantidad del platillo utilizando el índice
@@ -148,18 +148,34 @@ export class RegistrarPedidoComponent implements OnInit {
         // Agregar el platillo combinado con su descripción al arreglo platillosConDescripciones
         platillosConDescripciones.push(platilloConDescripcion);
     });
-    let id_mesa=this.numeroMesa;
-    let id_empleado=(this.sessionService.getUsuario()).id;
 
-    const pedidoCompleto={
-      platillos:platillosConDescripciones,
-      id_mesa:id_mesa,
-      tipo:this.tipo.toLowerCase(),
-      id_empleado:id_empleado
+    const id_mesa = this.numeroMesa;
+    const id_empleado = this.sessionService.getUsuario()?.id || '';
+
+    const pedidoCompleto = {
+      platillos: platillosConDescripciones,
+      id_mesa: id_mesa,
+      tipo: this.tipo.toLowerCase(),
+      id_empleado: id_empleado
     };
-     console.log(pedidoCompleto)
-}
 
+    const formData = new FormData();
+    formData.append('platillos', JSON.stringify(pedidoCompleto.platillos));
+    formData.append('id_mesa', id_mesa.toString());
+    formData.append('tipo', this.tipo.toLowerCase());
+    formData.append('id_empleado', id_empleado.toString());
+
+    this.pedidoselectService.storePedido(formData).subscribe(
+      (response: any) => {
+        console.log('Pedido almacenado exitosamente', response);
+        // Realiza cualquier acción adicional después de almacenar el pedido, como limpiar el carrito, mostrar un mensaje de éxito, etc.
+      },
+      (error: any) => {
+        console.error('Error al almacenar el pedido', error);
+        // Maneja el error adecuadamente, muestra un mensaje de error al usuario, etc.
+      }
+    );
+}
 
   increment(index: number) {
     const quantityInput = document.getElementById('quantityP' + index) as HTMLInputElement;

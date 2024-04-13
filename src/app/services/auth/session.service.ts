@@ -42,6 +42,7 @@ export class SessionService {
             sessionStorage.setItem('tipo', 'Propietario');
           } else if (res.user.tipo === 'Empleado') {
             let empleado: Empleado = res.user;
+            sessionStorage.setItem('id_empleado', empleado.id.toString());
             sessionStorage.setItem('ci', empleado.ci.toString());
             sessionStorage.setItem('fecha_nacimiento', empleado.fecha_nacimiento.toString());
             sessionStorage.setItem('fecha_contratacion', empleado.fecha_contratacion.toString());
@@ -67,9 +68,8 @@ export class SessionService {
 
   getUsuario(){
     const usuario = {
-      id: sessionStorage.getItem('id_user'),
-      nombre: sessionStorage.getItem('nombre'),
-      apellido_paterno: sessionStorage.getItem('apellido_paterno')
+      id: sessionStorage.getItem('id_empleado'),
+      nombre: sessionStorage.getItem('nombre')
     };
     return usuario;
   }
