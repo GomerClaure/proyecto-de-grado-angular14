@@ -20,9 +20,18 @@ const routes: Routes = [
     loadChildren:()=>import('../app/modulos/propietario/listas/listas.module').then(m=>m.ListasModule)
   },
   {
+  path:'home',
+  component:HomeComponent
+  },
+  {
+    path:'mesero',
+    loadChildren:()=>import('../app/modulos/mesero/mesero.module').then(m=>m.MeseroModule)
+  },
+  {
   path:'menu',
   loadChildren:()=>import('../app/modulos/propietario/menu/menu.module').then(m=>m.MenuModule)
   }
+
 ];
  
 @NgModule({ 

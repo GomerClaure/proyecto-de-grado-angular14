@@ -1,0 +1,16 @@
+.selected-card {
+    background-color: rgb(246, 129, 27) !important; /* Utilizamos !important para garantizar que esta regla tenga prioridad */
+  }
+  .card {
+    width: 70%;
+    height: 0;
+    padding-top: 70%; /* Hace que el card tenga una relación de aspecto cuadrada */
+    cursor: pointer; /* Cambia el cursor al pasar sobre la tarjeta */
+  }
+  .card-body {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    transform: translate(-20%, -20%);
+    text-align: center;
+  }

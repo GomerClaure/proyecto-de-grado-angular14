@@ -19,11 +19,16 @@ import { LoginComponent } from './auth/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalEliminarCategoriaComponent } from './modulos/propietario/listas/modal-eliminar-categoria/modal-eliminar-categoria.component';
 import { ModalEliminarComponent } from './modulos/propietario/listas/modal-eliminar/modal-eliminar.component';
+import { RegistrarPedidoComponent } from './modulos/mesero/registrar-pedido/registrar-pedido.component';
+import { ListaPedidosComponent } from './modulos/mesero/lista-pedidos/lista-pedidos.component';
 import { FormsModule } from '@angular/forms';
+import { ListaMesasComponent } from './modulos/mesero/lista-mesas/lista-mesas.component';
+import { ModalPedidoComponent } from './modulos/mesero/modal-pedido/modal-pedido.component';
 import { GenerarComponent } from './modulos/propietario/menu/generar/generar.component';
 import { VisualizarQrComponent } from './modulos/propietario/menu/visualizar-qr/visualizar-qr.component';
-import { VistaMenuComponent } from './modulos/propietario/menu/vista-menu/vista-menu.component';
-import { PlantillaQrComponent } from './modulos/propietario/menu/plantilla-qr/plantilla-qr.component';
+import {VistaMenuComponent} from './modulos/propietario/menu/vista-menu/vista-menu.component';
+import {PlantillaQrComponent} from './modulos/propietario/menu/plantilla-qr/plantilla-qr.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,13 +43,19 @@ import { PlantillaQrComponent } from './modulos/propietario/menu/plantilla-qr/pl
     EditarPlatilloComponent,
     HomePageComponent,
     LoginComponent,
+    ModalEliminarComponent,
+    RegistrarPedidoComponent,
+    ListaPedidosComponent,
     EditarCategoriaComponent,
     ModalEliminarCategoriaComponent,
     ModalEliminarComponent,
+    ListaMesasComponent,
+    ModalPedidoComponent,
     GenerarComponent,
     VisualizarQrComponent,
     VistaMenuComponent,
     PlantillaQrComponent
+
   ],
   imports: [
     BrowserModule,
