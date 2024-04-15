@@ -8,4 +8,5 @@ export interface Platillo {
     imagen: string;
     id_menu: number;
     categoria: Categoria;
+    plato_disponible_menu: boolean;
 }

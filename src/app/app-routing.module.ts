@@ -4,6 +4,10 @@ import { HomeComponent } from './modulos/home/home.component';
 
 const routes: Routes = [ 
   {
+    path:'home',
+    component:HomeComponent
+  },
+  {
     path:'',
     loadChildren:()=>import('../app/auth/auth.module').then(m=>m.AuthModule)
   },
@@ -22,7 +26,10 @@ const routes: Routes = [
   {
     path:'mesero',
     loadChildren:()=>import('../app/modulos/mesero/mesero.module').then(m=>m.MeseroModule)
-    
+  },
+  {
+  path:'menu',
+  loadChildren:()=>import('../app/modulos/propietario/menu/menu.module').then(m=>m.MenuModule)
   }
 
 ];

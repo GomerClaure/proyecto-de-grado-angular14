@@ -1,0 +1,93 @@
+ .title {
+  background-color: #d2691eb9; /* Color de fondo semi-transparente */
+  padding: 10px; /* Ajusta el padding según sea necesario */
+  border-radius: 5px; /* Añade bordes redondeados */
+  // color: white;
+}
+
+.dark-theme .title {
+  background-color: #350e07ab;
+  color: white;
+}
+
+.container {
+  margin-top: 20px;
+  background-color: #ee8132;
+  min-height:30em;
+//   max-width: 100%;
+  
+}
+
+.dark-theme .container {
+  background-color:  #350E07;
+//   max-width: 100%;
+  
+}
+
+.container.nav {
+    white-space: nowrap;
+    display:block!important;
+    flex-wrap: nowrap;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    text-align: center;
+  }
+  
+  .container.nav li {
+    display: inline-block;
+    margin-inline-start: 10px;
+  }
+  
+.nav-underline a, a.active {
+    color: #1a1212;
+  }
+.nav-underline a.active {
+  font-weight: bold;
+}
+
+.dark-theme .nav-underline a, a.active {
+  color: #f0e6e6;
+}
+
+.dark-theme .form-check-label {
+  color: #f0e6e6;
+}
+#img-portada{
+    width: 100%; /* Ancho máximo para asegurar que la imagen no sea más grande que su contenedor */
+    height: 18em; /* Altura fija para todas las imágenes */
+    object-fit: cover;
+    position: relative;
+}
+
+#collapseImgPortada {
+    cursor: pointer;
+}
+
+.dark-theme .card{
+  background-color: #2c2c2c;
+  color: #f0e6e6;
+}
+
+
+.card-img-top {
+  max-width: 100%; /* Ancho máximo para asegurar que la imagen no sea más grande que su contenedor */
+  height: 15em; /* Altura fija para todas las imágenes */
+  object-fit: cover;
+}
+.check-img{
+  transform: scale(3) !important;
+}
+
+// .check-img :active{
+//   background-color: #350E07 !important;
+// }
+
+@media (max-width: 576px) { /* Pantallas más pequeñas que el punto de quiebre de SM */
+    .col-12.col-sm-6.col-md-4.col-lg-3.col-xl-3 {
+        flex: 0 0 50% !important; /* Establecer el ancho de la columna al 50% en pantallas pequeñas */
+        max-width: 50% !important; /* Establecer el ancho máximo al 50% en pantallas pequeñas */
+    }
+
+}

@@ -24,6 +24,7 @@ import { ListaPedidosComponent } from './modulos/mesero/lista-pedidos/lista-pedi
 import { FormsModule } from '@angular/forms';
 import { ListaMesasComponent } from './modulos/mesero/lista-mesas/lista-mesas.component';
 import { ModalPedidoComponent } from './modulos/mesero/modal-pedido/modal-pedido.component';
+import { GenerarComponent } from './modulos/propietario/menu/generar/generar.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ModalPedidoComponent } from './modulos/mesero/modal-pedido/modal-pedido
     ModalEliminarCategoriaComponent,
     ModalEliminarComponent,
     ListaMesasComponent,
-    ModalPedidoComponent
+    ModalPedidoComponent,
+    GenerarComponent
 
   ],
   imports: [
