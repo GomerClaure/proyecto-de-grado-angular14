@@ -19,7 +19,11 @@ import { LoginComponent } from './auth/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalEliminarCategoriaComponent } from './modulos/propietario/listas/modal-eliminar-categoria/modal-eliminar-categoria.component';
 import { ModalEliminarComponent } from './modulos/propietario/listas/modal-eliminar/modal-eliminar.component';
+import { RegistrarPedidoComponent } from './modulos/mesero/registrar-pedido/registrar-pedido.component';
+import { ListaPedidosComponent } from './modulos/mesero/lista-pedidos/lista-pedidos.component';
 import { FormsModule } from '@angular/forms';
+import { ListaMesasComponent } from './modulos/mesero/lista-mesas/lista-mesas.component';
+import { ModalPedidoComponent } from './modulos/mesero/modal-pedido/modal-pedido.component';
 import { GenerarComponent } from './modulos/propietario/menu/generar/generar.component';
 
 @NgModule({
@@ -36,9 +40,14 @@ import { GenerarComponent } from './modulos/propietario/menu/generar/generar.com
     EditarPlatilloComponent,
     HomePageComponent,
     LoginComponent,
+    ModalEliminarComponent,
+    RegistrarPedidoComponent,
+    ListaPedidosComponent,
     EditarCategoriaComponent,
     ModalEliminarCategoriaComponent,
     ModalEliminarComponent,
+    ListaMesasComponent,
+    ModalPedidoComponent,
     GenerarComponent
 
   ],
