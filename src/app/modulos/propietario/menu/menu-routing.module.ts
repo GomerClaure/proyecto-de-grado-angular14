@@ -19,7 +19,8 @@ const routes:Routes=[
         component:VisualizarQrComponent
       },
       {
-        path:'vista',
+        // id menu
+        path:'vista/:menu',
         component:VistaMenuComponent
       },
       { path:'imprimir/qr',

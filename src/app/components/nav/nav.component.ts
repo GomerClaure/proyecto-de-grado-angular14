@@ -33,6 +33,10 @@ export class NavComponent implements OnInit {
     console.log("modal");
     this.router.navigateByUrl('/registrar/categoria');
   }
+
+  irAMenu(){
+    this.router.navigateByUrl('/menu/vista/1');
+  }
  
 } 
 

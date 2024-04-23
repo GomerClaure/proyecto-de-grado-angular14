@@ -1,3 +1,42 @@
 <app-nav></app-nav><br><br>
 
-<p>vista-menu works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col libro d-flex justify-content-center">
+      <!-- Portada -->
+      <div>
+        <div class="portada my-3 "
+          [style.background-image]="'url(' + baseUrl + menu.portada + ')'">
+          <div class="portada-interior text-center d-flex flex-column justify-content-between">
+            <div>
+              <h1>Menú</h1>
+              <img src="assets/image/line-sub.webp" alt="">
+              <p class="mb-0 bienvenida">Cicharrones Don Paul</p>
+            </div>
+            <div>
+              <p class="mb-0 bienvenida">Bienvenido a nuestro restaurante</p>
+            </div>
+            <div>
+              <p>Direccion del restaurante: Calle los pinos entre Luis espinal N°4803</p>
+            </div>
+          </div>
+
+        </div>
+        <!-- Páginas de platillos -->
+        <div class="pagina-platillo my-2" *ngFor="let categoriasPag of platilloPorCategoriaPagina">
+          <div class="pagina-interior">
+            <div class="categoria border-bottom" *ngFor="let categoriaElemnt of categoriasPag ">
+              <h2>{{ categoriaElemnt.nombre }}</h2>
+              <ul>
+                <li *ngFor="let platillo of categoriaElemnt.platillos">{{ platillo.nombre }}</li>
+              </ul>
+            </div>
+           
+          </div>
+          
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
