@@ -39,7 +39,10 @@ export class RegistrarPedidoComponent implements OnInit {
               public pedidoselectService: PedidoService, 
               private categoriaService: CategoriaService,
               private sessionService:SessionService) { }
+<<<<<<< HEAD
               
+=======
+>>>>>>> release
  
   ngOnInit(): void {
     this.getPlatillos();
@@ -122,6 +125,10 @@ export class RegistrarPedidoComponent implements OnInit {
   setPlatilloSeleccionado(index: number) {
     this.descripcionPedidoService.platilloNombreSeleccionado(index);
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> release
   retirarPlatillo(index: number) {
     this.pedidoselectService.platillosSeleccionados.splice(index, 1);
   }
@@ -175,6 +182,7 @@ export class RegistrarPedidoComponent implements OnInit {
         // Maneja el error adecuadamente, muestra un mensaje de error al usuario, etc.
       }
     );
+<<<<<<< HEAD
 
     this.pedidoselectService.limpiarSeleccion();
     this.descripcionPedidoService.limpiarDescripciones();
@@ -193,6 +201,8 @@ export class RegistrarPedidoComponent implements OnInit {
     this.switchState = false;
 
     this.getPlatillos()
+=======
+>>>>>>> release
 }
 
   increment(index: number) {
@@ -226,6 +236,7 @@ export class RegistrarPedidoComponent implements OnInit {
     }
  }
 
+<<<<<<< HEAD
 
 
 
@@ -234,4 +245,6 @@ export class RegistrarPedidoComponent implements OnInit {
 
  
 
+=======
+>>>>>>> release
 }
