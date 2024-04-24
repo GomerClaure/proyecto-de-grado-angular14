@@ -39,6 +39,7 @@ export class RegistrarPedidoComponent implements OnInit {
               public pedidoselectService: PedidoService, 
               private categoriaService: CategoriaService,
               private sessionService:SessionService) { }
+              
  
   ngOnInit(): void {
     this.getPlatillos();
@@ -121,7 +122,6 @@ export class RegistrarPedidoComponent implements OnInit {
   setPlatilloSeleccionado(index: number) {
     this.descripcionPedidoService.platilloNombreSeleccionado(index);
   }
-
   retirarPlatillo(index: number) {
     this.pedidoselectService.platillosSeleccionados.splice(index, 1);
   }
@@ -175,6 +175,24 @@ export class RegistrarPedidoComponent implements OnInit {
         // Maneja el error adecuadamente, muestra un mensaje de error al usuario, etc.
       }
     );
+
+    this.pedidoselectService.limpiarSeleccion();
+    this.descripcionPedidoService.limpiarDescripciones();
+    this.listaCantidades = [];
+    // Restablecer la variable tipo
+    this.tipo = 'Local';
+    // Restablecer la búsqueda de platillos
+    this.busquedaNombre = '';
+    // Restablecer la categoría seleccionada
+    this.idCategoriaSeleccionada = undefined;
+
+    // Restablecer la lista de platillos
+    this.platillos = [];
+
+    // Restablecer el switchState
+    this.switchState = false;
+
+    this.getPlatillos()
 }
 
   increment(index: number) {
@@ -207,5 +225,13 @@ export class RegistrarPedidoComponent implements OnInit {
         this.listaCantidades.push({ index, cant: cantidad });
     }
  }
+
+
+
+
+
+
+
+ 
 
 }

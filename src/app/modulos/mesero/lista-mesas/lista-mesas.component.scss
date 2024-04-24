@@ -3,9 +3,14 @@
   }
   .card {
     width: 70%;
-    height: 0;
+    height: 20%;
     padding-top: 70%; /* Hace que el card tenga una relación de aspecto cuadrada */
     cursor: pointer; /* Cambia el cursor al pasar sobre la tarjeta */
+    margin: 15px;
+    background-color: rgba(255, 255, 255, 0.5); /* Color de fondo transparente */
+    border: 1px solid #ccc; /* Borde del card */
+    border-radius: 10px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
   }
   .card-body {
     position: absolute;
@@ -14,3 +19,15 @@
     transform: translate(-20%, -20%);
     text-align: center;
   }
+.container{
+  padding: 10px;
+  align-items: center;
+  //margin-left: 10px;
+}
+.mesa-nombre{
+  //background-color: aqua;
+  //font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Agrega puntos suspensivos si el texto es demasiado largo */
+  white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+}

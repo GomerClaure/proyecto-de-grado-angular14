@@ -1,6 +1,88 @@
 .card:active {
-    transform: scale(0.95); /* Reduce el tamaño del card al hacer clic */
-    transition: transform 0.2s; /* Agrega una transición suave al efecto */
+    transform: scale(0.95); 
+    transition: transform 0.2s;
+}
+.card{
+    border-color :rgb(62, 57, 33);
+    margin-bottom: 10px;
+    border-radius: 0px;
+}
+.card-body {
+    //border-radius: 0% !important;
+    text-align: center;
+    max-height: 60px;
+    overflow: hidden;
+}
+.imagen{
+    max-width: 100%; 
+    height:80px;
+    margin: 0px;
+    //padding: 5px;
+    border-radius: 0px;
+}
+.img-top {
+    background: rgb(62, 57, 33);
+    border: none;
+    text-align: center;
+    overflow: hidden; /* Para ocultar cualquier parte de la imagen que se salga del div */
+    padding-top: 56.25%; /* Proporción 16:9 */
+    position: relative;
+    
+}
+
+.img-top img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Para que la imagen se ajuste manteniendo su proporción */
+}
+
+
+
+
+
+
+
+/* Cambia el color del switch en su estado normal */
+.form-check-input {
+    background-color: #ffeeee; /* Color de fondo del switch */
+    border: #484505;
+}
+
+/* Cambia el color del switch cuando está activado */
+.form-check-input:checked {
+    background-color: #484505; /* Color de fondo del switch cuando está activado */
+    border: #484505;
+}
+
+/* Cambia el color del switch cuando está enfocado */
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.25); /* Ajusta el color del resplandor cuando está enfocado */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.container{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 100vh;
 }
 .form-check{
     margin-left: 150px;
@@ -28,20 +110,6 @@
     border-bottom: 1px solid #ddd;
     text-align: left;
 }
-
-// .number-input {
-//     display: flex;
-//     align-items: center;
-// }
-
-// .number-input input {
-//     width: 40px;
-//     height: 40px;
-//     text-align: center;
-//     border: none;
-//     border-radius: 50%;
-//     font-size: 16px;
-// }
 
 .number-input .quantity-button {
     width: 40px;

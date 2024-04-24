@@ -30,4 +30,8 @@ export class DescripcionPedidoService {
   getDescripciones(){
     return this.descripciones; 
 } 
+limpiarDescripciones() {
+  // Limpiar la lista de descripciones
+  this.descripciones = [];
+}
 }
