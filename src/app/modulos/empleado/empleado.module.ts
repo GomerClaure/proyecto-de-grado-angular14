@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegistroEmpleadoModule  } from './registro/registro.module';
+//import { RegistroEmpleadoModule  } from './registro/registro.module';
 
 
 
@@ -8,8 +8,9 @@ import { RegistroEmpleadoModule  } from './registro/registro.module';
   declarations: [
   ],
   imports: [
-    CommonModule,
-    RegistroEmpleadoModule
+   // CommonModule,
+    //RegistroEmpleadoModule
   ]
 })
 export class EmpleadoModule { }
+ 

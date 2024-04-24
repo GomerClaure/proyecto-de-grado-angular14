@@ -11,6 +11,6 @@ import { VisualizarComponent } from './menu/visualizar/visualizar.component';
   ],
   imports: [ 
     CommonModule
-  ]
+  ] 
 })
 export class PropietarioModule { }

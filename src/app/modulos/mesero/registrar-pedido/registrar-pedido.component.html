@@ -1,5 +1,4 @@
 <app-nav></app-nav>
-<<<<<<< HEAD
 
 <div class="fondo">
 <div class="container">
@@ -19,21 +18,6 @@
 </div>
 
   <!--Barra de busqueda-->
-=======
-<br><br><br>
-<h2 class="titulo">Tomar Orden</h2>
-<div class="form-check form-switch">
-    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" [(ngModel)]="switchState" (ngModelChange)="switchStateChanged()" >
-    <label class="form-check-label" for="flexSwitchCheckChecked">Para llevar</label> 
-</div>
-  <div style="text-align:center">
-    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasOrders" aria-controls="offcanvasOrders">
-        Ver Órdenes
-    </button>
-</div>
-<div class="container">
-    <p>Mesa : {{ numeroMesa }}</p>
->>>>>>> release
 <div class="row">
     <div class="col">
         <div class="col-md-12">
@@ -42,20 +26,14 @@
             </div>
         </div>
     </div> 
-<<<<<<< HEAD
  <div class="col">
         <div class="col-md-12">
-=======
-    <div class="col">
-        <div class="col-md-4">
->>>>>>> release
             <select class="form-select" aria-label="Default select example" (change)="onChangeCategoria($event)">
                 <option selected disabled>Categoria</option>
                 <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
             </select>
         </div> 
     </div>
-<<<<<<< HEAD
     <div class="col">
         <div class="col-md-12">
             <div style="text-align:center">
@@ -90,22 +68,6 @@
 </div>
 </div>
 <!--Este es el espacio donde ves el pedido que seleccionaste-->
-=======
-</div>
-    <br>
-    <div class="row">
-    <div class="col-md-2 mb-2" *ngFor="let platillo of platillos" (click)="agregarPlatillo(platillo)">
-            <div class="card">
-                <img class="card-img-top" [src]="storageUrl+platillo.imagen" alt="{{ platillo.nombre }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ platillo.nombre }}</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
->>>>>>> release
 <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasOrders" aria-labelledby="offcanvasOrdersLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasOrdersLabel"><P>Pedido</P></h5>
@@ -156,8 +118,5 @@
   <button class="btn btn-danger btn-sm" (click)="guardarPedido()">Confirmar Pedido</button>
 </div>
 <app-modal-pedido></app-modal-pedido>
-<<<<<<< HEAD
 </div>
-=======
->>>>>>> release
 
