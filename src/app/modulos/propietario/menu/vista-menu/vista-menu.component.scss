@@ -50,6 +50,23 @@ h1 {
     background-color: #E8DACB;
   }
 
+.contenedor-menu-imagen{
+    // height: 100%; /* Ajusta la altura del contenedor para que ocupe toda la altura del padre */
+    background-size: cover !important; /* Ajusta el tamaño de la imagen de fondo para que cubra todo el contenedor */
+    background-position: center;
+    background: rgb(62, 57, 33);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-inline: 0px;
+}
+
+.contenedor-menu-imagen-cabeza,     
+.contenedor-menu-imagen-footer {
+    color: aliceblue;
+    background-color: rgba(109, 105, 101, 0.384);    
+}
+  
   @media print {
     body {
         background-image: none; /* Restablece la imagen de fondo para que no se imprima */

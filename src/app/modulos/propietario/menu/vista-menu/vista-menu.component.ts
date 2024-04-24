@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { MenuService } from 'src/app/services/menu/menu.service';
 import { ActivatedRoute } from '@angular/router';
@@ -17,19 +17,23 @@ export class VistaMenuComponent implements OnInit {
   private idMenu: number;
   public menu!: Menu;
   public nombreRestaurante: string;
+  public imagenesPorPagina: any[][];
   public platilloPorCategoria!: PlatillosPorCategoria[];
   public platilloPorCategoriaPagina!: PlatillosPorCategoria[][];
+  randomIndex: { [key: string]: number } = {};
 
-  constructor(private menuService: MenuService, private route: ActivatedRoute) {
+  constructor(private menuService: MenuService, private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef) {
     this.idMenu = parseInt(this.route.snapshot.paramMap.get('menu') || '0');
     this.nombreRestaurante = 'Restaurante';
     this.platilloPorCategoria = [];
+    this.imagenesPorPagina = [];
     this.menu = {
       id: 0,
       portada: '',
       tema: '',
       qr: '',
-  }
+    }
 
   }
 
@@ -44,9 +48,10 @@ export class VistaMenuComponent implements OnInit {
         this.menu = response.menu;
         const platillos: Platillo[] = response.platillos;
         this.platilloPorCategoria = this.transformarDatos(platillos);
-        this.platilloPorCategoriaPagina = this.agruparPlatillosPorPagina(this.platilloPorCategoria,5);
+        this.platilloPorCategoriaPagina = this.agruparPlatillosPorPagina(this.platilloPorCategoria, 15);
         this.platilloPorCategoriaPagina = this.agruparCategoriasDeCadaPagina(this.platilloPorCategoriaPagina);
-     
+        this.generarImagenesPorPagina();
+        console.log(this.imagenesPorPagina);
       }
     );
   }
@@ -55,7 +60,7 @@ export class VistaMenuComponent implements OnInit {
     event.target.src = 'assets/image/27002.jpg';
   }
 
- transformarDatos(platillos: Platillo[]): PlatillosPorCategoria[] {
+  transformarDatos(platillos: Platillo[]): PlatillosPorCategoria[] {
     const categorias: Categoria[] = [];
     const platillosPorCategoria: PlatillosPorCategoria[] = [];
 
@@ -78,53 +83,77 @@ export class VistaMenuComponent implements OnInit {
 
     return platillosPorCategoria;
   }
- agruparPlatillosPorPagina(platillos: PlatillosPorCategoria[], limitePlatillosPorPagina: number): PlatillosPorCategoria[][] {
+  agruparPlatillosPorPagina(platillos: PlatillosPorCategoria[], limitePlatillosPorPagina: number): PlatillosPorCategoria[][] {
     const paginas: PlatillosPorCategoria[][] = [];
     let paginaActual: PlatillosPorCategoria[] = [];
 
     for (const categoria of platillos) {
-        for (const platillo of categoria.platillos) {
-            if (paginaActual.length === limitePlatillosPorPagina) {
-                paginas.push(paginaActual);
-                paginaActual = [];
-            }
-
-         
-            paginaActual.push({ ...categoria, platillos: [platillo] });
-            let banderaEstaEnPagina = false;
+      for (const platillo of categoria.platillos) {
+        if (paginaActual.length === limitePlatillosPorPagina) {
+          paginas.push(paginaActual);
+          paginaActual = [];
         }
+
+
+        paginaActual.push({ ...categoria, platillos: [platillo] });
+        let banderaEstaEnPagina = false;
+      }
     }
 
 
     if (paginaActual.length > 0) {
-        paginas.push(paginaActual);
+      paginas.push(paginaActual);
     }
 
     return paginas;
-}
+  }
 
- agruparCategoriasDeCadaPagina(platilosCategoriaPorPagina: PlatillosPorCategoria[][]): PlatillosPorCategoria[][] {
-  const paginasAgrupadas: PlatillosPorCategoria[][] = [];
+  agruparCategoriasDeCadaPagina(platilosCategoriaPorPagina: PlatillosPorCategoria[][]): PlatillosPorCategoria[][] {
+    const paginasAgrupadas: PlatillosPorCategoria[][] = [];
 
-  platilosCategoriaPorPagina.forEach(pagina => {
+    platilosCategoriaPorPagina.forEach(pagina => {
       const categoriasAgrupadas: { [key: number]: PlatillosPorCategoria } = {};
 
       pagina.forEach(categoria => {
-          const categoriaId = categoria.id;
-          if (categoriaId in categoriasAgrupadas) {
-              categoriasAgrupadas[categoriaId].platillos.push(...categoria.platillos);
-          } else {
-              categoriasAgrupadas[categoriaId] = { ...categoria };
-          }
+        const categoriaId = categoria.id;
+        if (categoriaId in categoriasAgrupadas) {
+          categoriasAgrupadas[categoriaId].platillos.push(...categoria.platillos);
+        } else {
+          categoriasAgrupadas[categoriaId] = { ...categoria };
+        }
       });
 
       const categoriasAgrupadasArray = Object.values(categoriasAgrupadas);
 
       paginasAgrupadas.push(categoriasAgrupadasArray);
-  });
+    });
 
-  return paginasAgrupadas;
-}
+    return paginasAgrupadas;
+  }
 
+  getRandomIndex(max: number): number {
+    return Math.floor(Math.random() * max);
+  }
 
+  generarImagenesPorPagina() {
+    for (let index = 0; index < this.platilloPorCategoriaPagina.length; index++) {
+      let pagina = this.platilloPorCategoriaPagina[index]
+      
+      for (let indexCategoria = 0; indexCategoria < pagina.length; indexCategoria++) {
+        let indiceAleatorio = this.getRandomIndex(pagina[indexCategoria].platillos.length);
+        let platilloAleatorio = pagina[indexCategoria].platillos[indiceAleatorio];
+        if (!this.imagenesPorPagina[index]) {
+          this.imagenesPorPagina[index] = [];
+        }
+        
+        this.imagenesPorPagina[index].push({
+          nombre: platilloAleatorio.nombre,
+          descripcion: platilloAleatorio.descripcion,
+          precio: platilloAleatorio.precio,
+          imagen: platilloAleatorio.imagen
+        });
+
+      }
+    }
+  }
 }

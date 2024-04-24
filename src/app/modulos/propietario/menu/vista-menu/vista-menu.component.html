@@ -5,8 +5,7 @@
     <div class="col libro d-flex justify-content-center">
       <!-- Portada -->
       <div>
-        <div class="portada my-3 "
-          [style.background-image]="'url(' + baseUrl + menu.portada + ')'">
+        <div class="portada my-3 " [style.background-image]="'url(' + baseUrl + menu.portada + ')'">
           <div class="portada-interior text-center d-flex flex-column justify-content-between">
             <div>
               <h1>Menú</h1>
@@ -22,21 +21,36 @@
           </div>
 
         </div>
-        <!-- Páginas de platillos -->
-        <div class="pagina-platillo my-2" *ngFor="let categoriasPag of platilloPorCategoriaPagina">
-          <div class="pagina-interior">
-            <div class="categoria border-bottom" *ngFor="let categoriaElemnt of categoriasPag ">
-              <h2>{{ categoriaElemnt.nombre }}</h2>
-              <ul>
-                <li *ngFor="let platillo of categoriaElemnt.platillos">{{ platillo.nombre }}</li>
-              </ul>
-            </div>
-           
-          </div>
-          
-        </div>
-      </div>
 
+        <!-- Páginas de platillos -->
+        <div class="pagina-platillo my-2" *ngFor="let categoriasPag of platilloPorCategoriaPagina; let i = index" >
+
+          
+          <div class="pagina-interior row">
+            <div class="col-6">
+              <div class="categoria border-bottom" *ngFor="let categoriaElemnt of categoriasPag ">
+                <h2>{{ categoriaElemnt.nombre }}</h2>
+                <ul>
+                  <li *ngFor="let platillo of categoriaElemnt.platillos">{{ platillo.nombre }}</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-6 ">
+              <div class="row h-100">
+                <div class="contenedor-menu-imagen " *ngFor="let platilloImg of imagenesPorPagina[i] "[style.background-image]="'url(' + baseUrl + platilloImg.imagen + ')'">
+                    <h2 class="contenedor-menu-imagen-cabeza">{{ platilloImg.nombre }}</h2>
+                    <p class="contenedor-menu-imagen-footer">Precio: {{ platilloImg.precio }}</p>
+                </div>                      
+                   
+            </div>
+            
+
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
-</div>
