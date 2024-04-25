@@ -48,7 +48,7 @@ export class VistaMenuComponent implements OnInit {
         this.menu = response.menu;
         const platillos: Platillo[] = response.platillos;
         this.platilloPorCategoria = this.transformarDatos(platillos);
-        this.platilloPorCategoriaPagina = this.agruparPlatillosPorPagina(this.platilloPorCategoria, 15);
+        this.platilloPorCategoriaPagina = this.agruparPlatillosPorPagina(this.platilloPorCategoria, 11);
         this.platilloPorCategoriaPagina = this.agruparCategoriasDeCadaPagina(this.platilloPorCategoriaPagina);
         this.generarImagenesPorPagina();
         console.log(this.imagenesPorPagina);

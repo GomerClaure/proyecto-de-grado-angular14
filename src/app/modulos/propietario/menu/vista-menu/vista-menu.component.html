@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col libro d-flex justify-content-center">
+    <div class="col libro d-flex justify-content-center h-100">
       <!-- Portada -->
       <div>
         <div class="portada my-3 " [style.background-image]="'url(' + baseUrl + menu.portada + ')'">
@@ -23,30 +23,43 @@
         </div>
 
         <!-- Páginas de platillos -->
-        <div class="pagina-platillo my-2" *ngFor="let categoriasPag of platilloPorCategoriaPagina; let i = index" >
+        <div class="pagina-platillo my-2 row" *ngFor="let categoriasPag of platilloPorCategoriaPagina; let i = index">
 
-          
-          <div class="pagina-interior row">
-            <div class="col-6">
-              <div class="categoria border-bottom" *ngFor="let categoriaElemnt of categoriasPag ">
-                <h2>{{ categoriaElemnt.nombre }}</h2>
-                <ul>
-                  <li *ngFor="let platillo of categoriaElemnt.platillos">{{ platillo.nombre }}</li>
-                </ul>
+
+          <div class="pagina-interior ">
+            <div class="row menu-titulo-pagina text-center d-flex align-items-center" style="height: 10%;background-image: url('assets/image/portada2.jpg');">
+              <h2 class="text-light">Menu <br> Del Restaurante</h2>
+            </div>
+            <div class="row" style="height: 90%;">
+              <div class="col-7" style="height: 100%">
+                <div class="categoria border-bottom" *ngFor="let categoriaElemnt of categoriasPag ">
+                  <div class="categoria-titulo">
+                    <h2>{{ categoriaElemnt.nombre }}</h2>
+                  </div>
+                  <div class="menu-cuerpo" *ngFor="let platillo of categoriaElemnt.platillos">
+                    
+                    <p class="menu-cuerpo-platillo">{{platillo.nombre}}</p>
+                    <div class="d-flex justify-content-between">
+                      <p class="menu-cuerpo-descripcion">{{platillo.descripcion}}</p>
+                      <p class="menu-cuerpo-precio">{{platillo.precio+ ' Bs'}}</p>
+                    </div>
+                    
+
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="col-5" style="height: 100%;">
+                <div class="row h-100">
+                  <div class="contenedor-menu-imagen " *ngFor="let platilloImg of imagenesPorPagina[i] "
+                    [style.background-image]="'url(' + baseUrl + platilloImg.imagen + ')'">
+                    <h3 class="contenedor-menu-imagen-cabeza">{{ platilloImg.nombre }}</h3>
+                    <p class="contenedor-menu-imagen-footer"> {{ platilloImg.precio+' Bs' }}</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col-6 ">
-              <div class="row h-100">
-                <div class="contenedor-menu-imagen " *ngFor="let platilloImg of imagenesPorPagina[i] "[style.background-image]="'url(' + baseUrl + platilloImg.imagen + ')'">
-                    <h2 class="contenedor-menu-imagen-cabeza">{{ platilloImg.nombre }}</h2>
-                    <p class="contenedor-menu-imagen-footer">Precio: {{ platilloImg.precio }}</p>
-                </div>                      
-                   
-            </div>
-            
 
-
-            </div>
 
           </div>
         </div>
@@ -54,3 +67,4 @@
       </div>
     </div>
   </div>
+</div>
