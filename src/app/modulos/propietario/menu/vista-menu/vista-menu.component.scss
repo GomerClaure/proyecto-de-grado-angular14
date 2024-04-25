@@ -110,7 +110,7 @@ h1 {
     /* Alto de carta */
     background-color: white;
     /* Color de fondo para simular el papel */
-    padding: 0.4in;
+    // padding: 0.4in;
     /* Margen interior para el contenido */
     box-sizing: border-box;
     /* Incluye el padding en el tamaño total */
@@ -160,52 +160,3 @@ h1 {
     background-color: rgba(87, 82, 78, 0.384);
 }
 
-@media print {
-    body {
-        background-image: none;
-        /* Restablece la imagen de fondo para que no se imprima */
-    }
-
-    h1 {
-        font-size: 62px;
-    }
-
-    .bienvenida {
-        font-size: 40px;
-        /* font-weight: 600; */
-    }
-
-    .portada {
-        background-size: cover;
-        /* La imagen se ajustará para cubrir todo el contenedor */
-        background-position: center;
-        /* Centra la imagen en el contenedor */
-        font-family: 'Montserrat', sans-serif;
-        color: beige;
-    }
-
-    .portada-interior {
-        /* border: 2px double inl rgb(253, 253, 253); */
-        border: 4px double rgb(238, 230, 230);
-        /* box-sizing: border-box; */
-        height: 100%;
-    }
-
-    .portada,
-    .pagina-platillo {
-        /* margin-bottom: 50px; */
-        width: 8.5in;
-        /* Ancho de carta */
-        height: 11in;
-        /* Alto de carta */
-        background-color: white;
-        /* Color de fondo para simular el papel */
-        padding: 1in;
-        /* Margen interior para el contenido */
-        box-sizing: border-box;
-        /* Incluye el padding en el tamaño total */
-        page-break-after: always;
-        /* Asegura que cada página se imprima en una hoja separada */
-        border: 1px solid rgb(24, 7, 1);
-    }
-}

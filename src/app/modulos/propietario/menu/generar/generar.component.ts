@@ -120,7 +120,9 @@ export class GenerarComponent implements OnInit {
     const index = this.platillos.findIndex(platillo => platillo.id === idPlato);
     if (index !== -1) {
       const platillo = this.platillos[index]; // Obtiene el platillo usando el índice
-      platillo.plato_disponible_menu = false;
+      console.log(platillo)
+      platillo.plato_disponible_menu = !platillo.plato_disponible_menu;
+      
     }
 
     }
