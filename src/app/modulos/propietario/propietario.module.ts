@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GenerarComponent } from './menu/generar/generar.component';
-import { VisualizarComponent } from './menu/visualizar/visualizar.component';
+import { RegistroModule } from './registro/registro.module';
+import { ListasModule } from './listas/listas.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-  
-    GenerarComponent,
-       VisualizarComponent
   ],
-  imports: [ 
-    CommonModule
+  imports: [  
+    CommonModule,
+    RegistroModule,
+    ListasModule,
+    ReactiveFormsModule,
+    FormsModule
+    
   ] 
 })
 export class PropietarioModule { }
