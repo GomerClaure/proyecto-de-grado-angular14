@@ -51,6 +51,8 @@ export class VistaMenuComponent implements OnInit {
         this.platilloPorCategoriaPagina = this.agruparPlatillosPorPagina(this.platilloPorCategoria, 11);
         this.platilloPorCategoriaPagina = this.agruparCategoriasDeCadaPagina(this.platilloPorCategoriaPagina);
         this.generarImagenesPorPagina();
+        let container = document.getElementById("container-ver-menu");
+        container?.classList.add(this.menu.tema);
         console.log(this.imagenesPorPagina);
       }
     );
