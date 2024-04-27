@@ -3,8 +3,14 @@ td img{
     height: 60px;
     border-radius: 20%;
 }
+.btn{
+   margin: 15px;
+   border-radius: 0px;
+   border-color: white;
+}
 
-//  .table-nombre {
-//     max-width: 600px; /* Establece el ancho máximo de la tabla */
-//     margin: 0 auto; /* Centra la tabla horizontalmente */
-//   }
+.fila{
+    background-color: rgb(76, 53, 10);
+    color: white;
+    padding-left: 45px;
+}

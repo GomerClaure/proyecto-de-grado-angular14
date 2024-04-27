@@ -8,12 +8,12 @@ import { FormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { MeseroModule } from './modulos/mesero/mesero.module';
 import { HomeModule } from './modulos/home/home.module';
-import { RegistrarCategoriaComponent } from './modulos/propietario/registro/registrar-categoria/registrar-categoria.component';
-import { RegistrarCategoriaModule } from './modulos/propietario/registro/registrar-categoria/registrar-categoria.module';
+import { EditarCategoriaComponent } from './modulos/propietario/editar/editar-categoria/editar-categoria.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    //EditarCategoriaComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +23,7 @@ import { RegistrarCategoriaModule } from './modulos/propietario/registro/registr
     FormsModule,
     AuthModule,
     MeseroModule,
-    HomeModule,
+    HomeModule
   ], 
   providers: [],
   bootstrap: [AppComponent]

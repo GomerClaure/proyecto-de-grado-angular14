@@ -5,11 +5,10 @@ import { ModalEliminarCategoriaComponent } from './modal-eliminar-categoria/moda
 import { ListaCategoriaComponent } from './lista-categoria/lista-categoria.component';
 import { ListaPlatilloComponent } from './lista-platillo/lista-platillo.component';
 import { ModalEliminarComponent } from './modal-eliminar/modal-eliminar.component';
-import { EditarModule } from '../editar/editar.module';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { FormsModule } from '@angular/forms';
+//import { EditarCategoriaComponent } from '../editar/editar-categoria/editar-categoria.component';
 
- 
 @NgModule({
   declarations: [
     ModalEliminarCategoriaComponent,
@@ -21,7 +20,6 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ListaRoutingModule,
-    EditarModule,
     ComponentsModule,
     FormsModule
   ]

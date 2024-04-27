@@ -1,21 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ComponentsModule } from 'src/app/components/components.module';
 import { EditarCategoriaComponent } from './editar-categoria/editar-categoria.component';
 import { EditarPlatilloComponent } from './editar-platillo/editar-platillo.component';
-import { ComponentsModule } from 'src/app/components/components.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    EditarCategoriaComponent,
-    EditarPlatilloComponent
+    //EditarCategoriaComponent,
+    //EditarPlatilloComponent
   ],
   imports: [
     CommonModule,
+    //FormsModule, 
     ComponentsModule,
-    FormsModule,
-    ReactiveFormsModule
-
+    //ReactiveFormsModule 
   ]
 })
 export class EditarModule { }

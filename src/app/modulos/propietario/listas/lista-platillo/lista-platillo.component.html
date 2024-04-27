@@ -1,4 +1,4 @@
-<app-nav></app-nav><br><br><br>
+<app-nav></app-nav><br><br><br><br>
 <h2 class="titulo">Lista de platillos</h2>
 <div class="container">
   <div class="row">
@@ -6,22 +6,23 @@
       <input type="text" class="form-control" placeholder="Buscar..." [ngModel]="textoBuscador" (ngModelChange)="onSearchChange($event)">
     </div>
   </div>
+  <br>
   <div class="table-responsive-xl">
     <div class="table-responsive">
-      <table class="table table-striped">
+      <table class="table">
         <thead>
-          <tr class="text-center">
-            <th scope="col">Nombre</th>
-            <th scope="col">Categoría</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Descripción</th>
-            <th scope="col">Opciones</th>
+          <tr class="text">
+            <th class="fila" scope="col">Nombre</th>
+            <th class="fila" scope="col">Categoría</th>
+            <th class="fila" scope="col">Precio</th>
+            <th class="fila" scope="col">Descripción</th>
+            <th class="fila" scope="col">Opciones</th>
           </tr>
         </thead>
         <tbody>
           <!-- Aquí se insertarían las filas de datos -->
           <tr *ngFor="let platillo of platillosFiltrados" class="align-middle">
-            <td class="table-nombre ">
+            <td class="table-nombre">
               <div class="row">
                 <div class="col text-center ">
                   <span>{{ platillo.nombre }}</span>
