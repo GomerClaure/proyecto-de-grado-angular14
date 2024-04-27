@@ -7,14 +7,14 @@ import { EditarPlatilloComponent } from './editar-platillo/editar-platillo.compo
 
 @NgModule({
   declarations: [
-    //EditarCategoriaComponent,
-    //EditarPlatilloComponent
+    EditarCategoriaComponent,
+    EditarPlatilloComponent
   ],
   imports: [
     CommonModule,
-    //FormsModule, 
+    FormsModule, 
     ComponentsModule,
-    //ReactiveFormsModule 
+    ReactiveFormsModule
   ]
-})
+}) 
 export class EditarModule { }
