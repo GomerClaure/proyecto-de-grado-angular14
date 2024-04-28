@@ -13,7 +13,7 @@ export class ModalEditarCategoriaService {
 
   getCategoria(){
     return this.categoria;
-  }
+  } 
 
   openModal(categoria: Categoria){
     this.categoria.id = categoria.id;

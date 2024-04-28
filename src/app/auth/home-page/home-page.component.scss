@@ -9,11 +9,23 @@
 .paginaInicial{
     margin: 0;
     padding: 0;
-    background-image: url('../../../assets/image/Fondo1.jpg'); 
     background-size: cover;
     background-position: center;
-    height: 90vh;
+    height: 100vh;
+    animation: changeBackground 11s infinite alternate;
   }
+  @keyframes changeBackground {
+    0% {
+      background-image: url('../../../assets/image/646937\ \(1\).jpg');
+    }
+    50% {
+      background-image: url('../../../assets/image/313058.jpg');
+      
+    }
+    100% {
+      background-image: url('../../../assets/image/wallpaperbetter.com_7680x4320.jpg');
+    }
+  } 
 h1{
   font-size: 4vw;
 }
@@ -30,6 +42,7 @@ h1{
   }
   .animated-heading, .animated-text {
     opacity: 0;
+    //color: black;
     animation: fadeIn 2s forwards;
   }
   @keyframes fadeIn {

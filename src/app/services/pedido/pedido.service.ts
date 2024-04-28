@@ -25,7 +25,11 @@ export class PedidoService {
   storePedido(formData:FormData) {
     return this.http.post<any>(`${this.BASE_URL}/pedido`, formData, { headers: this.headers });
   }
+  limpiarSeleccion() {
+    // Limpiar la lista de platillos seleccionados
+    this.platillosSeleccionados = [];
+  }
 }
   
 
- 
+  

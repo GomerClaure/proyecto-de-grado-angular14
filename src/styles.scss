@@ -1,20 +1,23 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
 * {
-    font-family: "Poppins", sans-serif;
+    font-family: 'Arial Narrow Bold', sans-serif;
+    padding: 0px;
+    margin: 0px;
   }
 .titulo{
     text-align: center;
 }
 .btn{
-  background-color: hsla(10, 78%, 47%, 0.992);
+  background-color: rgb(104, 85, 53);
+  color: white;
+  border-color:rgb(195, 197, 122) ;
+}
+.btn:hover{
+  background-color: hsla(53, 32%, 11%, 0.992);
+  border-color: hsla(52, 20%, 22%, 0.992);
   color: white;
 }
-.fondo {
-  background-image: url('./assets/image/background_transp1.png');
-  background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el contenedor */
-  background-position: center; /* Centra la imagen */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
-  height: 100vh;
+.fondo{
+  background-color: rgb(255, 255, 255);
 }
