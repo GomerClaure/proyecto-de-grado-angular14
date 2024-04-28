@@ -6,22 +6,24 @@ import { ListaCategoriaComponent } from './lista-categoria/lista-categoria.compo
 import { ListaPlatilloComponent } from './lista-platillo/lista-platillo.component';
 import { ModalEliminarComponent } from './modal-eliminar/modal-eliminar.component';
 import { ComponentsModule } from 'src/app/components/components.module';
-import { FormsModule } from '@angular/forms';
-//import { EditarCategoriaComponent } from '../editar/editar-categoria/editar-categoria.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditarCategoriaComponent } from '../editar/editar-categoria/editar-categoria.component';
+
 
 @NgModule({
   declarations: [
     ModalEliminarCategoriaComponent,
     ListaCategoriaComponent,
     ListaPlatilloComponent,
-    ModalEliminarComponent
-  
+    ModalEliminarComponent,
+    EditarCategoriaComponent
   ],
   imports: [
     CommonModule,
     ListaRoutingModule,
     ComponentsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class ListasModule { } 
