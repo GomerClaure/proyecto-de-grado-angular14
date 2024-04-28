@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VisualizarComponent } from './visualizar.component';
+import { PlantillaQrComponent } from './plantilla-qr.component';
 
-describe('VisualizarComponent', () => {
-  let component: VisualizarComponent;
-  let fixture: ComponentFixture<VisualizarComponent>;
+describe('PlantillaQrComponent', () => {
+  let component: PlantillaQrComponent;
+  let fixture: ComponentFixture<PlantillaQrComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VisualizarComponent ]
+      declarations: [ PlantillaQrComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(VisualizarComponent);
+    fixture = TestBed.createComponent(PlantillaQrComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

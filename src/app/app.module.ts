@@ -25,6 +25,9 @@ import { FormsModule } from '@angular/forms';
 import { ListaMesasComponent } from './modulos/mesero/lista-mesas/lista-mesas.component';
 import { ModalPedidoComponent } from './modulos/mesero/modal-pedido/modal-pedido.component';
 import { GenerarComponent } from './modulos/propietario/menu/generar/generar.component';
+import { VisualizarQrComponent } from './modulos/propietario/menu/visualizar-qr/visualizar-qr.component';
+import {VistaMenuComponent} from './modulos/propietario/menu/vista-menu/vista-menu.component';
+import {PlantillaQrComponent} from './modulos/propietario/menu/plantilla-qr/plantilla-qr.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import { GenerarComponent } from './modulos/propietario/menu/generar/generar.com
     ModalEliminarComponent,
     ListaMesasComponent,
     ModalPedidoComponent,
-    GenerarComponent
+    GenerarComponent,
+    VisualizarQrComponent,
+    VistaMenuComponent,
+    PlantillaQrComponent
 
   ],
   imports: [

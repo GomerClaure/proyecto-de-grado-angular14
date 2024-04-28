@@ -1,0 +1,70 @@
+<app-nav></app-nav><br><br>
+
+<div class="container" id="container-ver-menu">
+  <div class="row">
+    <div class="col libro d-flex justify-content-center h-100">
+      <!-- Portada -->
+      <div>
+        <div class="portada my-3 " [style.background-image]="'url(' + baseUrl + menu.portada + ')'">
+          <div class="portada-interior text-center d-flex flex-column justify-content-between">
+            <div>
+              <h1>Menú</h1>
+              <img src="assets/image/line-sub.webp" alt="">
+              <p class="mb-0 bienvenida">Cicharrones Don Paul</p>
+            </div>
+            <div>
+              <p class="mb-0 bienvenida">Bienvenido a nuestro restaurante</p>
+            </div>
+            <div>
+              <p>Direccion del restaurante: Calle los pinos entre Luis espinal N°4803</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Páginas de platillos -->
+        <div class="pagina-platillo my-2 row" *ngFor="let categoriasPag of platilloPorCategoriaPagina; let i = index">
+
+
+          <div class="pagina-interior ">
+            <div class="row menu-titulo-pagina text-center d-flex align-items-center" style="height: 10%;background-image: url('assets/image/portada2.jpg');">
+              <h2 class="text-light">Menu <br> Del Restaurante</h2>
+            </div>
+            <div class="row" style="height: 90%;">
+              <div class="col-7" style="height: 100%">
+                <div class="categoria border-bottom" *ngFor="let categoriaElemnt of categoriasPag ">
+                  <div class="categoria-titulo">
+                    <h2>{{ categoriaElemnt.nombre }}</h2>
+                  </div>
+                  <div class="menu-cuerpo" *ngFor="let platillo of categoriaElemnt.platillos">
+                    
+                    <p class="menu-cuerpo-platillo">{{platillo.nombre}}</p>
+                    <div class="d-flex justify-content-between">
+                      <p class="menu-cuerpo-descripcion">{{platillo.descripcion}}</p>
+                      <p class="menu-cuerpo-precio">{{platillo.precio+ ' Bs'}}</p>
+                    </div>
+                    
+
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="col-5" style="height: 100%;">
+                <div class="row h-100">
+                  <div class="contenedor-menu-imagen " *ngFor="let platilloImg of imagenesPorPagina[i] "
+                    [style.background-image]="'url(' + baseUrl + platilloImg.imagen + ')'">
+                    <h3 class="contenedor-menu-imagen-cabeza">{{ platilloImg.nombre }}</h3>
+                    <p class="contenedor-menu-imagen-footer"> {{ platilloImg.precio+' Bs' }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
