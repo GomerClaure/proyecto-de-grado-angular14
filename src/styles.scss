@@ -12,9 +12,20 @@
   background-color:#d5b771;
   border-color:#d5b771 ;
 }
-.btn:hover{
-  background-color: #9f8417;
-  border-color:#9f8417;
-  color: white;
+.btn-delete:hover{
+  background-color: #c01818;
+  border-color:#bf3636;
+}
+.btn-editar:hover{
+  background-color: rgb(210, 183, 133);
+  border-color:rgb(210, 183, 133);
+}
+.btn-delete{
+  background-color: rgb(220, 108, 71);
+ border-color:rgb(220, 108, 71) ;
+}
+.btn-editar{
+  background-color:#edc97b;
+  border-color: #edc97b ;
 }
 
