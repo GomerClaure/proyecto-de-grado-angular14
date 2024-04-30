@@ -7,7 +7,7 @@ import { ListaPlatilloComponent } from './lista-platillo/lista-platillo.componen
 import { ModalEliminarComponent } from './modal-eliminar/modal-eliminar.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EditarCategoriaComponent } from '../editar/editar-categoria/editar-categoria.component';
+//*import { EditarCategoriaComponent } from '../editar/editar-categoria/editar-categoria.component';
 
 
 @NgModule({
@@ -15,8 +15,7 @@ import { EditarCategoriaComponent } from '../editar/editar-categoria/editar-cate
     ModalEliminarCategoriaComponent,
     ListaCategoriaComponent,
     ListaPlatilloComponent,
-    ModalEliminarComponent,
-    EditarCategoriaComponent
+    ModalEliminarComponent
   ],
   imports: [
     CommonModule,

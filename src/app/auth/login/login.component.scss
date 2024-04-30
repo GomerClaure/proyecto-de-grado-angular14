@@ -1,12 +1,4 @@
 
-.custom-navbar-color {
-    background-color: hsla(10, 78%, 47%, 0.992);
-    color: white; 
-    position: fixed;
-    width: 100%; /* Asegura que ocupe toda la anchura */
-    top: 0; /* La barra de navegación se fija en la parte superior */
-    z-index: 1000; 
-}
 .card {
     margin-top: 150px;
     border-radius: 10px;
@@ -23,3 +15,8 @@
     width: 60px;
     height: 60px;
 }
+.fon{
+    background-color:beige;
+    width: 100%;
+    height: 100vh; /* Ajusta la altura al 100% del viewport */
+} 

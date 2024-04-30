@@ -13,7 +13,7 @@ import { EditarCategoriaComponent } from './modulos/propietario/editar/editar-ca
 @NgModule({
   declarations: [
     AppComponent,
-    //EditarCategoriaComponent
+    EditarCategoriaComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +23,7 @@ import { EditarCategoriaComponent } from './modulos/propietario/editar/editar-ca
     FormsModule,
     AuthModule,
     MeseroModule,
-    HomeModule
+    HomeModule,
   ], 
   providers: [],
   bootstrap: [AppComponent]
