@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgToastService } from 'ng-angular-popup';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
 import { ModalEliminarCategoriaService } from 'src/app/services/modales/modal-eliminar-categoria.service';
 
@@ -10,12 +11,14 @@ import { ModalEliminarCategoriaService } from 'src/app/services/modales/modal-el
 export class ModalEliminarCategoriaComponent implements OnInit {
   showModal=false;
 
-  constructor(private categoriaService:CategoriaService,private modalService:ModalEliminarCategoriaService) { }
+  constructor(private categoriaService:CategoriaService,
+              private modalService:ModalEliminarCategoriaService,
+              private toast:NgToastService) { }
 
   ngOnInit(): void {
   }
   
-  eliminarCategoria(){
+  eliminarCategoria(){ 
    console.log("Categoria eliminada"+this.modalService.idCategoriaModal());
    this.categoriaService.deleteCategoria(this.modalService.idCategoriaModal()).subscribe(
     res => {
@@ -23,14 +26,14 @@ export class ModalEliminarCategoriaComponent implements OnInit {
       this.modalService.listaCategorias()
         .splice(this.modalService.listaCategorias()
           .findIndex(categoria => categoria.id === this.modalService.idCategoriaModal()), 1);
-      alert("Platillo eliminado corredtamente.");
       console.log(res);
+      this.toast.success({ detail:'Categoria eliminada', summary: 'Success', duration: 1000});
+      console.log('aqui')
     },
     err => {
       console.log(err);
+      this.toast.error({detail:"ERROR",summary:'La categoria no se pudo eliminar',sticky:true});
     }
   );
-
-
   }
 }

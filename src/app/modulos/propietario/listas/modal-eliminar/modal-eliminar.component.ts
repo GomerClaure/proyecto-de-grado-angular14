@@ -27,10 +27,11 @@ export class ModalEliminarComponent {
           .splice(this.modalService.listaPlatillos()
             .findIndex(platillo => platillo.id === this.modalService.idPlatilloModal()), 1);
         console.log(res);
-        this.toast.success({ detail: 'platillo eliminado', summary: 'Success', duration: 1000});
+        this.toast.success({ detail:'Platillo eliminado', summary: 'Success', duration: 1000});
       },
       err => {
         console.log(err);
+        this.toast.error({detail:"ERROR",summary:'El platillo no se pudo eliminar',sticky:true});
       }
     );
 
