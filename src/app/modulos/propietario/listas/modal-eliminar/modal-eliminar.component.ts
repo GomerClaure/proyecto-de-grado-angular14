@@ -11,6 +11,7 @@ import { NgToastService } from 'ng-angular-popup';
 export class ModalEliminarComponent {
   showModal = false;
 
+
   constructor(private modalService: ModalEliminarPlatilloService,
      private platillosService: PlatillosService,
     private toast:NgToastService) {
@@ -26,6 +27,7 @@ export class ModalEliminarComponent {
           .splice(this.modalService.listaPlatillos()
             .findIndex(platillo => platillo.id === this.modalService.idPlatilloModal()), 1);
         console.log(res);
+        this.toast.success({ detail: 'platillo eliminado', summary: 'Success', duration: 1000});
       },
       err => {
         console.log(err);
