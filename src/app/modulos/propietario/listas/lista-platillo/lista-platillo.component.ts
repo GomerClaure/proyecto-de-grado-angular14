@@ -5,6 +5,7 @@ import { Platillo } from 'src/app/modelos/Platillo';
 import { PlatillosService } from 'src/app/services/platillos/platillos.service';
 import { environment } from 'src/environments/environment';
 import { ModalEliminarPlatilloService } from 'src/app/services/modales/modal-eliminar-platillo.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-lista-platillo',
@@ -19,7 +20,8 @@ export class ListaPlatilloComponent {
   storageUrl = environment.backendStorageUrl;
   textoBuscador:string = '';
   constructor(private router: Router, private platilloService: PlatillosService,
-    private modalService: ModalEliminarPlatilloService) {
+    private modalService: ModalEliminarPlatilloService,
+    private toast:NgToastService) {
   }
 
   ngOnInit(): void {
@@ -48,8 +50,18 @@ export class ListaPlatilloComponent {
     );
   }
 
+  showSuccess(message: string) {
+    console.log('entra')
+    this.toast.success({ detail: message, summary: 'Success', duration: 5000 });
+  }
+
   eliminarPlatillo(id: number) {
-  this.modalService.openModal(id,this.platillos);
+    this.modalService.openModal(id, this.platillos);
+  }
+  
+  // Esta función será llamada desde el servicio modal una vez que la eliminación sea confirmada
+  confirmarEliminacion() {
+    this.showSuccess('Platillo eliminado');
   }
 
   onSearchChange(searchValue: string): void {  

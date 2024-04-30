@@ -7,6 +7,7 @@ import { ListaPlatilloComponent } from './lista-platillo/lista-platillo.componen
 import { ModalEliminarComponent } from './modal-eliminar/modal-eliminar.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgToastModule } from 'ng-angular-popup';
 //*import { EditarCategoriaComponent } from '../editar/editar-categoria/editar-categoria.component';
 
 
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ComponentsModule,
     FormsModule,
     ReactiveFormsModule,
+    NgToastModule
   ]
 })
 export class ListasModule { } 

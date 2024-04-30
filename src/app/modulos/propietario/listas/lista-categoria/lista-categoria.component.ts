@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { ModalEditarCategoriaService } from 'src/app/services/modales/modal-editar-categoria.service';
 import { ModalEliminarCategoriaService } from 'src/app/services/modales/modal-eliminar-categoria.service';
+import { NgToastService } from 'ng-angular-popup';
 
 
 @Component({
@@ -18,7 +19,9 @@ export class ListaCategoriaComponent implements OnInit {
   storageUrl = environment.backendStorageUrl;
 
   constructor(private router:Router,private categoriasService:CategoriaService,
-    private modalEditarCategoriaService:ModalEditarCategoriaService,private modalService:ModalEliminarCategoriaService ) { 
+    private modalEditarCategoriaService:ModalEditarCategoriaService,
+    private modalService:ModalEliminarCategoriaService,
+  private toast:NgToastService ) { 
   }
   ngOnInit(): void {
     this.getCategorias();
@@ -33,6 +36,7 @@ export class ListaCategoriaComponent implements OnInit {
   eliminarCategoria(id:number){
    console.log("Categoria eliminada")
    this.modalService.openModal(id,this.categorias);
+   this.showSuccess('Categoria eliminada');
 
   } 
 
@@ -46,6 +50,10 @@ export class ListaCategoriaComponent implements OnInit {
         console.error('Error obteniendo categorías:', error);
       }
     );
+  }
+  showSuccess(message: string) {
+    console.log('entra')
+    this.toast.success({ detail: message, summary: 'Success', duration: 5000 });
   }
 
 }
