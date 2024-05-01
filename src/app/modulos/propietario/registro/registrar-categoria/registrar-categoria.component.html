@@ -2,7 +2,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Registrar Categoría</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><strong>Registrar Categoría</strong></h5>
       </div>
       <div class="modal-body">
         <div class="form-group" [formGroup]="formularioCategoria">
@@ -13,16 +13,16 @@
           </div>
         </div>
         <div class="col-md-6 col-xs-12 d-flex justify-content-center align-items-center">
-          <div class="apartadoImg">
+          <div class="apartadoImg text-center">
               <img [src]="imageUrl" id="image-platillo" class="img-fluid" alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
               <input type="file" id="archivo" class="hidden" (change)="onFileSelected($event)">
-              <label for="archivo" class="btn-img" >Seleccionar</label>
+              <label for="archivo" class="btn-img">Seleccionar Imagen<i class="bi bi-file-earmark-arrow-up"></i></label>
           </div>
       </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" (click)="guardarCategoria()" data-bs-dismiss="modal">Guardar</button>
+        <button type="button" class="btn btn-delete" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-aceptar" (click)="guardarCategoria()" data-bs-dismiss="modal">Guardar</button>
       </div>
     </div>
   </div>

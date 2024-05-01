@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
+import { NgToastService } from 'ng-angular-popup';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';	
+
 @Component({
   selector: 'app-registrar-categoria',
   templateUrl: './registrar-categoria.component.html',
@@ -13,7 +15,7 @@ export class RegistrarCategoriaComponent {
   formularioCategoria:FormGroup
   selectedFile: File = new File([''], ''); 
 
-  constructor(private formBuilder:FormBuilder, private categoriaService:CategoriaService) { 
+  constructor(private formBuilder:FormBuilder, private categoriaService:CategoriaService ,private toast:NgToastService) { 
     this.formularioCategoria=this.formBuilder.group({
       nombre:[null,Validators.required]
     })
@@ -43,16 +45,18 @@ export class RegistrarCategoriaComponent {
       this.categoriaService.saveCategoria(formData).subscribe(
         success => {
           console.log('Categoría guardada exitosamente:', success);
-          // Aquí puedes agregar lógica adicional, como mostrar un mensaje de éxito o redirigir a otra página.
+          this.toast.success({detail:"SUCCESS",summary:'Categoria Registrada',duration:2000})
+          this.imageUrl = 'assets/image/27002.jpg';       
+          this.formularioCategoria.reset();
         },
         error => {
           console.error('Error al guardar la categoría:', error);
-          // Aquí puedes manejar errores, como mostrar un mensaje de error al usuario.
+          this.toast.error({detail:"ERROR",summary:'Error al registrar la categoria',sticky:true})
         }
       );
     } else {
       console.error('Formulario inválido o no se ha seleccionado ninguna imagen.');
-      // Aquí puedes manejar el caso en que el formulario no sea válido o no se haya seleccionado ninguna imagen.
+      
     }
   }
 }

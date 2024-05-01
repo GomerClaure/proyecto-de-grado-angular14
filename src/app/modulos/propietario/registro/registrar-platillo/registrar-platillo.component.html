@@ -42,17 +42,15 @@
                 <div class="apartadoImg">
                     <img [src]="imageUrl" id="image-platillo" class="img-fluid" alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
                     <input type="file" id="img-registrar-platillo" class="hidden" (change)="onFileSelected($event)">
-                    <label for="img-registrar-platillo" class="btn-img">Seleccionar</label>
+                    <label for="img-registrar-platillo" class="btn-img">Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i></label>
                 </div>
             </div>
     </div>
         </form>
     </div>
     <div class="row">
-        <div class="botones-group">
-         <button class="btn">Atras</button>
-         <button class="btn" (click)="onSubmit()">Registrar</button>
-        </div>
+         <button class="btn-editar" (click)="onSubmit()">Registrar</button>
      </div>
 </div>
 </div>
+<lib-ng-toast></lib-ng-toast>

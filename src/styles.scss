@@ -8,24 +8,46 @@
 .titulo{
     text-align: center;
 }
-.btn{
-  background-color:#d5b771;
-  border-color:#d5b771 ;
+.btn-aceptar{
+  background-color:#96be64;
+  border-radius: 0px;
+  border-color: #c0f185;
+  color: black;
+}
+.btn-aceptar:hover{
+  background-color: #719841;
+  border-color: #719841;
 }
 .btn-delete:hover{
   background-color: #c01818;
   border-color:#bf3636;
 }
 .btn-editar:hover{
-  background-color: rgb(210, 183, 133);
-  border-color:rgb(210, 183, 133);
+  background-color: rgb(221, 165, 61);
+  border-color:rgb(218, 170, 82);
 }
 .btn-delete{
   background-color: rgb(220, 108, 71);
  border-color:rgb(220, 108, 71) ;
+ border-radius: 0px;
 }
 .btn-editar{
   background-color:#edc97b;
   border-color: #edc97b ;
+}
+.btn-img{
+  height: 40px;
+  width: 260px;
+  background-color:#eada89;
+  cursor: pointer;
+  border: none;
+  border-radius: 0px;
+  padding-top: 6px;
+  margin: 10px;
+  text-align: center;
+}
+.btn-img:hover{
+  background-color: #d1bd58;
+  border-color: #ceba53;
 }
 
