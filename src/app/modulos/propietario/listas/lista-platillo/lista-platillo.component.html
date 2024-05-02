@@ -1,7 +1,11 @@
 <app-nav></app-nav>
-<div class="pru">
+<div class="fondo pru">
   <br><br><br><br>
-<h2 class="titulo"><strong>Lista de platillos</strong></h2>
+  <div class=" row justify-content-center cont">
+    <h2 class="titulo"><strong>Lista de platillos</strong></h2>
+    <img class="li" src="../../../../../assets/image/linea.png">
+</div>
+<br>
 <div class="container">
   <div class="row">
     <div class="input-group">
@@ -35,7 +39,7 @@
             <td class="text-center">{{ platillo.precio }}</td>
             <td class="text-left">{{ platillo.descripcion }}</td>
             <td>
-              <div class="btn-group" role="group">
+              <div class="btn grupo" role="group">
                 <button type="button" class="btn btn-editar" (click)="editarPlatillo(platillo.id)">
                   <i class="bi bi-pencil-square"></i> Editar
                 </button>

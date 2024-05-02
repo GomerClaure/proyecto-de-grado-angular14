@@ -1,6 +1,11 @@
 .container{
     align-items: center;
 }
+hr{
+    border: solid 1px black;
+    width: 500px;
+    margin-top: 3px;
+}
 .form{
     padding: 20px;
 }
@@ -11,6 +16,7 @@
 .img-fluid{
     width: 450px;
     height: 300x;
+    border-radius: 5px;
 }
 .botones-group{
     justify-content: center;
@@ -24,7 +30,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 15px;
+    padding-top: 10px;
+    margin-right: 2px;
 }
 
 .hidden {
@@ -42,3 +49,7 @@ textarea{
     width: 100%;
     height: 100vh;
   }
+.form-control{
+    //border-color:#eece84;
+    margin: 2px;
+}

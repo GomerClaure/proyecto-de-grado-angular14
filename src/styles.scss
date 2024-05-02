@@ -1,12 +1,14 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
 * {
-    font-family: 'Arial Narrow Bold', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 0px;
     margin: 0px;
   }
 .titulo{
     text-align: center;
+    //padding:50px;
+    
 }
 .btn-aceptar{
   background-color:#96be64;
@@ -48,7 +50,7 @@
 }
 .btn-img:hover{
   background-color: #d1bd58;
-  border-color: #ceba53;
+  border-color: rgb(218, 170, 82);
 }
 .btn-registrar{
   background-color:#96be64;
@@ -59,4 +61,43 @@
   width: 150px;
   margin-bottom: 20px;
 }
-
+.fondo{
+  background-image: url('./assets/image/f1c.jpg');
+  //background-color: rgb(245, 236, 220);
+  width: 100%;
+  height: 100vh;
+  background-size: cover; /* Ajusta el tamaño de la imagen al contenedor */
+  background-position: center; /* Centra la imagen en el contenedor */
+  position: fixed;
+  overflow-y: auto;
+}
+@media (max-width: 700px) {
+  .fondo {
+    background-image: url('./assets/image/f1c-mobile.jpg'); /* Cambiar la imagen para dispositivos móviles */
+    height: auto;
+  }
+}
+.li{
+  width: 350px;
+  padding-bottom:0px;
+  margin: 0;
+}
+.modal-header{
+  //background-image: url('./assets/image/f1c.jpg');
+  background-size: cover;
+  background-position: center;
+  background-color: #eecf7b;
+}
+.modal-footer{
+   background-image: url('./assets/image/f1c.jpg');
+   background-size: cover;
+   background-position: center;
+}
+.modal-body{
+  background-image: url('./assets/image/f1c.jpg');
+   background-size: cover;
+   background-position: center;
+}
+.img-fluid{
+   border-radius: 5px;
+}
