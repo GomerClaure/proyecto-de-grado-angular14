@@ -8,7 +8,7 @@ import { ModalEliminarComponent } from './modal-eliminar/modal-eliminar.componen
 import { ComponentsModule } from 'src/app/components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgToastModule } from 'ng-angular-popup';
-//*import { EditarCategoriaComponent } from '../editar/editar-categoria/editar-categoria.component';
+import { EditarCategoriaComponent } from '../editar/editar-categoria/editar-categoria.component';
 
 
 @NgModule({
@@ -16,7 +16,8 @@ import { NgToastModule } from 'ng-angular-popup';
     ModalEliminarCategoriaComponent,
     ListaCategoriaComponent,
     ListaPlatilloComponent,
-    ModalEliminarComponent
+    ModalEliminarComponent,
+    EditarCategoriaComponent
   ],
   imports: [
     CommonModule,

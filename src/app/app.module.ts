@@ -15,7 +15,6 @@ import { NgToastModule } from 'ng-angular-popup';
 @NgModule({
   declarations: [
     AppComponent,
-    EditarCategoriaComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +25,7 @@ import { NgToastModule } from 'ng-angular-popup';
     AuthModule, 
     MeseroModule,
     HomeModule,
-    //NgToastModule
+    
   ], 
   providers: [],
   bootstrap: [AppComponent]

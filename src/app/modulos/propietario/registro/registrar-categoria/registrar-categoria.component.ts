@@ -56,7 +56,7 @@ export class RegistrarCategoriaComponent {
       );
     } else {
       console.error('Formulario inválido o no se ha seleccionado ninguna imagen.');
-      
+      this.toast.info({detail:"INFO",summary:'Formulario invalido',sticky:true});
     }
   }
 }

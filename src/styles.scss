@@ -10,9 +10,9 @@
 }
 .btn-aceptar{
   background-color:#96be64;
-  border-radius: 0px;
   border-color: #c0f185;
   color: black;
+  border-radius: 5px;
 }
 .btn-aceptar:hover{
   background-color: #719841;
@@ -29,7 +29,7 @@
 .btn-delete{
   background-color: rgb(220, 108, 71);
  border-color:rgb(220, 108, 71) ;
- border-radius: 0px;
+ border-radius: 5px;
 }
 .btn-editar{
   background-color:#edc97b;
@@ -41,7 +41,7 @@
   background-color:#eada89;
   cursor: pointer;
   border: none;
-  border-radius: 0px;
+  border-radius: 5px;
   padding-top: 6px;
   margin: 10px;
   text-align: center;
@@ -49,5 +49,14 @@
 .btn-img:hover{
   background-color: #d1bd58;
   border-color: #ceba53;
+}
+.btn-registrar{
+  background-color:#96be64;
+  border-radius: 5px;
+  border-color: #c0f185;
+  color: black;
+  padding: 6px;
+  width: 150px;
+  margin-bottom: 20px;
 }
 

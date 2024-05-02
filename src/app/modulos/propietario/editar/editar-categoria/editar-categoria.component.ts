@@ -4,6 +4,7 @@ import { Categoria } from 'src/app/modelos/Categoria';
 import { ModalEditarCategoriaService } from 'src/app/services/modales/modal-editar-categoria.service';
 import { environment } from 'src/environments/environment';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-editar-categoria',
@@ -22,8 +23,11 @@ export class EditarCategoriaComponent implements OnInit {
   public backendStorageUrl = environment.backendStorageUrl;
   //idCategoria:string='';
 
-  constructor(private formBuilder: FormBuilder, private modalEditarCategoriaService: ModalEditarCategoriaService
-    ,private categoriaService:CategoriaService) {
+  constructor(private formBuilder: FormBuilder, 
+              private modalEditarCategoriaService: ModalEditarCategoriaService,
+              private categoriaService:CategoriaService,
+              private toast:NgToastService
+            ) {
     this.imageUrl = 'assets/image/27002.jpg';
     this.formularioCategoria = this.formBuilder.group({
       nombre: [null, Validators.required],
@@ -67,8 +71,9 @@ export class EditarCategoriaComponent implements OnInit {
     
     this.categoriaService.updateCategoria(this.categoria.id, formData).subscribe(
       (response) => {
-        // Manejo de la respuesta, si es necesario
         console.log('Categoría actualizada correctamente', response);
+        this.toast.success({detail:"SUCCESS",summary:'Categoria guardada',duration:2000});
+
       },
       (error) => {
         // Manejo de errores
