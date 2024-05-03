@@ -1,59 +1,61 @@
 <app-nav></app-nav>
-<div class="fondo pru">
+<div class="fondo pur">
   <br><br><br><br>
-  <div class=" row justify-content-center cont">
+  <div class="d-flex flex-column align-items-center">
     <h2 class="titulo"><strong>Lista de platillos</strong></h2>
     <img class="li" src="../../../../../assets/image/linea.png">
-</div>
-<br>
-<div class="container">
-  <div class="row">
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Buscar..." [ngModel]="textoBuscador" (ngModelChange)="onSearchChange($event)">
-    </div>
   </div>
   <br>
-  <div class="table-responsive-xl">
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr class="text">
-            <th class="fila" scope="col">Nombre</th>
-            <th class="fila" scope="col">Categoría</th>
-            <th class="fila" scope="col">Precio</th>
-            <th class="fila" scope="col">Descripción</th>
-            <th class="fila" scope="col">Opciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Aquí se insertarían las filas de datos -->
-          <tr *ngFor="let platillo of platillosFiltrados" class="align-middle">
-            <td class="table-nombre">
-              <div class="row">
-                <div class="col text-center ">
-                  <span>{{ platillo.nombre }}</span>
-                </div>
-              </div>
-            </td>
-            <td class="text-center">{{ platillo.categoria.nombre }}</td>
-            <td class="text-center">{{ platillo.precio }}</td>
-            <td class="text-left">{{ platillo.descripcion }}</td>
-            <td>
-              <div class="btn grupo" role="group">
-                <button type="button" class="btn btn-editar" (click)="editarPlatillo(platillo.id)">
-                  <i class="bi bi-pencil-square"></i> Editar
-                </button>
-                <button type="button" class="btn btn-delete" data-bs-toggle="modal" data-bs-target="#ModalEliminar" (click)="eliminarPlatillo(platillo.id)">
-                  <i class="bi bi-trash3"></i> Eliminar
-              </button>
-              </div>
-            </td>
-          </tr> 
-          <!-- Puedes agregar más filas según sea necesario -->
-        </tbody>
-      </table>
+  <div class="container">
+    <div class="row">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Buscar..." [ngModel]="textoBuscador"
+          (ngModelChange)="onSearchChange($event)">
+      </div>
     </div>
-  </div> 
-</div>
+    <br>
+    <div class="table-responsive-xl">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr class="text">
+              <th class="fila" scope="col">Nombre</th>
+              <th class="fila" scope="col">Categoría</th>
+              <th class="fila" scope="col">Precio</th>
+              <th class="fila" scope="col">Descripción</th>
+              <th class="fila" scope="col">Opciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Aquí se insertarían las filas de datos -->
+            <tr *ngFor="let platillo of platillosFiltrados" class="align-middle">
+              <td class="table-nombre">
+                <div class="row">
+                  <div class="col text-center ">
+                    <span>{{ platillo.nombre }}</span>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center">{{ platillo.categoria.nombre }}</td>
+              <td class="text-center">{{ platillo.precio }}</td>
+              <td class="text-left">{{ platillo.descripcion }}</td>
+              <td>
+                <div class="btn grupo" role="group">
+                  <button type="button" class="btn btn-editar" (click)="editarPlatillo(platillo.id)">
+                    <i class="bi bi-pencil-square"></i> Editar
+                  </button>
+                  <button type="button" class="btn btn-delete" data-bs-toggle="modal" data-bs-target="#ModalEliminar"
+                    (click)="eliminarPlatillo(platillo.id)">
+                    <i class="bi bi-trash3"></i> Eliminar
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <!-- Puedes agregar más filas según sea necesario -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 <app-modal-eliminar></app-modal-eliminar>
