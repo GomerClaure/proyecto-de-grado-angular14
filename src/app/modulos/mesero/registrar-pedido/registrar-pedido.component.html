@@ -1,10 +1,12 @@
 <app-nav></app-nav>
-
 <div class="fondo">
 <div class="container">
    <br><br><br>
    <br>
+   <div class=" row justify-content-center cont">
     <h2 class="titulo"><strong>Tomar Orden</strong></h2>
+    <img class="li" src="../../../../../assets/image/linea.png">
+  </div>
 <div class="row">
     <div class="col">
     <p>Mesa : {{ numeroMesa }}</p>
@@ -37,7 +39,7 @@
     <div class="col">
         <div class="col-md-12">
             <div style="text-align:center">
-                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasOrders" aria-controls="offcanvasOrders">
+                <button class="btn btn-registrar" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasOrders" aria-controls="offcanvasOrders">
                     Ver Órdenes
                 </button>
               </div>
@@ -61,8 +63,17 @@
     </div>
 </div>
 </div>
+</div>
+
+
+
+
+
+
+
+
 <!--Este es el espacio donde ves el pedido que seleccionaste-->
-<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasOrders" aria-labelledby="offcanvasOrdersLabel">
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasOrders" aria-labelledby="offcanvasOrdersLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasOrdersLabel"><P>Pedido</P></h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -93,11 +104,13 @@
                         </div>
                     </td>
                     <td>
-                        <div class="btn-group" role="group" aria-label="Acciones">
-                            <button class="btn btn-agregar" data-bs-toggle="modal" data-bs-target="#agregarDescripcion" (click)="setPlatilloSeleccionado(i)" >
+                    <div class="btn-group" role="group" aria-label="Acciones">
+                            <button class="bt btn-editar" data-bs-toggle="modal" data-bs-target="#agregarDescripcion" (click)="setPlatilloSeleccionado(i)" >
                                 <i class="bi bi-journals"></i> 
                             </button>
-                            <button class="btn btn-retirar" (click)="retirarPlatillo(i)">Retirar</button>
+                            <button class="bt btn-delete" (click)="retirarPlatillo(i)">
+                                <i class="bi bi-trash3"></i>
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -109,8 +122,10 @@
           <p>No se ha seleccionado ningun platillo.</p>
       </ng-template>
   </div>
-  <button class="btn btn-danger btn-sm" (click)="guardarPedido()">Confirmar Pedido</button>
+  <div class="foot">
+  <button class="btn-registrar btn-sm justify-content-center" (click)="guardarPedido()">Confirmar Pedido</button>
+  </div>
 </div>
 <app-modal-pedido></app-modal-pedido>
-</div>
+
 

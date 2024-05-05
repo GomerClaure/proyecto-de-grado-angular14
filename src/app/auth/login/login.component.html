@@ -1,21 +1,20 @@
 <app-nav></app-nav>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div class="fon">
+<div class="fondo">
+  <div class="fond">
 <br><br>
+<div>
     <div class="container">
-      <div class="row justify-content-center">
+      <div class="row">
+        <div class="f">
         <div class="col-md-6 col-sm-8 col-xs-10">
           <div class="card">
             <div class="card-header ">
               <strong>Iniciar Sesion</strong>
-              <div class="contenedor-icono">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                </svg>
-              </div>
+                <br>
             </div>
             <div class="card-body"> 
+              <div class="formulario">
               <form [formGroup]="formularioLogin"> 
                 <div class="mb-3">
                   <label for="validationServer03" class="form-label">Nombre</label>
@@ -32,16 +31,21 @@
                     La contraseña es obligatoria y debe tener al menos 8 caracteres.
                   </div>
                 </div>
-                <div class="d-grid gap-2"> 
-                  <button type="submit" class="btn btn-block" (click)="onSubmit()">Iniciar Sesión</button>
+                <div class="d-grid gap-2 justify-content-center"> 
+                  <button type="submit" class="btn btn-registrar" (click)="onSubmit()">Iniciar Sesión</button>
                 </div>
               </form>
+            </div>
               <lib-ng-toast></lib-ng-toast>
             </div>
           </div>
         </div>
       </div>
+      </div>
     </div>
 </div>
+  </div>
+  </div>
+
 
 

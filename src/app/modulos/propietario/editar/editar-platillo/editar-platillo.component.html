@@ -2,7 +2,11 @@
 <div class="fondo">
 <div class="container">
     <br>
-    <h2 class="titulo">Editar Platillo</h2> 
+    <br>
+    <div class=" row justify-content-center cont">
+        <h2 class="titulo"><strong>Editar Platillo</strong></h2>
+        <img class="li" src="../../../../../assets/image/linea.png">
+    </div>
     <div class="form">
         <form [formGroup]="formularioEditarPlatillo"> 
             <div class="row">
@@ -16,9 +20,9 @@
                 </div>
                 <div class="form-group col-12">
                     <label for="exampleFormControlSelect1">Categoria</label>
-                    <select class="form-control form-select" formControlName="categoria">
-                      <option [value]="1">Postres</option>
-                      <option [value]="2">Carnes</option>
+                    <select class="form-control form-select" aria-label="Default select example" formControlName="categoria">
+                        <option selected >categoria</option>
+                        <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
                     </select>
                     <div *ngIf="formularioEditarPlatillo.get('categoria')?.invalid && formularioEditarPlatillo.get('categoria')?.touched" class="text-danger">
                         Seleccione una categoria
@@ -41,7 +45,7 @@
                 <div class="apartadoImg">
                     <img [src]="imageUrl"  class="img-fluid" alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
                     <input type="file" id="img-editar-platillo" class="hidden" (change)="onFileSelected($event)">
-                    <label for="img-editar-platillo" class="btn-img">Seleccionar</label>
+                    <label for="img-editar-platillo" class="btn-img">Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i></label>
                 </div>
             </div>
     </div>
@@ -49,9 +53,9 @@
     </div>
     <div class="row">
         <div class="botones-group">
-         <button class="btn">Atras</button>
-         <button class="btn" (click)="registrarPlatillo()">Guardar</button>
+         <button class="btn-registrar" (click)="registrarPlatillo()">Guardar</button>
         </div>
      </div>
 </div> 
 </div>
+<lib-ng-toast></lib-ng-toast>

@@ -61,6 +61,11 @@
   width: 150px;
   margin-bottom: 20px;
 }
+.btn-registrar:hover{
+  background-color:#96be64;
+
+  border-color: #c0f185;
+}
 .fondo{
   background-image: url('./assets/image/f1c.jpg');
   //background-color: rgb(245, 236, 220);
@@ -70,12 +75,6 @@
   background-position: center; /* Centra la imagen en el contenedor */
   position: fixed;
   overflow-y: auto;
-}
-@media (max-width: 700px) {
-  .fondo {
-    background-image: url('./assets/image/f1c-mobile.jpg'); /* Cambiar la imagen para dispositivos móviles */
-    height: auto;
-  }
 }
 .li{
   width: 350px;
@@ -100,4 +99,9 @@
 }
 .img-fluid{
    border-radius: 5px;
+   border-color: #d1bd58;
+}
+.form-control{
+  background-color: #ffffff;
+  border-color: #d5d3cd;
 }

@@ -23,6 +23,15 @@ export class ListaCategoriaComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getCategorias();
+    this.modalEditarCategoriaService.getModalClosed().subscribe(closed => {
+      if (closed) {
+        console.log('Modal cerrado:', closed);
+        // Recargar la lista de categorías
+        window.location.reload();
+        // Poner modalClosed a false después de recargar la lista de categorías
+        this.modalEditarCategoriaService.setModalClosed(false);
+      }
+    });
   }
 
   editarCategoria(id: number) {
