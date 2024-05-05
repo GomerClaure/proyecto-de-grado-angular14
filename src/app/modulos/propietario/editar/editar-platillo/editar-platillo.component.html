@@ -21,7 +21,7 @@
                 <div class="form-group col-12">
                     <label for="exampleFormControlSelect1">Categoria</label>
                     <select class="form-control form-select" aria-label="Default select example" formControlName="categoria">
-                        <option selected >categoria</option>
+                        <option [value]="platillo.categoria.nombre">{{ platillo.categoria.nombre }}</option>
                         <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
                     </select>
                     <div *ngIf="formularioEditarPlatillo.get('categoria')?.invalid && formularioEditarPlatillo.get('categoria')?.touched" class="text-danger">
