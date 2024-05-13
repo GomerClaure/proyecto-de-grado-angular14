@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 @Component({
   selector: 'app-home-page',
@@ -8,13 +7,10 @@ import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private webSocketService: WebsocketService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    const canal = this.webSocketService.listen('pedido');
-    canal.bind('CrearPedido',(data: any) => {
-      console.log(data);
-    });
+
   }
 
 }

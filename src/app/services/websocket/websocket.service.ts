@@ -7,8 +7,9 @@ import { websocketConfig } from 'src/environments/environment';
 })
 export class WebsocketService {
   private socket: Pusher;
-  // channel: Channel;
+  channel: Channel;
   constructor() {
+
     this.socket = new Pusher(websocketConfig.key, {
       cluster: websocketConfig.cluster,
       wsHost: websocketConfig.wsHost,
@@ -20,21 +21,22 @@ export class WebsocketService {
       // authEndpoint: 'http://localhost:8000/broadcasting/auth',
       // auth: {
       //   headers: {
-      //     'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]')?.content
+      //    'Authorization': 'Bearer ' + sessionStorage.getItem('token_access'),
+      //    "Access-Control-Allow-Origin": "*"
       //   }
       // }
 
     })
-    // this.channel = this.socket.subscribe('chat');
-    // this.listenAllEvents();
+    this.channel = this.socket.subscribe('pedido');
+    this.listenAllEvents();
   }
   listen(channel: string): Channel{
     return this.socket.subscribe(channel);
   }
-  // listenAllEvents() {
-  //   this.channel.bind_global((eventName: string, data: any) => {
-  //     console.log(`Received event '${eventName}' with data:`, data);
-  //   });
-  // }
+  listenAllEvents() {
+    this.channel.bind_global((eventName: string, data: any) => {
+      console.log(`Received event '${eventName}' with data:`, data);
+    });
+  }
 
 }
