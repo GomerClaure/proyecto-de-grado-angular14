@@ -32,11 +32,11 @@
                     
                     <div class="row row-nav">
                         <ul class="nav nav-underline justify-content-center mb-4">
-                            <li class="nav-item" (click)="cambiarCategoria(0)">
+                            <li class="nav-item ms-3" (click)="cambiarCategoria(0)">
                                 <a class="nav-link" [class.active]="activeCategoria === 0" role="tab" aria-controls="categoria0"
                                     aria-selected="true">Todas</a>
                             </li>
-                            <li class="nav-item" *ngFor="let categoria of categorias;" (click)="cambiarCategoria(categoria.id)">
+                            <li class="nav-item ms-3" *ngFor="let categoria of categorias;" (click)="cambiarCategoria(categoria.id)">
                                 <a class="nav-link" [class.active]="activeCategoria === categoria.id" role="tab"
                                     aria-selected="false">{{ categoria.nombre }}</a>
                             </li>

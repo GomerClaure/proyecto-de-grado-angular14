@@ -63,6 +63,7 @@ export class RegistrarPedidoComponent implements OnInit {
     }
   }
   onSearchChange(searchValue: string): void {  
+    console.log(searchValue);
     this.textoBuscador = searchValue.trim().toLowerCase();
     this.filtrarPlatillos();
   }
@@ -78,7 +79,7 @@ export class RegistrarPedidoComponent implements OnInit {
     }
   }
   getPlatillos() { 
-    this.platilloService.getPlatillos().subscribe(
+    this.platilloService.getPlatillosMenu().subscribe(
       (res: any) => {
         // Filtrar solo los platillos de la categoría seleccionada y que coincidan con el término de búsqueda
         let filteredPlatillos = res.platillo.filter((platillo: any) => {
