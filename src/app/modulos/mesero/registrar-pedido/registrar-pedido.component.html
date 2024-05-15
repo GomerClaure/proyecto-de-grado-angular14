@@ -93,14 +93,10 @@
                 <tr *ngFor="let platillo of pedidoselectService.platillosSeleccionados; let i = index">
                     <td>{{ platillo.nombre }}</td>
                     <td>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-outline-secondary" type="button" (click)="decrement(i)">-</button>
-                            </div>
-                            <input #quantityInput type="number" [id]="'quantityP'+i" name="quantity" min="1" max="100" value="1" class="form-control text-center" readonly>
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" (click)="increment(i)">+</button>
-                            </div>
+                        <div style="display: inline-block; border: 1px solid #ccc; border-radius: 4px; padding: 4px;">
+                            <span href="#" class="boton-cantidad" role="button" (click)="decrement(i)" style="padding: 0.2rem 0.3rem; font-size: 0.8rem; text-decoration: none;">-</span>
+                            <span style="padding: 0 8px;">{{diccionarioDeCantidades[i]||1}}</span>
+                            <span href="#" class="boton-cantidad" role="button" (click)="increment(i)" style="padding: 0.2rem 0.3rem; font-size: 0.8rem; text-decoration: none;">+</span>
                         </div>
                     </td>
                     <td>

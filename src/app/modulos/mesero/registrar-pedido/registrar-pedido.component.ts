@@ -25,7 +25,7 @@ export class RegistrarPedidoComponent implements OnInit {
   //Array de descripciones 
   platillosDescripciones:{ id:number, descripcion: string }[] = [];
   //Array de cantidades
-  listaCantidades:{index:number,cant:number}[]=[];
+  diccionarioDeCantidades: { [id: number]: number } = {};
   numeroMesa: string = '';
   platillos: Platillo[] = [];
   categoria: Categoria[] = [];
@@ -117,6 +117,7 @@ export class RegistrarPedidoComponent implements OnInit {
   }
   agregarPlatillo(platillo: Platillo) {
     this.pedidoselectService.agregarSeleccion(platillo);
+
   }
   setPlatilloSeleccionado(index: number) {
     this.descripcionPedidoService.platilloNombreSeleccionado(index);
@@ -132,7 +133,7 @@ export class RegistrarPedidoComponent implements OnInit {
     
     this.platillosAGuardar.forEach((platillo, index) => {
         // Obtener la cantidad del platillo utilizando el índice
-        const cantidad = this.listaCantidades.find(item => item.index === index)?.cant || 1;
+        const cantidad = this.diccionarioDeCantidades[index] || 1;
         
         // Obtener la descripción correspondiente utilizando el índice
         const descripcion = this.platillosDescripciones[index]?.descripcion || '';
@@ -177,7 +178,7 @@ export class RegistrarPedidoComponent implements OnInit {
 
     this.pedidoselectService.limpiarSeleccion();
     this.descripcionPedidoService.limpiarDescripciones();
-    this.listaCantidades = [];
+    this.diccionarioDeCantidades = {};
     // Restablecer la variable tipo
     this.tipo = 'Local';
     // Restablecer la búsqueda de platillos
@@ -194,36 +195,17 @@ export class RegistrarPedidoComponent implements OnInit {
     this.getPlatillos()
 }
 
-  increment(index: number) {
-    const quantityInput = document.getElementById('quantityP' + index) as HTMLInputElement;
-    //input cast
-    let cantidad = parseInt(quantityInput.value);
-    if ( cantidad < 100) cantidad++;
-    quantityInput.value = cantidad.toString();
-    const existingIndex = this.listaCantidades.findIndex(item => item.index === index);
-    if (existingIndex !== -1) {
-        // Si el índice ya existe, actualizar la cantidad
-        this.listaCantidades[existingIndex].cant = cantidad;
-    } else {
-        // Si el índice no existe, agregar un nuevo objeto al array
-        this.listaCantidades.push({ index, cant: cantidad });
-    }
+increment(index: number) {
+  let cantidad =   this.diccionarioDeCantidades[index]||1;
+  if (cantidad < 100) cantidad++;
+  this.diccionarioDeCantidades[index] = cantidad;
+}
 
-  }
-  decrement(index: number) {
-    const quantityInput = document.getElementById('quantityP' + index) as HTMLInputElement;
-    let cantidad = parseInt(quantityInput.value);
-    if ( cantidad > 1) cantidad--;
-    quantityInput.value = cantidad.toString();
-    const existingIndex = this.listaCantidades.findIndex(item => item.index === index);
-    if (existingIndex !== -1) {
-        // Si el índice ya existe, actualizar la cantidad
-        this.listaCantidades[existingIndex].cant = cantidad;
-    } else {
-        // Si el índice no existe, agregar un nuevo objeto al array
-        this.listaCantidades.push({ index, cant: cantidad });
-    }
- }
+decrement(index: number) {
+  let cantidad = this.diccionarioDeCantidades[index]||1;
+  if (cantidad > 1) cantidad--;
+  this.diccionarioDeCantidades[index] = cantidad;
+}
 
 
 
