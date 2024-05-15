@@ -24,7 +24,7 @@
     <div class="col">
         <div class="col-md-12">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="busquedaNombre" (keyup)="onBuscar()">
+                <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="textoBuscador" (ngModelChange)="onSearchChange($event)">
             </div>
         </div>
     </div> 
@@ -127,5 +127,4 @@
   </div>
 </div>
 <app-modal-pedido></app-modal-pedido>
-
-
+<lib-ng-toast></lib-ng-toast>

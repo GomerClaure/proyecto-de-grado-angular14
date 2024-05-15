@@ -9,6 +9,7 @@ import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { ActivatedRoute } from '@angular/router';
 import { DescripcionPedidoService } from 'src/app/services/detalle-pedido/descripcion-pedido.service';
 import { SessionService } from 'src/app/services/auth/session.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-registrar-pedido',
@@ -33,12 +34,16 @@ export class RegistrarPedidoComponent implements OnInit {
   tipo:string='Local';
   descripcion: string = '';
   storageUrl = environment.backendStorageUrl;
+  textoBuscador:string = '';
+  platillosFiltrados:Platillo[]=[];
   constructor(private descripcionPedidoService: DescripcionPedidoService,
               private route: ActivatedRoute, 
               private platilloService: PlatillosService,
               public pedidoselectService: PedidoService, 
               private categoriaService: CategoriaService,
-              private sessionService:SessionService) { }
+              private sessionService:SessionService,
+              private toast:NgToastService
+            ) { }
               
  
   ngOnInit(): void {
@@ -57,6 +62,21 @@ export class RegistrarPedidoComponent implements OnInit {
       console.log(this.tipo)
     }
   }
+  onSearchChange(searchValue: string): void {  
+    this.textoBuscador = searchValue.trim().toLowerCase();
+    this.filtrarPlatillos();
+  }
+  filtrarPlatillos():void{
+    if (this.textoBuscador === '') {
+      // Si el campo de búsqueda está vacío, mostrar todos los platillos
+      this.platillosFiltrados = this.platillos;
+    } else {
+      // Filtrar los platillos por nombre y categoría
+      this.platillosFiltrados = this.platillos.filter(platillo =>
+        platillo.nombre.toLowerCase().includes(this.textoBuscador) || platillo.categoria.nombre.toLowerCase().includes(this.textoBuscador)
+      );
+    }
+  }
   getPlatillos() { 
     this.platilloService.getPlatillos().subscribe(
       (res: any) => {
@@ -68,43 +88,21 @@ export class RegistrarPedidoComponent implements OnInit {
             return platillo.disponible === true && platillo.nombre.toLowerCase().includes(this.busquedaNombre.toLowerCase());
           }
         });
-        // Si el término de búsqueda está vacío, mostrar todos los platillos
-        if (!this.busquedaNombre) {
-          filteredPlatillos = res.platillo.filter((platillo: any) => {
-            if (this.idCategoriaSeleccionada && this.idCategoriaSeleccionada !== 0) {
-              return platillo.id_categoria === this.idCategoriaSeleccionada && platillo.disponible === true;
-            } else {
-              return platillo.disponible === true;
-            }
-          });
-        }
-  
-        // Limitar a los 10 primeros platillos si se ha seleccionado una categoría y el término de búsqueda está vacío
-        if (!this.busquedaNombre && this.idCategoriaSeleccionada && this.idCategoriaSeleccionada !== 0) {
-          filteredPlatillos = filteredPlatillos.slice(0, 10);
-        }
-  
         this.platillos = filteredPlatillos;
+        this.platillosFiltrados=this.platillos;
         console.log(this.platillos);
       },
       err => {
         console.log(err); 
       }
+      
     );
   }
   onChangeCategoria(event: any) {
     this.idCategoriaSeleccionada = parseInt(event.target.value); // Convierte el valor a un número entero
     this.getPlatillos(); // Llama a getPlatillos() para actualizar la lista de platillos según la categoría seleccionada
   }
-  onBuscar() {
-    // Elimina los espacios en blanco extra al principio y al final del término de búsqueda
-    const searchTerm = this.busquedaNombre.trim().toLowerCase();
-    
-    // Filtra los platillos según el término de búsqueda
-    this.platillos = this.platillos.filter((platillo: Platillo) => {
-      return platillo.nombre.toLowerCase().includes(searchTerm);
-    });
-  }
+
   getCategorias() {
     this.categoriaService.getCategorias().subscribe(
       (data: any) => {
@@ -167,12 +165,12 @@ export class RegistrarPedidoComponent implements OnInit {
 
     this.pedidoselectService.storePedido(formData).subscribe(
       (response: any) => {
-        console.log('Pedido almacenado exitosamente', response);
-        // Realiza cualquier acción adicional después de almacenar el pedido, como limpiar el carrito, mostrar un mensaje de éxito, etc.
+        console.error('se registro el pedido', response);
+        this.toast.success({detail:"SUCCESS",summary:'Se agrego registro el pedido con exito',duration:2000});
       },
       (error: any) => {
         console.error('Error al almacenar el pedido', error);
-        // Maneja el error adecuadamente, muestra un mensaje de error al usuario, etc.
+        this.toast.error({detail:"ERROR",summary:'Error al editar categoria',sticky:true})
       }
     );
 

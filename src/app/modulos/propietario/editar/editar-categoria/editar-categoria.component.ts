@@ -88,8 +88,7 @@ export class EditarCategoriaComponent implements OnInit {
         this.router.navigate(['/lista/categoria']);
       },
       (error) => {
-        // Manejo de errores
-        console.error('Error al actualizar categoría', error);
+        this.toast.error({detail:"ERROR",summary:'Error al editar categoria',sticky:true})
       }
     );
   }
