@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { VisualizarQrComponent } from './visualizar-qr/visualizar-qr.component';
 import { PlantillaQrComponent } from './plantilla-qr/plantilla-qr.component';
 import { VistaMenuComponent } from './vista-menu/vista-menu.component';
+import { NgToastModule } from 'ng-angular-popup';
+
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { VistaMenuComponent } from './vista-menu/vista-menu.component';
     CommonModule,
     MenuRoutingModule,
     ComponentsModule,
-    FormsModule
+    FormsModule,
+    NgToastModule
   ]
 })
 export class MenuModule { }

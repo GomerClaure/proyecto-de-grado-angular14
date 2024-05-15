@@ -1,16 +1,20 @@
-.card-body{
-    background-image: url('../../../../../assets/image/f1c.jpg');
-    background-position: center;
-    background-size: cover;
-    padding: 50px;
-    background-color: rgb(255, 255, 255);
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade una sombra */
+    border: none; /* Elimina el borde */
 }
-.fonf{
-    background-image: url('../../../../../assets/image/patron.png');
+
+.card-body {
     background-position: center;
     background-size: cover;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    overflow-y: auto;
+    padding: 30px;
+    padding-bottom: 5px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: inset;
+    border-radius: 5px;
+}
+.seccionboton{
+    margin-top: 15px;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
 }

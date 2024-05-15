@@ -22,6 +22,7 @@ export class EditarPlatilloComponent implements OnInit {
   selectedFile: File = new File([''], '');
   formularioEditarPlatillo: FormGroup;
   categorias: any[] = [];
+  //selectedCategoria: number=0;
 
   constructor(private router: Router, 
               private activatedRoute: ActivatedRoute,
@@ -61,7 +62,7 @@ export class EditarPlatilloComponent implements OnInit {
     this.categoriaService.getCategorias().subscribe(
       (data: any) => {
         // Añade la opción "Todos" al principio de la lista de categorías
-        this.categorias = [{ id: 0, nombre: 'Todos' }, ...data.categorias];
+        this.categorias = [...data.categorias];
       },
       error => {
         console.error('Error obteniendo categorías:', error);
@@ -87,8 +88,9 @@ export class EditarPlatilloComponent implements OnInit {
       nombre: this.platillo.nombre,
       precio: this.platillo.precio,
       descripcion: this.platillo.descripcion,
-      categoria: this.platillo.categoria.nombre
+      categoria: this.platillo.categoria.id
     });
+    //this.selectedCategoria = this.platillo.categoria.id; // Almacena el ID de la categoría seleccionada
     this.imageUrl = environment.backendStorageUrl + this.platillo.imagen;
   }
   registrarPlatillo() {
@@ -110,7 +112,7 @@ export class EditarPlatilloComponent implements OnInit {
         success => {
           console.log(success);
           this.toast.success({detail:"SUCCESS",summary:'Se edito el platillo correctamente',duration:5000})
-          this.irPagina();
+          //this.irPagina();
         },
         error => {
           console.log(error);

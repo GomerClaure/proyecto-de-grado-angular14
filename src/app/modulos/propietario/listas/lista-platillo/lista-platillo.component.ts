@@ -53,7 +53,6 @@ export class ListaPlatilloComponent {
   }
 
   onSearchChange(searchValue: string): void {  
-    console.log(searchValue);
     this.textoBuscador = searchValue.trim().toLowerCase();
     this.filtrarPlatillos();
   }
