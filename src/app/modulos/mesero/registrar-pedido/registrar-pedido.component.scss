@@ -77,20 +77,33 @@
     white-space: nowrap;
     width: 1%;
 }
-.number-input .quantity-button {
-    width: 30px;
-    height: 40px;
-    border: none;
-    border-radius: 50%;
-    color: white;
-    font-size: 20px;
+.boton-cantidad
+{
+    color: #242323;
+    width: 18.36px;
+}
+.boton-cantidad:hover
+{
+    background-color: #7074778a;
+    width: 20px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
-.number-input .quantity-button:hover {
-    background-color: #0056b3;
-    width: 20px;
-}
+
+// .number-input .quantity-button {
+//     width: 30px;
+//     height: 40px;
+//     border: none;
+//     border-radius: 50%;
+//     color: white;
+//     font-size: 20px;
+//     cursor: pointer;
+//     transition: background-color 0.3s;
+// }
+// .number-input .quantity-button:hover {
+//     background-color: #0056b3;
+//     width: 20px;
+// }
 .foot{
 text-align: center;
 background-image: url('../../../../assets/image/f1c.jpg');

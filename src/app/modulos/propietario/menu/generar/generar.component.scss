@@ -74,3 +74,27 @@
   }
 
 }
+.botones{
+  display:flex;
+  flex-direction: column;
+}
+.img-fluid{
+  width: 400px;
+  height: 200px;
+}
+.spacer {
+  flex-grow: 1;
+}
+.dark-mode-card {
+  background-color: #26292d; /* Cambia este color por el que prefieras para el modo oscuro */
+  color: #fff; /* Cambia este color por el que prefieras para el texto en modo oscuro */
+}
+.book-card {
+  background-image: url('../../../../../assets/image/arrugad.png'); /* Ruta de tu imagen de textura */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+  border: none;
+  transition: background-color 0.3s ease; 
+}

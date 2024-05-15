@@ -21,6 +21,9 @@ export class PlatillosService {
     return this.http.get<any>(`${this.BASE_URL}/menu/platillo`, { headers: this.headers });
   }
 
+  getPlatillosMenu() {
+    return this.http.get<any>(`${this.BASE_URL}/menu/pedido/platillos`, { headers: this.headers });
+  }
   storePlatillo(formData: FormData) {
     return this.http.post<any>(`${this.BASE_URL}/menu/platillo`, formData, { headers: this.headers });
   }
