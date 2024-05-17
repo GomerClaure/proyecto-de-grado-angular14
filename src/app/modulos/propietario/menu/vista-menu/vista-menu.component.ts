@@ -13,6 +13,7 @@ import { PlatillosPorCategoria } from 'src/app/modelos/PlatillosPorCategoria';
   styleUrls: ['./vista-menu.component.scss']
 })
 export class VistaMenuComponent implements OnInit {
+
   public baseUrl = environment.backendStorageUrl;
   private idMenu: number;
   public menu!: Menu;
@@ -48,7 +49,7 @@ export class VistaMenuComponent implements OnInit {
         this.menu = response.menu;
         const platillos: Platillo[] = response.platillos;
         this.platilloPorCategoria = this.transformarDatos(platillos);
-        this.platilloPorCategoriaPagina = this.agruparPlatillosPorPagina(this.platilloPorCategoria, 11);
+        this.platilloPorCategoriaPagina = this.agruparPlatillosPorPagina(this.platilloPorCategoria, 4);
         this.platilloPorCategoriaPagina = this.agruparCategoriasDeCadaPagina(this.platilloPorCategoriaPagina);
         this.generarImagenesPorPagina();
         let container = document.getElementById("container-ver-menu");

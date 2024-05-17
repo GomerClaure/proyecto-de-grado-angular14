@@ -1,59 +1,80 @@
 /* Estilos comunes */
 .fondo {
-    background-color: lightgray;
-    padding: 20px;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    min-height: 400px; /* Altura mínima del card */
-    height: 80vh;
-  }
-  
-  .card-header {
-    padding: 20px;
-    text-align: center;
-    border-bottom: 1px solid #ccc; /* Línea divisoria */
-    background-color: white;
-  }
-  
-  .card-body {
-    flex-grow: 1; /* El cuerpo de la tarjeta se expande para llenar el espacio */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0px;
-  }
-  
-  .imagen {
-    width: 100%;
-    max-height: 300px; /* Altura máxima de la imagen */
-    background-size: cover;
-    background-position: center;
-  }
-  
-  .carousel-control-prev-icon{
-    color: black;
-  }
-  .portada {
-    background-size: cover;
-    background-position: center;
-    width: 100%; /* Ocupa todo el ancho del card-body */
-    height: 100%; /* Ocupa todo el alto del card-body */
-    font-family: 'Montserrat', sans-serif;
-    color: beige;
-    padding: 1.2in;
-    box-sizing: border-box;
-    page-break-after: always;
-    border: 1px solid rgb(24, 7, 1);
+  background-color: lightgray;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
+}
+.containercard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+}
+
+.card-header {
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  background-color: white;
+}
+
+.card-body {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+.plati{
+  text-align: left;
+  padding-left: 10px;
+  flex-direction: column;
+}
+.img-platillo{
+  width: 50px;
+  height: 50px;
+}
+.imagen {
+  width: 100%;
+  max-height: 300px;
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel-control-prev-icon {
+  color: black;
+}
+
+.portada {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+  color: beige;
+  padding: 1.2in;
+  box-sizing: border-box;
+  border: 1px solid rgb(24, 7, 1);
+}
+
+

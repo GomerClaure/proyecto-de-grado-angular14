@@ -1,39 +1,34 @@
 <app-nav></app-nav><br><br>
 <div class="fondo">
+  <br>
   <div class="container">
-    <br><br>
     <div id="carouselExampleIndicators" class="carousel slide">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <div  class="card">
-            <div class="card-header">
-              <h1 class="text-center">El Asador</h1>
-         </div>
          <div class="card-body">
            <div class="portada my-3" [style.background-image]="'url(' + baseUrl + menu.portada + ')'"></div>
          </div>
           </div>
         </div>
-        <div class="carousel-item">
-          <div class="card">
-            <div class="card-header">
-                 <h1 class="text-center">Carnes</h1>
-            </div>
-            <div class="card-body">
-              
+            <div class="carousel-item">
+                <div class="card">
+                  <div *ngFor="let categoriasPag of platilloPorCategoriaPagina;let i =index">
+                    <div *ngFor="let categoriaElement of categoriasPag">
+                  <div class="card-header p-0">
+                       <h1 class="text-center">{{categoriaElement.nombre}}</h1>
+                  </div>
+                  <div *ngFor="let platillo of categoriaElement.platillos">
+                    <div class="card-body">
+                      <div class="platillos">
+                       <p>{{ platillo.nombre }} {{ platillo.descripcion }} {{ platillo.precio + ' Bs' }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="carousel-item">
-          <div class="card">
-            <div class="card-header">
-              <h1 class="text-center">Postres</h1>
-         </div>
-         <div class="card-body">
-           
-       </div>
-          </div>
-        </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
