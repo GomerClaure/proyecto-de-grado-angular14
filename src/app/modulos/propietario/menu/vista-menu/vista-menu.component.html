@@ -21,7 +21,19 @@
                   <div *ngFor="let platillo of categoriaElement.platillos">
                     <div class="card-body">
                       <div class="platillos">
-                       <p>{{ platillo.nombre }} {{ platillo.descripcion }} {{ platillo.precio + ' Bs' }}</p>
+                        <div class="row">
+                        <div class="col-7">
+                          <img class="img-platillo" [src]="baseUrl+categoriaElement.imagen">
+                        </div>
+                        <div class="col-5 p-0">
+                          <table>
+                            <tr>
+                              <td>{{ platillo.nombre }}</td>
+                              <td>{{ platillo.precio + ' Bs' }}</td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
                       </div>
                     </div>
                   </div>
