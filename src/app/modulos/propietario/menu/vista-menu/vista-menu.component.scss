@@ -1,4 +1,6 @@
 /* Estilos comunes */
+@import url('https://fonts.googleapis.com/css2?family=Sedan:ital@0;1&display=swap');
+
 .fondo {
   background-color: lightgray;
   padding: 20px;
@@ -37,6 +39,40 @@
   border-bottom: 1px solid #ccc;
   background-color: white;
 }
+.categoria-titulo {
+  display: flex;
+  justify-content: center;
+  border-bottom: 5px solid #f77103;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+
+.menu-cuerpo{
+  font-family: 'Sedan';
+}
+
+.menu-cuerpo-platillo{
+  font-family: 'Sedan';
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 0px;
+  text-transform: capitalize;
+}
+
+.menu-cuerpo-descripcion{
+  font-family: 'Sedan';
+  font-size: 14px;
+  font-style: normal;
+  margin-bottom: 5px;
+  color: dimgray;
+}
+.menu-cuerpo-precio{
+  font-size: 12px;
+  font-style: normal;
+  color: dimgray;
+  width: 40px;
+  margin-left: 5px;
+}
 
 .card-body {
   padding: 0;
@@ -72,5 +108,35 @@
   box-sizing: border-box;
   border: 1px solid rgb(24, 7, 1);
 }
+// pantallas mayores a 768px aplicar media query
+@media (min-width: 504px) {
+  .container {
+    // en tamaño relativo
+    margin-inline: 10%;
+  }
+}
+
+@media (min-width: 604px) {
+  .container {
+    // en tamaño relativo
+    margin-inline: 20%;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    // en tamaño relativo
+    margin-inline: 30%;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    // en tamaño relativo
+    margin-inline: 35%;
+  }
+}
+
+
 
 

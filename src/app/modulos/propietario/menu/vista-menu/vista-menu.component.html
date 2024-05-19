@@ -5,42 +5,50 @@
     <div id="carouselExampleIndicators" class="carousel slide">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <div  class="card">
-         <div class="card-body">
-           <div class="portada my-3" [style.background-image]="'url(' + baseUrl + menu.portada + ')'"></div>
-         </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="portada my-3" [style.background-image]="'url(' + baseUrl + menu.portada + ')'"></div>
+            </div>
           </div>
         </div>
+
+
+        <div *ngFor="let categoriasPag of platilloPorCategoriaPagina;let i =index">
+          
             <div class="carousel-item">
-                <div class="card">
-                  <div *ngFor="let categoriasPag of platilloPorCategoriaPagina;let i =index">
-                    <div *ngFor="let categoriaElement of categoriasPag">
+              <div class="card">
+                <div *ngFor="let categoriaElement of categoriasPag">
                   <div class="card-header p-0">
-                       <h1 class="text-center">{{categoriaElement.nombre}}</h1>
+                    <h1 class="categoria-titulo text-center">{{categoriaElement.nombre}}</h1>
                   </div>
-                  <div *ngFor="let platillo of categoriaElement.platillos">
-                    <div class="card-body">
-                      <div class="platillos">
-                        <div class="row">
-                        <div class="col-7">
-                          <img class="img-platillo" [src]="baseUrl+categoriaElement.imagen">
+                  <div class="row">
+                    <div class="col-7">
+                      <img class="img-platillo" [src]="baseUrl+categoriaElement.imagen">
+                    </div>
+                    <div class="col-5 p-0">
+                      <div *ngFor="let platillo of categoriaElement.platillos">
+                        <div class="card-body">
+                          <div class="platillos">
+                            <table class="menu-cuerpo">
+                              <tr>
+                                <td class="menu-cuerpo-platillo">{{ platillo.nombre }}</td>
+                                <td class="menu-cuerpo-precio">{{ platillo.precio + ' Bs' }}</td>
+                              </tr>
+                            </table>
+                          </div>
                         </div>
-                        <div class="col-5 p-0">
-                          <table>
-                            <tr>
-                              <td>{{ platillo.nombre }}</td>
-                              <td>{{ platillo.precio + ' Bs' }}</td>
-                            </tr>
-                          </table>
-                        </div>
-                      </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              
             </div>
-          </div>
+
+
+        </div>
+
+
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

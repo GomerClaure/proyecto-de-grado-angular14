@@ -55,7 +55,7 @@ export class RegistrarPedidoComponent implements OnInit {
   }
   switchStateChanged() {
     if (this.switchState) {
-      this.tipo='Para llevar'
+      this.tipo='Llevar'
       console.log(this.tipo);
     } else {
       this.tipo='Local'
