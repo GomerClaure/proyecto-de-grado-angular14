@@ -7,8 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { MeseroModule } from './modulos/mesero/mesero.module';
+import { CocineroModule } from './modulos/cocinero/cocinero.module';
 import { HomeModule } from './modulos/home/home.module';
-import { EditarCategoriaComponent } from './modulos/propietario/editar/editar-categoria/editar-categoria.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,8 @@ import { EditarCategoriaComponent } from './modulos/propietario/editar/editar-ca
     FormsModule,
     AuthModule,
     MeseroModule,
-    HomeModule
+    HomeModule,
+    CocineroModule
   ], 
   providers: [],
   bootstrap: [AppComponent]
