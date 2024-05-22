@@ -8,6 +8,7 @@ import { VisualizarQrComponent } from './visualizar-qr/visualizar-qr.component';
 import { PlantillaQrComponent } from './plantilla-qr/plantilla-qr.component';
 import { VistaMenuComponent } from './vista-menu/vista-menu.component';
 import { NgToastModule } from 'ng-angular-popup';
+import { ModalPlatilloComponent } from './modal-platillo/modal-platillo.component';
 
 
 
@@ -16,7 +17,8 @@ import { NgToastModule } from 'ng-angular-popup';
     GenerarComponent,
     VisualizarQrComponent,
     PlantillaQrComponent,
-    VistaMenuComponent
+    VistaMenuComponent,
+    ModalPlatilloComponent
   ],
   imports: [
     CommonModule,

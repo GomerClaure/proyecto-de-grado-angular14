@@ -6,6 +6,7 @@ import { Menu } from 'src/app/modelos/Menu';
 import { Platillo } from 'src/app/modelos/Platillo';
 import { Categoria } from 'src/app/modelos/Categoria';
 import { PlatillosPorCategoria } from 'src/app/modelos/PlatillosPorCategoria';
+import { ModalMostrarPlatilloService } from 'src/app/services/modales/modal-mostrar-platillo.service';
 
 @Component({
   selector: 'app-vista-menu',
@@ -24,7 +25,7 @@ export class VistaMenuComponent implements OnInit {
   randomIndex: { [key: string]: number } = {};
 
   constructor(private menuService: MenuService, private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef) {
+    private cdr: ChangeDetectorRef,private modalService:ModalMostrarPlatilloService) {
     this.idMenu = parseInt(this.route.snapshot.paramMap.get('menu') || '0');
     this.nombreRestaurante = 'Restaurante';
     this.platilloPorCategoria = [];
@@ -159,4 +160,11 @@ export class VistaMenuComponent implements OnInit {
       }
     }
   }
+  onRowClick(platillo: any) {
+    let nom = platillo.nombre;
+    let img = platillo.imagen;
+    let desc = platillo.descripcion;
+    this.modalService.openModal(platillo);
+    console.log(nom,img,desc)
+}
 }
