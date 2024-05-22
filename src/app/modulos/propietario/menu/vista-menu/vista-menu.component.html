@@ -26,7 +26,7 @@
                       <img class="img-platillo" [src]="baseUrl+categoriaElement.imagen">
                     </div>
                     <div class="col-5 p-0">
-                      <div *ngFor="let platillo of categoriaElement.platillos">
+                      <div *ngFor="let platillo of categoriaElement.platillos" data-bs-toggle="modal" data-bs-target="#MostrarPlatillo" (click)="onRowClick(platillo)">
                         <div class="card-body">
                           <div class="platillos">
                             <table class="menu-cuerpo">
@@ -61,3 +61,4 @@
     </div>
   </div>
 </div>
+<app-modal-platillo></app-modal-platillo>
