@@ -14,36 +14,39 @@
 
 
         <div *ngFor="let categoriasPag of platilloPorCategoriaPagina;let i =index">
-          
-            <div class="carousel-item">
-              <div class="card">
+
+          <div class="carousel-item">
+            <div class="card">
+              <div class="row h-100">
                 <div *ngFor="let categoriaElement of categoriasPag">
-                  <div class="card-header p-0">
-                    <h1 class="categoria-titulo text-center">{{categoriaElement.nombre}}</h1>
-                  </div>
-                  <div class="row">
-                    <div class="col-7">
-                      <img class="img-platillo" [src]="baseUrl+categoriaElement.imagen">
-                    </div>
-                    <div class="col-5 p-0">
+                  <!-- <div class="col-5 h-100"></div> -->
+                  <div class="row h-100">
+                    <div class="col-7 h-100">
+                      <div class=" p-0">
+                        <h1 class="categoria-titulo text-center">{{categoriaElement.nombre}}</h1>
+                      </div>
                       <div *ngFor="let platillo of categoriaElement.platillos">
-                        <div class="card-body">
-                          <div class="platillos">
-                            <table class="menu-cuerpo">
-                              <tr>
-                                <td class="menu-cuerpo-platillo">{{ platillo.nombre }}</td>
-                                <td class="menu-cuerpo-precio">{{ platillo.precio + ' Bs' }}</td>
-                              </tr>
-                            </table>
-                          </div>
+                        <div class="platillos">
+                          <table class="menu-cuerpo">
+                            <tr>
+                              <td class="menu-cuerpo-platillo">{{ platillo.nombre }}</td>
+                              <td class="menu-cuerpo-precio">{{ platillo.precio + ' Bs' }}</td>
+                            </tr>
+                          </table>
                         </div>
                       </div>
                     </div>
+                    <div class="col-5" [style.background-image]="'url(' + baseUrl + categoriaElement.imagen + ')'">
+                      <a href="">holi</a>
+                    </div>
                   </div>
+                 
                 </div>
               </div>
-              
             </div>
+
+
+          </div>
 
 
         </div>
