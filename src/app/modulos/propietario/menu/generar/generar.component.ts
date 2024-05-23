@@ -5,6 +5,7 @@ import { MenuService } from 'src/app/services/menu/menu.service';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
 import { Menu } from 'src/app/modelos/Menu';
 import { environment } from 'src/environments/environment';
+import { NgToastComponent, NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-generar',
@@ -22,7 +23,7 @@ export class GenerarComponent implements OnInit {
   public tema: string;
   public baseUrl = environment.backendStorageUrl;
 
-  constructor(private menuService: MenuService, private categoriaService: CategoriaService) {
+  constructor(private menuService: MenuService, private categoriaService: CategoriaService,private toast:NgToastService) {
     this.platillos = [];
     this.categorias = [];
     this.platillosFiltrados = [];
@@ -140,10 +141,11 @@ export class GenerarComponent implements OnInit {
       this.menuService.saveMenu(formData).subscribe(
         res => {
           console.log(res);
-          alert('Menú guardado');
+          this.toast.success({detail:"SUCCESS",summary:'Menu guardado',duration:2000});
         },
         err => {
           console.log(err);
+          this.toast.error({detail:"ERROR",summary:'Error al generar menu',sticky:true})
         }
       );
       

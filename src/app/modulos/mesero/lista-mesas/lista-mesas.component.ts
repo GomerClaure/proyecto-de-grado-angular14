@@ -44,5 +44,8 @@ export class ListaMesasComponent implements OnInit {
     if (mesaSeleccionada) {
       mesaSeleccionada.classList.add('selected-card');
     }
+    const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+    sleep(1000)
+    this.router.navigate(['mesero/registrar-pedido'],{queryParams:{mesaSeleccionada:id}});
   }
 }

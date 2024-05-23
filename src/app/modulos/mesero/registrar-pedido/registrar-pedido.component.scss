@@ -3,12 +3,10 @@
     transition: transform 0.2s;
 }
 .card{
-    border-color :rgb(62, 57, 33);
     margin-bottom: 10px;
-    border-radius: 0px;
+    border-radius: 5px;
 }
 .card-body {
-    //border-radius: 0% !important;
     text-align: center;
     max-height: 60px;
     overflow: hidden;
@@ -17,19 +15,14 @@
     max-width: 100%; 
     height:80px;
     margin: 0px;
-    //padding: 5px;
-    border-radius: 0px;
+    border-radius: 5px;
 }
 .img-top {
-    background: rgb(62, 57, 33);
-    border: none;
     text-align: center;
     overflow: hidden; /* Para ocultar cualquier parte de la imagen que se salga del div */
     padding-top: 56.25%; /* Proporción 16:9 */
-    position: relative;
-    
+    position: relative; 
 }
-
 .img-top img {
     position: absolute;
     top: 0;
@@ -38,91 +31,91 @@
     height: 100%;
     object-fit: cover; /* Para que la imagen se ajuste manteniendo su proporción */
 }
-
-
-
-
-
-
-
+.offcanvas-body{
+    text-align: center;
+    //background-image: ;
+    background-image: url('../../../../assets/image/f1c.jpg');
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+}
+.offcanvas-header{
+   background-color: #e8d39d;
+   text-align: center;
+}
 /* Cambia el color del switch en su estado normal */
 .form-check-input {
-    background-color: #ffeeee; /* Color de fondo del switch */
-    border: #484505;
+    background-color: #b2c597; /* Color de fondo del switch */
+    border: #000000;
 }
-
 /* Cambia el color del switch cuando está activado */
 .form-check-input:checked {
     background-color: #484505; /* Color de fondo del switch cuando está activado */
     border: #484505;
 }
-
 /* Cambia el color del switch cuando está enfocado */
 .form-check-input:focus {
     box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.25); /* Ajusta el color del resplandor cuando está enfocado */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.container{
-    background-color: rgb(255, 255, 255);
+.container  {
+    background-image: url('../../../../assets/image/f1c.jpg');
     width: 100%;
     height: 100vh;
+    background-position: center;
+    background-size: cover;
 }
-.form-check{
-    margin-left: 150px;
-}
-.acciones{
-    margin: 2px;
-}
-
-.btn-agregar:hover {
-    background-color: #f8b203; /* Cambia el color de fondo al pasar el ratón por encima */
-}
-
-.btn-agregar:focus {
-    outline: none; /* Quita el contorno al enfocar el botón */
-}
-
 .table {
     width: 100%;
     border-collapse: collapse;
 }
-
 .table th,
 .table td {
     padding: 8px;
     border-bottom: 1px solid #ddd;
-    text-align: left;
+    text-align: center;
+    white-space: nowrap;
+    width: 1%;
 }
-
-.number-input .quantity-button {
-    width: 40px;
-    height: 40px;
-    border: none;
-    border-radius: 50%;
-    background-color: #007bff;
-    color: white;
-    font-size: 20px;
+.boton-cantidad
+{
+    color: #242323;
+    width: 18.36px;
+}
+.boton-cantidad:hover
+{
+    background-color: #7074778a;
+    width: 20px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.number-input .quantity-button:hover {
-    background-color: #0056b3;
+// .number-input .quantity-button {
+//     width: 30px;
+//     height: 40px;
+//     border: none;
+//     border-radius: 50%;
+//     color: white;
+//     font-size: 20px;
+//     cursor: pointer;
+//     transition: background-color 0.3s;
+// }
+// .number-input .quantity-button:hover {
+//     background-color: #0056b3;
+//     width: 20px;
+// }
+.foot{
+text-align: center;
+background-image: url('../../../../assets/image/f1c.jpg');
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+}
+.bt{
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 5px;
+    text-align: center;
+    margin-left: 2px;
+    margin-right: 2px;
 }

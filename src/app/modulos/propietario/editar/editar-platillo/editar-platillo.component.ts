@@ -5,6 +5,8 @@ import { Platillo } from 'src/app/modelos/Platillo';
 import { PlatillosService } from 'src/app/services/platillos/platillos.service';
 import { RegistrarPlatilloComponent } from '../../registro/registrar-platillo/registrar-platillo.component';
 import { environment } from 'src/environments/environment';
+import { NgToastService } from 'ng-angular-popup';
+import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
 
 @Component({
   selector: 'app-editar-platillo',
@@ -19,9 +21,16 @@ export class EditarPlatilloComponent implements OnInit {
   imageHeight: number = 300;
   selectedFile: File = new File([''], '');
   formularioEditarPlatillo: FormGroup;
+  categorias: any[] = [];
+  //selectedCategoria: number=0;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute,
-    private platilloservice: PlatillosService, private formBuilder: FormBuilder) {
+  constructor(private router: Router, 
+              private activatedRoute: ActivatedRoute,
+              private platilloservice: PlatillosService, 
+              private formBuilder: FormBuilder,
+              private toast:NgToastService,
+              private categoriaService:CategoriaService
+            ) {
     this.imageUrl = 'assets/image/27002.jpg';
     this.formularioEditarPlatillo = this.formBuilder.group({
       nombre: [null, Validators.required],
@@ -33,6 +42,7 @@ export class EditarPlatilloComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getCategorias();
     this.activatedRoute.queryParams.subscribe(params => {
       this.idPlatillo = params['platilloId'];
       this.platilloservice.showPlatillo(parseInt(this.idPlatillo)).subscribe(
@@ -46,6 +56,18 @@ export class EditarPlatilloComponent implements OnInit {
         }
       );
     });
+  }
+
+  getCategorias() {
+    this.categoriaService.getCategorias().subscribe(
+      (data: any) => {
+        // Añade la opción "Todos" al principio de la lista de categorías
+        this.categorias = [...data.categorias];
+      },
+      error => {
+        console.error('Error obteniendo categorías:', error);
+      }
+    );
   }
 
   onFileSelected(event: any) {
@@ -64,10 +86,11 @@ export class EditarPlatilloComponent implements OnInit {
     // Llenar el formulario con los datos del platillo
     this.formularioEditarPlatillo.patchValue({
       nombre: this.platillo.nombre,
-      // categoria: this.platillo.categoria.nombre,
       precio: this.platillo.precio,
-      descripcion: this.platillo.descripcion
+      descripcion: this.platillo.descripcion,
+      categoria: this.platillo.categoria.id
     });
+    //this.selectedCategoria = this.platillo.categoria.id; // Almacena el ID de la categoría seleccionada
     this.imageUrl = environment.backendStorageUrl + this.platillo.imagen;
   }
   registrarPlatillo() {
@@ -88,16 +111,22 @@ export class EditarPlatilloComponent implements OnInit {
       this.platilloservice.updatePlatillo(formData, parseInt(this.idPlatillo)).subscribe(
         success => {
           console.log(success);
+          this.toast.success({detail:"SUCCESS",summary:'Se edito el platillo correctamente',duration:5000})
+          //this.irPagina();
         },
         error => {
           console.log(error);
+          this.toast.error({detail:"ERROR",summary:'Error al editar',sticky:true})
         }
       );
 
     }
     else {
-      //Formulario Invalido
+      this.toast.error({detail:"ERROR",summary:'Error al editar',sticky:true})
     }
+  }
+  irPagina(){
+    this.router.navigate(['/lista/platillo']);
   }
 }
  

@@ -6,6 +6,7 @@ import { FormRegisterComponent } from './form-register/form-register.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AuthRouthingModule } from './auth-routhing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgToastComponent, NgToastModule } from 'ng-angular-popup';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     AuthRouthingModule,
     ComponentsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgToastModule
   ]
 })
 export class AuthModule { }

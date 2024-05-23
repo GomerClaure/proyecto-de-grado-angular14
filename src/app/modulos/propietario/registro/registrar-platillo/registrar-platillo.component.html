@@ -1,8 +1,13 @@
-<app-nav></app-nav><br><br>
-<div class="fondo">
+<app-nav></app-nav>
+<div class="pru fondo">
+    <br><br>
 <div class="container">
     <br>
-    <h2 class="titulo">Registrar Platillo</h2>
+    <br>
+    <div class=" row justify-content-center cont">
+        <h2 class="titulo"><strong>Registrar platillo</strong></h2>
+        <img class="li" src="../../../../../assets/image/linea.png">
+    </div>
     <div class="form">
         <form [formGroup]="formularioPlatillo">
             <div class="row">
@@ -40,17 +45,15 @@
                 <div class="apartadoImg">
                     <img [src]="imageUrl" id="image-platillo" class="img-fluid" alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
                     <input type="file" id="img-registrar-platillo" class="hidden" (change)="onFileSelected($event)">
-                    <label for="img-registrar-platillo" class="btn-img">Seleccionar</label>
+                    <label for="img-registrar-platillo" class="btn-img">Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i></label>
                 </div>
             </div>
     </div>
         </form>
     </div>
-    <div class="row">
-        <div class="botones-group">
-         <button class="btn">Atras</button>
-         <button class="btn" (click)="onSubmit()">Registrar</button>
-        </div>
+    <div class="row justify-content-center">
+         <button class="btn-registrar" (click)="onSubmit()">Registrar</button>
      </div>
 </div>
 </div>
+<lib-ng-toast></lib-ng-toast>

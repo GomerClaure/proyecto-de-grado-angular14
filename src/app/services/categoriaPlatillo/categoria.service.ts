@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';	
 import { environment } from 'src/environments/environment';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriaService {
+
+  
   private BASE_URL = environment.backendUrl; 
   private headers = {
     'Authorization': 'Bearer ' + sessionStorage.getItem('token_access'),
@@ -13,6 +16,16 @@ export class CategoriaService {
 
   constructor(private http: HttpClient) { }
 
+
+  private modalClosedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  setModalClosed(value: boolean) {
+    this.modalClosedSubject.next(value);
+  }
+
+  getModalClosed(): Observable<boolean> {
+    return this.modalClosedSubject.asObservable();
+  }
   // Obtiene todas las categorias de platillos
   getCategorias(){
     return this.http.get(`${this.BASE_URL}/menu/categoria`, { headers: this.headers });

@@ -1,7 +1,7 @@
 <!-- Barra de navegacion para el propietario -->
-<nav *ngIf="esPropietario()" class="navbar navbar-expand-lg custom-navbar-color navbar-dark">
+<nav *ngIf="esPropietario()" class="navbar navbar-expand-lg custom-navbar-color ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="home">Restaurant X</a>
+    <a class="navbar-brand" href="home">Restaurant</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button> 
@@ -44,7 +44,7 @@
 </nav>
 
 <!-- Barra de navegacion para el administrador -->
-<nav *ngIf="esAdministrador()" class="navbar navbar-expand-lg custom-navbar-color navbar-dark">
+<nav *ngIf="esAdministrador()" class="navbar navbar-expand-lg custom-navbar-color ">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Administrador</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -65,9 +65,9 @@
 </nav>
 
 <!-- Barra de navegacion del empleado -->
-<nav *ngIf="esEmpleado()" class="navbar navbar-expand-lg custom-navbar-color navbar-dark">
+<nav *ngIf="esEmpleado()" class="navbar navbar-expand-lg custom-navbar-color ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Empleado Mesero</a>
+    <a class="navbar-brand" href="home">Empleado Mesero</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -90,9 +90,12 @@
 
 <!-- Barra de navegacion generica -->
 <nav *ngIf="!esPropietario() && !esEmpleado() && !esAdministrador()"
-  class="navbar navbar-expand-lg custom-navbar-color navbar-dark">
+  class="navbar navbar-expand-lg custom-navbar-color">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Lugo</a>
+    <a class="navbar-brand" href="#">
+      <strong>Lugo</strong>
+      <img src="../../../assets/image/icons8-crema-de-avena-50.png" alt="Icono" style="width: 30px; height: auto; margin-left: 5px;">
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

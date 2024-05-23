@@ -26,6 +26,7 @@ export class DescripcionPedidoService {
     console.log(this.index);
     // Restablecer el índice después de agregar la descripción
     this.index = 0;
+    return false
 }
   getDescripciones(){
     return this.descripciones; 

@@ -1,25 +1,27 @@
 
-.custom-navbar-color {
-    background-color: hsla(10, 78%, 47%, 0.992);
-    color: white; 
-    position: fixed;
-    width: 100%; /* Asegura que ocupe toda la anchura */
-    top: 0; /* La barra de navegación se fija en la parte superior */
-    z-index: 1000; 
-}
 .card {
     margin-top: 150px;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.9); /* Color de fondo semi-transparente */
+    background-color: rgba(253, 253, 253, 0.9); /* Color de fondo semi-transparente */
     box-shadow: 0px 0px 100px 0px rgba(0, 0, 0, 0.2); /* Ajuste del box-shadow */
-    padding: 20px;
+    border: none;
+    //position: relative;
+}
+.card-body{
+    padding: 50px;
 }
 .card-header{
     text-align: center;
+    background-color: white;
   }
 .contenedor-icono svg{
     text-align: center;
     margin-top: 20px;
     width: 60px;
     height: 60px;
+    margin-bottom: 20px;
+}
+.f{
+    display:flex;
+    justify-content: center;
 }

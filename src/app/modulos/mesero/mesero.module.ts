@@ -7,6 +7,7 @@ import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
 import { RegistrarPedidoComponent } from './registrar-pedido/registrar-pedido.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgToastModule } from 'ng-angular-popup';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MeseroRoutingModule,
     ComponentsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgToastModule
   ]
 })
 export class MeseroModule { }

@@ -1,207 +1,139 @@
-* {
-    -webkit-print-color-adjust: exact;
-    color-adjust: exact;
-}
-
+/* Estilos comunes */
 @import url('https://fonts.googleapis.com/css2?family=Sedan:ital@0;1&display=swap');
 
+.fondo {
+  background-color: lightgray;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
 .container {
-    width: 1000px;
-    /* Ancho fijo */
-    height: 100vh;
-    /* Altura en función del viewport */
-    // overflow-x: hidden; /* Evita el desbordamiento horizontal */
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
 }
 
-h1 {
-    font-size: 62px;
+.containercard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.menu-titulo-pagina {
-    background-size:cover;
-    font-family: "Sedan", serif;
-    font-size: 40px;
-  font-style:normal;
-    
+.card {
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
 }
 
-.pagina-platillo h2{
-    font-family: 'Sedan', cursive;
-    font-size: 25px;
-}
-.categoria-titulo h2{
-    display: flex;
-    justify-content: center;
-    border-bottom: 5px solid #f77103;
-    text-transform: uppercase;
-    font-size: 15px;
-}
-.contenedor-menu-imagen h3{
-    font-family: 'Sedan';
-    font-size: 20px;
-    font-weight: bold;
-}
-.menu-cuerpo{
-    font-family: 'Sedan';
+.card-header {
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  background-color: white;
 }
 
-.menu-cuerpo-platillo{
-    font-family: 'Sedan';
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 0px;
+.categoria-titulo {
+  display: flex;
+  justify-content: center;
+  border-bottom: 5px solid #f77103;
+  text-transform: uppercase;
+  font-size: 15px;
 }
 
-.menu-cuerpo-descripcion{
-    font-family: 'Sedan';
-    font-size: 14px;
-    font-style: normal;
-    margin-bottom: 5px;
-    color: dimgray;
-}
-.menu-cuerpo-precio{
-    font-size: 12px;
-    font-style: normal;
-    color: dimgray;
-    width: 40px;
-    margin-left: 5px;
+.menu-cuerpo {
+  font-family: 'Sedan';
+  width: 100%;
 }
 
-.bienvenida {
-    font-size: 40px;
-    // font-weight: 600;
+.menu-cuerpo-platillo {
+  font-family: 'Sedan';
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 0px;
+  text-transform: capitalize;
+}
+
+.menu-cuerpo-descripcion {
+  font-family: 'Sedan';
+  font-size: 14px;
+  font-style: normal;
+  margin-bottom: 5px;
+  color: dimgray;
+}
+
+.menu-cuerpo-precio {
+  font-size: 12px;
+  font-style: normal;
+  color: dimgray;
+  width: 40px;
+  margin-left: 5px;
+}
+
+.card-body {
+  padding: 10px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.img-platillo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imagen {
+  width: 100%;
+  max-height: 300px;
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel-control-prev-icon {
+  color: black;
 }
 
 .portada {
-    background-size: cover;
-    /* La imagen se ajustará para cubrir todo el contenedor */
-    background-position: center;
-    /* Centra la imagen en el contenedor */
-    font-family: 'Montserrat', sans-serif;
-    color: beige;
-    /* similar a portada-interiror*/
-    width: 8.5in;
-    /* Ancho de carta */
-    height: 11in;
-    /* Alto de carta */
-    background-color: white;
-    /* Color de fondo para simular el papel */
-    padding: 1.2in;
-    /* Margen interior para el contenido */
-    box-sizing: border-box;
-    /* Incluye el padding en el tamaño total */
-    page-break-after: always;
-    /* Asegura que cada página se imprima en una hoja separada */
-    border: 1px solid rgb(24, 7, 1);
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+  color: beige;
+  padding: 1.2in;
+  box-sizing: border-box;
+  border: 1px solid rgb(24, 7, 1);
 }
 
-.portada-interior {
-    // border: 2px double inl rgb(253, 253, 253);
-    border: 4px double rgb(238, 230, 230);
-    // box-sizing: border-box;
-    height: 100%;
+/* Pantallas mayores a 504px aplicar media query */
+@media (min-width: 504px) {
+  .container {
+    margin-inline: 10%;
+  }
 }
 
-.pagina-platillo {
-    // margin-bottom: 50px;
-    width: 8.5in;
-    /* Ancho de carta */
-    height: 11in;
-    /* Alto de carta */
-    background-color: white;
-    /* Color de fondo para simular el papel */
-    // padding: 0.4in;
-    /* Margen interior para el contenido */
-    box-sizing: border-box;
-    /* Incluye el padding en el tamaño total */
-    page-break-after: always;
-    /* Asegura que cada página se imprima en una hoja separada */
-    border: 1px solid rgb(24, 7, 1);
+@media (min-width: 604px) {
+  .container {
+    margin-inline: 20%;
+  }
 }
 
-.pagina-interior {
-    // border: 2px double inl rgb(253, 253, 253);
-    border: 2px solid rgb(168, 156, 156);
-    // box-sizing: border-box;
-    height: 100%;
-    background-color: #ece8e2;
-    // padding: 0px;
+@media (min-width: 768px) {
+  .container {
+    margin-inline: 30%;
+  }
 }
 
-
-
-.contenedor-menu-imagen {
-    // height: 100%; /* Ajusta la altura del contenedor para que ocupe toda la altura del padre */
-    background-size: cover !important;
-    /* Ajusta el tamaño de la imagen de fondo para que cubra todo el contenedor */
-    background-position: center;
-    background: rgb(62, 57, 33);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-inline: 0px;
-    
-}
-
-.contenedor-menu-imagen p  {
-    font-family: "Sedan", serif;
-    font-weight: 400;
-    font-style: normal;
-    width: 30%;
-}
-
-.contenedor-menu-imagen p, .contenedor-menu-imagen h3{
-    padding-left: 20px;
-}
-
-.contenedor-menu-imagen-cabeza,
-.contenedor-menu-imagen-footer {
-    color: aliceblue;
-    background-color: rgba(87, 82, 78, 0.384);
-}
-
-.container.dark-theme{
-        background-color: #533e3a91;
-        height: 100%;
-    
-    .menu-titulo-pagina{
-        background-image: url('/assets/image/Portada-5.jpg')!important;
-    }
-    .pagina-interior {
-        background-color:  #350E07;
-    }
-    .categoria-titulo{
-        color: azure;
-    }
-    .menu-cuerpo-platillo{
-        color: rgb(248, 241, 241);
-    }
-    .menu-cuerpo-descripcion, .menu-cuerpo-precio{
-        color: rgb(226, 224, 224);
-    }
-
-    .contenedor-menu-imagen-cabeza,
-.contenedor-menu-imagen-footer {
-    color: aliceblue;
-    background-color: #350e0777;
-}
-    .categoria-titulo h2{
-        border-bottom: 5px solid #f7d203;
-    }
-}
-
-@media print{
-    .pagina-platillo {
-        // margin-bottom: 50px;
-        width: 8.5in;
-        /* Ancho de carta */
-        height: 11in;
-        /* Alto de carta */
-        background-color: white;
-        /* Color de fondo para simular el papel */
-        padding: 0.4in;
-    }
-    .container.dark-theme{
-        background-color:#ffffff
-    };
+@media (min-width: 992px) {
+  .container {
+    margin-inline: 35%;
+  }
 }

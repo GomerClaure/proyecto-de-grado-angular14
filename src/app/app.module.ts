@@ -13,7 +13,6 @@ import { HomeModule } from './modulos/home/home.module';
 @NgModule({
   declarations: [
     AppComponent,
-    //EditarCategoriaComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +20,7 @@ import { HomeModule } from './modulos/home/home.module';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    AuthModule,
+    AuthModule, 
     MeseroModule,
     HomeModule,
     CocineroModule

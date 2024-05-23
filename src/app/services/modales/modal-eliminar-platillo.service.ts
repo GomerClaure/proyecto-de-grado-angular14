@@ -22,4 +22,5 @@ export class ModalEliminarPlatilloService {
     this.idPlatillo = id;
     this.platillosLista = platillos;
   }
+ 
 }
