@@ -6,8 +6,9 @@
       <div class="carousel-inner">
         <div class="carousel-item active">
           <div class="card">
-            <div class="card-body">
-              <div class="portada my-3" [style.background-image]="'url(' + baseUrl + menu.portada + ')'"></div>
+            <div class="card-body h-100" [style.background-image]="'url(' + baseUrl + menu.portada + ')'"
+            >
+              <!-- <div class="portada my-3" ></div> -->
             </div>
           </div>
         </div>
@@ -19,8 +20,10 @@
             <div class="card">
               <div class="row h-100">
                 <div *ngFor="let categoriaElement of categoriasPag">
-                  <!-- <div class="col-5 h-100"></div> -->
                   <div class="row h-100">
+                    <div class="col-5" [style.background-image]="'url(' + baseUrl + categoriaElement.imagen + ')'"
+                    style="background-size: cover !important;background-position: center;">
+                    </div>
                     <div class="col-7 h-100">
                       <div class=" p-0">
                         <h1 class="categoria-titulo text-center">{{categoriaElement.nombre}}</h1>
@@ -36,8 +39,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-5" [style.background-image]="'url(' + baseUrl + categoriaElement.imagen + ')'">
-                    </div>
+                    
                   </div>
                  
                 </div>
