@@ -18,9 +18,12 @@
     0% {
       background-image: url('../../../assets/image/646937\ \(1\).jpg');
     }
-    50% {
+    30% {
       background-image: url('../../../assets/image/313058.jpg');
       
+    }
+    70%{
+      background-image: url('../../../assets/image/w1.jpg');
     }
     100% {
       background-image: url('../../../assets/image/wallpaperbetter.com_7680x4320.jpg');
@@ -44,6 +47,7 @@ h1{
     opacity: 0;
     //color: black;
     animation: fadeIn 2s forwards;
+    font-size: 5vw;
   }
   @keyframes fadeIn {
     from {

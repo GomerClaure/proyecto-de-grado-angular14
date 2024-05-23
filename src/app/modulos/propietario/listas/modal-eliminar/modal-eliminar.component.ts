@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalEliminarPlatilloService } from 'src/app/services/modales/modal-eliminar-platillo.service';
 import { PlatillosService } from '../../../../services/platillos/platillos.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-modal-eliminar',
@@ -10,10 +11,13 @@ import { PlatillosService } from '../../../../services/platillos/platillos.servi
 export class ModalEliminarComponent {
   showModal = false;
 
+
   constructor(private modalService: ModalEliminarPlatilloService,
-     private platillosService: PlatillosService) {
+     private platillosService: PlatillosService,
+    private toast:NgToastService) {
 
   }
+
   eliminarPlatillo() {
     console.log("Platillo eliminado" + this.modalService.idPlatilloModal());
     this.platillosService.deletePlatillo(this.modalService.idPlatilloModal()).subscribe(
@@ -22,11 +26,12 @@ export class ModalEliminarComponent {
         this.modalService.listaPlatillos()
           .splice(this.modalService.listaPlatillos()
             .findIndex(platillo => platillo.id === this.modalService.idPlatilloModal()), 1);
-        alert("Platillo eliminado corredtamente.");
         console.log(res);
+        this.toast.success({ detail:'Platillo eliminado', summary: 'Success', duration: 1000});
       },
       err => {
         console.log(err);
+        this.toast.error({detail:"ERROR",summary:'El platillo no se pudo eliminar',sticky:true});
       }
     );
 

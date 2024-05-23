@@ -1,33 +1,55 @@
-.selected-card {
-    background-color: rgb(246, 129, 27) !important; /* Utilizamos !important para garantizar que esta regla tenga prioridad */
-  }
-  .card {
-    width: 70%;
-    height: 20%;
-    padding-top: 70%; /* Hace que el card tenga una relación de aspecto cuadrada */
-    cursor: pointer; /* Cambia el cursor al pasar sobre la tarjeta */
-    margin: 15px;
-    background-color: rgba(255, 255, 255, 0.5); /* Color de fondo transparente */
-    border: 1px solid #ccc; /* Borde del card */
-    border-radius: 10px; /* Esquinas redondeadas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
-  }
-  .card-body {
-    position: absolute;
-    top: 30%;
-    left: 30%;
-    transform: translate(-20%, -20%);
-    text-align: center;
-  }
-.container{
+.card {
+  cursor: pointer; /* Cambia el cursor al pasar sobre la tarjeta */
+  background-color: rgb(255, 255, 255); /* Color de fondo transparente */
+  min-width: 128px !important;
+  min-height: 128px !important;
+  max-width: 216px !important;
+  max-height: 216px !important;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  transition: all 0.3s ease; /* Transición suave para cambios */
+  border: none;
+  margin-bottom: 5px;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Eleva la tarjeta ligeramente */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+  //background-color: rgb(255, 222, 172);
+}
+
+.card:active {
+  transform: translateY(0); /* Devuelve la tarjeta a su posición original cuando se presiona */
+  box-shadow: none; /* Quita la sombra cuando se presiona */
+}
+
+.mesa-nombre {
+  margin-top: 25px;
+}
+
+.card-body {
+  padding-bottom: 0px;
+  background-color: #faf3e9;
+  font-size: 20px;
+  background-image: url('../../../../assets/image/tenedores.png');
+  background-position: center;
+  width: 100%;
+  height: 120px;
+  background-size: cover;
+}
+
+.card-header {
+  text-align: center;
+} 
+
+.card-footer {
+  background-image: url('../../../../assets/image/lll.png');
+  background-position: center;
+  background-size: cover;
+  height: 50px;
+}
+
+.container {
   padding: 10px;
   align-items: center;
-  //margin-left: 10px;
-}
-.mesa-nombre{
-  //background-color: aqua;
-  //font-size: 14px;
-  overflow: hidden;
-  text-overflow: ellipsis; /* Agrega puntos suspensivos si el texto es demasiado largo */
-  white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
 }

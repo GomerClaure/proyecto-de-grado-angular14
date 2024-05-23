@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlatillosService } from 'src/app/services/platillos/platillos.service';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-registrar-platillo',
@@ -21,7 +22,11 @@ export class RegistrarPlatilloComponent implements OnInit{
       this.obtenerCategorias();
   }
  
-  constructor(private formBuilder: FormBuilder,private platillosService:PlatillosService,private categoriasService:CategoriaService) {
+  constructor(private formBuilder: FormBuilder,
+              private platillosService:PlatillosService,
+              private categoriasService:CategoriaService,
+              private toast:NgToastService
+            ) {
     this.formularioPlatillo = this.formBuilder.group({
       nombre: [null,Validators.required],
       categoria: [null,Validators.required],
@@ -52,10 +57,9 @@ export class RegistrarPlatilloComponent implements OnInit{
       console.log(datosPlatillo);
       console.log(this.selectedFile);
       this.registrarPlatillo();
-      // Aquí puedes agregar la lógica para enviar los datos a través de una solicitud HTTP o realizar cualquier otra acción que desees con los datos.
     }
     else {
-      //Formulario Invalido
+      
     }
   }
 
@@ -78,23 +82,25 @@ export class RegistrarPlatilloComponent implements OnInit{
           this.formularioPlatillo.reset();
           this.imageUrl = 'assets/image/27002.jpg';
           console.log(success);
+          this.toast.success({detail:"SUCCESS",summary:'Platillo Registrado',duration:2000})
         },
         error => {
           console.log(error);
+          this.toast.error({detail:"ERROR",summary:'Error al registrar platillo',sticky:true})
         }
       );
 
     }
     else {
-      //Formulario Invalido
+     
     }
   }
 
   // Método para obtener las categorías del servicio
   obtenerCategorias() {
     this.categoriasService.getCategorias().subscribe(
-      (data: any) => { // Ajusta el tipo de datos esperado
-        this.categorias = data.categorias; // Almacena las categorías obtenidas en la variable categorias
+      (data: any) => { 
+        this.categorias = data.categorias;
         console.log(data)
       },
       error => {

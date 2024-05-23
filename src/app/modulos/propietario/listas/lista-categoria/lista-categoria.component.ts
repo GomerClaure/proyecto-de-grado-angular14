@@ -18,10 +18,20 @@ export class ListaCategoriaComponent implements OnInit {
   storageUrl = environment.backendStorageUrl;
 
   constructor(private router:Router,private categoriasService:CategoriaService,
-    private modalEditarCategoriaService:ModalEditarCategoriaService,private modalService:ModalEliminarCategoriaService ) { 
+    private modalEditarCategoriaService:ModalEditarCategoriaService,
+    private modalService:ModalEliminarCategoriaService) { 
   }
   ngOnInit(): void {
     this.getCategorias();
+    this.modalEditarCategoriaService.getModalClosed().subscribe(closed => {
+      if (closed) {
+        console.log('Modal cerrado:', closed);
+        // Recargar la lista de categorías
+        window.location.reload();
+        // Poner modalClosed a false después de recargar la lista de categorías
+        this.modalEditarCategoriaService.setModalClosed(false);
+      }
+    });
   }
 
   editarCategoria(id: number) {
@@ -31,9 +41,7 @@ export class ListaCategoriaComponent implements OnInit {
   }
 
   eliminarCategoria(id:number){
-   console.log("Categoria eliminada")
    this.modalService.openModal(id,this.categorias);
-
   } 
 
   getCategorias() {

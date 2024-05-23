@@ -1,29 +1,33 @@
-<app-nav></app-nav><br><br><br>
+<app-nav></app-nav><br><br>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simulación de Mesas</title>
 </head>
-<body>
-<div class="titulo">
-  <h1>Mesas</h1>
-</div>
-<div class="container">
-<div class="row">
-  <div class="row">
-    <div class="row">
-      <div class="row">
-        <div class="col-3" *ngFor="let mesa of mesas">
-        <div class="card" [attr.id]="mesa.id" (click)="seleccionarMesa(mesa.id)">
-          <div class="card-body">
-            <p class="mesa-nombre">{{mesa.nombre}}</p>
+<body class="fondo">
+  <br><br>
+  <div class="container">
+    <div class=" row justify-content-center cont">
+      <h2 class="titulo"><strong>Mesas</strong></h2>
+      <img class="li" src="../../../../../assets/image/linea.png">
+    </div>
+    <br>
+    <div class="row mesas">
+      <div class="col-6 col-md-4 col-lg-3 pb-3 " *ngFor="let mesa of mesas">
+        <div class="card mb-2" [attr.id]="mesa.id" (click)="seleccionarMesa(mesa.id)">
+          <!-- Header -->
+          <!-- Body -->
+          <div class="card-body text-center ">
+            <!-- Contenido del cuerpo aquí -->
+            <p class="mesa-nombre ">{{mesa.id}}</p>
+          </div>
+          <!-- Footer -->
+          <div class="card-footer">
+            <!-- Contenido del pie aquí -->
           </div>
         </div>
       </div>
+      
     </div>
   </div>
-  </div>
-</div>
-</div>
-  <button class="btn btn-primary" (click)="RegistrarMesa(mesaSeleccionada)">Siguiente</button>
 </body>

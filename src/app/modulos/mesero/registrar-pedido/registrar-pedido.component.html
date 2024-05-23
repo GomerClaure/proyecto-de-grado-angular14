@@ -1,10 +1,12 @@
 <app-nav></app-nav>
-
 <div class="fondo">
 <div class="container">
    <br><br><br>
    <br>
+   <div class=" row justify-content-center cont">
     <h2 class="titulo"><strong>Tomar Orden</strong></h2>
+    <img class="li" src="../../../../../assets/image/linea.png">
+  </div>
 <div class="row">
     <div class="col">
     <p>Mesa : {{ numeroMesa }}</p>
@@ -22,7 +24,7 @@
     <div class="col">
         <div class="col-md-12">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="busquedaNombre" (keyup)="onBuscar()">
+                <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="textoBuscador" (ngModelChange)="onSearchChange($event)">
             </div>
         </div>
     </div> 
@@ -37,7 +39,7 @@
     <div class="col">
         <div class="col-md-12">
             <div style="text-align:center">
-                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasOrders" aria-controls="offcanvasOrders">
+                <button class="btn btn-registrar" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasOrders" aria-controls="offcanvasOrders">
                     Ver Órdenes
                 </button>
               </div>
@@ -48,10 +50,7 @@
 <div>
     <br>
     <div class="row">
-       <div class="row">
-         <div class="row">
-            <div class="row">
-                <div class="col-4" *ngFor="let platillo of platillos" (click)="agregarPlatillo(platillo)">
+                <div class="col-6 col-md-4 col-lg-3" *ngFor="let platillo of platillosFiltrados" (click)="agregarPlatillo(platillo)">
                     <div class="card">
                         <div class="img-top">
                         <img class="card-img-top imagen" [src]="storageUrl+platillo.imagen" alt="{{ platillo.nombre }}">
@@ -60,15 +59,21 @@
                             <h5 class="card-title">{{ platillo.nombre }}</h5>
                         </div>
                 </div>
-            </div>
-            </div>
-         </div>
        </div>
     </div>
 </div>
 </div>
+</div>
+
+
+
+
+
+
+
+
 <!--Este es el espacio donde ves el pedido que seleccionaste-->
-<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasOrders" aria-labelledby="offcanvasOrdersLabel">
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasOrders" aria-labelledby="offcanvasOrdersLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasOrdersLabel"><P>Pedido</P></h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -88,22 +93,20 @@
                 <tr *ngFor="let platillo of pedidoselectService.platillosSeleccionados; let i = index">
                     <td>{{ platillo.nombre }}</td>
                     <td>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-outline-secondary" type="button" (click)="decrement(i)">-</button>
-                            </div>
-                            <input #quantityInput type="number" [id]="'quantityP'+i" name="quantity" min="1" max="100" value="1" class="form-control text-center" readonly>
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" (click)="increment(i)">+</button>
-                            </div>
+                        <div style="display: inline-block; border: 1px solid #ccc; border-radius: 4px; padding: 4px;">
+                            <span href="#" class="boton-cantidad" role="button" (click)="decrement(i)" style="padding: 0.2rem 0.3rem; font-size: 0.8rem; text-decoration: none;">-</span>
+                            <span style="padding: 0 8px;">{{diccionarioDeCantidades[i]||1}}</span>
+                            <span href="#" class="boton-cantidad" role="button" (click)="increment(i)" style="padding: 0.2rem 0.3rem; font-size: 0.8rem; text-decoration: none;">+</span>
                         </div>
                     </td>
                     <td>
-                        <div class="btn-group" role="group" aria-label="Acciones">
-                            <button class="btn btn-agregar" data-bs-toggle="modal" data-bs-target="#agregarDescripcion" (click)="setPlatilloSeleccionado(i)" >
+                    <div class="btn-group" role="group" aria-label="Acciones">
+                            <button class="bt btn-editar" data-bs-toggle="modal" data-bs-target="#agregarDescripcion" (click)="setPlatilloSeleccionado(i)" >
                                 <i class="bi bi-journals"></i> 
                             </button>
-                            <button class="btn btn-retirar" (click)="retirarPlatillo(i)">Retirar</button>
+                            <button class="bt btn-delete" (click)="retirarPlatillo(i)">
+                                <i class="bi bi-trash3"></i>
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -115,8 +118,9 @@
           <p>No se ha seleccionado ningun platillo.</p>
       </ng-template>
   </div>
-  <button class="btn btn-danger btn-sm" (click)="guardarPedido()">Confirmar Pedido</button>
+  <div class="foot">
+  <button class="btn-registrar btn-sm justify-content-center" (click)="guardarPedido()">Confirmar Pedido</button>
+  </div>
 </div>
 <app-modal-pedido></app-modal-pedido>
-</div>
-
+<lib-ng-toast></lib-ng-toast>

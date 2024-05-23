@@ -9,11 +9,12 @@ import { AuthModule } from './auth/auth.module';
 import { MeseroModule } from './modulos/mesero/mesero.module';
 import { HomeModule } from './modulos/home/home.module';
 import { EditarCategoriaComponent } from './modulos/propietario/editar/editar-categoria/editar-categoria.component';
+import { NgToastModule } from 'ng-angular-popup';
+//import { NgToastComponent, NgToastModule } from 'ng-angular-popup';
 
 @NgModule({
   declarations: [
     AppComponent,
-    //EditarCategoriaComponent
   ],
   imports: [
     BrowserModule,
@@ -21,9 +22,10 @@ import { EditarCategoriaComponent } from './modulos/propietario/editar/editar-ca
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    AuthModule,
+    AuthModule, 
     MeseroModule,
-    HomeModule
+    HomeModule,
+    
   ], 
   providers: [],
   bootstrap: [AppComponent]

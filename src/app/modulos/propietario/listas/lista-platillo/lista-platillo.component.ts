@@ -1,4 +1,3 @@
-import { query } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platillo } from 'src/app/modelos/Platillo';
@@ -19,7 +18,8 @@ export class ListaPlatilloComponent {
   storageUrl = environment.backendStorageUrl;
   textoBuscador:string = '';
   constructor(private router: Router, private platilloService: PlatillosService,
-    private modalService: ModalEliminarPlatilloService) {
+    private modalService: ModalEliminarPlatilloService,
+   ) {
   }
 
   ngOnInit(): void {
@@ -49,11 +49,10 @@ export class ListaPlatilloComponent {
   }
 
   eliminarPlatillo(id: number) {
-  this.modalService.openModal(id,this.platillos);
+    this.modalService.openModal(id, this.platillos);
   }
 
   onSearchChange(searchValue: string): void {  
-    console.log(searchValue);
     this.textoBuscador = searchValue.trim().toLowerCase();
     this.filtrarPlatillos();
   }
