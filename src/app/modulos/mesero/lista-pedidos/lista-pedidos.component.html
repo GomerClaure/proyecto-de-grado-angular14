@@ -1,26 +1,37 @@
-<app-nav></app-nav><br><br>
-<div class="fondo">
-    <br><br>
-    <div class=" row justify-content-center cont">
-        <h2 class="titulo"><strong>Lista de Pedidos</strong></h2>
-        <img class="li" src="../../../../../assets/image/linea.png">
+<app-nav></app-nav>
+<div class="fondo pur">
+  <br><br><br><br>
+  <div class="d-flex flex-column align-items-center">
+    <h2 class="titulo"><strong>Lista de Pedidos</strong></h2>
+    <img class="li" src="../../../../../assets/image/linea.png">
+  </div>
+  <br>
+  <div class="container">
+    <div class="table-responsive-xl">
+      <div class="table-responsive">
+        <table class="table pru">
+          <thead>
+            <tr class="text-center">
+              <th class="fila" scope="col">Mesa</th>
+              <th class="fila" scope="col">Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Aquí se insertarían las filas de datos -->
+            <tr *ngFor="let mesa of pedidosPorMesa" class="align-middle">
+              <td>{{ mesa.nombreMesa }}</td>
+              <td>
+                <div class="grupo" role="group">
+                  <button type="button" class="btn btn-aceptar justify-content-center">
+                    <i class="bi bi-eye"></i> Detalles
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <!-- Puedes agregar más filas según sea necesario -->
+          </tbody>
+        </table>
       </div>
-   <div class="container">
-    <div *ngIf="errorMessage" class="error">
-      {{ errorMessage }}
     </div>
-    
-    <div *ngIf="pedidos.length === 0 && !errorMessage">
-      No hay pedidos disponibles.
-    </div>
-    
-    <div *ngIf="pedidos.length > 0">
-      <h2>Pedidos</h2>
-      <ul>
-        <li *ngFor="let pedido of pedidos">
-          Pedido ID: {{ pedido.id }}, Tipo: {{ pedido.tipo }}, Fecha: {{ pedido.fecha_hora_pedido }}
-        </li>
-      </ul>
-    </div>
-   </div>
+  </div>
 </div>
