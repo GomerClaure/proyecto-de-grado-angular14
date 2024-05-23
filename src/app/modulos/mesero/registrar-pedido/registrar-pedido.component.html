@@ -1,0 +1,126 @@
+<app-nav></app-nav>
+<div class="fondo">
+<div class="container">
+   <br><br><br>
+   <br>
+   <div class=" row justify-content-center cont">
+    <h2 class="titulo"><strong>Tomar Orden</strong></h2>
+    <img class="li" src="../../../../../assets/image/linea.png">
+  </div>
+<div class="row">
+    <div class="col">
+    <p>Mesa : {{ numeroMesa }}</p>
+    </div>
+    <div class="col d-flex justify-content-center align-items-center">
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" [(ngModel)]="switchState" (ngModelChange)="switchStateChanged()" >
+        <label class="form-check-label" for="flexSwitchCheckChecked">Para llevar <i class="bi bi-cart-fill"></i></label> 
+    </div>
+    </div>
+</div>
+
+  <!--Barra de busqueda-->
+<div class="row">
+    <div class="col">
+        <div class="col-md-12">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="textoBuscador" (ngModelChange)="onSearchChange($event)">
+            </div>
+        </div>
+    </div> 
+ <div class="col">
+        <div class="col-md-12">
+            <select class="form-select" aria-label="Default select example" (change)="onChangeCategoria($event)">
+                <option selected disabled>Categoria</option>
+                <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
+            </select>
+        </div> 
+    </div>
+    <div class="col">
+        <div class="col-md-12">
+            <div style="text-align:center">
+                <button class="btn btn-registrar" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasOrders" aria-controls="offcanvasOrders">
+                    Ver Órdenes
+                </button>
+              </div>
+        </div>
+   </div>
+</div>
+<!--Espacio donde se muestran los platillos-->
+<div>
+    <br>
+    <div class="row">
+                <div class="col-6 col-md-4 col-lg-3" *ngFor="let platillo of platillosFiltrados" (click)="agregarPlatillo(platillo)">
+                    <div class="card">
+                        <div class="img-top">
+                        <img class="card-img-top imagen" [src]="storageUrl+platillo.imagen" alt="{{ platillo.nombre }}">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ platillo.nombre }}</h5>
+                        </div>
+                </div>
+       </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<!--Este es el espacio donde ves el pedido que seleccionaste-->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasOrders" aria-labelledby="offcanvasOrdersLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasOrdersLabel"><P>Pedido</P></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <!-- Mostrar la lista de selecciones -->
+      <ng-container *ngIf="pedidoselectService.platillosSeleccionados.length > 0; else noSelection">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Platillo</th>
+                    <th>Cantidad</th>
+                    <th>Accion  </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let platillo of pedidoselectService.platillosSeleccionados; let i = index">
+                    <td>{{ platillo.nombre }}</td>
+                    <td>
+                        <div style="display: inline-block; border: 1px solid #ccc; border-radius: 4px; padding: 4px;">
+                            <span href="#" class="boton-cantidad" role="button" (click)="decrement(i)" style="padding: 0.2rem 0.3rem; font-size: 0.8rem; text-decoration: none;">-</span>
+                            <span style="padding: 0 8px;">{{diccionarioDeCantidades[i]||1}}</span>
+                            <span href="#" class="boton-cantidad" role="button" (click)="increment(i)" style="padding: 0.2rem 0.3rem; font-size: 0.8rem; text-decoration: none;">+</span>
+                        </div>
+                    </td>
+                    <td>
+                    <div class="btn-group" role="group" aria-label="Acciones">
+                            <button class="bt btn-editar" data-bs-toggle="modal" data-bs-target="#agregarDescripcion" (click)="setPlatilloSeleccionado(i)" >
+                                <i class="bi bi-journals"></i> 
+                            </button>
+                            <button class="bt btn-delete" (click)="retirarPlatillo(i)">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+     
+      <ng-template #noSelection>
+          <p>No se ha seleccionado ningun platillo.</p>
+      </ng-template>
+  </div>
+  <div class="foot">
+  <button class="btn-registrar btn-sm justify-content-center" (click)="guardarPedido()">Confirmar Pedido</button>
+  </div>
+</div>
+<app-modal-pedido></app-modal-pedido>
+<lib-ng-toast></lib-ng-toast>

@@ -1,0 +1,116 @@
+<!-- Barra de navegacion para el propietario -->
+<nav *ngIf="esPropietario()" class="navbar navbar-expand-lg custom-navbar-color ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="home">Restaurant</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           Menu    
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="lista/platillo">Lista de platillos</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="lista/categoria">Lista de categorias</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="menu/generar">Generar menu </a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="menu/qr">Generar Qr</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" (click)="irAMenu()">Ver Menu</a></li>
+          </ul>
+        </li>  
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           Registro
+          </a>
+          <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="registrar/platillo">Registrar platillo</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrar categoria</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="registrar/empleado">Registrar empleado</a></li>
+          </ul>
+        </li>  
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
+        </li>
+      </ul> 
+    </div>
+  </div>
+</nav>
+
+<!-- Barra de navegacion para el administrador -->
+<nav *ngIf="esAdministrador()" class="navbar navbar-expand-lg custom-navbar-color ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Administrador</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Solicitudes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Barra de navegacion del empleado -->
+<nav *ngIf="esEmpleado()" class="navbar navbar-expand-lg custom-navbar-color ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="home">Empleado Mesero</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="mesero/lista-mesa">Registrar Pedido</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="mesero/lista-pedidos">Lista de Pedidos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Barra de navegacion generica -->
+<nav *ngIf="!esPropietario() && !esEmpleado() && !esAdministrador()"
+  class="navbar navbar-expand-lg custom-navbar-color">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <strong>Lugo</strong>
+      <img src="../../../assets/image/icons8-crema-de-avena-50.png" alt="Icono" style="width: 30px; height: auto; margin-left: 5px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="registro">Registro</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<app-registrar-categoria></app-registrar-categoria>

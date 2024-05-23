@@ -1,0 +1,27 @@
+
+.card {
+    margin-top: 150px;
+    border-radius: 10px;
+    background-color: rgba(253, 253, 253, 0.9); /* Color de fondo semi-transparente */
+    box-shadow: 0px 0px 100px 0px rgba(0, 0, 0, 0.2); /* Ajuste del box-shadow */
+    border: none;
+    //position: relative;
+}
+.card-body{
+    padding: 50px;
+}
+.card-header{
+    text-align: center;
+    background-color: white;
+  }
+.contenedor-icono svg{
+    text-align: center;
+    margin-top: 20px;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+}
+.f{
+    display:flex;
+    justify-content: center;
+}

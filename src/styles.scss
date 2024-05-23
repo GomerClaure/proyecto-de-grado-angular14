@@ -1,1 +1,107 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0px;
+    margin: 0px;
+  }
+.titulo{
+    text-align: center;
+    //padding:50px;
+    
+}
+.btn-aceptar{
+  background-color:#96be64;
+  border-color: #c0f185;
+  color: black;
+  border-radius: 5px;
+}
+.btn-aceptar:hover{
+  background-color: #719841;
+  border-color: #719841;
+}
+.btn-delete:hover{
+  background-color: #c01818;
+  border-color:#bf3636;
+}
+.btn-editar:hover{
+  background-color: rgb(221, 165, 61);
+  border-color:rgb(218, 170, 82);
+}
+.btn-delete{
+  background-color: rgb(220, 108, 71);
+ border-color:rgb(220, 108, 71) ;
+ border-radius: 5px;
+}
+.btn-editar{
+  background-color:#edc97b;
+  border-color: #edc97b ;
+}
+.btn-img{
+  height: 40px;
+  width: 260px;
+  background-color:#eada89;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  padding-top: 6px;
+  margin: 10px;
+  text-align: center;
+}
+.btn-img:hover{
+  background-color: #d1bd58;
+  border-color: rgb(218, 170, 82);
+}
+.btn-registrar{
+  background-color:#96be64;
+  border-radius: 5px;
+  border-color: #c0f185;
+  color: black;
+  padding: 6px;
+  width: 150px;
+  margin-bottom: 20px;
+}
+.btn-registrar:hover{
+  background-color:#96be64;
+
+  border-color: #c0f185;
+}
+.fondo{
+  background-image: url('./assets/image/f1c.jpg');
+  //background-color: rgb(245, 236, 220);
+  width: 100%;
+  height: 100vh;
+  background-size: cover; /* Ajusta el tamaño de la imagen al contenedor */
+  background-position: center; /* Centra la imagen en el contenedor */
+  position: fixed;
+  overflow-y: auto;
+}
+.li{
+  width: 350px;
+  padding-bottom:0px;
+  margin: 0;
+}
+.modal-header{
+  //background-image: url('./assets/image/f1c.jpg');
+  background-size: cover;
+  background-position: center;
+  background-color: #eecf7b;
+}
+.modal-footer{
+   background-image: url('./assets/image/f1c.jpg');
+   background-size: cover;
+   background-position: center;
+}
+.modal-body{
+  background-image: url('./assets/image/f1c.jpg');
+   background-size: cover;
+   background-position: center;
+}
+.img-fluid{
+   border-radius: 5px;
+   border-color: #d1bd58;
+}
+.form-control{
+  background-color: #ffffff;
+  border-color: #d5d3cd;
+}

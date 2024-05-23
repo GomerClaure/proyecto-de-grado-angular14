@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  backendUrl: 'http://localhost:8000/api',
+  backendStorageUrl: 'http://localhost:8000',
+  frontDominio: 'http://localhost:4200'
+ 
+  // backendUrl: ' http://192.168.0.15:8000/api',
+  // backendStorageUrl: ' http://192.168.0.15:8000',
+  // frontDominio: ' http://192.168.0.15:8000:4200'
 };
 
 /*

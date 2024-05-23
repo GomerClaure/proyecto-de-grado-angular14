@@ -1,0 +1,17 @@
+<div class="white-window">
+    <div class="container">
+        <h2>Códigos QR - {{" "+nombreRestaurante}}</h2>
+        <div class="form-group">
+          <label for="quantity">Cantidad de Copias:</label>
+          <input type="number" id="quantity" [(ngModel)]="cantidad_qr" name="quantity" min="1">
+        </div>
+        <div class="form-group">
+          <button class="btn print-btn" (click)="printQR()">Imprimir</button>
+        </div>
+        <div class="qr-codes">
+          <div *ngFor="let _ of [].constructor(cantidad_qr); let i = index" class="qr-code" >
+            <img [src]="urlQr" alt="Código QR">
+          </div>
+        </div>
+      </div>
+</div>

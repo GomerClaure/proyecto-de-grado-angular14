@@ -1,0 +1,63 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+.white-window {
+    display: none;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.qr-codes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.qr-code {
+    width: calc(25% - 20px);
+    /* Asegura que haya espacio para 4 columnas con un margen entre ellas */
+    margin-bottom: 20px;
+    /* Espacio entre las filas */
+}
+
+.qr-code img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border: 2px dashed #000;
+    border-radius: 5px;
+}
+@media print {
+    title {
+        display: none !important;
+      }
+    nav {
+        display: none !important;
+      }
+      .clock {
+        display: none !important;
+      }
+    
+    .print-btn {
+      display: none;
+    }
+    .white-window {
+        display: block;
+    }
+  }

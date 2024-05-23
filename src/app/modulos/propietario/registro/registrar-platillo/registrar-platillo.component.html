@@ -1,0 +1,59 @@
+<app-nav></app-nav>
+<div class="pru fondo">
+    <br><br>
+<div class="container">
+    <br>
+    <br>
+    <div class=" row justify-content-center cont">
+        <h2 class="titulo"><strong>Registrar platillo</strong></h2>
+        <img class="li" src="../../../../../assets/image/linea.png">
+    </div>
+    <div class="form">
+        <form [formGroup]="formularioPlatillo">
+            <div class="row">
+            <div class=" col-md-6">
+                <div class="form-group col-12"> 
+                  <label>Nombre del platillo</label>
+                  <input type="text" class="form-control" formControlName="nombre"> 
+                   <div *ngIf="formularioPlatillo.get('nombre')?.invalid && formularioPlatillo.get('nombre')?.touched" class="text-danger">
+                    El nombre es obligatorio y debe tener al menos 3 caracteres.
+                  </div>
+                </div>
+                <div class="form-group col-12">
+                    <label for="exampleFormControlSelect1">Categoria</label>
+                    <select class="form-control form-select" formControlName="categoria">
+                        <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
+                    </select>
+                    <div *ngIf="formularioPlatillo.get('categoria')?.invalid && formularioPlatillo.get('categoria')?.touched" class="text-danger">
+                        Seleccione una categoria
+                    </div>
+                </div> 
+                <div class="form-group col-12">
+                    <label>Precio</label>
+                    <input type="text" class="form-control" formControlName="precio">
+                    <div *ngIf="formularioPlatillo.get('precio')?.invalid && formularioPlatillo.get('precio')?.touched" class="text-danger">
+                        Ingrese solo numeros 
+                      </div>
+                </div>
+                <div class="form-group col-12">
+                    <label>Descripcion</label>
+                    <textarea class="form-control" formControlName="descripcion"></textarea>
+                </div>
+            </div> 
+            <br>
+            <div class="col-md-6 col-xs-12">
+                <div class="apartadoImg">
+                    <img [src]="imageUrl" id="image-platillo" class="img-fluid" alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
+                    <input type="file" id="img-registrar-platillo" class="hidden" (change)="onFileSelected($event)">
+                    <label for="img-registrar-platillo" class="btn-img">Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i></label>
+                </div>
+            </div>
+    </div>
+        </form>
+    </div>
+    <div class="row justify-content-center">
+         <button class="btn-registrar" (click)="onSubmit()">Registrar</button>
+     </div>
+</div>
+</div>
+<lib-ng-toast></lib-ng-toast>
