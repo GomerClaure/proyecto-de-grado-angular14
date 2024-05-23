@@ -1,2 +1,26 @@
-<app-nav></app-nav><br><br><br>
-<p>lista-pedidos works!</p>
+<app-nav></app-nav><br><br>
+<div class="fondo">
+    <br><br>
+    <div class=" row justify-content-center cont">
+        <h2 class="titulo"><strong>Lista de Pedidos</strong></h2>
+        <img class="li" src="../../../../../assets/image/linea.png">
+      </div>
+   <div class="container">
+    <div *ngIf="errorMessage" class="error">
+      {{ errorMessage }}
+    </div>
+    
+    <div *ngIf="pedidos.length === 0 && !errorMessage">
+      No hay pedidos disponibles.
+    </div>
+    
+    <div *ngIf="pedidos.length > 0">
+      <h2>Pedidos</h2>
+      <ul>
+        <li *ngFor="let pedido of pedidos">
+          Pedido ID: {{ pedido.id }}, Tipo: {{ pedido.tipo }}, Fecha: {{ pedido.fecha_hora_pedido }}
+        </li>
+      </ul>
+    </div>
+   </div>
+</div>

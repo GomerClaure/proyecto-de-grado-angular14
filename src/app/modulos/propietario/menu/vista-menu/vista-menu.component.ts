@@ -161,10 +161,6 @@ export class VistaMenuComponent implements OnInit {
     }
   }
   onRowClick(platillo: any) {
-    let nom = platillo.nombre;
-    let img = platillo.imagen;
-    let desc = platillo.descripcion;
     this.modalService.openModal(platillo);
-    console.log(nom,img,desc)
 }
 }

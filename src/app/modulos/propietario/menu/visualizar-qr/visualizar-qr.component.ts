@@ -51,6 +51,7 @@ export class VisualizarQrComponent implements OnInit {
     this.menuService.getMenu().subscribe(
       (res: any) => {
         this.menu = res.menu;
+        console.log(this.menu)
         if(this.menu.qr){
           this.mostrarElemento('campoImprimirQr');
         }else{
