@@ -45,7 +45,7 @@ export class ListaPedidosComponent implements OnInit {
     });
     console.log(this.pedidosPorMesa);
   }
-  mostrarPedidos(nombreMesa: string): void {
+  mostrar(nombreMesa: string): void {
     console.log('Nombre de la mesa:', nombreMesa);
     // Aquí puedes agregar el código adicional que necesites para manejar los pedidos
   }
