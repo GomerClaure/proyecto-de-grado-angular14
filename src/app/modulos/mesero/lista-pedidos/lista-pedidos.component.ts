@@ -45,4 +45,8 @@ export class ListaPedidosComponent implements OnInit {
     });
     console.log(this.pedidosPorMesa);
   }
+  mostrarPedidos(): void{
+    console.log("entra")
+    
+  }
 }
