@@ -1,32 +1,56 @@
 <div class="modal fade" id="pedidosmesa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Pedidos de la {{ nombreMesa }}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div *ngIf="pedidosDeMesa.length > 0; else noPedidos">
-            <div *ngFor="let pedido of pedidosDeMesa" class="card my-2">
-              <div class="card-body">
-                <h5 class="card-title">Pedido de la mesa {{ pedido.mesa }}</h5>
-                <div *ngFor="let plato of pedido.platos">
-                  <p class="card-text">Plato: {{ plato.nombre }}</p>
-                  <p class="card-text">Cantidad: {{ plato.cantidad }}</p>
-                  <p class="card-text">Precio unitario: {{ plato.precio }}</p>
-                  <p class="card-text">Total: {{ plato.cantidad * plato.precio }}</p>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pedidos de la {{ nombreMesa }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="PedidosParaMostrar.length > 0; else noPedidos">
+          <div *ngFor="let pedido of PedidosParaMostrar" class="card my-2">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-title">Pedido: {{ pedido.pedidoId }}</h5>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Plato</th>
+                      <th>Cantidad</th>
+                      <th>P.Unidad</th>
+                      <th>P.Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let plato of pedido.platos">
+                      <td>{{ plato.nomplatillo }}</td>
+                      <td>{{ plato.cantidad }}</td>
+                      <td>{{ plato.totalPedido / plato.cantidad | number:'1.2-2' }}</td>
+                      <td>{{ plato.totalPedido | number:'1.2-2' }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-8">
+                  <h6 class="card-subtitle mb-2 text-muted">Total del pedido: {{ pedido.totalPedido | number:'1.2-2' }}</h6>
+                </div>
+                <div class="col-4 text-end">
+                  <button class="btn btn-danger"><i class="bi bi-trash3-fill"></i> Eliminar</button>
                 </div>
               </div>
             </div>
           </div>
-          <ng-template #noPedidos>
-            <p>No hay pedidos para esta mesa.</p>
-          </ng-template>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        </div>
+        <ng-template #noPedidos>
+          <p>No hay pedidos para esta mesa.</p>
+        </ng-template>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
-  
+</div>
