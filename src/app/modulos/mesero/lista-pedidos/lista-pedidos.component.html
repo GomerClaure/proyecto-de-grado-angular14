@@ -7,31 +7,22 @@
   </div>
   <br>
   <div class="container">
-    <div class="table-responsive-xl">
-      <div class="table-responsive">
-        <table class="table pru">
-          <thead>
-            <tr class="text-center">
-              <th class="fila" scope="col">Mesa</th>
-              <th class="fila" scope="col">Acción</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Aquí se insertarían las filas de datos -->
-            <tr *ngFor="let mesa of pedidosPorMesa" class="align-middle">
-              <td>{{ mesa.nombreMesa }}</td>
-              <td>
-                <div class="grupo" role="group">
-                  <button type="button" class="btn btn-aceptar justify-content-center">
-                    <i class="bi bi-eye" (click)="mostrar(mesa.nombreMesa)"></i> Detalles
-                  </button>
-                </div>
-              </td> 
-            </tr>
-            <!-- Puedes agregar más filas según sea necesario -->
-          </tbody>
-        </table>
+    <div class="row">
+      <!-- Aquí se insertarían las tarjetas de datos -->
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" *ngFor="let mesa of pedidosPorMesa">
+        <div class="card shadow-sm h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ mesa.nombreMesa }}</h5>
+            <div class="mt-auto">
+              <button type="button" class="btn btn-aceptar w-80" data-bs-toggle="modal" data-bs-target="#pedidosmesa" (click)="mostrar(mesa.nombreMesa)">
+                <i class="bi bi-eye"></i> Detalles
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+      <!-- Puedes agregar más tarjetas según sea necesario -->
     </div>
   </div>
 </div>
+<app-modal-pedidos></app-modal-pedidos>

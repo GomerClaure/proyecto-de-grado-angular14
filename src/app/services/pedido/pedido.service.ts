@@ -13,6 +13,7 @@ export class PedidoService {
   };
   platillosSeleccionados: Platillo[] = [];
   descripcion:string='';
+  pedidoMesa:any[]=[];
   platillosAGuardar:{platillo:Platillo,descripcion:string}[]=[];
 
   constructor(private http: HttpClient) { }
