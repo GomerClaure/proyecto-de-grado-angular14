@@ -8,13 +8,15 @@ import { RegistrarPedidoComponent } from './registrar-pedido/registrar-pedido.co
 import { ComponentsModule } from 'src/app/components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgToastModule } from 'ng-angular-popup';
+import { ModalPedidosComponent } from './modal-pedidos/modal-pedidos.component';
 
 @NgModule({
   declarations: [
     ModalPedidoComponent,
     ListaMesasComponent,
     ListaPedidosComponent,
-    RegistrarPedidoComponent
+    RegistrarPedidoComponent,
+    ModalPedidosComponent
   ],
   imports: [
     CommonModule,

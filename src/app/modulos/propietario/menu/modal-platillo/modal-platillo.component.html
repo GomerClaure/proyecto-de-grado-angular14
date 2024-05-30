@@ -1,21 +1,23 @@
 <div class="modal fade" id="MostrarPlatillo" tabindex="-1" aria-labelledby="modalAgregarPlatilloLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered semi-transparent-modal">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title"  id="modalAgregarPlatilloLabel">{{ platillo.nombre }}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          
         </div>
-        <div class="modal-body">
+        <div class="modal-body pb-0">
             <div class="container-wrapper">
             <img [src]="baseUrl + platillo.imagen" alt="{{platillo.nombre}}" class="img-fluid">
             <br>
+            <hr>
+            <h5 id="modalAgregarPlatilloLabel"><strong>{{ platillo.nombre }}</strong></h5>
             <div class="descripcion">
                 <h6>{{ platillo.descripcion }}</h6>
             </div>
             </div>
+            <hr>
         </div>
         <div class="modal-footer"> 
-          <button type="button" class="btn btn-delete" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-delete pt-0" data-bs-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div> 

@@ -1,0 +1,73 @@
+<div class="modal fade" id="pedidosmesa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="exampleModalLabel">
+        <h5>
+          Pedidos de la {{ nombreMesa }}</h5>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="PedidosParaMostrar.length > 0; else noPedidos">
+          <div id="carouselExampleIndicators" class="carousel slide">
+            <div class="carousel-inner">
+              <div *ngFor="let pedido of PedidosParaMostrar; let i = index" class="carousel-item" [class.active]="i === 0">
+                <div class="card my-2">
+                  <div class="card-body"> 
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h5 class="card-title">Pedido: {{ pedido.pedidoId }}</h5>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>Plato</th>
+                            <th>Cant.</th>
+                            <th>P.Unidad</th>
+                            <th>P.Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let plato of pedido.platos">
+                            <td>{{ plato.nomplatillo }}</td>
+                            <td>{{ plato.cantidad }}</td>
+                            <td>{{ plato.totalPedido / plato.cantidad | number:'1.2-2' }}</td>
+                            <td>{{ plato.totalPedido | number:'1.2-2' }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-8">
+                        <button class="btn btn-danger"><i class="bi bi-trash3-fill"></i> Eliminar</button>
+                      </div>
+                      <div class="col-4 text-end">
+                        <h6 class="card-subtitle mb-2 text-muted">Total del pedido: {{ pedido.totalPedido | number:'1.2-2' }} Bs.</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only"></span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only"></span>
+            </a>
+          </div>
+        </div>
+        <ng-template #noPedidos>
+          <p>No hay pedidos para esta mesa.</p>
+        </ng-template>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

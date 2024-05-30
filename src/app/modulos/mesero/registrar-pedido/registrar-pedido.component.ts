@@ -172,7 +172,7 @@ export class RegistrarPedidoComponent implements OnInit {
       },
       (error: any) => {
         console.error('Error al almacenar el pedido', error);
-        this.toast.error({detail:"ERROR",summary:'Error al editar categoria',sticky:true})
+        this.toast.error({detail:"ERROR",summary:'No hay platillos seleccionados',sticky:true})
       }
     );
 

@@ -13,6 +13,7 @@ export class PedidoService {
   };
   platillosSeleccionados: Platillo[] = [];
   descripcion:string='';
+  pedidoMesa:any[]=[];
   platillosAGuardar:{platillo:Platillo,descripcion:string}[]=[];
 
   constructor(private http: HttpClient) { }
@@ -25,9 +26,12 @@ export class PedidoService {
   storePedido(formData:FormData) {
     return this.http.post<any>(`${this.BASE_URL}/pedido`, formData, { headers: this.headers });
   }
-  limpiarSeleccion() {
+  limpiarSeleccion() { 
     // Limpiar la lista de platillos seleccionados
     this.platillosSeleccionados = [];
+  }
+  getPedidos() {
+    return this.http.get<any>(`${this.BASE_URL}/pedidos`, { headers: this.headers });
   }
 }
   

@@ -16,4 +16,11 @@
 }
 .modal-header{
     justify-content: center;
+    background-image: url(../../../../../assets/image/f1.jpg);
+    //background-position: center;
+    background-position: cover;
+    border: none;
+}
+.modal-footer{
+    border: none;
 }
