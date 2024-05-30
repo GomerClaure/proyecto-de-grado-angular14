@@ -2,12 +2,15 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Pedidos de la {{ nombreMesa }}</h5>
+        <div class="modal-title" id="exampleModalLabel">
+        <h5>
+          Pedidos de la {{ nombreMesa }}</h5>
+        </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div *ngIf="PedidosParaMostrar.length > 0; else noPedidos">
-          <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+          <div id="carouselExampleIndicators" class="carousel slide">
             <div class="carousel-inner">
               <div *ngFor="let pedido of PedidosParaMostrar; let i = index" class="carousel-item" [class.active]="i === 0">
                 <div class="card my-2">
@@ -20,7 +23,7 @@
                         <thead>
                           <tr>
                             <th>Plato</th>
-                            <th>Cantidad</th>
+                            <th>Cant.</th>
                             <th>P.Unidad</th>
                             <th>P.Total</th>
                           </tr>
