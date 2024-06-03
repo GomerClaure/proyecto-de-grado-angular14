@@ -53,5 +53,8 @@ export class ModalPedidosComponent implements OnInit {
 
     console.log(this.PedidosParaMostrar);
   }
-
+  eliminarPedido(IdPedido:any){
+    console.log(IdPedido);
+    console.log("qbfiuowerbfoiuwrbfl")
+  }
 }

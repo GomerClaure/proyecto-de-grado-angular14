@@ -40,12 +40,15 @@
                     </div>
                     <hr>
                     <div class="row">
-                      <div class="col-8">
-                        <button class="btn btn-danger"><i class="bi bi-trash3-fill"></i> Eliminar</button>
-                      </div>
-                      <div class="col-4 text-end">
+                      <div class="col text-end">
                         <h6 class="card-subtitle mb-2 text-muted">Total del pedido: {{ pedido.totalPedido | number:'1.2-2' }} Bs.</h6>
+                        <br>
                       </div>
+                    </div>
+                    <div class="row justify-content-center">
+                      <div class="col-auto">
+                      <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalEliminarPedido" (click)="eliminarPedido(pedido.pedidoId)"><i class="bi bi-trash3-fill"></i> Eliminar</button>
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -71,3 +74,5 @@
     </div>
   </div>
 </div>
+
+<app-modal-eliminar-pedido></app-modal-eliminar-pedido>
