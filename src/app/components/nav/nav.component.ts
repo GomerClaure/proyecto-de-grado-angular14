@@ -3,6 +3,7 @@ import { SessionService } from 'src/app/services/auth/session.service';
 import { Router } from '@angular/router';
 import { NotificacionService } from 'src/app/services/notificacion/notificacion.service';
 import { Notificacion } from 'src/app/modelos/Notificacion';
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 @Component({
   selector: 'app-nav',
@@ -13,11 +14,15 @@ export class NavComponent implements OnInit {
   public notificaciones : Notificacion[];
 
   constructor(private sessionService: SessionService,private router:Router,
-     private notificacionService: NotificacionService) {
+     private notificacionService: NotificacionService, private webSocketService: WebsocketService) {
     this.notificaciones = [];
       }
 
   ngOnInit(): void {
+    if (sessionStorage.getItem('token_access')) {
+      this.webSocketService.iniciarConexion();
+      this.webSocketService.listenAllEvents('pedido');
+    }
     let bandera = sessionStorage.getItem('tipo') === 'Empleado';
     
     if (bandera){
@@ -32,8 +37,9 @@ export class NavComponent implements OnInit {
           console.error(error);
         }
       );
-    }
   }
+}
+  
   esAdministrador(): boolean {
     return sessionStorage.getItem('tipo') === 'Administrador';
   }
@@ -59,7 +65,7 @@ export class NavComponent implements OnInit {
 
   cerrarSesion() {
     this.sessionService.logout();
-  }
+  }
 
   mostrarModalCategoria(): void {
     console.log("modal");
@@ -69,7 +75,10 @@ export class NavComponent implements OnInit {
   irAMenu(){
     this.router.navigateByUrl('/menu/vista/1');
   }
+
+  suscribirseEventosDePedido(){
+    
  
 } 
 
- 
+}
