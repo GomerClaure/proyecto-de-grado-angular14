@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from 'src/app/services/auth/session.service';
 import { Router } from '@angular/router';
+import { NotificacionService } from 'src/app/services/notificacion/notificacion.service';
+import { Notificacion } from 'src/app/modelos/Notificacion';
 
 @Component({
   selector: 'app-nav',
@@ -8,10 +10,29 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
+  public notificaciones : Notificacion[];
 
-  constructor(private sessionService: SessionService,private router:Router) { }
+  constructor(private sessionService: SessionService,private router:Router,
+     private notificacionService: NotificacionService) {
+    this.notificaciones = [];
+      }
 
   ngOnInit(): void {
+    let bandera = sessionStorage.getItem('tipo') === 'Empleado';
+    
+    if (bandera){
+      console.log('jejejejejej')
+      this.notificacionService.getNotificaciones().subscribe(
+        (data) => {
+          console.log(data);
+          this.notificaciones = data.notificaciones;
+          console.log(this.notificaciones);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
   }
   esAdministrador(): boolean {
     return sessionStorage.getItem('tipo') === 'Administrador';
@@ -22,7 +43,18 @@ export class NavComponent implements OnInit {
   }
 
   esEmpleado(): boolean {
-    return sessionStorage.getItem('tipo') === 'Empleado';
+    let bandera = sessionStorage.getItem('tipo') === 'Empleado';
+    if (bandera){
+      this.notificacionService.getNotificaciones().subscribe(
+        (data) => {
+          this.notificaciones = data.notificaciones;
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+    return bandera;
   }
 
   cerrarSesion() {

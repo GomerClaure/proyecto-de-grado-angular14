@@ -11,6 +11,14 @@
     z-index: 1000; 
 
 }
-.navbar-brand{
-    font-size: 35x;
+
+@media (max-width: 425px) {
+    // .navbar{
+    //     flex-wrap: nowrap !important;
+    //     text-wrap: wrap !important;
+    // }
+    .navbar-brand{
+        font-size:  1rem !important;
+        margin-inline: 0px !important;
+    }
 }
