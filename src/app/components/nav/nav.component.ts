@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from 'src/app/services/auth/session.service';
 import { Router } from '@angular/router';
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,9 +10,14 @@ import { Router } from '@angular/router';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private sessionService: SessionService,private router:Router) { }
+  constructor(private sessionService: SessionService,private router:Router,
+    private webSocketService: WebsocketService) { }
 
   ngOnInit(): void {
+    if (sessionStorage.getItem('token_access')) {
+      this.webSocketService.iniciarConexion();
+      this.webSocketService.listenAllEvents('pedido');
+    }
   }
   esAdministrador(): boolean {
     return sessionStorage.getItem('tipo') === 'Administrador';
@@ -27,7 +33,7 @@ export class NavComponent implements OnInit {
 
   cerrarSesion() {
     this.sessionService.logout();
-  }
+  }
 
   mostrarModalCategoria(): void {
     console.log("modal");
@@ -37,7 +43,10 @@ export class NavComponent implements OnInit {
   irAMenu(){
     this.router.navigateByUrl('/menu/vista/1');
   }
+
+  suscribirseEventosDePedido(){
+    
  
 } 
 
- 
+}
