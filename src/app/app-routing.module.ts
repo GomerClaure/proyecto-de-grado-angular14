@@ -30,6 +30,10 @@ const routes: Routes = [
   {
   path:'menu',
   loadChildren:()=>import('../app/modulos/propietario/menu/menu.module').then(m=>m.MenuModule)
+  },
+  {
+    path:'notificacion',
+    loadChildren:()=>import('../app/modulos/notificacion/notificacion.module').then(m=>m.NotificacionModule)
   }
 
 ];
