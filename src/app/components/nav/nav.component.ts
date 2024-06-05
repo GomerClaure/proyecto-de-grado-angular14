@@ -12,21 +12,25 @@ import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 })
 export class NavComponent implements OnInit {
   public notificaciones : Notificacion[];
+  private idRestaurante: number;
 
   constructor(private sessionService: SessionService,private router:Router,
      private notificacionService: NotificacionService, private webSocketService: WebsocketService) {
     this.notificaciones = [];
+    this.idRestaurante = 0;
       }
 
   ngOnInit(): void {
     if (sessionStorage.getItem('token_access')) {
       this.webSocketService.iniciarConexion();
       this.webSocketService.listenAllEvents('pedido');
+      this.idRestaurante = parseInt(sessionStorage.getItem('id_restaurante')||'0');
+      this.suscribirseEventosDePedido();
+      
     }
-    let bandera = sessionStorage.getItem('tipo') === 'Empleado';
+    let sesionComoEmpleado = sessionStorage.getItem('tipo') === 'Empleado';
     
-    if (bandera){
-      console.log('jejejejejej')
+    if (sesionComoEmpleado){
       this.notificacionService.getNotificaciones().subscribe(
         (data) => {
           console.log(data);
@@ -49,18 +53,8 @@ export class NavComponent implements OnInit {
   }
 
   esEmpleado(): boolean {
-    let bandera = sessionStorage.getItem('tipo') === 'Empleado';
-    if (bandera){
-      this.notificacionService.getNotificaciones().subscribe(
-        (data) => {
-          this.notificaciones = data.notificaciones;
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-    }
-    return bandera;
+    let sesionComoEmpleado = sessionStorage.getItem('tipo') === 'Empleado';
+    return sesionComoEmpleado;
   }
 
   cerrarSesion() {
@@ -77,8 +71,51 @@ export class NavComponent implements OnInit {
   }
 
   suscribirseEventosDePedido(){
-    
+    this.webSocketService.listenAllEvents('notificaciones'+this.idRestaurante).bind('Notificacion', (data: any) => {
+      console.log(data);
+      this.desplegarNotificaciones(data.titulo, data.mensaje);
+      this.notificaciones.push(data);
+    });
  
 } 
+
+desplegarNotificaciones(titulo: string, mensaje: string){
+  if ("Notification" in window) {
+
+    // Pide permiso para mostrar notificaciones
+    Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+            let direccionIcono = 'assets/image/notificacion.png';
+            if(titulo.includes('creó')){
+              direccionIcono = 'assets/image/notificacion-icon.png';
+            }else if(titulo.includes('preparación')){
+              direccionIcono = 'assets/image/notificacion-icon3.png';
+            }else if(titulo.includes('completó')){
+              direccionIcono = 'assets/image/notificacion-icon2.png';
+            }else if(titulo.includes('canceló')){
+              direccionIcono = 'assets/image/notificacion-icon5.webp';
+            }else if(titulo.includes('sirvió')){
+              direccionIcono = 'assets/image/notificacion-icon4.png';
+            }
+            const notification = new Notification(titulo, {
+                body: mensaje,
+                icon: direccionIcono // Asegúrate de que tienes un icono en esta ruta
+            });
+
+            // Opcional: añade eventos a la notificación
+            notification.onclick = () => {
+                console.log("Notificación clicada");
+                // Puedes añadir aquí código para hacer algo cuando se clicke en la notificación
+            };
+        }else{
+          console.log("Notificación denegada");
+        }
+    }).catch((error) => {
+        console.error("Error al pedir permiso para notificaciones: ", error);
+    });
+} else {
+    console.error("El navegador no soporta notificaciones.");
+}
+}
 
 }

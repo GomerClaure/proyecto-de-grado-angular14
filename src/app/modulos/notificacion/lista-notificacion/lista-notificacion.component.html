@@ -13,7 +13,7 @@
             <a href="#" class="list-group-item list-group-item-action notificacion" *ngFor="let notificacion of notificaciones">
               <div class="d-flex w-100 justify-content-between">
                 <strong class="mb-1">{{notificacion.titulo}}</strong>
-                <small>{{notificacion.creado_hace}}</small>
+                <small class="text-end">{{notificacion.creado_hace}}</small>
               </div>
               <p class="mb-1 small">{{notificacion.mensaje}}</p>
             </a>

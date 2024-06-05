@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Notificacion } from 'src/app/modelos/Notificacion';
 import { NotificacionService } from 'src/app/services/notificacion/notificacion.service';
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 @Component({
   selector: 'app-lista-notificacion',
@@ -10,7 +11,7 @@ import { NotificacionService } from 'src/app/services/notificacion/notificacion.
 export class ListaNotificacionComponent implements OnInit {
   public notificaciones : Notificacion[];
 
-  constructor(private notificacionService: NotificacionService) { 
+  constructor(private notificacionService: NotificacionService, private websocketService: WebsocketService) { 
     this.notificaciones = [];
   }
 
@@ -23,6 +24,17 @@ export class ListaNotificacionComponent implements OnInit {
       (error) => {
         console.error(error);
       }
+    );
+
+    this.websocketService.iniciarConexion();
+    this.websocketService.listen('notificaciones'+sessionStorage.getItem('id_restaurante')).bind('Notificacion',
+     (data: Notificacion) => {
+      //guardar al principio del arreglo
+      
+      let nuevaNotificacion: Notificacion = data;
+      console.log(nuevaNotificacion);
+      this.notificaciones.unshift(data);
+    }
     );
   }
 

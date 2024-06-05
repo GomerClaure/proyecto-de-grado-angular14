@@ -39,11 +39,12 @@ export class WebsocketService {
     return this.socket.subscribe(channel);
   }
 
-  listenAllEvents(channelName: string) {
+  listenAllEvents(channelName: string): Channel{
     let channel = this.socket.subscribe(channelName);
-    channel.bind_global((eventName: string, data: any) => {
-      console.log(`Received event '${eventName}' with data:`, data);
-    });
+    // channel.bind_global((eventName: string, data: any) => {
+    //   console.log(`Received event '${eventName}' with data:`, data);
+    // });
+    return channel;
   }
 
 }
