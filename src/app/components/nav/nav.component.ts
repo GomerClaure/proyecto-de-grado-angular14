@@ -26,12 +26,11 @@ export class NavComponent implements OnInit {
       this.webSocketService.listenAllEvents('pedido');
       this.idRestaurante = parseInt(sessionStorage.getItem('id_restaurante')||'0');
       this.suscribirseEventosDePedido();
-      
-    }
-    let sesionComoEmpleado = sessionStorage.getItem('tipo') === 'Empleado';
+
+       let sesionComoEmpleado = sessionStorage.getItem('tipo') === 'Empleado';
     
     if (sesionComoEmpleado){
-      this.notificacionService.getNotificaciones().subscribe(
+      this.notificacionService.getNotificaciones(5).subscribe(
         (data) => {
           console.log(data);
           this.notificaciones = data.notificaciones;
@@ -42,6 +41,9 @@ export class NavComponent implements OnInit {
         }
       );
   }
+      
+    }
+   
 }
   
   esAdministrador(): boolean {

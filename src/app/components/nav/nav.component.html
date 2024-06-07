@@ -83,10 +83,10 @@
 <!-- Barra de navegacion del empleado -->
 <nav *ngIf="esEmpleado()" class="navbar navbar-expand-lg custom-navbar-color fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="home"><strong>Restaurante </strong></a>
-    
-    
-    
+    <a class="navbar-brand mx-0" href="home"><strong>Restaurante </strong></a>
+
+
+
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
@@ -105,19 +105,39 @@
     </div>
 
     <div class="d-flex ms-auto ">
-      <div class="dropdown mx-2">
+      <div class="dropdown-center mx-2">
         <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="bi bi-bell"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{ notificaciones.length }}
+            <span class="visually-hidden">unread messages</span>
+          </span>
+          <!-- <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span> -->
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
-          <li *ngFor="let notificacion of notificaciones">
-            <a class="dropdown-item" href="#">{{notificacion.titulo}}</a>
+          <div class="container-titulo mb-3 px-2">
+            <p class="fs-5  border-bottom border-dark-subtle border-2">Notificaciones</p>
+          </div>
+          <li *ngIf="notificaciones.length == 0" >
+            <a href="" class="list-group-item px-2 " style="width: 278px;">
+              No tienes notificaciones
+            </a>
           </li>
-          <li><a class="dropdown-item" href="#">Notificacion 1</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#">Notificacion 2</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#">Notificacion 3</a></li>
+          <li *ngFor="let notificacion of notificaciones" class="border-bottom border-1">
+            <a href="#" class="list-group-item list-group-item-action  notificacion px-2 ">
+              <div class="d-flex w-100 justify-content-between">
+                <strong class="mb-1">{{notificacion.titulo}}</strong>
+                <small class="text-end">{{notificacion.creado_hace}}</small>
+              </div>
+
+              <p class="mb-1 small">{{notificacion.mensaje}}</p>
+            </a>
+          </li>
+          <li *ngIf="notificaciones.length != 0" >
+            <a href="/notificacion/lista-notificacion" class="list-group-item px-2 notificacion text-end">
+              Ver todas <i class="bi bi-chevron-right"></i>
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -125,7 +145,8 @@
         <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
       </div>
     </div>
-    <button class="navbar-toggler btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   </div>

@@ -16,7 +16,7 @@ export class ListaNotificacionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.notificacionService.getNotificaciones().subscribe(
+    this.notificacionService.getNotificacionesTodas().subscribe(
       (data) => {
         this.notificaciones = data.notificaciones;
         console.log(this.notificaciones);
