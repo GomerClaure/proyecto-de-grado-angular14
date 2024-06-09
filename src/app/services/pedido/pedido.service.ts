@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class PedidoService {
+export class PedidoService { 
   private BASE_URL = environment.backendUrl;
   private headers = {
     'Authorization': 'Bearer ' + sessionStorage.getItem('token_access'),
@@ -32,6 +32,9 @@ export class PedidoService {
   }
   getPedidos() {
     return this.http.get<any>(`${this.BASE_URL}/pedidos`, { headers: this.headers });
+  }
+  deletePedido(id:number){
+    return this.http.delete<any>(`${this.BASE_URL}/menu/platillo/${id}`, { headers: this.headers });
   }
 }
   

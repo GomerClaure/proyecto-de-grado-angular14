@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidosParaMostrarMesa } from 'src/app/modelos/PedidosMesa';
+import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { PedidosDeMesaService } from 'src/app/services/pedido/pedidos-de-mesa.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class ModalPedidosComponent implements OnInit {
   pedidosDeMesa: any[] = [];
   nombreMesa:string='';
   PedidosParaMostrar: { pedidoId: number, platos: PedidosParaMostrarMesa[], totalPedido: number }[] = [];
-  constructor(private pedidoServiceMesa: PedidosDeMesaService) { }
+  constructor(private pedidoServiceMesa: PedidosDeMesaService,private pedidoService:PedidoService) { }
 
   ngOnInit(): void {
     this.pedidoServiceMesa.pedidosMesa$.subscribe(data => {
@@ -54,7 +55,14 @@ export class ModalPedidosComponent implements OnInit {
     console.log(this.PedidosParaMostrar);
   }
   eliminarPedido(IdPedido:any){
-    console.log(IdPedido);
-    console.log("qbfiuowerbfoiuwrbfl")
+    this.pedidoService.deletePedido(IdPedido).subscribe(
+      response => {
+        console.log('Pedido eliminado exitosamente:', response);
+        // Aquí puedes agregar lógica adicional, como actualizar la lista de pedidos
+      },
+      error => {
+        console.error('Error al eliminar el pedido:', error);
+      }
+    );
   }
 }
