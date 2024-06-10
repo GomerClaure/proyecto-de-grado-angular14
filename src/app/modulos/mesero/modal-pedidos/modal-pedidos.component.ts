@@ -12,7 +12,7 @@ export class ModalPedidosComponent implements OnInit {
   pedidosDeMesa: any[] = [];
   nombreMesa:string='';
   PedidosParaMostrar: { pedidoId: number, platos: PedidosParaMostrarMesa[], totalPedido: number }[] = [];
-  constructor(private pedidoServiceMesa: PedidosDeMesaService,private pedidoService:PedidoService) { }
+  constructor(private pedidoServiceMesa: PedidosDeMesaService) { }
 
   ngOnInit(): void {
     this.pedidoServiceMesa.pedidosMesa$.subscribe(data => {
@@ -55,14 +55,7 @@ export class ModalPedidosComponent implements OnInit {
     console.log(this.PedidosParaMostrar);
   }
   eliminarPedido(IdPedido:any){
-    this.pedidoService.deletePedido(IdPedido).subscribe(
-      response => {
-        console.log('Pedido eliminado exitosamente:', response);
-        // Aquí puedes agregar lógica adicional, como actualizar la lista de pedidos
-      },
-      error => {
-        console.error('Error al eliminar el pedido:', error);
-      }
-    );
-  }
+    //abrir el modal
+   this.pedidoServiceMesa.setIdPedido(IdPedido);
+}
 }
