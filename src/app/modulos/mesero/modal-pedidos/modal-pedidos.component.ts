@@ -55,7 +55,6 @@ export class ModalPedidosComponent implements OnInit {
     console.log(this.PedidosParaMostrar);
   }
   eliminarPedido(IdPedido:any){
-    //abrir el modal
-   this.pedidoServiceMesa.setIdPedido(IdPedido);
+   this.pedidoServiceMesa.setIdPedido(IdPedido); 
 }
 }
