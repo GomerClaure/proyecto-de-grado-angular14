@@ -23,7 +23,7 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
     if (sessionStorage.getItem('token_access')) {
       this.webSocketService.iniciarConexion();
-      this.webSocketService.listenAllEvents('pedido');
+      // this.webSocketService.listenAllEvents('pedido');
       this.idRestaurante = parseInt(sessionStorage.getItem('id_restaurante')||'0');
       this.suscribirseEventosDePedido();
 
@@ -31,9 +31,9 @@ export class NavComponent implements OnInit {
     
     if (sesionComoEmpleado){
       this.notificacionService.getNotificaciones(5).subscribe(
-        (data) => {
-          console.log(data);
+        (data) => { 
           this.notificaciones = data.notificaciones;
+          
           console.log(this.notificaciones);
         },
         (error) => {
@@ -74,7 +74,9 @@ export class NavComponent implements OnInit {
 
   suscribirseEventosDePedido(){
     this.webSocketService.listenAllEvents('notificaciones'+this.idRestaurante).bind('Notificacion', (data: any) => {
+      console.log('notificacion enviada');
       console.log(data);
+      this.filtrarNotificaciones( );
       this.desplegarNotificaciones(data.titulo, data.mensaje);
       this.notificaciones.push(data);
     });
@@ -118,6 +120,12 @@ desplegarNotificaciones(titulo: string, mensaje: string){
 } else {
     console.error("El navegador no soporta notificaciones.");
 }
+}
+
+filtrarNotificaciones(){
+  let idUsuario = parseInt(sessionStorage.getItem('id_user')||'0');
+  console.log(idUsuario);
+  this.notificaciones = this.notificaciones.filter(notificacion => notificacion.id_empleado === idUsuario);
 }
 
 }

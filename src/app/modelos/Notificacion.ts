@@ -1,5 +1,9 @@
 export interface Notificacion {
     id: number;
+    id_creador: number;
+    id_pedido: number;
+    id_restaurante: number;
+    id_empleado: number;
     // tipo: string; "pedido"o "platillo"
     tipo: string;
     titulo: string;
