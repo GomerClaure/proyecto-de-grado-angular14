@@ -22,7 +22,11 @@ export class NavComponent implements OnInit {
   }
 
   esEmpleado(): boolean {
-    return sessionStorage.getItem('tipo') === 'Empleado';
+      return sessionStorage.getItem('tipo') === 'Empleado';
+
+  }
+  getRol(){
+     return sessionStorage.getItem('id_empleado');
   }
 
   cerrarSesion() {

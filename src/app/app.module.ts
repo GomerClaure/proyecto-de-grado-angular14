@@ -10,11 +10,15 @@ import { MeseroModule } from './modulos/mesero/mesero.module';
 import { HomeModule } from './modulos/home/home.module';
 import { EditarCategoriaComponent } from './modulos/propietario/editar/editar-categoria/editar-categoria.component';
 import { NgToastModule } from 'ng-angular-popup';
+import { MostrarPedidosComponent } from './modulos/cocinero/mostrar-pedidos/mostrar-pedidos.component';
+import { ModalEstadoPedidoComponent } from './modulos/cocinero/modal-estado-pedido/modal-estado-pedido.component';
 //import { NgToastComponent, NgToastModule } from 'ng-angular-popup';
 
 @NgModule({
   declarations: [
     AppComponent,
+    MostrarPedidosComponent,
+    ModalEstadoPedidoComponent,
   ],
   imports: [
     BrowserModule,
