@@ -34,7 +34,6 @@ export class PedidoService {
     return this.http.get<any>(`${this.BASE_URL}/pedidos`, { headers: this.headers });
   }
   deletePedido(id:number){
-    //Eliminar pedido seleccionado
     return this.http.delete<any>(`${this.BASE_URL}/pedidos/${id}`, { headers: this.headers });
   }
 }
