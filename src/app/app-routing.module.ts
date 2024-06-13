@@ -30,6 +30,10 @@ const routes: Routes = [
   {
   path:'menu',
   loadChildren:()=>import('../app/modulos/propietario/menu/menu.module').then(m=>m.MenuModule)
+  },
+  {
+    path:'cocinero',
+    loadChildren:()=>import('../app/modulos/cocinero/cocinero.module').then(m=>m.CocineroModule)
   }
 
 ];

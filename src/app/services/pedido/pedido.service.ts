@@ -27,7 +27,6 @@ export class PedidoService {
     return this.http.post<any>(`${this.BASE_URL}/pedido`, formData, { headers: this.headers });
   }
   limpiarSeleccion() { 
-    // Limpiar la lista de platillos seleccionados
     this.platillosSeleccionados = [];
   }
   getPedidos() {
