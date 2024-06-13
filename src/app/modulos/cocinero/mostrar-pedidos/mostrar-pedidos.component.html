@@ -1,5 +1,27 @@
 <app-nav></app-nav><br><br>
 <div class="fondo">
     <br>
-    <p>mostrar-pedidos works!</p>
+    <div class="d-flex flex-column align-items-center">
+      <h2 class="titulo"><strong>Lista de Pedidos</strong></h2>
+      <img class="li" src="../../../../../assets/image/linea.png">
+    </div>
+    <div class="pedidos" *ngIf="pedidosMostrar.length > 0; else noPedidos">
+      <div *ngFor="let pedido of pedidosMostrar">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-header">
+              <h5 class="card-title">Pedido: {{pedido.numPedido}}</h5>
+            </div>
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">{{pedido.mesa}}</h6>
+              <p class="card-text">Tipo de pedido: {{pedido.tipoPedido}}</p>
+              <button class="btn btn-aceptar">Ver pedido</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <ng-template #noPedidos>
+        <p>No hay pedidos disponibles.</p>
+      </ng-template>
 </div>

@@ -7,4 +7,11 @@ export interface PedidosParaMostrarMesa{
   nomplatillo:string;
   totalPedido:number
 }
+export interface PedidosCocina{
+  numPedido:number;
+  mesa:string;
+  platos: any[];
+  tipoPedido:string;
+  hora:string;
+}
   

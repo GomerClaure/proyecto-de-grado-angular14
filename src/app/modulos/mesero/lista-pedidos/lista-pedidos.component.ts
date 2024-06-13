@@ -12,14 +12,13 @@ export class ListaPedidosComponent implements OnInit {
   pedidos: any[] = [];
   pedidosMostrar:any[]=[];
   errorMessage: string = '';
-  pedidosPorMesa: PedidosMesa[] = []; // Utiliza la interfaz PedidosMesa como tipo para el array
+  pedidosPorMesa: PedidosMesa[] = []; 
 
   constructor(private pedidoService: PedidoService,private pedidoServiceMesa:PedidosDeMesaService) { }
 
   ngOnInit(): void {
     this.obtenerPedidos();
-  }
-   
+  } 
   obtenerPedidos(): void {
     this.pedidoService.getPedidos().subscribe(
       (response) => {
@@ -32,7 +31,6 @@ export class ListaPedidosComponent implements OnInit {
       }
     );
   }
-
   agruparPedidosPorMesa(): void {
     this.pedidos.forEach(pedido => {
       const nombreMesa = pedido.cuenta.mesa.nombre;
@@ -45,7 +43,6 @@ export class ListaPedidosComponent implements OnInit {
       }
     });
   } 
-
   mostrar(nombreMesa: string) {
     const pedidosMesa = this.pedidosPorMesa.find(item => item.nombreMesa === nombreMesa)?.pedidos || [];
     this.pedidoServiceMesa.setPedidosDeMesa(pedidosMesa,nombreMesa);
