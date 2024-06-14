@@ -10,7 +10,11 @@ import { PedidoService } from 'src/app/services/pedido/pedido.service';
 export class MostrarPedidosComponent implements OnInit {
   pedidos: any[] = [];
   errorMessage: string = '';
+  pedidosP:PedidosCocina[]=[];
   pedidosMostrar:PedidosCocina[]=[];
+  pedidosParaLlevar:PedidosCocina[]=[];
+  pedidosParaAqui:PedidosCocina[]=[];
+
   constructor(private pedidoService: PedidoService) { }
 
   ngOnInit(): void {
@@ -35,12 +39,29 @@ export class MostrarPedidosComponent implements OnInit {
       const mesaP=pedido.cuenta.mesa.nombre;
       const platosP=pedido.platos;
       const horaP=pedido.fecha_hora_pedido;
-      this.pedidosMostrar.push({numPedido:numeroPedido,mesa:mesaP,platos:[platosP],tipoPedido:tipo,hora:horaP})
+      this.pedidosP.push({numPedido:numeroPedido,mesa:mesaP,platos:[platosP],tipoPedido:tipo,hora:horaP})
     })
-    this.pedidosMostrar.sort((a, b) => {
+    this.pedidosP.sort((a, b) => {
       const dateA = new Date(b.hora);
       const dateB = new Date(a.hora);
       return dateB.getTime() - dateA.getTime();
     });
+    this.mostrarped(this.pedidosP);
+  }
+  MostrarTodos(){
+    this.pedidosMostrar=this.pedidosP;
+  }
+  paraLlevar(): void {
+    this.pedidosParaLlevar = this.pedidosP.filter(ped => ped.tipoPedido === 'llevar');
+    this.mostrarped(this.pedidosParaLlevar);
+    console.log(this.pedidosParaLlevar);
+  }
+  paraAqui():void{
+    this.pedidosParaAqui = this.pedidosP.filter(ped => ped.tipoPedido === 'local');
+    this.mostrarped(this.pedidosParaAqui)
+    console.log(this.pedidosParaAqui);
+  }
+  mostrarped(p:any){
+    this.pedidosMostrar=p;
   }
   }

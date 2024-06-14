@@ -1,11 +1,55 @@
-.card-header{
-    background-color: beige;
-}
-.card{
-   width: 18rem;
-}
-.pedidos{
+.pedidos-container {
+    margin-left: 100px;
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .pedidos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  
+  .pedidos .card {
+    flex: 0 1 calc(20% - 10px); /* 5 cards per row, with spacing */
     margin: 5px;
-}
+    box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+  }
+  
+  .card-header {
+    background-color: beige;
+  }
+  
+  
+  .btn-ver{
+    background-color: beige;
+
+  }
+  /* Media query for smaller screens */
+  @media (max-width: 1200px) {
+    .pedidos .card {
+      flex: 0 1 calc(25% - 10px); /* 4 cards per row */
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .pedidos .card {
+      flex: 0 1 calc(33.33% - 10px); /* 3 cards per row */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .pedidos .card {
+      flex: 0 1 calc(50% - 10px); /* 2 cards per row */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .pedidos .card {
+      flex: 0 1 calc(100% - 10px); /* 1 card per row */
+    }
+  }
+  .nav-link{
+    color: black;
+    size: 40px;
+  }
