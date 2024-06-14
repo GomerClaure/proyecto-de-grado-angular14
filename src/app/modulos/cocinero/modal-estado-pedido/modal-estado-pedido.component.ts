@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.service';
 
 @Component({
   selector: 'app-modal-estado-pedido',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalEstadoPedidoComponent implements OnInit {
 
-  constructor() { }
+  platillos: any[] = [];
+
+  constructor(private pedidoCocina: PedidosCocinaService) { }
 
   ngOnInit(): void {
+    this.pedidoCocina.getPlatillos().subscribe(
+      (platos) => {
+        this.platillos = platos;
+      }
+    );
+    console.log("entra",this.platillos)
   }
 
 }

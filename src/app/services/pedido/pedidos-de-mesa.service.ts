@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class PedidosDeMesaService {
   private pedidosMesaSubject = new BehaviorSubject<{ pedidos: any[], nombreMesa: string }>({ pedidos: [], nombreMesa: '' });
   pedidosMesa$ = this.pedidosMesaSubject.asObservable();
-
+  
   constructor() { }
 
   setPedidosDeMesa(pedidos: any[], nombreMesa: string) {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidosCocina } from 'src/app/modelos/PedidosMesa';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
+import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.service';
 
 @Component({
   selector: 'app-mostrar-pedidos',
@@ -14,8 +15,9 @@ export class MostrarPedidosComponent implements OnInit {
   pedidosMostrar:PedidosCocina[]=[];
   pedidosParaLlevar:PedidosCocina[]=[];
   pedidosParaAqui:PedidosCocina[]=[];
+  platillos:any[]=[];
 
-  constructor(private pedidoService: PedidoService) { }
+  constructor(private pedidoService: PedidoService,private pedidoCocina:PedidosCocinaService) { }
 
   ngOnInit(): void {
     this.obtenerPedidos();
@@ -63,5 +65,11 @@ export class MostrarPedidosComponent implements OnInit {
   }
   mostrarped(p:any){
     this.pedidosMostrar=p;
+    console.log(p);
   }
+  verPlatos(id:number){
+    const pedido = this.pedidosP.find(p => p.numPedido === id);
+    this.platillos = pedido ? pedido.platos : [];
+    this.pedidoCocina.setPlatillos(this.platillos);
   }
+}

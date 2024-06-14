@@ -44,7 +44,7 @@
             <div class="card-body">
               <h6 class="card-subtitle mb-2 text-muted">{{pedido.mesa}}</h6>
               <p class="card-text">Tipo de pedido: {{pedido.tipoPedido}}</p>
-              <button class="btn btn-ver">Ver pedido</button>
+              <button class="btn btn-ver" data-bs-toggle="modal" data-bs-target="#verPedido" (click)="verPlatos(pedido.numPedido)">Ver pedido</button>
             </div>
           </div>
         </div>
@@ -55,3 +55,4 @@
         <p>No hay Pedidos.</p>
       </ng-template>
 </div>
+<app-modal-estado-pedido></app-modal-estado-pedido>
