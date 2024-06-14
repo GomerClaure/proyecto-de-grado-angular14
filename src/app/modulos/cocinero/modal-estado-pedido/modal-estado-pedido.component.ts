@@ -8,17 +8,13 @@ import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.ser
 })
 export class ModalEstadoPedidoComponent implements OnInit {
 
-  platillos: any[] = [];
-
+  platillo: any[] = [];
   constructor(private pedidoCocina: PedidosCocinaService) { }
 
   ngOnInit(): void {
-    this.pedidoCocina.getPlatillos().subscribe(
-      (platos) => {
-        this.platillos = platos;
-      }
-    );
-    console.log("entra",this.platillos)
-  }
+    this.pedidoCocina.platillos$.subscribe((platos) => {
+        this.platillo = platos;
+      });
+    }
 
 }

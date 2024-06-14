@@ -14,8 +14,4 @@ export class PedidosCocinaService {
   setPlatillos(platos: any[]) {
     this.platillosSubject.next(platos);
   } 
-
-  getPlatillos() {
-    return this.platillos$;
-  }
 }

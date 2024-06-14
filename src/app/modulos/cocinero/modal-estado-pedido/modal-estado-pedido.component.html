@@ -5,8 +5,10 @@
         <h5 class="modal-title" id="exampleModalLabel">Platos del Pedido</h5>
       </div>
       <div class="modal-body">
-        <div *ngFor="let plato of platillos">
-          <p>{{plato.nombre}}</p>
+        <div *ngFor="let plato of platillo">
+          <div *ngFor="let p of plato">
+            <p>{{ p.nombre }}</p> 
+          </div>
         </div>
       </div>
       <div class="modal-footer">
