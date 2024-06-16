@@ -14,5 +14,6 @@ export interface PedidosCocina{
   platos: any[];
   tipoPedido:string;
   hora:string;
+  estado:string;
 }
   

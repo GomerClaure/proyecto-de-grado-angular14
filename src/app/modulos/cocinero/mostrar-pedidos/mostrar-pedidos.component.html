@@ -10,11 +10,11 @@
         </li>
             <li class="nav-item ms-3">
                 <a class="nav-link" role="tab" aria-controls="categoria0"
-                    aria-selected="true">Pendientes</a>
+                    aria-selected="true" (click)="enPreparacion()">En preparacion</a>
             </li>
             <li class="nav-item ms-3">
               <a class="nav-link" role="tab" aria-controls="categoria0"
-                  aria-selected="true">Terminados</a>
+                  aria-selected="true" (click)="terminado()">Terminados</a>
           </li>
           <li class="nav-item ms-3" (click)="paraLlevar()">
             <a class="nav-link" role="tab" aria-controls="categoria0"
@@ -39,6 +39,7 @@
             <div class="card-body">
               <h6 class="card-subtitle mb-2 text-muted">{{pedido.mesa}}</h6>
               <p class="card-text">Tipo de pedido: {{pedido.tipoPedido}}</p>
+              <p class="card-text">Estado del pedido: {{pedido.estado}}</p>
               <button class="btn btn-ver" data-bs-toggle="modal" data-bs-target="#verPedido" (click)="verPlatos(pedido.numPedido)">Ver pedido</button>
             </div>
           </div>

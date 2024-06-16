@@ -15,6 +15,8 @@ export class MostrarPedidosComponent implements OnInit {
   pedidosMostrar:PedidosCocina[]=[];
   pedidosParaLlevar:PedidosCocina[]=[];
   pedidosParaAqui:PedidosCocina[]=[];
+  pedidosPreparacion:PedidosCocina[]=[];
+  pedidosTerminado:PedidosCocina[]=[];
   platillos:any[]=[];
 
   constructor(private pedidoService: PedidoService,private pedidoCocina:PedidosCocinaService) { }
@@ -26,7 +28,6 @@ export class MostrarPedidosComponent implements OnInit {
     this.pedidoService.getPedidos().subscribe(
       (response) => {
         this.pedidos = response.pedidos;
-        console.log("entra",this.pedidos)
         this.ordenarPedidos();
       },
       (error) => {
@@ -37,12 +38,14 @@ export class MostrarPedidosComponent implements OnInit {
   }
   ordenarPedidos(){
     this.pedidos.forEach(pedido=>{
+      console.log(this.pedidos,"aquiiii")
       const numeroPedido=pedido.id;
       const tipo=pedido.tipo;
       const mesaP=pedido.cuenta.mesa.nombre;
       const platosP=pedido.platos;
       const horaP=pedido.fecha_hora_pedido;
-      this.pedidosP.push({numPedido:numeroPedido,mesa:mesaP,platos:[platosP],tipoPedido:tipo,hora:horaP})
+      const estadoP=pedido.estado.nombre;
+      this.pedidosP.push({numPedido:numeroPedido,mesa:mesaP,platos:[platosP],tipoPedido:tipo,hora:horaP,estado:estadoP})
     })
     this.pedidosP.sort((a, b) => {
       const dateA = new Date(b.hora);
@@ -57,20 +60,25 @@ export class MostrarPedidosComponent implements OnInit {
   paraLlevar(): void {
     this.pedidosParaLlevar = this.pedidosP.filter(ped => ped.tipoPedido === 'llevar');
     this.mostrarped(this.pedidosParaLlevar);
-    console.log(this.pedidosParaLlevar);
   }
   paraAqui():void{
     this.pedidosParaAqui = this.pedidosP.filter(ped => ped.tipoPedido === 'local');
     this.mostrarped(this.pedidosParaAqui)
-    console.log(this.pedidosParaAqui);
   }
   mostrarped(p:any){
     this.pedidosMostrar=p;
-    console.log(p);
   }
   verPlatos(id:number){
     const pedido = this.pedidosP.find(p => p.numPedido === id);
     this.platillos = pedido ? pedido.platos : [];
     this.pedidoCocina.setPlatillos(this.platillos);
+  }
+  enPreparacion(){
+    this.pedidosPreparacion= this.pedidosP.filter(p=>p.estado=='En preparación');
+    this.mostrarped(this.pedidosPreparacion);
+  }
+  terminado(){
+   this.pedidosTerminado=this.pedidosP.filter(pe=>pe.estado=='Servido');
+   this.mostrarped(this.pedidosTerminado);
   }
 }
