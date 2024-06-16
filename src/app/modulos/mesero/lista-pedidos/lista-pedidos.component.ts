@@ -23,6 +23,7 @@ export class ListaPedidosComponent implements OnInit {
     this.pedidoService.getPedidos().subscribe(
       (response) => {
         this.pedidos = response.pedidos;
+        console.log(this.pedidos);
         this.agruparPedidosPorMesa();
       },
       (error) => {
@@ -34,17 +35,19 @@ export class ListaPedidosComponent implements OnInit {
   agruparPedidosPorMesa(): void {
     this.pedidos.forEach(pedido => {
       const nombreMesa = pedido.cuenta.mesa.nombre;
+      const est=pedido.estado.nombre;
+      console.log(est);
       const pedidosMesa = this.pedidosPorMesa.find(item => item.nombreMesa === nombreMesa); 
 
       if (!pedidosMesa) { 
-        this.pedidosPorMesa.push({ nombreMesa: nombreMesa, pedidos: [pedido] });
+        this.pedidosPorMesa.push({ nombreMesa: nombreMesa,estadoP:est, pedidos: [pedido]});
       } else { 
-        pedidosMesa.pedidos.push(pedido);
+        pedidosMesa.pedidos.push(pedido); 
       }
     });
   } 
-  mostrar(nombreMesa: string) {
+  mostrar(nombreMesa: string,estado:string) {
     const pedidosMesa = this.pedidosPorMesa.find(item => item.nombreMesa === nombreMesa)?.pedidos || [];
-    this.pedidoServiceMesa.setPedidosDeMesa(pedidosMesa,nombreMesa);
+    this.pedidoServiceMesa.setPedidosDeMesa(pedidosMesa,nombreMesa,estado);
   }
 }

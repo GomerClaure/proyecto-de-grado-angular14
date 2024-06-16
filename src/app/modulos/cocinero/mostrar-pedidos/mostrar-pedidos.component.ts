@@ -26,6 +26,7 @@ export class MostrarPedidosComponent implements OnInit {
     this.pedidoService.getPedidos().subscribe(
       (response) => {
         this.pedidos = response.pedidos;
+        console.log("entra",this.pedidos)
         this.ordenarPedidos();
       },
       (error) => {

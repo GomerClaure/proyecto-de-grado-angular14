@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Platillo } from 'src/app/modelos/Platillo';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
