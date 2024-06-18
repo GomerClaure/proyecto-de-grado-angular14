@@ -26,7 +26,7 @@ export class NavComponent implements OnInit {
 
   }
   getRol(){
-     return sessionStorage.getItem('id_empleado');
+     return sessionStorage.getItem('rol_empleado');
   }
 
   cerrarSesion() {
