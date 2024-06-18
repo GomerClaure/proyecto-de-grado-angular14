@@ -40,6 +40,7 @@ export class SessionService {
             sessionStorage.setItem('pais', propietario.pais);
             sessionStorage.setItem('departamento', propietario.departamento);
             sessionStorage.setItem('tipo', 'Propietario');
+            sessionStorage.setItem('id_restaurante', propietario.id_restaurante.toString());
           } else if (res.user.tipo === 'Empleado') {
             let empleado: Empleado = res.user;
             sessionStorage.setItem('id_empleado', empleado.id.toString());
@@ -49,6 +50,7 @@ export class SessionService {
             sessionStorage.setItem('direccion', empleado.direccion);
             sessionStorage.setItem('tipo', 'Empleado');
             sessionStorage.setItem('rol_empleado',empleado.id_rol.toString());
+            sessionStorage.setItem('id_restaurante', empleado.id_restaurante.toString());
           }
         }
         // return {message: 'Inicio de sesión exitoso.'}
