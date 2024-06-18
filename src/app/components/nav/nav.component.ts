@@ -36,7 +36,7 @@ export class NavComponent implements OnInit {
           (data) => {
             this.notificaciones = data.notificaciones;
             this.notificaciones.forEach(notificacion => {
-              if (notificacion.read_at!== null) {
+              if (notificacion.read_at === null) {
                 this.notificacionesSinLeer++;
               }
             });
@@ -83,12 +83,15 @@ export class NavComponent implements OnInit {
     this.webSocketService.listenAllEvents('notificaciones' + this.idRestaurante).bind('Notificacion', (data: any) => {
      
       let idUsuario = parseInt(sessionStorage.getItem('id_user') || '0');
+      let rolEmpleado = sessionStorage.getItem('rol_empleado');
       console.log('El id del usuario es: ', idUsuario);
       console.log('El id del empleado es: ', data.id_empleado);
-      if (idUsuario === data.id_empleado) {
+      if (idUsuario === data.id_empleado || rolEmpleado === '3') {
         console.log('notificacion filtrada');
+
         this.filtrarNotificaciones( data);
         this.desplegarNotificaciones(data.titulo, data.mensaje);
+        this.notificacionesSinLeer++;
       }
     });
 
@@ -134,11 +137,14 @@ export class NavComponent implements OnInit {
   }
 
   filtrarNotificaciones(notificacion: Notificacion) {
-
+    console.log('notificacion', notificacion);// comprobar que al recibir notficacion se filtra
     // Colocar una notificacione en la posicion 0 de la lista de notidicaciones
     this.notificaciones.unshift(notificacion);
+    console.log('notificaciones', this.notificaciones);
     //quitar la ultima notificacion
-    this.notificaciones.pop();
+    if (this.notificaciones.length > 5) {
+      this.notificaciones.pop();
+    }
 
   }
 
