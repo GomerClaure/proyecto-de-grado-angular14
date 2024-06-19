@@ -33,6 +33,9 @@ export class PedidoService {
   getPedidos(): Observable<any> {
     return this.http.get<any>(`${this.BASE_URL}/pedidos`, { headers: this.headers });
   }
+  cambiarEstadoPedido(formData:any){
+    return this.http.put<any>(`${this.BASE_URL}/plato-pedido/estado`, { headers: this.headers })
+  }
 }
   
 

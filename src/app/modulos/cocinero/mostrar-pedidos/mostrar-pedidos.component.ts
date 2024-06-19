@@ -69,10 +69,12 @@ export class MostrarPedidosComponent implements OnInit {
     this.pedidosMostrar=p;
   }
   verPlatos(id:number){
+    const IdPedido=id;
     const pedido = this.pedidosP.find(p => p.numPedido === id);
     this.platillos = pedido ? pedido.platos : [];
     this.pedidoCocina.setPlatillos(this.platillos);
-  }
+    this.pedidoCocina.setIdPedido(IdPedido);
+    }
   enPreparacion(){
     this.pedidosPreparacion= this.pedidosP.filter(p=>p.estado=='En preparación');
     this.mostrarped(this.pedidosPreparacion);

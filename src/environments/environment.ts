@@ -13,7 +13,7 @@ export const environment = {
   // frontDominio: ' http://192.168.0.15:8000:4200'
 };
 export const websocketConfig = {
-  key: '123456',
+  key: '1234',
   cluster: 'mt1',
   wsHost: 'localhost',
   wsPort: 6001,

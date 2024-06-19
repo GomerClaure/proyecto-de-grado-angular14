@@ -12,8 +12,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-editar" data-bs-dismiss="modal" >En Curso</button>
-        <button type="button" class="btn btn-aceptar" data-bs-dismiss="modal">Terminado</button>
+        <button type="button" class="btn btn-editar" data-bs-dismiss="modal" (click)="cambiarEstado('2')">En Curso</button>
+        <button type="button" class="btn btn-aceptar" data-bs-dismiss="modal" (click)="cambiarEstado('4')">Terminado</button>
         <button type="button" class="btn btn-aceptar" data-bs-dismiss="modal">Atras</button>
       </div>
     </div>
