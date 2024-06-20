@@ -33,8 +33,13 @@ export class PedidoService {
   getPedidos(): Observable<any> {
     return this.http.get<any>(`${this.BASE_URL}/pedidos`, { headers: this.headers });
   }
-  cambiarEstadoPedido(idPedido:any,idRestaurante:any,idEstado:any){
-    return this.http.put<any>(`${this.BASE_URL}/plato-pedido/estado`, {id_pedido: idPedido, id_estado: idEstado, id_restaurante: idRestaurante}, { headers: this.headers });
+  cambiarEstadoPedido( idPedido: string, idRestaurante: string, idEstado: string){
+    const body = {
+      id_pedido: idPedido,
+      id_estado: idEstado,
+      id_restaurante: idRestaurante
+    };
+    return this.http.put<any>(`${this.BASE_URL}/plato-pedido/estado`, body, { headers: this.headers });
   }
   }
   
