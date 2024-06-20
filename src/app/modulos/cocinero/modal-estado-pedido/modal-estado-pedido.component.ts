@@ -19,18 +19,11 @@ export class ModalEstadoPedidoComponent implements OnInit {
     this.pedidoCocina.platillos$.subscribe((platos) => {
         this.platillo = platos;
       });
-      this.pedidoCocina.idPlatillo$.subscribe((id) => {
-        this.idPlatillo = id;
-      });
   }
   cambiarEstado(idEstado:any){
     let idPedido=this.pedidoCocina.getIdPedido();
     this.idRestaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
-    const formData = new FormData();
-    formData.append('idEstado', idEstado);
-    formData.append('idPedido',idPedido.toString());
-    formData.append('idRestaurante',this.idRestaurante.toString());
-
-    this.pedidoS.cambiarEstadoPedido(formData);
+    console.log(idPedido,this.idRestaurante,idEstado)
+    this.pedidoS.cambiarEstadoPedido(idPedido,this.idRestaurante,idEstado);
   }
 }

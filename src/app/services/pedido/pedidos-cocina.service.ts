@@ -7,9 +7,8 @@ import { BehaviorSubject } from 'rxjs';
 export class PedidosCocinaService {
 
   private platillosSubject = new BehaviorSubject<any[]>([]);
-  private idPlatilloSubject = new BehaviorSubject<any>(null); 
   platillos$ = this.platillosSubject.asObservable();
-  idPlatillo$ =this.idPlatilloSubject.asObservable();
+  private idPedido:string='';
 
   constructor() { }
 
@@ -17,10 +16,10 @@ export class PedidosCocinaService {
     this.platillosSubject.next(platos);
   } 
   setIdPedido(id:any){
-     this.idPlatilloSubject.next(id);
+     this.idPedido=id;
   }
   getIdPedido(){ 
-    return this.idPlatillo$;
-  }
+    return this.idPedido;
+    }
   
 }
