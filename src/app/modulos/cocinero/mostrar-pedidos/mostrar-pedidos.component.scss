@@ -15,22 +15,33 @@
     margin: 5px;
     box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
   }
-  
-  .card-header {
-    background-color: beige;
-  }
-  
-  
-  .btn-ver{
-    background-color: beige;
-
-  }
+.card-body{
+  background-color: white;
+}
+  /* Estado: Terminado */
+.card-terminado {
+  background-color: rgb(173, 236, 173);
+}
+/* Estado: En Preparacion */
+.card-en-preparacion {
+  background-color: rgb(247, 232, 168);
+}
+/* Estado por defecto */
+.card-default {
+  background-color: rgb(240, 162, 128);
+}  
+.btn-ver{
+    background-color: rgb(255, 255, 255);
+}
+.card-actions{
+  padding-bottom: 5px;
+}
   /* Media query for smaller screens */
-  @media (max-width: 1200px) {
+@media (max-width: 1200px) {
     .pedidos .card {
       flex: 0 1 calc(25% - 10px); /* 4 cards per row */
     }
-  }
+}
   
   @media (max-width: 992px) {
     .pedidos .card {

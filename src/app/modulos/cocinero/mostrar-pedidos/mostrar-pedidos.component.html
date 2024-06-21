@@ -31,18 +31,29 @@
     <div class="pedidos-container">
     <div class="pedidos" *ngIf="pedidosMostrar.length > 0; else noPedidos">
       <div *ngFor="let pedido of pedidosMostrar">
-        <div class="card">
-          <div class="card-body">
-            <div class="card-header">
-              <h5 class="card-title">Pedido: {{pedido.numPedido}}</h5>
+
+        <div class="card"  [ngClass]="{
+          'card-terminado': pedido.estado ==='Servido',
+          'card-en-preparacion': pedido.estado === 'En preparación',
+          'card-default': pedido.estado !== 'Servido' && pedido.estado !== 'En preparación'
+        }">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <div>
+                <h2>{{pedido.hora}}</h2>
+              </div>
+              <i *ngIf="pedido.tipoPedido === 'llevar'" class="bi bi-bag-fill"></i>
+              <i *ngIf="pedido.tipoPedido === 'local'" class="bi bi-house-door-fill"></i>
             </div>
             <div class="card-body">
               <h6 class="card-subtitle mb-2 text-muted">{{pedido.mesa}}</h6>
               <p class="card-text">Tipo de pedido: {{pedido.tipoPedido}}</p>
-              <p class="card-text">Estado del pedido: {{pedido.estado}}</p>
-              <button class="btn btn-ver" data-bs-toggle="modal" data-bs-target="#verPedido" (click)="verPlatos(pedido.numPedido)">Ver pedido</button>
+              <p class="card-text">Estado: {{pedido.estado}}</p>
             </div>
+            <div class="card-actions d-flex justify-content-center pt-2">
+              <button class="btn btn-ver" data-bs-toggle="modal" data-bs-target="#verPedido" (click)="verPlatos(pedido.numPedido)">Ver pedido</button>
           </div>
+        </div> 
+
         </div>
       </div>
       </div>
@@ -50,5 +61,4 @@
       <ng-template #noPedidos>
         <p>No hay Pedidos.</p>
       </ng-template>
-</div>
 <app-modal-estado-pedido></app-modal-estado-pedido>

@@ -23,6 +23,12 @@ export class MostrarPedidosComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerPedidos();
+    this.pedidos.forEach(pedido => {
+      pedido.hora = this.extractHour(pedido.hora);
+    });
+  }
+  extractHour(datetime: string): string {
+    return datetime.split(' ')[1].substring(0, 5); // Extrae '15:05' de '2024-06-19 15:05:52'
   }
   obtenerPedidos(): void {
     this.pedidoService.getPedidos().subscribe(
@@ -44,7 +50,7 @@ export class MostrarPedidosComponent implements OnInit {
       const tipo=pedido.tipo;
       const mesaP=pedido.cuenta.mesa.nombre;
       const platosP=pedido.platos;
-      const horaP=pedido.fecha_hora_pedido;
+      const horaP=this.extractHour(pedido.fecha_hora_pedido);
       const estadoP=pedido.estado.nombre;
       this.pedidosP.push({numPedido:numeroPedido,mesa:mesaP,platos:[platosP],tipoPedido:tipo,hora:horaP,estado:estadoP})
     })

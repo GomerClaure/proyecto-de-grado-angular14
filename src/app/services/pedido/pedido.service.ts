@@ -41,7 +41,7 @@ export class PedidoService {
     };
     return this.http.put<any>(`${this.BASE_URL}/plato-pedido/estado`, body, { headers: this.headers });
   }
-  }
+  } 
   
 
   
