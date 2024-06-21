@@ -60,6 +60,7 @@ export class NavComponent implements OnInit {
   }
 
   cerrarSesion() {
+    this.webSocketService.closeConnection();
     this.sessionService.logout();
   }
 
@@ -74,11 +75,21 @@ export class NavComponent implements OnInit {
 
   suscribirseEventosDePedido(){
     this.webSocketService.listenAllEvents('notificaciones'+this.idRestaurante).bind('Notificacion', (data: any) => {
+      console.log(data)
       console.log('notificacion enviada');
-      console.log(data);
-      this.filtrarNotificaciones( );
-      this.desplegarNotificaciones(data.titulo, data.mensaje);
-      this.notificaciones.push(data);
+      console.log('El id del empleado es: '+data.id_empleado);
+      console.log('El id del empleado en sesion es: '+sessionStorage.getItem('id_empleado'));
+      if(data.id_empleado === parseInt(sessionStorage.getItem('id_empleado')||'0')){
+        console.log('notificacion desplegada');
+        this.desplegarNotificaciones(data.titulo, data.mensaje);
+        if(this.notificaciones.length >= 5){
+          //colocar la notificacion en la primera posicion
+          this.notificaciones.pop();
+          this.notificaciones.unshift(data);
+        }
+        
+      }
+      
     });
  
 } 
@@ -122,10 +133,5 @@ desplegarNotificaciones(titulo: string, mensaje: string){
 }
 }
 
-filtrarNotificaciones(){
-  let idUsuario = parseInt(sessionStorage.getItem('id_user')||'0');
-  console.log(idUsuario);
-  this.notificaciones = this.notificaciones.filter(notificacion => notificacion.id_empleado === idUsuario);
-}
 
 }

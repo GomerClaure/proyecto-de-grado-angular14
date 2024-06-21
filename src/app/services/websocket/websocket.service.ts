@@ -16,6 +16,7 @@ export class WebsocketService {
   }
 
   iniciarConexion() {
+    this.closeConnection();
     this.socket = new Pusher(websocketConfig.key, {
       cluster: websocketConfig.cluster,
       wsHost: websocketConfig.wsHost,
@@ -45,6 +46,11 @@ export class WebsocketService {
     //   console.log(`Received event '${eventName}' with data:`, data);
     // });
     return channel;
+  }
+
+  closeConnection() {
+    if (this.socket)
+      this.socket.disconnect();
   }
 
 }
