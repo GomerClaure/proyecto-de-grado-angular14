@@ -41,11 +41,11 @@
               <div>
                 <h2>{{pedido.hora}}</h2>
               </div>
-              <i *ngIf="pedido.tipoPedido === 'llevar'" class="bi bi-bag-fill"></i>
-              <i *ngIf="pedido.tipoPedido === 'local'" class="bi bi-house-door-fill"></i>
+              <i *ngIf="pedido.tipoPedido === 'llevar'" class="bi bi-bag-fill icon-large"></i>
+              <i *ngIf="pedido.tipoPedido === 'local'" class="bi bi-house-door-fill icon-large"></i>
             </div>
             <div class="card-body">
-              <h6 class="card-subtitle mb-2 text-muted">{{pedido.mesa}}</h6>
+              <p class="card-text">{{pedido.mesa}}</p>
               <p class="card-text">Tipo de pedido: {{pedido.tipoPedido}}</p>
               <p class="card-text">Estado: {{pedido.estado}}</p>
             </div>

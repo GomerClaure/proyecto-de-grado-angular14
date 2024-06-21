@@ -22,20 +22,23 @@ export class MostrarPedidosComponent implements OnInit {
   constructor(private pedidoService: PedidoService,private pedidoCocina:PedidosCocinaService) { }
 
   ngOnInit(): void {
-    this.obtenerPedidos();
-    this.pedidos.forEach(pedido => {
-      pedido.hora = this.extractHour(pedido.hora);
+    this.pedidoService.pedidos$.subscribe(pedidos => {
+      console.log('Pedidos recibidos en el componente:', pedidos);
+      this.pedidos = pedidos;
+      this.ordenarPedidos();
     });
+
+    // Cargar pedidos inicialmente
+    this.obtenerPedidos();
   }
   extractHour(datetime: string): string {
     return datetime.split(' ')[1].substring(0, 5); // Extrae '15:05' de '2024-06-19 15:05:52'
   }
   obtenerPedidos(): void {
     this.pedidoService.getPedidos().subscribe(
-      (response) => {
-        this.pedidos = response.pedidos;
-        console.log(this.pedidos);
-        this.ordenarPedidos();
+      () => {
+        // Los pedidos ya serán emitidos por pedidosSubject
+        console.log('Pedidos obtenidos y emitidos por pedidosSubject');
       },
       (error) => {
         this.errorMessage = 'Error al obtener los pedidos';
