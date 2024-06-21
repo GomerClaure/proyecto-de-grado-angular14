@@ -24,7 +24,7 @@ export class MostrarPedidosComponent implements OnInit {
   ngOnInit(): void {
     this.pedidoService.pedidos$.subscribe(pedidos => {
       console.log('Pedidos recibidos en el componente:', pedidos);
-      this.pedidos = pedidos;
+      this.actualizarPedidos(pedidos);
       this.ordenarPedidos();
     });
 
@@ -63,6 +63,30 @@ export class MostrarPedidosComponent implements OnInit {
       return dateB.getTime() - dateA.getTime();
     });
     this.mostrarped(this.pedidosP);
+  }
+  actualizarPedidos(nuevosPedidos: any[]) {
+    nuevosPedidos.forEach(pedido => {
+      // Buscar si el pedido ya existe en pedidosP
+      const indice = this.pedidosP.findIndex(p => p.numPedido === pedido.id);
+      if (indice !== -1) {
+        // Si existe, actualizar los campos necesarios
+        this.pedidosP[indice].mesa = pedido.cuenta.mesa.nombre;
+        this.pedidosP[indice].platos = [pedido.platos];
+        this.pedidosP[indice].tipoPedido = pedido.tipo;
+        this.pedidosP[indice].hora = this.extractHour(pedido.fecha_hora_pedido);
+        this.pedidosP[indice].estado = pedido.estado.nombre;
+      } else {
+        // Si no existe, agregar el nuevo pedido a pedidosP
+        this.pedidosP.push({
+          numPedido: pedido.id,
+          mesa: pedido.cuenta.mesa.nombre,
+          platos: [pedido.platos],
+          tipoPedido: pedido.tipo,
+          hora: this.extractHour(pedido.fecha_hora_pedido),
+          estado: pedido.estado.nombre
+        });
+      }
+    });
   }
   MostrarTodos(){
     this.pedidosMostrar=this.pedidosP;
