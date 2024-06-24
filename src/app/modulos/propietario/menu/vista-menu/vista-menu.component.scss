@@ -46,6 +46,7 @@
   display: flex;
   flex-direction: column;
   height: 80vh;
+  border-radius: 0%;
 }
 
 .card-header {
@@ -113,6 +114,19 @@
 
 .carousel-control-prev-icon {
   color: black;
+}
+
+.dark-theme{
+  .card{
+    background-color: #333;
+    color: white;
+  }
+  .categoria-titulo {
+  border-bottom: 1px solid #f3a96c;
+  }
+  .menu-cuerpo-precio {
+    color: #ffffff;
+  }
 }
 
 .portada {

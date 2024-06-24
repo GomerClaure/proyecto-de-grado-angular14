@@ -81,7 +81,8 @@
 </nav>
 
 <!-- Barra de navegacion del empleado -->
-<nav *ngIf="esEmpleado()" class="navbar navbar-expand-lg custom-navbar-color fixed-top">
+ <!--Si el empleado es mesero-->
+<nav *ngIf="esEmpleado() && getRol()=='1'" class="navbar navbar-expand-lg custom-navbar-color ">
   <div class="container-fluid">
     <a class="navbar-brand mx-0" href="home"><strong>Restaurante </strong></a>
 
@@ -100,9 +101,6 @@
           <li class="nav-item">
             <a class="nav-link active" href="mesero/lista-pedidos">Lista de Pedidos</a>
           </li>
-          <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
-          </li>
         </ul>
       </div>
     </div>
@@ -111,8 +109,9 @@
       <div class="dropdown-center mx-2">
         <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="bi bi-bell"></i>
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            {{ notificaciones.length }}
+
+          <span *ngIf="notificacionesSinLeer !=0  " class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{ notificacionesSinLeer }}
             <span class="visually-hidden">unread messages</span>
           </span>
           <!-- <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span> -->
@@ -144,6 +143,9 @@
         </ul>
       </div>
 
+      <div class="nav-item mx-2">
+        <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
+      </div>
     </div>
     <button class="navbar-toggler btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
       aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -151,10 +153,51 @@
     </button>
   </div>
 </nav>
+<!--Si el empleado es cocinero-->
+<nav *ngIf="esEmpleado() && getRol()=='3'" class="navbar navbar-expand-lg custom-navbar-color ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="home">Empleado Cocinero</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="cocinero/pedido-cocina">Ver pedidos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!--Si el empleado es cajero-->
+<nav *ngIf="esEmpleado() && getRol()=='2'" class="navbar navbar-expand-lg custom-navbar-color ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="home">Empleado Cajero</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="mesero/lista-mesa">Registrar Pedido</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="mesero/lista-pedidos">Lista de Pedidos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
 
-
-<!-- Barra de navegacion generica -->
 <nav *ngIf="!esPropietario() && !esEmpleado() && !esAdministrador()"
   class="navbar navbar-expand-lg custom-navbar-color">
   <div class="container-fluid">
@@ -179,5 +222,4 @@
     </div>
   </div>
 </nav>
-
 <app-registrar-categoria></app-registrar-categoria>
