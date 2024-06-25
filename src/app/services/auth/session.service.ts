@@ -63,6 +63,7 @@ export class SessionService {
   }
 
   public logout() {
+    localStorage.clear();
     sessionStorage.clear();
     return this.http.get<any>(`${this.BASE_URL}/logout`);
 

@@ -35,12 +35,7 @@ export class NavComponent implements OnInit {
         this.notificacionService.getNotificaciones(5).subscribe(
           (data) => {
             this.notificaciones = data.notificaciones;
-            this.notificaciones.forEach(notificacion => {
-              if (notificacion.read_at === null) {
-                this.notificacionesSinLeer++;
-              }
-            });
-
+            this.notificacionesSinLeer = data.notificacionesSinLeer;
             console.log(this.notificaciones);
           },
           (error) => {
@@ -147,18 +142,29 @@ export class NavComponent implements OnInit {
     this.webSocketService.listenAllEvents('notificaciones' + this.idRestaurante).bind('Notificacion', (data: any) => {
      
       let idEmpleado = parseInt(sessionStorage.getItem('id_empleado') || '0');
-      let rolEmpleado = sessionStorage.getItem('rol_empleado');
+      // let rolEmpleado = sessionStorage.getItem('rol_empleado');
       console.log('El id del usuario es: ', idEmpleado);
       console.log('El id del empleado es: ', data.id_empleado);
-      if (idEmpleado === data.id_empleado || rolEmpleado === '3') {
-        console.log('notificacion filtrada');
-        this.desplegarNotificaciones(data.titulo, data.mensaje);
-        this.notificacionesSinLeer++;
+      if (idEmpleado === data.id_empleado ) {
+        // Verificar si la notificación ya fue mostrada
+        const ultimaNotificacionId = localStorage.getItem('ultimaNotificacionId');
+        if (ultimaNotificacionId !== data.id) {
+          console.log('notificacion filtrada');
+          this.desplegarNotificaciones(data.titulo, data.mensaje);
+          this.notificacionesSinLeer++;
+          if (this.notificaciones.length >= 5) {
+            //colocar la notificacion en la primera posicion
+            this.notificaciones.pop();
+            
+          }
+          this.notificaciones.unshift(data);
+
+          // Almacenar el identificador de la última notificación
+          localStorage.setItem('ultimaNotificacionId', data.id);
+          console.log('notificacion desplegada con id: ', data.id);
+        }
       }
     });
 
   }
-
-
-
 }
