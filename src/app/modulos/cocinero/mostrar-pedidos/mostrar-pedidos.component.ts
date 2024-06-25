@@ -23,7 +23,6 @@ export class MostrarPedidosComponent implements OnInit {
 
   ngOnInit(): void {
     this.pedidoService.pedidos$.subscribe(pedidos => {
-      console.log('Pedidos recibidos en el componente:', pedidos);
       this.actualizarPedidos(pedidos);
       this.ordenarPedidos();
     });
@@ -37,8 +36,6 @@ export class MostrarPedidosComponent implements OnInit {
   obtenerPedidos(): void {
     this.pedidoService.getPedidos().subscribe(
       () => {
-        // Los pedidos ya serán emitidos por pedidosSubject
-        console.log('Pedidos obtenidos y emitidos por pedidosSubject');
       },
       (error) => {
         this.errorMessage = 'Error al obtener los pedidos';
@@ -48,7 +45,6 @@ export class MostrarPedidosComponent implements OnInit {
   }
   ordenarPedidos(){
     this.pedidos.forEach(pedido=>{
-      console.log(this.pedidos,"aquiiii")
       const numeroPedido=pedido.id;
       const tipo=pedido.tipo;
       const mesaP=pedido.cuenta.mesa.nombre;
@@ -102,12 +98,14 @@ export class MostrarPedidosComponent implements OnInit {
   mostrarped(p:any){
     this.pedidosMostrar=p;
   }
-  verPlatos(id:number){
+  verPlatos(id:number,estadoP:string){
     const IdPedido=id;
+    const estadoPedido=estadoP;
     const pedido = this.pedidosP.find(p => p.numPedido === id);
     this.platillos = pedido ? pedido.platos : [];
     this.pedidoCocina.setPlatillos(this.platillos);
     this.pedidoCocina.setIdPedido(IdPedido);
+    this.pedidoCocina.setEstado(estadoPedido);
     }
   enPreparacion(){
     this.pedidosPreparacion= this.pedidosP.filter(p=>p.estado=='En preparación');

@@ -11,14 +11,35 @@ export class ModalEstadoPedidoComponent implements OnInit {
 
   platillo: any[] = [];
   idPlatillo: any = null;
+  Estado: string = '';
   idRestaurante = 0;
+  platillosDescripcion:any[]=[];
+  platillosSinDescripcion:any[]=[];
+
 
   constructor(private pedidoCocina: PedidosCocinaService, private pedidoS:PedidoService) { }
 
   ngOnInit(): void {
     this.pedidoCocina.platillos$.subscribe((platos) => {
         this.platillo = platos;
+        console.log( "los platillos",this.platillo);
+        this.ordenarPlatillos();
       });
+    this.pedidoCocina.estPedido$.subscribe((est)=>{
+       this.Estado=est;
+    });
+    }
+
+  ordenarPlatillos(){
+    this.platillo.forEach((plato)=>{
+      if(plato.descripcion !== ''){
+        this.platillosDescripcion.push(plato);
+      }
+      else{
+        this.platillosSinDescripcion.push(plato);
+      }
+    }); 
+    console.log("con des",this.platillosDescripcion);
   }
   cambiarEstado(idEstado:any){
     let idPedido=this.pedidoCocina.getIdPedido();

@@ -44,7 +44,6 @@ export class PedidoService {
   getPedidos(): Observable<any> {
     return this.http.get<any>(`${this.BASE_URL}/pedidos`, { headers: this.headers }).pipe(
       tap(pedidos => {
-        console.log('Pedidos obtenidos:', pedidos);
         this.pedidosSubject.next(pedidos.pedidos); // Asegúrate de que el formato de los datos es correcto
       })
     );
