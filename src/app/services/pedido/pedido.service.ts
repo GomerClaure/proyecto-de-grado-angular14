@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class PedidoService {
+export class PedidoService { 
   private BASE_URL = environment.backendUrl;
   private headers = {
     'Authorization': 'Bearer ' + sessionStorage.getItem('token_access'),
@@ -48,7 +48,9 @@ export class PedidoService {
       })
     );
   }
-
+  deletePedido(id:number){
+    return this.http.delete<any>(`${this.BASE_URL}/pedidos/${id}`, { headers: this.headers });
+  }  
   cambiarEstadoPedido(idPedido: string, idRestaurante: string, idEstado: string): Observable<any> {
     const body = {
       id_pedido: idPedido,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidosParaMostrarMesa } from 'src/app/modelos/PedidosMesa';
+import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { PedidosDeMesaService } from 'src/app/services/pedido/pedidos-de-mesa.service';
 
 @Component({
@@ -56,5 +57,7 @@ export class ModalPedidosComponent implements OnInit {
 
     console.log("para mostrar",this.PedidosParaMostrar);
   }
-
+  eliminarPedido(IdPedido:any){
+   this.pedidoServiceMesa.setIdPedido(IdPedido); 
+}
 }
