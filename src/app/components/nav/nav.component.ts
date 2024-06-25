@@ -66,31 +66,34 @@ export class NavComponent implements OnInit, OnDestroy {
 
   marcarLeida(cantidad: number) {
     // [1, 2, 3, 4, 5] por ejemplo
-    let ids: number[] = [];
+    console.log('Cantidad de notificaciones a marcar como leídas: ', cantidad);
+    let ids: any[] = [];
     for (let i = 0; i < cantidad; i++) {
       if (this.notificaciones[i].read_at === null) {
         ids.push(this.notificaciones[i].id);
+        this.notificaciones[i].read_at = new Date();
+
       }
     }
-
-  //  this.notificaciones.forEach(notificacion => {
-  //   if (notificacion.read_at === null) {
-  //     ids.push(notificacion.id);
-  //   }
-  //  });
+    if (cantidad === 0) {
+      ids.push('all');
+      this.notificacionesSinLeer = 0;
+    }
    console.log('ids', ids);
-    this.notificacionService.marcarLeida(ids, this.idRestaurante).subscribe(
-      (data) => {
-        console.log(data);
-        this.notificacionesSinLeer -= ids.length;
-        this.notificaciones.forEach(notificacion => {
-          notificacion.read_at = new Date();
-        });
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+   if(ids.length > 0){
+     this.notificacionService.marcarLeida(ids, this.idRestaurante).subscribe(
+       (data) => {
+         console.log(data);
+         if(this.notificacionesSinLeer !== 0){
+          this.notificacionesSinLeer -= ids.length;
+         }
+         
+       },
+       (error) => {
+         console.error(error);
+       }
+     );
+    }
   }
 
   esAdministrador(): boolean {

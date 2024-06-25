@@ -50,7 +50,10 @@ export class WebsocketService {
 
   closeConnection() {
     if (this.socket)
-      this.socket.disconnect();
+      //si ya se desconecto entonces no desconectar
+      if (this.socket.connection.state === 'connected'){
+        this.socket.disconnect();
+      }
   }
 
 }
