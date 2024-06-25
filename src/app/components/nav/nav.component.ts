@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SessionService } from 'src/app/services/auth/session.service';
 import { Router } from '@angular/router';
 import { NotificacionService } from 'src/app/services/notificacion/notificacion.service';
@@ -10,7 +10,7 @@ import { WebsocketService } from 'src/app/services/websocket/websocket.service';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss']
 })
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit, OnDestroy {
   public notificaciones: Notificacion[];
   public notificacionesSinLeer: number;
   private idRestaurante: number;
@@ -23,11 +23,21 @@ export class NavComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // window.onload = () => {
+    //   localStorage.setItem('conexionWebSocket', 'false');
+    // };
     if (sessionStorage.getItem('token_access')) {
-      this.webSocketService.iniciarConexion();
+      
       // this.webSocketService.listenAllEvents('pedido');
       this.idRestaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
-      this.suscribirNotificacion();
+      const conexionWebSocket = localStorage.getItem('conexionWebSocket');
+      console.log('El valor de la conexión websocket es: ', conexionWebSocket);
+      if (conexionWebSocket !== 'true') {
+        console.log('Iniciando conexión websocket');
+        localStorage.setItem('conexionWebSocket', 'true');
+        this.webSocketService.iniciarConexion();
+        this.suscribirNotificacion();
+      }
 
       let sesionComoEmpleado = sessionStorage.getItem('tipo') === 'Empleado';
 
@@ -46,6 +56,12 @@ export class NavComponent implements OnInit {
 
     }
 
+  }
+
+  ngOnDestroy(): void {
+    console.log('Cerrando conexión websocket');
+    localStorage.setItem('conexionWebSocket', 'false');
+    this.webSocketService.closeConnection();
   }
 
   esAdministrador(): boolean {
@@ -80,10 +96,7 @@ export class NavComponent implements OnInit {
 
   suscribirseEventosDePedido(){
     this.webSocketService.listenAllEvents('notificaciones'+this.idRestaurante).bind('Notificacion', (data: any) => {
-      console.log(data)
-      console.log('notificacion enviada');
-      console.log('El id del empleado es: '+data.id_empleado);
-      console.log('El id del empleado en sesion es: '+sessionStorage.getItem('id_empleado'));
+
       if(data.id_empleado === parseInt(sessionStorage.getItem('id_empleado')||'0')){
         console.log('notificacion desplegada');
         this.desplegarNotificaciones(data.titulo, data.mensaje);
@@ -146,9 +159,6 @@ export class NavComponent implements OnInit {
       console.log('El id del usuario es: ', idEmpleado);
       console.log('El id del empleado es: ', data.id_empleado);
       if (idEmpleado === data.id_empleado ) {
-        // Verificar si la notificación ya fue mostrada
-        const ultimaNotificacionId = localStorage.getItem('ultimaNotificacionId');
-        if (ultimaNotificacionId !== data.id) {
           console.log('notificacion filtrada');
           this.desplegarNotificaciones(data.titulo, data.mensaje);
           this.notificacionesSinLeer++;
@@ -159,10 +169,6 @@ export class NavComponent implements OnInit {
           }
           this.notificaciones.unshift(data);
 
-          // Almacenar el identificador de la última notificación
-          localStorage.setItem('ultimaNotificacionId', data.id);
-          console.log('notificacion desplegada con id: ', data.id);
-        }
       }
     });
 
