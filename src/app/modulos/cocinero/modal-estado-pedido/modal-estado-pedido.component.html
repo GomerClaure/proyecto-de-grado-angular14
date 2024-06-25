@@ -6,13 +6,23 @@
           'en-preparacion':Estado === 'En preparación',
           'default':Estado !== 'Servido' && Estado !== 'En preparación'
       }">
-        <h5 class="modal-title" id="exampleModalLabel">Platos del Pedido</h5>
+        <h5 class="modal-title" id="exampleModalLabel">
+          <i *ngIf="tipo=== 'llevar'" class="bi bi-bag-fill icon-large"></i>
+          <i *ngIf="tipo=== 'local'" class="bi bi-house-door-fill icon-large"></i>
+        </h5>
       </div>
       <div class="modal-body">
-        <div *ngFor="let plato of platillo">
-          <div *ngFor="let p of plato">
-            <p>{{ p.nombre }}</p> 
+        <div class="card">
+          <h5>Pedidos con descripcion</h5>
+          <div *ngFor="let d of platillosAmostrar">
+           <p>{{d.nombre}}{{d.cantidad}}{{d.detalle}}</p>
           </div>
+        </div>
+        <div class="card">
+            <h5>Pedidos sin descripcion</h5>
+            <p *ngFor="let c of platillosSinDescripcion">
+              {{c.nombre}}
+            </p>
         </div>
       </div>
       <div class="modal-footer">

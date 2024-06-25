@@ -6,11 +6,13 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class PedidosCocinaService {
 
+  private idPedido:string='';
   private platillosSubject = new BehaviorSubject<any[]>([]);
   platillos$ = this.platillosSubject.asObservable();
-  private idPedido:string='';
   private estPedidoSubject = new BehaviorSubject<string>('');
   estPedido$ = this.estPedidoSubject.asObservable();
+  private tipoPedidoSubject = new BehaviorSubject<string>('');
+  tipoPedido$ = this.tipoPedidoSubject.asObservable();
 
   constructor() { }
 
@@ -23,14 +25,19 @@ export class PedidosCocinaService {
   getIdPedido(){ 
     return this.idPedido;
     }
-    setEstado(estado: string) {
+  setEstado(estado: string) {
       this.estPedidoSubject.next(estado);
       console.log(estado);
     }
-  
-    getEstado() {
+  setTipo(tip:string){
+      this.tipoPedidoSubject.next(tip);
+  }
+  getEstado() {
       return this.estPedidoSubject.getValue();
     }
+  getTipo(){
+    return this.tipoPedidoSubject.getValue();
+  }
 
   
 }
