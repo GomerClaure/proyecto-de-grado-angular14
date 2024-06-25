@@ -31,4 +31,16 @@ export class NotificacionService {
 
     return this.http.get<any>(`${this.BASE_URL}/notificaciones/cantidad`, { headers: this.headers, params: params });
   }
+//   {
+//     "id_notificaciones":[5],
+//     "id_restaurante":1
+
+// }
+  public marcarLeida(ids : number[],id_restaurante:number){
+    let body = {
+      id_notificaciones:ids,
+      id_restaurante:id_restaurante
+    }
+    return this.http.put<any>(`${this.BASE_URL}/notificaciones/leidas`,body,{headers:this.headers});
+  }
 }

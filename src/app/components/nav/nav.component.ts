@@ -64,6 +64,35 @@ export class NavComponent implements OnInit, OnDestroy {
     this.webSocketService.closeConnection();
   }
 
+  marcarLeida(cantidad: number) {
+    // [1, 2, 3, 4, 5] por ejemplo
+    let ids: number[] = [];
+    for (let i = 0; i < cantidad; i++) {
+      if (this.notificaciones[i].read_at === null) {
+        ids.push(this.notificaciones[i].id);
+      }
+    }
+
+  //  this.notificaciones.forEach(notificacion => {
+  //   if (notificacion.read_at === null) {
+  //     ids.push(notificacion.id);
+  //   }
+  //  });
+   console.log('ids', ids);
+    this.notificacionService.marcarLeida(ids, this.idRestaurante).subscribe(
+      (data) => {
+        console.log(data);
+        this.notificacionesSinLeer -= ids.length;
+        this.notificaciones.forEach(notificacion => {
+          notificacion.read_at = new Date();
+        });
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
   esAdministrador(): boolean {
     return sessionStorage.getItem('tipo') === 'Administrador';
   }
