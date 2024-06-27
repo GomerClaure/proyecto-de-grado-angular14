@@ -6,7 +6,7 @@ export interface PedidosMesa {
 export interface PedidosParaMostrarMesa{
   cantidad:number;
   nomplatillo:string;
-  totalPedido:number
+  totalPedido:any;
 }
 export interface PedidosCocina{
   numPedido:number;
@@ -15,5 +15,10 @@ export interface PedidosCocina{
   tipoPedido:string;
   hora:string;
   estado:string;
+}
+export interface PedidosPlatos{
+  nombre:any;
+  cantidad:number;
+  detalle:string;
 }
   

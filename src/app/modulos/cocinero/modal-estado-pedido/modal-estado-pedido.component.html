@@ -12,18 +12,21 @@
         </h5>
       </div>
       <div class="modal-body">
+        <div class="row">
+        <div class="col-6">
         <div class="card">
           <h5>Pedidos con descripcion</h5>
-          <div *ngFor="let d of platillosAmostrar">
-           <p>{{d.nombre}}{{d.cantidad}}{{d.detalle}}</p>
+          <div *ngFor="let d of PlatosMostrar">
+           <p>{{d.nombre}}{{d.cantidad}}</p>
           </div>
         </div>
+      </div>
+      <div class="col-6">
         <div class="card">
             <h5>Pedidos sin descripcion</h5>
-            <p *ngFor="let c of platillosSinDescripcion">
-              {{c.nombre}}
-            </p>
         </div>
+      </div>
+      </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-curso" data-bs-dismiss="modal" (click)="cambiarEstado('2')">En Curso</button>

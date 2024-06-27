@@ -15,22 +15,11 @@ export class PedidosCocinaService {
   tipoPedido$ = this.tipoPedidoSubject.asObservable();
 
   constructor() { }
-
-  setPlatillos(platos: any[]) {
+  setPedidoOrdenado(platos:any,Id:any,estado:string,tip:string) {
     this.platillosSubject.next(platos);
-  } 
-  setIdPedido(id:any){
-     this.idPedido=id;
-  }
-  getIdPedido(){ 
-    return this.idPedido;
-    }
-  setEstado(estado: string) {
-      this.estPedidoSubject.next(estado);
-      console.log(estado);
-    }
-  setTipo(tip:string){
-      this.tipoPedidoSubject.next(tip);
+    this.idPedido=Id;
+    this.estPedidoSubject.next(estado);
+    this.tipoPedidoSubject.next(tip);
   }
   getEstado() {
       return this.estPedidoSubject.getValue();
@@ -38,6 +27,10 @@ export class PedidosCocinaService {
   getTipo(){
     return this.tipoPedidoSubject.getValue();
   }
-
-  
+  getIdPedido(){ 
+    return this.idPedido;
+    }
+  getPlatillos(){
+    return this.platillosSubject.getValue();
+  }
 }
