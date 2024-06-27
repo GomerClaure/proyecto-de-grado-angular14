@@ -59,11 +59,15 @@ export class ModalEstadoPedidoComponent implements OnInit {
     }
 
   cambiarEstado(idEstado:any){
-    let idPedido=this.pedidoCocina.getIdPedido();
-    this.idRestaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
-    console.log(idPedido,this.idRestaurante,idEstado)
-    this.pedidoS.cambiarEstadoPedido(idPedido,this.idRestaurante.toString(),idEstado).subscribe((res)=>{
-      console.log(res)
-      });
+    if(this.Estado=='Terminado'){
+      console.log("Ya termino")
+    }else{
+      let idPedido=this.pedidoCocina.getIdPedido();
+      this.idRestaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
+      console.log(idPedido,this.idRestaurante,idEstado)
+      this.pedidoS.cambiarEstadoPedido(idPedido,this.idRestaurante.toString(),idEstado).subscribe((res)=>{
+        console.log(res)
+        });
+    }
   }
 }

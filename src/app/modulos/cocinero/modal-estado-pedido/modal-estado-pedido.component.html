@@ -15,20 +15,20 @@
         <div class="row">
           <div class="col-6">
             <div class="cont">
-              <h5>Pedidos con descripcion</h5>
+              <h5>Platillos con descripcion</h5>
               <table class="table">
                 <thead>
                   <tr>
-                    <th>Nombre</th>
                     <th>Cantidad</th>
+                    <th>Platillo</th>
                     <th>Detalle</th>
                   </tr>
                 </thead>
                 <tbody>
                   <ng-container *ngFor="let d of PlatosMostrar">
                     <tr *ngIf="d.detalle">
-                      <td>{{ d.nombre }}</td>
                       <td>{{ d.cantidad }}</td>
+                      <td>{{ d.nombre }}</td>
                       <td>{{ d.detalle }}</td>
                     </tr>
                   </ng-container>
@@ -38,19 +38,19 @@
           </div>
           <div class="col-6">
             <div class="cont">
-              <h5>Pedidos sin descripcion</h5>
+              <h5>Platillos sin descripcion</h5>
               <table class="table">
                 <thead>
                   <tr>
-                    <th>Nombre</th>
                     <th>Cantidad</th>
+                    <th>Platillo</th>
                   </tr>
                 </thead>
                 <tbody>
                   <ng-container *ngFor="let d of PlatosMostrar">
                     <tr *ngIf="!d.detalle">
-                      <td>{{ d.nombre }}</td>
                       <td>{{ d.cantidad }}</td>
+                      <td>{{ d.nombre }}</td>
                     </tr>
                   </ng-container>
                 </tbody>
@@ -60,8 +60,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-curso" data-bs-dismiss="modal" (click)="cambiarEstado('2')">En Curso</button>
-        <button type="button" class="btn btn-terminado" data-bs-dismiss="modal" (click)="cambiarEstado('4')">Terminado</button>
+        <button  *ngIf="Estado !== 'Servido' && Estado !== 'En preparación'" type="button" class="btn btn-curso" data-bs-dismiss="modal" (click)="cambiarEstado('2')">En Curso</button>
+        <button *ngIf="Estado !== 'Servido' && Estado !== 'En preparación'" type="button"class="btn btn-terminado" data-bs-dismiss="modal" (click)="cambiarEstado('4')">Terminado</button>
+        <button *ngIf="Estado == 'Servido'" type="button" class="btn btn-atra"  data-bs-dismiss="modal">Atras</button>
+        <button *ngIf="Estado == 'En preparación'"type="button" class="btn btn-terminado" data-bs-dismiss="modal" (click)="cambiarEstado('4')">Terminado</button>
       </div>
     </div>
   </div>
