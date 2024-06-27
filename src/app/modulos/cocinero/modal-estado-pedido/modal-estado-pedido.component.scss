@@ -10,4 +10,13 @@
   .default {
     background-color: rgb(240, 162, 128);
   }  
+  .modal-footer{
+    justify-content: center;
+  }
+  .custom-modal-lg {
+    max-width: 90%;
+  }
   
+  .custom-modal-xl {
+    max-width: 100%;
+  }

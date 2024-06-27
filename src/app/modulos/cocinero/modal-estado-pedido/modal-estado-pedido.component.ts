@@ -56,8 +56,6 @@ export class ModalEstadoPedidoComponent implements OnInit {
       for (const key in platosMap) {
         this.PlatosMostrar.push(platosMap[key] as PedidosPlatos);
       }
-  
-      console.log("mmmm", this.PlatosMostrar);
     }
 
   cambiarEstado(idEstado:any){
