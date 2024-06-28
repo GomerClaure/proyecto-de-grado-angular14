@@ -1,51 +1,84 @@
 <app-nav></app-nav><br><br>
 <div class="fondo">
-    <br>
-    
-    <div class="container mt-5">
-        <h2 class="mb-4">Reporte</h2>
-        <!-- Fecha inicio y fecha fin -->
-        <div class="form-group">
-            <label for="fechaInicio">Fecha de Inicio</label>
-            <input type="date" class="form-control" id="fechaInicio" [(ngModel)]="fechaInicio">
-        </div>
-        <div class="form-group">
-            <label for="fechaFin">Fecha de Fin</label>
-            <input type="date" class="form-control" id="fechaFin" [(ngModel)]="fechaFin">
-        </div>
-        
-        <button class="btn btn-primary mt-3" (click)="generarReporte()">Generar Reporte</button>
-        
-        <div *ngIf="reporte.pedidos.length > 0" class="mt-5">
-          <h4>Pedidos del {{ selectedDate }}</h4>
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Número de Pedido</th>
-                <th>Restaurante</th>
-                <th>Hora</th>
-                <th>Productos</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let pedido of pedidos">
-                <td>{{ pedido.numero }}</td>
-                <td>{{ pedido.restaurante }}</td>
-                <td>{{ pedido.hora }}</td>
-                <td>{{ pedido.productos }}</td>
-              </tr>
-            </tbody>
-          </table>
-      
-          <div class="mt-5">
-            <!-- <canvas baseChart 
+  <br>
+
+  <div class="container mt-5">
+    <h2 class="mb-4">Reporte</h2>
+    <!-- Fecha inicio y fecha fin -->
+    <div class="form-group">
+      <label for="fechaInicio">Fecha de Inicio</label>
+      <input type="date" class="form-control" id="fechaInicio" [(ngModel)]="fechaInicio">
+    </div>
+    <div class="form-group">
+      <label for="fechaFin">Fecha de Fin</label>
+      <input type="date" class="form-control" id="fechaFin" [(ngModel)]="fechaFin">
+    </div>
+
+    <button class="btn btn-primary mt-3" (click)="generarReporte()">Generar Reporte</button>
+
+    <div *ngIf="reporte.cantidadPedidosPorDia.length > 0" class="mt-5">
+      <div class="reporte">
+        <h4>Cantidad De Pedidos Por Dia</h4>
+        <table class="table table-bordered cantidadPedidosPorDia ">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pedidoDia of reporte.cantidadPedidosPorDia">
+              <td>{{ pedidoDia.fecha }}</td>
+              <td>{{ pedidoDia.cantidad }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="reporte">
+        <h4>Monto Total De Pedidos Por Dia</h4>
+        <table class="table table-bordered montoTotalPedidosPorDia ">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let montoDia of reporte.montoTotalPedidosPorDia">
+              <td>{{ montoDia.fecha }}</td>
+              <td>{{ montoDia.monto }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="reporte">
+        <h4>Cantidad De Pedidos Por Mesa</h4>
+        <table class="table table-bordered cantidadPedidosPorMesa ">
+          <thead>
+            <tr>
+              <th>Mesa</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pedidoMesa of reporte.cantidadPedidosPorMesa">
+              <td>{{ pedidoMesa.mesa }}</td>
+              <td>{{ pedidoMesa.cantidad_pedidos }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <div class="mt-5">
+        <!-- <canvas baseChart 
                     [data]="chartData"
                     [labels]="chartLabels"
                     [chartType]="'bar'">
             </canvas> -->
-          </div>
-        </div>
       </div>
-      
-</div>
+    </div>
+  </div>
 
+</div>

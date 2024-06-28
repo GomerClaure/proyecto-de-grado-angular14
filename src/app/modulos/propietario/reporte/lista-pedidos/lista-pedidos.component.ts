@@ -9,23 +9,23 @@ import { Reporte } from 'src/app/modelos/Reporte';
 })
 export class ListaPedidosComponent implements OnInit {
 
-  public fechaInicio: Date;// hace siete dias
-  public fechaFin: Date;// hoy a las 11:59:59
+  public fechaInicio: string;// hace siete dias
+  public fechaFin: string;// hoy a las 11:59:59
   public reporte: Reporte;
-  selectedDate: string;
-  pedidos: any[] = ['hi'];
-  chartData: any[] = [];
-  chartLabels: string[] = [];
 
   constructor(private reporteService: ReporteService) {
-    this.fechaInicio = new Date();
-    this.fechaInicio.setDate(this.fechaInicio.getDate() - 7);
-    this.fechaFin = new Date();
-    this.fechaFin.setHours(23, 59, 59);
+    var fechaIni = new Date();
+    fechaIni.setDate(fechaIni.getDate() - 7);
+    this.fechaInicio = fechaIni.toISOString().split('T')[0];
+    var fechaFin = new Date();
+    fechaFin.setHours(23, 59, 59);
+    this.fechaFin = fechaFin.toISOString().split('T')[0];
     this.reporte = {
-      pedidos: [],
-      cuentas: {id: 0}};
-    this.selectedDate = '';
+      montoTotalPedidosPorDia: [],
+      cantidadPedidosPorDia: [],
+      cantidadPedidosPorMesa: [],
+      cuentas: []
+    };
     }
 
   ngOnInit(): void {
@@ -34,13 +34,15 @@ export class ListaPedidosComponent implements OnInit {
 
   generarReporte() {
     const idRestaurante = sessionStorage.getItem('id_restaurante');
+    console.log('fechaInicio', this.fechaInicio);
+    console.log('fechaFin', this.fechaFin);
     const formData = new FormData();
-    formData.append('fecha_inicio', this.fechaInicio.toISOString());
-    formData.append('fecha_fin', this.fechaFin.toISOString());
+    formData.append('fecha_inicio', this.fechaInicio);
+    formData.append('fecha_fin', this.fechaFin);
     formData.append('id_restaurante', idRestaurante || '');
     this.reporteService.getReportePedidos(formData).subscribe((reporte: Reporte) => {
       console.log(reporte);
-      // this.reporte = reporte;
+      this.reporte = reporte;
     });
 
 
