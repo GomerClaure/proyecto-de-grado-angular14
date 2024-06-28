@@ -4,6 +4,7 @@ import { ReporteRoutingModule } from './reporte-routing.module';
 import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
 import { ListaVentasComponent } from './lista-ventas/lista-ventas.component';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
   imports: [
     CommonModule,
     ReporteRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    FormsModule
   ]
 })
 export class ReporteModule { }
