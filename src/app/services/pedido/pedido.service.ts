@@ -40,14 +40,19 @@ export class PedidoService {
   limpiarSeleccion() {
     this.platillosSeleccionados = [];
   }
+  //get Pedidos por empleado y restaurante
+  //id_empleado tambien mandaremos el id_restaurante
 
-  getPedidos(): Observable<any> {
-    return this.http.get<any>(`${this.BASE_URL}/pedidos`, { headers: this.headers }).pipe(
+  getPedidos(id_emp:any,id_rest:any): Observable<any> {
+    console.log(id_emp,id_rest);
+    return this.http.get<any>(`${this.BASE_URL}/pedidos/${id_emp}/${id_rest}`, { headers: this.headers }).pipe(
       tap(pedidos => {
         this.pedidosSubject.next(pedidos.pedidos); // Asegúrate de que el formato de los datos es correcto
       })
     );
   }
+
+
   deletePedido(id:number){
     return this.http.delete<any>(`${this.BASE_URL}/pedidos/${id}`, { headers: this.headers });
   }  
@@ -60,7 +65,7 @@ export class PedidoService {
     return this.http.put<any>(`${this.BASE_URL}/plato-pedido/estado`, body, { headers: this.headers }).pipe(
       tap(() => {
         // Volver a cargar los pedidos y emitir la lista actualizada
-        this.getPedidos().subscribe();
+        //this.getPedidos().subscribe();
       })
     );
   }

@@ -19,6 +19,9 @@ export class MostrarPedidosComponent implements OnInit {
   pedidosTerminado:PedidosCocina[]=[];
   platillos:any[]=[];
 
+  id_restaurante:any;
+  id_empleado:any;
+
   constructor(private pedidoService: PedidoService,private pedidoCocina:PedidosCocinaService) { }
 
   ngOnInit(): void {
@@ -26,16 +29,17 @@ export class MostrarPedidosComponent implements OnInit {
       this.actualizarPedidos(pedidos);
       this.ordenarPedidos();
     });
-
-    // Cargar pedidos inicialmente
     this.obtenerPedidos();
+    this.id_restaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
+    this.id_empleado= parseInt(sessionStorage.getItem('id_empleado')||'0');
   }
   extractHour(datetime: string): string {
     return datetime.split(' ')[1].substring(0, 5); // Extrae '15:05' de '2024-06-19 15:05:52'
   }
   obtenerPedidos(): void {
-    this.pedidoService.getPedidos().subscribe(
+    this.pedidoService.getPedidos(this.id_restaurante,this.id_empleado).subscribe(
       () => {
+        console.log("no")
       },
       (error) => {
         this.errorMessage = 'Error al obtener los pedidos';

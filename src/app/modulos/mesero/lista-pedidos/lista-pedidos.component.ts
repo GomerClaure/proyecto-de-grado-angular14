@@ -14,13 +14,19 @@ export class ListaPedidosComponent implements OnInit {
   errorMessage: string = '';
   pedidosPorMesa: PedidosMesa[] = []; 
 
+  id_restaurante:any;
+  id_empleado:any;
+
   constructor(private pedidoService: PedidoService,private pedidoServiceMesa:PedidosDeMesaService) { }
 
   ngOnInit(): void {
+    this.id_restaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
+    this.id_empleado= parseInt(sessionStorage.getItem('id_empleado')||'0');
     this.obtenerPedidos();
   } 
   obtenerPedidos(): void {
-    this.pedidoService.getPedidos().subscribe(
+    console.log("antes de mandar",this.id_empleado,this.id_restaurante)
+    this.pedidoService.getPedidos(this.id_empleado,this.id_restaurante).subscribe(
       (response) => {
         this.pedidos = response.pedidos;
         console.log(this.pedidos);
