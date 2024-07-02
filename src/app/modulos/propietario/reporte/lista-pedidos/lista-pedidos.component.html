@@ -18,6 +18,21 @@
 
     <div *ngIf="reporte.cantidadPedidosPorDia.length > 0" class="mt-5">
       <div class="reporte">
+        <div class="container">
+          <div style="display: block;">
+            <canvas
+              baseChart
+              [data]="barChartData"
+              [options]="barChartOptions"
+              [type]="barChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"
+            ></canvas>
+          </div>
+          <button class="btn btn-primary" (click)="randomize()">Update</button>
+        </div>
+      </div>
+      <div class="reporte">
         <h4>Cantidad De Pedidos Por Dia</h4>
         <table class="table table-bordered cantidadPedidosPorDia ">
           <thead>
