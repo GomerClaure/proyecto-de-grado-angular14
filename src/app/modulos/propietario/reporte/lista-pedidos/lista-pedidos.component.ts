@@ -102,6 +102,13 @@ export class ListaPedidosComponent implements OnInit {
     formData.append('fecha_fin', this.fechaFin);
     formData.append('id_restaurante', idRestaurante || '');
     this.reporteService.getReportePedidos(formData).subscribe((reporte: Reporte) => {
+      this.barChartData = {
+        labels: reporte.montoTotalPedidosPorDia.map((item) => item.fecha),
+        datasets: [
+          { data: reporte.montoTotalPedidosPorDia.map((item) => item.monto), label: 'Monto total de pedidos' },
+          // { data: reporte.cantidadPedidosPorDia.map((item) => item.cantidad), label: 'Cantidad de pedidos' },
+        ],
+      };
       console.log(reporte);
       this.reporte = reporte;
     });
