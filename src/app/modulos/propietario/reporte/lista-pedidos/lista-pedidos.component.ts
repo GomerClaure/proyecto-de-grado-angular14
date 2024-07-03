@@ -10,13 +10,14 @@ import { BaseChartDirective } from 'ng2-charts';
   styleUrls: ['./lista-pedidos.component.scss']
 })
 export class ListaPedidosComponent implements OnInit {
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective<'bar'> | undefined;
+  @ViewChild(BaseChartDirective) barChart: BaseChartDirective<'bar'> | undefined;
+  @ViewChild('pieChart') pieChart: BaseChartDirective<'pie'> | undefined;
 
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
     scales: {
       x: {},
       y: {
-        min: 10,
+        min: 0,
       },
     },
     plugins: {
@@ -25,95 +26,96 @@ export class ListaPedidosComponent implements OnInit {
       },
     },
   };
-  public barChartType = 'bar' as const;
 
-  public barChartData: ChartData<'bar'> = {
-    labels: ['2006', '2007', '2008', '2009', '2010', '2011', '2012'],
+  public barChartDataMonto: ChartData<'bar'> = {
+    labels: [],
     datasets: [
-      { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-      { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
+      { data: [], label: 'Monto total de pedidos' },
     ],
   };
 
-  // events
-  public chartClicked({
-    event,
-    active,
-  }: {
-    event?: ChartEvent;
-    active?: object[];
-  }): void {
-    console.log(event, active);
-  }
+  public barChartDataCantidad: ChartData<'bar'> = {
+    labels: [],
+    datasets: [
+      { data: [], label: 'Cantidad de pedidos' },
+    ],
+  };
 
-  public chartHovered({
-    event,
-    active,
-  }: {
-    event?: ChartEvent;
-    active?: object[];
-  }): void {
-    console.log(event, active);
-  }
+  public pieChartOptions: ChartConfiguration<'pie'>['options'] = {
+    plugins: {
+      legend: {
+        display: true,
+      },
+    },
+  };
 
-  public randomize(): void {
-    // Only Change 3 values
-    this.barChartData.datasets[0].data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      Math.round(Math.random() * 100),
-      56,
-      Math.round(Math.random() * 100),
-      40,
-    ];
+  public pieChartData: ChartData<'pie'> = {
+    labels: [],
+    datasets: [
+      { data: [], label: 'Cantidad de pedidos por mesa' },
+    ],
+  };
 
-    this.chart?.update();
-  }
-  public fechaInicio: string;// hace siete dias
-  public fechaFin: string;// hoy a las 11:59:59
+  public barChartType = 'bar' as const;
+  public pieChartType = 'pie' as const;
+
+  public fechaInicio: string; // hace siete dias
+  public fechaFin: string; // hoy a las 11:59:59
   public reporte: Reporte;
 
   constructor(private reporteService: ReporteService) {
-    var fechaIni = new Date();
+    const fechaIni = new Date();
     fechaIni.setDate(fechaIni.getDate() - 7);
     this.fechaInicio = fechaIni.toISOString().split('T')[0];
-    var fechaFin = new Date();
+    
+    const fechaFin = new Date();
     fechaFin.setHours(23, 59, 59);
     this.fechaFin = fechaFin.toISOString().split('T')[0];
+
     this.reporte = {
       montoTotalPedidosPorDia: [],
       cantidadPedidosPorDia: [],
       cantidadPedidosPorMesa: [],
       cuentas: []
     };
-    }
-
-  ngOnInit(): void {
-
   }
+
+  ngOnInit(): void {}
 
   generarReporte() {
     const idRestaurante = sessionStorage.getItem('id_restaurante');
-    console.log('fechaInicio', this.fechaInicio);
-    console.log('fechaFin', this.fechaFin);
     const formData = new FormData();
     formData.append('fecha_inicio', this.fechaInicio);
     formData.append('fecha_fin', this.fechaFin);
     formData.append('id_restaurante', idRestaurante || '');
+
     this.reporteService.getReportePedidos(formData).subscribe((reporte: Reporte) => {
-      this.barChartData = {
-        labels: reporte.montoTotalPedidosPorDia.map((item) => item.fecha),
-        datasets: [
-          { data: reporte.montoTotalPedidosPorDia.map((item) => item.monto), label: 'Monto total de pedidos' },
-          // { data: reporte.cantidadPedidosPorDia.map((item) => item.cantidad), label: 'Cantidad de pedidos' },
-        ],
-      };
-      console.log(reporte);
+      this.barChartDataMonto.labels = reporte.montoTotalPedidosPorDia.map((item) => item.fecha);
+      this.barChartDataMonto.datasets[0].data = reporte.montoTotalPedidosPorDia.map((item) => item.monto);
+
+      this.barChartDataCantidad.labels = reporte.cantidadPedidosPorDia.map((item) => item.fecha);
+      this.barChartDataCantidad.datasets[0].data = reporte.cantidadPedidosPorDia.map((item) => item.cantidad);
+
+      this.pieChartData.labels = reporte.cantidadPedidosPorMesa.map((item) => item.mesa);
+      this.pieChartData.datasets[0].data = reporte.cantidadPedidosPorMesa.map((item) => item.cantidad_pedidos);
+
+      this.barChart?.update();
+      this.pieChart?.update();
       this.reporte = reporte;
     });
-
-
   }
 
+  public chartClicked({ event, active }: { event?: ChartEvent; active?: object[] }): void {
+    console.log(event, active);
+  }
+
+  public chartHovered({ event, active }: { event?: ChartEvent; active?: object[] }): void {
+    console.log(event, active);
+  }
+
+  public randomize(): void {
+    this.barChartDataMonto.datasets[0].data = this.barChartDataMonto.datasets[0].data.map(() => Math.round(Math.random() * 10000));
+    this.barChartDataCantidad.datasets[0].data = this.barChartDataCantidad.datasets[0].data.map(() => Math.round(Math.random() * 10));
+    this.barChart?.update();
+  }
 }

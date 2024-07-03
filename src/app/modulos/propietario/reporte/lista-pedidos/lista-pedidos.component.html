@@ -18,20 +18,44 @@
 
     <div *ngIf="reporte.cantidadPedidosPorDia.length > 0" class="mt-5">
       <div class="reporte">
-        <div class="container">
-          <div style="display: block;">
-            <canvas
-              baseChart
-              [data]="barChartData"
-              [options]="barChartOptions"
-              [type]="barChartType"
-              (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"
-            ></canvas>
-          </div>
-          <button class="btn btn-primary" (click)="randomize()">Update</button>
-        </div>
-      </div>
+  <div class="container charts">
+    <div style="display: block;" class="chart-container">
+      <h3>Monto Total de Pedidos por Día</h3>
+      <canvas
+        baseChart
+        [data]="barChartDataMonto"
+        [options]="barChartOptions"
+        [type]="barChartType"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"
+      ></canvas>
+    </div>
+    <div style="display: block;" class="chart-container">
+      <h3>Cantidad de Pedidos por Día</h3>
+      <canvas
+        baseChart
+        [data]="barChartDataCantidad"
+        [options]="barChartOptions"
+        [type]="barChartType"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"
+      ></canvas>
+    </div>
+    <div style="display: block;" class="chart-container">
+      <h3>Cantidad de Pedidos por Mesa</h3>
+      <canvas
+        baseChart
+        [data]="pieChartData"
+        [options]="pieChartOptions"
+        [type]="pieChartType"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"
+      ></canvas>
+    </div>
+    <button class="btn btn-primary" (click)="randomize()">Update</button>
+  </div>
+</div>
+
       <div class="reporte">
         <h4>Cantidad De Pedidos Por Dia</h4>
         <table class="table table-bordered cantidadPedidosPorDia ">
