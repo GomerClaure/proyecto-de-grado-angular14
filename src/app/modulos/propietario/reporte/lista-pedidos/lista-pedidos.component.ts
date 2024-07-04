@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { formatDate } from '@angular/common';
 import { ReporteService } from 'src/app/services/reporte/reporte.service';
 import { Reporte } from 'src/app/modelos/Reporte';
 import { ChartConfiguration, ChartData, ChartEvent } from 'chart.js';
@@ -15,6 +16,7 @@ export class ListaPedidosComponent implements OnInit {
   @ViewChild('pieChart') pieChart: BaseChartDirective<'pie'> | undefined;
 
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
+    responsive: true,
     scales: {
       x: {},
       y: {
@@ -29,6 +31,7 @@ export class ListaPedidosComponent implements OnInit {
   };
   
   public lineChartOptions: ChartConfiguration<'line'>['options'] = {
+    responsive: true,
     elements: {
       line: {
         tension: 0.5,
@@ -88,6 +91,7 @@ export class ListaPedidosComponent implements OnInit {
   
 
   public pieChartOptions: ChartConfiguration<'pie'>['options'] = {
+    responsive: true,
     plugins: {
       legend: {
         display: true,
@@ -139,10 +143,14 @@ export class ListaPedidosComponent implements OnInit {
     this.reporteService.getReportePedidos(formData).subscribe((reporte: Reporte) => {
       // this.barChartDataMonto.labels = reporte.montoTotalPedidosPorDia.map((item) => item.fecha);
       // this.barChartDataMonto.datasets[0].data = reporte.montoTotalPedidosPorDia.map((item) => item.monto);
-      this.lineChartDataMonto.labels = reporte.montoTotalPedidosPorDia.map((item) => item.fecha);
+      this.lineChartDataMonto.labels = reporte.montoTotalPedidosPorDia.map((item) => {
+        return formatDate(item.fecha, 'dd-MM-yyyy', 'en-US');
+      });
       this.lineChartDataMonto.datasets[0].data = reporte.montoTotalPedidosPorDia.map((item) => item.monto);
 
-      this.barChartDataCantidad.labels = reporte.cantidadPedidosPorDia.map((item) => item.fecha);
+      this.barChartDataCantidad.labels = reporte.cantidadPedidosPorDia.map((item) => {
+        return formatDate(item.fecha, 'dd-MM-yyyy', 'en-US');
+      });
       this.barChartDataCantidad.datasets[0].data = reporte.cantidadPedidosPorDia.map((item) => item.cantidad);
 
       this.pieChartData.labels = reporte.cantidadPedidosPorMesa.map((item) => item.mesa);
