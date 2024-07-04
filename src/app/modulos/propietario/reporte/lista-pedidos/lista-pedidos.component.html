@@ -1,18 +1,20 @@
-<app-nav></app-nav><br><br>
+<app-nav></app-nav><br>
 <div class="fondo">
-  <br>
 
   <div class="container mt-5">
     <h2 class="mb-4">Reporte</h2>
     <!-- Fecha inicio y fecha fin -->
-    <div class="form-group">
-      <label for="fechaInicio">Fecha de Inicio</label>
-      <input type="date" class="form-control" id="fechaInicio" [(ngModel)]="fechaInicio">
+    <div class="row">
+      <div class="form-group col">
+        <label for="fechaInicio">Fecha de Inicio</label>
+        <input type="date" class="form-control" id="fechaInicio" [(ngModel)]="fechaInicio">
+      </div>
+      <div class="form-group col">
+        <label for="fechaFin">Fecha de Fin</label>
+        <input type="date" class="form-control" id="fechaFin" [(ngModel)]="fechaFin">
+      </div>
     </div>
-    <div class="form-group">
-      <label for="fechaFin">Fecha de Fin</label>
-      <input type="date" class="form-control" id="fechaFin" [(ngModel)]="fechaFin">
-    </div>
+    
 
     <button class="btn btn-aceptar mt-3" (click)="generarReporte()">Generar Reporte</button>
 
@@ -40,18 +42,13 @@
             ></canvas>
           </div>
         </div>
-      </div>
-      <div class="reporte">
-        <div class="container charts">
-        
-          
-          <div style="display: block;" class="chart-container">
-            <h3>Cantidad de Pedidos por Mesa</h3>
-            <canvas baseChart [data]="pieChartData" [options]="pieChartOptions" [type]="pieChartType"
-              (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-          </div>
+        <div class="col-xl-4 col-md-12 text-center">
+          <h3>Cantidad de Pedidos por Mesa</h3>
+          <canvas baseChart [data]="pieChartData" [options]="pieChartOptions" [type]="pieChartType"
+            (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
         </div>
       </div>
+      
 
       <div class="reporte">
         <h4>Cantidad De Pedidos Por Dia</h4>
