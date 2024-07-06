@@ -23,12 +23,12 @@
         <div class="col-lg-6 col-md-12">
           <div class="chart-container">
             <h3>Monto Total de Pedidos por Día</h3>
-            <canvas
-              baseChart
+            <canvas baseChart
+              #lineChartMonto
               [data]="lineChartDataMonto"
               [options]="lineChartOptions"
-              type="line"
-            ></canvas>
+              [type]="lineChartType">
+            </canvas>
           </div>
         </div>
         <div class="col-lg-6 col-md-12">
@@ -36,57 +36,50 @@
             <h3>Cantidad de Pedidos por Día</h3>
             <canvas
               baseChart
+              #barChart
               [data]="barChartDataCantidad"
               [options]="barChartOptions"
-              type="bar"
+              [type]="barChartType">
             ></canvas>
           </div>
         </div>
         <div class="col-xl-4 col-md-12 text-center">
           <h3>Cantidad de Pedidos por Mesa</h3>
-          <canvas baseChart [data]="pieChartData" [options]="pieChartOptions" [type]="pieChartType"
-            (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+          <canvas baseChart
+            #pieChart
+            [data]="pieChartData"
+            [options]="pieChartOptions"
+            [type]="pieChartType">
+          </canvas>
         </div>
       </div>
       
 
       <div class="reporte">
-        <h4>Cantidad De Pedidos Por Dia</h4>
+        <h4>Reporte Diario</h4>
         <table class="table table-bordered cantidadPedidosPorDia ">
           <thead>
             <tr>
+              <th>N°</th>
               <th>Fecha</th>
-              <th>Cantidad</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let pedidoDia of reporte.cantidadPedidosPorDia">
-              <td>{{ pedidoDia.fecha }}</td>
-              <td>{{ pedidoDia.cantidad }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="reporte">
-        <h4>Monto Total De Pedidos Por Dia</h4>
-        <table class="table table-bordered montoTotalPedidosPorDia ">
-          <thead>
-            <tr>
-              <th>Fecha</th>
+              <th>Cantidad Clientes</th>
               <th>Monto</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let montoDia of reporte.montoTotalPedidosPorDia">
-              <td>{{ montoDia.fecha }}</td>
-              <td>{{ montoDia.monto }}</td>
+            <tr *ngFor="let pedidoDia of combinedData">
+              <!-- N° que empiece en uno y sea autoincrementable -->
+              <td>{{ combinedData.indexOf(pedidoDia) + 1 }}</td>
+              <td>{{ pedidoDia.fecha }}</td>
+              <td>{{ pedidoDia.cantidad }}</td>
+              <td>{{ pedidoDia.monto }}</td>
             </tr>
           </tbody>
         </table>
       </div>
 
       <div class="reporte">
-        <h4>Cantidad De Pedidos Por Mesa</h4>
+        <h4>Pedidos Por Mesa</h4>
         <table class="table table-bordered cantidadPedidosPorMesa ">
           <thead>
             <tr>

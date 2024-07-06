@@ -11,7 +11,7 @@ import { BaseChartDirective } from 'ng2-charts';
   styleUrls: ['./lista-pedidos.component.scss']
 })
 export class ListaPedidosComponent implements OnInit {
-  @ViewChild(BaseChartDirective) barChart: BaseChartDirective<'bar'> | undefined;
+  @ViewChild('barChart') barChart: BaseChartDirective<'bar'> | undefined;
   @ViewChild('lineChartMonto') lineChartMonto: BaseChartDirective<'line'> | undefined;
   @ViewChild('pieChart') pieChart: BaseChartDirective<'pie'> | undefined;
 
@@ -29,7 +29,7 @@ export class ListaPedidosComponent implements OnInit {
       },
     },
   };
-  
+
   public lineChartOptions: ChartConfiguration<'line'>['options'] = {
     responsive: true,
     elements: {
@@ -44,10 +44,10 @@ export class ListaPedidosComponent implements OnInit {
       y1: {
         position: 'right',
         grid: {
-          display: false, // Deshabilita la rejilla
+          display: false,
         },
         ticks: {
-          display: false, // Deshabilita los ticks
+          display: false,
         },
       },
     },
@@ -62,17 +62,16 @@ export class ListaPedidosComponent implements OnInit {
       {
         data: [],
         label: 'Monto total de pedidos',
-        backgroundColor: 'rgba(212, 167, 66, 0.2)', // Color de fondo
-        borderColor: '#d6a742', // Color de línea más oscuro
-        pointBackgroundColor: '#d6a742', // Color de punto
+        backgroundColor: 'rgba(212, 167, 66, 0.2)',
+        borderColor: '#d6a742',
+        pointBackgroundColor: '#d6a742',
         pointBorderColor: '#fff',
         pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(212, 167, 66, 0.8)', // Color de punto al pasar el mouse
+        pointHoverBorderColor: 'rgba(212, 167, 66, 0.8)',
         fill: 'origin',
       },
     ],
   };
-  
 
   public barChartDataCantidad: ChartData<'bar'> = {
     labels: [],
@@ -80,15 +79,14 @@ export class ListaPedidosComponent implements OnInit {
       {
         data: [],
         label: 'Cantidad de pedidos',
-        backgroundColor: '#70c1b3', // Color de barra (verdoso)
-        borderColor: 'rgba(112, 193, 179, 1)', // Color de borde de barra
+        backgroundColor: '#70c1b3',
+        borderColor: 'rgba(112, 193, 179, 1)',
         borderWidth: 1,
-        hoverBackgroundColor: 'rgba(112, 193, 179, 0.4)', // Color de fondo al pasar el mouse
-        hoverBorderColor: 'rgba(112, 193, 179, 1)', // Color de borde al pasar el mouse
+        hoverBackgroundColor: 'rgba(112, 193, 179, 0.4)',
+        hoverBorderColor: 'rgba(112, 193, 179, 1)',
       },
     ],
   };
-  
 
   public pieChartOptions: ChartConfiguration<'pie'>['options'] = {
     responsive: true,
@@ -110,9 +108,10 @@ export class ListaPedidosComponent implements OnInit {
   public pieChartType = 'pie' as const;
   public lineChartType = 'line' as const;
 
-  public fechaInicio: string; // hace siete dias
-  public fechaFin: string; // hoy a las 11:59:59
+  public fechaInicio: string;
+  public fechaFin: string;
   public reporte: Reporte;
+  public combinedData: any;
 
   constructor(private reporteService: ReporteService) {
     const fechaIni = new Date();
@@ -141,25 +140,40 @@ export class ListaPedidosComponent implements OnInit {
     formData.append('id_restaurante', idRestaurante || '');
 
     this.reporteService.getReportePedidos(formData).subscribe((reporte: Reporte) => {
-      // this.barChartDataMonto.labels = reporte.montoTotalPedidosPorDia.map((item) => item.fecha);
-      // this.barChartDataMonto.datasets[0].data = reporte.montoTotalPedidosPorDia.map((item) => item.monto);
-      this.lineChartDataMonto.labels = reporte.montoTotalPedidosPorDia.map((item) => {
-        return formatDate(item.fecha, 'dd-MM-yyyy', 'en-US');
-      });
-      this.lineChartDataMonto.datasets[0].data = reporte.montoTotalPedidosPorDia.map((item) => item.monto);
+        this.combinedData = reporte.cantidadPedidosPorDia.map((cantidadItem, index) => {
+            const fecha = formatDate(cantidadItem.fecha, 'dd-MM-yyyy', 'en-US');
+            const montoItem = reporte.montoTotalPedidosPorDia[index];
+            return {
+                fecha: fecha,
+                cantidad: cantidadItem.cantidad,
+                monto: montoItem ? montoItem.monto : 0
+            };
+        });
 
-      this.barChartDataCantidad.labels = reporte.cantidadPedidosPorDia.map((item) => {
-        return formatDate(item.fecha, 'dd-MM-yyyy', 'en-US');
-      });
-      this.barChartDataCantidad.datasets[0].data = reporte.cantidadPedidosPorDia.map((item) => item.cantidad);
+        this.lineChartDataMonto.labels = reporte.montoTotalPedidosPorDia.map((item) => {
+            return formatDate(item.fecha, 'dd-MM-yyyy', 'en-US');
+        });
+        this.lineChartDataMonto.datasets[0].data = reporte.montoTotalPedidosPorDia.map((item) => item.monto);
 
-      this.pieChartData.labels = reporte.cantidadPedidosPorMesa.map((item) => item.mesa);
-      this.pieChartData.datasets[0].data = reporte.cantidadPedidosPorMesa.map((item) => item.cantidad_pedidos);
+        this.barChartDataCantidad.labels = reporte.cantidadPedidosPorDia.map((item) => {
+            return formatDate(item.fecha, 'dd-MM-yyyy', 'en-US');
+        });
+        this.barChartDataCantidad.datasets[0].data = reporte.cantidadPedidosPorDia.map((item) => item.cantidad);
 
-      this.barChart?.update();
-      this.pieChart?.update();
-      this.lineChartMonto?.update();
-      this.reporte = reporte;
+        this.pieChartData.labels = reporte.cantidadPedidosPorMesa.map((item) => item.mesa);
+        this.pieChartData.datasets[0].data = reporte.cantidadPedidosPorMesa.map((item) => item.cantidad_pedidos);
+
+        if (this.barChart) {
+            this.barChart.chart?.update();
+        }
+        if (this.lineChartMonto) {
+            this.lineChartMonto.chart?.update();
+        }
+        if (this.pieChart) {
+            this.pieChart.chart?.update();
+        }
+
+        this.reporte = reporte;
     });
   }
 
@@ -170,10 +184,4 @@ export class ListaPedidosComponent implements OnInit {
   public chartHovered({ event, active }: { event?: ChartEvent; active?: object[] }): void {
     console.log(event, active);
   }
-
-  // public randomize(): void {
-  //   this.barChartDataMonto.datasets[0].data = this.barChartDataMonto.datasets[0].data.map(() => Math.round(Math.random() * 10000));
-  //   this.barChartDataCantidad.datasets[0].data = this.barChartDataCantidad.datasets[0].data.map(() => Math.round(Math.random() * 10));
-  //   this.barChart?.update();
-  // }
 }
