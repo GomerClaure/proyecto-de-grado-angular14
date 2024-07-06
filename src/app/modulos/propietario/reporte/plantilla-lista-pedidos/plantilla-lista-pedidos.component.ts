@@ -14,9 +14,54 @@ export class PlantillaListaPedidosComponent implements OnInit {
   public combinedData: any;
   public reporte: any;
 
-  public barChartOptions: ChartConfiguration<'bar'>['options'] = { /* ... */ };
-  public lineChartOptions: ChartConfiguration<'line'>['options'] = { /* ... */ };
-  public pieChartOptions: ChartConfiguration<'pie'>['options'] = { /* ... */ };
+  public barChartOptions: ChartConfiguration<'bar'>['options'] = {
+    responsive: true,
+    scales: {
+      x: {},
+      y: {
+        min: 0,
+      },
+    },
+    plugins: {
+      legend: {
+        display: true,
+      },
+    },
+  };
+
+  public lineChartOptions: ChartConfiguration<'line'>['options'] = {
+    responsive: true,
+    elements: {
+      line: {
+        tension: 0.5,
+      },
+    },
+    scales: {
+      y: {
+        position: 'left',
+      },
+      y1: {
+        position: 'right',
+        grid: {
+          display: false,
+        },
+        ticks: {
+          display: false,
+        },
+      },
+    },
+    plugins: {
+      legend: { display: false },
+    },
+  };
+  public pieChartOptions: ChartConfiguration<'pie'>['options'] = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+      },
+    },
+  };
   public barChartType: 'bar' = 'bar' as const;
   public pieChartType: 'pie' = 'pie' as const;
   public lineChartType: 'line' = 'line' as const;
@@ -24,25 +69,20 @@ export class PlantillaListaPedidosComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    //quiero obtener el elemendo dee clase fondo
-    const fondo = document.querySelector('.fondo');
-    // if (fondo) {
-    //   fondo.classList.add('fondo-blanco');
-    // }
     const navigation = window.history.state;
     this.lineChartDataMonto = navigation.lineChartDataMonto;
     this.barChartDataCantidad = navigation.barChartDataCantidad;
     this.pieChartData = navigation.pieChartData;
     this.combinedData = navigation.combinedData;
     this.reporte = navigation.reporte;
+
     setTimeout(() => {
-      fondo?.classList.remove('fondo-blanco');
       this.imprimir();
-      // this.router.navigate(['/reporte/pedidos']);
     }, 1000);
   }
 
   public imprimir() {
     window.print();
+    this.router.navigate(['/reporte/pedidos']);
   }
 }

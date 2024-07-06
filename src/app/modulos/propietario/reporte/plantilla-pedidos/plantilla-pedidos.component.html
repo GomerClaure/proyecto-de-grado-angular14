@@ -1,35 +1,21 @@
 <div class="white-screen" id="plantilla-reporte-pedidos">
-  <div class=" mt-5  border">
-    <h2 class="mb-4">Reporte</h2>
+    <div class="container mt-5">
+      <h2 class="mb-4">Reporte</h2>
       <div class="row">
-        <div class="col-lg-6 col-md-12 chart-container">
+        <div class="col-lg-6 col-md-12 chart-container page-break">
           <h3>Monto Total de Pedidos por Día</h3>
-          <canvas baseChart
-            [data]="lineChartDataMonto"
-            [options]="lineChartOptions"
-            [type]="lineChartType">
-          </canvas>
+          <canvas baseChart [data]="lineChartDataMonto" [options]="lineChartOptions" [type]="lineChartType"></canvas>
         </div>
-        <div class="col-lg-6 col-md-12 chart-container">
+        <div class="col-lg-6 col-md-12 chart-container page-break">
           <h3>Cantidad de Pedidos por Día</h3>
-          <canvas
-            baseChart
-            [data]="barChartDataCantidad"
-            [options]="barChartOptions"
-            [type]="barChartType">
-          ></canvas>
+          <canvas baseChart [data]="barChartDataCantidad" [options]="barChartOptions" [type]="barChartType"></canvas>
         </div>
-        <div class="col-xl-4 col-md-12 text-center chart-container">
+        <div class="col-xl-4 col-md-12 text-center chart-container page-break">
           <h3>Cantidad de Pedidos por Mesa</h3>
-          <canvas baseChart
-            [data]="pieChartData"
-            [options]="pieChartOptions"
-            [type]="pieChartType">
-          </canvas>
+          <canvas baseChart [data]="pieChartData" [options]="pieChartOptions" [type]="pieChartType"></canvas>
         </div>
       </div>
-      
-      <div class="reporte">
+      <div class="reporte page-break">
         <h4>Reporte Diario</h4>
         <table class="table table-bordered cantidadPedidosPorDia">
           <thead>
@@ -50,8 +36,8 @@
           </tbody>
         </table>
       </div>
-
-      <div class="reporte">
+  
+      <div class="reporte page-break">
         <h4>Pedidos Por Mesa</h4>
         <table class="table table-bordered cantidadPedidosPorMesa">
           <thead>
@@ -68,5 +54,6 @@
           </tbody>
         </table>
       </div>
+    </div>
   </div>
-</div>
+  
