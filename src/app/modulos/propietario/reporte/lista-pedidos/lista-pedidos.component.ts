@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild,ChangeDetectorRef, QueryList, ViewChildren } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { ReporteService } from 'src/app/services/reporte/reporte.service';
 import { Reporte } from 'src/app/modelos/Reporte';
@@ -11,9 +11,7 @@ import { BaseChartDirective } from 'ng2-charts';
   styleUrls: ['./lista-pedidos.component.scss']
 })
 export class ListaPedidosComponent implements OnInit {
-  @ViewChild('barChart') barChart: BaseChartDirective<'bar'> | undefined;
-  @ViewChild('lineChartMonto') lineChartMonto: BaseChartDirective<'line'> | undefined;
-  @ViewChild('pieChart') pieChart: BaseChartDirective<'pie'> | undefined;
+  @ViewChildren(BaseChartDirective) charts!: QueryList<BaseChartDirective>;
 
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
     responsive: true,
@@ -104,16 +102,16 @@ export class ListaPedidosComponent implements OnInit {
     ],
   };
 
-  public barChartType = 'bar' as const;
-  public pieChartType = 'pie' as const;
-  public lineChartType = 'line' as const;
+  public barChartType : 'bar' = 'bar' as const;
+  public pieChartType : 'pie' = 'pie' as const;
+  public lineChartType : 'line' = 'line' as const;
 
   public fechaInicio: string;
   public fechaFin: string;
   public reporte: Reporte;
   public combinedData: any;
 
-  constructor(private reporteService: ReporteService) {
+  constructor(private reporteService: ReporteService,private cdr: ChangeDetectorRef) {
     const fechaIni = new Date();
     fechaIni.setDate(fechaIni.getDate() - 7);
     this.fechaInicio = fechaIni.toISOString().split('T')[0];
@@ -140,6 +138,7 @@ export class ListaPedidosComponent implements OnInit {
     formData.append('id_restaurante', idRestaurante || '');
 
     this.reporteService.getReportePedidos(formData).subscribe((reporte: Reporte) => {
+      this.reporte = reporte;
         this.combinedData = reporte.cantidadPedidosPorDia.map((cantidadItem, index) => {
             const fecha = formatDate(cantidadItem.fecha, 'dd-MM-yyyy', 'en-US');
             const montoItem = reporte.montoTotalPedidosPorDia[index];
@@ -163,17 +162,11 @@ export class ListaPedidosComponent implements OnInit {
         this.pieChartData.labels = reporte.cantidadPedidosPorMesa.map((item) => item.mesa);
         this.pieChartData.datasets[0].data = reporte.cantidadPedidosPorMesa.map((item) => item.cantidad_pedidos);
 
-        if (this.barChart) {
-            this.barChart.chart?.update();
-        }
-        if (this.lineChartMonto) {
-            this.lineChartMonto.chart?.update();
-        }
-        if (this.pieChart) {
-            this.pieChart.chart?.update();
-        }
-
-        this.reporte = reporte;
+        this.charts.forEach((child) => {
+          child.chart?.update()
+      });
+        this.cdr.detectChanges();
+        
     });
   }
 
