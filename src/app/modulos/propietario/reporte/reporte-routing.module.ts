@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
 import { ListaVentasComponent } from './lista-ventas/lista-ventas.component';
+import { PlantillaListaPedidosComponent } from './plantilla-lista-pedidos/plantilla-lista-pedidos.component';
 
 const routes: Routes = [
     {
@@ -15,6 +16,11 @@ const routes: Routes = [
             {
                 path: 'ventas',
                 component: ListaVentasComponent
+            }
+            ,
+            {
+                path: 'plantilla-pedidos',
+                component: PlantillaListaPedidosComponent
             }
         ]
     }

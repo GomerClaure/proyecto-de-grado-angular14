@@ -10,11 +10,13 @@ import { FormsModule } from '@angular/forms';
 // import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgChartsModule } from 'ng2-charts';
+import { PlantillaListaPedidosComponent } from './plantilla-lista-pedidos/plantilla-lista-pedidos.component';
 
 @NgModule({
   declarations: [
     ListaPedidosComponent,
-    ListaVentasComponent
+    ListaVentasComponent,
+    PlantillaListaPedidosComponent
   ],
   imports: [
     CommonModule,

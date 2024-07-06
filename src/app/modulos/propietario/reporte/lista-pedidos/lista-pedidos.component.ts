@@ -4,6 +4,7 @@ import { ReporteService } from 'src/app/services/reporte/reporte.service';
 import { Reporte } from 'src/app/modelos/Reporte';
 import { ChartConfiguration, ChartData, ChartEvent } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-pedidos',
@@ -111,7 +112,7 @@ export class ListaPedidosComponent implements OnInit {
   public reporte: Reporte;
   public combinedData: any;
 
-  constructor(private reporteService: ReporteService,private cdr: ChangeDetectorRef) {
+  constructor(private reporteService: ReporteService,private cdr: ChangeDetectorRef, private router: Router) {
     const fechaIni = new Date();
     fechaIni.setDate(fechaIni.getDate() - 7);
     this.fechaInicio = fechaIni.toISOString().split('T')[0];
@@ -176,5 +177,17 @@ export class ListaPedidosComponent implements OnInit {
 
   public chartHovered({ event, active }: { event?: ChartEvent; active?: object[] }): void {
     console.log(event, active);
+  }
+
+  public imprimir() {
+    this.router.navigate(['reporte/plantilla-pedidos'], {
+      state: {
+        lineChartDataMonto: this.lineChartDataMonto,
+        barChartDataCantidad: this.barChartDataCantidad,
+        pieChartData: this.pieChartData,
+        combinedData: this.combinedData,
+        reporte: this.reporte
+      }
+    });
   }
 }
