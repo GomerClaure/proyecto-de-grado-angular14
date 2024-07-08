@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidosParaMostrarMesa } from 'src/app/modelos/PedidosMesa';
-import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { PedidosDeMesaService } from 'src/app/services/pedido/pedidos-de-mesa.service';
 
 @Component({
@@ -16,12 +15,16 @@ export class ModalPedidosComponent implements OnInit {
   constructor(private pedidoServiceMesa: PedidosDeMesaService) { }
 
   ngOnInit(): void {
+    //Observable para los pedidos
     this.pedidoServiceMesa.pedidosMesa$.subscribe(data => {
       this.estadoPedido=data.est;
       this.pedidosDeMesa = data.pedidos;
       this.nombreMesa = data.nombreMesa;
       this.ordenar();
     });
+    //Observable para la cuenta
+
+
   }
   ordenar() {
     this.PedidosParaMostrar = this.pedidosDeMesa.map(pedido => {
@@ -54,8 +57,6 @@ export class ModalPedidosComponent implements OnInit {
         estado: pedido.estado.nombre
       };
     });
-
-    console.log("para mostrar",this.PedidosParaMostrar);
   }
   eliminarPedido(IdPedido:any){
    this.pedidoServiceMesa.setIdPedido(IdPedido); 

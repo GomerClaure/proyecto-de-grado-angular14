@@ -25,11 +25,10 @@ export class ListaPedidosComponent implements OnInit {
     this.obtenerPedidos();
   } 
   obtenerPedidos(): void {
-    console.log("antes de mandar",this.id_empleado,this.id_restaurante)
     this.pedidoService.getPedidos(this.id_empleado,this.id_restaurante).subscribe(
       (response) => {
         this.pedidos = response.pedidos;
-        console.log(this.pedidos);
+        console.log("Obteniendo pedidos",this.pedidos);
         this.agruparPedidosPorMesa();
       },
       (error) => {
@@ -42,8 +41,13 @@ export class ListaPedidosComponent implements OnInit {
     this.pedidos.forEach(pedido => {
       const nombreMesa = pedido.cuenta.mesa.nombre;
       const est=pedido.estado.nombre;
-      console.log(est);
       const pedidosMesa = this.pedidosPorMesa.find(item => item.nombreMesa === nombreMesa); 
+
+       // Excluir pedidos con cuenta cerrada
+       console.log(pedido.cuenta.estado)
+       if (pedido.cuenta.estado === 'cerrada') {
+        return;
+      }
 
       if (!pedidosMesa) { 
         this.pedidosPorMesa.push({ nombreMesa: nombreMesa,estadoP:est, pedidos: [pedido]});
