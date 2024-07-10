@@ -17,6 +17,7 @@ export interface Reporte {
     };
     estado_pedido: string;
     monto: number;
+    fecha_hora_cuenta: Date;
     platillos: {
       id_platillo: number;
       nombre: string;

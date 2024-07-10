@@ -126,7 +126,7 @@ export class ListaPedidosComponent implements OnInit {
       cantidadPedidosPorDia: [],
       cantidadPedidosPorMesa: [],
       cuentas: [],
-      pedidoPorCuenta: {},
+      pedidoPorCuenta: {}
     };
   }
 
@@ -193,7 +193,6 @@ export class ListaPedidosComponent implements OnInit {
     });
   }
   getPedidoIds(cuentaId: number): string[] {
-    console.log(this.reporte.pedidoPorCuenta);
     return this.reporte.pedidoPorCuenta && this.reporte.pedidoPorCuenta[cuentaId]
       ? Object.keys(this.reporte.pedidoPorCuenta[cuentaId])
       : [];
@@ -215,5 +214,15 @@ export class ListaPedidosComponent implements OnInit {
     return this.reporte.pedidoPorCuenta && this.reporte.pedidoPorCuenta[cuentaId] && this.reporte.pedidoPorCuenta[cuentaId][pedidoId]
       ? this.reporte.pedidoPorCuenta[cuentaId][pedidoId].platillos
       : [];
+  }
+  
+  getSubtotal(cuentaId: number, pedidoId: string): number {
+    const platillos = this.getPlatillos(cuentaId, pedidoId);
+    return platillos.reduce((sum, platillo) => sum + (platillo.precio * platillo.cantidad), 0);
+  }
+  
+  getTotal(cuentaId: number): number {
+    const pedidoIds = this.getPedidoIds(cuentaId);
+    return pedidoIds.reduce((total, pedidoId) => total + this.getSubtotal(cuentaId, pedidoId), 0);
   }
 }

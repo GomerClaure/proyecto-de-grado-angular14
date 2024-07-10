@@ -90,34 +90,47 @@
 
       <div class="reporte">
         <h4>Detalle de Pedidos por Cuenta</h4>
-        <div *ngFor="let cuenta of reporte.cuentas">
-          <h5>Cuenta ID: {{ cuenta.id }}</h5>
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Pedido ID</th>
-                <th>Empleado</th>
-                <th>Estado</th>
-                <th>Platillos</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let pedidoId of getPedidoIds(cuenta.id)">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Cuenta ID</th>
+              <th>Pedido ID</th>
+              <th>Empleado</th>
+              <th>Estado</th>
+              <th>Platillos</th>
+              <th>Subtotal (Bs)</th>
+              <th>Total (Bs)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let cuenta of reporte.cuentas">
+              <tr *ngFor="let pedidoId of getPedidoIds(cuenta.id); let i = index">
+                <td *ngIf="i === 0" [attr.rowspan]="getPedidoIds(cuenta.id).length">
+                  {{ cuenta.id }}
+                </td>
                 <td>{{ pedidoId }}</td>
                 <td>{{ getEmpleado(cuenta.id, pedidoId).nombre }} {{ getEmpleado(cuenta.id, pedidoId).apellido }}</td>
                 <td>{{ getEstadoPedido(cuenta.id, pedidoId) }}</td>
                 <td>
                   <ul>
                     <li *ngFor="let platillo of getPlatillos(cuenta.id, pedidoId)">
-                      {{ platillo.nombre }} - {{ platillo.precio | currency }} x {{ platillo.cantidad }} ({{ platillo.detalle }})
+                      {{ platillo.nombre }} - {{ platillo.precio | currency:'Bs':'symbol':'1.2-2' }} x {{ platillo.cantidad }} ({{ platillo.detalle }})
                     </li>
                   </ul>
                 </td>
+                <td *ngIf="i === 0" [attr.rowspan]="getPedidoIds(cuenta.id).length">
+                  {{ getSubtotal(cuenta.id, pedidoId) | currency:'Bs':'symbol':'1.2-2' }}
+                </td>
+                <td *ngIf="i === 0" [attr.rowspan]="getPedidoIds(cuenta.id).length">
+                  {{ getTotal(cuenta.id) | currency:'Bs':'symbol':'1.2-2' }}
+                </td>
               </tr>
-            </tbody>
-          </table>
-        </div>
+            </ng-container>
+          </tbody>
+        </table>
       </div>
+      
+      
 
     </div>
   </div>
