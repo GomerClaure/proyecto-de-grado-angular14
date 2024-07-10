@@ -68,5 +68,36 @@
           </tbody>
         </table>
       </div>
+      <div class="reporte">
+        <h4>Detalle de Pedidos por Cuenta</h4>
+        <div *ngFor="let cuenta of reporte.cuentas">
+          <h5>Cuenta ID: {{ cuenta.id }}</h5>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Pedido ID</th>
+                <th>Empleado</th>
+                <th>Estado</th>
+                <th>Platillos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let pedidoId of getPedidoIds(cuenta.id)">
+                <td>{{ pedidoId }}</td>
+                <td>{{ getEmpleado(cuenta.id, pedidoId).nombre }} {{ getEmpleado(cuenta.id, pedidoId).apellido }}</td>
+                <td>{{ getEstadoPedido(cuenta.id, pedidoId) }}</td>
+                <td>
+                  <ul>
+                    <li *ngFor="let platillo of getPlatillos(cuenta.id, pedidoId)">
+                      {{ platillo.nombre }} - {{ platillo.precio | currency }} x {{ platillo.cantidad }} ({{ platillo.detalle }})
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
   </div>
 </div>

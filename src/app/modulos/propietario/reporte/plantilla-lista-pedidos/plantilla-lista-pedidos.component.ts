@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChartData, ChartConfiguration } from 'chart.js';
+import { Reporte } from 'src/app/modelos/Reporte';
 
 @Component({
   selector: 'app-plantilla-lista-pedidos',
@@ -12,7 +13,7 @@ export class PlantillaListaPedidosComponent implements OnInit {
   public barChartDataCantidad!: ChartData<'bar'>;
   public pieChartData!: ChartData<'pie'>;
   public combinedData: any;
-  public reporte: any;
+  public reporte: Reporte;
 
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
     responsive: true,
@@ -66,7 +67,15 @@ export class PlantillaListaPedidosComponent implements OnInit {
   public pieChartType: 'pie' = 'pie' as const;
   public lineChartType: 'line' = 'line' as const;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.reporte = {
+      montoTotalPedidosPorDia: [],
+      cantidadPedidosPorDia: [],
+      cantidadPedidosPorMesa: [],
+      cuentas: [],
+      pedidoPorCuenta: {},
+    };
+   }
 
   ngOnInit(): void {
     const navigation = window.history.state;
@@ -84,5 +93,30 @@ export class PlantillaListaPedidosComponent implements OnInit {
   public imprimir() {
     window.print();
     this.router.navigate(['/reporte/pedidos']);
+  }
+
+  getPedidoIds(cuentaId: number): string[] {
+    console.log(this.reporte.pedidoPorCuenta);
+    return this.reporte.pedidoPorCuenta && this.reporte.pedidoPorCuenta[cuentaId]
+      ? Object.keys(this.reporte.pedidoPorCuenta[cuentaId])
+      : [];
+  }
+  
+  getEmpleado(cuentaId: number, pedidoId: string) {
+    return this.reporte.pedidoPorCuenta && this.reporte.pedidoPorCuenta[cuentaId] && this.reporte.pedidoPorCuenta[cuentaId][pedidoId]
+      ? this.reporte.pedidoPorCuenta[cuentaId][pedidoId].empleado
+      : { nombre: '', apellido: '' };
+  }
+  
+  getEstadoPedido(cuentaId: number, pedidoId: string) {
+    return this.reporte.pedidoPorCuenta && this.reporte.pedidoPorCuenta[cuentaId] && this.reporte.pedidoPorCuenta[cuentaId][pedidoId]
+      ? this.reporte.pedidoPorCuenta[cuentaId][pedidoId].estado_pedido
+      : '';
+  }
+  
+  getPlatillos(cuentaId: number, pedidoId: string) {
+    return this.reporte.pedidoPorCuenta && this.reporte.pedidoPorCuenta[cuentaId] && this.reporte.pedidoPorCuenta[cuentaId][pedidoId]
+      ? this.reporte.pedidoPorCuenta[cuentaId][pedidoId].platillos
+      : [];
   }
 }
