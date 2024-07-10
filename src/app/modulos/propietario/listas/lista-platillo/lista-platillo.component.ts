@@ -17,12 +17,18 @@ export class ListaPlatilloComponent {
   selectedPlatilloId: number | null = null;
   storageUrl = environment.backendStorageUrl;
   textoBuscador:string = '';
+
+  id_restaurante:any;
+
   constructor(private router: Router, private platilloService: PlatillosService,
     private modalService: ModalEliminarPlatilloService,
    ) {
   }
 
   ngOnInit(): void {
+    //Sacamos el id del restaurante para filtrar los platillos de un restaurante en concreto
+    this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
+    //Obtenemos los platillos segun el id_restaurante
     this.getPlatillos();
   }
 
@@ -31,19 +37,20 @@ export class ListaPlatilloComponent {
   }
 
 
-  getPlatillos() {
-    this.platilloService.getPlatillos().subscribe(
+  getPlatillos(): void {
+    this.platilloService.getPlatillos(this.id_restaurante).subscribe(
       res => {
-        this.platillos = res.platillo;
-                // Ordenar los platillos por nombre en orden alfabético
-                this.platillos.sort((a, b) => a.nombre.localeCompare(b.nombre));
-                // Tomar los primeros 10 platillos
-                this.platillos = this.platillos.slice(0, 10);
-                this.platillosFiltrados=this.platillos;
+        // Verificar si res.platillo es un arreglo o un solo objeto y convertirlo a un arreglo si es necesario
+        if (Array.isArray(res.platillo)) {
+          this.platillos = res.platillo;
+        } else {
+          this.platillos = [res.platillo];
+        }
+        this.platillosFiltrados = this.platillos;
         console.log(this.platillos);
       },
       err => {
-        console.log(err);
+        console.error('Error al obtener los platillos', err);
       }
     );
   }

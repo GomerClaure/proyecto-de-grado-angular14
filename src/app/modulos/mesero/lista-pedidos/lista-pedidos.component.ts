@@ -43,13 +43,10 @@ export class ListaPedidosComponent implements OnInit {
       const est=pedido.estado.nombre;
       const pedidosMesa = this.pedidosPorMesa.find(item => item.nombreMesa === nombreMesa); 
 
-       // Excluir pedidos con cuenta cerrada
        console.log(pedido.cuenta.estado)
        if (pedido.cuenta.estado === 'cerrada') {
         return;
-      }
-
-      if (!pedidosMesa) { 
+      }else if (!pedidosMesa) { 
         this.pedidosPorMesa.push({ nombreMesa: nombreMesa,estadoP:est, pedidos: [pedido]});
       } else { 
         pedidosMesa.pedidos.push(pedido); 
