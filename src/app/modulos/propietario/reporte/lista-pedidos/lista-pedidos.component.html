@@ -118,9 +118,7 @@
                     </li>
                   </ul>
                 </td>
-                <td *ngIf="i === 0" [attr.rowspan]="getPedidoIds(cuenta.id).length">
-                  {{ getSubtotal(cuenta.id, pedidoId) | currency:'Bs':'symbol':'1.2-2' }}
-                </td>
+                <td>{{ getSubtotal(cuenta.id, pedidoId) | currency:'Bs.' }}</td>
                 <td *ngIf="i === 0" [attr.rowspan]="getPedidoIds(cuenta.id).length">
                   {{ getTotal(cuenta.id) | currency:'Bs':'symbol':'1.2-2' }}
                 </td>
