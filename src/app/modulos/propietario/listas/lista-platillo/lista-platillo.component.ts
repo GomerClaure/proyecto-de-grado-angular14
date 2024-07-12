@@ -40,17 +40,14 @@ export class ListaPlatilloComponent {
   getPlatillos(): void {
     this.platilloService.getPlatillos(this.id_restaurante).subscribe(
       res => {
-        // Verificar si res.platillo es un arreglo o un solo objeto y convertirlo a un arreglo si es necesario
-        if (Array.isArray(res.platillo)) {
-          this.platillos = res.platillo;
-        } else {
-          this.platillos = [res.platillo];
-        }
-        this.platillosFiltrados = this.platillos;
-        console.log(this.platillos);
+        console.log("Response from service:", res);
+        
+        this.platillosFiltrados = res.platillos;
+        
+        console.log("Platillos filtrados:", this.platillosFiltrados);
       },
-      err => {
-        console.error('Error al obtener los platillos', err);
+      error => {
+        console.error("Error fetching platillos:", error);
       }
     );
   }
