@@ -41,10 +41,9 @@ export class ListaPlatilloComponent {
     this.platilloService.getPlatillos(this.id_restaurante).subscribe(
       res => {
         console.log("Response from service:", res);
+        this.platillos = res.platillos;
+        this.filtrarPlatillos();
         
-        this.platillosFiltrados = res.platillos;
-        
-        console.log("Platillos filtrados:", this.platillosFiltrados);
       },
       error => {
         console.error("Error fetching platillos:", error);
