@@ -111,6 +111,8 @@ export class ListaPedidosComponent implements OnInit {
   public fechaFin: string;
   public reporte: Reporte;
   public combinedData: any;
+  public pageSize: number = 10; // Cantidad de elementos por página
+  public currentPage: number = 1; // Página actual
 
   constructor(private reporteService: ReporteService,private cdr: ChangeDetectorRef, private router: Router) {
     const fechaIni = new Date();
@@ -191,6 +193,36 @@ export class ListaPedidosComponent implements OnInit {
         reporte: this.reporte
       }
     });
+  }
+  get pagedCuentas(): any[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    return this.reporte.cuentas.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  get pageCount(): number {
+    return Math.ceil(this.reporte.cuentas.length / this.pageSize);
+  }
+
+  get pagesArray(): number[] {
+    return Array(this.pageCount).fill(0).map((x, i) => i + 1);
+  }
+
+  setPage(page: number) {
+    if (page >= 1 && page <= this.pageCount) {
+      this.currentPage = page;
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.pageCount) {
+      this.currentPage++;
+    }
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
   }
   getPedidoIds(cuentaId: number): string[] {
     return this.reporte.pedidoPorCuenta && this.reporte.pedidoPorCuenta[cuentaId]

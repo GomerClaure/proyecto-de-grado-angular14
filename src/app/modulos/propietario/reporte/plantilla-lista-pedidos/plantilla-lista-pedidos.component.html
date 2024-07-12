@@ -69,6 +69,46 @@
         </table>
       </div>
       <div class="reporte">
+        <h4>Reporte Diario</h4>
+        <table class="table table-bordered cantidadPedidosPorDia">
+          <thead>
+            <tr>
+              <th>N°</th>
+              <th>Fecha</th>
+              <th>Cantidad Clientes</th>
+              <th>Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pedidoDia of combinedData">
+              <td>{{ combinedData.indexOf(pedidoDia) + 1 }}</td>
+              <td>{{ pedidoDia.fecha }}</td>
+              <td>{{ pedidoDia.cantidad }}</td>
+              <td>{{ pedidoDia.monto }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="reporte">
+        <h4>Pedidos Por Mesa</h4>
+        <table class="table table-bordered cantidadPedidosPorMesa">
+          <thead>
+            <tr>
+              <th>Mesa</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pedidoMesa of reporte.cantidadPedidosPorMesa">
+              <td>{{ pedidoMesa.mesa }}</td>
+              <td>{{ pedidoMesa.cantidad_pedidos }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="reporte">
         <h4>Detalle de Pedidos por Cuenta</h4>
         <table class="table table-bordered">
           <thead>
@@ -98,9 +138,7 @@
                     </li>
                   </ul>
                 </td>
-                <td *ngIf="i === 0" [attr.rowspan]="getPedidoIds(cuenta.id).length">
-                  {{ getSubtotal(cuenta.id, pedidoId) | currency:'Bs':'symbol':'1.2-2' }}
-                </td>
+                <td>{{ getSubtotal(cuenta.id, pedidoId) | currency:'Bs.' }}</td>
                 <td *ngIf="i === 0" [attr.rowspan]="getPedidoIds(cuenta.id).length">
                   {{ getTotal(cuenta.id) | currency:'Bs':'symbol':'1.2-2' }}
                 </td>

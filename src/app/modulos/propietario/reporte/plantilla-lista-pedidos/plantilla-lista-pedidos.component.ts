@@ -102,9 +102,7 @@ export class PlantillaListaPedidosComponent implements OnInit {
   }
   
   getEmpleado(cuentaId: number, pedidoId: string) {
-    return this.reporte.pedidoPorCuenta && this.reporte.pedidoPorCuenta[cuentaId] && this.reporte.pedidoPorCuenta[cuentaId][pedidoId]
-      ? this.reporte.pedidoPorCuenta[cuentaId][pedidoId].empleado
-      : { nombre: '', apellido: '' };
+    return this.reporte.pedidoPorCuenta[cuentaId.toString()][pedidoId].empleado;
   }
   
   getEstadoPedido(cuentaId: number, pedidoId: string) {
@@ -120,12 +118,18 @@ export class PlantillaListaPedidosComponent implements OnInit {
   }
   
   getSubtotal(cuentaId: number, pedidoId: string): number {
-    const platillos = this.getPlatillos(cuentaId, pedidoId);
-    return platillos.reduce((sum, platillo) => sum + (platillo.precio * platillo.cantidad), 0);
+    const monto = this.reporte.pedidoPorCuenta[cuentaId.toString()][pedidoId].monto;
+    return typeof monto === 'number' ? monto : parseFloat(monto);
   }
   
+  
   getTotal(cuentaId: number): number {
-    const pedidoIds = this.getPedidoIds(cuentaId);
-    return pedidoIds.reduce((total, pedidoId) => total + this.getSubtotal(cuentaId, pedidoId), 0);
+    let total = 0;
+    const pedidos = this.reporte.pedidoPorCuenta[cuentaId.toString()];
+    for (let pedidoId in pedidos) {
+      const monto = pedidos[pedidoId].monto;
+      total += typeof monto === 'number' ? monto : parseFloat(monto);
+    }
+    return total;
   }
 }
