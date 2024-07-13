@@ -22,25 +22,29 @@ export class VistaMenuComponent implements OnInit {
   public imagenesPorPagina: any[][];
   public platilloPorCategoria!: PlatillosPorCategoria[];
   public platilloPorCategoriaPagina!: PlatillosPorCategoria[][];
-  randomIndex: { [key: string]: number } = {};
+  public tamanioMaximoPagina: number;
+  public espacioPorPlatillo: number;
+  public espacioPorCategoria: number;
 
-  constructor(private menuService: MenuService, private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef,private modalService:ModalMostrarPlatilloService) {
+  constructor(private menuService: MenuService, private route: ActivatedRoute, private modalService: ModalMostrarPlatilloService) {
     this.idMenu = parseInt(this.route.snapshot.paramMap.get('menu') || '0');
     this.nombreRestaurante = 'Restaurante';
+    this.tamanioMaximoPagina = 1000;
+    this.espacioPorCategoria = 100;
     this.platilloPorCategoria = [];
+    this.espacioPorPlatillo = 50;
     this.imagenesPorPagina = [];
     this.menu = {
       id: 0,
       portada: '',
       tema: '',
       qr: '',
-    }
-
+    };
   }
 
   ngOnInit(): void {
     this.getMenuById();
+    this.actualizarEspacioPorPantalla();
   }
 
 
@@ -50,7 +54,7 @@ export class VistaMenuComponent implements OnInit {
         this.menu = response.menu;
         const platillos: Platillo[] = response.platillos;
         this.platilloPorCategoria = this.transformarDatos(platillos);
-        this.platilloPorCategoriaPagina = this.agruparPlatillosPorPagina(this.platilloPorCategoria, 4);
+        this.platilloPorCategoriaPagina = this.agruparPlatillosPorPagina(this.platilloPorCategoria);
         this.platilloPorCategoriaPagina = this.agruparCategoriasDeCadaPagina(this.platilloPorCategoriaPagina);
         this.generarImagenesPorPagina();
         let container = document.getElementById("container-ver-menu");
@@ -60,8 +64,27 @@ export class VistaMenuComponent implements OnInit {
     );
   }
 
-  onImgError(event: any) {
-    event.target.src = 'assets/image/27002.jpg';
+  actualizarEspacioPorPantalla() {
+    const anchoPantalla = window.innerWidth;
+    const altoPantalla = window.innerHeight;
+    console.log('anchoPantalla', anchoPantalla)
+    console.log('altoPantalla', altoPantalla)
+    this.tamanioMaximoPagina = Math.trunc(altoPantalla * 0.8);//mejor no redondearlo por si se excede
+    this.espacioPorCategoria = 23;
+    this.espacioPorPlatillo = 22.5;
+  }
+
+  onImgError(idElemento: string) {
+    console.log(idElemento);
+    let contenedor = document.getElementById(idElemento);
+    if (contenedor) {
+      contenedor.style.backgroundImage = 'url("assets/image/270021.jpg")';
+    }
+    // event.target.src = 'assets/image/2700.jpg';
+  }
+
+  portadaError(event: any) {
+    event.target.src = 'assets/image/pp.png';
   }
 
   transformarDatos(platillos: Platillo[]): PlatillosPorCategoria[] {
@@ -87,28 +110,30 @@ export class VistaMenuComponent implements OnInit {
 
     return platillosPorCategoria;
   }
-  agruparPlatillosPorPagina(platillos: PlatillosPorCategoria[], limitePlatillosPorPagina: number): PlatillosPorCategoria[][] {
+  agruparPlatillosPorPagina(platillos: PlatillosPorCategoria[]): PlatillosPorCategoria[][] {
     const paginas: PlatillosPorCategoria[][] = [];
     let paginaActual: PlatillosPorCategoria[] = [];
-
+    let espacioDisponible = this.tamanioMaximoPagina;
+  
     for (const categoria of platillos) {
-      for (const platillo of categoria.platillos) {
-        if (paginaActual.length === limitePlatillosPorPagina) {
-          paginas.push(paginaActual);
-          paginaActual = [];
-        }
-
-
-        paginaActual.push({ ...categoria, platillos: [platillo] });
-        let banderaEstaEnPagina = false;
+      const espacioCategoria = this.espacioPorCategoria + categoria.platillos.length * this.espacioPorPlatillo;
+      
+      // Si no hay suficiente espacio en la página actual para esta categoría, crear una nueva página
+      if (espacioDisponible < espacioCategoria) {
+        paginas.push(paginaActual);
+        paginaActual = [];
+        espacioDisponible = this.tamanioMaximoPagina;
       }
+  
+      paginaActual.push(categoria);
+      espacioDisponible -= espacioCategoria;
     }
-
-
+  
+    // Añadir la última página si tiene contenido
     if (paginaActual.length > 0) {
       paginas.push(paginaActual);
     }
-
+  
     return paginas;
   }
 
@@ -142,14 +167,14 @@ export class VistaMenuComponent implements OnInit {
   generarImagenesPorPagina() {
     for (let index = 0; index < this.platilloPorCategoriaPagina.length; index++) {
       let pagina = this.platilloPorCategoriaPagina[index]
-      
+
       for (let indexCategoria = 0; indexCategoria < pagina.length; indexCategoria++) {
         let indiceAleatorio = this.getRandomIndex(pagina[indexCategoria].platillos.length);
         let platilloAleatorio = pagina[indexCategoria].platillos[indiceAleatorio];
         if (!this.imagenesPorPagina[index]) {
           this.imagenesPorPagina[index] = [];
         }
-        
+
         this.imagenesPorPagina[index].push({
           nombre: platilloAleatorio.nombre,
           descripcion: platilloAleatorio.descripcion,
@@ -165,6 +190,6 @@ export class VistaMenuComponent implements OnInit {
     let img = platillo.imagen;
     let desc = platillo.descripcion;
     this.modalService.openModal(platillo);
-    console.log(nom,img,desc)
-}
+    console.log(nom, img, desc)
+  }
 }
