@@ -43,10 +43,9 @@ export class VistaMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getMenuById();
     this.actualizarEspacioPorPantalla();
+    this.getMenuById();
   }
-
 
   getMenuById() {
     this.menuService.getMenuById(this.idMenu).subscribe(
@@ -54,8 +53,9 @@ export class VistaMenuComponent implements OnInit {
         this.menu = response.menu;
         const platillos: Platillo[] = response.platillos;
         this.platilloPorCategoria = this.transformarDatos(platillos);
-        this.platilloPorCategoriaPagina = this.agruparPlatillosPorPagina(this.platilloPorCategoria);
-        this.platilloPorCategoriaPagina = this.agruparCategoriasDeCadaPagina(this.platilloPorCategoriaPagina);
+        const limitePlatillosPorPagina = this.calcularLimitePlatillosPorPagina(this.platilloPorCategoria);
+        console.log('limitePlatillosPorPagina', limitePlatillosPorPagina);
+        this.platilloPorCategoriaPagina = this.agruparPlatillosPorPagina(this.platilloPorCategoria, limitePlatillosPorPagina);
         this.generarImagenesPorPagina();
         let container = document.getElementById("container-ver-menu");
         container?.classList.add(this.menu.tema);
@@ -69,7 +69,7 @@ export class VistaMenuComponent implements OnInit {
     const altoPantalla = window.innerHeight;
     console.log('anchoPantalla', anchoPantalla)
     console.log('altoPantalla', altoPantalla)
-    this.tamanioMaximoPagina = Math.trunc(altoPantalla * 0.8);//mejor no redondearlo por si se excede
+    this.tamanioMaximoPagina = Math.trunc(altoPantalla * 0.75);//mejor no redondearlo por si se excede
     this.espacioPorCategoria = 23;
     this.espacioPorPlatillo = 22.5;
   }
@@ -110,54 +110,65 @@ export class VistaMenuComponent implements OnInit {
 
     return platillosPorCategoria;
   }
-  agruparPlatillosPorPagina(platillos: PlatillosPorCategoria[]): PlatillosPorCategoria[][] {
+
+  calcularLimitePlatillosPorPagina(platillosPorCategoria: PlatillosPorCategoria[]): number {
+    let totalEspacio = 0;
+    let totalPlatillos = 0;
+
+    for (const categoria of platillosPorCategoria) {
+      totalEspacio += this.espacioPorCategoria + (categoria.platillos.length * this.espacioPorPlatillo);
+      totalPlatillos += categoria.platillos.length;
+
+      if (totalEspacio > this.tamanioMaximoPagina) {
+        // Si el espacio total excede el tamaño máximo de la página, calcular cuántos platillos se pueden incluir
+        const espacioRestante = this.tamanioMaximoPagina - (totalEspacio - (categoria.platillos.length * this.espacioPorPlatillo));
+        const platillosRestantes = Math.floor(espacioRestante / this.espacioPorPlatillo);
+        totalPlatillos -= (categoria.platillos.length - platillosRestantes);
+        break;
+      }
+    }
+
+    return totalPlatillos;
+  }
+
+  agruparPlatillosPorPagina(platillos: PlatillosPorCategoria[], limitePlatillosPorPagina: number): PlatillosPorCategoria[][] {
     const paginas: PlatillosPorCategoria[][] = [];
     let paginaActual: PlatillosPorCategoria[] = [];
     let espacioDisponible = this.tamanioMaximoPagina;
   
     for (const categoria of platillos) {
-      const espacioCategoria = this.espacioPorCategoria + categoria.platillos.length * this.espacioPorPlatillo;
-      
-      // Si no hay suficiente espacio en la página actual para esta categoría, crear una nueva página
-      if (espacioDisponible < espacioCategoria) {
-        paginas.push(paginaActual);
-        paginaActual = [];
-        espacioDisponible = this.tamanioMaximoPagina;
-      }
+      let platillosRestantes = categoria.platillos.slice();
   
-      paginaActual.push(categoria);
-      espacioDisponible -= espacioCategoria;
+      while (platillosRestantes.length > 0) {
+        const espacioCategoria = this.espacioPorCategoria;
+        const espacioParaPlatillos = espacioDisponible - espacioCategoria;
+        const numeroPlatillosPagina = Math.min(platillosRestantes.length, limitePlatillosPorPagina, Math.floor(espacioParaPlatillos / this.espacioPorPlatillo));
+  
+        if (numeroPlatillosPagina === 0 || espacioParaPlatillos < this.espacioPorPlatillo) {
+          paginas.push(paginaActual);
+          paginaActual = [];
+          espacioDisponible = this.tamanioMaximoPagina;
+        } else {
+          const platillosPagina = platillosRestantes.splice(0, numeroPlatillosPagina);
+  
+          const categoriaPagina = {
+            id: categoria.id,
+            nombre: categoria.nombre,
+            imagen: categoria.imagen,
+            platillos: platillosPagina
+          };
+  
+          paginaActual.push(categoriaPagina);
+          espacioDisponible -= espacioCategoria + numeroPlatillosPagina * this.espacioPorPlatillo;
+        }
+      }
     }
   
-    // Añadir la última página si tiene contenido
     if (paginaActual.length > 0) {
       paginas.push(paginaActual);
     }
   
     return paginas;
-  }
-
-  agruparCategoriasDeCadaPagina(platilosCategoriaPorPagina: PlatillosPorCategoria[][]): PlatillosPorCategoria[][] {
-    const paginasAgrupadas: PlatillosPorCategoria[][] = [];
-
-    platilosCategoriaPorPagina.forEach(pagina => {
-      const categoriasAgrupadas: { [key: number]: PlatillosPorCategoria } = {};
-
-      pagina.forEach(categoria => {
-        const categoriaId = categoria.id;
-        if (categoriaId in categoriasAgrupadas) {
-          categoriasAgrupadas[categoriaId].platillos.push(...categoria.platillos);
-        } else {
-          categoriasAgrupadas[categoriaId] = { ...categoria };
-        }
-      });
-
-      const categoriasAgrupadasArray = Object.values(categoriasAgrupadas);
-
-      paginasAgrupadas.push(categoriasAgrupadasArray);
-    });
-
-    return paginasAgrupadas;
   }
 
   getRandomIndex(max: number): number {
@@ -166,7 +177,7 @@ export class VistaMenuComponent implements OnInit {
 
   generarImagenesPorPagina() {
     for (let index = 0; index < this.platilloPorCategoriaPagina.length; index++) {
-      let pagina = this.platilloPorCategoriaPagina[index]
+      let pagina = this.platilloPorCategoriaPagina[index];
 
       for (let indexCategoria = 0; indexCategoria < pagina.length; indexCategoria++) {
         let indiceAleatorio = this.getRandomIndex(pagina[indexCategoria].platillos.length);
@@ -181,15 +192,15 @@ export class VistaMenuComponent implements OnInit {
           precio: platilloAleatorio.precio,
           imagen: platilloAleatorio.imagen
         });
-
       }
     }
   }
+
   onRowClick(platillo: any) {
     let nom = platillo.nombre;
     let img = platillo.imagen;
     let desc = platillo.descripcion;
     this.modalService.openModal(platillo);
-    console.log(nom, img, desc)
+    console.log(nom, img, desc);
   }
 }
