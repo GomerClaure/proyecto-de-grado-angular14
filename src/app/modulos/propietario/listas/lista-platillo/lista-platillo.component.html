@@ -27,8 +27,7 @@
             </tr>
           </thead>
           <tbody>
-            <!-- Aquí se insertarían las filas de datos -->
-            <tr *ngFor="let platillo of platillosFiltrados" class="align-middle">
+            <tr *ngFor="let platillo of pagedPlatillos" class="align-middle">
               <td class="table-nombre">
                 <div class="row">
                   <div class="col text-center ">
@@ -51,9 +50,25 @@
                 </div>
               </td>
             </tr>
-            <!-- Puedes agregar más filas según sea necesario -->
           </tbody>
         </table>
+        <nav *ngIf="pageCount > 1" aria-label="Page navigation">
+          <ul class="pagination d-flex justify-content-center">
+            <li class="page-item" [ngClass]="{ 'disabled': currentPage === 1 }">
+              <a class="page-link" aria-label="Previous" (click)="prevPage()">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item" *ngFor="let page of pagesArray" [ngClass]="{ 'active': page === currentPage }">
+              <a class="page-link" (click)="setPage(page)">{{ page }}</a>
+            </li>
+            <li class="page-item" [ngClass]="{ 'disabled': currentPage === pageCount }">
+              <a class="page-link" aria-label="Next" (click)="nextPage()">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
