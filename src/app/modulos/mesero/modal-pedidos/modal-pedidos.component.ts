@@ -12,6 +12,10 @@ export class ModalPedidosComponent implements OnInit {
   nombreMesa:string='';
   estadoPedido:string='';
   PedidosParaMostrar: { pedidoId: number, platos: PedidosParaMostrarMesa[], totalPedido: number,estado:string}[] = [];
+  
+  
+  public pageSize: number = 1; // Cantidad de elementos por página (una card por página)
+  public currentPage: number = 1; // Página actual
   constructor(private pedidoServiceMesa: PedidosDeMesaService) { }
 
   ngOnInit(): void {
@@ -60,5 +64,36 @@ export class ModalPedidosComponent implements OnInit {
   }
   eliminarPedido(IdPedido:any){
    this.pedidoServiceMesa.setIdPedido(IdPedido); 
+}
+
+get pagedPedidos(): any[] {
+  const startIndex = (this.currentPage - 1) * this.pageSize;
+  return this.PedidosParaMostrar.slice(startIndex, startIndex + this.pageSize);
+}
+
+get pageCount(): number {
+  return Math.ceil(this.PedidosParaMostrar.length / this.pageSize);
+}
+
+get pagesArray(): number[] {
+  return Array(this.pageCount).fill(0).map((x, i) => i + 1);
+}
+
+setPage(page: number) {
+  if (page >= 1 && page <= this.pageCount) {
+    this.currentPage = page;
+  }
+}
+
+nextPage() {
+  if (this.currentPage < this.pageCount) {
+    this.currentPage++;
+  }
+}
+
+prevPage() {
+  if (this.currentPage > 1) {
+    this.currentPage--;
+  }
 }
 }
