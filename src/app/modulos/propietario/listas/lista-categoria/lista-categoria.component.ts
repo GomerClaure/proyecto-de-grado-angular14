@@ -16,12 +16,14 @@ export class ListaCategoriaComponent implements OnInit {
 
   categorias:Categoria[]=[];
   storageUrl = environment.backendStorageUrl;
+  id_restaurante:any;
 
   constructor(private router:Router,private categoriasService:CategoriaService,
     private modalEditarCategoriaService:ModalEditarCategoriaService,
     private modalService:ModalEliminarCategoriaService) { 
   }
   ngOnInit(): void {
+    this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
     this.getCategorias();
     this.modalEditarCategoriaService.getModalClosed().subscribe(closed => {
       if (closed) {
