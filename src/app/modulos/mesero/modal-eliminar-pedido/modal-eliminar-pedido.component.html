@@ -1,0 +1,17 @@
+<div class="modal fade" id="ModalEliminarPedido" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Eliminar Pedido</h5>
+        </div>
+        <div class="modal-body">
+          <label>¿Esta seguro que desea eliminar este pedido?</label>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-delete" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-aceptar" data-bs-dismiss="modal" (click)="eliminarPedido()">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<lib-ng-toast></lib-ng-toast>
