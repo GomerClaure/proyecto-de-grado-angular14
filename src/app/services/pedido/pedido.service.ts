@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class PedidoService {
+export class PedidoService { 
   private BASE_URL = environment.backendUrl;
   private headers = {
     'Authorization': 'Bearer ' + sessionStorage.getItem('token_access'),

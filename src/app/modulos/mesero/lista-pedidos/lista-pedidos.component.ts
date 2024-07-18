@@ -19,11 +19,11 @@ export class ListaPedidosComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerPedidos();
   } 
+  
   obtenerPedidos(): void {
     this.pedidoService.getPedidos().subscribe(
       (response) => {
         this.pedidos = response.pedidos;
-        console.log(this.pedidos);
         this.agruparPedidosPorMesa();
       },
       (error) => {
