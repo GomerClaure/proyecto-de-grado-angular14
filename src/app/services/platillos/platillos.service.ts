@@ -17,10 +17,9 @@ export class PlatillosService {
 
   constructor(private http: HttpClient) { }
 
-  getPlatillos() {
-    return this.http.get<any>(`${this.BASE_URL}/menu/platillo`, { headers: this.headers });
+  getPlatillos(idRestaurante:any) {
+    return this.http.get<any>(`${this.BASE_URL}/menu/platillos/${idRestaurante}`, { headers: this.headers });
   }
-
   getPlatillosMenu() {
     return this.http.get<any>(`${this.BASE_URL}/menu/pedido/platillos`, { headers: this.headers });
   }

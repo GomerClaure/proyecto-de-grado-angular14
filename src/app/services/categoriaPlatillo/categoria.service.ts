@@ -27,8 +27,8 @@ export class CategoriaService {
     return this.modalClosedSubject.asObservable();
   }
   // Obtiene todas las categorias de platillos
-  getCategorias(){
-    return this.http.get(`${this.BASE_URL}/menu/categoria`, { headers: this.headers });
+  getCategorias(idRestaurante:any){
+    return this.http.get(`${this.BASE_URL}/menu/categoriaRestaurante/${idRestaurante}`, { headers: this.headers });
   }
   // Obtiene una categoria de platillos por su id
   getCategoria(id: string){

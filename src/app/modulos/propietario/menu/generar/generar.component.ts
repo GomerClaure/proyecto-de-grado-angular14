@@ -22,6 +22,7 @@ export class GenerarComponent implements OnInit {
   public selectedFile: File;
   public tema: string;
   public baseUrl = environment.backendStorageUrl;
+  id_restaurante:any;
 
   constructor(private menuService: MenuService, private categoriaService: CategoriaService,private toast:NgToastService) {
     this.platillos = [];
@@ -34,6 +35,7 @@ export class GenerarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
     this.cargarCategorias();
     this.cargarPlatillos();
   }
@@ -72,7 +74,7 @@ export class GenerarComponent implements OnInit {
 
   cargarCategorias() {
     console.log('Cargando categorías');
-    this.categoriaService.getCategorias().subscribe(
+    this.categoriaService.getCategorias(this.id_restaurante).subscribe(
       (res: any) => {
         this.categorias = res.categorias;
         console.log('Categorías cargadas---');

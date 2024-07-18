@@ -1,20 +1,69 @@
 <div class="modal fade" id="verPedido" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog custom-modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Platos del Pedido</h5>
+      <div class="modal-header" [ngClass]="{
+        'terminado': Estado === 'Servido',
+        'en-preparacion': Estado === 'En preparación',
+        'default': Estado !== 'Servido' && Estado !== 'En preparación'
+      }">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <i *ngIf="tipo === 'llevar'" class="bi bi-bag-fill icon-large"> Pedido </i>
+          <i *ngIf="tipo === 'local'" class="bi bi-house-door-fill icon-large"> Pedido </i>
+        </h5>
       </div>
       <div class="modal-body">
-        <div *ngFor="let plato of platillo">
-          <div *ngFor="let p of plato">
-            <p>{{ p.nombre }}</p> 
+        <div class="row">
+          <div class="col-6">
+            <div class="cont">
+              <h5>Platillos con descripcion</h5>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Cantidad</th>
+                    <th>Platillo</th>
+                    <th>Detalle</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let d of PlatosMostrar">
+                    <tr *ngIf="d.detalle">
+                      <td>{{ d.cantidad }}</td>
+                      <td>{{ d.nombre }}</td>
+                      <td>{{ d.detalle }}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="cont">
+              <h5>Platillos sin descripcion</h5>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Cantidad</th>
+                    <th>Platillo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let d of PlatosMostrar">
+                    <tr *ngIf="!d.detalle">
+                      <td>{{ d.cantidad }}</td>
+                      <td>{{ d.nombre }}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-editar" data-bs-dismiss="modal" (click)="cambiarEstado('2')">En Curso</button>
-        <button type="button" class="btn btn-aceptar" data-bs-dismiss="modal" (click)="cambiarEstado('4')">Terminado</button>
-        <button type="button" class="btn btn-aceptar" data-bs-dismiss="modal">Atras</button>
+        <button  *ngIf="Estado !== 'Servido' && Estado !== 'En preparación'" type="button" class="btn btn-curso" data-bs-dismiss="modal" (click)="cambiarEstado('2')">En Curso</button>
+        <button *ngIf="Estado !== 'Servido' && Estado !== 'En preparación'" type="button"class="btn btn-terminado" data-bs-dismiss="modal" (click)="cambiarEstado('4')">Terminado</button>
+        <button *ngIf="Estado == 'Servido'" type="button" class="btn btn-atra"  data-bs-dismiss="modal">Atras</button>
+        <button *ngIf="Estado == 'En preparación'"type="button" class="btn btn-terminado" data-bs-dismiss="modal" (click)="cambiarEstado('4')">Terminado</button>
       </div>
     </div>
   </div>

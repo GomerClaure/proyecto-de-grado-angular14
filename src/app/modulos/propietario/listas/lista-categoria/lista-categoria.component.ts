@@ -16,12 +16,15 @@ export class ListaCategoriaComponent implements OnInit {
 
   categorias:Categoria[]=[];
   storageUrl = environment.backendStorageUrl;
+  id_restaurante:any;
 
   constructor(private router:Router,private categoriasService:CategoriaService,
     private modalEditarCategoriaService:ModalEditarCategoriaService,
     private modalService:ModalEliminarCategoriaService) { 
   }
   ngOnInit(): void {
+    //sacamos el id del restaurante para solo mostrar categorias de ese restaurante
+    this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
     this.getCategorias();
     this.modalEditarCategoriaService.getModalClosed().subscribe(closed => {
       if (closed) {
@@ -45,7 +48,7 @@ export class ListaCategoriaComponent implements OnInit {
   } 
 
   getCategorias() {
-    this.categoriasService.getCategorias().subscribe(
+    this.categoriasService.getCategorias(this.id_restaurante).subscribe(
       (data: any) => { // Ajusta el tipo de datos esperado
         this.categorias = data.categorias; // Almacena las categorías obtenidas en la variable categorias
         console.log(data)
