@@ -69,6 +69,7 @@ export class ListaPlatilloComponent implements OnInit {
         platillo.nombre.toLowerCase().includes(this.textoBuscador) || platillo.categoria.nombre.toLowerCase().includes(this.textoBuscador)
       );
     }
+    this.currentPage = 1; // Reinicia la página actual a la primera página
   }
 
   get pagedPlatillos(): Platillo[] {
