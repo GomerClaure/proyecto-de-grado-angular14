@@ -7,12 +7,20 @@ export const environment = {
   backendUrl: 'http://localhost:8000/api',
   backendStorageUrl: 'http://localhost:8000',
   frontDominio: 'http://localhost:4200'
- 
-  // backendUrl: ' http://192.168.0.15:8000/api',
-  // backendStorageUrl: ' http://192.168.0.15:8000',
-  // frontDominio: ' http://192.168.0.15:8000:4200'
-};
 
+//   backendUrl: ' http://192.168.0.24:8000/api',
+//   backendStorageUrl: ' http://192.168.0.24:8000',
+//   frontDominio: ' http://192.168.0.24:4200'
+};
+export const websocketConfig = {
+  key: '123456',
+  cluster: 'mt1',
+  wsHost: 'localhost',
+  wsPort: 6001,
+  forceTLS: false,
+  enabledTransports: ['ws'],
+  wssPort: 6001,
+}
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

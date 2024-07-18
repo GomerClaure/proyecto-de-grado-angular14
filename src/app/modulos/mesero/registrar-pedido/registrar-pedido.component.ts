@@ -164,13 +164,15 @@ export class RegistrarPedidoComponent implements OnInit {
     formData.append('id_mesa', id_mesa.toString());
     formData.append('tipo', this.tipo.toLowerCase());
     formData.append('id_empleado', id_empleado.toString());
+    let id_restaurante = sessionStorage.getItem('id_restaurante');
+    formData.append('id_restaurante', id_restaurante || '');
 
     this.pedidoselectService.storePedido(formData).subscribe(
-      (response: any) => {
+      (response) => {
         console.error('se registro el pedido', response);
         this.toast.success({detail:"SUCCESS",summary:'Se agrego registro el pedido con exito',duration:2000});
       },
-      (error: any) => {
+      (error) => {
         console.error('Error al almacenar el pedido', error);
         this.toast.error({detail:"ERROR",summary:'No hay platillos seleccionados',sticky:true})
       }
@@ -206,13 +208,4 @@ decrement(index: number) {
   if (cantidad > 1) cantidad--;
   this.diccionarioDeCantidades[index] = cantidad;
 }
-
-
-
-
-
-
-
- 
-
 }

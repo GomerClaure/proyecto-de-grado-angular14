@@ -8,13 +8,12 @@ import { FormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { MeseroModule } from './modulos/mesero/mesero.module';
 import { HomeModule } from './modulos/home/home.module';
-import { EditarCategoriaComponent } from './modulos/propietario/editar/editar-categoria/editar-categoria.component';
-import { NgToastModule } from 'ng-angular-popup';
-//import { NgToastComponent, NgToastModule } from 'ng-angular-popup';
+import { CocineroModule } from './modulos/cocinero/cocinero.module';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +24,8 @@ import { NgToastModule } from 'ng-angular-popup';
     AuthModule, 
     MeseroModule,
     HomeModule,
-    
+    CocineroModule,
+    ComponentsModule
   ], 
   providers: [],
   bootstrap: [AppComponent]

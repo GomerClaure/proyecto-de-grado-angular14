@@ -1,3 +1,20 @@
+/* Estilos comunes */
+@import url('https://fonts.googleapis.com/css2?family=Sedan:ital@0;1&display=swap');
+
+.card-body.portada {
+  width: 100%; 
+  height: 100vh;
+  position: relative; /* Necesario para el posicionamiento absoluto del img */
+  overflow: hidden; /* Oculta cualquier desbordamiento de la imagen */
+}
+
+.portada-img {
+  width: 100%;
+  height: 100%;
+  position: absolute; /* Posiciona la imagen dentro del contenedor */
+  top: 0;
+  left: 0;
+}
 .fondo {
   background-color: lightgray;
   padding: 20px;
@@ -29,6 +46,7 @@
   display: flex;
   flex-direction: column;
   height: 80vh;
+  border-radius: 0%;
 }
 
 .card-header {
@@ -96,6 +114,19 @@
 
 .carousel-control-prev-icon {
   color: black;
+}
+
+.dark-theme{
+  .card{
+    background-color: #333;
+    color: white;
+  }
+  .categoria-titulo {
+  border-bottom: 1px solid #f3a96c;
+  }
+  .menu-cuerpo-precio {
+    color: #ffffff;
+  }
 }
 
 .portada {
