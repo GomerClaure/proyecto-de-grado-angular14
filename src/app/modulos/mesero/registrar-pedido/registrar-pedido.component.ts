@@ -36,6 +36,7 @@ export class RegistrarPedidoComponent implements OnInit {
   storageUrl = environment.backendStorageUrl;
   textoBuscador:string = '';
   platillosFiltrados:Platillo[]=[];
+  id_restaurante:any;
   constructor(private descripcionPedidoService: DescripcionPedidoService,
               private route: ActivatedRoute, 
               private platilloService: PlatillosService,
@@ -47,6 +48,7 @@ export class RegistrarPedidoComponent implements OnInit {
               
  
   ngOnInit(): void {
+    this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
     this.getPlatillos();
     this.getCategorias();
     this.route.queryParams.subscribe(params => {
@@ -105,7 +107,7 @@ export class RegistrarPedidoComponent implements OnInit {
   }
 
   getCategorias() {
-    this.categoriaService.getCategorias().subscribe(
+    this.categoriaService.getCategorias(this.id_restaurante).subscribe(
       (data: any) => {
         // Añade la opción "Todos" al principio de la lista de categorías
         this.categorias = [{ id: 0, nombre: 'Todos' }, ...data.categorias];
