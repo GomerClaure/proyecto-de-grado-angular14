@@ -14,16 +14,21 @@ export class ListaPedidosComponent implements OnInit {
   errorMessage: string = '';
   pedidosPorMesa: PedidosMesa[] = []; 
 
+  id_restaurante:any;
+  id_empleado:any;
+
   constructor(private pedidoService: PedidoService,private pedidoServiceMesa:PedidosDeMesaService) { }
 
   ngOnInit(): void {
+    this.id_restaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
+    this.id_empleado= parseInt(sessionStorage.getItem('id_empleado')||'0');
     this.obtenerPedidos();
   } 
   obtenerPedidos(): void {
-    this.pedidoService.getPedidos().subscribe(
+    this.pedidoService.getPedidos(this.id_empleado,this.id_restaurante).subscribe(
       (response) => {
         this.pedidos = response.pedidos;
-        console.log(this.pedidos);
+        console.log("Obteniendo pedidos",this.pedidos);
         this.agruparPedidosPorMesa();
       },
       (error) => {
@@ -36,10 +41,12 @@ export class ListaPedidosComponent implements OnInit {
     this.pedidos.forEach(pedido => {
       const nombreMesa = pedido.cuenta.mesa.nombre;
       const est=pedido.estado.nombre;
-      console.log(est);
       const pedidosMesa = this.pedidosPorMesa.find(item => item.nombreMesa === nombreMesa); 
 
-      if (!pedidosMesa) { 
+       console.log(pedido.cuenta.estado)
+       if (pedido.cuenta.estado === 'cerrada') {
+        return;
+      }else if (!pedidosMesa) { 
         this.pedidosPorMesa.push({ nombreMesa: nombreMesa,estadoP:est, pedidos: [pedido]});
       } else { 
         pedidosMesa.pedidos.push(pedido); 

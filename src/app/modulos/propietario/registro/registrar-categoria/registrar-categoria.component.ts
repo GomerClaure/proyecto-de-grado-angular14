@@ -15,12 +15,14 @@ export class RegistrarCategoriaComponent {
   imageHeight: number = 250;
   formularioCategoria:FormGroup
   selectedFile: File = new File([''], ''); 
+  id_restaurante:any;
 
   constructor(
     private formBuilder:FormBuilder, private categoriaService:CategoriaService ,private toast:NgToastService,private router:Router) { 
     this.formularioCategoria=this.formBuilder.group({
       nombre:[null,Validators.required]
     })
+    this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
     this.imageUrl = 'assets/image/27002.jpg';
    }
 
@@ -41,8 +43,10 @@ export class RegistrarCategoriaComponent {
       const nombre = this.formularioCategoria.get('nombre')?.value;
   
       const formData = new FormData();
+
       formData.append('imagen', this.selectedFile);
       formData.append('nombre', nombre);
+      formData.append('id_restaurante',this.id_restaurante)
   
       this.categoriaService.saveCategoria(formData).subscribe(
         success => {

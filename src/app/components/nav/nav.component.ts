@@ -30,7 +30,6 @@ export class NavComponent implements OnInit, OnDestroy {
       
       // this.webSocketService.listenAllEvents('pedido');
       this.idRestaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
-      localStorage.setItem('conexionWebSocket', 'false');
       const conexionWebSocket = localStorage.getItem('conexionWebSocket');
       console.log('El valor de la conexión websocket es: ', conexionWebSocket);
       if (conexionWebSocket !== 'true') {
@@ -67,11 +66,10 @@ export class NavComponent implements OnInit, OnDestroy {
 
   marcarLeida(cantidad: number) {
     // [1, 2, 3, 4, 5] por ejemplo
-    
+    console.log('Cantidad de notificaciones a marcar como leídas: ', cantidad);
     let ids: any[] = [];
     for (let i = 0; i < cantidad; i++) {
       if (this.notificaciones[i].read_at === null) {
-        console.log('Cantidad de notificaciones a marcar como leídas: ', i);
         ids.push(this.notificaciones[i].id);
         this.notificaciones[i].read_at = new Date();
 
@@ -200,9 +198,6 @@ export class NavComponent implements OnInit, OnDestroy {
             //colocar la notificacion en la primera posicion
             this.notificaciones.pop();
             
-          }
-          if (!data.read_at){
-            data.read_at = null;
           }
           this.notificaciones.unshift(data);
 

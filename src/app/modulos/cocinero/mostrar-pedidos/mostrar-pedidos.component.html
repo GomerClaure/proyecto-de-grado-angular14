@@ -50,7 +50,7 @@
               <p class="card-text">Estado: {{pedido.estado}}</p>
             </div>
             <div class="card-actions d-flex justify-content-center pt-2">
-              <button class="btn btn-ver" data-bs-toggle="modal" data-bs-target="#verPedido" (click)="verPlatos(pedido.numPedido)">Ver pedido</button>
+              <button class="btn btn-ver" data-bs-toggle="modal" data-bs-target="#verPedido" (click)="verPlatos(pedido.numPedido,pedido.estado,pedido.tipoPedido)">Ver pedido</button>
           </div>
         </div> 
 
