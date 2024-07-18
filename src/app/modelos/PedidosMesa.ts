@@ -21,4 +21,12 @@ export interface PedidosPlatos{
   cantidad:number;
   detalle:string;
 }
+export interface PedidosCocina{
+  numPedido:number;
+  mesa:string;
+  platos: any[];
+  tipoPedido:string;
+  hora:string;
+  estado:string;
+}
   

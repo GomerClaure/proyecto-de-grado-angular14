@@ -1,7 +1,7 @@
 <!-- Barra de navegacion para el propietario -->
 <nav *ngIf="esPropietario()" class="navbar navbar-expand-lg custom-navbar-color ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="home">
+    <a class="navbar-brand" [routerLink]="'/home'">
       <strong>Restaurant</strong>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -15,19 +15,19 @@
             Menu
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="lista/platillo">Lista de platillos</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/lista/platillo'">Lista de platillos</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="lista/categoria">Lista de categorias</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/lista/categoria'">Lista de categorias</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="menu/generar">Generar menu </a></li>
+            <li><a class="dropdown-item" [routerLink]="'/menu/generar'">Generar menu </a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="menu/qr">Generar Qr</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/menu/qr'">Generar Qr</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -39,7 +39,7 @@
             Registro
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="registrar/platillo">Registrar platillo</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/registrar/platillo'">Registrar platillo</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -48,7 +48,7 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="registrar/empleado">Registrar empleado</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/registrar/empleado'">Registrar empleado</a></li>
           </ul>
         </li>
         <li class="nav-item">
@@ -84,7 +84,7 @@
  <!--Si el empleado es mesero-->
 <nav *ngIf="esEmpleado() && getRol()=='1'" class="navbar navbar-expand-lg custom-navbar-color ">
   <div class="container-fluid">
-    <a class="navbar-brand mx-0" href="home"><strong>Restaurante </strong></a>
+    <a class="navbar-brand mx-0" [routerLink]="'/home'"><strong>Restaurante </strong></a>
 
 
 
@@ -96,10 +96,10 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="mesero/lista-mesa">Registrar Pedido</a>
+            <a class="nav-link active" aria-current="page" [routerLink]="'/mesero/lista-mesa'">Registrar Pedido</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="mesero/lista-pedidos">Lista de Pedidos</a>
+            <a class="nav-link active" [routerLink]="'/mesero/lista-pedidos'">Lista de Pedidos</a>
           </li>
         </ul>
       </div>
@@ -107,7 +107,7 @@
 
     <div class="d-flex ms-auto ">
       <div class="dropdown-center mx-2">
-        <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" (click)="marcarLeida(5)" aria-expanded="false">
           <i class="bi bi-bell"></i>
 
           <span *ngIf="notificacionesSinLeer !=0  " class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -136,7 +136,7 @@
             </a>
           </li>
           <li *ngIf="notificaciones.length != 0" >
-            <a href="/notificacion/lista-notificacion" class="list-group-item px-2 notificacion text-end">
+            <a [routerLink]="'/notificacion/lista-notificacion'" (click)="marcarLeida(0)" class="list-group-item px-2 notificacion text-end">
               Ver todas <i class="bi bi-chevron-right"></i>
             </a>
           </li>
@@ -156,7 +156,7 @@
 <!--Si el empleado es cocinero-->
 <nav *ngIf="esEmpleado() && getRol()=='3'" class="navbar navbar-expand-lg custom-navbar-color ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="home">Empleado Cocinero</a>
+    <a class="navbar-brand" [routerLink]="'/home'">Empleado Cocinero</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -164,7 +164,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="cocinero/pedido-cocina">Ver pedidos</a>
+          <a class="nav-link active" aria-current="page" [routerLink]="'/cocinero/pedido-cocina'">Ver pedidos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
@@ -176,7 +176,7 @@
 <!--Si el empleado es cajero-->
 <nav *ngIf="esEmpleado() && getRol()=='2'" class="navbar navbar-expand-lg custom-navbar-color ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="home">Empleado Cajero</a>
+    <a class="navbar-brand" [routerLink]="'/home'">Empleado Cajero</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -184,10 +184,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="mesero/lista-mesa">Registrar Pedido</a>
+          <a class="nav-link active" aria-current="page" [routerLink]="'/mesero/lista-mesa'">Registrar Pedido</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="mesero/lista-pedidos">Lista de Pedidos</a>
+          <a class="nav-link active" [routerLink]="'/mesero/lista-pedidos'">Lista de Pedidos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
@@ -213,10 +213,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="login">Login</a>
+          <a class="nav-link active" aria-current="page" [routerLink]="'/login'">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="registro">Registro</a>
+          <a class="nav-link" [routerLink]="'/registro'">Registro</a>
         </li>
       </ul>
     </div>
