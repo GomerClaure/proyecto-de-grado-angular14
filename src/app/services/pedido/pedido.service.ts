@@ -65,7 +65,7 @@ export class PedidoService {
     return this.http.put<any>(`${this.BASE_URL}/plato-pedido/estado`, body, { headers: this.headers }).pipe(
       tap(() => {
         // Volver a cargar los pedidos y emitir la lista actualizada
-        //this.getPedidos().subscribe();
+        // this.getPedidos().subscribe();
       })
     );
   }

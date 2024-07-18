@@ -1,0 +1,152 @@
+<div class="white-screen" id="plantilla-reporte-pedidos">
+  <div class=" mt-5  border">
+    <h2 class="mb-4 text-center">Reporte del Establecimiento</h2>
+      <div class="row">
+        <div class="col-lg-6 col-md-12 chart-container">
+          <h3>Monto Total de Pedidos por Día</h3>
+          <canvas baseChart
+            [data]="lineChartDataMonto"
+            [options]="lineChartOptions"
+            [type]="lineChartType">
+          </canvas>
+        </div>
+        <div class="col-lg-6 col-md-12 chart-container">
+          <h3>Cantidad de Pedidos por Día</h3>
+          <canvas
+            baseChart
+            [data]="barChartDataCantidad"
+            [options]="barChartOptions"
+            [type]="barChartType">
+          ></canvas>
+        </div>
+        <div class="col-xl-4 col-md-12 chart-container">
+          <h3>Cantidad de Pedidos por Mesa</h3>
+          <canvas baseChart
+            [data]="pieChartData"
+            [options]="pieChartOptions"
+            [type]="pieChartType">
+          </canvas>
+        </div>
+      </div>
+      
+      <div class="reporte">
+        <h4>Reporte Diario</h4>
+        <table class="table table-bordered cantidadPedidosPorDia">
+          <thead>
+            <tr>
+              <th>N°</th>
+              <th>Fecha</th>
+              <th>Cantidad Clientes</th>
+              <th>Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pedidoDia of combinedData">
+              <td>{{ combinedData.indexOf(pedidoDia) + 1 }}</td>
+              <td>{{ pedidoDia.fecha }}</td>
+              <td>{{ pedidoDia.cantidad }}</td>
+              <td>{{ pedidoDia.monto }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="reporte">
+        <h4>Pedidos Por Mesa</h4>
+        <table class="table table-bordered cantidadPedidosPorMesa">
+          <thead>
+            <tr>
+              <th>Mesa</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pedidoMesa of reporte.cantidadPedidosPorMesa">
+              <td>{{ pedidoMesa.mesa }}</td>
+              <td>{{ pedidoMesa.cantidad_pedidos }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="reporte">
+        <h4>Reporte Diario</h4>
+        <table class="table table-bordered cantidadPedidosPorDia">
+          <thead>
+            <tr>
+              <th>N°</th>
+              <th>Fecha</th>
+              <th>Cantidad Clientes</th>
+              <th>Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pedidoDia of combinedData">
+              <td>{{ combinedData.indexOf(pedidoDia) + 1 }}</td>
+              <td>{{ pedidoDia.fecha }}</td>
+              <td>{{ pedidoDia.cantidad }}</td>
+              <td>{{ pedidoDia.monto }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="reporte">
+        <h4>Pedidos Por Mesa</h4>
+        <table class="table table-bordered cantidadPedidosPorMesa">
+          <thead>
+            <tr>
+              <th>Mesa</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pedidoMesa of reporte.cantidadPedidosPorMesa">
+              <td>{{ pedidoMesa.mesa }}</td>
+              <td>{{ pedidoMesa.cantidad_pedidos }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="reporte">
+        <h4>Detalle de Pedidos por Cuenta</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Cuenta ID</th>
+              <th>Pedido ID</th>
+              <th>Empleado</th>
+              <th>Estado</th>
+              <th>Platillos</th>
+              <th>Subtotal (Bs)</th>
+              <th>Total (Bs)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let cuenta of reporte.cuentas">
+              <tr *ngFor="let pedidoId of getPedidoIds(cuenta.id); let i = index">
+                <td *ngIf="i === 0" [attr.rowspan]="getPedidoIds(cuenta.id).length">
+                  {{ cuenta.id }}
+                </td>
+                <td>{{ pedidoId }}</td>
+                <td>{{ getEmpleado(cuenta.id, pedidoId).nombre }} {{ getEmpleado(cuenta.id, pedidoId).apellido }}</td>
+                <td>{{ getEstadoPedido(cuenta.id, pedidoId) }}</td>
+                <td>
+                  <ul>
+                    <li *ngFor="let platillo of getPlatillos(cuenta.id, pedidoId)">
+                      {{ platillo.nombre }} - {{ platillo.precio | currency:'Bs':'symbol':'1.2-2' }} x {{ platillo.cantidad }} ({{ platillo.detalle }})
+                    </li>
+                  </ul>
+                </td>
+                <td>{{ getSubtotal(cuenta.id, pedidoId) | currency:'Bs.' }}</td>
+                <td *ngIf="i === 0" [attr.rowspan]="getPedidoIds(cuenta.id).length">
+                  {{ getTotal(cuenta.id) | currency:'Bs':'symbol':'1.2-2' }}
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+
+  </div>
+</div>

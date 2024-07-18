@@ -1,4 +1,15 @@
 <div class="modal fade" id="verPedido" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<<<<<<< HEAD
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Platos del Pedido</h5>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let plato of platillo">
+          <div *ngFor="let p of plato">
+            <p>{{ p.nombre }}</p> 
+=======
   <div class="modal-dialog custom-modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header" [ngClass]="{
@@ -56,14 +67,21 @@
                 </tbody>
               </table>
             </div>
+>>>>>>> develop
           </div>
         </div>
       </div>
       <div class="modal-footer">
+<<<<<<< HEAD
+        <button type="button" class="btn btn-editar" data-bs-dismiss="modal" (click)="cambiarEstado('2')">En Curso</button>
+        <button type="button" class="btn btn-aceptar" data-bs-dismiss="modal" (click)="cambiarEstado('4')">Terminado</button>
+        <button type="button" class="btn btn-aceptar" data-bs-dismiss="modal">Atras</button>
+=======
         <button  *ngIf="Estado !== 'Servido' && Estado !== 'En preparación'" type="button" class="btn btn-curso" data-bs-dismiss="modal" (click)="cambiarEstado('2')">En Curso</button>
         <button *ngIf="Estado !== 'Servido' && Estado !== 'En preparación'" type="button"class="btn btn-terminado" data-bs-dismiss="modal" (click)="cambiarEstado('4')">Terminado</button>
         <button *ngIf="Estado == 'Servido'" type="button" class="btn btn-atra"  data-bs-dismiss="modal">Atras</button>
         <button *ngIf="Estado == 'En preparación'"type="button" class="btn btn-terminado" data-bs-dismiss="modal" (click)="cambiarEstado('4')">Terminado</button>
+>>>>>>> develop
       </div>
     </div>
   </div>

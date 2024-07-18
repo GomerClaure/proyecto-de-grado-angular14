@@ -1,0 +1,153 @@
+<app-nav></app-nav><br>
+<div class="fondo">
+  <div class="container mt-5">
+    <h2 class="mb-4">Reporte</h2>
+    <div class="row">
+      <div class="form-group col">
+        <label for="fechaInicio">Fecha de Inicio</label>
+        <input type="date" class="form-control" id="fechaInicio" [(ngModel)]="fechaInicio">
+      </div>
+      <div class="form-group col">
+        <label for="fechaFin">Fecha de Fin</label>
+        <input type="date" class="form-control" id="fechaFin" [(ngModel)]="fechaFin">
+      </div>
+    </div>
+    
+    <button class="btn btn-aceptar mt-3 no-print" (click)="generarReporte()">Generar Reporte</button>
+    <button class="btn btn-aceptar mt-3 no-print" (click)="imprimir()">Imprimir</button>
+
+    <div *ngIf="reporte.cantidadPedidosPorDia.length > 0" class="mt-5">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 chart-container">
+          <h3>Monto Total de Pedidos por Día</h3>
+          <canvas baseChart
+            #lineChartMonto
+            [data]="lineChartDataMonto"
+            [options]="lineChartOptions"
+            [type]="lineChartType">
+          </canvas>
+        </div>
+        <div class="col-lg-6 col-md-12 chart-container">
+          <h3>Cantidad de Pedidos por Día</h3>
+          <canvas
+            baseChart
+            #barChart
+            [data]="barChartDataCantidad"
+            [options]="barChartOptions"
+            [type]="barChartType">
+          ></canvas>
+        </div>
+        <div class="col-xl-4 col-md-12 text-center chart-container">
+          <h3>Cantidad de Pedidos por Mesa</h3>
+          <canvas baseChart
+            #pieChart
+            [data]="pieChartData"
+            [options]="pieChartOptions"
+            [type]="pieChartType">
+          </canvas>
+        </div>
+      </div>
+      
+      <div class="reporte">
+        <h4>Reporte Diario</h4>
+        <table class="table table-bordered cantidadPedidosPorDia">
+          <thead>
+            <tr>
+              <th>N°</th>
+              <th>Fecha</th>
+              <th>Cantidad Clientes</th>
+              <th>Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pedidoDia of combinedData">
+              <td>{{ combinedData.indexOf(pedidoDia) + 1 }}</td>
+              <td>{{ pedidoDia.fecha }}</td>
+              <td>{{ pedidoDia.cantidad }}</td>
+              <td>{{ pedidoDia.monto }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="reporte">
+        <h4>Pedidos Por Mesa</h4>
+        <table class="table table-bordered cantidadPedidosPorMesa">
+          <thead>
+            <tr>
+              <th>Mesa</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pedidoMesa of reporte.cantidadPedidosPorMesa">
+              <td>{{ pedidoMesa.mesa }}</td>
+              <td>{{ pedidoMesa.cantidad_pedidos }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="reporte row">
+        <h4>Detalle de Pedidos por Cuenta</h4>
+        <table class="row table table-bordered">
+          <thead>
+            <tr>
+              <th>Cuenta ID</th>
+              <th>Pedido ID</th>
+              <th>Empleado</th>
+              <th>Estado</th>
+              <th>Platillos</th>
+              <th>Subtotal (Bs)</th>
+              <th>Total (Bs)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let cuenta of pagedCuentas">
+              <tr *ngFor="let pedidoId of getPedidoIds(cuenta.id); let i = index">
+                <td *ngIf="i === 0" [attr.rowspan]="getPedidoIds(cuenta.id).length">
+                  {{ cuenta.id }}
+                </td>
+                <td>{{ pedidoId }}</td>
+                <td>{{ getEmpleado(cuenta.id, pedidoId).nombre }} {{ getEmpleado(cuenta.id, pedidoId).apellido }}</td>
+                <td>{{ getEstadoPedido(cuenta.id, pedidoId) }}</td>
+                <td>
+                  <ul>
+                    <li *ngFor="let platillo of getPlatillos(cuenta.id, pedidoId)">
+                      {{ platillo.nombre }} - {{ platillo.precio | currency:'Bs':'symbol':'1.2-2' }} x {{ platillo.cantidad }} ({{ platillo.detalle }})
+                    </li>
+                  </ul>
+                </td>
+                <td>{{ getSubtotal(cuenta.id, pedidoId) | currency:'Bs.' }}</td>
+                <td *ngIf="i === 0" [attr.rowspan]="getPedidoIds(cuenta.id).length">
+                  {{ getTotal(cuenta.id) | currency:'Bs':'symbol':'1.2-2' }}
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      
+        <nav class="row" *ngIf="pageCount > 1" aria-label="Page navigation">
+          <ul class="pagination d-flex justify-content-center">
+            <li class="page-item" [ngClass]="{ 'disabled': currentPage === 1 }">
+              <a class="page-link"  aria-label="Previous" (click)="prevPage()">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item" *ngFor="let page of pagesArray" [ngClass]="{ 'active': page === currentPage }">
+              <a class="page-link"  (click)="setPage(page)">{{ page }}</a>
+            </li>
+            <li class="page-item" [ngClass]="{ 'disabled': currentPage === pageCount }">
+              <a class="page-link"  aria-label="Next" (click)="nextPage()">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      
+      
+
+    </div>
+  </div>
+</div>

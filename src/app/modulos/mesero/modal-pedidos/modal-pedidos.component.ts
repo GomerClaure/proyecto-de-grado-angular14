@@ -26,9 +26,6 @@ export class ModalPedidosComponent implements OnInit {
       this.nombreMesa = data.nombreMesa;
       this.ordenar();
     });
-    //Observable para la cuenta
-
-
   }
   ordenar() {
     this.PedidosParaMostrar = this.pedidosDeMesa.map(pedido => {
