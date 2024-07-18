@@ -16,7 +16,7 @@
     <br>
     <div class="table-responsive-xl">
       <div class="table-responsive">
-        <table class="table">
+        <table class="table pru">
           <thead>
             <tr class="text-center">
               <th class="fila" scope="col">Nombre</th>
@@ -27,11 +27,10 @@
             </tr>
           </thead>
           <tbody>
-            <!-- Aquí se insertarían las filas de datos -->
-            <tr *ngFor="let platillo of platillosFiltrados" class="align-middle">
+            <tr *ngFor="let platillo of pagedPlatillos" class="align-middle">
               <td class="table-nombre">
                 <div class="row">
-                  <div class="col text-center ">
+                  <div class="col text-center">
                     <span>{{ platillo.nombre }}</span>
                   </div>
                 </div>
@@ -51,9 +50,25 @@
                 </div>
               </td>
             </tr>
-            <!-- Puedes agregar más filas según sea necesario -->
           </tbody>
         </table>
+        <nav *ngIf="pageCount > 1" class="paginacion" aria-label="Page navigation">
+          <ul class="pagination d-flex justify-content-center">
+            <li class="page-item" [ngClass]="{ 'disabled': currentPage === 1 }">
+              <a class="page-link" aria-label="Anterior" (click)="prevPage()" style="cursor: pointer;">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item page-number" *ngFor="let page of pagesArray" [ngClass]="{ 'active': page === currentPage }">
+              <a class="page-link" (click)="setPage(page)" style="cursor: pointer;">{{ page }}</a>
+            </li>
+            <li class="page-item" [ngClass]="{ 'disabled': currentPage === pageCount }">
+              <a class="page-link" aria-label="Siguiente" (click)="nextPage()" style="cursor: pointer;">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>

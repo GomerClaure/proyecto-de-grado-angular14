@@ -19,26 +19,27 @@ export class MostrarPedidosComponent implements OnInit {
   pedidosTerminado:PedidosCocina[]=[];
   platillos:any[]=[];
 
+  id_restaurante:any;
+  id_empleado:any;
+
   constructor(private pedidoService: PedidoService,private pedidoCocina:PedidosCocinaService) { }
 
   ngOnInit(): void {
+    this.id_restaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
+    this.id_empleado= parseInt(sessionStorage.getItem('id_empleado')||'0');
+    this.obtenerPedidos();
+// Revisar si esto esta perjudicando el sacar los pedidos 
     this.pedidoService.pedidos$.subscribe(pedidos => {
-      console.log('Pedidos recibidos en el componente:', pedidos);
       this.actualizarPedidos(pedidos);
       this.ordenarPedidos();
     });
 
-    // Cargar pedidos inicialmente
-    this.obtenerPedidos();
-  }
-  extractHour(datetime: string): string {
-    return datetime.split(' ')[1].substring(0, 5); // Extrae '15:05' de '2024-06-19 15:05:52'
   }
   obtenerPedidos(): void {
-    this.pedidoService.getPedidos().subscribe(
-      () => {
-        // Los pedidos ya serán emitidos por pedidosSubject
-        console.log('Pedidos obtenidos y emitidos por pedidosSubject');
+    this.pedidoService.getPedidos(this.id_restaurante,this.id_empleado).subscribe(
+      (response) => {
+        this.pedidos = response.pedidos;
+        console.log(this.pedidos);
       },
       (error) => {
         this.errorMessage = 'Error al obtener los pedidos';
@@ -46,9 +47,11 @@ export class MostrarPedidosComponent implements OnInit {
       }
     );
   }
+  extractHour(datetime: string): string {
+    return datetime.split(' ')[1].substring(0, 5); // Extrae '15:05' de '2024-06-19 15:05:52'
+  }
   ordenarPedidos(){
     this.pedidos.forEach(pedido=>{
-      console.log(this.pedidos,"aquiiii")
       const numeroPedido=pedido.id;
       const tipo=pedido.tipo;
       const mesaP=pedido.cuenta.mesa.nombre;
@@ -102,12 +105,13 @@ export class MostrarPedidosComponent implements OnInit {
   mostrarped(p:any){
     this.pedidosMostrar=p;
   }
-  verPlatos(id:number){
+  verPlatos(id:number,estadoP:string,tipo:string){
     const IdPedido=id;
+    const estadoPedido=estadoP;
+    const tipoPedido=tipo;
     const pedido = this.pedidosP.find(p => p.numPedido === id);
     this.platillos = pedido ? pedido.platos : [];
-    this.pedidoCocina.setPlatillos(this.platillos);
-    this.pedidoCocina.setIdPedido(IdPedido);
+    this.pedidoCocina.setPedidoOrdenado(this.platillos,IdPedido,estadoPedido,tipoPedido);
     }
   enPreparacion(){
     this.pedidosPreparacion= this.pedidosP.filter(p=>p.estado=='En preparación');

@@ -25,7 +25,7 @@ import { ComponentsModule } from './components/components.module';
     MeseroModule,
     HomeModule,
     CocineroModule,
-    ComponentsModule
+    ComponentsModule,
   ], 
   providers: [],
   bootstrap: [AppComponent]

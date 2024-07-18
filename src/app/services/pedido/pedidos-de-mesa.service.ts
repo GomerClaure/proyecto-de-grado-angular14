@@ -9,8 +9,15 @@ export class PedidosDeMesaService {
   pedidosMesa$ = this.pedidosMesaSubject.asObservable();
   
   constructor() { }
+  idPedido:number=0;
 
   setPedidosDeMesa(pedidos: any[], nombreMesa: string,est:string) {
     this.pedidosMesaSubject.next({ pedidos, nombreMesa,est});
+  }
+  setIdPedido(id:number){
+    this.idPedido=id;
+  }
+  getIdpedido(){
+    return this.idPedido;
   }
 }

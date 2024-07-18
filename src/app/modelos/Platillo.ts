@@ -10,3 +10,8 @@ export interface Platillo {
     categoria: Categoria;
     plato_disponible_menu: boolean;
 }
+export interface PlatilloCocina{
+    nombre:string;
+    cantidad:any;
+    detalle:any;
+}
