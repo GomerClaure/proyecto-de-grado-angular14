@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidosParaMostrarMesa } from 'src/app/modelos/PedidosMesa';
-import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { PedidosDeMesaService } from 'src/app/services/pedido/pedidos-de-mesa.service';
 
 @Component({
@@ -11,11 +10,13 @@ import { PedidosDeMesaService } from 'src/app/services/pedido/pedidos-de-mesa.se
 export class ModalPedidosComponent implements OnInit {
   pedidosDeMesa: any[] = [];
   nombreMesa:string='';
-  PedidosParaMostrar: { pedidoId: number, platos: PedidosParaMostrarMesa[], totalPedido: number }[] = [];
+  estadoPedido:string='';
+  PedidosParaMostrar: { pedidoId: number, platos: PedidosParaMostrarMesa[], totalPedido: number,estado:string}[] = [];
   constructor(private pedidoServiceMesa: PedidosDeMesaService) { }
 
   ngOnInit(): void {
     this.pedidoServiceMesa.pedidosMesa$.subscribe(data => {
+      this.estadoPedido=data.est;
       this.pedidosDeMesa = data.pedidos;
       this.nombreMesa = data.nombreMesa;
       this.ordenar();
@@ -48,13 +49,12 @@ export class ModalPedidosComponent implements OnInit {
       return {
         pedidoId: pedido.id,
         platos: Object.values(cantidadesPorPlatillo),
-        totalPedido: totalPedido
+        totalPedido: totalPedido,
+        estado: pedido.estado.nombre
       };
     });
 
-    console.log(this.PedidosParaMostrar);
+    console.log("para mostrar",this.PedidosParaMostrar);
   }
-  eliminarPedido(IdPedido:any){
-   this.pedidoServiceMesa.setIdPedido(IdPedido); 
-}
+
 }

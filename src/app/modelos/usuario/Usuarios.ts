@@ -35,4 +35,5 @@ export interface Empleado{
     direccion:string;
     usuario: Usuario;
     id_rol:number;
+    id_restaurante:number;
 }

@@ -18,6 +18,12 @@
                     <div class="d-flex justify-content-between align-items-center">
                       <h5 class="card-title">Pedido: {{ pedido.pedidoId }}</h5>
                     </div>
+<<<<<<< HEAD
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h5 class="card-title">Estado: {{ pedido.estado}}</h5>
+                    </div>
+=======
+>>>>>>> develop
                     <div class="table-responsive">
                       <table class="table table-striped">
                         <thead>
@@ -40,15 +46,12 @@
                     </div>
                     <hr>
                     <div class="row">
-                      <div class="col text-end">
-                        <h6 class="card-subtitle mb-2 text-muted">Total del pedido: {{ pedido.totalPedido | number:'1.2-2' }} Bs.</h6>
-                        <br>
+                      <div class="col-8">
+                        <button class="btn btn-danger"><i class="bi bi-trash3-fill"></i> Eliminar</button>
                       </div>
-                    </div>
-                    <div class="row justify-content-center">
-                      <div class="col-auto">
-                      <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalEliminarPedido" (click)="eliminarPedido(pedido.pedidoId)"><i class="bi bi-trash3-fill"></i> Eliminar</button>
-                    </div>
+                      <div class="col-4 text-end">
+                        <h6 class="card-subtitle mb-2 text-muted">Total del pedido: {{ pedido.totalPedido | number:'1.2-2' }} Bs.</h6>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -69,10 +72,8 @@
         </ng-template>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cerrar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
 </div>
-
-<app-modal-eliminar-pedido></app-modal-eliminar-pedido>

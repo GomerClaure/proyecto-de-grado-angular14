@@ -1,12 +1,13 @@
 <app-nav></app-nav><br><br>
-<div class="fondo">
+<div class="fondo" id="container-ver-menu">
   <br>
   <div class="container">
     <div id="carouselExampleIndicators" class="carousel slide">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <div class="card">
-            <div class="card-body h-100" [style.background-image]="'url(' + baseUrl + menu.portada + ')'">
+            <div class="card-body portada">
+              <img [src]="baseUrl + menu.portada" alt="Descripción de la imagen" class="portada-img">
             </div>
           </div>
         </div>

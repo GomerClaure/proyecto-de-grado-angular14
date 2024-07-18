@@ -164,6 +164,8 @@ export class RegistrarPedidoComponent implements OnInit {
     formData.append('id_mesa', id_mesa.toString());
     formData.append('tipo', this.tipo.toLowerCase());
     formData.append('id_empleado', id_empleado.toString());
+    let id_restaurante = sessionStorage.getItem('id_restaurante');
+    formData.append('id_restaurante', id_restaurante || '');
 
     this.pedidoselectService.storePedido(formData).subscribe(
       (response) => {
@@ -172,8 +174,7 @@ export class RegistrarPedidoComponent implements OnInit {
       },
       (error) => {
         console.error('Error al almacenar el pedido', error);
-        console.log("entra")
-        this.toast.error({detail:"ERROR",summary:'No selecciono ningun platillo',duration:1500})
+        this.toast.error({detail:"ERROR",summary:'No hay platillos seleccionados',sticky:true})
       }
     );
 

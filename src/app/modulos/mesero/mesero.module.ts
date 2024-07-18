@@ -9,7 +9,6 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgToastModule } from 'ng-angular-popup';
 import { ModalPedidosComponent } from './modal-pedidos/modal-pedidos.component';
-import { ModalEliminarPedidoComponent } from './modal-eliminar-pedido/modal-eliminar-pedido.component';
 
 @NgModule({
   declarations: [
@@ -17,8 +16,7 @@ import { ModalEliminarPedidoComponent } from './modal-eliminar-pedido/modal-elim
     ListaMesasComponent,
     ListaPedidosComponent,
     RegistrarPedidoComponent,
-    ModalPedidosComponent,
-    ModalEliminarPedidoComponent
+    ModalPedidosComponent
   ],
   imports: [
     CommonModule,
