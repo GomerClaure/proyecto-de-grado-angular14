@@ -1,64 +1,66 @@
 <app-nav></app-nav><br><br>
 <div class="fondo">
-    <br>
+  <div class="container-fluid mt-4">
     <div class="filtro">
-      <div class="row row-nav">
-        <ul class="nav nav-underline justify-content-center mb-2">
-          <li class="nav-item ms-3" (click)="MostrarTodos()">
-            <a class="nav-link" role="tab" aria-controls="categoria0"
-                aria-selected="true">Todos los pedidos</a>
+      <ul class="nav nav-underline justify-content-center">
+        <li class="nav-item ms-3" (click)="MostrarTodos()">
+          <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true">Todos los pedidos</a>
         </li>
-            <li class="nav-item ms-3">
-                <a class="nav-link" role="tab" aria-controls="categoria0"
-                    aria-selected="true" (click)="enPreparacion()">En preparacion</a>
-            </li>
-            <li class="nav-item ms-3">
-              <a class="nav-link" role="tab" aria-controls="categoria0"
-                  aria-selected="true" (click)="terminado()">Terminados</a>
-          </li>
-          <li class="nav-item ms-3" (click)="paraLlevar()">
-            <a class="nav-link" role="tab" aria-controls="categoria0"
-                aria-selected="true">Para Llevar</a>
+        <li class="nav-item ms-3">
+          <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true" (click)="enPreparacion()">En preparación</a>
+        </li>
+        <li class="nav-item ms-3">
+          <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true" (click)="terminado()">Terminados</a>
+        </li>
+        <li class="nav-item ms-3" (click)="paraLlevar()">
+          <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true">Para Llevar</a>
         </li>
         <li class="nav-item ms-3" (click)="paraAqui()">
-          <a class="nav-link" role="tab" aria-controls="categoria0"
-              aria-selected="true">Para Aqui</a>
-      </li>
-            <!-- Agrega más elementos de navegación según sea necesario -->
-        </ul>
+          <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true">Para Aquí</a>
+        </li>
+      </ul>
     </div>
-    </div>
-    <div class="pedidos-container">
-    <div class="pedidos" *ngIf="pedidosMostrar.length > 0; else noPedidos">
-      <div *ngFor="let pedido of pedidosMostrar">
-
-        <div class="card"  [ngClass]="{
-          'card-terminado': pedido.estado ==='Servido',
+    <div class="mt-3 pedidos row" *ngIf="pedidosMostrar.length > 0; else noPedidos">
+      <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3" *ngFor="let pedido of pedidosMostrar">
+        <div class="card custom-card" [ngClass]="{
+          'card-terminado': pedido.estado === 'Servido',
           'card-en-preparacion': pedido.estado === 'En preparación',
           'card-default': pedido.estado !== 'Servido' && pedido.estado !== 'En preparación'
         }">
-            <div class="card-header d-flex justify-content-between align-items-center">
-              <div>
-                <h2>{{pedido.hora}}</h2>
-              </div>
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <div>
+              <h5>{{pedido.hora}}</h5>
+            </div>
+            <div>
               <i *ngIf="pedido.tipoPedido === 'llevar'" class="bi bi-bag-fill icon-large"></i>
               <i *ngIf="pedido.tipoPedido === 'local'" class="bi bi-house-door-fill icon-large"></i>
             </div>
-            <div class="card-body">
-              <p class="card-text">{{pedido.mesa}}</p>
-              <p class="card-text">Tipo de pedido: {{pedido.tipoPedido}}</p>
-              <p class="card-text">Estado: {{pedido.estado}}</p>
-            </div>
-            <div class="card-actions d-flex justify-content-center pt-2">
-              <button class="btn btn-ver" data-bs-toggle="modal" data-bs-target="#verPedido" (click)="verPlatos(pedido.numPedido,pedido.estado,pedido.tipoPedido)">Ver pedido</button>
           </div>
-        </div> 
-
+          <div class="card-body">
+            <p class="card-text"><strong>Mesa:</strong> {{pedido.mesa}}</p>
+            <p class="card-text"><strong>Tipo de pedido:</strong> {{pedido.tipoPedido}}</p>
+            <p class="card-text"><strong>Estado:</strong> {{pedido.estado}}</p>
+          </div>
+          <div class="card-footer text-center">
+            <button [ngClass]="{
+              'btn-success': pedido.estado === 'Servido',
+              'btn-warning': pedido.estado === 'En preparación',
+              'btn-secondary': pedido.estado !== 'Servido' && pedido.estado !== 'En preparación'
+            }" 
+          data-bs-toggle="modal" 
+          data-bs-target="#verPedido" 
+          (click)="verPlatos(pedido.numPedido, pedido.estado, pedido.tipoPedido)">
+    Ver pedido
+  </button>
+          </div>
         </div>
       </div>
-      </div>
     </div>
-      <ng-template #noPedidos>
-        <p>No hay Pedidos.</p>
-      </ng-template>
+  </div>
+</div>
+<ng-template #noPedidos>
+  <div class="alert alert-warning text-center mt-3 mensaje-reporte" role="alert">
+    No hay Pedidos.
+  </div>
+</ng-template>
 <app-modal-estado-pedido></app-modal-estado-pedido>

@@ -17,7 +17,14 @@
 /***************************************************************************************************
  * BROWSER POLYFILLS
  */
+/** IE10 and IE11 requires the following for NgClass support on SVG elements */
+import 'classlist.js';
 
+/** Web Animations `@angular/platform-browser/animations` */
+import 'web-animations-js';
+
+/** Intersection Observer API */
+import 'intersection-observer';
 /**
  * By default, zone.js will patch all possible macroTask and DomEvents
  * user can disable parts of macroTask/DomEvents patch by setting following flags

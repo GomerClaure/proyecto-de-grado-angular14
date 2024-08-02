@@ -36,7 +36,7 @@ export class MostrarPedidosComponent implements OnInit {
 
   }
   obtenerPedidos(): void {
-    this.pedidoService.getPedidos(this.id_restaurante,this.id_empleado).subscribe(
+    this.pedidoService.getPedidos(this.id_empleado, this.id_restaurante).subscribe(
       (response) => {
         this.pedidos = response.pedidos;
         console.log(this.pedidos);

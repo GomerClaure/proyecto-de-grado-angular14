@@ -1,69 +1,51 @@
+.card-terminado  .card-header{
+    background-color: rgb(173, 236, 173);
+}
+
+.card-en-preparacion .card-header{
+    background-color: rgb(247, 232, 168);
+}
+
+.card-default .card-header{
+    background-color: rgb(240, 162, 128);
+}
+
+.icon-large {
+  font-size: 1.5em;
+}
+
+
+.filtro {
+  border-bottom: 1px solid #dee2e6;
+}
+
 .pedidos-container {
-    margin-left: 100px;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .pedidos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-  }
-  
-  .pedidos .card {
-    flex: 0 1 calc(20% - 10px); /* 5 cards per row, with spacing */
-    margin: 5px;
-    box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
-  }
-.card-body{
-  background-color: white;
+  margin-top: 20px;
 }
-  /* Estado: Terminado */
-.card-terminado {
-  background-color: rgb(173, 236, 173);
+
+.card {
+  transition: box-shadow 0.3s;
 }
-/* Estado: En Preparacion */
-.card-en-preparacion {
-  background-color: rgb(247, 232, 168);
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-/* Estado por defecto */
-.card-default {
-  background-color: rgb(240, 162, 128);
-}  
-.btn-ver{
-    background-color: rgb(255, 255, 255);
+
+.card-footer {
+  background-color: #f8f9fa;
+  border-top: none;
 }
-.card-actions{
-  padding-bottom: 5px;
+
+.alert-warning {
+  background-color: #fff3cd;
+  border-color: #ffeeba;
 }
-  /* Media query for smaller screens */
-@media (max-width: 1200px) {
-    .pedidos .card {
-      flex: 0 1 calc(25% - 10px); /* 4 cards per row */
-    }
+
+.nav-link{
+  color: black;
+  size: 40px;
 }
-  
-  @media (max-width: 992px) {
-    .pedidos .card {
-      flex: 0 1 calc(33.33% - 10px); /* 3 cards per row */
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .pedidos .card {
-      flex: 0 1 calc(50% - 10px); /* 2 cards per row */
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .pedidos .card {
-      flex: 0 1 calc(100% - 10px); /* 1 card per row */
-    }
-  }
-  .nav-link{
-    color: black;
-    size: 40px;
-  }
-  .icon-large {
-    font-size: 30px; /* Ajusta este valor al tamaño deseado */
-  }
+
+.icon-large {
+  font-size: 30px; /* Ajusta este valor al tamaño deseado */
+}
