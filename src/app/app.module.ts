@@ -10,6 +10,8 @@ import { MeseroModule } from './modulos/mesero/mesero.module';
 import { HomeModule } from './modulos/home/home.module';
 import { CocineroModule } from './modulos/cocinero/cocinero.module';
 import { ComponentsModule } from './components/components.module';
+import { MostrarPedidosCComponent } from './modulos/cajero/mostrar-pedidos-c/mostrar-pedidos-c.component';
+import { CajeroModule } from './modulos/cajero/cajero.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { ComponentsModule } from './components/components.module';
     MeseroModule,
     HomeModule,
     CocineroModule,
+    CajeroModule,
     ComponentsModule,
   ], 
   providers: [],

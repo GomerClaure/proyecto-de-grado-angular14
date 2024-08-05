@@ -34,7 +34,12 @@ const routes: Routes = [
   {
     path: 'cocinero',
     loadChildren: () => import('../app/modulos/cocinero/cocinero.module').then(m => m.CocineroModule)
-  }, {
+  },
+  {
+    path: 'cajero',
+    loadChildren: () => import('../app/modulos/cajero/cajero.module').then(m => m.CajeroModule)
+  },
+  {
     path: 'notificacion',
     loadChildren: () => import('../app/modulos/notificacion/notificacion.module').then(m => m.NotificacionModule)
   },
