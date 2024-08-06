@@ -7,10 +7,12 @@
           <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true">Todos los pedidos</a>
         </li>
         <li class="nav-item ms-3">
-          <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true" (click)="enPreparacion()">En preparación</a>
+          <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true" (click)="enPreparacion()">En
+            preparación</a>
         </li>
         <li class="nav-item ms-3">
-          <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true" (click)="terminado()">Terminados</a>
+          <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true"
+            (click)="terminado()">Terminados</a>
         </li>
         <li class="nav-item ms-3" (click)="paraLlevar()">
           <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true">Para Llevar</a>
@@ -36,22 +38,17 @@
               <i *ngIf="pedido.tipoPedido === 'local'" class="bi bi-house-door-fill icon-large"></i>
             </div>
           </div>
-          <div class="card-body">
-            <p class="card-text"><strong>Mesa:</strong> {{pedido.mesa}}</p>
-            <p class="card-text"><strong>Tipo de pedido:</strong> {{pedido.tipoPedido}}</p>
-            <p class="card-text"><strong>Estado:</strong> {{pedido.estado}}</p>
+          <div class="card-body pb-0">
+            <p class="fs-5 card-text mb-1">Mesa: <strong>{{pedido.mesa}}</strong></p>
+            <p class="fs-5 card-text mb-1">Tipo: <strong>{{pedido.tipoPedido}}</strong></p>
+            <p class="fs-5 card-text mb-1">Estado: <strong>{{pedido.estado}}</strong></p>
           </div>
           <div class="card-footer text-center">
-            <button [ngClass]="{
-              'btn-success': pedido.estado === 'Servido',
-              'btn-warning': pedido.estado === 'En preparación',
-              'btn-secondary': pedido.estado !== 'Servido' && pedido.estado !== 'En preparación'
-            }" 
-          data-bs-toggle="modal" 
-          data-bs-target="#verPedido" 
-          (click)="verPlatos(pedido.numPedido, pedido.estado, pedido.tipoPedido)">
-    Ver pedido
-  </button>
+            <button [ngClass]="getButtonClass(pedido.estado)"
+            data-bs-toggle="modal" data-bs-target="#verPedido"
+              (click)="verPlatos(pedido.numPedido, pedido.estado, pedido.tipoPedido)">
+              Ver Pedido
+            </button>
           </div>
         </div>
       </div>

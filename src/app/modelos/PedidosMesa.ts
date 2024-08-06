@@ -1,3 +1,5 @@
+import { Platillo } from "./Platillo";
+
 export interface PedidosMesa {
     nombreMesa: string;
     estadoP:string;
@@ -29,4 +31,18 @@ export interface PedidosCocina{
   hora:string;
   estado:string;
 }
+
+export interface DetallePedido{
+  cuenta:{ estado: string, mesa: { nombre: string , id:number, id_restaurante:number}, id: number };
+  estado: { id: number, nombre: string };
+  monto: number;
+  platos: Platillo[];
+  tipo: string;
+  updatedAt: string;
+  id: number;
+  id_estado:number;
+  id_cuenta:number;
+  id_empleado:number;
+  fecha_hora_pedido:string;
+};
   

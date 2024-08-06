@@ -1,3 +1,5 @@
+// @import "node_modules/bootstrap/scss/variables";
+
 .card-terminado  .card-header{
     background-color: rgb(173, 236, 173);
 }
@@ -8,6 +10,16 @@
 
 .card-default .card-header{
     background-color: rgb(240, 162, 128);
+}
+
+.btn-en-preparacion{
+    background-color: #ac721a ;
+    color: rgb(247, 243, 243);
+}
+
+.btn-en-cola{
+    background-color: #cd5c5c;
+    color: rgb(253, 253, 253);
 }
 
 .icon-large {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PedidosCocina } from 'src/app/modelos/PedidosMesa';
+import { DetallePedido, PedidosCocina } from 'src/app/modelos/PedidosMesa';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.service';
 
@@ -9,13 +9,14 @@ import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.ser
   styleUrls: ['./mostrar-pedidos.component.scss']
 })
 export class MostrarPedidosComponent implements OnInit {
-  pedidos: any[] = [];
+  pedidos: DetallePedido[] = [];
   errorMessage: string = '';
   pedidosP:PedidosCocina[]=[];
   pedidosMostrar:PedidosCocina[]=[];
   pedidosParaLlevar:PedidosCocina[]=[];
   pedidosParaAqui:PedidosCocina[]=[];
   pedidosPreparacion:PedidosCocina[]=[];
+  pedidosEnEspera:PedidosCocina[]=[];
   pedidosTerminado:PedidosCocina[]=[];
   platillos:any[]=[];
 
@@ -39,7 +40,12 @@ export class MostrarPedidosComponent implements OnInit {
     this.pedidoService.getPedidos(this.id_empleado, this.id_restaurante).subscribe(
       (response) => {
         this.pedidos = response.pedidos;
-        console.log(this.pedidos);
+      //   for (let i = 0; i < this.pedidos.length; i++) {
+      //     // separar pedidos por Estado
+      //     if (this.pedidos[i].id_estado === 1) {
+      //       this.pedidosEnEspera.push(this.pedidos[i]);
+      //   }
+      // }
       },
       (error) => {
         this.errorMessage = 'Error al obtener los pedidos';
@@ -120,5 +126,14 @@ export class MostrarPedidosComponent implements OnInit {
   terminado(){
    this.pedidosTerminado=this.pedidosP.filter(pe=>pe.estado=='Servido');
    this.mostrarped(this.pedidosTerminado);
+  }
+  getButtonClass(estado: string): string {
+    if (estado === 'Servido') {
+      return 'btn btn-success';
+    } else if (estado === 'En preparación') {
+      return 'btn btn-en-preparacion';
+    } else {
+      return 'btn btn-en-cola';
+    }
   }
 }
