@@ -11,7 +11,7 @@ import { ComponentsModule } from "../../components/components.module";
     MostrarPedidosCComponent
   ],
   imports: [
-    CommonModule,
+    CommonModule, 
     CajeroRoutingModule,
     ComponentsModule
 ]
