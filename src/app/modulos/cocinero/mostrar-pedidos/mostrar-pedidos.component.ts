@@ -11,41 +11,32 @@ import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.ser
 export class MostrarPedidosComponent implements OnInit {
   pedidos: DetallePedido[] = [];
   errorMessage: string = '';
-  pedidosP:PedidosCocina[]=[];
-  pedidosMostrar:PedidosCocina[]=[];
-  pedidosParaLlevar:PedidosCocina[]=[];
-  pedidosParaAqui:PedidosCocina[]=[];
-  pedidosPreparacion:PedidosCocina[]=[];
-  pedidosEnEspera:PedidosCocina[]=[];
-  pedidosTerminado:PedidosCocina[]=[];
-  platillos:any[]=[];
+  pedidosP: PedidosCocina[] = [];
+  pedidosMostrar: PedidosCocina[] = [];
+  pedidosPreparacion: PedidosCocina[] = [];
+  pedidosEnEspera: PedidosCocina[] = [];
+  pedidosTerminado: PedidosCocina[] = [];
+  platillos: any[] = [];
 
-  id_restaurante:any;
-  id_empleado:any;
+  id_restaurante: number;
+  id_empleado: number;
 
-  constructor(private pedidoService: PedidoService,private pedidoCocina:PedidosCocinaService) { }
+  constructor(private pedidoService: PedidoService, private pedidoCocina: PedidosCocinaService) {
+    this.id_restaurante = 0;
+    this.id_empleado = 0;
+   }
 
   ngOnInit(): void {
-    this.id_restaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
-    this.id_empleado= parseInt(sessionStorage.getItem('id_empleado')||'0');
+    this.id_restaurante = +sessionStorage.getItem('id_restaurante')!;
+    this.id_empleado = +sessionStorage.getItem('id_empleado')!;
     this.obtenerPedidos();
-// Revisar si esto esta perjudicando el sacar los pedidos 
-    this.pedidoService.pedidos$.subscribe(pedidos => {
-      this.actualizarPedidos(pedidos);
-      this.ordenarPedidos();
-    });
-
   }
+
   obtenerPedidos(): void {
     this.pedidoService.getPedidos(this.id_empleado, this.id_restaurante).subscribe(
       (response) => {
         this.pedidos = response.pedidos;
-      //   for (let i = 0; i < this.pedidos.length; i++) {
-      //     // separar pedidos por Estado
-      //     if (this.pedidos[i].id_estado === 1) {
-      //       this.pedidosEnEspera.push(this.pedidos[i]);
-      //   }
-      // }
+        this.ordenarPedidos();
       },
       (error) => {
         this.errorMessage = 'Error al obtener los pedidos';
@@ -53,87 +44,79 @@ export class MostrarPedidosComponent implements OnInit {
       }
     );
   }
+
   extractHour(datetime: string): string {
-    return datetime.split(' ')[1].substring(0, 5); // Extrae '15:05' de '2024-06-19 15:05:52'
+    return datetime.split(' ')[1]; // Extrae '15:05' de '2024-06-19 15:05:52'
   }
-  ordenarPedidos(){
-    this.pedidos.forEach(pedido=>{
-      const numeroPedido=pedido.id;
-      const tipo=pedido.tipo;
-      const mesaP=pedido.cuenta.mesa.nombre;
-      const platosP=pedido.platos;
-      const horaP=this.extractHour(pedido.fecha_hora_pedido);
-      const estadoP=pedido.estado.nombre;
-      this.pedidosP.push({numPedido:numeroPedido,mesa:mesaP,platos:[platosP],tipoPedido:tipo,hora:horaP,estado:estadoP})
-    })
-    this.pedidosP.sort((a, b) => {
-      const dateA = new Date(b.hora);
-      const dateB = new Date(a.hora);
-      return dateB.getTime() - dateA.getTime();
-    });
-    this.mostrarped(this.pedidosP);
-  }
-  actualizarPedidos(nuevosPedidos: any[]) {
-    nuevosPedidos.forEach(pedido => {
-      // Buscar si el pedido ya existe en pedidosP
-      const indice = this.pedidosP.findIndex(p => p.numPedido === pedido.id);
-      if (indice !== -1) {
-        // Si existe, actualizar los campos necesarios
-        this.pedidosP[indice].mesa = pedido.cuenta.mesa.nombre;
-        this.pedidosP[indice].platos = [pedido.platos];
-        this.pedidosP[indice].tipoPedido = pedido.tipo;
-        this.pedidosP[indice].hora = this.extractHour(pedido.fecha_hora_pedido);
-        this.pedidosP[indice].estado = pedido.estado.nombre;
-      } else {
-        // Si no existe, agregar el nuevo pedido a pedidosP
-        this.pedidosP.push({
-          numPedido: pedido.id,
-          mesa: pedido.cuenta.mesa.nombre,
-          platos: [pedido.platos],
-          tipoPedido: pedido.tipo,
-          hora: this.extractHour(pedido.fecha_hora_pedido),
-          estado: pedido.estado.nombre
-        });
+
+  ordenarPedidos(): void {
+    this.pedidos.forEach(pedido => {
+      const pedidoCocina: PedidosCocina = {
+        numPedido: pedido.id,
+        mesa: pedido.cuenta.mesa.nombre,
+        platos: pedido.platos,
+        tipoPedido: pedido.tipo,
+        hora: this.extractHour(pedido.fecha_hora_pedido),
+        estado: pedido.estado.nombre
+      };
+
+      switch (pedido.id_estado) {
+        case 1:
+          this.pedidosEnEspera.push(pedidoCocina);
+          break;
+        case 2:
+          this.pedidosPreparacion.push(pedidoCocina);
+          break;
+        case 4:
+          this.pedidosTerminado.push(pedidoCocina);
+          break;
+        default:
+          break;
       }
     });
+
+    this.pedidosP = [...this.pedidosEnEspera, ...this.pedidosPreparacion, ...this.pedidosTerminado];
+    this.mostrarped(this.pedidosP);
   }
-  MostrarTodos(){
-    this.pedidosMostrar=this.pedidosP;
+
+  mostrarped(p: PedidosCocina[]): void {
+    this.pedidosMostrar = p;
   }
-  paraLlevar(): void {
-    this.pedidosParaLlevar = this.pedidosP.filter(ped => ped.tipoPedido === 'llevar');
-    this.mostrarped(this.pedidosParaLlevar);
+
+  mostrarTodos(){
+    this.mostrarped(this.pedidosP);
   }
-  paraAqui():void{
-    this.pedidosParaAqui = this.pedidosP.filter(ped => ped.tipoPedido === 'local');
-    this.mostrarped(this.pedidosParaAqui)
-  }
-  mostrarped(p:any){
-    this.pedidosMostrar=p;
-  }
-  verPlatos(id:number,estadoP:string,tipo:string){
-    const IdPedido=id;
-    const estadoPedido=estadoP;
-    const tipoPedido=tipo;
-    const pedido = this.pedidosP.find(p => p.numPedido === id);
-    this.platillos = pedido ? pedido.platos : [];
-    this.pedidoCocina.setPedidoOrdenado(this.platillos,IdPedido,estadoPedido,tipoPedido);
-    }
-  enPreparacion(){
-    this.pedidosPreparacion= this.pedidosP.filter(p=>p.estado=='En preparación');
+
+  enPreparacion(): void {
     this.mostrarped(this.pedidosPreparacion);
   }
-  terminado(){
-   this.pedidosTerminado=this.pedidosP.filter(pe=>pe.estado=='Servido');
-   this.mostrarped(this.pedidosTerminado);
+
+  terminado(): void {
+    this.mostrarped(this.pedidosTerminado);
   }
+
+  paraLlevar(): void {
+    this.mostrarped(this.pedidosP.filter(ped => ped.tipoPedido === 'llevar'));
+  }
+
+  paraAqui(): void {
+    this.mostrarped(this.pedidosP.filter(ped => ped.tipoPedido === 'local'));
+  }
+
+  verPlatos(id: number, estadoP: string, tipo: string): void {
+    const pedido = this.pedidosP.find(p => p.numPedido === id);
+    this.platillos = pedido ? pedido.platos : [];
+    this.pedidoCocina.setPedidoOrdenado(this.platillos, id, estadoP, tipo);
+  }
+
   getButtonClass(estado: string): string {
-    if (estado === 'Servido') {
-      return 'btn btn-success';
-    } else if (estado === 'En preparación') {
-      return 'btn btn-en-preparacion';
-    } else {
-      return 'btn btn-en-cola';
+    switch (estado) {
+      case 'Servido':
+        return 'btn btn-success';
+      case 'En preparación':
+        return 'btn btn-en-preparacion';
+      default:
+        return 'btn btn-en-cola';
     }
   }
 }
