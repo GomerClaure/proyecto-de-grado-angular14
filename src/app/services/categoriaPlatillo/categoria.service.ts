@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';	
+import { HttpClient, HttpHeaders } from '@angular/common/http';	
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -19,6 +19,17 @@ export class CategoriaService {
 
   private modalClosedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  private getHeaders(): HttpHeaders {
+    const token = sessionStorage.getItem('token_access');
+    if (token) {
+      return new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      });
+    } else {
+      throw new Error('No access token found in sessionStorage');
+    }
+  }
+
   setModalClosed(value: boolean) {
     this.modalClosedSubject.next(value);
   }
@@ -27,12 +38,12 @@ export class CategoriaService {
     return this.modalClosedSubject.asObservable();
   }
   // Obtiene todas las categorias de platillos
-  getCategorias(){
-    return this.http.get(`${this.BASE_URL}/menu/categoria`, { headers: this.headers });
-  }
+ getCategorias(idRestaurante: any) {
+  return this.http.get(`${this.BASE_URL}/menu/categoriaRestaurante/${idRestaurante}`, { headers: this.getHeaders() });
+}
   // Obtiene una categoria de platillos por su id
   getCategoria(id: string){
-    return this.http.get(`${this.BASE_URL}/menu/categoria/` + id);
+    return this.http.get(`${this.BASE_URL}/menu/categoria/` + id, { headers: this.headers });
   }
 
   // Guarda una nueva categoria de platillos

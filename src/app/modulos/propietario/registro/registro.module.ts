@@ -5,7 +5,6 @@ import { RegistrarPlatilloComponent } from './registrar-platillo/registrar-plati
 import { RegistrarEmpleadoComponent } from './registrar-empleado/registrar-empleado.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from 'src/app/components/components.module';
-import { EditarCategoriaComponent } from '../editar/editar-categoria/editar-categoria.component';
 import { EditarPlatilloComponent } from '../editar/editar-platillo/editar-platillo.component';
 import { NgToastModule } from 'ng-angular-popup';
 @NgModule({
@@ -18,7 +17,7 @@ import { NgToastModule } from 'ng-angular-popup';
     CommonModule,
     RegistroRoutingModule,
     ReactiveFormsModule,
-    FormsModule,
+    FormsModule, 
     ComponentsModule,
     NgToastModule
   ] 

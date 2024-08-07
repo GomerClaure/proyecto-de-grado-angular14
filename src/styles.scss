@@ -16,6 +16,25 @@
   color: black;
   border-radius: 5px;
 }
+.btn-curso{
+  background-color:#edd590;
+  border-color: #edd590;
+  color: black;
+  border-radius: 5px;
+}
+
+.btn-terminado{
+  background-color:#95c575;
+  border-color: #95c575;
+  color: black;
+  border-radius: 5px;
+}
+.btn-atra{
+  background-color:#f5ed93;
+  border-color: #f5ed93;
+  color: black;
+  border-radius: 5px;
+}
 .btn-aceptar:hover{
   background-color: #719841;
   border-color: #719841;
@@ -73,7 +92,7 @@
   height: 100vh;
   background-size: cover; /* Ajusta el tamaño de la imagen al contenedor */
   background-position: center; /* Centra la imagen en el contenedor */
-  position: fixed;
+  // position: fixed;
   overflow-y: auto;
 }
 .li{

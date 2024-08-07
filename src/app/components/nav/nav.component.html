@@ -1,44 +1,72 @@
 <!-- Barra de navegacion para el propietario -->
 <nav *ngIf="esPropietario()" class="navbar navbar-expand-lg custom-navbar-color ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="home">Restaurant</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" [routerLink]="'/home'">
+      <strong>Restaurant</strong>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button> 
+    </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-           Menu    
+            Menu
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="lista/platillo">Lista de platillos</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="lista/categoria">Lista de categorias</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="menu/generar">Generar menu </a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="menu/qr">Generar Qr</a></li>
-            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" [routerLink]="'/lista/platillo'">Lista de platillos</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" [routerLink]="'/lista/categoria'">Lista de categorias</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" [routerLink]="'/menu/generar'">Generar menu </a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" [routerLink]="'/menu/qr'">Generar Qr</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
             <li><a class="dropdown-item" (click)="irAMenu()">Ver Menu</a></li>
           </ul>
-        </li>  
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-           Registro
+            Registro
           </a>
           <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="registrar/platillo">Registrar platillo</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrar categoria</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="registrar/empleado">Registrar empleado</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/registrar/platillo'">Registrar platillo</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrar categoria</a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" [routerLink]="'/registrar/empleado'">Registrar empleado</a></li>
           </ul>
-        </li>  
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Reporte
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" [routerLink]="'/reporte/pedidos'">Pedidos</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" [routerLink]="'/reporte/ventas'">Ventas</a></li>
+          </ul>
+        </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
         </li>
-      </ul> 
+      </ul>
     </div>
   </div>
 </nav>
@@ -65,9 +93,82 @@
 </nav>
 
 <!-- Barra de navegacion del empleado -->
-<nav *ngIf="esEmpleado()" class="navbar navbar-expand-lg custom-navbar-color ">
+ <!--Si el empleado es mesero-->
+<nav *ngIf="esEmpleado() && getRol()=='1'" class="navbar navbar-expand-lg custom-navbar-color ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="home">Empleado Mesero</a>
+    <a class="navbar-brand mx-0" [routerLink]="'/home'"><strong>Restaurante </strong></a>
+
+
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" [routerLink]="'/mesero/lista-mesa'">Registrar Pedido</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" [routerLink]="'/mesero/lista-pedidos'">Lista de Pedidos</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="d-flex ms-auto ">
+      <div class="dropdown-center mx-2">
+        <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" (click)="marcarLeida(5)" aria-expanded="false">
+          <i class="bi bi-bell"></i>
+
+          <span *ngIf="notificacionesSinLeer !=0  " class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{ notificacionesSinLeer }}
+            <span class="visually-hidden">unread messages</span>
+          </span>
+          <!-- <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span> -->
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <div class="container-titulo mb-3 px-2">
+            <p class="fs-5  border-bottom border-dark-subtle border-2">Notificaciones</p>
+          </div>
+          <li *ngIf="notificaciones.length == 0" >
+            <a href="" class="list-group-item px-2 " style="width: 278px;">
+              No tienes notificaciones
+            </a>
+          </li>
+          <li *ngFor="let notificacion of notificaciones" class="border-bottom border-1">
+            <a href="#" class="list-group-item list-group-item-action  notificacion px-2 ">
+              <div class="d-flex w-100 justify-content-between">
+                <strong class="mb-1">{{notificacion.titulo}}</strong>
+                <small class="text-end">{{notificacion.creado_hace}}</small>
+              </div>
+
+              <p class="mb-1 small">{{notificacion.mensaje}}</p>
+            </a>
+          </li>
+          <li *ngIf="notificaciones.length != 0" >
+            <a [routerLink]="'/notificacion/lista-notificacion'" (click)="marcarLeida(0)" class="list-group-item px-2 notificacion text-end">
+              Ver todas <i class="bi bi-chevron-right"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav-item mx-2">
+        <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
+      </div>
+    </div>
+    <button class="navbar-toggler btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+<!--Si el empleado es cocinero-->
+<nav *ngIf="esEmpleado() && getRol()=='3'" class="navbar navbar-expand-lg custom-navbar-color ">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="'/home'">Empleado Cocinero</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -75,10 +176,30 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="mesero/lista-mesa">Registrar Pedido</a>
+          <a class="nav-link active" aria-current="page" [routerLink]="'/cocinero/pedido-cocina'">Ver pedidos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="mesero/lista-pedidos">Lista de Pedidos</a>
+          <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!--Si el empleado es cajero-->
+<nav *ngIf="esEmpleado() && getRol()=='2'" class="navbar navbar-expand-lg custom-navbar-color ">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="'/home'">Empleado Cajero</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" [routerLink]="'/mesero/lista-mesa'">Registrar Pedido</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" [routerLink]="'/mesero/lista-pedidos'">Lista de Pedidos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
@@ -88,29 +209,29 @@
   </div>
 </nav>
 
-<!-- Barra de navegacion generica -->
+
 <nav *ngIf="!esPropietario() && !esEmpleado() && !esAdministrador()"
   class="navbar navbar-expand-lg custom-navbar-color">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <strong>Lugo</strong>
-      <img src="../../../assets/image/icons8-crema-de-avena-50.png" alt="Icono" style="width: 30px; height: auto; margin-left: 5px;">
+      <img src="../../../assets/image/icons8-crema-de-avena-50.png" alt="Icono"
+        style="width: 30px; height: auto; margin-left: 5px;">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button> 
+    </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="login">Login</a>
+          <a class="nav-link active" aria-current="page" [routerLink]="'/login'">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="registro">Registro</a>
+          <a class="nav-link" [routerLink]="'/registro'">Registro</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-
 <app-registrar-categoria></app-registrar-categoria>
