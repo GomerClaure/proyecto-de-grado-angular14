@@ -6,6 +6,9 @@
         <li class="nav-item ms-3" (click)="mostrarTodos()">
           <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true">Todos los pedidos</a>
         </li>
+        <li class="nav-item ms-3" (click)="mostrarDetallePedido()">
+          <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true">Mostrar detalle</a>
+        </li>
         <li class="nav-item ms-3">
           <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true" (click)="enPreparacion()">En
             preparación</a>
@@ -63,10 +66,6 @@
   </div>
   <app-mostrar-detalle-pedidos *ngIf="mostrarDetalle"
    [pedidosP]="pedidosP"
-   [pedidosMostrar]="pedidosMostrar"
-    [pedidosPreparacion]="pedidosPreparacion"
-    [pedidosTerminado]="pedidosTerminado"
-    [pedidosEnEspera]="pedidosEnEspera"
     
     [id_pedido_detallado]="id_pedido_detallado"
   ></app-mostrar-detalle-pedidos>

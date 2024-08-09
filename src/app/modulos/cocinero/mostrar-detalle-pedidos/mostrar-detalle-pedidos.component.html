@@ -2,12 +2,50 @@
   <!-- Vista Principal -->
   <div class="vista-principal">
     <div class="detalles-pedido">
-      <h2>Detalles del Pedido</h2>
-      <div *ngIf="pedidoSeleccionado">
-        <p>ID Pedido: {{ pedidoSeleccionado.id }}</p>
-        <p>Tipo: {{ pedidoSeleccionado.tipo }}</p>
-        <div *ngFor="let platillo of pedidoSeleccionado.platillos">
-          <p>{{ platillo.nombre }} - {{ platillo.precio }}</p>
+      <div class="row">
+        <div class="col-6">
+          <div class="cont">
+            <h5>Platillos con descripcion</h5>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Cantidad</th>
+                  <th>Platillo</th>
+                  <th>Detalle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let d of platosMostrar">
+                  <tr *ngIf="d.detalle">
+                    <td>{{ d.cantidad }}</td>
+                    <td>{{ d.nombre }}</td>
+                    <td>{{ d.detalle }}</td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="cont">
+            <h5>Platillos sin descripcion</h5>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Cantidad</th>
+                  <th>Platillo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let d of platosMostrar">
+                  <tr *ngIf="!d.detalle">
+                    <td>{{ d.cantidad }}</td>
+                    <td>{{ d.nombre }}</td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -20,7 +58,7 @@
       <div class="lista-miniaturas">
         <div *ngFor="let pedido of pedidosVisibles" (click)="seleccionarPedido(pedido)" [class.seleccionado]="pedido.id === pedidoSeleccionado?.id">
           <p>ID: {{ pedido.id }}</p>
-          <p>Tipo: {{ pedido.tipo }}</p>
+          <p>Tipo: {{ pedido.tipoPedido }}</p>
         </div>
       </div>
     </div>

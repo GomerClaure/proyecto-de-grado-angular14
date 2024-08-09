@@ -12,6 +12,7 @@ export interface PedidosParaMostrarMesa{
   totalPedido:any;
 }
 export interface PedidosCocina{
+  id: number;
   numPedido:number;
   mesa:string;
   platos: any[];
@@ -23,14 +24,6 @@ export interface PedidosPlatos{
   nombre:any;
   cantidad:number;
   detalle:string;
-}
-export interface PedidosCocina{
-  numPedido:number;
-  mesa:string;
-  platos: any[];
-  tipoPedido:string;
-  hora:string;
-  estado:string;
 }
 export interface PlatilloPedido {
   id: number;

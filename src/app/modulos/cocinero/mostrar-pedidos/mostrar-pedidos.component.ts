@@ -21,7 +21,7 @@ export class MostrarPedidosComponent implements OnInit {
   id_restaurante: number;
   id_empleado: number;
   id_pedido_detallado: number;
-  mostrarDetalle: boolean = true;
+  mostrarDetalle: boolean = false;
 
   constructor(private pedidoService: PedidoService, private pedidoCocinaService: PedidosCocinaService) {
     this.id_restaurante = 0;
@@ -38,6 +38,7 @@ export class MostrarPedidosComponent implements OnInit {
   obtenerPedidos(): void {
     this.pedidoService.getPedidos(this.id_empleado, this.id_restaurante).subscribe(
       (response) => {
+        console.log(response);
         this.pedidos = response.pedidos;
         this.ordenarPedidos();
       },
@@ -48,6 +49,10 @@ export class MostrarPedidosComponent implements OnInit {
     );
   }
 
+  mostrarDetallePedido(): void {
+    this.mostrarDetalle = true;
+  }
+
   extractHour(datetime: string): string {
     return datetime.split(' ')[1]; // Extrae '15:05' de '2024-06-19 15:05:52'
   }
@@ -55,6 +60,7 @@ export class MostrarPedidosComponent implements OnInit {
   ordenarPedidos(): void {
     this.pedidos.forEach(pedido => {
       const pedidoCocina: PedidosCocina = {
+        id: pedido.id,
         numPedido: pedido.id,
         mesa: pedido.cuenta.mesa.nombre,
         platos: pedido.platos,
@@ -87,22 +93,27 @@ export class MostrarPedidosComponent implements OnInit {
   }
 
   mostrarTodos(){
+    this.mostrarDetalle = false;
     this.mostrarped(this.pedidosP);
   }
 
   enPreparacion(): void {
+    this.mostrarDetalle = false;
     this.mostrarped(this.pedidosPreparacion);
   }
 
   terminado(): void {
+    this.mostrarDetalle = false;
     this.mostrarped(this.pedidosTerminado);
   }
 
   paraLlevar(): void {
+    this.mostrarDetalle = false;
     this.mostrarped(this.pedidosP.filter(ped => ped.tipoPedido === 'llevar'));
   }
 
   paraAqui(): void {
+    this.mostrarDetalle = false;
     this.mostrarped(this.pedidosP.filter(ped => ped.tipoPedido === 'local'));
   }
 
