@@ -1,40 +1,46 @@
-.slider-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .main-view {
-    margin-bottom: 10px;
-  }
-  
-  .order-detail {
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #f9f9f9;
-  }
-  
-  .thumbnails {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .thumbnail-list {
-    display: flex;
-    overflow-x: auto;
-  }
-  
-  .thumbnail-list div {
-    cursor: pointer;
-    padding: 5px;
-    border: 1px solid #ddd;
-    margin: 5px;
-  }
-  
-  .thumbnail-list div.active {
-    border: 2px solid #007bff; /* Color para resaltar el pedido seleccionado */
-  }
-  
-  button {
-    margin: 5px;
-  }
+.contenedor-slider {
+  display: flex;
+  flex-direction: column;
+}
+
+.vista-principal {
+  margin-bottom: 10px;
+}
+
+.detalles-pedido {
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.navegacion-miniaturas {
+  display: flex;
+  align-items: center;
+}
+
+.contenedor-miniaturas {
+  overflow: hidden;
+  width: calc(100% - 60px); /* Ajusta el ancho para mostrar solo 5 miniaturas más márgenes */
+}
+
+.lista-miniaturas {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.lista-miniaturas div {
+  flex: 0 0 20%; /* Mostrar 5 miniaturas a la vez */
+  box-sizing: border-box;
+  cursor: pointer;
+  padding: 5px;
+  border: 1px solid #ddd;
+  margin: 5px;
+}
+
+.lista-miniaturas div.seleccionado {
+  border: 2px solid #007bff; /* Color para resaltar el pedido seleccionado */
+}
+
+button {
+  margin: 5px;
+}

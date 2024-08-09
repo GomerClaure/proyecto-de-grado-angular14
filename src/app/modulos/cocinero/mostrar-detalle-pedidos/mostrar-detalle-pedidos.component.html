@@ -1,30 +1,29 @@
-<div class="slider-container">
-    <!-- Vista Principal -->
-    <div class="main-view">
-      <div class="order-detail">
-        <h2>Detalles del Pedido</h2>
-        <!-- Mostrar detalles del pedido aquí -->
-        <div *ngIf="selectedOrder">
-          <p>ID Pedido: {{ selectedOrder.id }}</p>
-          <p>Para: {{ selectedOrder.tipo }}</p>
-          <!-- Detalles del platillo -->
-          <div *ngFor="let dish of selectedOrder.platillos">
-            <p>{{ dish.nombre }} - {{ dish.precio }}</p>
-          </div>
+<div class="contenedor-slider">
+  <!-- Vista Principal -->
+  <div class="vista-principal">
+    <div class="detalles-pedido">
+      <h2>Detalles del Pedido</h2>
+      <div *ngIf="pedidoSeleccionado">
+        <p>ID Pedido: {{ pedidoSeleccionado.id }}</p>
+        <p>Tipo: {{ pedidoSeleccionado.tipo }}</p>
+        <div *ngFor="let platillo of pedidoSeleccionado.platillos">
+          <p>{{ platillo.nombre }} - {{ platillo.precio }}</p>
         </div>
       </div>
-    </div>
-  
-    <!-- Miniaturas -->
-    <div class="thumbnails">
-      <button (click)="previousOrder()">Anterior</button>
-      <div class="thumbnail-list">
-        <div *ngFor="let order of orders" (click)="selectOrder(order)" [class.active]="order.id === selectedOrder?.id">
-          <p>ID: {{ order.id }}</p>
-          <p>Tipo: {{ order.tipo }}</p>
-        </div>
-      </div>
-      <button (click)="nextOrder()">Siguiente</button>
     </div>
   </div>
-  
+
+  <!-- Miniaturas -->
+  <div class="navegacion-miniaturas">
+    <button (click)="mostrarPedidoAnterior()">Anterior</button>
+    <div class="contenedor-miniaturas">
+      <div class="lista-miniaturas">
+        <div *ngFor="let pedido of pedidosVisibles" (click)="seleccionarPedido(pedido)" [class.seleccionado]="pedido.id === pedidoSeleccionado?.id">
+          <p>ID: {{ pedido.id }}</p>
+          <p>Tipo: {{ pedido.tipo }}</p>
+        </div>
+      </div>
+    </div>
+    <button (click)="mostrarPedidoSiguiente()">Siguiente</button>
+  </div>
+</div>
