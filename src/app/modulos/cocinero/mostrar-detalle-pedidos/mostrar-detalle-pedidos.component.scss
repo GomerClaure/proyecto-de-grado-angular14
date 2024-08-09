@@ -1,0 +1,40 @@
+.slider-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .main-view {
+    margin-bottom: 10px;
+  }
+  
+  .order-detail {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .thumbnails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .thumbnail-list {
+    display: flex;
+    overflow-x: auto;
+  }
+  
+  .thumbnail-list div {
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #ddd;
+    margin: 5px;
+  }
+  
+  .thumbnail-list div.active {
+    border: 2px solid #007bff; /* Color para resaltar el pedido seleccionado */
+  }
+  
+  button {
+    margin: 5px;
+  }

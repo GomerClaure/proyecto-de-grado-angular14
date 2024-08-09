@@ -22,42 +22,54 @@
         </li>
       </ul>
     </div>
-    <div class="mt-3 pedidos row" *ngIf="pedidosMostrar.length > 0; else noPedidos">
-      <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-3" *ngFor="let pedido of pedidosMostrar">
-        <div class="card custom-card" [ngClass]="{
-          'card-terminado': pedido.estado === 'Servido',
-          'card-en-preparacion': pedido.estado === 'En preparación',
-          'card-default': pedido.estado !== 'Servido' && pedido.estado !== 'En preparación'
-        }">
-          <div class="card-header d-flex justify-content-between align-items-center">
-            <div>
-              <h5>{{pedido.hora}}</h5>
+    <div *ngIf="!mostrarDetalle">
+      <div class="mt-3 pedidos row" *ngIf="pedidosMostrar.length > 0; else noPedidos">
+        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-3" *ngFor="let pedido of pedidosMostrar">
+          <div class="card custom-card" [ngClass]="{
+            'card-terminado': pedido.estado === 'Servido',
+            'card-en-preparacion': pedido.estado === 'En preparación',
+            'card-default': pedido.estado !== 'Servido' && pedido.estado !== 'En preparación'
+          }">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <div>
+                <h5>{{pedido.hora}}</h5>
+              </div>
+              
+              <div>
+                <i *ngIf="pedido.tipoPedido === 'llevar'" class="bi bi-bag-fill icon-large"></i>
+                <i *ngIf="pedido.tipoPedido === 'local'" class="bi bi-house-door-fill icon-large"></i>
+              </div>
+              <div>
+                <h4>{{pedido.numPedido}}</h4>
+              </div>
             </div>
-            
-            <div>
-              <i *ngIf="pedido.tipoPedido === 'llevar'" class="bi bi-bag-fill icon-large"></i>
-              <i *ngIf="pedido.tipoPedido === 'local'" class="bi bi-house-door-fill icon-large"></i>
+            <div class="card-body pb-0">
+              <p class="fs-5 card-text mb-1">Mesa: <strong>{{pedido.mesa}}</strong></p>
+              <p class="fs-5 card-text mb-1">Tipo: <strong>{{pedido.tipoPedido}}</strong></p>
+              <p class="fs-5 card-text mb-1">Estado: <strong>{{pedido.estado}}</strong></p>
             </div>
-            <div>
-              <h4>{{pedido.numPedido}}</h4>
+            <div class="card-footer text-center">
+              <button [ngClass]="getButtonClass(pedido.estado)"
+              data-bs-toggle="modal" data-bs-target="#verPedido"
+                (click)="verPlatos(pedido.numPedido, pedido.estado, pedido.tipoPedido)">
+                Ver Pedido
+              </button>
             </div>
-          </div>
-          <div class="card-body pb-0">
-            <p class="fs-5 card-text mb-1">Mesa: <strong>{{pedido.mesa}}</strong></p>
-            <p class="fs-5 card-text mb-1">Tipo: <strong>{{pedido.tipoPedido}}</strong></p>
-            <p class="fs-5 card-text mb-1">Estado: <strong>{{pedido.estado}}</strong></p>
-          </div>
-          <div class="card-footer text-center">
-            <button [ngClass]="getButtonClass(pedido.estado)"
-            data-bs-toggle="modal" data-bs-target="#verPedido"
-              (click)="verPlatos(pedido.numPedido, pedido.estado, pedido.tipoPedido)">
-              Ver Pedido
-            </button>
           </div>
         </div>
       </div>
     </div>
+   
   </div>
+  <app-mostrar-detalle-pedidos *ngIf="mostrarDetalle"
+   [pedidosP]="pedidosP"
+   [pedidosMostrar]="pedidosMostrar"
+    [pedidosPreparacion]="pedidosPreparacion"
+    [pedidosTerminado]="pedidosTerminado"
+    [pedidosEnEspera]="pedidosEnEspera"
+    
+    [id_pedido_detallado]="id_pedido_detallado"
+  ></app-mostrar-detalle-pedidos>
 </div>
 <ng-template #noPedidos>
   <div class="alert alert-warning text-center mt-3 mensaje-reporte" role="alert">

@@ -20,10 +20,13 @@ export class MostrarPedidosComponent implements OnInit {
 
   id_restaurante: number;
   id_empleado: number;
+  id_pedido_detallado: number;
+  mostrarDetalle: boolean = true;
 
-  constructor(private pedidoService: PedidoService, private pedidoCocina: PedidosCocinaService) {
+  constructor(private pedidoService: PedidoService, private pedidoCocinaService: PedidosCocinaService) {
     this.id_restaurante = 0;
     this.id_empleado = 0;
+    this.id_pedido_detallado = 0;
    }
 
   ngOnInit(): void {
@@ -106,7 +109,9 @@ export class MostrarPedidosComponent implements OnInit {
   verPlatos(id: number, estadoP: string, tipo: string): void {
     const pedido = this.pedidosP.find(p => p.numPedido === id);
     this.platillos = pedido ? pedido.platos : [];
-    this.pedidoCocina.setPedidoOrdenado(this.platillos, id, estadoP, tipo);
+    console.log(this.pedidosP);
+    this.pedidoCocinaService.setPedidoOrdenado(this.platillos, id, estadoP, tipo);
+    // console.log(this.pedidoCocinaService.getPlatillos());
   }
 
   getButtonClass(estado: string): string {
