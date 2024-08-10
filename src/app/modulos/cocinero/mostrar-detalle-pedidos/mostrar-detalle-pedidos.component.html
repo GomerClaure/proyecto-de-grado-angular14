@@ -1,11 +1,29 @@
 <div class="contenedor-slider">
   <!-- Vista Principal -->
-  <div class="vista-principal">
-    <div class="detalles-pedido">
-      <div class="row">
-        <div class="col-6">
+  <div class="vista-principal position-relative rounded">
+    <!-- Botón Anterior -->
+    <button class="btn-navegacion anterior position-absolute top-50 start-0 translate-middle-y" (click)="mostrarPedidoAnterior()">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+    
+    <!-- Detalles del Pedido -->
+    <div class="detalles-pedido px-5">
+      <div class="row  mx-5">
+        <div class="col-12 px-0">
+          <div class="detalles-pedido-header card-title" [ngClass]="{
+            'terminado': pedidoSeleccionado.estado === 'Servido',
+            'en-preparacion': pedidoSeleccionado.estado === 'En preparación',
+            'default': pedidoSeleccionado.estado !== 'Servido' && pedidoSeleccionado.estado !== 'En preparación'
+          }">
+            <h5 class="modal-title" id="exampleModalLabel">
+              <i *ngIf="pedidoSeleccionado.tipoPedido === 'llevar'" class="bi bi-bag-fill icon-large"> Pedido </i>
+              <i *ngIf="pedidoSeleccionado.tipoPedido === 'local'" class="bi bi-house-door-fill icon-large"> Pedido </i>
+            </h5>
+          </div>
+        </div>
+        <div class="col-6 ps-0">
           <div class="cont">
-            <h5>Platillos con descripcion</h5>
+            <h5>Platillos con descripción</h5>
             <table class="table">
               <thead>
                 <tr>
@@ -26,9 +44,9 @@
             </table>
           </div>
         </div>
-        <div class="col-6">
+        <div class="col-6 pe-0">
           <div class="cont">
-            <h5>Platillos sin descripcion</h5>
+            <h5>Platillos sin descripción</h5>
             <table class="table">
               <thead>
                 <tr>
@@ -49,19 +67,40 @@
         </div>
       </div>
     </div>
+    
+    <!-- Botón Siguiente -->
+    <button class="btn-navegacion siguiente position-absolute top-50 end-0 translate-middle-y" (click)="mostrarPedidoSiguiente()">
+      <i class="bi bi-chevron-right"></i>
+    </button>
   </div>
 
   <!-- Miniaturas -->
-  <div class="navegacion-miniaturas">
-    <button (click)="mostrarPedidoAnterior()">Anterior</button>
+  <div class="navegacion-miniaturas mt-0">
     <div class="contenedor-miniaturas">
-      <div class="lista-miniaturas">
-        <div *ngFor="let pedido of pedidosVisibles" (click)="seleccionarPedido(pedido)" [class.seleccionado]="pedido.id === pedidoSeleccionado?.id">
-          <p>ID: {{ pedido.id }}</p>
-          <p>Tipo: {{ pedido.tipoPedido }}</p>
+      <div class="lista-miniaturas ">
+        <div 
+          class="d-flex justify-content-between align-items-center miniatura-card"
+          *ngFor="let pedido of pedidosVisibles" 
+          (click)="seleccionarPedido(pedido)" 
+          [ngClass]="{
+            'en-preparacion': pedido.estado === 'En preparación',
+            'terminado': pedido.estado === 'Servido',
+            'default': pedido.estado !== 'Servido' && pedido.estado !== 'En preparación',
+            'seleccionado': pedido.id === pedidoSeleccionado?.id
+          }"
+        >
+        <div>
+          <h5>{{pedido.hora}}</h5>
+        </div>
+          <div class="fs-4">
+            <i *ngIf="pedido.tipoPedido === 'llevar'" class="bi bi-bag-fill icon-large"></i>
+            <i *ngIf="pedido.tipoPedido === 'local'" class="bi bi-house-door-fill icon-large"></i>
+          </div>
+          <div class="p-0">
+            <h4 class="m-0">{{pedido.numPedido}}</h4>
+          </div>
         </div>
       </div>
     </div>
-    <button (click)="mostrarPedidoSiguiente()">Siguiente</button>
   </div>
-</div>
+  

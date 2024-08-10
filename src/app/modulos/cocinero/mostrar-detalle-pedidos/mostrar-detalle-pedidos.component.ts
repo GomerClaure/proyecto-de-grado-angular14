@@ -94,6 +94,7 @@ export class MostrarDetallePedidosComponent implements OnInit,  OnChanges{
     console.log(idPedido);
     this.pedidoSeleccionado = idPedido;
     this.indicePedidoActual = this.pedidosP.indexOf(idPedido);
+    this.ordenar(this.pedidoSeleccionado.platos);
   }
 
   mostrarPedidoAnterior() {

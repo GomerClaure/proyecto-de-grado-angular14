@@ -1,3 +1,21 @@
+.terminado {
+  background-color: rgb(173, 236, 173);
+}
+
+/* Estado: En Preparación */
+.en-preparacion {
+  background-color: rgb(247, 232, 168);
+}
+
+/* Estado por defecto */
+.default {
+  background-color: rgb(240, 162, 128);
+}
+
+.detalles-pedido .row {
+  background-color: aliceblue;
+}
+
 .contenedor-slider {
   display: flex;
   flex-direction: column;
@@ -5,35 +23,42 @@
 
 .vista-principal {
   margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #746b6b6e;
+  height: 24.25rem; /* Equivalente a 420px */
+  position: relative;
 }
 
-.detalles-pedido {
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: #f9f9f9;
+.cont {
+  height: 21rem; /* Equivalente a 372px */
+  overflow-y: auto;
 }
 
 .navegacion-miniaturas {
   display: flex;
   align-items: center;
+  margin-top: 10px;
 }
 
 .contenedor-miniaturas {
   overflow: hidden;
-  width: calc(100% - 60px); /* Ajusta el ancho para mostrar solo 5 miniaturas más márgenes */
+  width: 100%;
 }
 
 .lista-miniaturas {
   display: flex;
+  justify-content: center;
   transition: transform 0.3s ease;
 }
 
 .lista-miniaturas div {
-  flex: 0 0 20%; /* Mostrar 5 miniaturas a la vez */
+  flex: 0 0 19%; /* Mostrar 5 miniaturas a la vez */
   box-sizing: border-box;
   cursor: pointer;
   padding: 5px;
-  border: 1px solid #ddd;
+  // border: 1px solid #ddd;
   margin: 5px;
 }
 
@@ -41,6 +66,30 @@
   border: 2px solid #007bff; /* Color para resaltar el pedido seleccionado */
 }
 
+.btn-navegacion {
+  background-color: #746b6b6e; /* Color de fondo normal */
+  border: none;
+  font-size: 1.5rem;
+  color: #f1f1f1; /* Color de texto que contraste */
+  border-radius: 5px; /* Borde redondeado */
+  padding: 0.5rem 1rem; /* Espaciado interno */
+  transition: background-color 0.3s, color 0.3s; /* Suaviza la transición de color */
+}
+
+.btn-navegacion:hover {
+  background-color: #5e5a5a6e; /* Un tono más oscuro en hover */
+  color: #ffffff; /* Color de texto más claro en hover */
+}
+
+.btn-navegacion:active {
+  background-color: #4c48486e; /* Un tono aún más oscuro cuando se presiona */
+  color: #eaeaea; /* Color de texto para estado presionado */
+}
+
+.btn-navegacion:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #5e5a5a6e; /* Sombra ligera para enfoque */
+}
 button {
   margin: 5px;
 }
