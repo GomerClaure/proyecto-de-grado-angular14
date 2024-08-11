@@ -70,7 +70,18 @@ export class MostrarDetallePedidosComponent implements OnInit,  OnChanges{
     }
   }
   
-  
+  cambiarEstado(idEstado:any){
+    // if(this.Estado=='Terminado'){
+    //   console.log("Ya termino")
+    // }else{
+    //   let idPedido=this.pedidoCocina.getIdPedido();
+    //   this.idRestaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
+    //   console.log(idPedido,this.idRestaurante,idEstado)
+    //   this.pedidoS.cambiarEstadoPedido(idPedido,this.idRestaurante.toString(),idEstado).subscribe((res)=>{
+    //     console.log(res)
+    //     });
+    // }
+  }
 
   get pedidosVisibles() {
     const totalPedidos = this.pedidosP.length;
@@ -79,7 +90,7 @@ export class MostrarDetallePedidosComponent implements OnInit,  OnChanges{
     let inicio = (this.indicePedidoActual - mitadVisible + totalPedidos) % totalPedidos;
     let fin = (inicio + this.maximoMiniaturasVisibles) % totalPedidos;
 
-    if (totalPedidos <= this.maximoMiniaturasVisibles) {
+    if (totalPedidos < this.maximoMiniaturasVisibles) {
       return this.pedidosP;
     }
 
@@ -98,15 +109,34 @@ export class MostrarDetallePedidosComponent implements OnInit,  OnChanges{
   }
 
   mostrarPedidoAnterior() {
+    
     this.indicePedidoActual = (this.indicePedidoActual - 1 + this.pedidosP.length) % this.pedidosP.length;
     this.pedidoSeleccionado = this.pedidosP[this.indicePedidoActual];
     this.ordenar(this.pedidoSeleccionado.platos);
+    this.toggleAnimacion('saliendo-hacia-derecha');
+    setTimeout(() => {
+      
+      this.toggleAnimacion('entrando-desde-izquierda');
+    }, 200); // Duración de la transición
   }
-
+  
   mostrarPedidoSiguiente() {
     this.indicePedidoActual = (this.indicePedidoActual + 1) % this.pedidosP.length;
     this.pedidoSeleccionado = this.pedidosP[this.indicePedidoActual];
     this.ordenar(this.pedidoSeleccionado.platos);
+    this.toggleAnimacion('saliendo-hacia-izquierda');
+    setTimeout(() => {
+      
+      this.toggleAnimacion('entrando-desde-derecha');
+    }, 200); // Duración de la transición
   }
+  
+  toggleAnimacion(clase: string) {
+    const detallesPedido = document.querySelector('.detalles-pedido') as HTMLElement;
+    detallesPedido.classList.remove('entrando-desde-derecha', 'saliendo-hacia-derecha', 'entrando-desde-izquierda', 'saliendo-hacia-izquierda');
+    detallesPedido.classList.add(clase);
+  }
+  
+  
 }
 //pedido es el id_pedido_detallado

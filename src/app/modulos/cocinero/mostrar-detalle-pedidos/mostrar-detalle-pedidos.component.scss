@@ -22,13 +22,13 @@
 }
 
 .vista-principal {
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+  position: relative;
+  overflow: hidden; /* Asegura que el contenido que se deslice fuera del contenedor no sea visible */
+  height: 24.25rem;
   padding: 10px;
   background-color: #746b6b6e;
-  height: 24.25rem; /* Equivalente a 420px */
-  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
 
 .cont {
@@ -49,21 +49,25 @@
 
 .lista-miniaturas {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   transition: transform 0.3s ease;
 }
 
 .lista-miniaturas div {
-  flex: 0 0 19%; /* Mostrar 5 miniaturas a la vez */
+  flex: 0 0 15%; /* Un poco más pequeño para las miniaturas no seleccionadas */
   box-sizing: border-box;
   cursor: pointer;
   padding: 5px;
-  // border: 1px solid #ddd;
   margin: 5px;
+  // transform: scale(0.9);
+  transition: transform 0.3s ease, border 0.3s ease, flex 0.3s ease;
+  
 }
 
 .lista-miniaturas div.seleccionado {
-  border: 2px solid #007bff; /* Color para resaltar el pedido seleccionado */
+  flex: 0 0 20%; /* Aumenta el tamaño de la miniatura seleccionada */
+  transform: scale(1.1); /* Escala adicional para resaltar la selección */
+  border: 2px solid #007bff; /* Resalta la miniatura seleccionada */
 }
 
 .btn-navegacion {
@@ -74,6 +78,7 @@
   border-radius: 5px; /* Borde redondeado */
   padding: 0.5rem 1rem; /* Espaciado interno */
   transition: background-color 0.3s, color 0.3s; /* Suaviza la transición de color */
+  z-index: 10;
 }
 
 .btn-navegacion:hover {
@@ -93,3 +98,69 @@
 button {
   margin: 5px;
 }
+
+
+.table-container {
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed; /* Hace que las columnas tengan un ancho fijo */
+}
+
+.table th, .table td {
+  word-wrap: break-word; /* Ajusta el contenido largo a nuevas líneas */
+  white-space: normal; /* Permite que el contenido se ajuste en múltiples líneas */
+}
+
+
+.detalles-pedido {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transition: transform 0.5s ease; /* Transición para la animación suave */
+}
+
+/* Cuando el pedido entra desde la derecha */
+.detalles-pedido.entrando-desde-derecha {
+  animation: entrarDerecha 0.1s forwards;
+}
+
+/* Cuando el pedido sale hacia la derecha */
+.detalles-pedido.saliendo-hacia-derecha {
+  animation: salirDerecha 0.2s forwards;
+}
+
+/* Cuando el pedido entra desde la izquierda */
+.detalles-pedido.entrando-desde-izquierda {
+  animation: entrarIzquierda 0.1s forwards;
+}
+
+/* Cuando el pedido sale hacia la izquierda */
+.detalles-pedido.saliendo-hacia-izquierda {
+  animation: salirIzquierda 0.2s forwards;
+}
+
+@keyframes entrarDerecha {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes salirDerecha {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(-100%); opacity: 0; }
+}
+
+@keyframes entrarIzquierda {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes salirIzquierda {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0; }
+}
+
