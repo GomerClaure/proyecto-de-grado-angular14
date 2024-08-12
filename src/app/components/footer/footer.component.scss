@@ -7,24 +7,21 @@
   font-family: "Poppins", sans-serif;
 }
 .footer {
-  position: fixed;
   width: 100%;
   bottom: 0;
   left: 0;
-  background: #d5b771;
+  background: #44360a;
   padding: 10px 0;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border-top-left-radius: 150px;
-  border-top-right-radius: 150px;
 }
 .datos{
-    color: rgb(2, 2, 2);
+    color: rgb(255, 255, 255);
 }
 .footer p {
-  color: #000000;
+  color: #ffffff;
   font-size: 1rem;
   font-weight: 300;
 }

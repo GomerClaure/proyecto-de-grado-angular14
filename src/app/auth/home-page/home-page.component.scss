@@ -1,60 +1,40 @@
-.custom-navbar-color {
-    background-color: hsla(10, 78%, 47%, 0.992);
-    color: white;
-    position: fixed;
-    width: 100%; /* Asegura que ocupe toda la anchura */
-    top: 0; /* La barra de navegación se fija en la parte superior */
-    z-index: 1000; 
+.logo {
+  max-width: 100%;
+  height: auto;
 }
-.paginaInicial{
-    margin: 0;
-    padding: 0;
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    animation: changeBackground 11s infinite alternate;
-  }
-  @keyframes changeBackground {
-    0% {
-      background-image: url('../../../assets/image/646937\ \(1\).jpg');
-    }
-    30% {
-      background-image: url('../../../assets/image/313058.jpg');
-      
-    }
-    70%{
-      background-image: url('../../../assets/image/w1.jpg');
-    }
-    100% {
-      background-image: url('../../../assets/image/wallpaperbetter.com_7680x4320.jpg');
-    }
-  } 
-h1{
-  font-size: 4vw;
+.card-header {
+  font-size: 30px;
 }
-  .container {
-    text-align: center;
-    backdrop-filter: blur(10px);
-    position: absolute;
-    font-size: 50px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    color: white; 
-  }
-  .animated-heading, .animated-text {
+.card {
+  margin-top: 10px;
+  margin-bottom: 100px;
+}
+.box1-container {
+  position: relative; /* Necesario para el posicionamiento absoluto del círculo */
+  margin-bottom: 10px;
+}
+.slide-in {
+  animation: slide-in 2s forwards;
+}
+@keyframes slide-in {
+  from {
+    transform: translateX(-100%); /* Comienza desde fuera de la pantalla a la izquierda */
     opacity: 0;
-    //color: black;
-    animation: fadeIn 2s forwards;
-    font-size: 5vw;
   }
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  to {
+    transform: translateX(0); /* Termina en su posición original */
+    opacity: 1;
   }
-  
+}
+
+/* Ajustes específicos para pantallas más pequeñas */
+@media (max-width: 1900px) {
+  .imagenPrincipal {
+    padding-top: 0px; /* Reducir el padding-top en pantallas más pequeñas */
+    height: auto;
+    margin: auto; /* Asegurarse de que el contenido esté centrado */
+  }
+  .box1-container {
+    margin-top: 100px; /* Reducir el margen superior en pantallas más pequeñas */
+  }
+}
