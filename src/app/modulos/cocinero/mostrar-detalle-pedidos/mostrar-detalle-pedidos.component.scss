@@ -7,6 +7,16 @@
   background-color: rgb(247, 232, 168);
 }
 
+.btn-atras{
+  background-color: #cd5c5c;
+  color: rgb(253, 253, 253);
+}
+
+.btn-en-preparacion{
+  background-color: #ac721a ;
+  color: rgb(247, 243, 243);
+}
+
 /* Estado por defecto */
 .default {
   background-color: rgb(240, 162, 128);
@@ -32,7 +42,7 @@
 }
 
 .cont {
-  height: 21rem; /* Equivalente a 372px */
+  height: 19rem; /* Equivalente a 372px */
   overflow-y: auto;
 }
 

@@ -40,8 +40,10 @@ export class PedidoService {
   limpiarSeleccion() {
     this.platillosSeleccionados = [];
   }
-  //get Pedidos por empleado y restaurante
-  //id_empleado tambien mandaremos el id_restaurante
+  
+  getPedido(idPedido: string, idRestaurante: string): Observable<any> {
+    return this.http.get<any>(`${this.BASE_URL}/pedido/show/${idPedido}/${idRestaurante}`, { headers: this.headers });
+  }
 
   getPedidos(id_emp:any,id_rest:any): Observable<any> {
     console.log(id_emp,id_rest);

@@ -32,7 +32,8 @@
             'card-terminado': pedido.estado === 'Servido',
             'card-en-preparacion': pedido.estado === 'En preparación',
             'card-default': pedido.estado !== 'Servido' && pedido.estado !== 'En preparación'
-          }">
+          }"
+          (click)="verPlatos(pedido.id)">
             <div class="card-header d-flex justify-content-between align-items-center">
               <div>
                 <h5>{{pedido.hora}}</h5>
@@ -43,20 +44,13 @@
                 <i *ngIf="pedido.tipoPedido === 'local'" class="bi bi-house-door-fill icon-large"></i>
               </div>
               <div>
-                <h4>{{pedido.numPedido}}</h4>
+                <h4>{{pedido.id}}</h4>
               </div>
             </div>
             <div class="card-body pb-0">
               <p class="fs-5 card-text mb-1">Mesa: <strong>{{pedido.mesa}}</strong></p>
               <p class="fs-5 card-text mb-1">Tipo: <strong>{{pedido.tipoPedido}}</strong></p>
               <p class="fs-5 card-text mb-1">Estado: <strong>{{pedido.estado}}</strong></p>
-            </div>
-            <div class="card-footer text-center">
-              <button [ngClass]="getButtonClass(pedido.estado)"
-              data-bs-toggle="modal" data-bs-target="#verPedido"
-                (click)="verPlatos(pedido.numPedido, pedido.estado, pedido.tipoPedido)">
-                Ver Pedido
-              </button>
             </div>
           </div>
         </div>
@@ -66,7 +60,8 @@
   </div>
   <app-mostrar-detalle-pedidos *ngIf="mostrarDetalle"
    [pedidosP]="pedidosP"
-    
+    [id_empleado]="id_empleado"
+    [id_restaurante]="id_restaurante"
     [id_pedido_detallado]="id_pedido_detallado"
   ></app-mostrar-detalle-pedidos>
 </div>
@@ -75,4 +70,3 @@
     No hay Pedidos.
   </div>
 </ng-template>
-<app-modal-estado-pedido></app-modal-estado-pedido>

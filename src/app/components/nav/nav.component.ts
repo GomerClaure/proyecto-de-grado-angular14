@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NotificacionService } from 'src/app/services/notificacion/notificacion.service';
 import { Notificacion } from 'src/app/modelos/Notificacion';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
+import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.service';
 
 @Component({
   selector: 'app-nav',
@@ -16,7 +17,8 @@ export class NavComponent implements OnInit, OnDestroy {
   private idRestaurante: number;
 
   constructor(private sessionService: SessionService, private router: Router,
-    private notificacionService: NotificacionService, private webSocketService: WebsocketService) {
+    private notificacionService: NotificacionService, private webSocketService: WebsocketService,
+    private cocinaService: PedidosCocinaService) {
     this.notificaciones = [];
     this.idRestaurante = 0;
     this.notificacionesSinLeer = 0;
@@ -35,8 +37,14 @@ export class NavComponent implements OnInit, OnDestroy {
       if (conexionWebSocket !== 'true') {
         console.log('Iniciando conexión websocket');
         localStorage.setItem('conexionWebSocket', 'true');
-        this.webSocketService.iniciarConexion();
-        this.suscribirNotificacion();
+        if(sessionStorage.getItem('tipo') === 'Empleado'){
+          this.webSocketService.iniciarConexion();
+          if(sessionStorage.getItem('rol_empleado') === '3'){
+            this.suscribirseEventosDePedido();
+          }else{
+            this.suscribirNotificacion();
+          }
+        }
       }
 
       let sesionComoEmpleado = sessionStorage.getItem('tipo') === 'Empleado';
@@ -127,19 +135,10 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   suscribirseEventosDePedido(){
-    this.webSocketService.listenAllEvents('notificaciones'+this.idRestaurante).bind('Notificacion', (data: any) => {
+    this.webSocketService.listenAllEvents('pedido'+this.idRestaurante).bind_global((eventName: string, data: any) => { 
+      console.log(`Received event '${eventName}' with data:`, data);
+      this.cocinaService.actualizarPedidos(eventName, data);
 
-      if(data.id_empleado === parseInt(sessionStorage.getItem('id_empleado')||'0')){
-        console.log('notificacion desplegada');
-        this.desplegarNotificaciones(data.titulo, data.mensaje);
-        if(this.notificaciones.length >= 5){
-          //colocar la notificacion en la primera posicion
-          this.notificaciones.pop();
-          this.notificaciones.unshift(data);
-        }
-        
-      }
-      
     });
 
   }

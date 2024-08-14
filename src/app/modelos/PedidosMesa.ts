@@ -1,5 +1,4 @@
 import { Categoria } from "./Categoria";
-import { Platillo } from "./Platillo";
 
 export interface PedidosMesa {
     nombreMesa: string;
@@ -13,7 +12,6 @@ export interface PedidosParaMostrarMesa{
 }
 export interface PedidosCocina{
   id: number;
-  numPedido:number;
   mesa:string;
   platos: any[];
   tipoPedido:string;
