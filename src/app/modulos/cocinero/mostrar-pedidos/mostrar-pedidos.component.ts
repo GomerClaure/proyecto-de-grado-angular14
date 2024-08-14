@@ -49,11 +49,13 @@ export class MostrarPedidosComponent implements OnInit {
           this.eliminarPedidoDeLista(pedido);
           break;
         case 'PedidoCreado':
+          console.log(pedido);
           this.pedidosEnEspera.push(pedido);
           this.pedidosP = [...this.pedidosEnEspera, ...this.pedidosPreparacion, ...this.pedidosTerminado];
           this.mostrarped(this.pedidosP);
+          var audio = document.getElementById('sonidoNotificacion') as HTMLAudioElement;
+          audio?.play();
           break;
-        // Otros casos según el evento...
         default:
           console.warn(`Evento no manejado: ${evento}`);
       }

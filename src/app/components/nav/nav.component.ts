@@ -12,6 +12,11 @@ import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.ser
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit, OnDestroy {
+  private unloadHandler = (event: BeforeUnloadEvent) => {
+    console.log('La página se está refrescando o cerrando');
+    localStorage.setItem('conexionWebSocket', 'false');
+    this.webSocketService.closeConnection();
+  };
   public notificaciones: Notificacion[];
   public notificacionesSinLeer: number;
   private idRestaurante: number;
@@ -25,23 +30,20 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // window.onload = () => {
-    //   localStorage.setItem('conexionWebSocket', 'false');
-    // };
+    window.addEventListener('beforeunload', this.unloadHandler);
     if (sessionStorage.getItem('token_access')) {
-      
-      // this.webSocketService.listenAllEvents('pedido');
+
       this.idRestaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
       const conexionWebSocket = localStorage.getItem('conexionWebSocket');
       console.log('El valor de la conexión websocket es: ', conexionWebSocket);
       if (conexionWebSocket !== 'true') {
         console.log('Iniciando conexión websocket');
         localStorage.setItem('conexionWebSocket', 'true');
-        if(sessionStorage.getItem('tipo') === 'Empleado'){
+        if (sessionStorage.getItem('tipo') === 'Empleado') {
           this.webSocketService.iniciarConexion();
-          if(sessionStorage.getItem('rol_empleado') === '3'){
+          if (sessionStorage.getItem('rol_empleado') === '3') {
             this.suscribirseEventosDePedido();
-          }else{
+          } else {
             this.suscribirNotificacion();
           }
         }
@@ -67,9 +69,9 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('Cerrando conexión websocket');
     localStorage.setItem('conexionWebSocket', 'false');
     this.webSocketService.closeConnection();
+    window.removeEventListener('beforeunload', this.unloadHandler);
   }
 
   marcarLeida(cantidad: number) {
@@ -87,20 +89,20 @@ export class NavComponent implements OnInit, OnDestroy {
       ids.push('all');
       this.notificacionesSinLeer = 0;
     }
-   console.log('ids', ids);
-   if(ids.length > 0){
-     this.notificacionService.marcarLeida(ids, this.idRestaurante).subscribe(
-       (data) => {
-         console.log(data);
-         if(this.notificacionesSinLeer !== 0){
-          this.notificacionesSinLeer -= ids.length;
-         }
-         
-       },
-       (error) => {
-         console.error(error);
-       }
-     );
+    console.log('ids', ids);
+    if (ids.length > 0) {
+      this.notificacionService.marcarLeida(ids, this.idRestaurante).subscribe(
+        (data) => {
+          console.log(data);
+          if (this.notificacionesSinLeer !== 0) {
+            this.notificacionesSinLeer -= ids.length;
+          }
+
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
     }
   }
 
@@ -113,11 +115,11 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   esEmpleado(): boolean {
-      return sessionStorage.getItem('tipo') === 'Empleado';
+    return sessionStorage.getItem('tipo') === 'Empleado';
 
   }
-  getRol(){
-     return sessionStorage.getItem('rol_empleado');
+  getRol() {
+    return sessionStorage.getItem('rol_empleado');
   }
 
   cerrarSesion() {
@@ -134,8 +136,8 @@ export class NavComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/menu/vista/1');
   }
 
-  suscribirseEventosDePedido(){
-    this.webSocketService.listenAllEvents('pedido'+this.idRestaurante).bind_global((eventName: string, data: any) => { 
+  suscribirseEventosDePedido() {
+    this.webSocketService.listenAllEvents('pedido' + this.idRestaurante).bind_global((eventName: string, data: any) => {
       console.log(`Received event '${eventName}' with data:`, data);
       this.cocinaService.actualizarPedidos(eventName, data);
 
@@ -184,21 +186,21 @@ export class NavComponent implements OnInit, OnDestroy {
 
   suscribirNotificacion() {
     this.webSocketService.listenAllEvents('notificaciones' + this.idRestaurante).bind('Notificacion', (data: any) => {
-     
+
       let idEmpleado = parseInt(sessionStorage.getItem('id_empleado') || '0');
       // let rolEmpleado = sessionStorage.getItem('rol_empleado');
       console.log('El id del usuario es: ', idEmpleado);
       console.log('El id del empleado es: ', data.id_empleado);
-      if (idEmpleado === data.id_empleado ) {
-          console.log('notificacion filtrada');
-          this.desplegarNotificaciones(data.titulo, data.mensaje);
-          this.notificacionesSinLeer++;
-          if (this.notificaciones.length >= 5) {
-            //colocar la notificacion en la primera posicion
-            this.notificaciones.pop();
-            
-          }
-          this.notificaciones.unshift(data);
+      if (idEmpleado === data.id_empleado) {
+        console.log('notificacion filtrada');
+        this.desplegarNotificaciones(data.titulo, data.mensaje);
+        this.notificacionesSinLeer++;
+        if (this.notificaciones.length >= 5) {
+          //colocar la notificacion en la primera posicion
+          this.notificaciones.pop();
+
+        }
+        this.notificaciones.unshift(data);
 
       }
     });

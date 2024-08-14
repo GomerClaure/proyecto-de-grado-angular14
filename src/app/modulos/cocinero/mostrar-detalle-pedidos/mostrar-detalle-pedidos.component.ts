@@ -133,6 +133,7 @@ export class MostrarDetallePedidosComponent implements OnInit,  OnChanges{
     // Actualiza el pedido seleccionado y el índice actual
     this.pedidoSeleccionado = this.pedidosP[nuevoIndice];
     this.indicePedidoActual = nuevoIndice;
+    this.id_pedido_detallado = idPedido;
     this.ordenar(this.pedidoSeleccionado.platos);
 }
 
@@ -141,6 +142,7 @@ export class MostrarDetallePedidosComponent implements OnInit,  OnChanges{
     
     this.indicePedidoActual = (this.indicePedidoActual - 1 + this.pedidosP.length) % this.pedidosP.length;
     this.pedidoSeleccionado = this.pedidosP[this.indicePedidoActual];
+    this.id_pedido_detallado = this.pedidoSeleccionado.id;
     this.ordenar(this.pedidoSeleccionado.platos);
     this.toggleAnimacion('saliendo-hacia-derecha');
     setTimeout(() => {
