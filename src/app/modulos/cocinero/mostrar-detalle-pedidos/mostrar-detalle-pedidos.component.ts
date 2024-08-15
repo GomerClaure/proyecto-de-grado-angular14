@@ -1,6 +1,7 @@
 import { Component, Input, OnInit , OnChanges} from '@angular/core';
 import { DetallePedido, PedidosCocina, PedidosPlatos } from 'src/app/modelos/PedidosMesa';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
+import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.service';
 
 @Component({
   selector: 'app-mostrar-detalle-pedidos',
@@ -22,7 +23,7 @@ export class MostrarDetallePedidosComponent implements OnInit,  OnChanges{
   pedidoSeleccionado: PedidosCocina = this.pedidosP[0];
   platosMostrar:PedidosPlatos[]=[];
 
-  constructor( private pedidoService: PedidoService) {
+  constructor( private pedidoService: PedidoService, private pedidoCocinaService : PedidosCocinaService) {
     console.log(this.pedidosP);
     this.id_restaurante = 0;
     this.id_empleado = 0;
@@ -46,6 +47,10 @@ export class MostrarDetallePedidosComponent implements OnInit,  OnChanges{
   }
 
   ngOnInit(): void {
+    this.pedidoCocinaService.pedidoDetallado$.subscribe(id => {
+      this.id_pedido_detallado = id;
+      this.seleccionarPedido(id);
+    });
   }
 
   ordenar(platillosP: any) {
@@ -145,6 +150,7 @@ export class MostrarDetallePedidosComponent implements OnInit,  OnChanges{
     this.id_pedido_detallado = this.pedidoSeleccionado.id;
     this.ordenar(this.pedidoSeleccionado.platos);
     this.toggleAnimacion('saliendo-hacia-derecha');
+    this.pedidoCocinaService.actualizarPedidoDetallado(this.id_pedido_detallado);
     setTimeout(() => {
       
       this.toggleAnimacion('entrando-desde-izquierda');
@@ -155,6 +161,8 @@ export class MostrarDetallePedidosComponent implements OnInit,  OnChanges{
     this.indicePedidoActual = (this.indicePedidoActual + 1) % this.pedidosP.length;
     this.pedidoSeleccionado = this.pedidosP[this.indicePedidoActual];
     this.ordenar(this.pedidoSeleccionado.platos);
+    this.pedidoCocinaService.actualizarPedidoDetallado(this.id_pedido_detallado);
+
     this.toggleAnimacion('saliendo-hacia-izquierda');
     setTimeout(() => {
       

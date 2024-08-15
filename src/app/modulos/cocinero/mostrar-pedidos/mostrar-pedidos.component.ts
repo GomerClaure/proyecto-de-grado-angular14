@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DetallePedido, PedidosCocina } from 'src/app/modelos/PedidosMesa';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.service';
-import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 @Component({
   selector: 'app-mostrar-pedidos',
@@ -60,6 +59,11 @@ export class MostrarPedidosComponent implements OnInit {
           console.warn(`Evento no manejado: ${evento}`);
       }
     }
+  });
+
+  this.cocinaService.pedidoDetallado$.subscribe(id => {
+    console.log('Pedido detallado:', id);
+    this.id_pedido_detallado = id;
   });
 }
 // Método para actualizar el estado del pedido y moverlo al final de la lista
