@@ -1,4 +1,3 @@
-
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SessionService } from 'src/app/services/auth/session.service';
 import { Router } from '@angular/router';
@@ -117,11 +116,11 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   esEmpleado(): boolean {
-    return sessionStorage.getItem('tipo') === 'Empleado';
-  }
+      return sessionStorage.getItem('tipo') === 'Empleado';
 
-  getRol() {
-    return sessionStorage.getItem('rol_empleado');
+  }
+  getRol(){
+     return sessionStorage.getItem('rol_empleado');
   }
 
   cerrarSesion() {
@@ -138,10 +137,12 @@ export class NavComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/menu/vista/1');
   }
 
+
   suscribirseEventosDePedido() {
     this.webSocketService.listenAllEvents('pedido' + this.idRestaurante).bind_global((eventName: string, data: any) => {
       console.log(`Received event '${eventName}' with data:`, data);
       this.cocinaService.actualizarPedidos(eventName, data);
+
 
     });
 
@@ -188,7 +189,6 @@ export class NavComponent implements OnInit, OnDestroy {
 
   suscribirNotificacion() {
     this.webSocketService.listenAllEvents('notificaciones' + this.idRestaurante).bind('Notificacion', (data: any) => {
-
       let idEmpleado = parseInt(sessionStorage.getItem('id_empleado') || '0');
       // let rolEmpleado = sessionStorage.getItem('rol_empleado');
       console.log('El id del usuario es: ', idEmpleado);
@@ -209,4 +209,3 @@ export class NavComponent implements OnInit, OnDestroy {
 
   }
 }
-

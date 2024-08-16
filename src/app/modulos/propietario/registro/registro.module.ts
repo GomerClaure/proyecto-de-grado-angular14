@@ -17,7 +17,7 @@ import { NgToastModule } from 'ng-angular-popup';
     CommonModule,
     RegistroRoutingModule,
     ReactiveFormsModule,
-    FormsModule,
+    FormsModule, 
     ComponentsModule,
     NgToastModule
   ] 

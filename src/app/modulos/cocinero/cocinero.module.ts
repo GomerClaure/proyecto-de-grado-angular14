@@ -7,6 +7,7 @@ import { MostrarDetallePedidosComponent } from './mostrar-detalle-pedidos/mostra
 
 
 
+
 @NgModule({
   declarations: [
     MostrarPedidosComponent,

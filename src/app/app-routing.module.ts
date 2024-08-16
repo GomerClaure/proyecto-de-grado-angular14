@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './modulos/home/home.component';
 
-
 const routes: Routes = [
   {
     path: 'home',
@@ -45,8 +44,8 @@ const routes: Routes = [
   },
 
 ];
- 
-@NgModule({ 
+
+@NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

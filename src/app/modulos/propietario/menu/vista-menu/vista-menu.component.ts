@@ -47,7 +47,6 @@ export class VistaMenuComponent implements OnInit {
     this.getMenuById();
   }
 
-
   getMenuById() {
     this.menuService.getMenuById(this.idMenu).subscribe(
       (response: any) => {
@@ -57,7 +56,6 @@ export class VistaMenuComponent implements OnInit {
         const limitePlatillosPorPagina = this.calcularLimitePlatillosPorPagina(this.platilloPorCategoria);
         console.log('limitePlatillosPorPagina', limitePlatillosPorPagina);
         this.platilloPorCategoriaPagina = this.agruparPlatillosPorPagina(this.platilloPorCategoria, limitePlatillosPorPagina);
-
         this.generarImagenesPorPagina();
         let container = document.getElementById("container-ver-menu");
         container?.classList.add(this.menu.tema);
@@ -172,7 +170,6 @@ export class VistaMenuComponent implements OnInit {
   
     return paginas;
   }
-
 
   getRandomIndex(max: number): number {
     return Math.floor(Math.random() * max);

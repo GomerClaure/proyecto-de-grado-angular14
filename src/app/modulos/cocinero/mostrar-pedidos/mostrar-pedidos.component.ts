@@ -167,7 +167,9 @@ eliminarPedidoDeLista(pedido: any): void {
     });
 
     this.pedidosP = [...this.pedidosEnEspera, ...this.pedidosPreparacion, ...this.pedidosTerminado];
+
     console.log(this.pedidosP)
+
     this.mostrarped(this.pedidosP);
   }
 
@@ -182,6 +184,8 @@ eliminarPedidoDeLista(pedido: any): void {
 
   enPreparacion(): void {
     this.mostrarDetalle = false;
+
+
     this.mostrarped(this.pedidosPreparacion);
   }
 
@@ -204,6 +208,7 @@ eliminarPedidoDeLista(pedido: any): void {
     this.id_pedido_detallado = id;
     this.cocinaService.actualizarPedidoDetallado(this.id_pedido_detallado);
     this.mostrarDetalle = true;
+
   }
 
   getButtonClass(estado: string): string {
