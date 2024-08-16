@@ -10,7 +10,6 @@ import { ModalEliminarPlatilloService } from 'src/app/services/modales/modal-eli
   templateUrl: './lista-platillo.component.html',
   styleUrls: ['./lista-platillo.component.scss']
 })
-<<<<<<< HEAD
 export class ListaPlatilloComponent implements OnInit {
   filterPlatillos = '';
   platillos: Platillo[] = [];
@@ -33,21 +32,6 @@ export class ListaPlatilloComponent implements OnInit {
 
   ngOnInit(): void {
     this.id_restaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
-=======
-export class ListaPlatilloComponent {
-  filterPlatillos='';
-  platillos: Platillo[] = [];
-  platillosFiltrados:Platillo[]=[];
-  selectedPlatilloId: number | null = null;
-  storageUrl = environment.backendStorageUrl;
-  textoBuscador:string = '';
-  constructor(private router: Router, private platilloService: PlatillosService,
-    private modalService: ModalEliminarPlatilloService,
-   ) {
-  }
-
-  ngOnInit(): void {
->>>>>>> master
     this.getPlatillos();
   }
 
@@ -55,7 +39,6 @@ export class ListaPlatilloComponent {
     this.router.navigate(['lista/editar-platillo'], { queryParams: { platilloId: id } });
   }
 
-<<<<<<< HEAD
   getPlatillos(): void {
     this.platilloService.getPlatillos(this.id_restaurante).subscribe(
       res => {
@@ -65,22 +48,6 @@ export class ListaPlatilloComponent {
       },
       error => {
         console.error("Error fetching platillos:", error);
-=======
-
-  getPlatillos() {
-    this.platilloService.getPlatillos().subscribe(
-      res => {
-        this.platillos = res.platillo;
-                // Ordenar los platillos por nombre en orden alfabético
-                this.platillos.sort((a, b) => a.nombre.localeCompare(b.nombre));
-                // Tomar los primeros 10 platillos
-                this.platillos = this.platillos.slice(0, 10);
-                this.platillosFiltrados=this.platillos;
-        console.log(this.platillos);
-      },
-      err => {
-        console.log(err);
->>>>>>> master
       }
     );
   }
@@ -89,33 +56,19 @@ export class ListaPlatilloComponent {
     this.modalService.openModal(id, this.platillos);
   }
 
-<<<<<<< HEAD
   onSearchChange(searchValue: string): void {
-=======
-  onSearchChange(searchValue: string): void {  
->>>>>>> master
     this.textoBuscador = searchValue.trim().toLowerCase();
     this.filtrarPlatillos();
   }
 
-<<<<<<< HEAD
   filtrarPlatillos(): void {
     if (this.textoBuscador === '') {
       this.platillosFiltrados = this.platillos;
     } else {
-=======
-  filtrarPlatillos():void{
-    if (this.textoBuscador === '') {
-      // Si el campo de búsqueda está vacío, mostrar todos los platillos
-      this.platillosFiltrados = this.platillos;
-    } else {
-      // Filtrar los platillos por nombre y categoría
->>>>>>> master
       this.platillosFiltrados = this.platillos.filter(platillo =>
         platillo.nombre.toLowerCase().includes(this.textoBuscador) || platillo.categoria.nombre.toLowerCase().includes(this.textoBuscador)
       );
     }
-<<<<<<< HEAD
     this.currentPage = 1; // Reinicia la página actual a la primera página
   }
 
@@ -150,9 +103,3 @@ export class ListaPlatilloComponent {
     }
   }
 }
-=======
-
-  }
-}
-   
->>>>>>> master

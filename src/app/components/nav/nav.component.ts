@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SessionService } from 'src/app/services/auth/session.service';
 import { Router } from '@angular/router';
@@ -6,18 +6,13 @@ import { NotificacionService } from 'src/app/services/notificacion/notificacion.
 import { Notificacion } from 'src/app/modelos/Notificacion';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.service';
-=======
-import { Component, OnInit } from '@angular/core';
-import { SessionService } from 'src/app/services/auth/session.service';
-import { Router } from '@angular/router';
->>>>>>> master
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss']
 })
-<<<<<<< HEAD
+
 export class NavComponent implements OnInit, OnDestroy {
   private unloadHandler = (event: BeforeUnloadEvent) => {
     console.log('La página se está refrescando o cerrando');
@@ -113,14 +108,6 @@ export class NavComponent implements OnInit, OnDestroy {
     }
   }
 
-=======
-export class NavComponent implements OnInit {
-
-  constructor(private sessionService: SessionService,private router:Router) { }
-
-  ngOnInit(): void {
-  }
->>>>>>> master
   esAdministrador(): boolean {
     return sessionStorage.getItem('tipo') === 'Administrador';
   }
@@ -131,9 +118,8 @@ export class NavComponent implements OnInit {
 
   esEmpleado(): boolean {
     return sessionStorage.getItem('tipo') === 'Empleado';
-<<<<<<< HEAD
-
   }
+
   getRol() {
     return sessionStorage.getItem('rol_empleado');
   }
@@ -142,20 +128,12 @@ export class NavComponent implements OnInit {
     this.webSocketService.closeConnection();
     this.sessionService.logout();
   }
-=======
-  }
-
-  cerrarSesion() {
-    this.sessionService.logout();
-  }
->>>>>>> master
 
   mostrarModalCategoria(): void {
     console.log("modal");
     this.router.navigateByUrl('/registrar/categoria');
   }
 
-<<<<<<< HEAD
   irAMenu() {
     this.router.navigateByUrl('/menu/vista/1');
   }
@@ -231,12 +209,4 @@ export class NavComponent implements OnInit {
 
   }
 }
-=======
-  irAMenu(){
-    this.router.navigateByUrl('/menu/vista/1');
-  }
- 
-} 
 
- 
->>>>>>> master

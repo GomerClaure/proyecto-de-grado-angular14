@@ -22,7 +22,6 @@ export class VistaMenuComponent implements OnInit {
   public imagenesPorPagina: any[][];
   public platilloPorCategoria!: PlatillosPorCategoria[];
   public platilloPorCategoriaPagina!: PlatillosPorCategoria[][];
-<<<<<<< HEAD
   public tamanioMaximoPagina: number;
   public espacioPorPlatillo: number;
   public espacioPorCategoria: number;
@@ -34,22 +33,12 @@ export class VistaMenuComponent implements OnInit {
     this.espacioPorCategoria = 100;
     this.platilloPorCategoria = [];
     this.espacioPorPlatillo = 50;
-=======
-  randomIndex: { [key: string]: number } = {};
-
-  constructor(private menuService: MenuService, private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef,private modalService:ModalMostrarPlatilloService) {
-    this.idMenu = parseInt(this.route.snapshot.paramMap.get('menu') || '0');
-    this.nombreRestaurante = 'Restaurante';
-    this.platilloPorCategoria = [];
->>>>>>> master
     this.imagenesPorPagina = [];
     this.menu = {
       id: 0,
       portada: '',
       tema: '',
       qr: '',
-<<<<<<< HEAD
     };
   }
 
@@ -58,31 +47,17 @@ export class VistaMenuComponent implements OnInit {
     this.getMenuById();
   }
 
-=======
-    }
 
-  }
-
-  ngOnInit(): void {
-    this.getMenuById();
-  }
-
-
->>>>>>> master
   getMenuById() {
     this.menuService.getMenuById(this.idMenu).subscribe(
       (response: any) => {
         this.menu = response.menu;
         const platillos: Platillo[] = response.platillos;
         this.platilloPorCategoria = this.transformarDatos(platillos);
-<<<<<<< HEAD
         const limitePlatillosPorPagina = this.calcularLimitePlatillosPorPagina(this.platilloPorCategoria);
         console.log('limitePlatillosPorPagina', limitePlatillosPorPagina);
         this.platilloPorCategoriaPagina = this.agruparPlatillosPorPagina(this.platilloPorCategoria, limitePlatillosPorPagina);
-=======
-        this.platilloPorCategoriaPagina = this.agruparPlatillosPorPagina(this.platilloPorCategoria, 4);
-        this.platilloPorCategoriaPagina = this.agruparCategoriasDeCadaPagina(this.platilloPorCategoriaPagina);
->>>>>>> master
+
         this.generarImagenesPorPagina();
         let container = document.getElementById("container-ver-menu");
         container?.classList.add(this.menu.tema);
@@ -91,7 +66,6 @@ export class VistaMenuComponent implements OnInit {
     );
   }
 
-<<<<<<< HEAD
   actualizarEspacioPorPantalla() {
     const anchoPantalla = window.innerWidth;
     const altoPantalla = window.innerHeight;
@@ -113,10 +87,6 @@ export class VistaMenuComponent implements OnInit {
 
   portadaError(event: any) {
     event.target.src = 'assets/image/pp.png';
-=======
-  onImgError(event: any) {
-    event.target.src = 'assets/image/27002.jpg';
->>>>>>> master
   }
 
   transformarDatos(platillos: Platillo[]): PlatillosPorCategoria[] {
@@ -142,7 +112,6 @@ export class VistaMenuComponent implements OnInit {
 
     return platillosPorCategoria;
   }
-<<<<<<< HEAD
 
   calcularLimitePlatillosPorPagina(platillosPorCategoria: PlatillosPorCategoria[]): number {
     let totalEspacio = 0;
@@ -204,107 +173,36 @@ export class VistaMenuComponent implements OnInit {
     return paginas;
   }
 
-=======
-  agruparPlatillosPorPagina(platillos: PlatillosPorCategoria[], limitePlatillosPorPagina: number): PlatillosPorCategoria[][] {
-    const paginas: PlatillosPorCategoria[][] = [];
-    let paginaActual: PlatillosPorCategoria[] = [];
 
-    for (const categoria of platillos) {
-      for (const platillo of categoria.platillos) {
-        if (paginaActual.length === limitePlatillosPorPagina) {
-          paginas.push(paginaActual);
-          paginaActual = [];
-        }
-
-
-        paginaActual.push({ ...categoria, platillos: [platillo] });
-        let banderaEstaEnPagina = false;
-      }
-    }
-
-
-    if (paginaActual.length > 0) {
-      paginas.push(paginaActual);
-    }
-
-    return paginas;
-  }
-
-  agruparCategoriasDeCadaPagina(platilosCategoriaPorPagina: PlatillosPorCategoria[][]): PlatillosPorCategoria[][] {
-    const paginasAgrupadas: PlatillosPorCategoria[][] = [];
-
-    platilosCategoriaPorPagina.forEach(pagina => {
-      const categoriasAgrupadas: { [key: number]: PlatillosPorCategoria } = {};
-
-      pagina.forEach(categoria => {
-        const categoriaId = categoria.id;
-        if (categoriaId in categoriasAgrupadas) {
-          categoriasAgrupadas[categoriaId].platillos.push(...categoria.platillos);
-        } else {
-          categoriasAgrupadas[categoriaId] = { ...categoria };
-        }
-      });
-
-      const categoriasAgrupadasArray = Object.values(categoriasAgrupadas);
-
-      paginasAgrupadas.push(categoriasAgrupadasArray);
-    });
-
-    return paginasAgrupadas;
-  }
-
->>>>>>> master
   getRandomIndex(max: number): number {
     return Math.floor(Math.random() * max);
   }
 
   generarImagenesPorPagina() {
     for (let index = 0; index < this.platilloPorCategoriaPagina.length; index++) {
-<<<<<<< HEAD
       let pagina = this.platilloPorCategoriaPagina[index];
 
-=======
-      let pagina = this.platilloPorCategoriaPagina[index]
-      
->>>>>>> master
       for (let indexCategoria = 0; indexCategoria < pagina.length; indexCategoria++) {
         let indiceAleatorio = this.getRandomIndex(pagina[indexCategoria].platillos.length);
         let platilloAleatorio = pagina[indexCategoria].platillos[indiceAleatorio];
         if (!this.imagenesPorPagina[index]) {
           this.imagenesPorPagina[index] = [];
         }
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> master
         this.imagenesPorPagina[index].push({
           nombre: platilloAleatorio.nombre,
           descripcion: platilloAleatorio.descripcion,
           precio: platilloAleatorio.precio,
           imagen: platilloAleatorio.imagen
         });
-<<<<<<< HEAD
       }
     }
   }
 
-=======
-
-      }
-    }
-  }
->>>>>>> master
   onRowClick(platillo: any) {
     let nom = platillo.nombre;
     let img = platillo.imagen;
     let desc = platillo.descripcion;
     this.modalService.openModal(platillo);
-<<<<<<< HEAD
     console.log(nom, img, desc);
   }
-=======
-    console.log(nom,img,desc)
-}
->>>>>>> master
 }

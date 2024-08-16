@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-=======
->>>>>>> master
 import { Router } from '@angular/router';
 import { Menu } from 'src/app/modelos/Menu';
 import { Restaurante } from 'src/app/modelos/Restaurante';
@@ -21,28 +18,18 @@ export class VisualizarQrComponent implements OnInit {
   public menu!: Menu;
   public restaurante!: Restaurante;
   public baseUrl = environment.backendStorageUrl;
-<<<<<<< HEAD
   public qrUrl: SafeResourceUrl;
 
 
   constructor(private menuService: MenuService, private restauranteService: RestauranteService,
     private router: Router, private sanitizer: DomSanitizer) {
-=======
-
-
-  constructor(private menuService: MenuService, private restauranteService: RestauranteService,
-    private router: Router) {
->>>>>>> master
     this.menu = {
       id: 0,
       portada: '',
       tema: '',
       qr: '',
     };
-<<<<<<< HEAD
     this.qrUrl = this.sanitizer.bypassSecurityTrustUrl( this.baseUrl + this.menu.qr);
-=======
->>>>>>> master
     this.restaurante = {
       id: 0,
       id_menu: 0,
@@ -67,13 +54,9 @@ export class VisualizarQrComponent implements OnInit {
     this.menuService.getMenu().subscribe(
       (res: any) => {
         this.menu = res.menu;
-<<<<<<< HEAD
         console.log(this.menu)
         if(this.menu.qr){
           this.qrUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.baseUrl + this.menu.qr);
-=======
-        if(this.menu.qr){
->>>>>>> master
           this.mostrarElemento('campoImprimirQr');
         }else{
           this.mostrarElemento('btnGenerarQr');

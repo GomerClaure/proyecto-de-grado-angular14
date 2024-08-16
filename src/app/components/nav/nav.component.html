@@ -1,7 +1,6 @@
 <!-- Barra de navegacion para el propietario -->
 <nav *ngIf="esPropietario()" class="navbar navbar-expand-lg custom-navbar-color ">
   <div class="container-fluid">
-<<<<<<< HEAD
     <a class="navbar-brand" [routerLink]="'/home'">
       <strong>Restaurant</strong>
     </a>
@@ -9,17 +8,10 @@
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-=======
-    <a class="navbar-brand" href="home">Restaurant</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> 
->>>>>>> master
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-<<<<<<< HEAD
             Menu
           </a>
           <ul class="dropdown-menu">
@@ -75,38 +67,6 @@
           <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
         </li>
       </ul>
-=======
-           Menu    
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="lista/platillo">Lista de platillos</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="lista/categoria">Lista de categorias</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="menu/generar">Generar menu </a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="menu/qr">Generar Qr</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" (click)="irAMenu()">Ver Menu</a></li>
-          </ul>
-        </li>  
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-           Registro
-          </a>
-          <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="registrar/platillo">Registrar platillo</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrar categoria</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="registrar/empleado">Registrar empleado</a></li>
-          </ul>
-        </li>  
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
-        </li>
-      </ul> 
->>>>>>> master
     </div>
   </div>
 </nav>
@@ -133,7 +93,6 @@
 </nav>
 
 <!-- Barra de navegacion del empleado -->
-<<<<<<< HEAD
  <!--Si el empleado es mesero-->
 <nav *ngIf="esEmpleado() && getRol()=='1'" class="navbar navbar-expand-lg custom-navbar-color ">
   <div class="container-fluid">
@@ -210,11 +169,6 @@
 <nav *ngIf="esEmpleado() && getRol()=='3'" class="navbar navbar-expand-lg custom-navbar-color ">
   <div class="container-fluid">
     <a class="navbar-brand" [routerLink]="'/home'">Empleado Cocinero</a>
-=======
-<nav *ngIf="esEmpleado()" class="navbar navbar-expand-lg custom-navbar-color ">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="home">Empleado Mesero</a>
->>>>>>> master
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -222,7 +176,6 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-<<<<<<< HEAD
           <a class="nav-link active" aria-current="page" [routerLink]="'/cocinero/pedido-cocina'">Ver pedidos</a>
         </li>
         <li class="nav-item">
@@ -247,12 +200,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link active" [routerLink]="'/mesero/lista-pedidos'">Lista de Pedidos</a>
-=======
-          <a class="nav-link active" aria-current="page" href="mesero/lista-mesa">Registrar Pedido</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="mesero/lista-pedidos">Lista de Pedidos</a>
->>>>>>> master
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
@@ -262,27 +209,18 @@
   </div>
 </nav>
 
-<<<<<<< HEAD
-
-=======
-<!-- Barra de navegacion generica -->
->>>>>>> master
 <nav *ngIf="!esPropietario() && !esEmpleado() && !esAdministrador()"
   class="navbar navbar-expand-lg custom-navbar-color">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <strong>Lugo</strong>
-<<<<<<< HEAD
       <img src="../../../assets/image/icons8-crema-de-avena-50.png" alt="Icono"
         style="width: 30px; height: auto; margin-left: 5px;">
-=======
-      <img src="../../../assets/image/icons8-crema-de-avena-50.png" alt="Icono" style="width: 30px; height: auto; margin-left: 5px;">
->>>>>>> master
+
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-<<<<<<< HEAD
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -291,23 +229,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="'/registro'">Registro</a>
-=======
-    </button> 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="login">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="registro">Registro</a>
->>>>>>> master
         </li>
       </ul>
     </div>
   </div>
 </nav>
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 <app-registrar-categoria></app-registrar-categoria>

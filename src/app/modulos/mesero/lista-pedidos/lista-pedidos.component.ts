@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { PedidosMesa } from 'src/app/modelos/PedidosMesa';
 import { PedidosDeMesaService } from 'src/app/services/pedido/pedidos-de-mesa.service';
-=======
->>>>>>> master
 
 @Component({
   selector: 'app-lista-pedidos',
@@ -12,7 +9,6 @@ import { PedidosDeMesaService } from 'src/app/services/pedido/pedidos-de-mesa.se
   styleUrls: ['./lista-pedidos.component.scss']
 })
 export class ListaPedidosComponent implements OnInit {
-<<<<<<< HEAD
   pedidos: any[] = [];
   pedidosMostrar:any[]=[];
   errorMessage: string = '';
@@ -61,12 +57,4 @@ export class ListaPedidosComponent implements OnInit {
     const pedidosMesa = this.pedidosPorMesa.find(item => item.nombreMesa === nombreMesa)?.pedidos || [];
     this.pedidoServiceMesa.setPedidosDeMesa(pedidosMesa,nombreMesa,estado);
   }
-=======
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
->>>>>>> master
 }
