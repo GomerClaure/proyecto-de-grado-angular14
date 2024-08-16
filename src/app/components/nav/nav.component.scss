@@ -1,5 +1,9 @@
 .custom-navbar-color {
+<<<<<<< HEAD
     background-color:#f4d596;
+=======
+    background-color:#eece84;
+>>>>>>> master
     //background-image: url(../../../assets/image/fondito.jpg);
     background-size: cover; /* Ajusta el tamaño de la imagen al contenedor */
     background-position: center; /* Centra la imagen en el contenedor */
@@ -11,6 +15,7 @@
     z-index: 1000; 
 
 }
+<<<<<<< HEAD
 .notificacion{
     width: 318px;
 }
@@ -44,4 +49,8 @@
         // posicion relativa en el medio de la mpantalla
         right: -970% !important;
       }
+=======
+.navbar-brand{
+    font-size: 35x;
+>>>>>>> master
 }

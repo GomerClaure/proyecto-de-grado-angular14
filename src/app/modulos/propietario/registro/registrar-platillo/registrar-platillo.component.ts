@@ -17,10 +17,15 @@ export class RegistrarPlatilloComponent implements OnInit{
   imageHeight: number = 300;
   selectedFile: File = new File([''], ''); 
   categorias:any[]=[];
+<<<<<<< HEAD
   id_restaurante:any;
 
   ngOnInit(): void {
     this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
+=======
+
+  ngOnInit(): void {
+>>>>>>> master
       this.obtenerCategorias();
   }
  
@@ -100,7 +105,11 @@ export class RegistrarPlatilloComponent implements OnInit{
 
   // Método para obtener las categorías del servicio
   obtenerCategorias() {
+<<<<<<< HEAD
     this.categoriasService.getCategorias(this.id_restaurante).subscribe(
+=======
+    this.categoriasService.getCategorias().subscribe(
+>>>>>>> master
       (data: any) => { 
         this.categorias = data.categorias;
         console.log(data)

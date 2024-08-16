@@ -40,7 +40,10 @@ export class SessionService {
             sessionStorage.setItem('pais', propietario.pais);
             sessionStorage.setItem('departamento', propietario.departamento);
             sessionStorage.setItem('tipo', 'Propietario');
+<<<<<<< HEAD
             sessionStorage.setItem('id_restaurante', propietario.id_restaurante.toString());
+=======
+>>>>>>> master
           } else if (res.user.tipo === 'Empleado') {
             let empleado: Empleado = res.user;
             sessionStorage.setItem('id_empleado', empleado.id.toString());
@@ -50,7 +53,10 @@ export class SessionService {
             sessionStorage.setItem('direccion', empleado.direccion);
             sessionStorage.setItem('tipo', 'Empleado');
             sessionStorage.setItem('rol_empleado',empleado.id_rol.toString());
+<<<<<<< HEAD
             sessionStorage.setItem('id_restaurante', empleado.id_restaurante.toString());
+=======
+>>>>>>> master
           }
         }
         // return {message: 'Inicio de sesión exitoso.'}
@@ -63,7 +69,10 @@ export class SessionService {
   }
 
   public logout() {
+<<<<<<< HEAD
     localStorage.clear();
+=======
+>>>>>>> master
     sessionStorage.clear();
     return this.http.get<any>(`${this.BASE_URL}/logout`);
 

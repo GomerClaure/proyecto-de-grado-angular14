@@ -16,7 +16,11 @@
     <br>
     <div class="table-responsive-xl">
       <div class="table-responsive">
+<<<<<<< HEAD
         <table class="table pru">
+=======
+        <table class="table">
+>>>>>>> master
           <thead>
             <tr class="text-center">
               <th class="fila" scope="col">Nombre</th>
@@ -27,10 +31,18 @@
             </tr>
           </thead>
           <tbody>
+<<<<<<< HEAD
             <tr *ngFor="let platillo of pagedPlatillos" class="align-middle">
               <td class="table-nombre">
                 <div class="row">
                   <div class="col text-center">
+=======
+            <!-- Aquí se insertarían las filas de datos -->
+            <tr *ngFor="let platillo of platillosFiltrados" class="align-middle">
+              <td class="table-nombre">
+                <div class="row">
+                  <div class="col text-center ">
+>>>>>>> master
                     <span>{{ platillo.nombre }}</span>
                   </div>
                 </div>
@@ -50,6 +62,7 @@
                 </div>
               </td>
             </tr>
+<<<<<<< HEAD
           </tbody>
         </table>
         <nav *ngIf="pageCount > 1" class="paginacion" aria-label="Page navigation">
@@ -69,6 +82,11 @@
             </li>
           </ul>
         </nav>
+=======
+            <!-- Puedes agregar más filas según sea necesario -->
+          </tbody>
+        </table>
+>>>>>>> master
       </div>
     </div>
   </div>

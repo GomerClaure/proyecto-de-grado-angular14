@@ -22,7 +22,10 @@ export class EditarPlatilloComponent implements OnInit {
   selectedFile: File = new File([''], '');
   formularioEditarPlatillo: FormGroup;
   categorias: any[] = [];
+<<<<<<< HEAD
   id_restaurante:any;
+=======
+>>>>>>> master
   //selectedCategoria: number=0;
 
   constructor(private router: Router, 
@@ -43,7 +46,10 @@ export class EditarPlatilloComponent implements OnInit {
   }
 
   ngOnInit(): void {
+<<<<<<< HEAD
     this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
+=======
+>>>>>>> master
     this.getCategorias();
     this.activatedRoute.queryParams.subscribe(params => {
       this.idPlatillo = params['platilloId'];
@@ -61,7 +67,11 @@ export class EditarPlatilloComponent implements OnInit {
   }
 
   getCategorias() {
+<<<<<<< HEAD
     this.categoriaService.getCategorias(this.id_restaurante).subscribe(
+=======
+    this.categoriaService.getCategorias().subscribe(
+>>>>>>> master
       (data: any) => {
         // Añade la opción "Todos" al principio de la lista de categorías
         this.categorias = [...data.categorias];
