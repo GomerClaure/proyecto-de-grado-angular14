@@ -5,32 +5,20 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class PedidosCocinaService {
+  private pedidosSubject = new BehaviorSubject<{ evento: string, datos: any } | null>(null);
+  pedidos$ = this.pedidosSubject.asObservable();
 
-  private idPedido:string='';
-  private platillosSubject = new BehaviorSubject<any[]>([]);
-  platillos$ = this.platillosSubject.asObservable();
-  private estPedidoSubject = new BehaviorSubject<string>('');
-  estPedido$ = this.estPedidoSubject.asObservable();
-  private tipoPedidoSubject = new BehaviorSubject<string>('');
-  tipoPedido$ = this.tipoPedidoSubject.asObservable();
+  private pedidoDetalladoSource = new BehaviorSubject<number>(0); // Observa el id del pedido detallado
+  pedidoDetallado$ = this.pedidoDetalladoSource.asObservable();
+
 
   constructor() { }
-  setPedidoOrdenado(platos:any,Id:any,estado:string,tip:string) {
-    this.platillosSubject.next(platos);
-    this.idPedido=Id;
-    this.estPedidoSubject.next(estado);
-    this.tipoPedidoSubject.next(tip);
+  
+  actualizarPedidos(evento: string, datos: any) {
+    this.pedidosSubject.next({ evento, datos });
   }
-  getEstado() {
-      return this.estPedidoSubject.getValue();
-    }
-  getTipo(){
-    return this.tipoPedidoSubject.getValue();
-  }
-  getIdPedido(){ 
-    return this.idPedido;
-    }
-  getPlatillos(){
-    return this.platillosSubject.getValue();
+
+  actualizarPedidoDetallado(id: number) {
+    this.pedidoDetalladoSource.next(id);
   }
 }

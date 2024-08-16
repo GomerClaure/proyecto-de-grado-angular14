@@ -8,8 +8,8 @@ import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class PedidoService { 
-  private BASE_URL = environment.backendUrl;
+
+export class PedidoService {private BASE_URL = environment.backendUrl;
   private headers = {
     'Authorization': 'Bearer ' + sessionStorage.getItem('token_access'),
   };
@@ -40,8 +40,10 @@ export class PedidoService {
   limpiarSeleccion() {
     this.platillosSeleccionados = [];
   }
-  //get Pedidos por empleado y restaurante
-  //id_empleado tambien mandaremos el id_restaurante
+  
+  getPedidoPlatillos(idPedido: string, idRestaurante: string): Observable<any> {
+    return this.http.get<any>(`${this.BASE_URL}/pedido/platos/${idPedido}/${idRestaurante}`, { headers: this.headers });
+  }
 
   getPedidos(id_emp:any,id_rest:any): Observable<any> {
     console.log(id_emp,id_rest);

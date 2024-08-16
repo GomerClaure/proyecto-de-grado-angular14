@@ -39,6 +39,10 @@ export class WebsocketService {
   listen(channel: string): Channel{
     return this.socket.subscribe(channel);
   }
+  listenAllEventsPedidos(id_restaurante:number): Channel{
+    let channel = this.socket.subscribe('pedido'+id_restaurante);
+    return channel;
+  }
 
   listenAllEvents(channelName: string): Channel{
     let channel = this.socket.subscribe(channelName);

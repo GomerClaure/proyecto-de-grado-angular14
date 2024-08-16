@@ -185,7 +185,6 @@ export class VistaMenuComponent implements OnInit {
         if (!this.imagenesPorPagina[index]) {
           this.imagenesPorPagina[index] = [];
         }
-
         this.imagenesPorPagina[index].push({
           nombre: platilloAleatorio.nombre,
           descripcion: platilloAleatorio.descripcion,

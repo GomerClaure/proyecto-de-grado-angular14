@@ -40,7 +40,14 @@
 }
 
 .card:hover {
+<<<<<<< HEAD
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Aumenta la sombra */
+  transform: translateY(-4px); /* Eleva un poco la tarjeta */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+=======
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+>>>>>>> develop
 }
 
 .card-footer {

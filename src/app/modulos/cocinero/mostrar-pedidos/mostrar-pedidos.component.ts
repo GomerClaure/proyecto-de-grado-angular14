@@ -20,21 +20,108 @@ export class MostrarPedidosComponent implements OnInit {
 
   id_restaurante: number;
   id_empleado: number;
+  id_pedido_detallado: number;
+  mostrarDetalle: boolean = false;
 
-  constructor(private pedidoService: PedidoService, private pedidoCocina: PedidosCocinaService) {
+  constructor(private pedidoService: PedidoService, private cocinaService : PedidosCocinaService) {
     this.id_restaurante = 0;
     this.id_empleado = 0;
+    this.id_pedido_detallado = 0;
    }
 
   ngOnInit(): void {
     this.id_restaurante = +sessionStorage.getItem('id_restaurante')!;
     this.id_empleado = +sessionStorage.getItem('id_empleado')!;
     this.obtenerPedidos();
+    // Suscribirse a los cambios en los pedidos
+  this.cocinaService.pedidos$.subscribe(update => {
+    console.log('Actualización de pedidos:', update);
+    if (update) {
+      const { evento, datos } = update;
+
+      // Dependiendo del tipo de evento, maneja el pedido de manera diferente
+      switch (evento) {
+        case 'PedidoEnPreparacion':
+          this.actualizarEstadoPedido(datos, 'En preparación');
+          break;
+        case 'PedidoServido':
+          this.actualizarEstadoPedido(datos, 'Servido');
+          break;
+        case 'pedidoCancelado':
+          this.eliminarPedidoDeLista(datos);
+          break;
+        case 'PedidoCreado':
+          this.pedidosEnEspera.push(datos);
+          this.pedidosP = [...this.pedidosEnEspera, ...this.pedidosPreparacion, ...this.pedidosTerminado];
+          this.pedidoService.getPedidoPlatillos(datos.id, this.id_restaurante+'').subscribe(
+            (response) => {
+              console.log(response);
+              this.pedidosP.forEach(ped => {
+                if(ped.id == response.idPedido){
+                  ped.platos = response.platos;
+                }
+              });
+            },
+            (error) => {
+              this.errorMessage = 'Error al obtener los pedidos';
+              console.error(error);
+            }
+          );
+
+          this.mostrarped(this.pedidosP);
+          var audio = document.getElementById('sonidoNotificacion') as HTMLAudioElement;
+          audio?.play();
+          break;
+        default:
+          console.warn(`Evento no manejado: ${evento}`);
+      }
+    }
+  });
+
+  this.cocinaService.pedidoDetallado$.subscribe(id => {
+    console.log('Pedido detallado:', id);
+    this.id_pedido_detallado = id;
+  });
+}
+// Método para actualizar el estado del pedido y moverlo al final de la lista
+actualizarEstadoPedido(pedido: any, estado:string): void {
+  var pedidoAnterior = this.pedidosP.find(p => p.id === pedido.idPedido);
+  if(pedidoAnterior){
+    if(pedidoAnterior.estado == 'En espera'){
+      this.pedidosEnEspera = this.pedidosEnEspera.filter(p => p.id !== pedido.idPedido);
+    }
+    if(pedidoAnterior.estado == 'En preparación'){
+      
+      this.pedidosPreparacion = this.pedidosPreparacion.filter(p => p.id !== pedido.idPedido);
+    }else if(pedidoAnterior.estado == 'Servido'){
+      this.pedidosTerminado = this.pedidosTerminado.filter(p => p.id !== pedido.idPedido);
+    }else{
+      this.pedidosEnEspera = this.pedidosEnEspera.filter(p => p.id !== pedido.idPedido);
+    }
+    pedidoAnterior.estado = estado;
+    if(estado == 'En preparación'){
+      this.pedidosPreparacion.push(pedidoAnterior);
+    }else if(estado == 'Servido'){
+      this.pedidosTerminado.push(pedidoAnterior);
+    } else{
+      this.pedidosEnEspera.push(pedidoAnterior);
+    }
+    this.pedidosP = [...this.pedidosEnEspera, ...this.pedidosPreparacion, ...this.pedidosTerminado];
+    this.mostrarped(this.pedidosP);
   }
+}
+
+// Método para eliminar un pedido de su lista actual
+eliminarPedidoDeLista(pedido: any): void {
+  this.pedidosEnEspera = this.pedidosEnEspera.filter(p => p.id !== pedido.id);
+  this.pedidosPreparacion = this.pedidosPreparacion.filter(p => p.id !== pedido.id);
+  this.pedidosTerminado = this.pedidosTerminado.filter(p => p.id !== pedido.id);
+}
 
   obtenerPedidos(): void {
     this.pedidoService.getPedidos(this.id_empleado, this.id_restaurante).subscribe(
       (response) => {
+        console.log(response);
         this.pedidos = response.pedidos;
         this.ordenarPedidos();
       },
@@ -45,6 +132,10 @@ export class MostrarPedidosComponent implements OnInit {
     );
   }
 
+  mostrarDetallePedido(): void {
+    this.mostrarDetalle = true;
+  }
+
   extractHour(datetime: string): string {
     return datetime.split(' ')[1]; // Extrae '15:05' de '2024-06-19 15:05:52'
   }
@@ -52,7 +143,7 @@ export class MostrarPedidosComponent implements OnInit {
   ordenarPedidos(): void {
     this.pedidos.forEach(pedido => {
       const pedidoCocina: PedidosCocina = {
-        numPedido: pedido.id,
+        id: pedido.id,
         mesa: pedido.cuenta.mesa.nombre,
         platos: pedido.platos,
         tipoPedido: pedido.tipo,
@@ -76,6 +167,9 @@ export class MostrarPedidosComponent implements OnInit {
     });
 
     this.pedidosP = [...this.pedidosEnEspera, ...this.pedidosPreparacion, ...this.pedidosTerminado];
+
+    console.log(this.pedidosP)
+
     this.mostrarped(this.pedidosP);
   }
 
@@ -84,29 +178,37 @@ export class MostrarPedidosComponent implements OnInit {
   }
 
   mostrarTodos(){
+    this.mostrarDetalle = false;
     this.mostrarped(this.pedidosP);
   }
 
   enPreparacion(): void {
+    this.mostrarDetalle = false;
+
+
     this.mostrarped(this.pedidosPreparacion);
   }
 
   terminado(): void {
+    this.mostrarDetalle = false;
     this.mostrarped(this.pedidosTerminado);
   }
 
   paraLlevar(): void {
+    this.mostrarDetalle = false;
     this.mostrarped(this.pedidosP.filter(ped => ped.tipoPedido === 'llevar'));
   }
 
   paraAqui(): void {
+    this.mostrarDetalle = false;
     this.mostrarped(this.pedidosP.filter(ped => ped.tipoPedido === 'local'));
   }
 
-  verPlatos(id: number, estadoP: string, tipo: string): void {
-    const pedido = this.pedidosP.find(p => p.numPedido === id);
-    this.platillos = pedido ? pedido.platos : [];
-    this.pedidoCocina.setPedidoOrdenado(this.platillos, id, estadoP, tipo);
+  verPlatos(id: number): void {
+    this.id_pedido_detallado = id;
+    this.cocinaService.actualizarPedidoDetallado(this.id_pedido_detallado);
+    this.mostrarDetalle = true;
+
   }
 
   getButtonClass(estado: string): string {
