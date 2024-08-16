@@ -47,6 +47,7 @@ export class MostrarDetallePedidosComponent implements OnInit,  OnChanges{
   }
 
   ngOnInit(): void {
+    this.seleccionarPedido(this.id_pedido_detallado);
     this.pedidoCocinaService.pedidoDetallado$.subscribe(id => {
       this.id_pedido_detallado = id;
       this.seleccionarPedido(id);
@@ -160,6 +161,7 @@ export class MostrarDetallePedidosComponent implements OnInit,  OnChanges{
   mostrarPedidoSiguiente() {
     this.indicePedidoActual = (this.indicePedidoActual + 1) % this.pedidosP.length;
     this.pedidoSeleccionado = this.pedidosP[this.indicePedidoActual];
+    this.id_pedido_detallado = this.pedidoSeleccionado.id;
     this.ordenar(this.pedidoSeleccionado.platos);
     this.pedidoCocinaService.actualizarPedidoDetallado(this.id_pedido_detallado);
 
