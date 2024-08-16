@@ -37,20 +37,37 @@ export class MostrarPedidosComponent implements OnInit {
   this.cocinaService.pedidos$.subscribe(update => {
     console.log('Actualización de pedidos:', update);
     if (update) {
-      const { evento, pedido } = update;
+      const { evento, datos } = update;
 
       // Dependiendo del tipo de evento, maneja el pedido de manera diferente
       switch (evento) {
-        case 'pedidoActualizado':
-          this.actualizarEstadoPedido(pedido);
+        case 'PedidoEnPreparacion':
+          this.actualizarEstadoPedido(datos, 'En preparación');
+          break;
+        case 'PedidoServido':
+          this.actualizarEstadoPedido(datos, 'Servido');
           break;
         case 'pedidoCancelado':
-          this.eliminarPedidoDeLista(pedido);
+          this.eliminarPedidoDeLista(datos);
           break;
         case 'PedidoCreado':
-          console.log(pedido);
-          this.pedidosEnEspera.push(pedido);
+          this.pedidosEnEspera.push(datos);
           this.pedidosP = [...this.pedidosEnEspera, ...this.pedidosPreparacion, ...this.pedidosTerminado];
+          this.pedidoService.getPedidoPlatillos(datos.id, this.id_restaurante+'').subscribe(
+            (response) => {
+              console.log(response);
+              this.pedidosP.forEach(ped => {
+                if(ped.id == response.idPedido){
+                  ped.platos = response.platos;
+                }
+              });
+            },
+            (error) => {
+              this.errorMessage = 'Error al obtener los pedidos';
+              console.error(error);
+            }
+          );
+
           this.mostrarped(this.pedidosP);
           var audio = document.getElementById('sonidoNotificacion') as HTMLAudioElement;
           audio?.play();
@@ -67,25 +84,31 @@ export class MostrarPedidosComponent implements OnInit {
   });
 }
 // Método para actualizar el estado del pedido y moverlo al final de la lista
-actualizarEstadoPedido(pedido: any): void {
-  this.eliminarPedidoDeLista(pedido);
-
-  switch (pedido.id_estado) {
-    case 1:
-      this.pedidosEnEspera.push(pedido);
-      break;
-    case 2:
-      this.pedidosPreparacion.push(pedido);
-      break;
-    case 4:
-      this.pedidosTerminado.push(pedido);
-      break;
-    default:
-      break;
+actualizarEstadoPedido(pedido: any, estado:string): void {
+  var pedidoAnterior = this.pedidosP.find(p => p.id === pedido.idPedido);
+  if(pedidoAnterior){
+    if(pedidoAnterior.estado == 'En espera'){
+      this.pedidosEnEspera = this.pedidosEnEspera.filter(p => p.id !== pedido.idPedido);
+    }
+    if(pedidoAnterior.estado == 'En preparación'){
+      
+      this.pedidosPreparacion = this.pedidosPreparacion.filter(p => p.id !== pedido.idPedido);
+    }else if(pedidoAnterior.estado == 'Servido'){
+      this.pedidosTerminado = this.pedidosTerminado.filter(p => p.id !== pedido.idPedido);
+    }else{
+      this.pedidosEnEspera = this.pedidosEnEspera.filter(p => p.id !== pedido.idPedido);
+    }
+    pedidoAnterior.estado = estado;
+    if(estado == 'En preparación'){
+      this.pedidosPreparacion.push(pedidoAnterior);
+    }else if(estado == 'Servido'){
+      this.pedidosTerminado.push(pedidoAnterior);
+    } else{
+      this.pedidosEnEspera.push(pedidoAnterior);
+    }
+    this.pedidosP = [...this.pedidosEnEspera, ...this.pedidosPreparacion, ...this.pedidosTerminado];
+    this.mostrarped(this.pedidosP);
   }
-
-  this.pedidosP = [...this.pedidosEnEspera, ...this.pedidosPreparacion, ...this.pedidosTerminado];
-  this.mostrarped(this.pedidosP);
 }
 
 // Método para eliminar un pedido de su lista actual

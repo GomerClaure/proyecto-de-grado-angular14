@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class PedidosCocinaService {
-  private pedidosSubject = new BehaviorSubject<{ evento: string, pedido: any } | null>(null);
+  private pedidosSubject = new BehaviorSubject<{ evento: string, datos: any } | null>(null);
   pedidos$ = this.pedidosSubject.asObservable();
 
   private pedidoDetalladoSource = new BehaviorSubject<number>(0); // Observa el id del pedido detallado
@@ -14,8 +14,8 @@ export class PedidosCocinaService {
 
   constructor() { }
   
-  actualizarPedidos(evento: string, pedido: any) {
-    this.pedidosSubject.next({ evento, pedido });
+  actualizarPedidos(evento: string, datos: any) {
+    this.pedidosSubject.next({ evento, datos });
   }
 
   actualizarPedidoDetallado(id: number) {

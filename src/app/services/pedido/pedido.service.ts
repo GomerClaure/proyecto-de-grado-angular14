@@ -41,8 +41,8 @@ export class PedidoService {
     this.platillosSeleccionados = [];
   }
   
-  getPedido(idPedido: string, idRestaurante: string): Observable<any> {
-    return this.http.get<any>(`${this.BASE_URL}/pedido/show/${idPedido}/${idRestaurante}`, { headers: this.headers });
+  getPedidoPlatillos(idPedido: string, idRestaurante: string): Observable<any> {
+    return this.http.get<any>(`${this.BASE_URL}/pedido/platos/${idPedido}/${idRestaurante}`, { headers: this.headers });
   }
 
   getPedidos(id_emp:any,id_rest:any): Observable<any> {
