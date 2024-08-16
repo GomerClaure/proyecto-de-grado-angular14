@@ -1,0 +1,66 @@
+// @import "node_modules/bootstrap/scss/variables";
+
+.card-terminado  .card-header{
+    background-color: rgb(173, 236, 173);
+}
+
+.card-en-preparacion .card-header{
+    background-color: rgb(247, 232, 168);
+}
+
+.card-default .card-header{
+    background-color: rgb(240, 162, 128);
+}
+
+.btn-en-preparacion{
+    background-color: #ac721a ;
+    color: rgb(247, 243, 243);
+}
+
+.btn-en-cola{
+    background-color: #cd5c5c;
+    color: rgb(253, 253, 253);
+}
+
+.icon-large {
+  font-size: 1.5em;
+}
+
+
+.filtro {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.pedidos-container {
+  margin-top: 20px;
+}
+
+.card {
+  transition: box-shadow 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Aumenta la sombra */
+  transform: translateY(-4px); /* Eleva un poco la tarjeta */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card-footer {
+  background-color: #f8f9fa;
+  border-top: none;
+}
+
+.alert-warning {
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+.nav-link{
+  color: black;
+  size: 40px;
+}
+
+.icon-large {
+  font-size: 30px; /* Ajusta este valor al tamaño deseado */
+}

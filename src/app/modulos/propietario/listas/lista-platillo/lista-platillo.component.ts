@@ -10,19 +10,28 @@ import { ModalEliminarPlatilloService } from 'src/app/services/modales/modal-eli
   templateUrl: './lista-platillo.component.html',
   styleUrls: ['./lista-platillo.component.scss']
 })
-export class ListaPlatilloComponent {
-  filterPlatillos='';
+export class ListaPlatilloComponent implements OnInit {
+  filterPlatillos = '';
   platillos: Platillo[] = [];
-  platillosFiltrados:Platillo[]=[];
+  platillosFiltrados: Platillo[] = [];
   selectedPlatilloId: number | null = null;
   storageUrl = environment.backendStorageUrl;
-  textoBuscador:string = '';
-  constructor(private router: Router, private platilloService: PlatillosService,
+  textoBuscador: string = '';
+
+  id_restaurante: any;
+
+  // Paginación
+  public pageSize: number = 10; // Cantidad de elementos por página
+  public currentPage: number = 1; // Página actual
+
+  constructor(
+    private router: Router,
+    private platilloService: PlatillosService,
     private modalService: ModalEliminarPlatilloService,
-   ) {
-  }
+  ) { }
 
   ngOnInit(): void {
+    this.id_restaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
     this.getPlatillos();
   }
 
@@ -30,20 +39,15 @@ export class ListaPlatilloComponent {
     this.router.navigate(['lista/editar-platillo'], { queryParams: { platilloId: id } });
   }
 
-
-  getPlatillos() {
-    this.platilloService.getPlatillos().subscribe(
+  getPlatillos(): void {
+    this.platilloService.getPlatillos(this.id_restaurante).subscribe(
       res => {
-        this.platillos = res.platillo;
-                // Ordenar los platillos por nombre en orden alfabético
-                this.platillos.sort((a, b) => a.nombre.localeCompare(b.nombre));
-                // Tomar los primeros 10 platillos
-                this.platillos = this.platillos.slice(0, 10);
-                this.platillosFiltrados=this.platillos;
-        console.log(this.platillos);
+        console.log("Response from service:", res);
+        this.platillos = res.platillos;
+        this.filtrarPlatillos();
       },
-      err => {
-        console.log(err);
+      error => {
+        console.error("Error fetching platillos:", error);
       }
     );
   }
@@ -52,22 +56,50 @@ export class ListaPlatilloComponent {
     this.modalService.openModal(id, this.platillos);
   }
 
-  onSearchChange(searchValue: string): void {  
+  onSearchChange(searchValue: string): void {
     this.textoBuscador = searchValue.trim().toLowerCase();
     this.filtrarPlatillos();
   }
 
-  filtrarPlatillos():void{
+  filtrarPlatillos(): void {
     if (this.textoBuscador === '') {
-      // Si el campo de búsqueda está vacío, mostrar todos los platillos
       this.platillosFiltrados = this.platillos;
     } else {
-      // Filtrar los platillos por nombre y categoría
       this.platillosFiltrados = this.platillos.filter(platillo =>
         platillo.nombre.toLowerCase().includes(this.textoBuscador) || platillo.categoria.nombre.toLowerCase().includes(this.textoBuscador)
       );
     }
+    this.currentPage = 1; // Reinicia la página actual a la primera página
+  }
 
+  get pagedPlatillos(): Platillo[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    return this.platillosFiltrados.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  get pageCount(): number {
+    return Math.ceil(this.platillosFiltrados.length / this.pageSize);
+  }
+
+  get pagesArray(): number[] {
+    return Array(this.pageCount).fill(0).map((x, i) => i + 1);
+  }
+
+  setPage(page: number) {
+    if (page >= 1 && page <= this.pageCount) {
+      this.currentPage = page;
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.pageCount) {
+      this.currentPage++;
+    }
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
   }
 }
-   

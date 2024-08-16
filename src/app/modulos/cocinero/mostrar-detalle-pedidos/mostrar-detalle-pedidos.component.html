@@ -1,0 +1,118 @@
+<div class="contenedor-slider">
+  <!-- Vista Principal -->
+  <div class="vista-principal position-relative rounded">
+    <!-- Botón Anterior -->
+    <button class="btn-navegacion anterior position-absolute top-50 start-0 translate-middle-y"
+      (click)="mostrarPedidoAnterior()">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+
+    <!-- Detalles del Pedido -->
+    <div class="detalles-pedido px-5">
+      <div class="row  mx-5 h-100">
+        <div class="col-12 px-0">
+          <div class="detalles-pedido-header card-title d-flex justify-content-between" [ngClass]="{
+            'terminado': pedidoSeleccionado.estado === 'Servido',
+            'en-preparacion': pedidoSeleccionado.estado === 'En preparación',
+            'default': pedidoSeleccionado.estado !== 'Servido' && pedidoSeleccionado.estado !== 'En preparación'
+          }">
+            <div>
+              <h5 class="modal-title ms-2" id="exampleModalLabel">
+                <i *ngIf="pedidoSeleccionado.tipoPedido === 'llevar'" class="bi bi-bag-fill icon-large"> Para Llevar {{pedidoSeleccionado.mesa}}
+                </i>
+                <i *ngIf="pedidoSeleccionado.tipoPedido === 'local'" class="bi bi-house-door-fill icon-large"> Local
+                  {{pedidoSeleccionado.mesa}}</i>
+              </h5>
+            </div>
+            <div>
+              <h5 class="modal-title ms-2 me-2" id="exampleModalLabel">Pedido #{{pedidoSeleccionado.id}}</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 ps-0">
+          <div class="cont">
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Cantidad</th>
+                    <th>Platillo</th>
+                    <th>Detalle</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let d of platosMostrar">
+                    <tr *ngIf="d.detalle" class="fs-6">
+                      <td>{{ d.cantidad }}</td>
+                      <td>{{ d.nombre }}</td>
+                      <td class="detalle-td">{{ d.detalle }}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 pe-0">
+          <div class="cont">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Cantidad</th>
+                  <th>Platillo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let d of platosMostrar">
+                  <tr *ngIf="!d.detalle" class="fs-5">
+                    <td>{{ d.cantidad }}</td>
+                    <td>{{ d.nombre }}</td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row-12 d-flex justify-content-center">
+          <button *ngIf="pedidoSeleccionado.estado !== 'Servido' && pedidoSeleccionado.estado !== 'En preparación'"
+            type="button" class="btn btn-en-preparacion  col-2" (click)="cambiarEstado('2')">En
+            Curso</button>
+          <button *ngIf="pedidoSeleccionado.estado == 'En preparación'" type="button" class="btn btn-success col-2"
+            (click)="cambiarEstado('4')">Terminado</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Botón Siguiente -->
+    <button class="btn-navegacion siguiente position-absolute top-50 end-0 translate-middle-y"
+      (click)="mostrarPedidoSiguiente()">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+
+  <!-- Miniaturas -->
+  <div class="navegacion-miniaturas mt-0">
+    <div class="contenedor-miniaturas">
+      <div class="lista-miniaturas ">
+        <div class="d-flex justify-content-between align-items-center miniatura-card"
+          *ngFor="let pedido of pedidosVisibles" (click)="seleccionarPedido(pedido.id)" [ngClass]="{
+            'en-preparacion': pedido.estado === 'En preparación',
+            'terminado': pedido.estado === 'Servido',
+            'default': pedido.estado !== 'Servido' && pedido.estado !== 'En preparación',
+            'seleccionado': pedido.id === pedidoSeleccionado.id
+          }">
+          <div>
+            <h5>{{pedido.hora}}</h5>
+          </div>
+          <div class="fs-4">
+            <i *ngIf="pedido.tipoPedido === 'llevar'" class="bi bi-bag-fill icon-large"></i>
+            <i *ngIf="pedido.tipoPedido === 'local'" class="bi bi-house-door-fill icon-large"></i>
+          </div>
+          <div class="p-0">
+            <h4 class="m-0">{{pedido.id}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
