@@ -202,6 +202,7 @@ eliminarPedidoDeLista(pedido: any): void {
 
   verPlatos(id: number): void {
     this.id_pedido_detallado = id;
+    this.cocinaService.actualizarPedidoDetallado(this.id_pedido_detallado);
     this.mostrarDetalle = true;
   }
 
