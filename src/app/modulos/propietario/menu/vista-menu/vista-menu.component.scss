@@ -1,10 +1,6 @@
 /* Estilos comunes */
 @import url('https://fonts.googleapis.com/css2?family=Sedan:ital@0;1&display=swap');
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> develop
 .card-body.portada {
   width: 100%; 
   height: 100vh;
@@ -19,20 +15,9 @@
   top: 0;
   left: 0;
 }
-<<<<<<< HEAD
-.fondo {
-  background-color: lightgray;
-  padding: 3.5%;
-=======
 .fondo {
   background-color: lightgray;
   padding: 20px;
->>>>>>> master
-=======
-.fondo {
-  background-color: lightgray;
-  padding: 3.5%;
->>>>>>> develop
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,17 +45,13 @@
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-<<<<<<< HEAD
-<<<<<<< HEAD
   height: 77vh;
   border-radius: 0%;
-=======
+
   height: 80vh;
->>>>>>> master
-=======
+
   height: 77vh;
   border-radius: 0%;
->>>>>>> develop
 }
 
 .card-header {
@@ -140,10 +121,7 @@
   color: black;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> develop
+
 .dark-theme{
   .card{
     background-color: #333;
@@ -157,11 +135,7 @@
   }
 }
 
-<<<<<<< HEAD
-=======
->>>>>>> master
-=======
->>>>>>> develop
+
 .portada {
   background-size: cover;
   background-position: center;
@@ -174,24 +148,7 @@
   border: 1px solid rgb(24, 7, 1);
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> develop
-// pantallas menores a 504px
-@media (max-width: 504px) {
-  .fondo{
-    padding-inline: 0px !important;
-  }
-  .container {
-    padding-inline: 0px!important;
-  }
-}
-<<<<<<< HEAD
-=======
->>>>>>> master
-=======
->>>>>>> develop
+
 /* Pantallas mayores a 504px aplicar media query */
 @media (min-width: 504px) {
   .container {
@@ -201,46 +158,20 @@
 
 @media (min-width: 604px) {
   .container {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     margin-inline: 15%;
-=======
-    margin-inline: 20%;
->>>>>>> master
-=======
-    margin-inline: 15%;
->>>>>>> develop
+
   }
 }
 
 @media (min-width: 768px) {
   .container {
-<<<<<<< HEAD
-<<<<<<< HEAD
     margin-inline: 10%;
-=======
-    margin-inline: 30%;
->>>>>>> master
-=======
-    margin-inline: 10%;
->>>>>>> develop
-  }
-}
+} }
 
 @media (min-width: 992px) {
   .container {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     margin-inline: 25%;
   }
 }
-=======
-    margin-inline: 35%;
-  }
-}
->>>>>>> master
-=======
-    margin-inline: 25%;
-  }
-}
->>>>>>> develop
