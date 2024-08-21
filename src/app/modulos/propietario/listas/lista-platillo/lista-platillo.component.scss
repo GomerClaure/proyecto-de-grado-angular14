@@ -1,44 +1,9 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> develop
+
 .btn {
     border-radius: 5px;
     margin: 4px;
     color: rgb(0, 0, 0);
     width: 150px;
-<<<<<<< HEAD
-}
-
-.grupo {
-    display: contents;
-    justify-content: center;
-}
-
-.pru table {
-    text-align: center;
-    border-collapse: separate;
-    border-spacing: 0 8px;
-    /* Espacio entre filas */
-    //border-color: solid 10px black;
-}
-
-.pru th,
-.pru td {
-    border-top: 2px solid rgba(0, 0, 0, 0.1);
-    /* Línea superior */
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-    /* Línea inferior */
-    border-left: 2px solid rgba(0, 0, 0, 0.1);
-    /* Línea izquierda */
-    border-right: 2px solid rgba(0, 0, 0, 0.1);
-    /* Línea derecha */
-}
-
-.pru th {
-    background-color: #eccf92;
-    /* Color de fondo para la fila de encabezados */
-=======
 // td img{
 //     max-width: 60px; 
 //     height: 60px;
@@ -49,8 +14,6 @@
    margin: 4px;
    color: rgb(0, 0, 0);
    width: 150px;
-=======
->>>>>>> develop
 }
 
 .grupo {
@@ -79,54 +42,10 @@
 }
 
 .pru th {
-<<<<<<< HEAD
-    background-color:#eccf92; /* Color de fondo para la fila de encabezados */
->>>>>>> master
-=======
-    background-color: #eccf92;
-    /* Color de fondo para la fila de encabezados */
->>>>>>> develop
-    //color: #fff;
-}
-
-td {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    background-color: #fff;
-    /* Color de fondo para las celdas */
-    text-align: center;
-}
-
-.pagination{
-    --bs-pagination-color: #8c6239;
-    --bs-pagination-hover-color: #9e7635; 
-    --bs-pagination-hover-bg: #e8c391; 
-    --bs-pagination-hover-border-color: #d6b386;
-}
-.paginacion .btn {
-    cursor: pointer;
-    background-color: #e8c391;
-    color: #fff; 
-    border: none; 
-    transition: background-color 0.3s; 
-}
-
-.paginacion .btn:hover {
-    transition: background-color 0.3s;
-}
-
-
-.page-number.active .page-link {
-    background-color: #8c6239; 
-    border-color: #8c6239; 
-    color: #fff; 
-}
-=======
     background-color: #fff; /* Color de fondo para las celdas */
     text-align: center;
 }
->>>>>>> master
-=======
+
     background-color: #fff;
     /* Color de fondo para las celdas */
     text-align: center;
@@ -156,4 +75,4 @@ td {
     border-color: #8c6239; 
     color: #fff; 
 }
->>>>>>> develop
+
