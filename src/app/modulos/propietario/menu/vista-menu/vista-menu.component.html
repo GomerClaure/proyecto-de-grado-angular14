@@ -1,11 +1,21 @@
 <app-nav></app-nav><br><br>
+<<<<<<< HEAD
+<<<<<<< HEAD
 <div class="fondo" id="container-ver-menu">
+=======
+<div class="fondo">
+>>>>>>> master
+=======
+<div class="fondo" id="container-ver-menu">
+>>>>>>> develop
   <br>
   <div class="container">
     <div id="carouselExampleIndicators" class="carousel slide">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <div class="card">
+<<<<<<< HEAD
+<<<<<<< HEAD
             <div class="card-body portada">
               <img [src]="baseUrl + menu.portada" alt="Descripción de la imagen" class="portada-img" (error)="portadaError($event)">
             </div>
@@ -28,11 +38,53 @@
                     <div class="col-7 h-100">
                       <div class="p-0">
                         <h1 class="categoria-titulo text-center">{{ categoriaElement.nombre }}</h1>
+=======
+            <div class="card-body h-100" [style.background-image]="'url(' + baseUrl + menu.portada + ')'"
+            >
+              <!-- <div class="portada my-3" ></div> -->
+=======
+            <div class="card-body portada">
+              <img [src]="baseUrl + menu.portada" alt="Descripción de la imagen" class="portada-img" (error)="portadaError($event)">
+>>>>>>> develop
+            </div>
+          </div>
+        </div>
+        <div *ngFor="let categoriasPag of platilloPorCategoriaPagina; let i = index">
+          <div class="carousel-item">
+            <div class="card">
+              <div class="row h-100">
+                <div *ngFor="let categoriaElement of categoriasPag; let j = index">
+                  <div class="row h-100">
+                    <div class="col-5"
+                         [style.background-image]=" 'url(' + baseUrl + categoriaElement.imagen + ')' "
+                         style="background-size: cover !important; background-position: center;" 
+                         [id]="'img-menu-categoria-' + i + '-' + j">
+                      <img [src]="baseUrl + categoriaElement.imagen" 
+                           (error)="onImgError('img-menu-categoria-' + i + '-' + j)" 
+                           style="display: none;">
+                    </div>
+                    <div class="col-7 h-100">
+<<<<<<< HEAD
+                      <div class=" p-0">
+                        <h1 class="categoria-titulo text-center">{{categoriaElement.nombre}}</h1>
+>>>>>>> master
+=======
+                      <div class="p-0">
+                        <h1 class="categoria-titulo text-center">{{ categoriaElement.nombre }}</h1>
+>>>>>>> develop
                       </div>
                       <div *ngFor="let platillo of categoriaElement.platillos">
                         <div class="platillos">
                           <table class="menu-cuerpo">
+<<<<<<< HEAD
+<<<<<<< HEAD
                             <tr data-bs-toggle="modal" data-bs-target="#MostrarPlatillo" (click)="onRowClick(platillo)">
+=======
+                            <tr  data-bs-toggle="modal" data-bs-target="#MostrarPlatillo" (click)="onRowClick(platillo)">
+>>>>>>> master
+=======
+                            <tr data-bs-toggle="modal" data-bs-target="#MostrarPlatillo" (click)="onRowClick(platillo)">
+>>>>>>> develop
                               <td class="menu-cuerpo-platillo">{{ platillo.nombre }}</td>
                               <td class="menu-cuerpo-precio">{{ platillo.precio + ' Bs' }}</td>
                             </tr>
@@ -40,11 +92,28 @@
                         </div>
                       </div>
                     </div>
+<<<<<<< HEAD
+<<<<<<< HEAD
                   </div>
                 </div>
               </div>
             </div>
           </div>
+=======
+                    
+=======
+>>>>>>> develop
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<<<<<<< HEAD
+
+
+>>>>>>> master
+=======
+>>>>>>> develop
         </div>
 
 

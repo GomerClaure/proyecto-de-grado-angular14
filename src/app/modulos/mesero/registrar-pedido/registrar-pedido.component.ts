@@ -211,4 +211,9 @@ decrement(index: number) {
   if (cantidad > 1) cantidad--;
   this.diccionarioDeCantidades[index] = cantidad;
 }
+
+onImgError(event: any) {
+  event.target.src = 'assets/image/27002.jpg';
+}
+
 }

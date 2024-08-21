@@ -1,8 +1,19 @@
+
 .btn {
     border-radius: 5px;
     margin: 4px;
     color: rgb(0, 0, 0);
     width: 150px;
+// td img{
+//     max-width: 60px; 
+//     height: 60px;
+//     border-radius: 20%;
+// }
+.btn{
+   border-radius: 5px;
+   margin: 4px;
+   color: rgb(0, 0, 0);
+   width: 150px;
 }
 
 .grupo {
@@ -31,12 +42,10 @@
 }
 
 .pru th {
-    background-color: #eccf92;
-    /* Color de fondo para la fila de encabezados */
-    //color: #fff;
+    background-color: #fff; /* Color de fondo para las celdas */
+    text-align: center;
 }
 
-td {
     background-color: #fff;
     /* Color de fondo para las celdas */
     text-align: center;
@@ -66,3 +75,4 @@ td {
     border-color: #8c6239; 
     color: #fff; 
 }
+

@@ -17,7 +17,7 @@
 }
 .fondo {
   background-color: lightgray;
-  padding: 3.5%;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,6 +45,11 @@
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
+  height: 77vh;
+  border-radius: 0%;
+
+  height: 80vh;
+
   height: 77vh;
   border-radius: 0%;
 }
@@ -116,6 +121,7 @@
   color: black;
 }
 
+
 .dark-theme{
   .card{
     background-color: #333;
@@ -129,6 +135,7 @@
   }
 }
 
+
 .portada {
   background-size: cover;
   background-position: center;
@@ -141,15 +148,7 @@
   border: 1px solid rgb(24, 7, 1);
 }
 
-// pantallas menores a 504px
-@media (max-width: 504px) {
-  .fondo{
-    padding-inline: 0px !important;
-  }
-  .container {
-    padding-inline: 0px!important;
-  }
-}
+
 /* Pantallas mayores a 504px aplicar media query */
 @media (min-width: 504px) {
   .container {
@@ -159,18 +158,20 @@
 
 @media (min-width: 604px) {
   .container {
+
     margin-inline: 15%;
+
   }
 }
 
 @media (min-width: 768px) {
   .container {
     margin-inline: 10%;
-  }
-}
+} }
 
 @media (min-width: 992px) {
   .container {
+
     margin-inline: 25%;
   }
 }

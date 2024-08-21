@@ -113,6 +113,7 @@ export class ListaPedidosComponent implements OnInit {
   public combinedData: any;
   public pageSize: number = 10; // Cantidad de elementos por página
   public currentPage: number = 1; // Página actual
+  public noHayPedidos = false;
 
   constructor(private reporteService: ReporteService,private cdr: ChangeDetectorRef, private router: Router) {
     const fechaIni = new Date();
@@ -170,7 +171,7 @@ export class ListaPedidosComponent implements OnInit {
         this.charts.forEach((child) => {
           child.chart?.update()
       });
-        // this.cdr.detectChanges();
+      this.noHayPedidos = this.reporte.cuentas.length === 0;
         
     });
   }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import Pusher, { Channel } from 'pusher-js';
-import { websocketConfig } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +17,14 @@ export class WebsocketService {
 
   iniciarConexion() {
     this.closeConnection();
-    this.socket = new Pusher(websocketConfig.key, {
-      cluster: websocketConfig.cluster,
-      wsHost: websocketConfig.wsHost,
-      wsPort: websocketConfig.wsPort,
-      forceTLS: websocketConfig.forceTLS,
+    this.socket = new Pusher(environment.websocketConfig.key, {
+      cluster: environment.websocketConfig.cluster,
+      wsHost: environment.websocketConfig.wsHost,
+      wsPort: environment.websocketConfig.wsPort,
+      forceTLS: environment.websocketConfig.forceTLS,
       //cambiar por wss si es cifrado
       enabledTransports: ['ws'],
-      wssPort: websocketConfig.wssPort,
+      wssPort: environment.websocketConfig.wssPort,
       // authEndpoint: 'http://localhost:8000/broadcasting/auth',
       // auth: {
       //   headers: {
@@ -38,6 +38,10 @@ export class WebsocketService {
    
   listen(channel: string): Channel{
     return this.socket.subscribe(channel);
+  }
+  listenAllEventsPedidos(id_restaurante:number): Channel{
+    let channel = this.socket.subscribe('pedido'+id_restaurante);
+    return channel;
   }
 
   listenAllEvents(channelName: string): Channel{

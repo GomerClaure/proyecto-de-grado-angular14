@@ -27,4 +27,28 @@
       page-break-before: always;
     }
   }
-  
+
+  .pagination{
+    --bs-pagination-color: #8c6239;
+    --bs-pagination-hover-color: #9e7635; 
+    --bs-pagination-hover-bg: #e8c391; 
+    --bs-pagination-hover-border-color: #d6b386;
+}
+.paginacion .btn {
+    cursor: pointer;
+    background-color: #e8c391;
+    color: #fff; 
+    border: none; 
+    transition: background-color 0.3s; 
+}
+
+.paginacion .btn:hover {
+    transition: background-color 0.3s;
+}
+
+
+.page-number.active .page-link {
+    background-color: #8c6239; 
+    border-color: #8c6239; 
+    color: #fff; 
+}  
