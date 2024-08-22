@@ -1,6 +1,6 @@
 <app-nav></app-nav><br><br>
-<div class="container mt-5">
-  <div class="text-center mb-4">
+<div class=" form-container border mt-5">
+  <div class="mb-4">
     <h1 class="fs-5">SOLICITUD DE REGISTRO DE RESTAURANTE</h1>
     <p class="lead">Completa el formulario con la información del restaurante y propietario.</p>
   </div>
@@ -8,20 +8,13 @@
   <form [formGroup]="restauranteForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
     <div class="row">
       <!-- Nombre del restaurante -->
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4 p-2">
         <label for="nombreRestaurante">Nombre del restaurante</label>
         <div class="input-group has-validation">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="bi bi-shop"></i></span>
-          </div>
-          <input 
-            id="nombreRestaurante" 
-            formControlName="nombreRestaurante" 
-            class="form-control" 
-            placeholder="Ej. La Casa de las Empanadas" 
+          <input id="nombreRestaurante" formControlName="nombreRestaurante" class="form-control"
+            placeholder="Ej. La Casa de las Empanadas"
             [ngClass]="{'is-invalid': restauranteForm.get('nombreRestaurante')?.invalid && restauranteForm.get('nombreRestaurante')?.touched}"
-            required
-          />
+            required />
           <div class="invalid-feedback">
             Nombre es requerido y debe tener al menos 3 caracteres
           </div>
@@ -29,20 +22,12 @@
       </div>
 
       <!-- NIT -->
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4 p-2">
         <label for="nit">NIT</label>
         <div class="input-group has-validation">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="bi bi-card-text"></i></span>
-          </div>
-          <input 
-            id="nit" 
-            formControlName="nit" 
-            class="form-control" 
-            placeholder="Ej. 123456789"
+          <input id="nit" formControlName="nit" class="form-control" placeholder="Ej. 123456789"
             [ngClass]="{'is-invalid': restauranteForm.get('nit')?.invalid && restauranteForm.get('nit')?.touched}"
-            required
-          />
+            required />
           <div class="invalid-feedback">
             NIT es requerido y solo puede contener números
           </div>
@@ -50,125 +35,136 @@
       </div>
 
       <!-- Número de celular -->
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4 p-2">
         <label for="numeroCelular">Número de celular</label>
         <div class="input-group has-validation">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="bi bi-phone"></i></span>
-          </div>
-          <input 
-            id="numeroCelular" 
-            formControlName="numeroCelular" 
-            class="form-control" 
-            placeholder="Ej. 6001234567"
+          <input id="numeroCelular" formControlName="numeroCelular" class="form-control" placeholder="Ej. 6001234567"
             [ngClass]="{'is-invalid': restauranteForm.get('numeroCelular')?.invalid && restauranteForm.get('numeroCelular')?.touched}"
-            required
-          />
+            required />
           <div class="invalid-feedback">
             Número de celular es requerido y debe tener 10 dígitos
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Correo electrónico del restaurante -->
-      <div class="form-group col-md-6">
-        <label for="correoRestaurante">Correo electrónico del restaurante</label>
-        <div class="input-group has-validation">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="row">
+          <!-- Nombre del restaurante -->
+          <div class="form-group col-md-6 p-2">
+            <label for="correoRestaurante">Correo electrónico del restaurante</label>
+            <div class="input-group has-validation">
+              <input id="correoRestaurante" formControlName="correoRestaurante" class="form-control"
+                placeholder="Ej. restaurante@example.com"
+                [ngClass]="{'is-invalid': restauranteForm.get('correoRestaurante')?.invalid && restauranteForm.get('correoRestaurante')?.touched}"
+                required />
+              <div class="invalid-feedback">
+                Correo electrónico es requerido y debe ser válido
+              </div>
+            </div>
           </div>
-          <input 
-            id="correoRestaurante" 
-            formControlName="correoRestaurante" 
-            class="form-control" 
-            placeholder="Ej. restaurante@example.com"
-            [ngClass]="{'is-invalid': restauranteForm.get('correoRestaurante')?.invalid && restauranteForm.get('correoRestaurante')?.touched}"
-            required
-          />
-          <div class="invalid-feedback">
-            Correo electrónico es requerido y debe ser válido
+          <!-- Licencia de funcionamiento -->
+          <div class="form-group col-md-6 p-2">
+            <label for="licenciaFuncionamiento">Licencia de funcionamiento (PDF)</label>
+            <div class="input-group-sm has-validation">
+              <input id="licenciaFuncionamiento" type="file" (change)="onFileChange($event, 'licenciaFuncionamiento')"
+                class="form-control input-form"
+                [ngClass]="{'is-invalid': restauranteForm.get('licenciaFuncionamiento')?.invalid && restauranteForm.get('licenciaFuncionamiento')?.touched}"
+                required />
+              <div class="invalid-feedback">
+                Licencia es requerida y debe ser un archivo PDF
+              </div>
+            </div>
+          </div>
+          <!-- Tipo de establecimiento -->
+          <div class="form-group col-md-12 p-2">
+            <label for="tipoEstablecimiento">Tipo de establecimiento</label>
+            <div class="d-flex flex-wrap">
+              <div class="form-check me-3">
+                <input class="form-check-input" type="radio" id="restaurante" formControlName="tipoEstablecimiento"
+                  value="Restaurante">
+                <label class="form-check-label" for="restaurante">Restaurante</label>
+              </div>
+              <div class="form-check me-3">
+                <input class="form-check-input" type="radio" id="cafeteria" formControlName="tipoEstablecimiento"
+                  value="Cafetería">
+                <label class="form-check-label" for="cafeteria">Cafetería</label>
+              </div>
+              <div class="form-check me-3">
+                <input class="form-check-input" type="radio" id="bar" formControlName="tipoEstablecimiento" value="Bar">
+                <label class="form-check-label" for="bar">Bar</label>
+              </div>
+              <div class="form-check me-3">
+                <input class="form-check-input" type="radio" id="pasteleria" formControlName="tipoEstablecimiento"
+                  value="Pastelería">
+                <label class="form-check-label" for="pasteleria">Pastelería</label>
+              </div>
+              <div class="form-check me-3">
+                <input class="form-check-input" type="radio" id="heladeria" formControlName="tipoEstablecimiento"
+                  value="Heladería">
+                <label class="form-check-label" for="heladeria">Heladería</label>
+              </div>
+              <div class="form-check me-3">
+                <input class="form-check-input" type="radio" id="comidaRapida" formControlName="tipoEstablecimiento"
+                  value="Comida rápida">
+                <label class="form-check-label" for="comidaRapida">Comida rápida</label>
+              </div>
+              <div class="form-check me-3">
+                <input class="form-check-input" type="radio" id="otro" formControlName="tipoEstablecimiento" value="Otro">
+                <label class="form-check-label" for="otro">Otro</label>
+              </div>
+            </div>
+            <div class="invalid-feedback">
+              Tipo de establecimiento es requerido
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+      <div class="col-md-4 d-md-block d-none">
+        <!-- Ubicación del restaurante en pantallas grandes -->
+        <div class="form-group col-md-12 p-2">
+          <label for="ubicacionRestaurante">Ubicación del restaurante</label>
+          <div class="input-group has-validation">
+            <textarea id="ubicacionRestaurante" formControlName="ubicacionRestaurante" class="form-control"
+              placeholder="Ej. Av. Siempre Viva 742"
+              [ngClass]="{'is-invalid': restauranteForm.get('ubicacionRestaurante')?.invalid && restauranteForm.get('ubicacionRestaurante')?.touched}"
+              required rows="5"></textarea>
+            <div class="invalid-feedback">
+              Ubicación es requerida
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- Licencia de funcionamiento -->
-      <div class="form-group col-md-6">
-        <label for="licenciaFuncionamiento">Licencia de funcionamiento (PDF)</label>
-        <div class="input-group has-validation">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="bi bi-file-earmark-pdf"></i></span>
-          </div>
-          <input 
-            id="licenciaFuncionamiento" 
-            type="file" 
-            (change)="onFileChange($event, 'licenciaFuncionamiento')" 
-            class="form-control"
-            [ngClass]="{'is-invalid': restauranteForm.get('licenciaFuncionamiento')?.invalid && restauranteForm.get('licenciaFuncionamiento')?.touched}"
-            required
-          />
-          <div class="invalid-feedback">
-            Licencia es requerida y debe ser un archivo PDF
+      <div class="col-12 d-md-none">
+        <!-- Ubicación del restaurante en pantallas pequeñas -->
+        <div class="form-group col-md-12 p-2">
+          <label for="ubicacionRestaurante">Ubicación del restaurante</label>
+          <div class="input-group has-validation">
+            <textarea id="ubicacionRestaurante" formControlName="ubicacionRestaurante" class="form-control"
+              placeholder="Ej. Av. Siempre Viva 742"
+              [ngClass]="{'is-invalid': restauranteForm.get('ubicacionRestaurante')?.invalid && restauranteForm.get('ubicacionRestaurante')?.touched}"
+              required rows="5"></textarea>
+            <div class="invalid-feedback">
+              Ubicación es requerida
+            </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Ubicación del restaurante -->
-      <div class="form-group col-md-6">
-        <label for="ubicacionRestaurante">Ubicación del restaurante</label>
-        <div class="input-group has-validation">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
-          </div>
-          <input 
-            id="ubicacionRestaurante" 
-            formControlName="ubicacionRestaurante" 
-            class="form-control" 
-            placeholder="Ej. Av. Siempre Viva 742"
-            [ngClass]="{'is-invalid': restauranteForm.get('ubicacionRestaurante')?.invalid && restauranteForm.get('ubicacionRestaurante')?.touched}"
-            required
-          />
-          <div class="invalid-feedback">
-            Ubicación es requerida
-          </div>
-        </div>
-      </div>
 
-      <!-- Tipo de establecimiento -->
-      <div class="form-group col-md-6">
-        <label for="tipoEstablecimiento">Tipo de establecimiento</label>
-        <div class="input-group has-validation">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="bi bi-building"></i></span>
-          </div>
-          <input 
-            id="tipoEstablecimiento" 
-            formControlName="tipoEstablecimiento" 
-            class="form-control" 
-            placeholder="Ej. Restaurante, Cafetería"
-            [ngClass]="{'is-invalid': restauranteForm.get('tipoEstablecimiento')?.invalid && restauranteForm.get('tipoEstablecimiento')?.touched}"
-            required
-          />
-          <div class="invalid-feedback">
-            Tipo de establecimiento es requerido
-          </div>
-        </div>
-      </div>
-
+    <div class="row">
       <!-- Nombre del propietario -->
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4 p-2">
         <label for="nombrePropietario">Nombre del propietario</label>
         <div class="input-group has-validation">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="bi bi-person"></i></span>
-          </div>
-          <input 
-            id="nombrePropietario" 
-            formControlName="nombrePropietario" 
-            class="form-control" 
-            placeholder="Ej. Juan"
+          <input id="nombrePropietario" formControlName="nombrePropietario" class="form-control" placeholder="Ej. Juan"
             [ngClass]="{'is-invalid': restauranteForm.get('nombrePropietario')?.invalid && restauranteForm.get('nombrePropietario')?.touched}"
-            required
-          />
+            required />
           <div class="invalid-feedback">
             Nombre del propietario es requerido
           </div>
@@ -176,20 +172,12 @@
       </div>
 
       <!-- Apellido paterno -->
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4 p-2">
         <label for="apellidoPaterno">Apellido paterno</label>
         <div class="input-group has-validation">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="bi bi-person"></i></span>
-          </div>
-          <input 
-            id="apellidoPaterno" 
-            formControlName="apellidoPaterno" 
-            class="form-control" 
-            placeholder="Ej. Pérez"
+          <input id="apellidoPaterno" formControlName="apellidoPaterno" class="form-control" placeholder="Ej. Pérez"
             [ngClass]="{'is-invalid': restauranteForm.get('apellidoPaterno')?.invalid && restauranteForm.get('apellidoPaterno')?.touched}"
-            required
-          />
+            required />
           <div class="invalid-feedback">
             Apellido paterno es requerido
           </div>
@@ -197,20 +185,12 @@
       </div>
 
       <!-- Apellido materno -->
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4 p-2">
         <label for="apellidoMaterno">Apellido materno</label>
         <div class="input-group has-validation">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="bi bi-person"></i></span>
-          </div>
-          <input 
-            id="apellidoMaterno" 
-            formControlName="apellidoMaterno" 
-            class="form-control" 
-            placeholder="Ej. Rodríguez"
+          <input id="apellidoMaterno" formControlName="apellidoMaterno" class="form-control" placeholder="Ej. Rodríguez"
             [ngClass]="{'is-invalid': restauranteForm.get('apellidoMaterno')?.invalid && restauranteForm.get('apellidoMaterno')?.touched}"
-            required
-          />
+            required />
           <div class="invalid-feedback">
             Apellido materno es requerido
           </div>
@@ -218,20 +198,13 @@
       </div>
 
       <!-- Correo electrónico del propietario -->
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4 p-2">
         <label for="correoPropietario">Correo electrónico del propietario</label>
         <div class="input-group has-validation">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-          </div>
-          <input 
-            id="correoPropietario" 
-            formControlName="correoPropietario" 
-            class="form-control" 
+          <input id="correoPropietario" formControlName="correoPropietario" class="form-control"
             placeholder="Ej. juan@example.com"
             [ngClass]="{'is-invalid': restauranteForm.get('correoPropietario')?.invalid && restauranteForm.get('correoPropietario')?.touched}"
-            required
-          />
+            required />
           <div class="invalid-feedback">
             Correo del propietario es requerido y debe ser válido
           </div>
@@ -239,51 +212,33 @@
       </div>
 
       <!-- Cédula de identidad -->
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4 p-2">
         <label for="cedulaIdentidad">Cédula de identidad</label>
         <div class="input-group has-validation">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="bi bi-card-heading"></i></span>
-          </div>
-          <input 
-            id="cedulaIdentidad" 
-            formControlName="cedulaIdentidad" 
-            class="form-control" 
-            placeholder="Ej. 12345678"
+          <input id="cedulaIdentidad" formControlName="cedulaIdentidad" class="form-control" placeholder="Ej. 1234567"
             [ngClass]="{'is-invalid': restauranteForm.get('cedulaIdentidad')?.invalid && restauranteForm.get('cedulaIdentidad')?.touched}"
-            required
-          />
+            required />
           <div class="invalid-feedback">
-            Cédula de identidad es requerida y debe contener solo números
+            Cédula de identidad es requerida
           </div>
         </div>
       </div>
 
       <!-- Fotografía del propietario -->
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4 p-2">
         <label for="fotoPropietario">Fotografía del propietario</label>
-        <div class="input-group has-validation">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="bi bi-file-earmark-image"></i></span>
-          </div>
-          <input 
-            id="fotoPropietario" 
-            type="file" 
-            (change)="onFileChange($event, 'fotoPropietario')" 
-            class="form-control"
+        <div class="input-group-sm has-validation">
+          <input id="fotoPropietario" type="file" (change)="onFileChange($event, 'fotoPropietario')"
+            class="form-control input-form"
             [ngClass]="{'is-invalid': restauranteForm.get('fotoPropietario')?.invalid && restauranteForm.get('fotoPropietario')?.touched}"
-            required
-          />
+            required />
           <div class="invalid-feedback">
-            Fotografía del propietario es requerida
+            Fotografía es requerida
           </div>
         </div>
       </div>
-
     </div>
 
-    <div class="text-center mt-4">
-      <button type="submit" class="btn btn-primary btn-lg" [disabled]="restauranteForm.invalid">Registrar Restaurante</button>
-    </div>
+    <button type="submit" class="btn btn-primary btn-block mt-4">Registrar</button>
   </form>
 </div>

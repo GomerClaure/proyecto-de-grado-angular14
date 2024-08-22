@@ -22,7 +22,7 @@ export class FormRegisterComponent implements OnInit {
       correoRestaurante: ['', [Validators.required, Validators.email]],
       licenciaFuncionamiento: ['', Validators.required],
       ubicacionRestaurante: ['', Validators.required],
-      tipoEstablecimiento: ['', Validators.required],
+      tipoEstablecimiento: ['', Validators.required],  // Asegura que se selecciona al menos uno
       nombrePropietario: ['', Validators.required],
       apellidoPaterno: ['', Validators.required],
       apellidoMaterno: ['', Validators.required],
@@ -30,6 +30,7 @@ export class FormRegisterComponent implements OnInit {
       cedulaIdentidad: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       fotografiaPropietario: ['', Validators.required]
     });
+    
   }
 
   onFileChange(event: any, controlName: string) {
@@ -44,6 +45,7 @@ export class FormRegisterComponent implements OnInit {
   
 
   onSubmit(): void {
+    console.log(this.restauranteForm.value);
     if (this.restauranteForm.valid) {
       console.log(this.restauranteForm.value);
     }

@@ -6,3 +6,32 @@
     top: 0; /* La barra de navegación se fija en la parte superior */
     z-index: 1000; 
 }
+.form-container {
+    padding: 1.5rem 2.7rem;
+    background-color: rgba(255, 255, 255, 0.96);
+    margin-inline: 3.5rem;
+}
+
+.form-control.input-form{
+    height: 38px !important;
+}
+
+
+
+@media screen and (max-width: 576px) {
+    .form-container {
+        max-width: 440px !important;
+    }
+    
+}
+
+@media screen and (max-width: 440px) {
+    .form-container {
+        padding: 1.3rem;
+        max-width: 320px !important;
+        margin-inline: 2.7rem;
+    }
+    
+}
+
+//para pantallas mayores a 720px
