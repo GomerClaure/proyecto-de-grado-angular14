@@ -57,7 +57,7 @@ export class NavComponent implements OnInit, OnDestroy {
           (data) => {
             this.notificaciones = data.notificaciones;
             this.notificacionesSinLeer = data.notificacionesSinLeer;
-            console.log(this.notificaciones);
+            //console.log(this.notificaciones);
           },
           (error) => {
             console.error(error);
@@ -94,7 +94,7 @@ export class NavComponent implements OnInit, OnDestroy {
     if (ids.length > 0) {
       this.notificacionService.marcarLeida(ids, this.idRestaurante).subscribe(
         (data) => {
-          console.log(data);
+          //console.log(data);
           if (this.notificacionesSinLeer !== 0) {
             this.notificacionesSinLeer -= ids.length;
           }

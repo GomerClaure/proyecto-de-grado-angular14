@@ -1,5 +1,5 @@
 <!-- Barra de navegacion para el propietario -->
-<nav *ngIf="esPropietario()" class="navbar navbar-expand-lg custom-navbar-color ">
+<nav *ngIf="esPropietario()" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark ">
   <div class="container-fluid">
     <a class="navbar-brand" [routerLink]="'/home'">
       <strong>Restaurant</strong>
@@ -72,7 +72,7 @@
 </nav>
 
 <!-- Barra de navegacion para el administrador -->
-<nav *ngIf="esAdministrador()" class="navbar navbar-expand-lg custom-navbar-color ">
+<nav *ngIf="esAdministrador()" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Administrador</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -94,7 +94,7 @@
 
 <!-- Barra de navegacion del empleado -->
  <!--Si el empleado es mesero-->
-<nav *ngIf="esEmpleado() && getRol()=='1'" class="navbar navbar-expand-lg custom-navbar-color ">
+<nav *ngIf="esEmpleado() && getRol()=='1'" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand mx-0" [routerLink]="'/home'"><strong>Restaurante </strong></a>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -163,7 +163,7 @@
   </div>
 </nav>
 <!--Si el empleado es cocinero-->
-<nav *ngIf="esEmpleado() && getRol()=='3'" class="navbar navbar-expand-lg custom-navbar-color ">
+<nav *ngIf="esEmpleado() && getRol()=='3'" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark ">
   <div class="container-fluid">
     <a class="navbar-brand" [routerLink]="'/home'">Empleado Cocinero</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -183,7 +183,7 @@
   </div>
 </nav>
 <!--Si el empleado es cajero-->
-<nav *ngIf="esEmpleado() && getRol()=='2'" class="navbar navbar-expand-lg custom-navbar-color ">
+<nav *ngIf="esEmpleado() && getRol()=='2'" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark ">
   <div class="container-fluid">
     <a class="navbar-brand" [routerLink]="'/home'">Empleado Cajero</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -196,7 +196,7 @@
           <a class="nav-link active" aria-current="page" [routerLink]="'/mesero/lista-mesa'">Registrar Pedido</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" [routerLink]="'/cajero/lista-pedidos'">Lista de Pedidos</a>
+          <a class="nav-link active" [routerLink]="'/cajero/lista-pedidos'">Cuentas de pedidos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
@@ -207,7 +207,7 @@
 </nav>
 
 <nav *ngIf="!esPropietario() && !esEmpleado() && !esAdministrador()"
-  class="navbar navbar-expand-lg custom-navbar-color">
+  class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <strong>Lugo</strong>
