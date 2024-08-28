@@ -48,5 +48,6 @@ export interface DetallePedido{
   id_cuenta:number;
   id_empleado:number;
   fecha_hora_pedido:string;
+  nombre_razon_social:string;
 };
   

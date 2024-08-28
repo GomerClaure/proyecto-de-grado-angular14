@@ -7,13 +7,11 @@
   }
 .titulo{
     text-align: center;
-    //padding:50px;
-    
 }
 .btn-aceptar{
   background-color:#96be64;
   border-color: #c0f185;
-  color: black;
+  color: rgb(255, 255, 255);
   border-radius: 5px;
 }
 .btn-curso{
@@ -38,6 +36,7 @@
 .btn-aceptar:hover{
   background-color: #719841;
   border-color: #719841;
+  color: white;
 }
 .btn-delete:hover{
   background-color: #c01818;
@@ -98,7 +97,6 @@
   margin: 0;
 }
 .modal-header{
-  //background-image: url('./assets/image/f1c.jpg');
   background-size: cover;
   background-position: center;
   background-color: #eecf7b;
@@ -122,14 +120,14 @@
   border-color: #d5d3cd;
 }
 .btn-imprimir{
-  background-color:#458771;
+  background-color:#A69A60;
   border-radius: 5px;
-  color: black;
+  color: rgb(255, 255, 255);
   padding: 6px;
   width: 150px;
 }
 .btn-imprimir:hover{
-  background-color:#3e5353;
+  background-color:#807b56;
   color: white;
 }
 
