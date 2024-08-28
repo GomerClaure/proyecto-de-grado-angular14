@@ -9,46 +9,63 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class FormRegisterComponent implements OnInit {
 
   restauranteForm: FormGroup;
+  currentStep = 1;
 
   constructor(private fb: FormBuilder) {
-    this.restauranteForm = this.fb.group({});
+    this.restauranteForm = this.fb.group({
+      pasoUno: this.fb.group({
+        nombreRestaurante: ['', [Validators.required, Validators.minLength(3)]],
+        nit: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+        numeroCelular: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+        correoRestaurante: ['', [Validators.required, Validators.email]],
+        licenciaFuncionamiento: ['', Validators.required],
+      }),
+      pasoDos: this.fb.group({
+        ubicacionRestaurante: ['', Validators.required],
+        tipoEstablecimiento: ['', Validators.required],
+      }),
+      pasoTres: this.fb.group({
+        nombrePropietario: ['', Validators.required],
+        apellidoPaterno: ['', Validators.required],
+        apellidoMaterno: ['', Validators.required],
+        correoPropietario: ['', [Validators.required, Validators.email]],
+        cedulaIdentidad: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+        fotografiaPropietario: ['', Validators.required]
+      })
+    });
   }
 
   ngOnInit(): void {
-    this.restauranteForm = this.fb.group({
-      nombreRestaurante: ['', [Validators.required, Validators.minLength(3)]],
-      nit: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-      numeroCelular: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      correoRestaurante: ['', [Validators.required, Validators.email]],
-      licenciaFuncionamiento: ['', Validators.required],
-      ubicacionRestaurante: ['', Validators.required],
-      tipoEstablecimiento: ['', Validators.required],  // Asegura que se selecciona al menos uno
-      nombrePropietario: ['', Validators.required],
-      apellidoPaterno: ['', Validators.required],
-      apellidoMaterno: ['', Validators.required],
-      correoPropietario: ['', [Validators.required, Validators.email]],
-      cedulaIdentidad: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-      fotografiaPropietario: ['', Validators.required]
-    });
     
   }
+  get pasoUnoForm(): FormGroup {
+    return this.restauranteForm.get('pasoUno') as FormGroup;
+  }
 
-  onFileChange(event: any, controlName: string) {
-    const file = event.target.files[0];
-    if (file) {
-      this.restauranteForm.patchValue({
-        [controlName]: file
-      });
-      this.restauranteForm.get(controlName)?.markAsTouched();
+  get pasoDosForm(): FormGroup {
+    return this.restauranteForm.get('pasoDos') as FormGroup;
+  }
+
+  get pasoTresForm(): FormGroup {
+    return this.restauranteForm.get('pasoTres') as FormGroup;
+  }
+
+  // Métodos para avanzar y retroceder entre pasos
+  goToNextStep(): void {
+    if (this.currentStep < 3) {
+      this.currentStep++;
     }
   }
-  
+
+  goToPreviousStep(): void {
+    if (this.currentStep > 1) {
+      this.currentStep--;
+    }
+  }
 
   onSubmit(): void {
-    console.log(this.restauranteForm.value);
     if (this.restauranteForm.valid) {
       console.log(this.restauranteForm.value);
     }
   }
 }
-

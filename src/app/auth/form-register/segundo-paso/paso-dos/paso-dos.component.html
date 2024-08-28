@@ -1,0 +1,18 @@
+<form [formGroup]="pasoDosForm" >
+    <div>
+      <label for="ubicacionRestaurante">Ubicación del Restaurante</label>
+      <textarea id="ubicacionRestaurante" formControlName="ubicacionRestaurante"></textarea>
+      <div *ngIf="pasoDosForm.get('ubicacionRestaurante')?.invalid && pasoDosForm.get('ubicacionRestaurante')?.touched">
+        La ubicación es requerida.
+      </div>
+    </div>
+  
+    <div>
+      <label for="tipoEstablecimiento">Tipo de Establecimiento</label>
+      <input id="tipoEstablecimiento" type="text" formControlName="tipoEstablecimiento">
+      <div *ngIf="pasoDosForm.get('tipoEstablecimiento')?.invalid && pasoDosForm.get('tipoEstablecimiento')?.touched">
+        El tipo de establecimiento es requerido.
+      </div>
+    </div>
+  </form>
+  

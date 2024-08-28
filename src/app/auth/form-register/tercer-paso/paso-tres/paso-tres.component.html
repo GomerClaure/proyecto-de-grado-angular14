@@ -1,0 +1,67 @@
+<form [formGroup]="pasoTresForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="nombrePropietario">Nombre del Propietario</label>
+      <input id="nombrePropietario" type="text" formControlName="nombrePropietario">
+      <div *ngIf="pasoTresForm.get('nombrePropietario')?.invalid && pasoTresForm.get('nombrePropietario')?.touched">
+        El nombre del propietario es requerido.
+      </div>
+    </div>
+  
+    <div>
+      <label for="apellidoPaterno">Apellido Paterno</label>
+      <input id="apellidoPaterno" type="text" formControlName="apellidoPaterno">
+      <div *ngIf="pasoTresForm.get('apellidoPaterno')?.invalid && pasoTresForm.get('apellidoPaterno')?.touched">
+        El apellido paterno es requerido.
+      </div>
+    </div>
+  
+    <div>
+      <label for="apellidoMaterno">Apellido Materno</label>
+      <input id="apellidoMaterno" type="text" formControlName="apellidoMaterno">
+      <div *ngIf="pasoTresForm.get('apellidoMaterno')?.invalid && pasoTresForm.get('apellidoMaterno')?.touched">
+        El apellido materno es requerido.
+      </div>
+    </div>
+  
+    <div>
+      <label for="correoPropietario">Correo Electrónico del Propietario</label>
+      <input id="correoPropietario" type="email" formControlName="correoPropietario">
+      <div *ngIf="pasoTresForm.get('correoPropietario')?.invalid && pasoTresForm.get('correoPropietario')?.touched">
+        El correo electrónico es requerido y debe tener un formato válido.
+      </div>
+    </div>
+  
+    <div>
+      <label for="cedulaIdentidad">Cédula de Identidad</label>
+      <input id="cedulaIdentidad" type="text" formControlName="cedulaIdentidad">
+      <div *ngIf="pasoTresForm.get('cedulaIdentidad')?.invalid && pasoTresForm.get('cedulaIdentidad')?.touched">
+        La cédula de identidad es requerida y debe contener solo números.
+      </div>
+    </div>
+  
+    <div>
+      <label for="fotografiaPropietario">Fotografía del Propietario</label>
+      <input id="fotografiaPropietario" type="file" (change)="onFileChange($event, 'fotografiaPropietario')">
+      <div *ngIf="pasoTresForm.get('fotografiaPropietario')?.invalid && pasoTresForm.get('fotografiaPropietario')?.touched">
+        La fotografía del propietario es requerida.
+      </div>
+    </div>
+  
+    <div class="summary">
+      <h3>Resumen de Datos Ingresados</h3>
+      <p><strong>Nombre del Restaurante:</strong> {{ formData.pasoUno?.nombreRestaurante }}</p>
+      <p><strong>NIT:</strong> {{ formData.pasoUno?.nit }}</p>
+      <p><strong>Número de Celular:</strong> {{ formData.pasoUno?.numeroCelular }}</p>
+      <p><strong>Correo del Restaurante:</strong> {{ formData.pasoUno?.correoRestaurante }}</p>
+      <p><strong>Ubicación del Restaurante:</strong> {{ formData.pasoDos?.ubicacionRestaurante }}</p>
+      <p><strong>Tipo de Establecimiento:</strong> {{ formData.pasoDos?.tipoEstablecimiento }}</p>
+      <p><strong>Nombre del Propietario:</strong> {{ formData.pasoTres?.nombrePropietario }}</p>
+      <p><strong>Apellido Paterno:</strong> {{ formData.pasoTres?.apellidoPaterno }}</p>
+      <p><strong>Apellido Materno:</strong> {{ formData.pasoTres?.apellidoMaterno }}</p>
+      <p><strong>Correo del Propietario:</strong> {{ formData.pasoTres?.correoPropietario }}</p>
+      <p><strong>Cédula de Identidad:</strong> {{ formData.pasoTres?.cedulaIdentidad }}</p>
+    </div>
+  
+    <button type="submit">Enviar Formulario</button>
+  </form>
+  

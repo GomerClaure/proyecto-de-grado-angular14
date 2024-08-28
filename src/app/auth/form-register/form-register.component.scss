@@ -1,15 +1,58 @@
-.custom-navbar-color {
-    background-color: hsla(10, 78%, 47%, 0.992);
+.progress-container {
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .steps {
+    display: flex;
+    justify-content: space-around; /* Asegura que las `circle` estén alineadas con los extremos */
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    width: 100%;
+  }
+  
+  .steps .circle {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    background-color: #d3d3d3;
+    text-align: center;
+    font-weight: bold;
     color: white;
-    position: fixed;
-    width: 100%; /* Asegura que ocupe toda la anchura */
-    top: 0; /* La barra de navegación se fija en la parte superior */
-    z-index: 1000; 
-}
+    z-index: 1;
+  }
+  
+  .steps .circle.active {
+    background-color: #4caf50; /* Color para los pasos completados */
+  }
+  
+  .progress-bar {
+    position: absolute;
+    top: 50%; /* Posición vertical en el centro del contenedor */
+    left: 0;
+    right: 0;
+    transform: translateY(-50%); /* Asegura que esté centrado verticalmente */
+    height: 4px;
+    background: #d3d3d3;
+    z-index: 0;
+  }
+  
+  .indicator {
+    height: 100%;
+    // width: calc((100% / 3) * 2); /* Ajusta el ancho según el paso actual */
+    background-color: #4caf50; /* Color de la barra de progreso */
+    display: inline-block;
+  }
+  
+  
 .form-container {
-    padding: 1.5rem 2.7rem;
+    padding: 1.5rem 5.5rem;
     background-color: rgba(255, 255, 255, 0.96);
-    margin-inline: 3.5rem;
+    margin-inline: 10rem;
 }
 
 .form-control.input-form{
