@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,10 +6,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './form-register.component.html',
   styleUrls: ['./form-register.component.scss']
 })
-export class FormRegisterComponent implements OnInit {
+export class FormRegisterComponent implements OnInit, AfterViewInit {
 
   restauranteForm: FormGroup;
-  currentStep = 1;
+  currentStep = 0;
 
   constructor(private fb: FormBuilder) {
     this.restauranteForm = this.fb.group({
@@ -37,6 +37,13 @@ export class FormRegisterComponent implements OnInit {
 
   ngOnInit(): void {
     
+  }
+
+  ngAfterViewInit(): void {
+    // Espera un pequeño delay para asegurar que el DOM está completamente cargado
+    setTimeout(() => {
+      this.currentStep = 1;
+    }, 200); // Ajusta el tiempo según sea necesario
   }
   get pasoUnoForm(): FormGroup {
     return this.restauranteForm.get('pasoUno') as FormGroup;

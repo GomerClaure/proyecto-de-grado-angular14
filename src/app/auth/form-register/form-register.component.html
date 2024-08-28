@@ -14,14 +14,14 @@
   </div>
   
   
-  <div class="mb-4">
-    <h1 class="fs-5">SOLICITUD DE REGISTRO DE RESTAURANTE</h1>
-    <p class="lead">Completa el formulario con la información del restaurante y propietario.</p>
+  <div class="mb-2">
+    <h1 class="fs-6 mb-">SOLICITUD DE REGISTRO DE RESTAURANTE</h1>
+    <p class="lead mb-0">Completa el formulario con la información del restaurante y propietario.</p>
   </div>
 
   <div class="by-step-form">
     <!-- form-register.component.html -->
-    <div *ngIf="currentStep === 1">
+    <div *ngIf="currentStep >= 0 && currentStep <2 ">
       <app-paso-uno [pasoUnoForm]="pasoUnoForm"></app-paso-uno>
     </div>
 
@@ -34,10 +34,10 @@
     </div>
 
 
-    <div class="navigation-buttons">
-      <button (click)="goToPreviousStep()" [disabled]="currentStep === 1">Anterior</button>
-      <button *ngIf="currentStep < 3" (click)="goToNextStep()">Siguiente</button>
-      <button *ngIf="currentStep === 3" (click)="onSubmit()">Enviar</button>
+    <div class="navigation-buttons d-flex justify-content-around">
+      <button class="btn btn-secondary" *ngIf="currentStep > 1" (click)="goToPreviousStep()" [disabled]="currentStep === 1">Anterior</button>
+      <button class="btn btn-success" *ngIf="currentStep < 3" (click)="goToNextStep()">Siguiente</button>
+      <button class="btn btn-success" *ngIf="currentStep === 3" (click)="onSubmit()">Enviar</button>
     </div>
 
 

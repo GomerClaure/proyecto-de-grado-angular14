@@ -24,10 +24,11 @@
     font-weight: bold;
     color: white;
     z-index: 1;
+    transition: background-color 0.3s ease; /* Transición suave para el color de la circunferencia */
   }
   
   .steps .circle.active {
-    background-color: #4caf50; /* Color para los pasos completados */
+    background-color: #458771; /* Color para los pasos completados */
   }
   
   .progress-bar {
@@ -39,20 +40,21 @@
     height: 4px;
     background: #d3d3d3;
     z-index: 0;
+    overflow: hidden; /* Asegura que la barra de progreso no se desborde */
   }
   
   .indicator {
     height: 100%;
-    // width: calc((100% / 3) * 2); /* Ajusta el ancho según el paso actual */
-    background-color: #4caf50; /* Color de la barra de progreso */
+    background-color: #458771; /* Color de la barra de progreso */
     display: inline-block;
+    transition: width 0.5s ease; /* Transición suave para el ancho de la barra de progreso */
   }
   
   
 .form-container {
     padding: 1.5rem 5.5rem;
     background-color: rgba(255, 255, 255, 0.96);
-    margin-inline: 10rem;
+    margin-inline: 18rem;
 }
 
 .form-control.input-form{

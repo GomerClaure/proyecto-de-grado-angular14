@@ -1,72 +1,88 @@
-<form [formGroup]="pasoUnoForm"  class="needs-validation" novalidate>
+<form [formGroup]="pasoUnoForm" class="needs-validation" novalidate>
     <div class="row">
-        <!-- Nombre del restaurante -->
-        <div class="form-group col-md-12 p-1">
-            <label for="nombreRestaurante">Nombre del restaurante</label>
-            <div class="input-group has-validation">
-                <input id="nombreRestaurante" formControlName="nombreRestaurante" class="form-control"
-                    placeholder="Ej. La Casa de las Empanadas"
-                    [ngClass]="{'is-invalid': pasoUnoForm.get('nombreRestaurante')?.invalid && pasoUnoForm.get('nombreRestaurante')?.touched}"
-                    required />
-                <div class="invalid-feedback">
-                    Nombre es requerido y debe tener al menos 3 caracteres
-                </div>
-            </div>
+      <!-- Nombre del restaurante -->
+      <div class="form-group col-md-12 mb-1 p-1">
+        <label for="nombreRestaurante">Nombre del restaurante</label>
+        <div class="input-group has-validation">
+          <input id="nombreRestaurante" formControlName="nombreRestaurante" class="form-control"
+            placeholder="Ej. La Casa de las Empanadas"
+            [ngClass]="{
+              'is-invalid': pasoUnoForm.get('nombreRestaurante')?.invalid && pasoUnoForm.get('nombreRestaurante')?.touched,
+              'is-valid': pasoUnoForm.get('nombreRestaurante')?.valid && pasoUnoForm.get('nombreRestaurante')?.touched
+            }"
+            required />
+          <div class="invalid-feedback">
+            Nombre es requerido y debe tener al menos 3 caracteres
+          </div>
         </div>
-
-        <!-- NIT -->
-        <div class="form-group col-md-12 p-1">
-            <label for="nit">NIT</label>
-            <div class="input-group has-validation">
-                <input id="nit" formControlName="nit" class="form-control" placeholder="Ej. 123456789"
-                    [ngClass]="{'is-invalid': pasoUnoForm.get('nit')?.invalid && pasoUnoForm.get('nit')?.touched}"
-                    required />
-                <div class="invalid-feedback">
-                    NIT es requerido y solo puede contener números
-                </div>
-            </div>
+      </div>
+  
+      <!-- NIT -->
+      <div class="form-group col-md-6 mb-1 p-1">
+        <label for="nit">NIT</label>
+        <div class="input-group has-validation">
+          <input id="nit" formControlName="nit" class="form-control" placeholder="Ej. 123456789"
+            [ngClass]="{
+              'is-invalid': pasoUnoForm.get('nit')?.invalid && pasoUnoForm.get('nit')?.touched,
+              'is-valid': pasoUnoForm.get('nit')?.valid && pasoUnoForm.get('nit')?.touched
+            }"
+            required />
+          <div class="invalid-feedback">
+            NIT es requerido y solo puede contener números
+          </div>
         </div>
-
-        <!-- Número de celular -->
-        <div class="form-group col-md-12 p-1">
-            <label for="numeroCelular">Número de celular</label>
-            <div class="input-group has-validation">
-                <input id="numeroCelular" formControlName="numeroCelular" class="form-control"
-                    placeholder="Ej. 6001234567"
-                    [ngClass]="{'is-invalid': pasoUnoForm.get('numeroCelular')?.invalid && pasoUnoForm.get('numeroCelular')?.touched}"
-                    required />
-                <div class="invalid-feedback">
-                    Número de celular es requerido y debe tener 10 dígitos
-                </div>
-            </div>
+      </div>
+  
+      <!-- Número de celular -->
+      <div class="form-group col-md-6 mb-1 p-1">
+        <label for="numeroCelular">Número de celular</label>
+        <div class="input-group has-validation">
+          <input id="numeroCelular" formControlName="numeroCelular" class="form-control"
+            placeholder="Ej. 6001234567"
+            [ngClass]="{
+              'is-invalid': pasoUnoForm.get('numeroCelular')?.invalid && pasoUnoForm.get('numeroCelular')?.touched,
+              'is-valid': pasoUnoForm.get('numeroCelular')?.valid && pasoUnoForm.get('numeroCelular')?.touched
+            }"
+            required />
+          <div class="invalid-feedback">
+            Número de celular es requerido y debe tener 10 dígitos
+          </div>
         </div>
-
-        <!-- correo del restaurante -->
-        <div class="form-group col-md-12 p-1">
-            <label for="correoRestaurante">Correo electrónico del restaurante</label>
-            <div class="input-group has-validation">
-                <input id="correoRestaurante" formControlName="correoRestaurante" class="form-control"
-                    placeholder="Ej. restaurante@example.com"
-                    [ngClass]="{'is-invalid': pasoUnoForm.get('correoRestaurante')?.invalid && pasoUnoForm.get('correoRestaurante')?.touched}"
-                    required />
-                <div class="invalid-feedback">
-                    Correo electrónico es requerido y debe ser válido
-                </div>
-            </div>
+      </div>
+  
+      <!-- Correo del restaurante -->
+      <div class="form-group col-md-12 mb-1 p-1">
+        <label for="correoRestaurante">Correo electrónico del restaurante</label>
+        <div class="input-group has-validation">
+          <input id="correoRestaurante" formControlName="correoRestaurante" class="form-control"
+            placeholder="Ej. restaurante@example.com"
+            [ngClass]="{
+              'is-invalid': pasoUnoForm.get('correoRestaurante')?.invalid && pasoUnoForm.get('correoRestaurante')?.touched,
+              'is-valid': pasoUnoForm.get('correoRestaurante')?.valid && pasoUnoForm.get('correoRestaurante')?.touched
+            }"
+            required />
+          <div class="invalid-feedback">
+            Correo electrónico es requerido y debe ser válido
+          </div>
         </div>
-
-        <!-- Licencia de funcionamiento -->
-        <div class="form-group col-md-12 p-1">
-            <label for="licenciaFuncionamiento">Licencia de funcionamiento (PDF)</label>
-            <div class="input-group-sm has-validation">
-                <input id="licenciaFuncionamiento" type="file" (change)="onFileChange($event, 'licenciaFuncionamiento')"
-                    class="form-control input-form"
-                    [ngClass]="{'is-invalid': pasoUnoForm.get('licenciaFuncionamiento')?.invalid && pasoUnoForm.get('licenciaFuncionamiento')?.touched}"
-                    required />
-                <div class="invalid-feedback">
-                    Licencia es requerida y debe ser un archivo PDF
-                </div>
-            </div>
+      </div>
+  
+      <!-- Licencia de funcionamiento -->
+      <div class="form-group col-md-12 p-1 mb-3">
+        <label for="licenciaFuncionamiento">Licencia de funcionamiento (PDF)</label>
+        <div class="input-group-sm has-validation">
+          <input id="licenciaFuncionamiento" type="file" (change)="onFileChange($event, 'licenciaFuncionamiento')"
+            class="form-control input-form"
+            [ngClass]="{
+              'is-invalid': pasoUnoForm.get('licenciaFuncionamiento')?.invalid && pasoUnoForm.get('licenciaFuncionamiento')?.touched,
+              'is-valid': pasoUnoForm.get('licenciaFuncionamiento')?.valid && pasoUnoForm.get('licenciaFuncionamiento')?.touched
+            }"
+            required />
+          <div class="invalid-feedback">
+            Licencia es requerida y debe ser un archivo PDF
+          </div>
         </div>
+      </div>
     </div>
-</form>
+  </form>
+  

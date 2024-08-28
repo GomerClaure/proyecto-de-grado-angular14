@@ -1,18 +1,54 @@
-<form [formGroup]="pasoDosForm" >
-    <div>
-      <label for="ubicacionRestaurante">Ubicación del Restaurante</label>
-      <textarea id="ubicacionRestaurante" formControlName="ubicacionRestaurante"></textarea>
-      <div *ngIf="pasoDosForm.get('ubicacionRestaurante')?.invalid && pasoDosForm.get('ubicacionRestaurante')?.touched">
-        La ubicación es requerida.
+<form [formGroup]="pasoDosForm" class="">
+  <!-- Tipo de establecimiento -->
+  <div class="form-group col-md-12 p-2">
+    <label for="tipoEstablecimiento">Tipo de establecimiento</label>
+    <div class="d-flex flex-wrap">
+      <div class="form-check me-3">
+        <input class="form-check-input" type="radio" id="restaurante" formControlName="tipoEstablecimiento"
+          value="Restaurante">
+        <label class="form-check-label" for="restaurante">Restaurante</label>
+      </div>
+      <div class="form-check me-3">
+        <input class="form-check-input" type="radio" id="cafeteria" formControlName="tipoEstablecimiento"
+          value="Cafetería">
+        <label class="form-check-label" for="cafeteria">Cafetería</label>
+      </div>
+      <div class="form-check me-3">
+        <input class="form-check-input" type="radio" id="bar" formControlName="tipoEstablecimiento" value="Bar">
+        <label class="form-check-label" for="bar">Bar</label>
+      </div>
+      <div class="form-check me-3">
+        <input class="form-check-input" type="radio" id="pasteleria" formControlName="tipoEstablecimiento"
+          value="Pastelería">
+        <label class="form-check-label" for="pasteleria">Pastelería</label>
+      </div>
+      <div class="form-check me-3">
+        <input class="form-check-input" type="radio" id="heladeria" formControlName="tipoEstablecimiento"
+          value="Heladería">
+        <label class="form-check-label" for="heladeria">Heladería</label>
+      </div>
+      <div class="form-check me-3">
+        <input class="form-check-input" type="radio" id="comidaRapida" formControlName="tipoEstablecimiento"
+          value="Comida rápida">
+        <label class="form-check-label" for="comidaRapida">Comida rápida</label>
+      </div>
+      <div class="form-check me-3">
+        <input class="form-check-input" type="radio" id="otro" formControlName="tipoEstablecimiento" value="Otro">
+        <label class="form-check-label" for="otro">Otro</label>
       </div>
     </div>
-  
-    <div>
-      <label for="tipoEstablecimiento">Tipo de Establecimiento</label>
-      <input id="tipoEstablecimiento" type="text" formControlName="tipoEstablecimiento">
-      <div *ngIf="pasoDosForm.get('tipoEstablecimiento')?.invalid && pasoDosForm.get('tipoEstablecimiento')?.touched">
-        El tipo de establecimiento es requerido.
-      </div>
+    <div class="invalid-feedback">
+      Tipo de establecimiento es requerido
     </div>
-  </form>
-  
+  </div>
+
+  <!-- Ubicación del Restaurante -->
+  <div class="mb-3">
+    <label for="map" class="form-label">Ubicación del Restaurante</label>
+    <div id="map" class="border"></div>
+    
+    <div *ngIf="pasoDosForm.get('ubicacionRestaurante')?.invalid && pasoDosForm.get('ubicacionRestaurante')?.touched" class="text-danger">
+      La ubicación es requerida.
+    </div>
+  </div>
+</form>
