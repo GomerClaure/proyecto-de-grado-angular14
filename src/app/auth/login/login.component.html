@@ -2,56 +2,56 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="fondo">
   <div class="fond">
-<br><br>
-<div>
-    <div class="container">
-      <div class="row">
-        <div class="f">
-        <div class="col-md-6 col-sm-8 col-xs-10">
-          <div class="card">
-            <div class="card-header ">
-              <strong>Iniciar Sesion</strong>
-                <br>
-              <div class="pt-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                </svg>
-              </div>
-            </div>
-            <div class="card-body"> 
-              <div class="formulario">
-              <form [formGroup]="formularioLogin"> 
-                <div class="mb-3">
-                  <label for="validationServer03" class="form-label">Nombre</label>
-                  <input class="form-control" aria-describedby="validationServer03Feedback" formControlName="usuario" [class.is-invalid]="formularioLogin.get('usuario')?.invalid && formularioLogin.get('usuario')?.touched">
-                  <div *ngIf="formularioLogin.get('usuario')?.invalid && formularioLogin.get('usuario')?.touched" class="invalid-feedback">
-                      El nombre es obligatorio y debe tener al menos 3 caracteres.
-                  </div>
-              </div>
-              
-                <div class="mb-3">
-                  <label for="validationServer03" class="form-label" >Contraseña</label>
-                  <input type="password" class="form-control" aria-describedby="validationServer03Feedback" formControlName="password" [class.is-invalid]="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched">
-                  <div *ngIf="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched"  class="invalid-feedback">
-                    La contraseña es obligatoria y debe tener al menos 8 caracteres.
+    <br><br>
+    <div>
+      <div class="container">
+        <div class="row">
+          <div class="f">
+            <div class="col-md-6 col-sm-8 col-xs-10">
+              <div class="card">
+                <div class="card-header ">
+                  <strong>Iniciar Sesión</strong>
+                  <br>
+                  <div class="pt-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                      <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
                   </div>
                 </div>
-                <div class="d-grid gap-2 justify-content-center"> 
-                  <button type="submit" class="btn btn-registrar" (click)="onSubmit()">Iniciar Sesión</button>
+                <div class="card-body"> 
+                  <div class="formulario">
+                    <form [formGroup]="formularioLogin"> 
+                      <div class="mb-3">
+                        <label for="validationServer03" class="form-label">Nombre</label>
+                        <input class="form-control" aria-describedby="validationServer03Feedback" formControlName="usuario" [class.is-invalid]="formularioLogin.get('usuario')?.invalid && formularioLogin.get('usuario')?.touched">
+                        <div *ngIf="formularioLogin.get('usuario')?.invalid && formularioLogin.get('usuario')?.touched" class="invalid-feedback">
+                          El nombre es obligatorio y debe tener al menos 3 caracteres.
+                        </div>
+                      </div>
+                      <div class="mb-3 position-relative">
+                        <label for="validationServer03" class="form-label">Contraseña</label>
+                        <input [type]="mostrarPassword ? 'text' : 'password'" class="form-control" aria-describedby="validationServer03Feedback" formControlName="password" [class.is-invalid]="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched">
+                        <span (click)="toggleMostrarPassword()">
+                            <i class="mt-3 fa" [ngClass]="mostrarPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                        </span>
+                        <div *ngIf="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched" class="invalid-feedback">
+                            La contraseña es obligatoria y debe tener al menos 8 caracteres.
+                        </div>
+                    </div>
+                    
+                      <div class="d-grid gap-2 justify-content-center"> 
+                        <button type="submit" class="btn btn-registrar" (click)="onSubmit()">Iniciar Sesión</button>
+                      </div>
+                    </form>
+                  </div>
+                  <lib-ng-toast></lib-ng-toast>
                 </div>
-              </form>
-            </div>
-              <lib-ng-toast></lib-ng-toast>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      </div>
     </div>
+  </div>
 </div>
-  </div>
-  </div>
-
-
-

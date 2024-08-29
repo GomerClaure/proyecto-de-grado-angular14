@@ -1,27 +1,51 @@
-
 .card {
     margin-top: 150px;
     border-radius: 10px;
     background-color: rgba(253, 253, 253, 0.9); /* Color de fondo semi-transparente */
     box-shadow: 0px 0px 100px 0px rgba(0, 0, 0, 0.2); /* Ajuste del box-shadow */
     border: none;
-    //position: relative;
 }
-.card-body{
+
+.card-body {
     padding: 50px;
 }
-.card-header{
+
+.card-header {
     text-align: center;
     background-color: white;
-  }
-.contenedor-icono svg{
+}
+
+.contenedor-icono svg {
     text-align: center;
     margin-top: 20px;
     width: 60px;
     height: 60px;
     margin-bottom: 20px;
 }
-.f{
-    display:flex;
+
+.f {
+    display: flex;
     justify-content: center;
+}
+
+/* Estilo específico para el input de contraseña */
+.position-relative {
+    position: relative;
+}
+
+.position-relative input {
+    padding-right: 2.5rem; /* Espacio para el icono dentro del input */
+}
+
+.position-relative .fa {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #6c757d; /* Color del ícono */
+}
+
+.position-relative .fa:hover {
+    color: #343a40; /* Color al hacer hover en el ícono */
 }
