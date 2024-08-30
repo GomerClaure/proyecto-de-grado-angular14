@@ -47,6 +47,7 @@ export class PasoDosComponent implements OnInit, AfterViewInit {
   private updateMarkerPosition(lat: number, lng: number): void {
     this.marker.setLatLng([lat, lng]);
     this.getAddress(lat, lng);
+    console.log('Latitud:', lat, 'Longitud:', lng);
     this.pasoDosForm.get('ubicacionRestaurante')?.setValue(this.direccion ? this.direccion.display_name : '');
   }
 

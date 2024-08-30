@@ -1,82 +1,86 @@
 .progress-container {
-    width: 100%;
-    margin-bottom: 20px;
-    position: relative;
-  }
-  
-  .steps {
-    display: flex;
-    justify-content: space-around; /* Asegura que las `circle` estén alineadas con los extremos */
-    align-items: center;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    width: 100%;
-  }
-  
-  .steps .circle {
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 50%;
-    background-color: #d3d3d3;
-    text-align: center;
-    font-weight: bold;
-    color: white;
-    z-index: 1;
-    transition: background-color 0.3s ease; /* Transición suave para el color de la circunferencia */
-  }
-  
-  .steps .circle.active {
-    background-color: #458771; /* Color para los pasos completados */
-  }
-  
-  .progress-bar {
-    position: absolute;
-    top: 50%; /* Posición vertical en el centro del contenedor */
-    left: 0;
-    right: 0;
-    transform: translateY(-50%); /* Asegura que esté centrado verticalmente */
-    height: 4px;
-    background: #d3d3d3;
-    z-index: 0;
-    overflow: hidden; /* Asegura que la barra de progreso no se desborde */
-  }
-  
-  .indicator {
-    height: 100%;
-    background-color: #458771; /* Color de la barra de progreso */
-    display: inline-block;
-    transition: width 0.5s ease; /* Transición suave para el ancho de la barra de progreso */
-  }
-  
-  
+  width: 100%;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  width: 100%;
+}
+
+.steps .circle {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  background-color: #d3d3d3;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  z-index: 1;
+  transition: background-color 0.3s ease;
+}
+
+.steps .circle.active {
+  background-color: #458771;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  height: 4px;
+  background: #d3d3d3;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.indicator {
+  height: 100%;
+  background-color: #458771;
+  display: inline-block;
+  transition: width 0.5s ease;
+}
+
 .form-container {
-    padding: 1.5rem 5.5rem;
-    background-color: rgba(255, 255, 255, 0.96);
-    margin-inline: 18rem;
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.96);
+  margin-inline: 18rem;
 }
 
-.form-control.input-form{
-    height: 38px !important;
+.form-control.input-form {
+  height: 38px !important;
 }
 
-
-
-@media screen and (max-width: 576px) {
-    .form-container {
-        max-width: 440px !important;
-    }
-    
+@media (max-width: 1400px) {
+  .form-container {
+    margin-inline: 10rem;
+  }
 }
 
-@media screen and (max-width: 440px) {
-    .form-container {
-        padding: 1.3rem;
-        max-width: 320px !important;
-        margin-inline: 2.7rem;
-    }
-    
+@media (max-width: 1024px) {
+  .form-container {
+    margin-inline: 5rem;
+  }
 }
 
-//para pantallas mayores a 720px
+@media (max-width: 768px) {
+  .form-container {
+    margin-inline: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .form-container {
+    padding: 1.3rem;
+    margin-inline: 1rem;
+  }
+}
