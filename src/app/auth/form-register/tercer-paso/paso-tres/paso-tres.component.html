@@ -1,4 +1,4 @@
-<form [formGroup]="pasoTresForm" (ngSubmit)="onSubmit()" class="container">
+<form [formGroup]="pasoTresForm"  class="container">
   <div class="row mb-1">
     <!-- Nombre del Propietario -->
     <div class="col-md-6">
@@ -82,17 +82,17 @@
 
   <div class="row mb-3">
     <!-- Fotografía del Propietario -->
-    <div class="col-md-12">
-      <label for="fotografiaPropietario" class="form-label">Fotografía del Propietario</label>
-      <input id="fotografiaPropietario" type="file" class="form-control"
-        formControlName="fotografiaPropietario"
-        [ngClass]="{
-          'is-invalid': pasoTresForm.get('fotografiaPropietario')?.invalid && pasoTresForm.get('fotografiaPropietario')?.touched,
-          'is-valid': pasoTresForm.get('fotografiaPropietario')?.valid && pasoTresForm.get('fotografiaPropietario')?.touched
-        }"
-        (change)="onFileChange($event, 'fotografiaPropietario')" />
-      <div *ngIf="pasoTresForm.get('fotografiaPropietario')?.invalid && pasoTresForm.get('fotografiaPropietario')?.touched" class="invalid-feedback">
-        La fotografía del propietario es requerida.
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <label for="fotografiaPropietario" class="form-label">Fotografía del Propietario</label>
+        <input id="fotografiaPropietario" type="file" class="form-control"
+          (change)="onFileChange($event, 'fotografiaPropietario')" />
+        <div *ngIf="uploadedFile">
+          Archivo seleccionado: {{ uploadedFile.name }}
+        </div>
+        <div *ngIf="pasoTresForm.get('fotografiaPropietario')?.invalid && pasoTresForm.get('fotografiaPropietario')?.touched" class="invalid-feedback">
+          La fotografía del propietario es requerida.
+        </div>
       </div>
     </div>
   </div>

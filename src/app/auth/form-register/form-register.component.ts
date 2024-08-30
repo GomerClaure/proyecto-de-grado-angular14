@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PreRegistroService } from 'src/app/services/pre-registro/pre-registro.service';
 
 @Component({
   selector: 'app-form-register',
@@ -11,7 +12,7 @@ export class FormRegisterComponent implements OnInit, AfterViewInit {
   restauranteForm: FormGroup;
   currentStep = 0;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private preRegistroService: PreRegistroService) {
     this.restauranteForm = this.fb.group({
       pasoUno: this.fb.group({
         nombreRestaurante: ['', [Validators.required, Validators.minLength(3)]],
@@ -71,8 +72,10 @@ export class FormRegisterComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit(): void {
+    console.log(this.restauranteForm.value);
     if (this.restauranteForm.valid) {
-      console.log(this.restauranteForm.value);
+      var lic = this.restauranteForm.get('pasoUno')?.get('licenciaFuncionamiento');
+      console.log(lic);
     }
   }
 }
