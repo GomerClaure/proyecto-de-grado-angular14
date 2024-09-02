@@ -14,10 +14,14 @@ export class PasoDosComponent implements OnInit, AfterViewInit {
   private map!: L.Map;
   private marker!: L.Marker;
   private direccion: any;
+  public tiposEstablecimiento: string[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.tiposEstablecimiento = ['Restaurante', 'Cafetería', 'Bar',
+       'Pasteleria', 'Pizzería', 'Comida rápida', 'Heladería', 'Otro'];
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ngAfterViewInit(): void {
     this.initMap();
@@ -41,12 +45,16 @@ export class PasoDosComponent implements OnInit, AfterViewInit {
 
     this.marker = L.marker([-17.3952, -66.1391], { draggable: true }).addTo(this.map);
     this.updateMarkerPosition(-17.3952, -66.1391);
+    this.pasoDosForm.get('latitud')?.setValue(-17.3952);
+    this.pasoDosForm.get('longitud')?.setValue(-66.1391);
     this.marker.bindPopup('¡Estás en Cochabamba!').openPopup();
   }
 
   private updateMarkerPosition(lat: number, lng: number): void {
     this.marker.setLatLng([lat, lng]);
     this.getAddress(lat, lng);
+    this.pasoDosForm.get('latitud')?.setValue(lat);
+    this.pasoDosForm.get('longitud')?.setValue(lng);
     console.log('Latitud:', lat, 'Longitud:', lng);
     this.pasoDosForm.get('ubicacionRestaurante')?.setValue(this.direccion ? this.direccion.display_name : '');
   }

@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class PasoUnoComponent implements OnInit {
 
   @Input() pasoUnoForm: FormGroup;
+  selectedFiles: { [key: string]: File } = {};
 
   constructor(private fb: FormBuilder) {
     this.pasoUnoForm = this.fb.group({});
@@ -19,6 +20,7 @@ export class PasoUnoComponent implements OnInit {
   onFileChange(event: any, controlName: string) {
     const file = event.target.files[0];
     if (file) {
+      this.selectedFiles[controlName] = file;
       this.pasoUnoForm.patchValue({
         [controlName]: file
       });
