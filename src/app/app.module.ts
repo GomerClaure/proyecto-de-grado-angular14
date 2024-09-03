@@ -10,6 +10,7 @@ import { MeseroModule } from './modulos/mesero/mesero.module';
 import { HomeModule } from './modulos/home/home.module';
 import { CocineroModule } from './modulos/cocinero/cocinero.module';
 import { ComponentsModule } from './components/components.module';
+import { AdministradorModule} from './modulos/administrador/administrador.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ComponentsModule } from './components/components.module';
     HomeModule,
     CocineroModule,
     ComponentsModule,
+    AdministradorModule
   ], 
   providers: [],
   bootstrap: [AppComponent]
