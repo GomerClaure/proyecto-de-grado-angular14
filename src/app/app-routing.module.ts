@@ -42,6 +42,10 @@ const routes: Routes = [
     path: 'reporte',
     loadChildren: () => import('../app/modulos/propietario/reporte/reporte.module').then(m => m.ReporteModule)
   },
+  {
+    path: 'administrador',
+    loadChildren: () => import('../app/modulos/administrador/administrador.module').then(m => m.AdministradorModule)
+  }
 
 ];
 
