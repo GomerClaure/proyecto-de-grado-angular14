@@ -99,18 +99,10 @@
 .modal-header{
   background-size: cover;
   background-position: center;
-  background-color: #eecf7b;
+  background-color: #1c1c1c;
+  color: white;
 }
-.modal-footer{
-   background-image: url('./assets/image/f1c.jpg');
-   background-size: cover;
-   background-position: center;
-}
-.modal-body{
-  background-image: url('./assets/image/f1c.jpg');
-   background-size: cover;
-   background-position: center;
-}
+
 .img-fluid{
    border-radius: 5px;
    border-color: #d1bd58;

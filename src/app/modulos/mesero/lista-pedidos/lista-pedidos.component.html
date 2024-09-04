@@ -4,11 +4,11 @@
   <div class="d-flex flex-column align-items-center">
     <h2 class="titulo"><strong>Lista de Pedidos</strong></h2>
   </div>
-  <br>2
+  <br>
   <div class="container">
     <div class="row">
       <!-- Aquí se insertarían las tarjetas de datos -->
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" *ngFor="let mesa of pedidosPorMesa">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 justify-content-center d-flex" *ngFor="let mesa of pedidosPorMesa">
         <div class="card shadow-sm h-100 d-flex flex-column justify-content-between small-card">
           <div class="card-body">
             <h5 class="card-title">{{ mesa.nombreMesa }}</h5>
@@ -19,7 +19,7 @@
                 </button>
               </div>
               <div class="mt-auto col-7">
-                <button type="button" class="btn btn-editar">
+                <button type="button" class="btn btn-editar" data-bs-toggle="modal" data-bs-target="#MiModal">
                   <i class="bi bi-receipt"></i> Cuenta
                 </button>
               </div>
@@ -32,3 +32,4 @@
   </div>
 </div>
 <app-modal-pedidos></app-modal-pedidos>
+<app-modal-datos-cuenta></app-modal-datos-cuenta>

@@ -57,4 +57,7 @@ export class ListaPedidosComponent implements OnInit {
     const pedidosMesa = this.pedidosPorMesa.find(item => item.nombreMesa === nombreMesa)?.pedidos || [];
     this.pedidoServiceMesa.setPedidosDeMesa(pedidosMesa,nombreMesa,estado);
   }
+  mostrarCuenta(){
+    console.log('entraaa')
+  }
 }

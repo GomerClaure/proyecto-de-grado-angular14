@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgToastModule } from 'ng-angular-popup';
 import { ModalPedidosComponent } from './modal-pedidos/modal-pedidos.component';
 import { ModalEliminarPedidoComponent } from './modal-eliminar-pedido/modal-eliminar-pedido.component';
+import { ModalDatosCuentaComponent } from './modal-datos-cuenta/modal-datos-cuenta.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ModalEliminarPedidoComponent } from './modal-eliminar-pedido/modal-elim
     ListaPedidosComponent,
     RegistrarPedidoComponent,
     ModalPedidosComponent,
-    ModalEliminarPedidoComponent
+    ModalEliminarPedidoComponent,
+    ModalDatosCuentaComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,7 @@ import { ModalEliminarPedidoComponent } from './modal-eliminar-pedido/modal-elim
     ComponentsModule,
     ReactiveFormsModule,
     FormsModule,
-    NgToastModule
+    NgToastModule 
   ]
 })
 export class MeseroModule { }
