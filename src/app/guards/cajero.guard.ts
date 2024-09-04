@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class PropietarioGuard implements CanActivate {
+export class CajeroGuard implements CanActivate {
   router = inject(Router);
 
   canActivate(
@@ -13,14 +13,14 @@ export class PropietarioGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const token = sessionStorage.getItem('token_access');
-    const userType = sessionStorage.getItem('tipo');
+    const userType = sessionStorage.getItem('rol_empleado');
 
     if (!token) {
       this.router.navigate(['/login']);
       return false;
     }
 
-    if (userType === 'Propietario') {
+    if (userType === '2') {
       return true;
     } else {
       this.router.navigate(['/home']); 

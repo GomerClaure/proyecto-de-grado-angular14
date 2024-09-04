@@ -1,49 +1,49 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './modulos/home/home.component';
-import { LoginGuard } from './guards/login.guard';
-import { AuthActiveGuard } from './guards/auth.guard';
+import { PropietarioGuard } from './guards/propietario.guard';
+import { MeseroGuard } from './guards/mesero.guard';
+import { CajeroGuard } from './guards/cajero.guard';
+import { CocineroGuard } from './guards/cocinero.guard';
 
 const routes: Routes = [
   { 
     path: 'home',
     component: HomeComponent,
-    //canActivate: [AuthActiveGuard]
   },
   {
     path: '',
     loadChildren: () => import('../app/auth/auth.module').then(m => m.AuthModule),
-    //canActivate: [LoginGuard]
   },
   {
     path: 'registrar',
     loadChildren: () => import('../app/modulos/propietario/registro/registro.module').then(m => m.RegistroModule),
-    //canActivate: [LoginGuard]
+    canActivate: [PropietarioGuard]
   },
   {
     path: 'lista',
     loadChildren: () => import('../app/modulos/propietario/listas/listas.module').then(m => m.ListasModule),
-    //canActivate: [LoginGuard]
+    canActivate: [PropietarioGuard]
   },
   {
     path: 'mesero',
     loadChildren: () => import('../app/modulos/mesero/mesero.module').then(m => m.MeseroModule),
-    //canActivate: [LoginGuard]
+    canActivate: [MeseroGuard]
   },
   {
     path: 'menu',
     loadChildren: () => import('../app/modulos/propietario/menu/menu.module').then(m => m.MenuModule),
-    //canActivate: [LoginGuard]
+    canActivate: [PropietarioGuard]
   },
   {
     path: 'cocinero',
     loadChildren: () => import('../app/modulos/cocinero/cocinero.module').then(m => m.CocineroModule),
-    //canActivate: [LoginGuard]
+    canActivate: [CocineroGuard]
   },
   {
     path: 'cajero',
     loadChildren: () => import('../app/modulos/cajero/cajero.module').then(m => m.CajeroModule),
-    //canActivate: [LoginGuard]
+    canActivate: [CajeroGuard]
   },
   {
     path: 'notificacion',
@@ -53,7 +53,7 @@ const routes: Routes = [
   {
     path: 'reporte',
     loadChildren: () => import('../app/modulos/propietario/reporte/reporte.module').then(m => m.ReporteModule),
-    //canActivate: [LoginGuard]
+    canActivate: [PropietarioGuard]
   }
 ];
 
