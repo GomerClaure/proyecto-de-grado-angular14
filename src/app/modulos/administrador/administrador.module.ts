@@ -3,17 +3,21 @@ import { CommonModule } from '@angular/common';
 import { AdministradorRoutingModule } from './administrador-routing.module';
 import { SolicitudesComponent } from './solicitudes/solicitudes.component';
 import { ComponentsModule } from "../../components/components.module";
+import { DetalleComponent } from './solicitudes/detalle/detalle.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
-    SolicitudesComponent
+    SolicitudesComponent,
+    DetalleComponent
   ],
   imports: [
     CommonModule,
     AdministradorRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    ReactiveFormsModule
 ]
 })
 export class AdministradorModule { }

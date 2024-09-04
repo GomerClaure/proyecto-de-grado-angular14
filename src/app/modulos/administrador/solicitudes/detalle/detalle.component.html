@@ -1,0 +1,79 @@
+
+<form [formGroup]="preRegistroForm" (ngSubmit)="onSubmit()" class="pt-2 ">
+    <div class="form-group">
+      <label for="nombre_restaurante">Nombre del Restaurante</label>
+      <input type="text" id="nombre_restaurante" formControlName="nombre_restaurante" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="nit">NIT</label>
+      <input type="text" id="nit" formControlName="nit" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="celular_restaurante">Celular del Restaurante</label>
+      <input type="text" id="celular_restaurante" formControlName="celular_restaurante" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="correo_restaurante">Correo del Restaurante</label>
+      <input type="email" id="correo_restaurante" formControlName="correo_restaurante" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="licencia_funcionamiento">Licencia de Funcionamiento</label>
+      <input type="text" id="licencia_funcionamiento" formControlName="licencia_funcionamiento" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="tipo_establecimiento">Tipo de Establecimiento</label>
+      <input type="text" id="tipo_establecimiento" formControlName="tipo_establecimiento" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="nombre_propietario">Nombre del Propietario</label>
+      <input type="text" id="nombre_propietario" formControlName="nombre_propietario" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="apellido_paterno_propietario">Apellido Paterno del Propietario</label>
+      <input type="text" id="apellido_paterno_propietario" formControlName="apellido_paterno_propietario" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="apellido_materno_propietario">Apellido Materno del Propietario</label>
+      <input type="text" id="apellido_materno_propietario" formControlName="apellido_materno_propietario" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="cedula_identidad_propietario">Cédula de Identidad del Propietario</label>
+      <input type="text" id="cedula_identidad_propietario" formControlName="cedula_identidad_propietario" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="correo_propietario">Correo del Propietario</label>
+      <input type="email" id="correo_propietario" formControlName="correo_propietario" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="fotografia_propietario">Fotografía del Propietario</label>
+      <input type="text" id="fotografia_propietario" formControlName="fotografia_propietario" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="estado">Estado</label>
+      <input type="text" id="estado" formControlName="estado" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="created_at">Fecha de Creación</label>
+      <input type="text" id="created_at" formControlName="created_at" class="form-control">
+    </div>
+  
+    <div class=" d-flex justify-content-around mt-3">
+        <!-- aceptar y rechazar -->
+        <button class="btn btn-success" type="submit">Aceptar</button>
+        <button class="btn btn-danger" type="submit">Rechazar</button>
+    </div>
+  </form>
+  

@@ -10,3 +10,17 @@
 .btn-custom:hover {
     background-color: #333333;
 }
+
+.fixed-button-container {
+  position: sticky; /* o position: fixed; dependiendo de la necesidad */
+  top: 0;
+  z-index: 1000;
+  background-color: white; /* Asegúrate de que el botón no quede superpuesto con el contenido */
+  padding: 10px 0; /* Opcional: espacio alrededor del botón */
+}
+
+.scrollable-content {
+  max-height: 70vh; /* Ajusta la altura máxima para permitir el scroll */
+  overflow-y: auto;
+  overflow: hidden;
+}

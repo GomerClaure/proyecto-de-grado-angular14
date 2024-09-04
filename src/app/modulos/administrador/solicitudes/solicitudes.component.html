@@ -1,8 +1,7 @@
-<app-nav></app-nav> <br><br>
-<div class="fondo">
-    
-    <div class=" container">
-        <table class="table table-striped mt-5">
+<app-nav></app-nav>
+<div class="fondo pt-5">
+    <div class="container">
+        <table *ngIf="!mostrarDetalle" class="table table-striped mt-5">
             <thead>
                 <tr>
                     <th scope="col">N°</th>
@@ -34,7 +33,15 @@
                 </tr>
             </tbody>
         </table>
-
-
+        
+        <!-- Contenedor del botón fijo -->
+        <div *ngIf="mostrarDetalle" class="mt-5 card shadow-lg p-4 pt-0 rounded" style="position: relative; overflow-y: auto; max-height: 80vh;">
+            <div class="d-flex justify-content-start py-2" style="position: sticky; top: 0; z-index: 1; background-color: white;">
+                <button class="btn btn-outline-dark" type="button" (click)="ocultarDetalle()">
+                    <i class="bi bi-arrow-left"></i> Atrás
+                </button>
+            </div>
+            <app-detalle [preRegistro]="preRegistroSeleccionado"></app-detalle>
+        </div>
     </div>
 </div>
