@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CuentaService } from 'src/app/services/cuenta/cuenta.service';
+import { CuentaService } from 'src/app/services/pedido/cuenta.service';
 
 
 @Component({
@@ -12,13 +12,13 @@ export class ModalDatosCuentaComponent implements OnInit {
   razonSocial: string = '';
   nit: string = '';
 
-  constructor(private cuentaService:CuentaService) { }
+  constructor(private cuentaS:CuentaService) { }
 
   ngOnInit(): void {
   }
   guardarDatos(){
     console.log('Razón Social:', this.razonSocial);
     console.log('NIT:', this.nit);
-    this.cuentaService.saveDatos(this.razonSocial,this.nit);
+    this.cuentaS.saveDatos(this.razonSocial,this.nit);
   }
 }

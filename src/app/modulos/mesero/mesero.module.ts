@@ -26,9 +26,9 @@ import { ModalDatosCuentaComponent } from './modal-datos-cuenta/modal-datos-cuen
     CommonModule,
     MeseroRoutingModule,
     ComponentsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule, 
     FormsModule,
     NgToastModule 
-  ]
+  ],
 })
 export class MeseroModule { }

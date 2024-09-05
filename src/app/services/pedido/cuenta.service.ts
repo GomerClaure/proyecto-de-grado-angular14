@@ -5,7 +5,12 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class CuentaService {
-  private cuentaSubject =new BehaviorSubject<any[]>([]);
-  cuenta$ =this.cuentaSubject.asObservable();
+  private cuentaSubject = new BehaviorSubject<any[]>([]);
+  cuenta$ = this.cuentaSubject.asObservable();
+
   constructor() { }
+
+  saveDatos(razonSocial: string, nit: string): void {
+    console.log("guardado", razonSocial, nit);
+  }
 }
