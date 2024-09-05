@@ -126,6 +126,8 @@ export class FormRegisterComponent implements OnInit, AfterViewInit {
         next: response => {
           console.log('Respuesta del servidor:', response);
           this.showSuccess('Formulario enviado correctamente');
+          this.restauranteForm.reset();
+          this.currentStep = 1;
         },
         error: error => {
           console.error('Error al enviar el formulario:', error);

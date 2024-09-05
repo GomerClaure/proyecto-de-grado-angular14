@@ -1,79 +1,124 @@
+<form [formGroup]="preRegistroForm" (ngSubmit)="onSubmit()" class="pt-2">
+  <fieldset class="border p-3 mb-4">
+    <legend class="w-auto px-2">Datos del Restaurante</legend>
+    <div class="row">
+      <div class="col-12 col-md-8">
+        <div class="form-group">
+          <label for="nombre_restaurante">Nombre del Restaurante</label>
+          <input type="text" id="nombre_restaurante" formControlName="nombre_restaurante" class="form-control" [attr.disabled]="true">
+        </div>
 
-<form [formGroup]="preRegistroForm" (ngSubmit)="onSubmit()" class="pt-2 ">
-    <div class="form-group">
-      <label for="nombre_restaurante">Nombre del Restaurante</label>
-      <input type="text" id="nombre_restaurante" formControlName="nombre_restaurante" class="form-control">
+        <div class="form-group">
+          <label for="nit">NIT</label>
+          <input type="text" id="nit" formControlName="nit" class="form-control" [attr.disabled]="true">
+        </div>
+
+        <div class="form-group">
+          <label for="celular_restaurante">Celular del Restaurante</label>
+          <input type="text" id="celular_restaurante" formControlName="celular_restaurante" class="form-control" [attr.disabled]="true">
+        </div>
+
+        <div class="form-group">
+          <label for="correo_restaurante">Correo del Restaurante</label>
+          <input type="email" id="correo_restaurante" formControlName="correo_restaurante" class="form-control" [attr.disabled]="true">
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="col-12 d-flex flex-column justify-content-between h-100">
+          <label for="licencia_funcionamiento">Licencia de Funcionamiento</label>
+
+          <iframe id="preview_pdf" [src]="sanitizer.bypassSecurityTrustResourceUrl(previewUrl)" class="form-control"
+            style="height: 150px; border: 1px solid #ccc;"></iframe>
+          <div class="d-flex justify-content-center mt-2">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pdfModal">
+              Ver Licencia de Funcionamiento
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="form-group">
+          <label for="tipo_establecimiento">Tipo de Establecimiento</label>
+          <input type="text" id="tipo_establecimiento" formControlName="tipo_establecimiento" class="form-control" [attr.disabled]="true">
+        </div>
+      </div>
     </div>
-  
-    <div class="form-group">
-      <label for="nit">NIT</label>
-      <input type="text" id="nit" formControlName="nit" class="form-control">
+  </fieldset>
+
+  <!-- Sección Datos del Propietario -->
+  <fieldset class="border p-3 mb-4">
+    <legend class="w-auto px-2">Datos del Propietario</legend>
+
+    <div class="row">
+      <div class="col-12 col-md-8">
+        <div class="form-group">
+          <label for="nombre_propietario">Nombre del Propietario</label>
+          <input type="text" id="nombre_propietario" formControlName="nombre_propietario" class="form-control" [attr.disabled]="true">
+        </div>
+
+        <div class="form-group">
+          <label for="apellido_paterno_propietario">Apellido Paterno del Propietario</label>
+          <input type="text" id="apellido_paterno_propietario" formControlName="apellido_paterno_propietario" class="form-control" [attr.disabled]="true">
+        </div>
+
+        <div class="form-group">
+          <label for="apellido_materno_propietario">Apellido Materno del Propietario</label>
+          <input type="text" id="apellido_materno_propietario" formControlName="apellido_materno_propietario" class="form-control" [attr.disabled]="true">
+        </div>
+
+        <div class="form-group">
+          <label for="cedula_identidad_propietario">Cédula de Identidad del Propietario</label>
+          <input type="text" id="cedula_identidad_propietario" formControlName="cedula_identidad_propietario" class="form-control" [attr.disabled]="true">
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4 d-flex flex-column">
+        <div class="form-group d-flex flex-column flex-grow-1">
+          <label for="fotografia_propietario">Fotografía del Propietario</label>
+          <!-- Previsualización de la imagen -->
+          <div class="d-flex justify-content-center">
+            <img [src]="sanitizer.bypassSecurityTrustUrl(imgURL)" 
+            class="img-fluid" 
+            style="max-width: 220px; max-height: 220px; border: 1px solid #ccc;" 
+            alt="Fotografía del Propietario">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="form-group">
+          <label for="correo_propietario">Correo del Propietario</label>
+          <input type="email" id="correo_propietario" formControlName="correo_propietario" class="form-control" [attr.disabled]="true">
+        </div>
+      </div>
     </div>
+  </fieldset>
   
-    <div class="form-group">
-      <label for="celular_restaurante">Celular del Restaurante</label>
-      <input type="text" id="celular_restaurante" formControlName="celular_restaurante" class="form-control">
+
+  <!-- Botones de acción -->
+  <div class="d-flex justify-content-around mt-3">
+    <button class="btn btn-success" type="submit">Aceptar</button>
+    <button class="btn btn-danger" type="button">Rechazar</button>
+  </div>
+
+</form>
+
+
+<!-- Modal -->
+<div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="pdfModalLabel">Licencia de Funcionamiento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-0">
+        <!-- Aquí mostramos el PDF ocupando el 100% del modal -->
+        <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(pdfUrl)" width="100%" height="100%"
+          style="border: none;"></iframe>
+      </div>
     </div>
-  
-    <div class="form-group">
-      <label for="correo_restaurante">Correo del Restaurante</label>
-      <input type="email" id="correo_restaurante" formControlName="correo_restaurante" class="form-control">
-    </div>
-  
-    <div class="form-group">
-      <label for="licencia_funcionamiento">Licencia de Funcionamiento</label>
-      <input type="text" id="licencia_funcionamiento" formControlName="licencia_funcionamiento" class="form-control">
-    </div>
-  
-    <div class="form-group">
-      <label for="tipo_establecimiento">Tipo de Establecimiento</label>
-      <input type="text" id="tipo_establecimiento" formControlName="tipo_establecimiento" class="form-control">
-    </div>
-  
-    <div class="form-group">
-      <label for="nombre_propietario">Nombre del Propietario</label>
-      <input type="text" id="nombre_propietario" formControlName="nombre_propietario" class="form-control">
-    </div>
-  
-    <div class="form-group">
-      <label for="apellido_paterno_propietario">Apellido Paterno del Propietario</label>
-      <input type="text" id="apellido_paterno_propietario" formControlName="apellido_paterno_propietario" class="form-control">
-    </div>
-  
-    <div class="form-group">
-      <label for="apellido_materno_propietario">Apellido Materno del Propietario</label>
-      <input type="text" id="apellido_materno_propietario" formControlName="apellido_materno_propietario" class="form-control">
-    </div>
-  
-    <div class="form-group">
-      <label for="cedula_identidad_propietario">Cédula de Identidad del Propietario</label>
-      <input type="text" id="cedula_identidad_propietario" formControlName="cedula_identidad_propietario" class="form-control">
-    </div>
-  
-    <div class="form-group">
-      <label for="correo_propietario">Correo del Propietario</label>
-      <input type="email" id="correo_propietario" formControlName="correo_propietario" class="form-control">
-    </div>
-  
-    <div class="form-group">
-      <label for="fotografia_propietario">Fotografía del Propietario</label>
-      <input type="text" id="fotografia_propietario" formControlName="fotografia_propietario" class="form-control">
-    </div>
-  
-    <div class="form-group">
-      <label for="estado">Estado</label>
-      <input type="text" id="estado" formControlName="estado" class="form-control">
-    </div>
-  
-    <div class="form-group">
-      <label for="created_at">Fecha de Creación</label>
-      <input type="text" id="created_at" formControlName="created_at" class="form-control">
-    </div>
-  
-    <div class=" d-flex justify-content-around mt-3">
-        <!-- aceptar y rechazar -->
-        <button class="btn btn-success" type="submit">Aceptar</button>
-        <button class="btn btn-danger" type="submit">Rechazar</button>
-    </div>
-  </form>
-  
+  </div>
+</div>

@@ -17,7 +17,7 @@ export class SolicitudesComponent implements OnInit {
   constructor(private preRegistroService: PreRegistroService,private location: Location) {
     this.preRegistros = [];
     this.preRegistroSeleccionado = {} as FormularioPreRegistro;
-    this.mostrarDetalle = false;
+    this.mostrarDetalle = true;
    }
 
   ngOnInit(): void {
