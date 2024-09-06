@@ -35,7 +35,9 @@ export class DetalleComponent implements OnInit {
       fotografia_propietario: [null],
       estado: [''],
       created_at: [''],
-      id: ['']
+      id: [''],
+      latitud: [''],
+      longitud: [''],
     });
     this.URL_BACKEND = environment.backendStorageUrl;
     this.previewUrl = '';
@@ -49,6 +51,19 @@ export class DetalleComponent implements OnInit {
       this.previewUrl = `${this.URL_BACKEND}${this.preRegistro.licencia_funcionamiento}`;
       this.pdfUrl = `${this.URL_BACKEND}${this.preRegistro.licencia_funcionamiento}`;
       this.imgURL = `${this.URL_BACKEND}${this.preRegistro.fotografia_propietario}`;
+    }
+  }
+
+  getBadgeClass(estado: string): string {
+    switch (estado.toLowerCase()) {
+      case 'pendiente':
+        return 'bg-secondary ';
+      case 'rechazado':
+        return 'bg-danger';
+      case 'aceptado':
+        return 'bg-success';
+      default:
+        return 'bg-secondary';
     }
   }
 

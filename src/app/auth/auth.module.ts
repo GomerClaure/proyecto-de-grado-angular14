@@ -18,7 +18,7 @@ import { PasoTresComponent } from './form-register/tercer-paso/paso-tres/paso-tr
     HomePageComponent,
     PasoUnoComponent,
     PasoDosComponent,
-    PasoTresComponent
+    PasoTresComponent,
   ],
   imports: [
     CommonModule,

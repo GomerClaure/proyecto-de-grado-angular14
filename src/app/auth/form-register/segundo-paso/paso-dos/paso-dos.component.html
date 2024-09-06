@@ -16,7 +16,8 @@
   <!-- Ubicación del Restaurante -->
   <div class="mb-3">
     <label for="map" class="form-label">Ubicación del Restaurante</label>
-    <div id="map" class="border rounded-3" style="height: 300px;"></div>
+    <app-map [parentForm]="pasoDosForm" [mapaDeshabilitado]="false"></app-map>
+
     
     <div *ngIf="pasoDosForm.get('ubicacionRestaurante')?.invalid && pasoDosForm.get('ubicacionRestaurante')?.touched" class="text-danger mt-2">
       La ubicación es requerida.

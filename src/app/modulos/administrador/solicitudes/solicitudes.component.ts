@@ -59,7 +59,6 @@ export class SolicitudesComponent implements OnInit {
 
   verDetalle(registro: FormularioPreRegistro) {
     // Aquí puedes mostrar un modal con todos los detalles del registro
-    console.log('Detalles del registro:', registro);
     this.preRegistroSeleccionado = registro;
     this.mostrarDetalle = true;
     // Implementa la lógica para abrir el modal
