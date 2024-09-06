@@ -11,13 +11,11 @@ import { ListaCategoriaComponent } from './listas/lista-categoria/lista-categori
 import { ListaPlatilloComponent } from './listas/lista-platillo/lista-platillo.component';
 import { ModalEliminarComponent } from './listas/modal-eliminar/modal-eliminar.component';
 import { EditarCategoriaComponent } from './editar/editar-categoria/editar-categoria.component';
-import { ListaPedidosComponent } from '../mesero/lista-pedidos/lista-pedidos.component';
 //menu
 import { GenerarComponent } from './menu/generar/generar.component';
 import { VisualizarQrComponent } from './menu/visualizar-qr/visualizar-qr.component';
 import { PlantillaQrComponent } from './menu/plantilla-qr/plantilla-qr.component';
-import { VistaMenuComponent } from './menu/vista-menu/vista-menu.component';
-import { ModalPlatilloComponent } from './menu/modal-platillo/modal-platillo.component';
+//import { ModalPlatilloComponent } from './menu/modal-platillo/modal-platillo.component';
 //registro
 import { RegistrarPlatilloComponent } from './registro/registrar-platillo/registrar-platillo.component';
 import { RegistrarEmpleadoComponent } from './registro/registrar-empleado/registrar-empleado.component';
@@ -26,7 +24,6 @@ import { EditarPlatilloComponent } from './editar/editar-platillo/editar-platill
 import { ListaVentasComponent } from './reporte/lista-ventas/lista-ventas.component';
 import { PlantillaListaPedidosComponent } from './reporte/plantilla-lista-pedidos/plantilla-lista-pedidos.component';
 import { ListaPedidosComponentR } from './reporte/lista-pedidosR/lista-pedidos.component';
-//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -40,8 +37,6 @@ import { ListaPedidosComponentR } from './reporte/lista-pedidosR/lista-pedidos.c
     GenerarComponent,
     VisualizarQrComponent,
     PlantillaQrComponent,
-    VistaMenuComponent,
-    ModalPlatilloComponent,
    //registro
     RegistrarPlatilloComponent,
     RegistrarEmpleadoComponent,

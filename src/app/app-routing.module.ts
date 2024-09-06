@@ -5,6 +5,7 @@ import { MeseroGuard } from './guards/mesero.guard';
 import { CajeroGuard } from './guards/cajero.guard';
 import { CocineroGuard } from './guards/cocinero.guard';
 import { PropietarioGuard } from './guards/propietario.guard';
+import { VistaMenuComponent } from './components/vista-menu/vista-menu.component';
 
 const routes: Routes = [
   { 
@@ -38,7 +39,11 @@ const routes: Routes = [
   {
     path: 'notificacion',
     loadChildren: () => import('../app/modulos/notificacion/notificacion.module').then(m => m.NotificacionModule),
-  }
+  },
+  {
+  path:'vista/:menu',
+    component:VistaMenuComponent
+  },
 ];
 
 @NgModule({
