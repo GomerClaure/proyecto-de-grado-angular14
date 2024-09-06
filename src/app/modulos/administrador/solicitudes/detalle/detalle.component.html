@@ -1,4 +1,4 @@
-<form [formGroup]="preRegistroForm" (ngSubmit)="onSubmit()" class="pt-2">
+<form [formGroup]="preRegistroForm" class="pt-2">
   <fieldset class="border p-3 mb-4">
     <legend class="w-auto px-2">Datos del Restaurante</legend>
     <div class="row">
@@ -24,12 +24,12 @@
         </div>
       </div>
 
-      <div class="col-12 col-md-4">
-        <div class="col-12 d-flex flex-column justify-content-between h-100">
+      <div class="col-12 col-md-4 ">
+        <div class="d-flex flex-column h-100">
           <label for="licencia_funcionamiento">Licencia de Funcionamiento</label>
 
-          <iframe id="preview_pdf" [src]="sanitizer.bypassSecurityTrustResourceUrl(previewUrl)" class="form-control"
-            style="height: 150px; border: 1px solid #ccc;"></iframe>
+          <iframe id="preview_pdf" [src]="sanitizer.bypassSecurityTrustResourceUrl(previewUrl)" class="form-control" style="height: 150px; border: 1px solid #ccc;"></iframe>
+          
           <div class="d-flex justify-content-center mt-2">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pdfModal">
               Ver Licencia de Funcionamiento
@@ -38,14 +38,29 @@
         </div>
       </div>
 
-      <div class="col-12">
+      <div class="col-12 col-md-6 mt-1">
         <div class="form-group">
           <label for="tipo_establecimiento">Tipo de Establecimiento</label>
           <input type="text" id="tipo_establecimiento" formControlName="tipo_establecimiento" class="form-control" [attr.disabled]="true">
         </div>
       </div>
+
+      <div class="col-12 col-md-6 mt-1">
+        <div class="form-group">
+            <label for="estado">Estado del Pre-Registro</label>
+            <input type="text" id="estado" formControlName="estado" class="form-control"
+                [ngClass]="{
+                    'bg-secondary': preRegistroForm.get('estado')?.value === 'pendiente',
+                    'bg-success': preRegistroForm.get('estado')?.value === 'aceptado',
+                    'bg-danger': preRegistroForm.get('estado')?.value === 'rechazado'
+                }"
+                [attr.disabled]="true">
+        </div>
     </div>
-  </fieldset>
+    
+    </div>
+</fieldset>
+
 
   <!-- Sección Datos del Propietario -->
   <fieldset class="border p-3 mb-4">
@@ -55,22 +70,26 @@
       <div class="col-12 col-md-8">
         <div class="form-group">
           <label for="nombre_propietario">Nombre del Propietario</label>
-          <input type="text" id="nombre_propietario" formControlName="nombre_propietario" class="form-control" [attr.disabled]="true">
+          <input type="text" id="nombre_propietario" formControlName="nombre_propietario" class="form-control"
+            [attr.disabled]="true">
         </div>
 
         <div class="form-group">
           <label for="apellido_paterno_propietario">Apellido Paterno del Propietario</label>
-          <input type="text" id="apellido_paterno_propietario" formControlName="apellido_paterno_propietario" class="form-control" [attr.disabled]="true">
+          <input type="text" id="apellido_paterno_propietario" formControlName="apellido_paterno_propietario"
+            class="form-control" [attr.disabled]="true">
         </div>
 
         <div class="form-group">
           <label for="apellido_materno_propietario">Apellido Materno del Propietario</label>
-          <input type="text" id="apellido_materno_propietario" formControlName="apellido_materno_propietario" class="form-control" [attr.disabled]="true">
+          <input type="text" id="apellido_materno_propietario" formControlName="apellido_materno_propietario"
+            class="form-control" [attr.disabled]="true">
         </div>
 
         <div class="form-group">
           <label for="cedula_identidad_propietario">Cédula de Identidad del Propietario</label>
-          <input type="text" id="cedula_identidad_propietario" formControlName="cedula_identidad_propietario" class="form-control" [attr.disabled]="true">
+          <input type="text" id="cedula_identidad_propietario" formControlName="cedula_identidad_propietario"
+            class="form-control" [attr.disabled]="true">
         </div>
       </div>
 
@@ -79,10 +98,8 @@
           <label for="fotografia_propietario">Fotografía del Propietario</label>
           <!-- Previsualización de la imagen -->
           <div class="d-flex justify-content-center">
-            <img [src]="sanitizer.bypassSecurityTrustUrl(imgURL)" 
-            class="img-fluid" 
-            style="max-width: 220px; max-height: 220px; border: 1px solid #ccc;" 
-            alt="Fotografía del Propietario">
+            <img [src]="sanitizer.bypassSecurityTrustUrl(imgURL)" class="img-fluid"
+              style="max-width: 220px; max-height: 220px; border: 1px solid #ccc;" alt="Fotografía del Propietario">
           </div>
         </div>
       </div>
@@ -90,18 +107,12 @@
       <div class="col-12">
         <div class="form-group">
           <label for="correo_propietario">Correo del Propietario</label>
-          <input type="email" id="correo_propietario" formControlName="correo_propietario" class="form-control" [attr.disabled]="true">
+          <input type="email" id="correo_propietario" formControlName="correo_propietario" class="form-control"
+            [attr.disabled]="true">
         </div>
       </div>
     </div>
   </fieldset>
-  
-
-  <!-- Botones de acción -->
-  <div class="d-flex justify-content-around mt-3">
-    <button class="btn btn-success" type="submit">Aceptar</button>
-    <button class="btn btn-danger" type="button">Rechazar</button>
-  </div>
 
 </form>
 

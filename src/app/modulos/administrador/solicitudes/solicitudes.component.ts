@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormularioPreRegistro } from 'src/app/modelos/FormularioPreRegistro';
 import { PreRegistroService } from 'src/app/services/pre-registro/pre-registro.service';
 import { Location } from '@angular/common';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-solicitudes',
@@ -14,10 +15,11 @@ export class SolicitudesComponent implements OnInit {
   public preRegistroSeleccionado: FormularioPreRegistro;
   public mostrarDetalle: boolean;
 
-  constructor(private preRegistroService: PreRegistroService,private location: Location) {
+  constructor(private preRegistroService: PreRegistroService,private location: Location,
+   private toast: NgToastService) {
     this.preRegistros = [];
     this.preRegistroSeleccionado = {} as FormularioPreRegistro;
-    this.mostrarDetalle = true;
+    this.mostrarDetalle = false;
    }
 
   ngOnInit(): void {
@@ -45,7 +47,7 @@ export class SolicitudesComponent implements OnInit {
   getBadgeClass(estado: string): string {
     switch (estado.toLowerCase()) {
       case 'pendiente':
-        return 'bg-warning text-dark';
+        return 'bg-secondary ';
       case 'rechazado':
         return 'bg-danger';
       case 'aceptado':
@@ -69,5 +71,29 @@ export class SolicitudesComponent implements OnInit {
     // Implementa la lógica para cerrar el modal
   }
 
+  confirmarPreRegistro(estado: string) {
+    this.preRegistroService.confirmarPreRegistro(this.preRegistroSeleccionado.id, estado).subscribe(
+      (response) => {
+        console.log(response);
+        this.preRegistroSeleccionado.estado = estado;
+        this.showSuccess('El registro ha sido confirmado');
+      },
+      (error) => {
+        this.showError('Ha ocurrido un error al confirmar el registro');
+        console.error(error);
+      }
+    );
+    
+  }
+  showError(message: string) {
+    this.toast.error({ detail: "ERROR", summary: message, sticky: true });
+  }
 
+  showInfo(message: string) {
+    this.toast.info({ detail: "INFO", summary: message, sticky: true });
+  }
+  showSuccess(message: string) {
+    this.toast.success({ detail: 'SUCCESS', summary: message });
+
+  }
 }
