@@ -1,3 +1,4 @@
+
 <!-- Barra de navegacion para el propietario -->
 <nav *ngIf="esPropietario()" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark ">
   <div class="container-fluid">
@@ -15,19 +16,19 @@
             Menu
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" [routerLink]="'/lista/platillo'">Lista de platillos</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/propietario/platillo'">Lista de platillos</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" [routerLink]="'/lista/categoria'">Lista de categorias</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/propietario/categoria'">Lista de categorias</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" [routerLink]="'/menu/generar'">Generar menu </a></li>
+            <li><a class="dropdown-item" [routerLink]="'/propietario/generar'">Generar menu </a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" [routerLink]="'/menu/qr'">Generar Qr</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/propietario/qr'">Generar Qr</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -39,7 +40,7 @@
             Registro
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" [routerLink]="'/registrar/platillo'">Registrar platillo</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/propietario/platillo/registrar'">Registrar platillo</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -48,7 +49,7 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" [routerLink]="'/registrar/empleado'">Registrar empleado</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/propietario/empleado'">Registrar empleado</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -56,11 +57,11 @@
             Reporte
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" [routerLink]="'/reporte/pedidos'">Pedidos</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/propietario/pedidos'">Pedidos</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" [routerLink]="'/reporte/ventas'">Ventas</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/propietario/ventas'">Ventas</a></li>
           </ul>
         </li>
         <li class="nav-item">

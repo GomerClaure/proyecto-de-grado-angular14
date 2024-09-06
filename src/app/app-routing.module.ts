@@ -4,6 +4,7 @@ import { HomeComponent } from './modulos/home/home.component';
 import { MeseroGuard } from './guards/mesero.guard';
 import { CajeroGuard } from './guards/cajero.guard';
 import { CocineroGuard } from './guards/cocinero.guard';
+import { PropietarioGuard } from './guards/propietario.guard';
 
 const routes: Routes = [
   { 
@@ -16,7 +17,8 @@ const routes: Routes = [
   },
   {
     path:'propietario',
-    loadChildren:()=>import('../app/modulos/propietario/propietario.module').then(m=> m.PropietarioModule)
+    loadChildren:()=>import('../app/modulos/propietario/propietario.module').then(m=> m.PropietarioModule),
+    canActivate:[PropietarioGuard]
   },
   {
     path: 'mesero',

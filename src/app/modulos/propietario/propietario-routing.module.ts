@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+//Listas
 import { ListaCategoriaComponent } from './listas/lista-categoria/lista-categoria.component';
 import { ListaPlatilloComponent } from './listas/lista-platillo/lista-platillo.component';
 import { EditarPlatilloComponent } from './editar/editar-platillo/editar-platillo.component';
+//
 import { GenerarComponent } from './menu/generar/generar.component';
 import { VisualizarQrComponent } from './menu/visualizar-qr/visualizar-qr.component';
 import { VistaMenuComponent } from './menu/vista-menu/vista-menu.component';
@@ -47,7 +49,7 @@ const routes:Routes=[
           component:PlantillaQrComponent
         },
         {
-          path:'platillo',
+          path:'platillo/registrar',
           component:RegistrarPlatilloComponent
         },
         {
