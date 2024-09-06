@@ -134,7 +134,7 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   irAMenu() {
-    this.router.navigateByUrl('/menu/vista/1');
+    this.router.navigateByUrl('/propietario/vista/1');
   }
 
 
