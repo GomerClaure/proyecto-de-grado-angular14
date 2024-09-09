@@ -13,9 +13,8 @@ export class DetalleComponent implements OnInit {
 
   @Input() public preRegistro: FormularioPreRegistro;
   URL_BACKEND: string ;
-  previewUrl: string;
-  pdfUrl: string ;
-  imgURL: string
+  previewUrlSafe: any;
+  imgURLSafe: any;
   public preRegistroForm: FormGroup;
 
   constructor(private fb: FormBuilder, public sanitizer: DomSanitizer) { 
@@ -40,17 +39,15 @@ export class DetalleComponent implements OnInit {
       longitud: [''],
     });
     this.URL_BACKEND = environment.backendStorageUrl;
-    this.previewUrl = '';
-    this.pdfUrl = '';
-    this.imgURL = '';
+    this.previewUrlSafe = '';
+    this.imgURLSafe = '';
   }
 
   ngOnInit(): void {
     if (this.preRegistro) {
       this.preRegistroForm.patchValue(this.preRegistro);
-      this.previewUrl = `${this.URL_BACKEND}${this.preRegistro.licencia_funcionamiento}`;
-      this.pdfUrl = `${this.URL_BACKEND}${this.preRegistro.licencia_funcionamiento}`;
-      this.imgURL = `${this.URL_BACKEND}${this.preRegistro.fotografia_propietario}`;
+      this.previewUrlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.URL_BACKEND+this.preRegistro.licencia_funcionamiento);
+      this.imgURLSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.URL_BACKEND+this.preRegistro.fotografia_propietario);;
     }
   }
 

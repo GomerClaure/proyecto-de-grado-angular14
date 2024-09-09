@@ -31,7 +31,7 @@
         <div class="d-flex flex-column h-100">
           <label for="licencia_funcionamiento">Licencia de Funcionamiento</label>
 
-          <iframe id="preview_pdf" [src]="sanitizer.bypassSecurityTrustResourceUrl(previewUrl)" class="form-control"
+          <iframe id="preview_pdf" [src]="previewUrlSafe" class="form-control"
             style="height: 150px; border: 1px solid #ccc;"></iframe>
 
           <div class="d-flex justify-content-center mt-2">
@@ -103,7 +103,7 @@
           <label for="fotografia_propietario">Fotografía del Propietario</label>
           <!-- Previsualización de la imagen -->
           <div class="d-flex justify-content-center">
-            <img [src]="sanitizer.bypassSecurityTrustUrl(imgURL)" class="img-fluid"
+            <img [src]="imgURLSafe" class="img-fluid"
               style="max-width: 220px; max-height: 220px; border: 1px solid #ccc;" alt="Fotografía del Propietario">
           </div>
         </div>
@@ -132,7 +132,7 @@
       </div>
       <div class="modal-body p-0">
         <!-- Aquí mostramos el PDF ocupando el 100% del modal -->
-        <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(pdfUrl)" width="100%" height="100%"
+        <iframe [src]="previewUrlSafe" width="100%" height="100%"
           style="border: none;"></iframe>
       </div>
     </div>
