@@ -28,7 +28,6 @@ export class PedidoService {private BASE_URL = environment.backendUrl;
   agregarSeleccion(platillo: Platillo) {
     this.platillosSeleccionados.push(platillo);
   }
-
   getPlatillosSeleccionados() {
     return this.platillosSeleccionados;
   }
