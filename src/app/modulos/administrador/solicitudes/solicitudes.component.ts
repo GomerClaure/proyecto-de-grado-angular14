@@ -3,6 +3,7 @@ import { FormularioPreRegistro } from 'src/app/modelos/FormularioPreRegistro';
 import { PreRegistroService } from 'src/app/services/pre-registro/pre-registro.service';
 import { Location } from '@angular/common';
 import { NgToastService } from 'ng-angular-popup';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-solicitudes',
@@ -14,13 +15,19 @@ export class SolicitudesComponent implements OnInit {
   public preRegistros: FormularioPreRegistro[];
   public preRegistroSeleccionado: FormularioPreRegistro;
   public mostrarDetalle: boolean;
+  public rechazoForm: FormGroup;
 
-  constructor(private preRegistroService: PreRegistroService,private location: Location,
-   private toast: NgToastService) {
+  constructor(private preRegistroService: PreRegistroService,
+    private fb: FormBuilder,
+    private location: Location,
+    private toast: NgToastService) {
     this.preRegistros = [];
     this.preRegistroSeleccionado = {} as FormularioPreRegistro;
     this.mostrarDetalle = false;
-   }
+    this.rechazoForm = this.fb.group({
+      motivoRechazo: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]]
+    });
+  }
 
   ngOnInit(): void {
     this.getPreRegistros();
@@ -70,20 +77,31 @@ export class SolicitudesComponent implements OnInit {
     // Implementa la lógica para cerrar el modal
   }
 
-  confirmarPreRegistro(estado: string) {
-    this.preRegistroService.confirmarPreRegistro(this.preRegistroSeleccionado.id, estado).subscribe(
+  actualizarEstado(estado: string, motivoRechazo?: string) {
+    this.preRegistroService.actualizarEstadoPreRegistro(this.preRegistroSeleccionado.id, estado, motivoRechazo).subscribe(
       (response) => {
         console.log(response);
         this.preRegistroSeleccionado.estado = estado;
-        this.showSuccess('El registro ha sido confirmado');
+
+        if (estado === 'rechazado') {
+          this.showSuccess('El registro ha sido rechazado');
+        } else {
+          this.showSuccess('El registro ha sido confirmado');
+        }
+
+        this.mostrarDetalle = false;
       },
       (error) => {
-        this.showError('Ha ocurrido un error al confirmar el registro');
+        if (estado === 'rechazado') {
+          this.showError('Ha ocurrido un error al rechazar el registro');
+        } else {
+          this.showError('Ha ocurrido un error al confirmar el registro');
+        }
         console.error(error);
       }
     );
-    
   }
+
   showError(message: string) {
     this.toast.error({ detail: "ERROR", summary: message, sticky: true });
   }

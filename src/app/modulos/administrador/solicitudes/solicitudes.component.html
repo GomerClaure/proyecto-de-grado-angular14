@@ -49,14 +49,50 @@
             <!-- Botones de acción -->
             <div class="d-flex flex-row justify-content-around mt-3"
                 *ngIf="preRegistroSeleccionado.estado === 'pendiente'">
-                <button class="btn btn-success me-2" (click)="confirmarPreRegistro('aceptado')" type="submit">
+                <button class="btn btn-success me-2" (click)="actualizarEstado('aceptado')" type="submit">
                     Aceptar
                 </button>
-                <button class="btn btn-danger" (click)="confirmarPreRegistro('rechazado')" type="button">
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rechazoModal" type="button">
                     Rechazar
                 </button>
+
             </div>
         </div>
     </div>
 </div>
+
+<!-- Modal para rechazo -->
+<div class="modal fade" id="rechazoModal" tabindex="-1" aria-labelledby="rechazoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rechazoModalLabel">Motivo del Rechazo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="rechazoForm" (ngSubmit)="actualizarEstado('rechazado',this.rechazoForm.value.motivoRechazo)">
+                    <div class="mb-3">
+                        <label for="motivoRechazo" class="form-label">Escriba el motivo del rechazo</label>
+                        <textarea id="motivoRechazo" formControlName="motivoRechazo" class="form-control"
+                            [ngClass]="{'is-invalid': rechazoForm.get('motivoRechazo')?.invalid && rechazoForm.get('motivoRechazo')?.touched, 'is-valid': rechazoForm.get('motivoRechazo')?.valid && rechazoForm.get('motivoRechazo')?.touched}"
+                            placeholder="Escriba el motivo" required></textarea>
+
+                        <div *ngIf="rechazoForm.get('motivoRechazo')?.invalid && rechazoForm.get('motivoRechazo')?.touched"
+                            class="invalid-feedback">
+                            El motivo debe tener entre 10 y 200 caracteres.
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" [disabled]="rechazoForm.invalid">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 <lib-ng-toast></lib-ng-toast>

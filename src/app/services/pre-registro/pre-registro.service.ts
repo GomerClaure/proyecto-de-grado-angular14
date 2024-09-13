@@ -23,14 +23,21 @@ export class PreRegistroService {
     return this.http.post<any>(`${this.BASE_URL}/pre-registro`, formData, { headers: this.headers });
   }
 
-  public confirmarPreRegistro(preRegistroId: number, estado: string) {
-    const params = new HttpParams()
+  public actualizarEstadoPreRegistro(preRegistroId: number, estado: string, motivoRechazo?: string) {
+
+    let params = new HttpParams()
       .set('pre_registro_id', preRegistroId.toString())
       .set('estado', estado);
+    
+    if (estado === 'rechazado' && motivoRechazo) {
+      params = params.set('motivo_rechazo', motivoRechazo);
+    }
+
     return this.http.put<any>(`${this.BASE_URL}/pre-registro/confirmar`, null, {
       headers: this.headers,
       params: params
     });
   }
+
 }
 
