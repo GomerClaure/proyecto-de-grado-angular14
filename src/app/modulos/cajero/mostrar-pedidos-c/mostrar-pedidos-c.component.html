@@ -5,17 +5,17 @@
   <br>
   <div class="container">
     <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Buscar cuenta por mesa o razon social...." aria-label="Recipient's username" aria-describedby="basic-addon2">
+      <input type="text" class="form-control" placeholder="Buscar cuenta por mesa o razón social...." aria-label="Recipient's username" aria-describedby="basic-addon2">
       <div class="input-group-append">
         <button class="btn btn-aceptar"><i class="bi bi-search"></i></button>
       </div>
     </div>
     <div class="row">
-      <div *ngFor="let pedido of pedidos" class="col-lg-3 col-md-4 col-sm-6 mb-3">
+      <div *ngFor="let pedido of pedidosPorMesa" class="col-lg-3 col-md-4 col-sm-6 mb-3">
         <div class="card h-100">
           <div class="card-header">
-            <h3 class="text-center">{{ pedido.cuenta.mesa.nombre }}</h3>
-            <p>Estado: {{ pedido.estado.nombre }}<br>Razon Social: {{pedido.cuenta}}</p>
+            <h3 class="text-center">{{ pedido.nombreMesa }}</h3>
+            <p>Estado: {{ pedido.estadoP }}<br>Razón Social: {{ pedido.razon_social }}<br>NIT: {{ pedido.nit }}</p>
           </div>
           <div class="card-body" style="overflow-y: auto; max-height: 200px;">
             <table class="table">
@@ -27,7 +27,7 @@
                 </tr>
               </thead>
               <tbody class="text-center">
-                <tr *ngFor="let plato of pedido.platos">
+                <tr *ngFor="let plato of pedido.pedidos[0].platos">
                   <td>{{ plato.nombre }}</td>
                   <td>{{ plato.pivot.cantidad }}</td>
                   <td>{{ plato.precio }} Bs</td>
@@ -36,14 +36,14 @@
             </table>
           </div>
           <div class="card-footer">
-            <h5 class="text-end">Total: {{ pedido.monto }} Bs</h5>
+            <h5 class="text-end">Total: {{ pedido.pedidos[0].monto }} Bs</h5>
             <div>
               <div class="row">
                 <div class="col-6 pt-0">
-                <button class="btn btn-aceptar w-100">Cerrar</button>
+                  <button class="btn btn-aceptar w-100">Cerrar</button>
                 </div>
                 <div class="col-6 pt-0">
-                <button class="btn btn-imprimir w-100">Imprimir</button>
+                  <button class="btn btn-imprimir w-100">Imprimir</button>
                 </div>
               </div>
             </div>

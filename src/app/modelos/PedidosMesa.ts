@@ -50,5 +50,26 @@ export interface DetallePedido{
   id_empleado:number;
   fecha_hora_pedido:string;
   nombre_razon_social:string;
+  nit:any;
 };
-  
+
+export interface DetallePedidoCajero {
+  cuenta: { 
+    estado: string; 
+    mesa: { nombre: string; id: number; id_restaurante: number }; 
+    id: number; 
+    // Aquí puedes agregar nombre_razon_social y nit si están en cuenta
+    nombre_razon_social?: string;
+    nit?: number;
+  };
+  estado: { id: number; nombre: string };
+  monto: number;
+  platos: PlatilloPedido[];
+  tipo: string;
+  updatedAt: string;
+  id: number;
+  id_estado: number;
+  id_cuenta: number;
+  id_empleado: number;
+  fecha_hora_pedido: string;
+}
