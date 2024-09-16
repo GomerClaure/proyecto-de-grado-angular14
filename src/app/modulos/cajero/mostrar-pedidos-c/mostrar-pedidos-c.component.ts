@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DetallePedido, DetallePedidoCajero } from 'src/app/modelos/PedidosMesa';
+import { DetallePedidoCajero } from 'src/app/modelos/PedidosMesa';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class MostrarPedidosCComponent implements OnInit {
   errorMessage: string = '';
   id_restaurante: number = 0;
   id_empleado: number = 0;
+  textoBuscador:string = '';
 
   constructor(private pedidoService: PedidoService) {}
 
@@ -88,6 +89,23 @@ export class MostrarPedidosCComponent implements OnInit {
     this.pedidosPorMesa = Array.from(mesasMap.values());
     console.log('pedidos por mesa a ver que onda',this.pedidosPorMesa)
   }
- 
+  onSearchChange(searchValue: string): void {  
+    this.textoBuscador = searchValue.trim().toLowerCase();
+    this.filtrarCuentas();
+  }
+  filtrarCuentas(): void {
+    if (this.textoBuscador === '') {
+      // Reset the list to the original array if the search is empty
+      this.agruparPedidosPorMesa(); // Re-group the orders by table
+    } else {
+      // Filter the grouped orders by table name, table number (idCuenta), or social reason (razon_social)
+      this.pedidosPorMesa = this.pedidosPorMesa.filter(pedido =>
+        pedido.nombreMesa.toLowerCase().includes(this.textoBuscador) ||
+        pedido.idCuenta.toString().includes(this.textoBuscador) ||
+        pedido.razon_social.toLowerCase().includes(this.textoBuscador)
+      );
+    }
+  }
+  
 }
 

@@ -5,10 +5,7 @@
   <br>
   <div class="container">
     <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Buscar cuenta por mesa o razón social...." aria-label="Recipient's username" aria-describedby="basic-addon2">
-      <div class="input-group-append">
-        <button class="btn btn-aceptar"><i class="bi bi-search"></i></button>
-      </div>
+      <input type="text" class="form-control" placeholder="Buscar por nombre de mesa o razon social " [(ngModel)]="textoBuscador" (ngModelChange)="onSearchChange($event)" >
     </div>
     <div class="row">
       <div *ngFor="let pedido of pedidosPorMesa" class="col-lg-3 col-md-4 col-sm-6 mb-3">
@@ -42,7 +39,7 @@
             </table>
           </div>
           <div class="card-footer">
-            <h5 class="text-end">Total: {{ pedido.pedidos[0].monto }} Bs</h5>
+            <h5 class="text-end">Total: {{ pedido.pedidos[0].cuenta.monto_total}} Bs</h5>
             <div>
               <div class="row">
                 <div class="col-6 pt-0">
