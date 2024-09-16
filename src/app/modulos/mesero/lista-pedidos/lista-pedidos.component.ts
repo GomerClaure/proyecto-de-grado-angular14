@@ -73,7 +73,7 @@ export class ListaPedidosComponent implements OnInit {
 
     // Convertimos el mapa a un array y lo asignamos a `pedidosPorMesa`
     this.pedidosPorMesa = Array.from(mesasMap.values());
-}
+  }
   mostrar(nombreMesa: string,estado:string) {
     const pedidosMesa = this.pedidosPorMesa.find(item => item.nombreMesa === nombreMesa)?.pedidos || [];
     this.pedidoServiceMesa.setPedidosDeMesa(pedidosMesa,nombreMesa,estado);
