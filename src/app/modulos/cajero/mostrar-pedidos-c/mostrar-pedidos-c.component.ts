@@ -8,7 +8,7 @@ import { PedidoService } from 'src/app/services/pedido/pedido.service';
   styleUrls: ['./mostrar-pedidos-c.component.scss']
 })
 export class MostrarPedidosCComponent implements OnInit {
-  pedidos: DetallePedido[] = [];
+  pedidos:DetallePedidoCajero[] = [];
   pedi:DetallePedidoCajero[]=[];
   pedidosPorMesa: any[] = [];
   errorMessage: string = '';
@@ -27,7 +27,8 @@ export class MostrarPedidosCComponent implements OnInit {
     this.pedidoService.getPedidos(this.id_empleado, this.id_restaurante).subscribe(
       (response) => {
         this.pedidos = response.pedidos;
-        this.pedi = this.pedidos.map(pedido => ({
+        console.log('pedidos que obtengo',this.pedidos)
+        this.pedi = this.pedidos .filter(pedido => pedido.cuenta.estado === 'Abierta').map(pedido => ({
           cuenta: pedido.cuenta,
           estado: pedido.estado,
           monto: pedido.monto,
@@ -40,8 +41,8 @@ export class MostrarPedidosCComponent implements OnInit {
           id_empleado: pedido.id_empleado,
           fecha_hora_pedido: pedido.fecha_hora_pedido
         }));
+        console.log('Pedidos mapeados:', this.pedi);
         this.agruparPedidosPorMesa();
-        console.log("Pedidos del cajero", this.pedidosPorMesa);
       },
       (error) => {
         this.errorMessage = 'Error al obtener los pedidos';
@@ -51,10 +52,8 @@ export class MostrarPedidosCComponent implements OnInit {
   }
 
   agruparPedidosPorMesa(): void {
-    // Inicializamos el array de pedidos agrupados por mesa
     this.pedidosPorMesa = [];
   
-    // Creamos un mapa para rastrear las mesas ya agregadas
     const mesasMap = new Map<string, { 
       nombreMesa: string, 
       estadoP: string, 
@@ -70,7 +69,7 @@ export class MostrarPedidosCComponent implements OnInit {
       const idCuenta = pedido.cuenta.id;
       const razon_social = pedido.cuenta.nombre_razon_social;
       const nit = pedido.cuenta.nit ? Number(pedido.cuenta.nit) : 0;
-      if (pedido.cuenta.estado === 'Pagada' || pedido.cuenta.estado === 'Cancelada') {
+      if (pedido.cuenta.estado === 'Pagada' || pedido.cuenta.estado ==='Cancelada') {
         return;
       }
       if (!mesasMap.has(nombreMesa)) {
@@ -87,6 +86,7 @@ export class MostrarPedidosCComponent implements OnInit {
       }
     });
     this.pedidosPorMesa = Array.from(mesasMap.values());
+    console.log('pedidos por mesa a ver que onda',this.pedidosPorMesa)
   }
  
 }
