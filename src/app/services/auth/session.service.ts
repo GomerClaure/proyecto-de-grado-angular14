@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Empleado, Propietario, Usuario } from 'src/app/modelos/usuario/Usuarios';
 import { catchError, tap } from 'rxjs/operators';
-import {environment} from "../../../environments/environment";
+import { environment } from "../../../environments/environment";
 import { of } from 'rxjs';
 
 @Injectable({
@@ -11,12 +11,15 @@ import { of } from 'rxjs';
 export class SessionService {
 
   private BASE_URL = environment.backendUrl;
+  private headers = {
+    'Authorization': 'Bearer ' + sessionStorage.getItem('token_access'),
+  };
 
   constructor(private http: HttpClient) { }
 
   public login(usuario: string, password: string) {
     return this.http.post<any>(`${this.BASE_URL}/login`, { usuario, password }).pipe(
-      tap (res => {
+      tap(res => {
         console.log(res);
         if (res) {
           let usuario: Usuario = res.user.usuario;
@@ -49,7 +52,7 @@ export class SessionService {
             sessionStorage.setItem('fecha_contratacion', empleado.fecha_contratacion.toString());
             sessionStorage.setItem('direccion', empleado.direccion);
             sessionStorage.setItem('tipo', 'Empleado');
-            sessionStorage.setItem('rol_empleado',empleado.id_rol.toString());
+            sessionStorage.setItem('rol_empleado', empleado.id_rol.toString());
             sessionStorage.setItem('id_restaurante', empleado.id_restaurante.toString());
           }
         }
@@ -69,12 +72,22 @@ export class SessionService {
 
   }
 
-  getUsuario(){
+  getUsuario() {
     const usuario = {
-      id: sessionStorage.getItem('id_empleado'),
-      nombre: sessionStorage.getItem('nombre')
+      id: sessionStorage.getItem('id_empleado')||'',
+      nombre: sessionStorage.getItem('nombre')||''
     };
     return usuario;
   }
+  actualizarDatosUsuario(usuarioForm: FormData) {
+    return this.http.post<any>(`${this.BASE_URL}/actualizar/datos-personales`, usuarioForm, { headers: this.headers });
   }
+
+  getDatosPersonales(id_usuario: string) {
+    const params = new HttpParams().set('id_usuario', id_usuario);
+    return this.http.get<any>(`${this.BASE_URL}/datos-personales`, { headers: this.headers, params });
+  }
+  
+}
+
 

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuario, Propietario } from 'src/app/modelos/usuario/Usuarios';
+import { SessionService } from 'src/app/services/auth/session.service';
 import { fileValidator } from 'src/app/validators/file-validator';
 
 @Component({
@@ -12,48 +13,28 @@ export class DatosPersonalesComponent implements OnInit {
   usuarioForm: FormGroup;
   selectedFile: File = new File([], 'default.jpg');
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private sessionService: SessionService) {  
     this.usuarioForm = this.fb.group({
-      // Definir los campos del formulario
-      nombre: ['', Validators.required],
-      apellido_paterno: ['', Validators.required],
-      apellido_materno: ['', Validators.required],
+      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      apellido_paterno: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      apellido_materno: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       correo: ['', [Validators.required, Validators.email]],
-      nickname: ['', Validators.required],
-      foto_perfil: [null, [Validators.required, fileValidator(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'], 2)]],
-      ci: ['', Validators.required] // Campo para el propietario
+      ci: ['', [Validators.required, Validators.pattern(/^\d+$/), Validators.minLength(7)]],
+      nickname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      foto_perfil: [null, []]
     });
   }
 
   ngOnInit(): void {
-    const usuarioData: Usuario = {
-      id: 1,
-      nombre: 'Juan',
-      apellido_paterno: 'Pérez',
-      apellido_materno: 'González',
-      correo: 'juan@example.com',
-      nickname: 'juanito123',
-      foto_perfil: 'https://via.placeholder.com/220',
-      token: '123456'
-    };
-
-    const propietarioData: any = {
-      id: 1,
-      ci: 12345678
-    };
-
-    // Actualizar los campos individuales
-    this.usuarioForm.patchValue({
-      nombre: usuarioData.nombre,
-      apellido_paterno: usuarioData.apellido_paterno,
-      apellido_materno: usuarioData.apellido_materno,
-      correo: usuarioData.correo,
-      nickname: usuarioData.nickname,
-      foto_perfil: usuarioData.foto_perfil,
-      ci: propietarioData.ci
-    });
-    // this.usuarioForm.markAsTouched();
-
+    let idUsuario = sessionStorage.getItem('id_user')||'';
+    this.sessionService.getDatosPersonales( idUsuario).subscribe((res: any) => {
+      let propietario: Propietario = res.user;  
+      console.log(propietario);
+      this.usuarioForm.patchValue(propietario.usuario);
+      this.usuarioForm.patchValue({ci: propietario.ci});
+      this.usuarioForm.markAllAsTouched();
+    }
+    );
   }
 
   onFileSelected(event: any) {
@@ -91,10 +72,15 @@ export class DatosPersonalesComponent implements OnInit {
 
   }
 
-
+  onImageError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = 'https://via.placeholder.com/220'; // URL de la imagen de reemplazo
+  }
+  
 
   actualizarUsuario() {
     console.log(this.usuarioForm.value);
+    console.log(this.usuarioForm.valid);
     if (this.usuarioForm.valid) {
       // Manejar la lógica al enviar el formulario
       console.log(this.usuarioForm.value);
