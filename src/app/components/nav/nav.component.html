@@ -1,4 +1,5 @@
 <!-- Barra de navegacion para el propietario -->
+ 
 <nav *ngIf="esPropietario()" class="navbar navbar-expand-lg custom-navbar-color ">
   <div class="container-fluid">
     <a class="navbar-brand" [routerLink]="'/home'">
@@ -63,9 +64,19 @@
             <li><a class="dropdown-item" [routerLink]="'/reporte/ventas'">Ventas</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Mi Perfil
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" [routerLink]="'/mesero/datos-personales'">Datos personales</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#" (click)="cerrarSesion()">Logout</a></li>
+          </ul>
         </li>
+       
       </ul>
     </div>
   </div>

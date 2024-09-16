@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgToastModule } from 'ng-angular-popup';
 import { ModalPedidosComponent } from './modal-pedidos/modal-pedidos.component';
 import { ModalEliminarPedidoComponent } from './modal-eliminar-pedido/modal-eliminar-pedido.component';
+import { DatosPersonalesComponent } from './datos-personales-propietario/datos-personales/datos-personales.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ModalEliminarPedidoComponent } from './modal-eliminar-pedido/modal-elim
     ListaPedidosComponent,
     RegistrarPedidoComponent,
     ModalPedidosComponent,
-    ModalEliminarPedidoComponent
+    ModalEliminarPedidoComponent,
+    DatosPersonalesComponent
   ],
   imports: [
     CommonModule,

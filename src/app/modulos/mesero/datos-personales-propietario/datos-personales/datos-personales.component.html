@@ -1,0 +1,93 @@
+<app-nav></app-nav><br><br><br>
+<form [formGroup]="usuarioForm" class="pt-2 container">
+  <!-- Sección Datos del Usuario -->
+  <fieldset class="border p-3 mb-4">
+    <legend class="w-auto px-2">Datos del Usuario</legend>
+
+    <div class="row">
+      <!-- Sección izquierda: Datos del usuario -->
+      <div class="col-12 col-md-8">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" formControlName="nombre" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="apellido_paterno">Apellido Paterno</label>
+          <input type="text" id="apellido_paterno" formControlName="apellido_paterno" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="apellido_materno">Apellido Materno</label>
+          <input type="text" id="apellido_materno" formControlName="apellido_materno" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="correo">Correo Electrónico</label>
+          <input type="email" id="correo" formControlName="correo" class="form-control">
+        </div>
+        <!-- Sección Inferior: Cédula y Nickname a todo el ancho -->
+        <div class="form-group">
+          <label for="ci">Cédula de Identidad</label>
+          <input type="text" id="ci" formControlName="ci" class="form-control">
+        </div>
+      </div>
+
+
+
+      <!-- Sección derecha: Imagen de perfil -->
+      <div class="col-12 col-md-4 d-flex flex-column align-items-center">
+        <div class="form-group d-flex flex-column flex-grow-1 w-100">
+          <label for="foto_perfil" class="text-center">Fotografía del Usuario</label>
+
+          <!-- Contenedor de imagen centrado -->
+          <div class="d-flex justify-content-center mb-3">
+            <img [src]="usuarioForm.get('foto_perfil')?.value || 'ruta_defecto.jpg'" class="img-fluid rounded-circle"
+              style="max-width: 220px; max-height: 220px; border: 1px solid #ccc;" alt="Fotografía del Usuario">
+          </div>
+          <!-- Input file oculto -->
+          <input type="file" id="img-editar-platillo" class="oculto" (change)="onFileSelected($event)">
+
+
+
+          <!-- Botón para seleccionar imagen, centrado y espaciado -->
+          <div class="d-flex justify-content-center">
+            <label for="img-editar-platillo" class="btn btn-primary">
+              Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i>
+            </label>
+          </div>
+
+          <!-- Mensajes de error, centrados también -->
+          <div
+            *ngIf="usuarioForm.get('foto_perfil')?.errors?.['invalidoTipoArchivo'] && usuarioForm.get('foto_perfil')?.touched"
+            class="invalid-feedback text-center archivo-invalido oculto">
+            El tipo de archivo no es válido. Solo se permiten imágenes JPG, PNG, WEBP.
+          </div>
+          <div
+            *ngIf="usuarioForm.get('foto_perfil')?.errors?.['archivoMuyPesado'] && usuarioForm.get('foto_perfil')?.touched"
+            class="invalid-feedback text-center archivo-pesado ">
+            El archivo es muy pesado. Debe ser menor de 2 MB.
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+      <div class="col-12">
+        <div class="form-group">
+          <label for="nickname">Nickname</label>
+          <input type="text" id="nickname" formControlName="nickname" class="form-control">
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón Actualizar -->
+    <div class="col-12 mt-3">
+      <button type="button" class="btn btn-primary" (click)="actualizarUsuario()">Actualizar</button>
+    </div>
+
+  </fieldset>
+</form>

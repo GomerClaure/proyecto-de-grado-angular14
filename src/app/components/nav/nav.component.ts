@@ -20,6 +20,7 @@ export class NavComponent implements OnInit, OnDestroy {
   };
   public notificaciones: Notificacion[];
   public notificacionesSinLeer: number;
+  public fotoPerfil: string;
   private idRestaurante: number;
 
   constructor(private sessionService: SessionService, private router: Router,
@@ -28,6 +29,7 @@ export class NavComponent implements OnInit, OnDestroy {
     this.notificaciones = [];
     this.idRestaurante = 0;
     this.notificacionesSinLeer = 0;
+    this.fotoPerfil = 'assets/image/som.png';
   }
 
   ngOnInit(): void {
