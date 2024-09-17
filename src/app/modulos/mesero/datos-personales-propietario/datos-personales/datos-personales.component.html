@@ -1,6 +1,6 @@
 <app-nav></app-nav>
 <div class="fondo pt-5">
-  <form [formGroup]="usuarioForm" class="mt-5 container needs-validation"
+  <form [formGroup]="usuarioForm" class="mt-5 container needs-validation shadow-lg"
     style="position: relative; overflow-y: auto; max-height: 80vh; background-color: white;" novalidate>
     <!-- Sección Datos del Usuario -->
     <fieldset class="border p-3 mb-4">
@@ -77,13 +77,14 @@
 
             <!-- Contenedor de imagen centrado -->
             <div class="d-flex justify-content-center mb-3">
-              <img [src]="usuarioForm.get('foto_perfil')?.value || 'https://via.placeholder.com/220'" 
+              <img [src]="foto_perfil" 
               (error)="onImageError($event)" class="img-fluid"
                 style="max-width: 220px; max-height: 220px; border: 1px solid #ccc;" alt="Fotografía del Usuario">
             </div>
 
             <!-- Input file oculto -->
-            <input type="file" id="img-editar-platillo" class="oculto" (change)="onFileSelected($event)">
+            <input type="file" id="img-editar-platillo" class="oculto" 
+            (change)="onFileSelected($event)" accept="image/jpeg, image/png, image/jpg, image/webp">
 
             <!-- Botón para seleccionar imagen, centrado y espaciado -->
             <div class="d-flex justify-content-center">
@@ -129,4 +130,5 @@
       </div>
     </fieldset>
   </form>
+  <lib-ng-toast></lib-ng-toast>   
 </div>
