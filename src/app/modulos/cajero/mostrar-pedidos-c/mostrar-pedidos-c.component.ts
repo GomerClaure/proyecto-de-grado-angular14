@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DetallePedidoCajero } from 'src/app/modelos/PedidosMesa';
+import { CuentaService } from 'src/app/services/pedido/cuenta.service';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class MostrarPedidosCComponent implements OnInit {
   id_empleado: number = 0;
   textoBuscador:string = '';
 
-  constructor(private pedidoService: PedidoService) {}
+  constructor(private pedidoService: PedidoService, private cuentaService:CuentaService) {}
 
   ngOnInit(): void {
     this.id_restaurante = +sessionStorage.getItem('id_restaurante')!;
@@ -89,6 +90,9 @@ export class MostrarPedidosCComponent implements OnInit {
     this.pedidosPorMesa = Array.from(mesasMap.values());
     console.log('pedidos por mesa a ver que onda',this.pedidosPorMesa)
   }
+
+
+  
   onSearchChange(searchValue: string): void {  
     this.textoBuscador = searchValue.trim().toLowerCase();
     this.filtrarCuentas();
@@ -104,8 +108,21 @@ export class MostrarPedidosCComponent implements OnInit {
         pedido.idCuenta.toString().includes(this.textoBuscador) ||
         pedido.razon_social.toLowerCase().includes(this.textoBuscador)
       );
+      
     }
   }
-  
+  CerrarCuenta(id:number){
+   console.log(id);
+   this.cuentaService.cerrarCuenta(id).subscribe(
+    response => {
+      console.log('Cuenta cerrada:', response);
+      // Update UI or alert the user that the account was closed
+    },
+    error => {
+      console.error('error al cerrar:', error);
+      // Handle error (e.g., show an error message)
+    }
+  );
+  }
 }
 

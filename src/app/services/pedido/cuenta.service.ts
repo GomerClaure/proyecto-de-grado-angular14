@@ -23,4 +23,7 @@ export class CuentaService {
     console.log('Formulario enviado con ID cuenta:', idCuenta, formData);
     return this.http.post<any>(`${this.BASE_URL}/cuenta/store/${idCuenta}`, formData, { headers: this.headers });
   }
+  cerrarCuenta(id: number){
+    return this.http.post<any>(`${this.BASE_URL}/cuenta/close/${id}`, { headers:this.headers});
+  }
 }
