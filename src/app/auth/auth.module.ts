@@ -10,6 +10,8 @@ import { NgToastComponent, NgToastModule } from 'ng-angular-popup';
 import { PasoUnoComponent } from './form-register/primer-paso/paso-uno/paso-uno.component';
 import { PasoDosComponent } from './form-register/segundo-paso/paso-dos/paso-dos.component';
 import { PasoTresComponent } from './form-register/tercer-paso/paso-tres/paso-tres.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { RequestPasswordResetComponent } from './request-password-reset/request-password-reset.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { PasoTresComponent } from './form-register/tercer-paso/paso-tres/paso-tr
     PasoUnoComponent,
     PasoDosComponent,
     PasoTresComponent,
+    ResetPasswordComponent,
+    RequestPasswordResetComponent,
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,6 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+
 
 export function fileValidator(tiposPermitidos: string[], tamanioMaxMb: number) {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -27,5 +29,13 @@ export function fileValidator(tiposPermitidos: string[], tamanioMaxMb: number) {
         // Si todo está bien, retorna null (sin error)
         return null;
     };
+}
+
+
+export function passwordsMatchValidator(formGroup: FormGroup) {
+  const newPassword = formGroup.get('newPassword')?.value;
+  const confirmPassword = formGroup.get('confirmPassword')?.value;
+
+  return newPassword === confirmPassword ? null : { mismatch: true };
 }
 

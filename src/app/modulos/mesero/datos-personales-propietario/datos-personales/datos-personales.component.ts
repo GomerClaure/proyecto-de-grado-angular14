@@ -61,6 +61,10 @@ export class DatosPersonalesComponent implements OnInit {
           this.foto_perfil = e.target?.result as string; // Mostrar vista previa del archivo
         };
         reader.readAsDataURL(file);
+      }else{
+        this.showError('Archivo no válido.');
+        this.selectedFile = null;
+        this.usuarioForm.patchValue({ foto_perfil: null });
       }
     }
   }
