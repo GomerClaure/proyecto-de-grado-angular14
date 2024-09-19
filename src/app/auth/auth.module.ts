@@ -12,6 +12,7 @@ import { PasoDosComponent } from './form-register/segundo-paso/paso-dos/paso-dos
 import { PasoTresComponent } from './form-register/tercer-paso/paso-tres/paso-tres.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { RequestPasswordResetComponent } from './request-password-reset/request-password-reset.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RequestPasswordResetComponent } from './request-password-reset/request-
     AuthRouthingModule,
     ComponentsModule,
     ReactiveFormsModule,
-    NgToastModule
+    NgToastModule,
+    RouterModule
   ]
 })
 export class AuthModule { }

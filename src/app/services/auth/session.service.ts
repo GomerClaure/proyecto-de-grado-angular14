@@ -89,6 +89,10 @@ export class SessionService {
     return this.http.get<any>(`${this.BASE_URL}/datos-personales`, { headers: this.headers, params });
   }
   
+  restablecerContra(contraseniaForm: FormData) {
+    return this.http.post<any>(`${this.BASE_URL}/restablecer-contrasenia`, contraseniaForm, { headers: this.headers });
+  }
+  
 }
 
 
