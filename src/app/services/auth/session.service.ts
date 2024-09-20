@@ -90,7 +90,18 @@ export class SessionService {
   }
   
   restablecerContra(contraseniaForm: FormData) {
-    return this.http.post<any>(`${this.BASE_URL}/restablecer-contrasenia`, contraseniaForm, { headers: this.headers });
+    // mostrar Datos de contraseniaForm
+    console.log(contraseniaForm);
+    var direccion = `${this.BASE_URL}/restablecer-contrasenia`;
+    if (contraseniaForm.get('token')) {
+      direccion = `${this.BASE_URL}/restablecer-contrasenia-olvidada`;
+    }
+
+    return this.http.post<any>(direccion, contraseniaForm, { headers: this.headers });
+  }
+
+  solicitarCambioContra(solicitudForm: FormData) {
+    return this.http.post<any>(`${this.BASE_URL}/solicitar-cambio-contrasenia`, solicitudForm );
   }
   
 }

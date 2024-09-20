@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { SessionService } from 'src/app/services/auth/session.service';
+import { environment } from 'src/environments/environment';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-request-password-reset',
@@ -9,24 +11,40 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RequestPasswordResetComponent {
   requestPasswordForm: FormGroup;
-  message: string;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private sessionService: SessionService,
+    private toast: NgToastService) {  
     this.requestPasswordForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]]
+      correo: ['', [Validators.required, Validators.email]]
     });
-    this.message = '';
+  }
+
+  showError(message: string) {
+    this.toast.error({ detail: "ERROR", summary: message, sticky: true });
+  }
+
+  showInfo(message: string) {
+    this.toast.info({ detail: "INFO", summary: message, sticky: true });
+  }
+  showSuccess(message: string) {
+    this.toast.success({ detail: 'SUCCESS', summary: message });
+
   }
 
   onSubmit() {
     if (this.requestPasswordForm.valid) {
-      const email = this.requestPasswordForm.value.email;
-      this.http.post('/solicitar-cambio-contrasena', { email }).subscribe(
-        (response: any) => {
-          this.message = 'Hemos enviado un enlace de restablecimiento a tu correo electrónico.';
+      const direccion_frontend = environment.frontDominio+'/reset-password';
+      const formData = new FormData();
+      formData.append('correo', this.requestPasswordForm.get('correo')?.value);
+      formData.append('direccion_frontend', direccion_frontend);
+      this.sessionService.solicitarCambioContra(formData).subscribe(
+        res => {
+          console.log(res);
+          this.showSuccess('Solicitud de cambio de contraseña enviada');
         },
-        (error) => {
-          console.error('Error al solicitar el cambio de contraseña', error);
+        err => {
+          this.showError('Error al solicitar cambio de contraseña');
+          console.log(err);
         }
       );
     }
