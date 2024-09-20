@@ -1,0 +1,117 @@
+<form [formGroup]="pasoTresForm" class="needs-validation" novalidate>
+  <div class="row">
+    <!-- Nombre del Propietario -->
+    <div class="form-group col-md-6 mb-1 p-1">
+      <label for="nombrePropietario">Nombre del Propietario</label>
+      <div class="input-group has-validation">
+        <input id="nombrePropietario" type="text" class="form-control" formControlName="nombrePropietario" [ngClass]="{
+            'is-invalid': pasoTresForm.get('nombrePropietario')?.invalid && pasoTresForm.get('nombrePropietario')?.touched,
+            'is-valid': pasoTresForm.get('nombrePropietario')?.valid && pasoTresForm.get('nombrePropietario')?.touched
+          }" placeholder="Nombre del Propietario" required />
+        <div class="invalid-feedback">
+          El nombre del propietario es requerido.
+        </div>
+      </div>
+    </div>
+
+    <!-- Apellido Paterno -->
+    <div class="form-group col-md-6 mb-1 p-1">
+      <label for="apellidoPaterno">Apellido Paterno</label>
+      <div class="input-group has-validation">
+        <input id="apellidoPaterno" type="text" class="form-control" formControlName="apellidoPaterno" [ngClass]="{
+            'is-invalid': pasoTresForm.get('apellidoPaterno')?.invalid && pasoTresForm.get('apellidoPaterno')?.touched,
+            'is-valid': pasoTresForm.get('apellidoPaterno')?.valid && pasoTresForm.get('apellidoPaterno')?.touched
+          }" placeholder="Apellido Paterno" required />
+        <div class="invalid-feedback">
+          El apellido paterno es requerido.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Apellido Materno -->
+    <div class="form-group col-md-6 mb-1 p-1">
+      <label for="apellidoMaterno">Apellido Materno</label>
+      <div class="input-group has-validation">
+        <input id="apellidoMaterno" type="text" class="form-control" formControlName="apellidoMaterno" [ngClass]="{
+            'is-invalid': pasoTresForm.get('apellidoMaterno')?.invalid && pasoTresForm.get('apellidoMaterno')?.touched,
+            'is-valid': pasoTresForm.get('apellidoMaterno')?.valid && pasoTresForm.get('apellidoMaterno')?.touched
+          }" placeholder="Apellido Materno" required />
+        <div class="invalid-feedback">
+          El apellido materno es requerido.
+        </div>
+      </div>
+    </div>
+
+    <!-- Cédula de Identidad -->
+    <div class="form-group col-md-6 mb-1 p-1">
+      <label for="cedulaIdentidad">Cédula de Identidad</label>
+      <div class="input-group has-validation">
+        <input id="cedulaIdentidad" type="text" class="form-control" formControlName="cedulaIdentidad" [ngClass]="{
+            'is-invalid': pasoTresForm.get('cedulaIdentidad')?.invalid && pasoTresForm.get('cedulaIdentidad')?.touched,
+            'is-valid': pasoTresForm.get('cedulaIdentidad')?.valid && pasoTresForm.get('cedulaIdentidad')?.touched
+          }" placeholder="Cédula de Identidad" required />
+        <div class="invalid-feedback">
+          La cédula de identidad es requerida y no debe tener mas de 7 digitos.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Correo Electrónico del Propietario -->
+    <div class="form-group col-md-12 mb-1 p-1">
+      <label for="correoPropietario">Correo Electrónico del Propietario</label>
+      <div class="input-group has-validation">
+        <input id="correoPropietario" type="email" class="form-control" formControlName="correoPropietario" [ngClass]="{
+            'is-invalid': pasoTresForm.get('correoPropietario')?.invalid && pasoTresForm.get('correoPropietario')?.touched,
+            'is-valid': pasoTresForm.get('correoPropietario')?.valid && pasoTresForm.get('correoPropietario')?.touched
+          }" placeholder="Correo Electrónico" required />
+        <div class="invalid-feedback">
+          El correo electrónico es requerido y debe tener un formato válido.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Fotografía del Propietario -->
+    <div class="form-group col-md-12 mb-3 p-1">
+      <label for="fotografiaPropietario">Fotografía del Propietario</label>
+      <div class="input-group has-validation">
+        <button type="button" class="btn btn-custom" (click)="fileInputPaso3.click()">
+          <i class="bi bi-person-bounding-box"></i> Seleccionar foto
+        </button>
+        <input type="text" class="form-control" [ngClass]="{
+            'is-invalid':
+              pasoTresForm.get('fotografiaPropietario')?.invalid &&
+              pasoTresForm.get('fotografiaPropietario')?.touched,
+            'is-valid':
+              pasoTresForm.get('fotografiaPropietario')?.valid &&
+              pasoTresForm.get('fotografiaPropietario')?.touched
+          }" [value]="
+            pasoTresForm.get('fotografiaPropietario')?.value?.name || ''
+          " placeholder="No se ha seleccionado ningún archivo" disabled />
+        <input id="fileInputPaso3" type="file" (change)="onFileChange($event, 'fotografiaPropietario')" #fileInputPaso3
+          style="display: none;" accept="image/png, image/jpeg, image/jpg, image/webp" />
+      </div>
+      <div *ngIf="
+    pasoTresForm.get('fotografiaPropietario')?.errors?.['invalidoTipoArchivo'] &&
+    pasoTresForm.get('fotografiaPropietario')?.touched
+  " class="invalid-feedback">
+        El tipo de archivo no es válido. Solo se permiten imágenes JPG, PNG, WEBP.
+      </div>
+
+      <div *ngIf="
+    pasoTresForm.get('fotografiaPropietario')?.errors?.['archivoMuyPesado'] &&
+    pasoTresForm.get('fotografiaPropietario')?.touched
+  " class="invalid-feedback">
+        El archivo es muy pesado. Debe ser menor de 2 MB.
+      </div>
+
+
+    </div>
+  </div>
+
+</form>
