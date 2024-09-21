@@ -12,7 +12,7 @@
   margin-bottom: 5px;
 }
 
-.card:hover {
+.card:hover { 
   transform: translateY(-5px); /* Eleva la tarjeta ligeramente */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
   //background-color: rgb(255, 222, 172);
@@ -43,13 +43,13 @@
 } 
 
 .card-footer {
-  background-image: url('../../../../assets/image/lll.png');
+  //background-image: url('../../../../assets/image/lll.png');
   background-position: center;
   background-size: cover;
   height: 50px;
 }
 
-.container {
+.container { 
   padding: 10px;
   align-items: center;
 }

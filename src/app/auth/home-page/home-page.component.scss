@@ -1,40 +1,216 @@
-.logo {
-  max-width: 100%;
-  height: auto;
+/* General Styles */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
 }
-.card-header {
-  font-size: 30px;
+#caja{
+  background-image: url('../../../assets/image/img-homepage/Designer\ \(1\).jpeg');
+  background-size: cover;
+  background-position: 0;
+  height: 100vh;
 }
-.card {
-  margin-top: 10px;
-  margin-bottom: 100px;
+
+.col-6 {
+  display: flex;
+  justify-content: center;  /* Centrar horizontalmente */
+  align-items: center;       /* Centrar verticalmente */
+  height: 100vh;             /* Para ocupar toda la altura de la pantalla */
 }
-.box1-container {
-  position: relative; /* Necesario para el posicionamiento absoluto del círculo */
-  margin-bottom: 10px;
+#titulo{
+ //background-image: url('../../../assets/image/img-homepage/5498321695145984-removebg-preview.png');
+  background-size: cover;
+  color: rgb(0, 0, 0);
+  background-color: #ffffff;
 }
-.slide-in {
-  animation: slide-in 2s forwards;
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* Centrar el contenido verticalmente */
+  text-align: center;        /* Alinear el texto en el centro */
+  max-width: 50%; /* Limitar ancho del contenido al 50% */
 }
-@keyframes slide-in {
-  from {
-    transform: translateX(-100%); /* Comienza desde fuera de la pantalla a la izquierda */
-    opacity: 0;
+
+.hero img {
+  max-width: 50%; /* Imagen ocupará el 50% */
+  height: 100%;
+  margin: 0 auto;
+}
+
+.btn-primary {
+  padding: 10px 20px;
+  background-color: #f8492e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.btn-primary:hover {
+  background-color: #ff4a3b;
+}
+
+@media (max-width: 768px) {
+
+  #caja {
+    display: none; /* Oculta el contenedor con la imagen en pantallas pequeñas */
   }
-  to {
-    transform: translateX(0); /* Termina en su posición original */
-    opacity: 1;
+
+  #titulo {
+    width: 100%; /* Asegura que el contenedor de contenido ocupe todo el ancho */
+    height: 100%; /* Ajustar altura automáticamente en pantallas pequeñas */
+  }
+
+  .hero-content {
+    max-width: 100%; /* En pantallas pequeñas usar todo el ancho */
+    text-align: center;
+    height: 100vh;
+    padding: 10px;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-content p {
+    font-size: 1.2rem;
+  }
+
+  .btn-primary {
+    font-size: 1rem;
+    padding: 8px 16px;
   }
 }
 
-/* Ajustes específicos para pantallas más pequeñas */
-@media (max-width: 1900px) {
-  .imagenPrincipal {
-    padding-top: 0px; /* Reducir el padding-top en pantallas más pequeñas */
-    height: auto;
-    margin: auto; /* Asegurarse de que el contenido esté centrado */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* About Us Section */
+.about-us {
+  background-color: rgb(249, 249, 249);
+  //color: white;
+  padding: 60px 20px;
+}
+
+.about-us .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.about-us .text {
+  flex: 1;
+  padding: 20px;
+}
+
+.about-us .image {
+  flex: 1;
+  padding: 20px;
+}
+
+.about-us .image img {
+  max-width: 100%;
+  height: 100%;
+}
+
+.about-us h2 {
+  font-size: 2.5rem;
+  color: #000000;
+}
+
+.about-us p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-us .container {
+    flex-direction: column;
+    text-align: center;
   }
-  .box1-container {
-    margin-top: 100px; /* Reducir el margen superior en pantallas más pequeñas */
+
+  .about-us .text, .about-us .image {
+    flex: unset;
+    padding: 10px;
+  }
+
+  .about-us h2 {
+    font-size: 2rem;
+  }
+
+  .about-us p {
+    font-size: 1rem;
+  }
+
+  .about-us .image img {
+    max-width: 80%;
   }
 }
+
+
+
+/* Features Section */
+.features {
+  background-image: url('../../../assets/image/img-homepage/fondo-linea-elegante-hexagonal-patron_1017-19742.avif');
+  background-position: 0;
+  background-size: cover;
+  //background-color: #ffffff;
+  padding: 60px 20px;
+}
+
+.features h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 40px;
+}
+
+.feature-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.feature-item {
+  text-align: center;
+  flex: 1;
+  margin: 20px;
+}
+
+.feature-item img {
+  max-width: 100%;
+  height: 50%;
+  margin-bottom: 20px;
+}
+
+.feature-item h3 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.feature-item p {
+  color: #666;
+}
+
+

@@ -1,64 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inicio - Lugo</title>
-</head>
 <app-nav></app-nav>
-<body class="fondo">
-  <div>
-      <!-- Box de logo y la imagen principal -->
-      <div class="container">
-        <div class="box1-container">
-          <div class="row">
-            <div class="col-4">
-
-            </div>
-            <div class="col-4">
-              <img class="logo slide-in" src="../../../assets/ImgLUGO/LUGO-Black.png" alt="Lugo Logo">
-            </div>
-            <div class="col-4">
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Box de información del sitio web -->
-      <div class="container">
-        <div class="box2-container">
-          <div class="row">
-            <div class="acerca">
-              <div class="card">
-                <div class="card-header">
-                  <strong>Acerca de LUGO</strong>
-                </div>
-                <div class="card-body">
-                  <div class="row">
-                    <blockquote class="col">
-                      <p>Lugo es un avanzado sistema web diseñado específicamente para la gestión 
-                        integral de pedidos en el ámbito de la cocina de establecimientos de alimentos 
-                        y bebidas. Este sistema no solo optimiza el proceso de administración de pedidos,
-                        sino que también mejora la eficiencia operativa y ofrece una experiencia de 
-                        atención al cliente mucho más fluida y agradable.
-                      </p>
-                    </blockquote>
-                    <blockquote class="col">
-                      <p>Con Lugo, los establecimientos pueden gestionar todos los aspectos del 
-                        ciclo de pedidos, desde la recepción inicial hasta la preparación y 
-                        entrega final. La plataforma proporciona una interfaz intuitiva que 
-                        facilita la visualización en tiempo real de los pedidos, permitiendo 
-                        a los equipos de cocina y al personal de servicio mantener un flujo de
-                        trabajo organizado y sincronizado.</p>
-                    </blockquote>
-                  </div>
-                  <footer class="blockquote-footer">Equipo de LUGO </footer>
-                </div>
-              </div>
-            </div>
-          </div>
+<body>
+  <header class="hero">
+    <div class="row">
+      <div id='caja' class="col-6">
+      </div> 
+      <div id="titulo" class="col-6">
+        <div class="hero-content">
+          <p>Sistema para gestión de pedidos en restaurantes</p>
+          <h1>Bienvenido a Lugo</h1>
+          <p>Te ayudamos a darle una mejor atención al cliente dentro de tu restaurante</p>
+          <a href="#about" class="btn-primary">Conoce Más</a>
         </div>
       </div>
     </div>
+  </header>
+
+  <section id="about" class="about-us">
+    <div class="container">
+      <div class="text">
+        <br>
+        <h2>¿Quiénes Somos?</h2>
+        <p>
+          Somos una empresa que ofrece servicios de gestión de pedidos
+          y soluciones tecnológicas innovadoras. Estamos comprometidos
+          con la tecnología y la innovación, dedicándonos a proporcionar
+          herramientas digitales que optimizan los procesos operativos 
+          y aumentan la productividad de nuestros clientes.
+        </p>
+        <p>
+          Optimizamos la gestión interna de un restaurante,
+          facilitando la logística y mejorar los procesos de 
+          est tipo de negocios, estamos aquí para ofrecer un servicio de calidad 
+          que haga la diferencia en el día a día de nuestros clientes. Nuestra pasión 
+          es la innovación, y nuestra meta es brindar soluciones que transformen los 
+          negocios de nuestros clientes.
+        </p>
+      </div>
+      <div class="image">
+        <img src="../../../assets/image/img-homepage/mano-mujer-usando-tocando-pantalla-telefono-inteligente-taza-cafe-mesa-madera-cafe_9563-7837.avif"  alt="Sobre Nosotros">
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="features">
+    <div class="container">
+      <h2>Nuestras Características</h2>
+      <div class="feature-list">
+        <div class="feature-item">
+          <img src="../../../assets/image/img-homepage/20dab2c289c978527793046e94c61192332caf77-6000x4000.webp" alt="Feature 1">
+          <h3>Calidad</h3>
+          <p>Ofrecemos productos de alta calidad con estándares internacionales.</p>
+        </div>
+        <div class="feature-item">
+          <img src="../../../assets/image/img-homepage/photo-1658282653150-67e2023a67e3.avif"  alt="Feature 2">
+          <h3>Innovación</h3>
+          <p>Nuestra constante evolución en la tecnología nos hace líderes en el mercado.</p>
+        </div>
+        <div class="feature-item">
+          <img src="../../../assets/image/img-homepage/imagen3C.avif"  alt="Feature 3">
+          <h3>Soporte 24/7</h3>
+          <p>Siempre estamos disponibles para ayudarte a solucionar cualquier inconveniente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
   <app-footer></app-footer>
 </body>
-</html>
