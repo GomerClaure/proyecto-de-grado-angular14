@@ -95,7 +95,6 @@ export class FormRegisterComponent implements OnInit, AfterViewInit {
   showError(message: string) {
     this.toast.error({ detail: "ERROR", summary: message, sticky: true });
   }
-
   showInfo(message: string) {
     this.toast.info({ detail: "INFO", summary: message, sticky: true });
   }
