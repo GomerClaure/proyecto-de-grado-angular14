@@ -12,10 +12,11 @@ import { CocineroModule } from './modulos/cocinero/cocinero.module';
 import { ComponentsModule } from './components/components.module';
 import { CajeroModule } from './modulos/cajero/cajero.module';
 import { PropietarioModule } from './modulos/propietario/propietario.module';
+import { AdministradorModule} from './modulos/administrador/administrador.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +30,8 @@ import { PropietarioModule } from './modulos/propietario/propietario.module';
     CocineroModule,
     CajeroModule,
     ComponentsModule,
-    PropietarioModule
+    PropietarioModule,
+    AdministradorModule
   ], 
   providers: [],
   bootstrap: [AppComponent]

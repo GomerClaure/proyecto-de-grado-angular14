@@ -44,6 +44,11 @@ const routes: Routes = [
   path:'vista/:menu',
     component:VistaMenuComponent
   },
+  {
+    path: 'administrador',
+    loadChildren: () => import('../app/modulos/administrador/administrador.module').then(m => m.AdministradorModule)
+  }
+
 ];
 
 @NgModule({

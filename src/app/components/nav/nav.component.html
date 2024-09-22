@@ -82,7 +82,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Solicitudes</a>
+          <a class="nav-link active" aria-current="page"  [routerLink]="'/administrador/ver-formularios'" >Solicitudes</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
@@ -224,7 +224,7 @@
           <a class="nav-link active" aria-current="page" [routerLink]="'/login'">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/registro'">Registro</a>
+          <a class="nav-link" [routerLink]="'/formulario-registro'">Registro</a>
         </li>
       </ul>
     </div>

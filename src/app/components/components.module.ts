@@ -7,6 +7,7 @@ import { RegistrarCategoriaComponent } from '../modulos/propietario/registro/reg
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VistaMenuComponent } from './vista-menu/vista-menu.component';
 import { ModalPlatilloComponent } from './modal-platillo/modal-platillo.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -14,11 +15,13 @@ import { ModalPlatilloComponent } from './modal-platillo/modal-platillo.componen
     FooterComponent,
     RegistrarCategoriaComponent,
     VistaMenuComponent,
-    ModalPlatilloComponent
+    ModalPlatilloComponent,
+    MapComponent
   ],
   exports:[
     NavComponent, 
-    FooterComponent
+    FooterComponent,
+    MapComponent
   ], 
   imports: [
     CommonModule,

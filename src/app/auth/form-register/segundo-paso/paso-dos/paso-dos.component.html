@@ -1,0 +1,26 @@
+<form [formGroup]="pasoDosForm" class="needs-validation" novalidate>
+  <!-- Tipo de establecimiento -->
+  <div class="form-group col-md-12 p-2">
+    <label for="tipoEstablecimiento" class="form-label">Tipo de establecimiento</label>
+    <div class="d-flex flex-wrap">
+      <div class="form-check me-3" *ngFor="let tipo of tiposEstablecimiento">
+        <input class="form-check-input" type="radio" [id]="tipo" formControlName="tipoEstablecimiento" [value]="tipo">
+        <label class="form-check-label" [for]="tipo">{{ tipo }}</label>
+      </div>
+    </div>
+    <div *ngIf="pasoDosForm.get('tipoEstablecimiento')?.invalid && pasoDosForm.get('tipoEstablecimiento')?.touched" class="text-danger">
+      Tipo de establecimiento es requerido
+    </div>
+  </div>
+
+  <!-- Ubicación del Restaurante -->
+  <div class="mb-3">
+    <label for="map" class="form-label">Ubicación del Restaurante</label>
+    <app-map [parentForm]="pasoDosForm" [mapaDeshabilitado]="false"></app-map>
+
+    
+    <div *ngIf="pasoDosForm.get('ubicacionRestaurante')?.invalid && pasoDosForm.get('ubicacionRestaurante')?.touched" class="text-danger mt-2">
+      La ubicación es requerida.
+    </div>
+  </div>
+</form>
