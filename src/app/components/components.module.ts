@@ -5,16 +5,19 @@ import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { RegistrarCategoriaComponent } from '../modulos/propietario/registro/registrar-categoria/registrar-categoria.component';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
     NavComponent,
     FooterComponent,
-    RegistrarCategoriaComponent
+    RegistrarCategoriaComponent,
+    MapComponent
   ],
   exports:[
     NavComponent, 
-    FooterComponent
+    FooterComponent,
+    MapComponent
   ], 
   imports: [
     CommonModule,

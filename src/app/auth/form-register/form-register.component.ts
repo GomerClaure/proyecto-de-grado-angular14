@@ -99,8 +99,8 @@ export class FormRegisterComponent implements OnInit, AfterViewInit {
     this.toast.info({ detail: "INFO", summary: message, sticky: true });
   }
   showSuccess(message: string) {
-    console.log('entra')
-    this.toast.success({ detail: message, summary: 'Success', duration: 500 });
+    this.toast.success({ detail: 'SUCCESS', summary: message });
+
   }
 
   onSubmit(): void {
@@ -120,17 +120,24 @@ export class FormRegisterComponent implements OnInit, AfterViewInit {
     formData.append('licencia_funcionamiento', this.restauranteForm.get('pasoUno.licenciaFuncionamiento')?.value);
     formData.append('fotografia_propietario', this.restauranteForm.get('pasoTres.fotografiaPropietario')?.value);
     this.restauranteForm.markAllAsTouched();
-    if (this.restauranteForm.valid) {
-      this.preRegistroService.savePreRegistro(formData).subscribe(
-        response => {
+    if (this.restauranteForm) {
+      this.preRegistroService.savePreRegistro(formData).subscribe({
+        next: response => {
           console.log('Respuesta del servidor:', response);
           this.showSuccess('Formulario enviado correctamente');
+          this.restauranteForm.reset();
+          this.currentStep = 1;
         },
-        error => {
+        error: error => {
           console.error('Error al enviar el formulario:', error);
           this.showError('Error al enviar el formulario');
+        },
+        complete: () => {
+          console.log('Envio completado');
         }
-      );
+      });
+    } else {
+      this.showInfo('Campos no validos')
     }
   }
 }
