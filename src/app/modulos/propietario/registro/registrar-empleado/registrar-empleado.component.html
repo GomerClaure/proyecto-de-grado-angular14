@@ -1,2 +1,63 @@
-<app-nav></app-nav><br><br><br>
-<p>registrar-empleado works!</p>
+<app-nav></app-nav>
+<br><br><br>
+<header class="text-center my-4">
+  <h1>Registrar Empleado</h1>
+</header>
+
+<section class="container">
+  <form class="row g-3">
+    <!-- Nombre -->
+    <div class="col-md-6">
+      <label for="nombre" class="form-label">Nombres</label>
+      <input type="text" class="form-control" id="nombre" name="nombre" required>
+    </div>
+    
+    <!-- Apellido -->
+    <div class="col-md-6">
+      <label for="apellido" class="form-label">Apellidos</label>
+      <input type="text" class="form-control" id="apellido" name="apellido" required>
+    </div>
+
+    <!-- Correo Electrónico -->
+    <div class="col-md-6">
+      <label for="email" class="form-label">Correo Electrónico</label>
+      <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+
+    <!-- Teléfono -->
+    <div class="col-md-6">
+      <label for="telefono" class="form-label">Teléfono</label>
+      <input type="tel" class="form-control" id="telefono" name="telefono" required>
+    </div>
+
+    <!-- Fecha de Nacimiento -->
+    <div class="col-md-6">
+      <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+      <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required>
+    </div>
+
+    <!-- Puesto -->
+    <div class="col-md-6">
+      <label for="puesto" class="form-label">Puesto</label>
+      <input type="text" class="form-control" id="puesto" name="puesto" required>
+    </div>
+
+    <!-- Salario -->
+    <div class="col-md-6">
+      <label for="salario" class="form-label">Salario</label>
+      <input type="number" class="form-control" id="salario" name="salario" required>
+    </div>
+
+    <!-- Fecha de Contratación -->
+    <div class="col-md-6">
+      <label for="fechaContratacion" class="form-label">Fecha de Contratación</label>
+      <input type="date" class="form-control" id="fechaContratacion" name="fechaContratacion" required>
+    </div>
+
+    <!-- Botones -->
+    <div class="col-12 d-flex justify-content-between">
+      <button type="submit" class="btn btn-primary">Registrar</button>
+      <button type="reset" class="btn btn-secondary">Limpiar</button>
+    </div>
+  </form>
+</section>
