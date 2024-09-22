@@ -5,7 +5,7 @@
   <br>
   <div class="container">
     <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Buscar por nombre de mesa o razon social " [(ngModel)]="textoBuscador" (ngModelChange)="onSearchChange($event)" >
+      <input type="text" class="form-control" placeholder="Buscar por nombre de mesa o razón social" [(ngModel)]="textoBuscador" (ngModelChange)="onSearchChange($event)">
     </div>
     <div class="row">
       <div *ngFor="let pedido of pedidosPorMesa" class="col-lg-3 col-md-4 col-sm-6 mb-3">
@@ -24,22 +24,19 @@
                 </tr>
               </thead>
               <tbody class="text-center">
-                <!-- Iterar sobre todos los pedidos de la mesa -->
+                <!-- Iterar sobre los pedidos en la mesa -->
                 <ng-container *ngFor="let pedidoItem of pedido.pedidos">
-                  <!-- Iterar sobre todos los platillos en cada pedido -->
-                  <ng-container *ngFor="let plato of pedidoItem.platos">
-                    <tr>
-                      <td>{{ plato.nombre }}</td>
-                      <td>{{ plato.pivot.cantidad }}</td>
-                      <td>{{ plato.precio }} Bs</td>
-                    </tr>
-                  </ng-container>
+                  <tr>
+                    <td>{{ pedidoItem.platillo.nombre }}</td>
+                    <td>{{ pedidoItem.cantidad }}</td>
+                    <td>{{ pedidoItem.platillo.precio }} Bs</td>
+                  </tr>
                 </ng-container>
               </tbody>
             </table>
           </div>
           <div class="card-footer">
-            <h5 class="text-end">Total: {{ pedido.pedidos[0].cuenta.monto_total}} Bs</h5>
+            <h5 class="text-end">Total: {{ pedido.montoTotal }} Bs</h5>
             <div>
               <div class="row no-print">
                 <div class="col-6 pt-0">

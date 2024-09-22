@@ -59,37 +59,61 @@ export class MostrarPedidosCComponent implements OnInit {
     const mesasMap = new Map<string, { 
       nombreMesa: string, 
       estadoP: string, 
-      pedidos: DetallePedidoCajero[], 
+      pedidos: { platillo: any, cantidad: number, subtotal: number }[], 
       idCuenta: number, 
       razon_social: string, 
-      nit: number 
+      nit: number,
+      montoTotal: number 
     }>();
   
     this.pedi.forEach(pedido => {
       const nombreMesa = pedido.cuenta.mesa.nombre;
       const estadoP = pedido.estado.nombre;
       const idCuenta = pedido.cuenta.id;
-      const razon_social = pedido.cuenta.nombre_razon_social;
+      const razon_social = pedido.cuenta.nombre_razon_social || 'Anonimo';
       const nit = pedido.cuenta.nit ? Number(pedido.cuenta.nit) : 0;
-      if (pedido.cuenta.estado === 'Pagada' || pedido.cuenta.estado ==='Cancelada') {
+  
+      // Filtrar estados no deseados
+      if (pedido.cuenta.estado === 'Pagada' || pedido.cuenta.estado === 'Cancelada') {
         return;
       }
-      if (!mesasMap.has(nombreMesa)) {
-        mesasMap.set(nombreMesa, {
-          nombreMesa: nombreMesa,
-          estadoP: estadoP,
-          pedidos: [pedido],
-          idCuenta: idCuenta,
-          razon_social: razon_social || 'Anonimo',
-          nit: nit
-        });
-      } else {
-        mesasMap.get(nombreMesa)?.pedidos.push(pedido);
-      }
+  
+      // Procesar los platos en el pedido
+      pedido.platos.forEach(platillo => {
+        const subtotal = platillo.precio * platillo.pivot.cantidad; // Suponiendo que pivot.cantidad tiene la cantidad
+  
+        const platilloExistente = mesasMap.get(nombreMesa);
+  
+        if (!platilloExistente) {
+          mesasMap.set(nombreMesa, {
+            nombreMesa: nombreMesa,
+            estadoP: estadoP,
+            pedidos: [{ platillo: platillo, cantidad: platillo.pivot.cantidad, subtotal: subtotal }],
+            idCuenta: idCuenta,
+            razon_social: razon_social,
+            nit: nit,
+            montoTotal: subtotal // Inicializamos el monto total
+          });
+        } else {
+          const platilloIndex = platilloExistente.pedidos.findIndex(p => p.platillo.id === platillo.id);
+          if (platilloIndex > -1) {
+            // Aumentar cantidad y subtotal si el platillo ya existe
+            platilloExistente.pedidos[platilloIndex].cantidad += platillo.pivot.cantidad;
+            platilloExistente.pedidos[platilloIndex].subtotal += subtotal; // Actualizar el subtotal
+          } else {
+            // Si es un platillo nuevo, añadirlo
+            platilloExistente.pedidos.push({ platillo: platillo, cantidad: platillo.pivot.cantidad, subtotal: subtotal });
+          }
+          // Actualizar el monto total
+          platilloExistente.montoTotal += subtotal;
+        }
+      });
     });
+  
     this.pedidosPorMesa = Array.from(mesasMap.values());
-    console.log('pedidos por mesa a ver que onda',this.pedidosPorMesa)
+    console.log('pedidos por mesa a ver que onda', this.pedidosPorMesa);
   }
+  
 
 
   
@@ -116,11 +140,9 @@ export class MostrarPedidosCComponent implements OnInit {
    this.cuentaService.cerrarCuenta(id).subscribe(
     response => {
       console.log('Cuenta cerrada:', response);
-      // Update UI or alert the user that the account was closed
     },
     error => {
       console.error('error al cerrar:', error);
-      // Handle error (e.g., show an error message)
     }
   );
   }
