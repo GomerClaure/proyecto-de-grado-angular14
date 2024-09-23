@@ -16,6 +16,10 @@ export class SolicitudesComponent implements OnInit {
   public preRegistroSeleccionado: FormularioPreRegistro;
   public mostrarDetalle: boolean;
   public rechazoForm: FormGroup;
+  // Para la paginación
+  public registrosPorPagina: number = 7;
+  public paginaActual: number = 1;
+  public totalPaginas: number = 0;
 
   constructor(private preRegistroService: PreRegistroService,
     private fb: FormBuilder,
@@ -43,6 +47,7 @@ export class SolicitudesComponent implements OnInit {
     this.preRegistroService.getPreRegistros().subscribe(
       (response) => {
         this.preRegistros = response.data;
+        this.totalPaginas = Math.ceil(this.preRegistros.length / this.registrosPorPagina);
         console.log(this.preRegistros);
       },
       (error) => {
@@ -50,7 +55,18 @@ export class SolicitudesComponent implements OnInit {
       }
     );
   }
+  get registrosPaginados(): FormularioPreRegistro[] {
+    const inicio = (this.paginaActual - 1) * this.registrosPorPagina;
+    const fin = inicio + this.registrosPorPagina;
+    return this.preRegistros.slice(inicio, fin);
+  }
 
+  // Funciones para cambiar la página
+  cambiarPagina(pagina: number) {
+    if (pagina >= 1 && pagina <= this.totalPaginas) {
+      this.paginaActual = pagina;
+    }
+  }
   getBadgeClass(estado: string): string {
     switch (estado.toLowerCase()) {
       case 'pendiente':
