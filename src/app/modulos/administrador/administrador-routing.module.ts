@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { SolicitudesComponent } from './solicitudes/solicitudes.component';
-
+import { ManejoCuentaPersonalComponent } from './manejo-cuenta-personal/manejo-cuenta-personal.component';
 const routes:Routes=[
   {
     path:'',
@@ -10,7 +10,10 @@ const routes:Routes=[
       {
         path:'ver-formularios',
         component:SolicitudesComponent
-
+      },
+      {
+        path:'manejo-cuentas-propietarios',
+        component:ManejoCuentaPersonalComponent
       }
     ]
   }

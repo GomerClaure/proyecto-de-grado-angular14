@@ -88,6 +88,10 @@ export class SessionService {
     const params = new HttpParams().set('id_usuario', id_usuario);
     return this.http.get<any>(`${this.BASE_URL}/datos-personales`, { headers: this.headers, params });
   }
+
+  getDatosPersonalesPropietarios() {
+    return this.http.get<any>(`${this.BASE_URL}/propietarios`, { headers: this.headers });
+  }
   
   restablecerContra(contraseniaForm: FormData) {
     // mostrar Datos de contraseniaForm
