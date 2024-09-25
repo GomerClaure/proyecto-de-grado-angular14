@@ -24,6 +24,6 @@ export class CuentaService {
     return this.http.post<any>(`${this.BASE_URL}/cuenta/store/${idCuenta}`, formData, { headers: this.headers });
   }
   cerrarCuenta(id: number){
-    return this.http.post<any>(`${this.BASE_URL}/cuenta/close/${id}`, { headers:this.headers});
-  }
+    return this.http.post<any>(`${this.BASE_URL}/cuenta/close/${id}`,null, { headers:this.headers});
+  } 
 }

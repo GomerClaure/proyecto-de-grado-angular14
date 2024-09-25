@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DetallePedidoCajero } from 'src/app/modelos/PedidosMesa';
 import { CuentaService } from 'src/app/services/pedido/cuenta.service';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
+import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.service';
 
 @Component({
   selector: 'app-mostrar-pedidos-c',
@@ -17,12 +18,15 @@ export class MostrarPedidosCComponent implements OnInit {
   id_empleado: number = 0;
   textoBuscador:string = '';
 
-  constructor(private pedidoService: PedidoService, private cuentaService:CuentaService) {}
+  constructor(private pedidococinaservice:PedidosCocinaService, private pedidoService: PedidoService, private cuentaService:CuentaService) {}
 
   ngOnInit(): void {
     this.id_restaurante = +sessionStorage.getItem('id_restaurante')!;
     this.id_empleado = +sessionStorage.getItem('id_empleado')!;
     this.obtenerPedidos();
+    this.pedidococinaservice.pedidos$.subscribe(update=>{
+       console.log('pedido',update)
+    })
   }
   
   obtenerPedidos(): void {
@@ -146,56 +150,9 @@ export class MostrarPedidosCComponent implements OnInit {
     }
   );
   }
-  
-  @ViewChild('printSection', { static: false }) printSection!: ElementRef;
 
   imprimir() {
-    const printContents = this.printSection.nativeElement.innerHTML;
-
-    // Crear un nuevo div temporal solo para impresión
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = printContents;
-
-    // Eliminar botones de los contenidos a imprimir
-    const botones = tempDiv.querySelectorAll('button');
-    botones.forEach(boton => boton.remove());
-
-    const printWindow = window.open('', '_blank', 'width=600,height=600');
-
-    printWindow!.document.write(`
-      <html>
-        <head>
-          <title>Imprimir</title>
-          <style>
-            @page {
-              size: A4; /* Tamaño de hoja A4 */
-              margin: 20mm; /* Margen alrededor del contenido */
-            }
-            body {
-              font-family: Arial, sans-serif;
-            }
-            table {
-              width: 100%;
-              border-collapse: collapse;
-            }
-            th, td {
-              border: 1px solid black;
-              padding: 10px;
-              text-align: left;
-            }
-            h2 {
-              text-align: center;
-            }
-          </style>
-        </head>
-        <body onload="window.print();">
-          ${tempDiv.innerHTML}
-        </body>
-      </html>
-    `);
-    
-    printWindow!.document.close();
-    printWindow!.focus();
+  window.print();
 }
 }
 

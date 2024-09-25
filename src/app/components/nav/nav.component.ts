@@ -42,7 +42,7 @@ export class NavComponent implements OnInit, OnDestroy {
         localStorage.setItem('conexionWebSocket', 'true');
         if (sessionStorage.getItem('tipo') === 'Empleado') {
           this.webSocketService.iniciarConexion();
-          if (sessionStorage.getItem('rol_empleado') === '3') {
+          if (sessionStorage.getItem('rol_empleado') === '3' || '2') {
             this.suscribirseEventosDePedido();
           } else {
             this.suscribirNotificacion();
@@ -51,7 +51,6 @@ export class NavComponent implements OnInit, OnDestroy {
       }
 
       let sesionComoEmpleado = sessionStorage.getItem('tipo') === 'Empleado';
-
       if (sesionComoEmpleado) {
         this.notificacionService.getNotificaciones(5).subscribe(
           (data) => {
