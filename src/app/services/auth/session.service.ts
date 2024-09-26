@@ -92,6 +92,14 @@ export class SessionService {
   getDatosPersonalesPropietarios() {
     return this.http.get<any>(`${this.BASE_URL}/propietarios`, { headers: this.headers });
   }
+
+  cambiarEstadoUsuario(id_usuario: string, estado: boolean) {
+    var ruta = '/propietario/dar-baja';
+    if (estado) {
+      ruta = '/propietario/dar-alta';
+    }
+    return this.http.put<any>(`${this.BASE_URL}${ruta}/${id_usuario}`, null, { headers: this.headers });
+  }
   
   restablecerContra(contraseniaForm: FormData) {
     // mostrar Datos de contraseniaForm

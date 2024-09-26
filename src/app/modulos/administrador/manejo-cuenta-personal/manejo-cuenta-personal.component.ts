@@ -43,4 +43,18 @@ export class ManejoCuentaPersonalComponent implements OnInit {
 
     event.target.src = this.sanitizer.bypassSecurityTrustUrl('assets/image/27002.jpg'); // URL de imagen de reemplazo
   }
+
+  cambiarEstadoUsuario(idUsuario: number, estado: boolean) {
+    this.sessionService.cambiarEstadoUsuario(idUsuario+'', estado).subscribe(
+      (res) => {
+        let usuario = this.usuarios.find(usuario => usuario.id_usuario == idUsuario);
+        if(usuario){
+          usuario.usuario.estado = estado
+        }
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
 }
