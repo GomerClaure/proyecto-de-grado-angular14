@@ -1,20 +1,37 @@
 header {
-    background-color: #f8f9fa;
-    padding: 20px 0;
+  background-color: white;
+  padding-top: 20px;
+}
+
+form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center; /* Alinea los elementos verticalmente */
+}
+
+.imagen-subir {
+  width: 50%; /* Ajusta el tamaño de la imagen */
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  object-fit: cover; /* Ajusta la imagen para que se adapte al contenedor sin distorsionarse */
+  max-height: 200px; /* Máximo alto de la imagen para evitar que sea demasiado grande */
+}
+
+.mb-2 {
+  margin-bottom: 10px; /* Añade margen inferior a la imagen */
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: #138496; /* Color al pasar el mouse */
   }
-  
-  h1 {
-    font-size: 2rem;
-  }
-  
-  form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  button {
-    width: 48%;
-  }
-  
+}
