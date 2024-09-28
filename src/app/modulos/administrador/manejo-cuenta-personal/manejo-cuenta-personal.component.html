@@ -1,77 +1,87 @@
 <app-nav></app-nav>
 <div class="fondo pt-5">
-    <div class="container-fluid">
-        <div class="row pt-3">
-            <div class="col-md-12">
-                <h1 class="text-center mb-4">Propietarios</h1>
-            </div>
-        </div>
-
-        <!-- Cards de usuario -->
-        <div class="row">
-            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3" *ngFor="let usuario of usuarios"
-                 (click)="seleccionarUsuario(usuario)" data-bs-toggle="modal" data-bs-target="#usuarioModal">
-              <div class="card shadow-sm h-100" style="cursor: pointer;">
-                <div class="card-img-container">
-                  <img [src]="getSanitizedImageUrl(usuario.usuario.foto_perfil)" (error)="onImgError($event)"
-                       class="img-fluid rounded-circle shadow" alt="Foto de perfil">
-                </div>
-                <div class="card-body text-center pt-0">
-                  <h5 class="card-title small mb-1">{{ usuario.usuario.nombre }} {{ usuario.usuario.apellido_paterno }}</h5>
-                  <p class="card-text text-muted small mb-1">{{ usuario.usuario.nickname }}</p>
-                  <span class="badge text-bg-secondary" *ngIf="!usuario.usuario.estado">Eliminado</span>
-                  <span class="badge text-bg-success" *ngIf="usuario.usuario.estado">Activo</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Modal -->
-          <div class="modal fade" id="usuarioModal" tabindex="-1" aria-labelledby="usuarioModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content shadow-lg rounded-4">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="usuarioModalLabel">Detalles del Usuario</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body px-4 pb-0">
-                  <div *ngIf="usuarioSeleccionado">
-                    <div class="row">
-                      <div class="col-md-4 d-flex justify-content-center align-items-center">
-                        <img [src]="getSanitizedImageUrl(usuarioSeleccionado.usuario.foto_perfil)" (error)="onImgError($event)"
-                             class="img-fluid rounded-circle shadow mb-3" alt="Foto de perfil" style="width: 150px; height: 150px;">
-                      </div>
-                      <div class="col-md-8">
-                        <h3 class="mb-3">{{ usuarioSeleccionado.usuario.nombre }} {{ usuarioSeleccionado.usuario.apellido_paterno }} {{ usuarioSeleccionado.usuario.apellido_materno }}</h3>
-                        <ul class="list-unstyled">
-                          <li><strong>Nickname:</strong> {{ usuarioSeleccionado.usuario.nickname }}</li>
-                          <li><strong>Correo:</strong> {{ usuarioSeleccionado.usuario.correo }}</li>
-                          <li><strong>CI:</strong> {{ usuarioSeleccionado.ci }}</li>
-                          <li><strong>País:</strong> {{ usuarioSeleccionado.pais }}</li>
-                          <li><strong>Departamento:</strong> {{ usuarioSeleccionado.departamento }}</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="modal-footer border-top-0">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          
-                  <!-- Botón de alta o baja dependiendo del estado -->
-                  <button type="button" class="btn btn-danger" *ngIf="usuarioSeleccionado && usuarioSeleccionado.usuario.estado"
-                          (click)="cambiarEstadoUsuario(usuarioSeleccionado.usuario.id, false)">
-                    Dar de Baja
-                  </button>
-
-                  <button type="button" class="btn btn-success" *ngIf="usuarioSeleccionado && !usuarioSeleccionado.usuario.estado"
-                          (click)="cambiarEstadoUsuario(usuarioSeleccionado.usuario.id, true)">
-                    Dar de Alta
-                  </button>
-
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          
+  <div class="container-fluid">
+    <div class="row pt-3">
+      <div class="col-md-12">
+        <h1 class="text-center mb-4">Propietarios</h1>
+      </div>
     </div>
+
+    <div class="input-group px-3 mb-3">
+      <input type="text" class="form-control" placeholder="Buscar por nombre..." [ngModel]="textoBuscador"
+        (ngModelChange)="onSearchChange($event)">
+    </div>
+    <!-- Cards de usuario -->
+    <div class="row">
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3" *ngFor="let usuario of usuariosFiltrados"
+        (click)="seleccionarUsuario(usuario)" data-bs-toggle="modal" data-bs-target="#usuarioModal">
+        <div class="card shadow-sm h-100" style="cursor: pointer;">
+          <div class="card-img-container">
+            <img [src]="getSanitizedImageUrl(usuario.usuario.foto_perfil)" (error)="onImgError($event)"
+              class="img-fluid rounded-circle shadow" alt="Foto de perfil">
+          </div>
+          <div class="card-body text-center pt-0">
+            <h5 class="card-title small mb-1">{{ usuario.usuario.nombre }} {{ usuario.usuario.apellido_paterno }}</h5>
+            <p class="card-text text-muted small mb-1">{{ usuario.usuario.nickname }}</p>
+            <span class="badge text-bg-secondary" *ngIf="!usuario.usuario.estado">Eliminado</span>
+            <span class="badge text-bg-success" *ngIf="usuario.usuario.estado">Activo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="usuarioModal" tabindex="-1" aria-labelledby="usuarioModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content shadow-lg rounded-4">
+          <div class="modal-header">
+            <h5 class="modal-title" id="usuarioModalLabel">Detalles del Usuario</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body px-4 pb-0">
+            <div *ngIf="usuarioSeleccionado">
+              <div class="row">
+                <div class="col-md-4 d-flex justify-content-center align-items-center">
+                  <img [src]="getSanitizedImageUrl(usuarioSeleccionado.usuario.foto_perfil)"
+                    (error)="onImgError($event)" class="img-fluid rounded-circle shadow mb-3" alt="Foto de perfil"
+                    style="width: 150px; height: 150px;">
+                </div>
+                <div class="col-md-8">
+                  <h3 class="mb-3">{{ usuarioSeleccionado.usuario.nombre }} {{
+                    usuarioSeleccionado.usuario.apellido_paterno }} {{ usuarioSeleccionado.usuario.apellido_materno }}
+                  </h3>
+                  <ul class="list-unstyled">
+                    <li><strong>Nickname:</strong> {{ usuarioSeleccionado.usuario.nickname }}</li>
+                    <li><strong>Correo:</strong> {{ usuarioSeleccionado.usuario.correo }}</li>
+                    <li><strong>CI:</strong> {{ usuarioSeleccionado.ci }}</li>
+                    <li><strong>País:</strong> {{ usuarioSeleccionado.pais }}</li>
+                    <li><strong>Departamento:</strong> {{ usuarioSeleccionado.departamento }}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer border-top-0">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+
+            <!-- Botón de alta o baja dependiendo del estado -->
+            <button type="button" class="btn btn-danger"
+              *ngIf="usuarioSeleccionado && usuarioSeleccionado.usuario.estado" data-bs-dismiss="modal"
+              (click)="cambiarEstadoUsuario(usuarioSeleccionado.usuario.id, false)">
+              Dar de Baja
+            </button>
+
+            <button type="button" class="btn btn-success"
+              *ngIf="usuarioSeleccionado && !usuarioSeleccionado.usuario.estado" data-bs-dismiss="modal"
+              (click)="cambiarEstadoUsuario(usuarioSeleccionado.usuario.id, true)">
+              Dar de Alta
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <lib-ng-toast></lib-ng-toast>
