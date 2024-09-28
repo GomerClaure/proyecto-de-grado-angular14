@@ -1,36 +1,35 @@
 <app-nav></app-nav>
-<br><br><br>
 <html>
+  <br><br>
   <header>
-    <h2 class="text-center">Registro de empleado</h2>
+    <h2 class="text-center my-4">Registro de empleado</h2>
   </header>
   <body>
     <section class="container">
-      <form class="row g-3">
+      <form [formGroup]="formularioEmpleado">
         <!-- Nombre -->
         <div class="col-md-4">
           <label for="nombre" class="form-label">Nombre</label>
-          <input type="text" class="form-control" id="nombre" name="nombre" required>
+          <input type="text" class="form-control" id="nombre" name="nombre" required formControlName="nombre">
         </div>
-
         <!-- Apellidos -->
         <div class="col-md-8">
           <div class="row">
-            <div class="col-6">
+            <div class="col-md-6 ">
               <label for="apellidoPaterno" class="form-label">Apellido Paterno</label>
-              <input type="text" class="form-control" id="apellidoPaterno" name="apellidoPaterno" required>
+              <input type="text" class="form-control ml-3" id="apellidoPaterno" name="apellidoPaterno" required formControlName="apellidoPaterno">
             </div>
-            <div class="col-6">
+            <div class="col-md-6">
               <label for="apellidoMaterno" class="form-label">Apellido Materno</label>
-              <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno" required>
+              <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno" required formControlName="apellidoMaterno">
             </div>
           </div>
         </div>
 
-        <!-- Correo Electrónico -->
+        <!-- Fecha de Nacimiento -->
         <div class="col-md-4">
           <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-          <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required>
+          <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required formControlName="fechaNacimiento">
         </div>
 
         <!-- Teléfono y Carnet de Identidad -->
@@ -38,62 +37,72 @@
           <div class="row">
             <div class="col-md-6">
               <label for="telefono" class="form-label">Teléfono</label>
-              <input type="tel" class="form-control" id="telefono" name="telefono" required>
+              <input type="tel" class="form-control" id="telefono" name="telefono" required formControlName="telefono">
             </div>
             <div class="col-md-6">
               <label for="ci" class="form-label">Carnet de Identidad</label>
-              <input type="text" class="form-control" id="ci" name="ci" required>
+              <input type="text" class="form-control" id="ci" name="ci" required formControlName="carnetIdentidad">
             </div>
           </div>
         </div>
 
+        <!-- Dirección y Correo Electrónico -->
         <div class="col-md-6">
           <label for="direccion" class="form-label">Dirección</label>
-          <input type="text" class="form-control mb-3" id="direccion" name="direccion" required>
+          <input type="text" class="form-control mb-3" id="direccion" name="direccion" required formControlName="direccion">
           <label for="email" class="form-label">Correo Electrónico</label>
-          <input type="email" class="form-control" id="email" name="email" required>
+          <input type="email" class="form-control" id="email" name="email" required formControlName="correoElectronico">
         </div>
 
-        <!-- Imagen y botón de subir imagen -->
-        <div class="col-md-6 ">
-          <div class="row">
-          <div class="col-md-6">
+        <!-- Puesto y Fecha de Contratación -->
+        <div class="col-md-6">
+          <div class=" mr-2 mt-1">
             <label for="puesto" class="form-label">Puesto</label>
-            <div class="d-flex justify-content-between mb-3">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="puesto" id="cocinero">
-                <label class="form-check-label" for="cocinero">
-                  Cocinero
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="puesto" id="mesero">
-                <label class="form-check-label" for="mesero">
-                  Mesero
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="puesto" id="cajero">
-                <label class="form-check-label" for="cajero">
-                  Cajero
-                </label>
-              </div>
+            <div class="btn-group w-100" role="group" >
+              <input type="radio" class="btn-check" name="puesto" id="cocinero" value="Cocinero" required>
+              <label class="btn btn-outline-primary" for="cocinero">Cocinero</label>
+
+              <input type="radio" class="btn-check" name="puesto" id="mesero" value="Mesero" required>
+              <label class="btn btn-outline-primary" for="mesero">Mesero</label>
+
+              <input type="radio" class="btn-check" name="puesto" id="cajero" value="Cajero" required>
+              <label class="btn btn-outline-primary" for="cajero">Cajero</label>
             </div>
+          </div>
+          <div class="mt-3">
             <label for="fechaContratacion" class="form-label">Fecha de Contratación</label>
-            <input type="date" class="form-control" id="fechaContratacion" name="fechaContratacion" required>
+            <input type="date" class="form-control" id="fechaContratacion" name="fechaContratacion" required formControlName="fechaContratacion">
           </div>
-          <div class="col-md-6 d-flex flex-column justify-content-start align-items-center">
-            <img class="imagen-subir img-fluid mb-2" src="../../../../../assets/image/2222.png" alt="Imagen de empleado">
-            <button type="button" class="btn btn-info mt-2">Subir Imagen</button>  
-          </div>
+        </div>
+
+        <!-- Fotografía del Empleado -->
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="fotografiaEmpleado" class="form-label">Fotografía del Empleado</label>
+            <div class="input-group">
+              <label class="btn btn-outline-secondary" for="fotografiaEmpleado">
+                <i class="bi bi-person-bounding-box"></i> Subir foto
+              </label>
+              <input type="file" class="form-control" id="fotografiaEmpleado" name="fotografiaEmpleado" accept="image/png, image/jpeg, image/jpg, image/webp" style="display: none;">
+              <input type="text" class="form-control" placeholder="Seleccione un archivo..." readonly>
+            </div>
           </div>
         </div>
 
         <!-- Botones de Registrar y Limpiar -->
-        <div class="col-12 d-flex justify-content-center"> <!-- Alínea los botones a la derecha -->
-          <button type="submit" class="btn btn-primary me-2">Registrar</button> <!-- Espacio entre los botones -->
+        <div class="col-12 d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary me-2"(click)="onSubmit()" >Registrar</button>
         </div>
+
       </form>
     </section>
+
+    <script>
+      // Script para mostrar el nombre del archivo seleccionado en el campo de texto
+      document.getElementById('fotografiaEmpleado').addEventListener('change', function () {
+        const fileName = this.files[0] ? this.files[0].name : 'Seleccione un archivo...';
+        this.nextElementSibling.value = fileName;
+      });
+    </script>
   </body>
 </html>
