@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { NgToastComponent, NgToastService } from 'ng-angular-popup';
 
@@ -10,8 +10,11 @@ import { NgToastComponent, NgToastService } from 'ng-angular-popup';
 export class RegistrarEmpleadoComponent implements OnInit {
 
   formularioEmpleado: FormGroup;
-  fileName: string = 'Seleccione un archivo...';  // Nombre del archivo para mostrar
+  imagenSeleccionada: File | null = null;
+  fileName: string = 'Seleccione un archivo...';
 
+  @ViewChild('fotografiaEmpleado', { static: false }) fotografiaEmpleado!: ElementRef; // Referencia al input de archivo
+  
   constructor(private formBuilder: FormBuilder , private toast: NgToastService) {
     this.formularioEmpleado = this.formBuilder.group({
       nombre: [null, Validators.required],
@@ -60,12 +63,19 @@ export class RegistrarEmpleadoComponent implements OnInit {
     else if (this.formularioEmpleado.valid) {
       const datosEmpleado = this.formularioEmpleado.value;
       console.log(datosEmpleado);  // Los datos del formulario, incluyendo la imagen
+      this.toast.success({
+        detail: 'Error',
+        summary: 'Empleado registrado.',
+        duration: 2000
+      });
+      this.formularioEmpleado.reset();
+      // Limpiar el nombre del archivo mostrado
+    this.fileName = 'Seleccione un archivo...';
+    this.imagenSeleccionada = null; // Reiniciar la variable de imagen
 
-      const imagenArchivo: File = this.formularioEmpleado.get('fotografiaEmpleado')?.value;
-      if (imagenArchivo) {
-        console.log(imagenArchivo);  // El archivo de imagen seleccionado
-        // Aquí puedes manejar la imagen, enviarla al servidor o procesarla como necesites
-      }
+    // Limpiar el input de archivo
+    this.fotografiaEmpleado.nativeElement.value = ''; 
     }
   }
 }
+ 
