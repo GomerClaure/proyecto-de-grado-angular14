@@ -24,6 +24,8 @@ import { EditarPlatilloComponent } from './editar/editar-platillo/editar-platill
 import { ListaVentasComponent } from './reporte/lista-ventas/lista-ventas.component';
 import { PlantillaListaPedidosComponent } from './reporte/plantilla-lista-pedidos/plantilla-lista-pedidos.component';
 import { ListaPedidosComponentR } from './reporte/lista-pedidosR/lista-pedidos.component';
+// manejo de cuentas
+import { ManejoCuentaEmpleadoComponent } from './manejo-cuenta-empleado/manejo-cuenta-empleado.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { ListaPedidosComponentR } from './reporte/lista-pedidosR/lista-pedidos.c
   //reporte
     ListaPedidosComponentR,
     ListaVentasComponent,
-    PlantillaListaPedidosComponent
+    PlantillaListaPedidosComponent,
+  // manejo de cuentas
+    ManejoCuentaEmpleadoComponent
   ],
   imports: [
     CommonModule,

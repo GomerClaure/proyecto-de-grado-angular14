@@ -13,6 +13,7 @@ import { RegistrarEmpleadoComponent } from './registro/registrar-empleado/regist
 import { ListaPedidosComponentR } from '../propietario/reporte/lista-pedidosR/lista-pedidos.component';
 import { ListaVentasComponent } from './reporte/lista-ventas/lista-ventas.component';
 import { PlantillaListaPedidosComponent } from './reporte/plantilla-lista-pedidos/plantilla-lista-pedidos.component';
+import { ManejoCuentaEmpleadoComponent } from './manejo-cuenta-empleado/manejo-cuenta-empleado.component';
 
 const routes:Routes=[
   {
@@ -65,6 +66,10 @@ const routes:Routes=[
       {
           path: 'plantilla-pedidos',
           component: PlantillaListaPedidosComponent
+      },
+      {
+        path: 'manejo-cuenta-empleado',
+        component: ManejoCuentaEmpleadoComponent
       }
       ]
   }
