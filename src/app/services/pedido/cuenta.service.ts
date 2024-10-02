@@ -26,4 +26,7 @@ export class CuentaService {
   cerrarCuenta(id: number){
     return this.http.post<any>(`${this.BASE_URL}/cuenta/close/${id}`,null, { headers:this.headers});
   } 
+  getCuenta(id: number) {
+    return this.http.get<any>(`${this.BASE_URL}/show/cuenta/${id}`, { headers: this.headers });
+  }
 }

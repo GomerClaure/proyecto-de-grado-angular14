@@ -3,6 +3,7 @@ import { DetallePedidoCajero } from 'src/app/modelos/PedidosMesa';
 import { CuentaService } from 'src/app/services/pedido/cuenta.service';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.service';
+import { Cuenta } from 'src/app/modelos/Cuenta';
 
 @Component({
   selector: 'app-mostrar-pedidos-c',
@@ -10,31 +11,66 @@ import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.ser
   styleUrls: ['./mostrar-pedidos-c.component.scss']
 })
 export class MostrarPedidosCComponent implements OnInit {
-  pedidos:DetallePedidoCajero[] = [];
-  pedi:DetallePedidoCajero[]=[];
-  pedidosPorMesa: any[] = [];
+  pedidos: DetallePedidoCajero[] = [];
+  pedi: DetallePedidoCajero[] = [];
+  pedidosPorMesa: Cuenta[] = [];
   errorMessage: string = '';
   id_restaurante: number = 0;
   id_empleado: number = 0;
-  textoBuscador:string = '';
+  textoBuscador: string = '';
 
-  constructor(private pedidococinaservice:PedidosCocinaService, private pedidoService: PedidoService, private cuentaService:CuentaService) {}
+  constructor(private pedidococinaservice: PedidosCocinaService, private pedidoService: PedidoService, private cuentaService: CuentaService,
+    private pedidoCocinaService: PedidosCocinaService) { }
 
   ngOnInit(): void {
     this.id_restaurante = +sessionStorage.getItem('id_restaurante')!;
     this.id_empleado = +sessionStorage.getItem('id_empleado')!;
     this.obtenerPedidos();
-    this.pedidococinaservice.pedidos$.subscribe(update=>{
-       console.log('pedido',update)
-    })
+    this.verificarPedidosNuevos();
   }
-  
+
+  verificarPedidosNuevos(): void {
+    console.log('Verificando pedidos nuevos');
+    this.pedidoCocinaService.pedidos$.subscribe(update => {
+      // primero verificar si existe la cuenta en pedidosPorMesa, si existe, actualizarla, agregando el plato depues de hacer la pedicion por id pedido si no entonces pedir cuenta por id
+      console.log('Pedido nuevo:', update);
+      
+      //busco la cuenta por id
+      if (update?.evento === 'PedidoCreado') {
+        const idCuenta = update?.datos.idCuenta;
+        this.cuentaService.getCuenta(idCuenta).subscribe(
+          response => {
+            // Buscar si ya existe la cuenta para la mesa en pedidosPorMesa
+            let cuentaExistente: Cuenta | undefined = this.pedidosPorMesa.find(cuenta => cuenta.id=== idCuenta);
+            let cuentaObtenida: Cuenta = response.cuenta;
+            console.log('Cuenta obtenida:', cuentaObtenida);
+            console.log('Cuenta existente:', cuentaExistente);
+            if (cuentaExistente) {
+              cuentaExistente.platos = response.cuenta.platos;
+            } else {
+              console.log('Cuenta no encontrada, agregando cuenta:', cuentaObtenida);
+              this.pedidosPorMesa.push(cuentaObtenida);
+            }
+           console.log('pedidos por mesa:', this.pedidosPorMesa);
+
+          },
+          error => {
+            console.error('Error al obtener la cuenta:', error);
+          }
+        );
+
+      }
+
+
+    });
+  }
+
   obtenerPedidos(): void {
     this.pedidoService.getPedidos(this.id_empleado, this.id_restaurante).subscribe(
       (response) => {
         this.pedidos = response.pedidos;
-        console.log('pedidos que obtengo',this.pedidos)
-        this.pedi = this.pedidos .filter(pedido => pedido.cuenta.estado === 'Abierta').map(pedido => ({
+        console.log('pedidos que obtengo', this.pedidos)
+        this.pedi = this.pedidos.filter(pedido => pedido.cuenta.estado === 'Abierta').map(pedido => ({
           cuenta: pedido.cuenta,
           estado: pedido.estado,
           monto: pedido.monto,
@@ -59,100 +95,102 @@ export class MostrarPedidosCComponent implements OnInit {
 
   agruparPedidosPorMesa(): void {
     this.pedidosPorMesa = [];
-  
-    const mesasMap = new Map<string, { 
-      nombreMesa: string, 
-      estadoP: string, 
-      pedidos: { platillo: any, cantidad: number, subtotal: number }[], 
-      idCuenta: number, 
-      razon_social: string, 
-      nit: number,
-      montoTotal: number 
-    }>();
-  
+
+    // Recorremos cada pedido y lo agrupamos en el array pedidosPorMesa
     this.pedi.forEach(pedido => {
       const nombreMesa = pedido.cuenta.mesa.nombre;
       const estadoP = pedido.estado.nombre;
       const idCuenta = pedido.cuenta.id;
       const razon_social = pedido.cuenta.nombre_razon_social || 'Anonimo';
       const nit = pedido.cuenta.nit ? Number(pedido.cuenta.nit) : 0;
-  
-      // Filtrar estados no deseados
+
+      // Filtrar cuentas con estado 'Pagada' o 'Cancelada'
       if (pedido.cuenta.estado === 'Pagada' || pedido.cuenta.estado === 'Cancelada') {
         return;
       }
-  
-      // Procesar los platos en el pedido
+
+      // Buscar si ya existe la cuenta para la mesa en pedidosPorMesa
+      let cuentaExistente = this.pedidosPorMesa.find(cuenta => cuenta.id_mesa === pedido.cuenta.mesa.id);
+
+      if (!cuentaExistente) {
+        // Si no existe, creamos una nueva cuenta con la estructura Cuenta
+        cuentaExistente = {
+          id: idCuenta,
+          id_mesa: pedido.cuenta.mesa.id,
+          nombre_mesa: nombreMesa,
+          estado: estadoP,
+          nit: nit,
+          nombre_razon_social: razon_social,
+          monto_total: 0,  // Inicializamos el monto total en 0
+          platos: []
+        };
+        // Agregamos la cuenta al array de pedidosPorMesa
+        this.pedidosPorMesa.push(cuentaExistente);
+      }
+
+      // Recorrer los platillos en el pedido
       pedido.platos.forEach(platillo => {
-        const subtotal = platillo.precio * platillo.pivot.cantidad; // Suponiendo que pivot.cantidad tiene la cantidad
-  
-        const platilloExistente = mesasMap.get(nombreMesa);
-  
-        if (!platilloExistente) {
-          mesasMap.set(nombreMesa, {
-            nombreMesa: nombreMesa,
-            estadoP: estadoP,
-            pedidos: [{ platillo: platillo, cantidad: platillo.pivot.cantidad, subtotal: subtotal }],
-            idCuenta: idCuenta,
-            razon_social: razon_social,
-            nit: nit,
-            montoTotal: subtotal // Inicializamos el monto total
-          });
+        const subtotal = platillo.precio * platillo.pivot.cantidad;
+
+        // Buscar si el platillo ya está en la cuenta
+        const platilloExistente = cuentaExistente!.platos.find(p => p.id_platillo === platillo.id);
+
+        if (platilloExistente) {
+          // Si el platillo ya existe, actualizamos la cantidad y el subtotal
+          platilloExistente.cantidad += platillo.pivot.cantidad;
+          platilloExistente.precio += subtotal;  // Actualizamos el precio
         } else {
-          const platilloIndex = platilloExistente.pedidos.findIndex(p => p.platillo.id === platillo.id);
-          if (platilloIndex > -1) {
-            // Aumentar cantidad y subtotal si el platillo ya existe
-            platilloExistente.pedidos[platilloIndex].cantidad += platillo.pivot.cantidad;
-            platilloExistente.pedidos[platilloIndex].subtotal += subtotal; // Actualizar el subtotal
-          } else {
-            // Si es un platillo nuevo, añadirlo
-            platilloExistente.pedidos.push({ platillo: platillo, cantidad: platillo.pivot.cantidad, subtotal: subtotal });
-          }
-          // Actualizar el monto total
-          platilloExistente.montoTotal += subtotal;
+          // Si el platillo no existe, lo agregamos
+          cuentaExistente!.platos.push({
+            id: platillo.id,
+            nombre: platillo.nombre,
+            precio: subtotal,
+            id_pedido: pedido.id,
+            id_platillo: platillo.id,
+            cantidad: platillo.pivot.cantidad
+          });
         }
+
+        // Actualizar el monto total de la cuenta
+        cuentaExistente!.monto_total += subtotal;
       });
     });
-  
-    this.pedidosPorMesa = Array.from(mesasMap.values());
-    console.log('pedidos por mesa a ver que onda', this.pedidosPorMesa);
+
+    console.log('pedidos por mesa:', this.pedidosPorMesa);
   }
-  
 
-
-  
-  onSearchChange(searchValue: string): void {  
+  onSearchChange(searchValue: string): void {
     this.textoBuscador = searchValue.trim().toLowerCase();
+    console.log('Texto buscador:', this.textoBuscador);
     this.filtrarCuentas();
   }
+
   filtrarCuentas(): void {
     if (this.textoBuscador === '') {
-      // Reset the list to the original array if the search is empty
-      this.agruparPedidosPorMesa(); // Re-group the orders by table
+      // Resetear la lista al estado original
+      this.agruparPedidosPorMesa();
     } else {
-      // Filter the grouped orders by table name, table number (idCuenta), or social reason (razon_social)
+      // Filtrar por nombre de mesa, id de cuenta o razón social
       this.pedidosPorMesa = this.pedidosPorMesa.filter(pedido =>
-        pedido.nombreMesa.toLowerCase().includes(this.textoBuscador) ||
-        pedido.idCuenta.toString().includes(this.textoBuscador) ||
-        pedido.razon_social.toLowerCase().includes(this.textoBuscador)
+        pedido.nombre_mesa.trim().toLowerCase().includes(this.textoBuscador) ||
+        pedido.nombre_razon_social.toLowerCase().includes(this.textoBuscador)
       );
-      
     }
   }
-  CerrarCuenta(id:number){
-   console.log(id);
-   this.cuentaService.cerrarCuenta(id).subscribe(
-    response => {
-      console.log('Cuenta cerrada:', response);
-    },
-    error => {
-      console.error('error al cerrar:', error);
-    }
-  );
+
+  CerrarCuenta(id: number) {
+    console.log(id);
+    this.cuentaService.cerrarCuenta(id).subscribe(
+      response => {
+        console.log('Cuenta cerrada:', response);
+      },
+      error => {
+        console.error('error al cerrar:', error);
+      }
+    );
   }
 
   imprimir() {
-  window.print();
+    window.print();
+  }
 }
-}
-

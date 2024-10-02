@@ -42,7 +42,7 @@ export class NavComponent implements OnInit, OnDestroy {
         localStorage.setItem('conexionWebSocket', 'true');
         if (sessionStorage.getItem('tipo') === 'Empleado') {
           this.webSocketService.iniciarConexion();
-          if (sessionStorage.getItem('rol_empleado') === '3' || '2') {
+          if (sessionStorage.getItem('rol_empleado') === '3' || sessionStorage.getItem('rol_empleado') === '2') {
             this.suscribirseEventosDePedido();
           } else {
             this.suscribirNotificacion();

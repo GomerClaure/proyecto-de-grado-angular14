@@ -11,8 +11,8 @@
       <div *ngFor="let pedido of pedidosPorMesa" class="col-lg-3 col-md-4 col-sm-6 mb-3">
         <div class="card h-100" #printSection>
           <div class="card-header">
-            <h3 class="text-center">{{ pedido.nombreMesa }}</h3>
-            <p>Estado: {{ pedido.estadoP }}<br>Razón Social: {{ pedido.razon_social }}<br>NIT: {{ pedido.nit }}</p>
+            <h3 class="text-center">{{ pedido.nombre_mesa }}</h3>
+            <p>Estado: {{ pedido.estado }}<br>Razón Social: {{ pedido.nombre_razon_social }}<br>NIT: {{ pedido.nit }}</p>
           </div>
           <div class="card-body" style="overflow-y: auto; max-height: 200px;">
             <table class="table">
@@ -25,22 +25,22 @@
               </thead>
               <tbody class="text-center">
                 <!-- Iterar sobre los pedidos en la mesa -->
-                <ng-container *ngFor="let pedidoItem of pedido.pedidos">
+                <ng-container *ngFor="let pedidoItem of pedido.platos">
                   <tr>
-                    <td>{{ pedidoItem.platillo.nombre }}</td>
+                    <td>{{ pedidoItem.nombre }}</td>
                     <td>{{ pedidoItem.cantidad }}</td>
-                    <td>{{ pedidoItem.platillo.precio }} Bs</td>
+                    <td>{{ pedidoItem.precio }} Bs</td>
                   </tr>
                 </ng-container>
               </tbody>
             </table>
           </div>
           <div class="card-footer">
-            <h5 class="text-end">Total: {{ pedido.montoTotal }} Bs</h5>
+            <h5 class="text-end">Total: {{ pedido.monto_total }} Bs</h5>
             <div>
               <div class="row no-print">
                 <div class="col-6 pt-0">
-                  <button class="btn btn-aceptar w-100 no-print" (click)="CerrarCuenta(pedido.idCuenta)">Cerrar</button>
+                  <button class="btn btn-aceptar w-100 no-print" (click)="CerrarCuenta(pedido.id)">Cerrar</button>
                 </div>
                 <div class="col-6 pt-0">
                   <button class="btn btn-imprimir w-100" (click)="imprimir()">Imprimir</button>
