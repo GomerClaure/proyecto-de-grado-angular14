@@ -11,6 +11,7 @@ import { HomeModule } from './modulos/home/home.module';
 import { CocineroModule } from './modulos/cocinero/cocinero.module';
 import { ComponentsModule } from './components/components.module';
 import { AdministradorModule} from './modulos/administrador/administrador.module';
+import { EmpleadosModule } from './empleados/empleados.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AdministradorModule} from './modulos/administrador/administrador.module
     HomeModule,
     CocineroModule,
     ComponentsModule,
-    AdministradorModule
+    AdministradorModule,
+    EmpleadosModule
   ], 
   providers: [],
   bootstrap: [AppComponent]

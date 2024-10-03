@@ -121,10 +121,38 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" [routerLink]="'/mesero/lista-mesa'">Registrar Pedido</a>
+            <a class="nav-link " aria-current="page" [routerLink]="'/mesero/lista-mesa'">
+              <i class="bi bi-pencil-square me-2 d-lg-none fw-bold"></i> <!-- Ícono visible solo en pantallas pequeñas -->
+              Registrar Pedido
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" [routerLink]="'/mesero/lista-pedidos'">Lista de Pedidos</a>
+            <a class="nav-link fw-lg-bold" [routerLink]="'/mesero/lista-pedidos'">
+              <i class="bi bi-list-check me-2 d-lg-none"></i> <!-- Ícono visible solo en pantallas pequeñas -->
+              Lista de Pedidos
+            </a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle me-2 d-lg-none"></i> <!-- Ícono visible solo en pantallas pequeñas -->
+              Mi Perfil
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" [routerLink]="'/empleados/datos-personales'">
+                <i class="bi bi-person me-2 d-lg-none"></i> <!-- Ícono visible solo en pantallas pequeñas -->
+                Datos Personales
+              </a></li>
+              <li><a class="dropdown-item" [routerLink]="'/reset-password'">
+                <i class="bi bi-key me-2 d-lg-none"></i> <!-- Ícono visible solo en pantallas pequeñas -->
+                Cambiar Contraseña
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="#" (click)="cerrarSesion()">
+                <i class="bi bi-box-arrow-right me-2 d-lg-none"></i> <!-- Ícono visible solo en pantallas pequeñas -->
+                Logout
+              </a></li>
+            </ul>
           </li>
         </ul>
       </div>
@@ -168,9 +196,7 @@
         </ul>
       </div>
 
-      <div class="nav-item mx-2">
-        <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
-      </div>
+      
     </div>
     <button class="navbar-toggler btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
       aria-controls="offcanvasNavbar" aria-expanded="false" aria-label="Toggle navigation">

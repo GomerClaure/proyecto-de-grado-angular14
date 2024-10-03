@@ -84,6 +84,11 @@ export class SessionService {
     return this.http.post<any>(`${this.BASE_URL}/actualizar/datos-personales`, usuarioForm, { headers: this.headers });
   }
 
+  actualizarDatosEmpleado(empleadoForm: FormData) {
+    console.log(empleadoForm);
+    return this.http.post<any>(`${this.BASE_URL}/actualizar/datos-empleado`, empleadoForm, { headers: this.headers });
+  }
+
   getDatosPersonales(id_usuario: string) {
     const params = new HttpParams().set('id_usuario', id_usuario);
     return this.http.get<any>(`${this.BASE_URL}/datos-personales`, { headers: this.headers, params });

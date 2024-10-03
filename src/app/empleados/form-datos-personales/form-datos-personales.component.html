@@ -1,0 +1,124 @@
+<app-nav></app-nav>
+<div class="fondo pt-5">
+  <form [formGroup]="usuarioForm" class="mt-5 container needs-validation shadow-lg"
+    style="position: relative; overflow-y: auto; max-height: 80vh; background-color: white;" novalidate>
+    <!-- Sección Datos del Usuario -->
+    <fieldset class="p-3 mb-4">
+      <legend class="w-auto px-2">Datos del Usuario</legend>
+
+      <div class="row">
+        <!-- Columna de 8 para los primeros 5 campos -->
+        <div class="col-md-8">
+          <!-- Nombre -->
+          <div class="form-group mb-2">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" formControlName="nombre" class="form-control"
+              [ngClass]="{
+                'is-invalid': usuarioForm.get('nombre')?.invalid && usuarioForm.get('nombre')?.touched,
+                'is-valid': usuarioForm.get('nombre')?.valid && usuarioForm.get('nombre')?.touched
+              }"
+              placeholder="Nombre" required>
+            <div class="invalid-feedback">Nombre es requerido</div>
+          </div>
+
+          <!-- Apellido Paterno -->
+          <div class="form-group mb-2">
+            <label for="apellido_paterno">Apellido Paterno</label>
+            <input id="apellido_paterno" formControlName="apellido_paterno" class="form-control"
+              [ngClass]="{
+                'is-invalid': usuarioForm.get('apellido_paterno')?.invalid && usuarioForm.get('apellido_paterno')?.touched,
+                'is-valid': usuarioForm.get('apellido_paterno')?.valid && usuarioForm.get('apellido_paterno')?.touched
+              }"
+              placeholder="Apellido Paterno" required>
+            <div class="invalid-feedback">Apellido Paterno es requerido</div>
+          </div>
+
+          <!-- Apellido Materno -->
+          <div class="form-group mb-2">
+            <label for="apellido_materno">Apellido Materno</label>
+            <input id="apellido_materno" formControlName="apellido_materno" class="form-control"
+              [ngClass]="{
+                'is-invalid': usuarioForm.get('apellido_materno')?.invalid && usuarioForm.get('apellido_materno')?.touched,
+                'is-valid': usuarioForm.get('apellido_materno')?.valid && usuarioForm.get('apellido_materno')?.touched
+              }"
+              placeholder="Apellido Materno" required>
+            <div class="invalid-feedback">Apellido Materno es requerido</div>
+          </div>
+
+          <!-- Correo -->
+          <div class="form-group mb-2">
+            <label for="correo">Correo Electrónico</label>
+            <input id="correo" type="email" formControlName="correo" class="form-control"
+              [ngClass]="{
+                'is-invalid': usuarioForm.get('correo')?.invalid && usuarioForm.get('correo')?.touched,
+                'is-valid': usuarioForm.get('correo')?.valid && usuarioForm.get('correo')?.touched
+              }"
+              placeholder="Correo" required>
+            <div class="invalid-feedback">Correo es requerido y debe ser válido</div>
+          </div>
+
+         
+        </div>
+
+        <!-- Columna de 4 para la imagen de perfil -->
+        <div class="col-md-4 d-flex flex-column align-items-center">
+          <div class="form-group d-flex flex-column flex-grow-1 w-100">
+            <label for="foto_perfil" class="pb-3">Fotografía del Usuario</label>
+
+            <!-- Contenedor de imagen centrado -->
+            <div class="d-flex justify-content-center mb-3">
+              <img [src]="foto_perfil" 
+              (error)="onImageError($event)" class="img-fluid"
+                style="max-width: 220px; max-height: 220px; border: 1px solid #ccc;" alt="Fotografía del Usuario">
+            </div>
+
+            <!-- Input file oculto -->
+            <input type="file" id="img-editar-platillo" class="oculto" 
+            (change)="onFileSelected($event)" accept="image/jpeg, image/png, image/jpg, image/webp">
+
+            <!-- Botón para seleccionar imagen, centrado y espaciado -->
+            <div class="d-flex justify-content-center">
+              <label for="img-editar-platillo" class="btn btn-primary">
+                Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i>
+              </label>
+            </div>
+
+            <!-- Mensajes de error, centrados también -->
+            <div *ngIf="usuarioForm.get('foto_perfil')?.errors?.['invalidoTipoArchivo'] && usuarioForm.get('foto_perfil')?.touched"
+              class="invalid-feedback text-center archivo-invalido oculto">
+              El tipo de archivo no es válido. Solo se permiten imágenes JPG, PNG, WEBP.
+            </div>
+            <div *ngIf="usuarioForm.get('foto_perfil')?.errors?.['archivoMuyPesado'] && usuarioForm.get('foto_perfil')?.touched"
+              class="invalid-feedback text-center archivo-pesado">
+              El archivo es muy pesado. Debe ser menor de 2 MB.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna de 12 para el nickname -->
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group mb-2">
+            <label for="nickname">Nickname</label>
+            <input id="nickname" formControlName="nickname" class="form-control"
+              [ngClass]="{
+                'is-invalid': usuarioForm.get('nickname')?.invalid && usuarioForm.get('nickname')?.touched,
+                'is-valid': usuarioForm.get('nickname')?.valid && usuarioForm.get('nickname')?.touched
+              }"
+              placeholder="Nickname" required>
+            <div class="invalid-feedback">Nickname es requerido</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón Actualizar -->
+      <div class="row">
+        <div class="col-12 mt-3">
+          <button type="button" class="btn btn-primary" (click)="actualizarUsuario()">Actualizar</button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+  <lib-ng-toast></lib-ng-toast>   
+</div>
