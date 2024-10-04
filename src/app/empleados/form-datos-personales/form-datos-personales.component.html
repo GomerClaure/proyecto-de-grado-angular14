@@ -4,7 +4,7 @@
     style="position: relative; overflow-y: auto; max-height: 80vh; background-color: white;" novalidate>
     <!-- Sección Datos del Usuario -->
     <fieldset class="p-3 mb-4">
-      <legend class="w-auto px-2">Datos del Usuario</legend>
+      <legend class="w-auto px-2">Datos Personales</legend>
 
       <div class="row">
         <!-- Columna de 8 para los primeros 5 campos -->
@@ -45,17 +45,17 @@
             <div class="invalid-feedback">Apellido Materno es requerido</div>
           </div>
 
-          <!-- Correo -->
           <div class="form-group mb-2">
-            <label for="correo">Correo Electrónico</label>
-            <input id="correo" type="email" formControlName="correo" class="form-control"
+            <label for="nickname">Nickname</label>
+            <input id="nickname" formControlName="nickname" class="form-control"
               [ngClass]="{
-                'is-invalid': usuarioForm.get('correo')?.invalid && usuarioForm.get('correo')?.touched,
-                'is-valid': usuarioForm.get('correo')?.valid && usuarioForm.get('correo')?.touched
+                'is-invalid': usuarioForm.get('nickname')?.invalid && usuarioForm.get('nickname')?.touched,
+                'is-valid': usuarioForm.get('nickname')?.valid && usuarioForm.get('nickname')?.touched
               }"
-              placeholder="Correo" required>
-            <div class="invalid-feedback">Correo es requerido y debe ser válido</div>
+              placeholder="Nickname" required>
+            <div class="invalid-feedback">Nickname es requerido</div>
           </div>
+
 
          
         </div>
@@ -92,22 +92,6 @@
               class="invalid-feedback text-center archivo-pesado">
               El archivo es muy pesado. Debe ser menor de 2 MB.
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Columna de 12 para el nickname -->
-      <div class="row">
-        <div class="col-12">
-          <div class="form-group mb-2">
-            <label for="nickname">Nickname</label>
-            <input id="nickname" formControlName="nickname" class="form-control"
-              [ngClass]="{
-                'is-invalid': usuarioForm.get('nickname')?.invalid && usuarioForm.get('nickname')?.touched,
-                'is-valid': usuarioForm.get('nickname')?.valid && usuarioForm.get('nickname')?.touched
-              }"
-              placeholder="Nickname" required>
-            <div class="invalid-feedback">Nickname es requerido</div>
           </div>
         </div>
       </div>
