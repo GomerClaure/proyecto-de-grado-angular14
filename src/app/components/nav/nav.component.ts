@@ -42,7 +42,7 @@ export class NavComponent implements OnInit, OnDestroy {
         localStorage.setItem('conexionWebSocket', 'true');
         if (sessionStorage.getItem('tipo') === 'Empleado') {
           this.webSocketService.iniciarConexion();
-          if (sessionStorage.getItem('rol_empleado') === '3') {
+          if (sessionStorage.getItem('rol_empleado') === '3' || sessionStorage.getItem('rol_empleado') === '2') {
             this.suscribirseEventosDePedido();
           } else {
             this.suscribirNotificacion();
@@ -51,13 +51,12 @@ export class NavComponent implements OnInit, OnDestroy {
       }
 
       let sesionComoEmpleado = sessionStorage.getItem('tipo') === 'Empleado';
-
       if (sesionComoEmpleado) {
         this.notificacionService.getNotificaciones(5).subscribe(
           (data) => {
             this.notificaciones = data.notificaciones;
             this.notificacionesSinLeer = data.notificacionesSinLeer;
-            console.log(this.notificaciones);
+            //console.log(this.notificaciones);
           },
           (error) => {
             console.error(error);
@@ -94,7 +93,7 @@ export class NavComponent implements OnInit, OnDestroy {
     if (ids.length > 0) {
       this.notificacionService.marcarLeida(ids, this.idRestaurante).subscribe(
         (data) => {
-          console.log(data);
+          //console.log(data);
           if (this.notificacionesSinLeer !== 0) {
             this.notificacionesSinLeer -= ids.length;
           }
@@ -134,7 +133,7 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   irAMenu() {
-    this.router.navigateByUrl('/menu/vista/1');
+    this.router.navigateByUrl('/vista/1');
   }
 
 

@@ -1,5 +1,5 @@
 <!-- Barra de navegacion para el propietario -->
-<nav *ngIf="esPropietario()" class="navbar navbar-expand-lg custom-navbar-color ">
+<nav *ngIf="esPropietario()" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark ">
   <div class="container-fluid">
     <a class="navbar-brand" [routerLink]="'/home'">
       <strong>Restaurant</strong>
@@ -15,19 +15,19 @@
             Menu
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" [routerLink]="'/lista/platillo'">Lista de platillos</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/propietario/platillo'">Lista de platillos</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" [routerLink]="'/lista/categoria'">Lista de categorias</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/propietario/categoria'">Lista de categorias</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" [routerLink]="'/menu/generar'">Generar menu </a></li>
+            <li><a class="dropdown-item" [routerLink]="'/propietario/generar'">Generar menu </a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" [routerLink]="'/menu/qr'">Generar Qr</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/propietario/qr'">Generar Qr</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -39,7 +39,7 @@
             Registro
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" [routerLink]="'/registrar/platillo'">Registrar platillo</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/propietario/platillo/registrar'">Registrar platillo</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -48,7 +48,7 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" [routerLink]="'/registrar/empleado'">Registrar empleado</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/propietario/empleado'">Registrar empleado</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -56,12 +56,16 @@
             Reporte
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" [routerLink]="'/reporte/pedidos'">Pedidos</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/propietario/pedidosR'">Pedidos</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" [routerLink]="'/reporte/ventas'">Ventas</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/propietario/ventas'">Ventas</a></li>
           </ul>
+        </li>
+        <!-- Personal -->
+        <li class="nav-item">
+          <a class="nav-link active" [routerLink]="'/propietario/manejo-cuenta-empleado'" >Empleados</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
@@ -72,7 +76,7 @@
 </nav>
 
 <!-- Barra de navegacion para el administrador -->
-<nav *ngIf="esAdministrador()" class="navbar navbar-expand-lg custom-navbar-color ">
+<nav *ngIf="esAdministrador()" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Administrador</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -94,12 +98,9 @@
 
 <!-- Barra de navegacion del empleado -->
  <!--Si el empleado es mesero-->
-<nav *ngIf="esEmpleado() && getRol()=='1'" class="navbar navbar-expand-lg custom-navbar-color ">
+<nav *ngIf="esEmpleado() && getRol()=='1'" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand mx-0" [routerLink]="'/home'"><strong>Restaurante </strong></a>
-
-
-
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
@@ -166,7 +167,7 @@
   </div>
 </nav>
 <!--Si el empleado es cocinero-->
-<nav *ngIf="esEmpleado() && getRol()=='3'" class="navbar navbar-expand-lg custom-navbar-color ">
+<nav *ngIf="esEmpleado() && getRol()=='3'" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark ">
   <div class="container-fluid">
     <a class="navbar-brand" [routerLink]="'/home'">Empleado Cocinero</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -186,7 +187,7 @@
   </div>
 </nav>
 <!--Si el empleado es cajero-->
-<nav *ngIf="esEmpleado() && getRol()=='2'" class="navbar navbar-expand-lg custom-navbar-color ">
+<nav *ngIf="esEmpleado() && getRol()=='2'" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark ">
   <div class="container-fluid">
     <a class="navbar-brand" [routerLink]="'/home'">Empleado Cajero</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -199,7 +200,7 @@
           <a class="nav-link active" aria-current="page" [routerLink]="'/mesero/lista-mesa'">Registrar Pedido</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" [routerLink]="'/mesero/lista-pedidos'">Lista de Pedidos</a>
+          <a class="nav-link active" [routerLink]="'/cajero/lista-pedidos'">Cuentas de pedidos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
@@ -210,7 +211,7 @@
 </nav>
 
 <nav *ngIf="!esPropietario() && !esEmpleado() && !esAdministrador()"
-  class="navbar navbar-expand-lg custom-navbar-color">
+  class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <strong>Lugo</strong>

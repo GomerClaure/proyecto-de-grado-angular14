@@ -28,7 +28,6 @@ export class PedidoService {private BASE_URL = environment.backendUrl;
   agregarSeleccion(platillo: Platillo) {
     this.platillosSeleccionados.push(platillo);
   }
-
   getPlatillosSeleccionados() {
     return this.platillosSeleccionados;
   }
@@ -45,15 +44,9 @@ export class PedidoService {private BASE_URL = environment.backendUrl;
     return this.http.get<any>(`${this.BASE_URL}/pedido/platos/${idPedido}/${idRestaurante}`, { headers: this.headers });
   }
 
-  getPedidos(id_emp:any,id_rest:any): Observable<any> {
-    console.log(id_emp,id_rest);
-    return this.http.get<any>(`${this.BASE_URL}/pedidos/${id_emp}/${id_rest}`, { headers: this.headers }).pipe(
-      tap(pedidos => {
-        this.pedidosSubject.next(pedidos.pedidos); // Asegúrate de que el formato de los datos es correcto
-      })
-    );
+  getPedidos(id_emp:number,id_rest:number): Observable<any> {
+    return this.http.get<any>(`${this.BASE_URL}/pedidos/${id_emp}/${id_rest}`, { headers: this.headers })
   }
-
 
   deletePedido(id:number){
     return this.http.delete<any>(`${this.BASE_URL}/pedidos/${id}`, { headers: this.headers });
@@ -64,11 +57,6 @@ export class PedidoService {private BASE_URL = environment.backendUrl;
       id_estado: idEstado,
       id_restaurante: idRestaurante
     };
-    return this.http.put<any>(`${this.BASE_URL}/plato-pedido/estado`, body, { headers: this.headers }).pipe(
-      tap(() => {
-        // Volver a cargar los pedidos y emitir la lista actualizada
-        // this.getPedidos().subscribe();
-      })
-    );
+    return this.http.put<any>(`${this.BASE_URL}/plato-pedido/estado`, body, { headers: this.headers })
   }
 }

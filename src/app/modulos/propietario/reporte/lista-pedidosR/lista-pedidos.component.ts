@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './lista-pedidos.component.html',
   styleUrls: ['./lista-pedidos.component.scss']
 })
-export class ListaPedidosComponent implements OnInit {
+export class ListaPedidosComponentR implements OnInit {
   @ViewChildren(BaseChartDirective) charts!: QueryList<BaseChartDirective>;
 
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {

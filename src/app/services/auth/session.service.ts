@@ -11,6 +11,9 @@ import { of } from 'rxjs';
 export class SessionService {
 
   private BASE_URL = environment.backendUrl;
+  private headers = {
+    'Authorization': 'Bearer ' + sessionStorage.getItem('token_access'),
+  };
 
   constructor(private http: HttpClient) { }
 
@@ -75,6 +78,18 @@ export class SessionService {
       nombre: sessionStorage.getItem('nombre')
     };
     return usuario;
+  }
+
+  cambiarEstadoEmpleado(idEmpleado: string, estado: boolean) {
+    var ruta = '/empleado/dar-baja/';
+    if(estado){
+      ruta = '/empleado/dar-alta/';
+    }
+    return this.http.put<any>(`${this.BASE_URL}${ruta}${idEmpleado}`,null,{ headers: this.headers });
+  }
+
+  getDatosEmpleado() {
+    return this.http.get<any>(`${this.BASE_URL}/empleados`,{ headers: this.headers });
   }
   }
 
