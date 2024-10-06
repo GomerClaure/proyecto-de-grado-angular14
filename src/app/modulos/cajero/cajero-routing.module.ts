@@ -10,8 +10,16 @@ const routes:Routes=[
       {
         path:'lista-pedidos',
         component:MostrarPedidosCComponent
+      },
+      {
+        path:'lista-cuentas-cerradas',
+        component:MostrarPedidosCComponent
+      },
+      {
+        path:'registrar-pedido-cajero',
+        component:MostrarPedidosCComponent 
       }
-    ]
+    ] 
   }
 ]
 
