@@ -5,9 +5,6 @@ import { CocineroRoutingModule } from './cocinero-routing.module';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { MostrarDetallePedidosComponent } from './mostrar-detalle-pedidos/mostrar-detalle-pedidos.component';
 
-
-
-
 @NgModule({
   declarations: [
     MostrarPedidosComponent,

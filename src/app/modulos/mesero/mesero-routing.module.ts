@@ -4,7 +4,6 @@ import { Routes,RouterModule } from '@angular/router';
 import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
 import { RegistrarPedidoComponent } from './registrar-pedido/registrar-pedido.component';
 import { ListaMesasComponent } from './lista-mesas/lista-mesas.component';
-import { DatosPersonalesComponent } from './datos-personales-propietario/datos-personales/datos-personales.component';
 
 const routes:Routes=[
   {
@@ -21,10 +20,6 @@ const routes:Routes=[
       {
         path:'lista-mesa',
         component:ListaMesasComponent
-      },
-      {
-        path:'datos-personales',
-        component:DatosPersonalesComponent
       },
     ]
   }

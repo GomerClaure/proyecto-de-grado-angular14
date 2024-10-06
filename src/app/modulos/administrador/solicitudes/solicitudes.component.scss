@@ -24,6 +24,22 @@
   overflow-y: auto;
 }
 
+.pagination{
+  --bs-pagination-color: #8c6239;
+  --bs-pagination-hover-color: #9e7635; 
+  --bs-pagination-hover-bg: #e8c391; 
+  --bs-pagination-active-bg: #8c6239;
+  --bs-pagination-active-border-color: #8c6239;
+  --bs-pagination-border-color: #d6b386;
+  --bs-pagination-hover-border-color: #d6b386;
+  
+}
+
+.pagination .page-link {
+  cursor: pointer !important;
+  transition: background-color 0.3s; 
+}
+
 
 @media (max-width: 576px) {
   .d-flex {

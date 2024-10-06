@@ -3,7 +3,6 @@
 <br><br><br><br>
 <div class=" row justify-content-center cont">
   <h2 class="titulo"><strong>Lista de Categorías</strong></h2>
-  <img class="li" src="../../../../../assets/image/linea.png">
 </div>
 <br>
 <div class="container">
@@ -13,13 +12,15 @@
         <img class="card-img-top img-categoria" [src]="storageUrl+categoria.imagen" alt="{{ categoria.nombre }}">
         <div class="card-body">
           <h5 class="card-title">{{ categoria.nombre }}</h5>
-          <div class="group">
-            <button type="button" class="btn btn-sm w-75 btn-editar" data-bs-toggle="modal" data-bs-target="#ModalEditarC" (click)="editarCategoria(categoria.id)">
-              <i class="bi bi-pencil-square"></i> Editar
-            </button>
-            <button type="button" class="btn btn-sm w-75 btn-delete" data-bs-toggle="modal" data-bs-target="#ModalEliminarC" (click)="eliminarCategoria(categoria.id)">
-              <i class="bi bi-trash3"></i> Eliminar
-            </button>
+          <div>
+            <div class="row">
+              <div class="col-6 pt-0">
+              <button class="btn btn-editar w-100" data-bs-toggle="modal" data-bs-target="#ModalEditarC" (click)="editarCategoria(categoria.id)"><i class="bi bi-pencil-square"></i> Editar</button>
+              </div>
+              <div class="col-6 pt-0">
+              <button class="btn btn-delete w-100" data-bs-toggle="modal" data-bs-target="#ModalEliminarC" (click)="eliminarCategoria(categoria.id)"><i class="bi bi-trash3"></i> Eliminar</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

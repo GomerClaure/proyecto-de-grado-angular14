@@ -26,6 +26,8 @@ export class MapComponent implements AfterViewInit {
     // Obtén las coordenadas del formulario, si existen
     const lat = this.parentForm.get('latitud')?.value || -17.3952;
     const lng = this.parentForm.get('longitud')?.value || -66.1391;
+    const pais = this.parentForm.get('pais')?.value || 'Bolivia';
+    const departamento = this.parentForm.get('departamento')?.value || 'Cochabamba';
   
     // Inicializa el mapa con las coordenadas obtenidas o por defecto
     this.map = L.map('map', {
@@ -38,29 +40,35 @@ export class MapComponent implements AfterViewInit {
       minZoom: 3,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(this.map);
-  
+    
     // Agrega un marcador con las coordenadas iniciales
     this.marker = L.marker([lat, lng], { draggable: true }).addTo(this.map);
-    this.updateMarkerPosition(lat, lng);
+
+    this.updateMarkerPosition(lat, lng, pais, departamento);
     this.marker.bindPopup('¡Estás aquí!').openPopup();
   
     // Actualiza el valor en el formulario cuando se hace clic en el mapa
     if (!this.mapaDeshabilitado) {
       this.map.on('click', (event: any) => {
-        this.updateMarkerPosition(event.latlng.lat, event.latlng.lng);
+        var dpto =this.direccion.state;
+        var pais = this.direccion.country;
+        this.updateMarkerPosition(event.latlng.lat, event.latlng.lng, pais, dpto);
       });
     }
     
   }
   
 
-  private updateMarkerPosition(lat: number, lng: number): void {
+  private updateMarkerPosition(lat: number, lng: number, pais: string, departamento: string): void {
     this.marker.setLatLng([lat, lng]);
     this.getAddress(lat, lng);
     this.parentForm.get('latitud')?.setValue(lat);
     this.parentForm.get('longitud')?.setValue(lng);
+    this.parentForm.get('pais')?.setValue(pais);
+    this.parentForm.get('departamento')?.setValue(departamento);
     this.parentForm.get('ubicacionRestaurante')?.setValue(this.direccion ? this.direccion.display_name : '');
     console.log('Latitud:', lat, 'Longitud:', lng);
+    console.log('País:', pais, 'Departamento:', departamento);
     console.log(this.parentForm.value);
   }
 

@@ -10,6 +10,8 @@ import { MeseroModule } from './modulos/mesero/mesero.module';
 import { HomeModule } from './modulos/home/home.module';
 import { CocineroModule } from './modulos/cocinero/cocinero.module';
 import { ComponentsModule } from './components/components.module';
+import { CajeroModule } from './modulos/cajero/cajero.module';
+import { PropietarioModule } from './modulos/propietario/propietario.module';
 import { AdministradorModule} from './modulos/administrador/administrador.module';
 import { EmpleadosModule } from './empleados/empleados.module';
 
@@ -27,9 +29,10 @@ import { EmpleadosModule } from './empleados/empleados.module';
     MeseroModule,
     HomeModule,
     CocineroModule,
+    CajeroModule,
     ComponentsModule,
-    AdministradorModule,
-    EmpleadosModule
+    PropietarioModule,
+    AdministradorModule
   ], 
   providers: [],
   bootstrap: [AppComponent]

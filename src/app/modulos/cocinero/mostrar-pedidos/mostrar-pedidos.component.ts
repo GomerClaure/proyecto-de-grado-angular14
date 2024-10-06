@@ -38,7 +38,6 @@ export class MostrarPedidosComponent implements OnInit {
     console.log('Actualización de pedidos:', update);
     if (update) {
       const { evento, datos } = update;
-
       // Dependiendo del tipo de evento, maneja el pedido de manera diferente
       switch (evento) {
         case 'PedidoEnPreparacion':

@@ -79,6 +79,7 @@ export class SessionService {
     };
     return usuario;
   }
+
   actualizarDatosUsuario(usuarioForm: FormData) {
     console.log(usuarioForm);
     return this.http.post<any>(`${this.BASE_URL}/actualizar/datos-personales`, usuarioForm, { headers: this.headers });
@@ -89,9 +90,35 @@ export class SessionService {
     return this.http.post<any>(`${this.BASE_URL}/actualizar/datos-empleado`, empleadoForm, { headers: this.headers });
   }
 
+
+  cambiarEstadoEmpleado(idEmpleado: string, estado: boolean) {
+    var ruta = '/empleado/dar-baja/';
+    if(estado){
+      ruta = '/empleado/dar-alta/';
+    }
+    return this.http.put<any>(`${this.BASE_URL}${ruta}${idEmpleado}`,null,{ headers: this.headers });
+  }
+
+  getDatosEmpleado() {
+    return this.http.get<any>(`${this.BASE_URL}/empleados`,{ headers: this.headers });
+  }
+  
+
   getDatosPersonales(id_usuario: string) {
     const params = new HttpParams().set('id_usuario', id_usuario);
     return this.http.get<any>(`${this.BASE_URL}/datos-personales`, { headers: this.headers, params });
+  }
+
+  getDatosPersonalesPropietarios() {
+    return this.http.get<any>(`${this.BASE_URL}/propietarios`, { headers: this.headers });
+  }
+
+  cambiarEstadoUsuario(id_usuario: string, estado: boolean) {
+    var ruta = '/propietario/dar-baja';
+    if (estado) {
+      ruta = '/propietario/dar-alta';
+    }
+    return this.http.put<any>(`${this.BASE_URL}${ruta}/${id_usuario}`, null, { headers: this.headers });
   }
   
   restablecerContra(contraseniaForm: FormData) {
@@ -110,5 +137,3 @@ export class SessionService {
   }
   
 }
-
-
