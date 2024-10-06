@@ -114,7 +114,7 @@ export class VisualizarQrComponent implements OnInit {
     localStorage.setItem('url_qr', this.baseUrl+this.menu.qr);
     localStorage.setItem('nombre_restaurante', this.restaurante.nombre);
     localStorage.setItem('cantidad_qr', this.cantidadQr.toString());
-    this.router.navigate(['menu/imprimir/qr']);
+    this.router.navigate(['propietario/imprimir/qr']);
   }
 
   onImgError(event: any) {
