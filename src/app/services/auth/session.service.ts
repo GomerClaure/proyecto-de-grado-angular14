@@ -79,6 +79,7 @@ export class SessionService {
     };
     return usuario;
   }
+
   actualizarDatosUsuario(usuarioForm: FormData) {
     console.log(usuarioForm);
     return this.http.post<any>(`${this.BASE_URL}/actualizar/datos-personales`, usuarioForm, { headers: this.headers });
