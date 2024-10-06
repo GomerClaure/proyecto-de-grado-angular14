@@ -28,6 +28,8 @@ export class FormRegisterComponent implements OnInit, AfterViewInit {
       pasoDos: this.fb.group({
         latitud: ['', Validators.required],
         longitud: ['', Validators.required],
+        pais: ['', Validators.required],
+        departamento: ['', Validators.required],
         tipoEstablecimiento: ['', Validators.required],
       }),
       pasoTres: this.fb.group({
@@ -95,6 +97,7 @@ export class FormRegisterComponent implements OnInit, AfterViewInit {
   showError(message: string) {
     this.toast.error({ detail: "ERROR", summary: message, sticky: true });
   }
+
   showInfo(message: string) {
     this.toast.info({ detail: "INFO", summary: message, sticky: true });
   }
@@ -119,6 +122,8 @@ export class FormRegisterComponent implements OnInit, AfterViewInit {
     formData.append('cedula_identidad_propietario', this.restauranteForm.get('pasoTres.cedulaIdentidad')?.value);
     formData.append('licencia_funcionamiento', this.restauranteForm.get('pasoUno.licenciaFuncionamiento')?.value);
     formData.append('fotografia_propietario', this.restauranteForm.get('pasoTres.fotografiaPropietario')?.value);
+    formData.append('pais', this.restauranteForm.get('pasoDos.pais')?.value);
+    formData.append('departamento', this.restauranteForm.get('pasoDos.departamento')?.value);
     this.restauranteForm.markAllAsTouched();
     if (this.restauranteForm) {
       this.preRegistroService.savePreRegistro(formData).subscribe({

@@ -14,6 +14,7 @@ import { ListaPedidosComponentR } from '../propietario/reporte/lista-pedidosR/li
 import { ListaVentasComponent } from './reporte/lista-ventas/lista-ventas.component';
 import { PlantillaListaPedidosComponent } from './reporte/plantilla-lista-pedidos/plantilla-lista-pedidos.component';
 import { ManejoCuentaEmpleadoComponent } from './manejo-cuenta-empleado/manejo-cuenta-empleado.component';
+import { DatosPersonalesComponent } from './datos-personales/datos-personales.component';
 
 const routes:Routes=[
   {
@@ -70,7 +71,11 @@ const routes:Routes=[
       {
         path: 'manejo-cuenta-empleado',
         component: ManejoCuentaEmpleadoComponent
-      }
+      },
+      {
+        path:'datos-personales',
+        component:DatosPersonalesComponent
+      },
       ]
   }
 ]

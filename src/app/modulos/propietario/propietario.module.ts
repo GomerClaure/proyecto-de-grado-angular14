@@ -26,6 +26,7 @@ import { PlantillaListaPedidosComponent } from './reporte/plantilla-lista-pedido
 import { ListaPedidosComponentR } from './reporte/lista-pedidosR/lista-pedidos.component';
 // manejo de cuentas
 import { ManejoCuentaEmpleadoComponent } from './manejo-cuenta-empleado/manejo-cuenta-empleado.component';
+import { DatosPersonalesComponent } from './datos-personales/datos-personales.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ManejoCuentaEmpleadoComponent } from './manejo-cuenta-empleado/manejo-c
     ListaVentasComponent,
     PlantillaListaPedidosComponent,
   // manejo de cuentas
-    ManejoCuentaEmpleadoComponent
+    ManejoCuentaEmpleadoComponent,
+    DatosPersonalesComponent
   ],
   imports: [
     CommonModule,
