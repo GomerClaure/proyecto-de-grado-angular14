@@ -26,26 +26,21 @@
                           El nombre es obligatorio y debe tener al menos 3 caracteres.
                         </div>
                       </div>
-
-                      <div class="mb-0">
+                      <div class="mb-3 position-relative">
                         <label for="validationServer03" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" aria-describedby="validationServer03Feedback" formControlName="password" [class.is-invalid]="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched">
+                        <input [type]="mostrarPassword ? 'text' : 'password'" class="form-control" aria-describedby="validationServer03Feedback" formControlName="password" [class.is-invalid]="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched">
+                        <span (click)="toggleMostrarPassword()">
+                            <i class="mt-3 fa" [ngClass]="mostrarPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                        </span>
                         <div *ngIf="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched" class="invalid-feedback">
-                          La contraseña es obligatoria y debe tener al menos 8 caracteres.
+                            La contraseña es obligatoria y debe tener al menos 8 caracteres.
                         </div>
-                      </div>
-                       <!-- Enlace para Olvidar Contraseña -->
-                    <div class="text-end mb-3">
-                      <a [routerLink]="['/request-password-reset']" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
                     </div>
-
-                      <div class="d-grid gap-2 justify-content-center">
+                    
+                      <div class="d-grid gap-2 justify-content-center"> 
                         <button type="submit" class="btn btn-registrar" (click)="onSubmit()">Iniciar Sesión</button>
                       </div>
                     </form>
-
-                   
-
                   </div>
                   <lib-ng-toast></lib-ng-toast>
                 </div>
