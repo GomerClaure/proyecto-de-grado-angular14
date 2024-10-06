@@ -84,6 +84,19 @@ export class SessionService {
     return this.http.post<any>(`${this.BASE_URL}/actualizar/datos-personales`, usuarioForm, { headers: this.headers });
   }
 
+  cambiarEstadoEmpleado(idEmpleado: string, estado: boolean) {
+    var ruta = '/empleado/dar-baja/';
+    if(estado){
+      ruta = '/empleado/dar-alta/';
+    }
+    return this.http.put<any>(`${this.BASE_URL}${ruta}${idEmpleado}`,null,{ headers: this.headers });
+  }
+
+  getDatosEmpleado() {
+    return this.http.get<any>(`${this.BASE_URL}/empleados`,{ headers: this.headers });
+  }
+  
+
   getDatosPersonales(id_usuario: string) {
     const params = new HttpParams().set('id_usuario', id_usuario);
     return this.http.get<any>(`${this.BASE_URL}/datos-personales`, { headers: this.headers, params });
