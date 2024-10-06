@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MostrarPedidosCComponent } from './mostrar-pedidos-c/mostrar-pedidos-c.component';
 import { CajeroRoutingModule } from './cajero-routing.module';
 import { ComponentsModule } from "../../components/components.module";
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,8 @@ import { ComponentsModule } from "../../components/components.module";
   imports: [
     CommonModule, 
     CajeroRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    FormsModule
 ]
 })
 

@@ -1,0 +1,176 @@
+.terminado {
+  background-color: rgb(173, 236, 173);
+}
+
+/* Estado: En Preparación */
+.en-preparacion {
+  background-color: rgb(247, 232, 168);
+}
+
+.btn-atras{
+  background-color: #cd5c5c;
+  color: rgb(253, 253, 253);
+}
+
+.btn-en-preparacion{
+  background-color: #ac721a ;
+  color: rgb(247, 243, 243);
+}
+
+/* Estado por defecto */
+.default {
+  background-color: rgb(240, 162, 128);
+}
+
+.detalles-pedido .row {
+  background-color: aliceblue;
+}
+
+.contenedor-slider {
+  display: flex;
+  flex-direction: column;
+}
+
+.vista-principal {
+  position: relative;
+  overflow: hidden; /* Asegura que el contenido que se deslice fuera del contenedor no sea visible */
+  height: 24.25rem;
+  padding: 10px;
+  background-color: #746b6b6e;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.cont {
+  height: 19rem; /* Equivalente a 372px */
+  overflow-y: auto;
+}
+
+.navegacion-miniaturas {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.contenedor-miniaturas {
+  overflow: hidden;
+  width: 100%;
+}
+
+.lista-miniaturas {
+  display: flex;
+  justify-content: space-around;
+  transition: transform 0.3s ease;
+}
+
+.lista-miniaturas div {
+  flex: 0 0 15%; /* Un poco más pequeño para las miniaturas no seleccionadas */
+  box-sizing: border-box;
+  cursor: pointer;
+  padding: 5px;
+  margin: 5px;
+  // transform: scale(0.9);
+  transition: transform 0.3s ease, border 0.3s ease, flex 0.3s ease;
+  
+}
+
+.lista-miniaturas div.seleccionado {
+  flex: 0 0 20%; /* Aumenta el tamaño de la miniatura seleccionada */
+  transform: scale(1.1); /* Escala adicional para resaltar la selección */
+  border: 2px solid #007bff; /* Resalta la miniatura seleccionada */
+}
+
+.btn-navegacion {
+  background-color: #746b6b6e; /* Color de fondo normal */
+  border: none;
+  font-size: 1.5rem;
+  color: #f1f1f1; /* Color de texto que contraste */
+  border-radius: 5px; /* Borde redondeado */
+  padding: 0.5rem 1rem; /* Espaciado interno */
+  transition: background-color 0.3s, color 0.3s; /* Suaviza la transición de color */
+  z-index: 10;
+}
+
+.btn-navegacion:hover {
+  background-color: #5e5a5a6e; /* Un tono más oscuro en hover */
+  color: #ffffff; /* Color de texto más claro en hover */
+}
+
+.btn-navegacion:active {
+  background-color: #4c48486e; /* Un tono aún más oscuro cuando se presiona */
+  color: #eaeaea; /* Color de texto para estado presionado */
+}
+
+.btn-navegacion:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #5e5a5a6e; /* Sombra ligera para enfoque */
+}
+button {
+  margin: 5px;
+}
+
+
+.table-container {
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed; /* Hace que las columnas tengan un ancho fijo */
+}
+
+.table th, .table td {
+  word-wrap: break-word; /* Ajusta el contenido largo a nuevas líneas */
+  white-space: normal; /* Permite que el contenido se ajuste en múltiples líneas */
+}
+
+
+.detalles-pedido {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transition: transform 0.5s ease; /* Transición para la animación suave */
+}
+
+/* Cuando el pedido entra desde la derecha */
+.detalles-pedido.entrando-desde-derecha {
+  animation: entrarDerecha 0.1s forwards;
+}
+
+/* Cuando el pedido sale hacia la derecha */
+.detalles-pedido.saliendo-hacia-derecha {
+  animation: salirDerecha 0.2s forwards;
+}
+
+/* Cuando el pedido entra desde la izquierda */
+.detalles-pedido.entrando-desde-izquierda {
+  animation: entrarIzquierda 0.1s forwards;
+}
+
+/* Cuando el pedido sale hacia la izquierda */
+.detalles-pedido.saliendo-hacia-izquierda {
+  animation: salirIzquierda 0.2s forwards;
+}
+
+@keyframes entrarDerecha {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes salirDerecha {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(-100%); opacity: 0; }
+}
+
+@keyframes entrarIzquierda {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes salirIzquierda {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0; }
+}
+

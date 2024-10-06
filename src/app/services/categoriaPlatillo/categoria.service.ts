@@ -37,7 +37,7 @@ export class CategoriaService {
   getModalClosed(): Observable<boolean> {
     return this.modalClosedSubject.asObservable();
   }
-  // Obtiene todas las categorias de platillos
+  
  getCategorias(idRestaurante: any) {
   return this.http.get(`${this.BASE_URL}/menu/categoriaRestaurante/${idRestaurante}`, { headers: this.getHeaders() });
 }

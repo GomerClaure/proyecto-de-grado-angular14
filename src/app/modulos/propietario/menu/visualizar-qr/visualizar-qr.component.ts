@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Menu } from 'src/app/modelos/Menu';
 import { Restaurante } from 'src/app/modelos/Restaurante';
@@ -17,16 +18,18 @@ export class VisualizarQrComponent implements OnInit {
   public menu!: Menu;
   public restaurante!: Restaurante;
   public baseUrl = environment.backendStorageUrl;
+  public qrUrl: SafeResourceUrl;
 
 
   constructor(private menuService: MenuService, private restauranteService: RestauranteService,
-    private router: Router) {
+    private router: Router, private sanitizer: DomSanitizer) {
     this.menu = {
       id: 0,
       portada: '',
       tema: '',
       qr: '',
     };
+    this.qrUrl = this.sanitizer.bypassSecurityTrustUrl( this.baseUrl + this.menu.qr);
     this.restaurante = {
       id: 0,
       id_menu: 0,
@@ -53,6 +56,7 @@ export class VisualizarQrComponent implements OnInit {
         this.menu = res.menu;
         console.log(this.menu)
         if(this.menu.qr){
+          this.qrUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.baseUrl + this.menu.qr);
           this.mostrarElemento('campoImprimirQr');
         }else{
           this.mostrarElemento('btnGenerarQr');
@@ -110,7 +114,7 @@ export class VisualizarQrComponent implements OnInit {
     localStorage.setItem('url_qr', this.baseUrl+this.menu.qr);
     localStorage.setItem('nombre_restaurante', this.restaurante.nombre);
     localStorage.setItem('cantidad_qr', this.cantidadQr.toString());
-    this.router.navigate(['menu/imprimir/qr']);
+    this.router.navigate(['propietario/imprimir/qr']);
   }
 
   onImgError(event: any) {

@@ -1,0 +1,58 @@
+.btn-custom {
+    background-color: #1E1E1E;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+.btn-custom:hover {
+    background-color: #333333;
+}
+
+.fixed-button-container {
+  position: sticky; /* o position: fixed; dependiendo de la necesidad */
+  top: 0;
+  z-index: 1000;
+  background-color: white; /* Asegúrate de que el botón no quede superpuesto con el contenido */
+  padding: 10px 0; /* Opcional: espacio alrededor del botón */
+}
+
+.scrollable-content {
+  max-height: 70vh; /* Ajusta la altura máxima para permitir el scroll */
+  overflow-y: auto;
+}
+
+.pagination{
+  --bs-pagination-color: #8c6239;
+  --bs-pagination-hover-color: #9e7635; 
+  --bs-pagination-hover-bg: #e8c391; 
+  --bs-pagination-active-bg: #8c6239;
+  --bs-pagination-active-border-color: #8c6239;
+  --bs-pagination-border-color: #d6b386;
+  --bs-pagination-hover-border-color: #d6b386;
+  
+}
+
+.pagination .page-link {
+  cursor: pointer !important;
+  transition: background-color 0.3s; 
+}
+
+
+@media (max-width: 576px) {
+  .d-flex {
+    flex-direction: column;
+  }
+
+  .d-flex button {
+    position: relative !important;
+    align-self: flex-start !important;
+  }
+
+  .d-flex h1 {
+    margin-top: 10px;
+    text-align: center;
+  }
+}

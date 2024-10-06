@@ -1,2 +1,55 @@
-<app-nav></app-nav><br><br>
-<p>mostrar-pedidos-c works!</p>
+<app-nav></app-nav>
+<div class="fondo">
+  <br><br><br><br>
+  <h2 class="text-center">Cuentas de pedidos</h2>
+  <br>
+  <div class="container">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Buscar por nombre de mesa o razón social" [(ngModel)]="textoBuscador" (ngModelChange)="onSearchChange($event)">
+    </div>
+    <div class="row">
+      <div *ngFor="let pedido of pedidosPorMesa" class="col-lg-3 col-md-4 col-sm-6 mb-3">
+        <div class="card h-100" #printSection>
+          <div class="card-header">
+            <h3 class="text-center">{{ pedido.nombre_mesa }}</h3>
+            <p>Estado: {{ pedido.estado }}<br>Razón Social: {{ pedido.nombre_razon_social }}<br>NIT: {{ pedido.nit }}</p>
+          </div>
+          <div class="card-body" style="overflow-y: auto; max-height: 200px;">
+            <table class="table">
+              <thead class="text-center table-dark">
+                <tr>
+                  <th>Plato</th>
+                  <th>Cantidad</th>
+                  <th>Precio</th>
+                </tr>
+              </thead>
+              <tbody class="text-center">
+                <!-- Iterar sobre los pedidos en la mesa -->
+                <ng-container *ngFor="let pedidoItem of pedido.platos">
+                  <tr>
+                    <td>{{ pedidoItem.nombre }}</td>
+                    <td>{{ pedidoItem.cantidad }}</td>
+                    <td>{{ pedidoItem.precio }} Bs</td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer">
+            <h5 class="text-end">Total: {{ pedido.monto_total }} Bs</h5>
+            <div>
+              <div class="row no-print">
+                <div class="col-6 pt-0">
+                  <button class="btn btn-aceptar w-100 no-print" (click)="CerrarCuenta(pedido.id)">Cerrar</button>
+                </div>
+                <div class="col-6 pt-0">
+                  <button class="btn btn-imprimir w-100" (click)="imprimir()">Imprimir</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
