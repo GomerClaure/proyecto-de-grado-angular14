@@ -1,6 +1,9 @@
 <app-nav></app-nav>
 <div class="fondo pt-5">
     <div class="container">
+        <div class="row">
+            <div class="mt-4" *ngIf="!mostrarDetalle">
+                <h1 class="text-center">Solicitudes de Pre-Registro</h1>
         <table *ngIf="!mostrarDetalle" class="table table-striped mt-5">
             <thead>
                 <tr>
@@ -47,54 +50,124 @@
                 </button>
                 <h1 class="fs-6 mt-2 text-center w-100">DETALLE DEL PRE-REGISTRO</h1>
             </div>
-            <app-detalle [preRegistro]="preRegistroSeleccionado"></app-detalle>
-            <!-- Botones de acción -->
-            <div class="d-flex flex-row justify-content-around mt-3"
-                *ngIf="preRegistroSeleccionado.estado === 'pendiente'">
-                <button class="btn btn-success me-2" (click)="actualizarEstado('aceptado')" type="submit">
-                    Aceptar
-                </button>
-                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rechazoModal" type="button">
-                    Rechazar
-                </button>
+            <table *ngIf="!mostrarDetalle" class="table table-striped ">
+                <thead>
+                    <tr>
+                        <th scope="col">N°</th>
+                        <th scope="col">Nombre Restaurante</th>
+                        <th scope="col">NIT</th>
+                        <th scope="col">Celular Restaurante</th>
+                        <th scope="col">Correo Restaurante</th>
+                        <th scope="col">Propietario</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let registro of registrosPaginados; let i = index">
+                        <th scope="row">{{ (paginaActual - 1) * registrosPorPagina + i + 1 }}</th>
+                        <td>{{ registro.nombre_restaurante }}</td>
+                        <td>{{ registro.nit }}</td>
+                        <td>{{ registro.celular_restaurante }}</td>
+                        <td>{{ registro.correo_restaurante }}</td>
+                        <td>{{ registro.nombre_propietario }} {{ registro.apellido_paterno_propietario }}</td>
+                        <td>
+                            <span class="badge" [ngClass]="getBadgeClass(registro.estado)">
+                                {{ registro.estado }}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-curso" (click)="verDetalle(registro)">Ver Detalle</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
+            <!-- Paginación Bootstrap -->
+            <nav aria-label="Page navigation" *ngIf="!mostrarDetalle && totalPaginas > 1">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" [class.disabled]="paginaActual === 1">
+                        <a class="page-link" (click)="cambiarPagina(paginaActual - 1)" aria-label="Anterior">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    <li class="page-item" *ngFor="let page of [].constructor(totalPaginas); let idx = index"
+                        [class.active]="paginaActual === idx + 1">
+                        <a class="page-link" (click)="cambiarPagina(idx + 1)">{{ idx + 1 }}</a>
+                    </li>
+
+                    <li class="page-item" [class.disabled]="paginaActual === totalPaginas">
+                        <a class="page-link" (click)="cambiarPagina(paginaActual + 1)" aria-label="Siguiente">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+
+            <!-- Contenedor del botón fijo -->
+            <div *ngIf="mostrarDetalle" class="mt-5 card shadow-lg p-4 pt-0 rounded"
+                style="position: relative; overflow-y: auto; max-height: 80vh;">
+                <div class="d-flex justify-content-center py-2 align-items-center"
+                    style="position: sticky; top: 0; z-index: 1; background-color: white;">
+
+                    <button class="btn btn-outline-dark" type="button" (click)="ocultarDetalle()"
+                        style="position: absolute; left: 0;">
+                        <i class="bi bi-arrow-left"></i> Atrás
+                    </button>
+                    <h1 class="fs-6 mt-2 text-center w-100">DETALLE DEL PRE-REGISTRO</h1>
+                </div>
+                <app-detalle [preRegistro]="preRegistroSeleccionado"></app-detalle>
+                <!-- Botones de acción -->
+                <div class="d-flex flex-row justify-content-around mt-3"
+                    *ngIf="preRegistroSeleccionado.estado === 'pendiente'">
+                    <button class="btn btn-success me-2" (click)="actualizarEstado('aceptado')" type="submit">
+                        Aceptar
+                    </button>
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rechazoModal" type="button">
+                        Rechazar
+                    </button>
+
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Modal para rechazo -->
-<div class="modal fade" id="rechazoModal" tabindex="-1" aria-labelledby="rechazoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="rechazoModalLabel">Motivo del Rechazo</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form [formGroup]="rechazoForm" (ngSubmit)="actualizarEstado('rechazado',this.rechazoForm.value.motivoRechazo)">
-                    <div class="mb-3">
-                        <label for="motivoRechazo" class="form-label">Escriba el motivo del rechazo</label>
-                        <textarea id="motivoRechazo" formControlName="motivoRechazo" class="form-control"
-                            [ngClass]="{'is-invalid': rechazoForm.get('motivoRechazo')?.invalid && rechazoForm.get('motivoRechazo')?.touched, 'is-valid': rechazoForm.get('motivoRechazo')?.valid && rechazoForm.get('motivoRechazo')?.touched}"
-                            placeholder="Escriba el motivo" required></textarea>
+    <!-- Modal para rechazo -->
+    <div class="modal fade" id="rechazoModal" tabindex="-1" aria-labelledby="rechazoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rechazoModalLabel">Motivo del Rechazo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="rechazoForm"
+                        (ngSubmit)="actualizarEstado('rechazado',this.rechazoForm.value.motivoRechazo)">
+                        <div class="mb-3">
+                            <label for="motivoRechazo" class="form-label">Escriba el motivo del rechazo</label>
+                            <textarea id="motivoRechazo" formControlName="motivoRechazo" class="form-control"
+                                [ngClass]="{'is-invalid': rechazoForm.get('motivoRechazo')?.invalid && rechazoForm.get('motivoRechazo')?.touched, 'is-valid': rechazoForm.get('motivoRechazo')?.valid && rechazoForm.get('motivoRechazo')?.touched}"
+                                placeholder="Escriba el motivo" required></textarea>
 
-                        <div *ngIf="rechazoForm.get('motivoRechazo')?.invalid && rechazoForm.get('motivoRechazo')?.touched"
-                            class="invalid-feedback">
-                            El motivo debe tener entre 10 y 200 caracteres.
+                            <div *ngIf="rechazoForm.get('motivoRechazo')?.invalid && rechazoForm.get('motivoRechazo')?.touched"
+                                class="invalid-feedback">
+                                El motivo debe tener entre 10 y 200 caracteres.
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" [disabled]="rechazoForm.invalid">Enviar</button>
-                    </div>
-                </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-danger" data-bs-dismiss="modal"
+                                [disabled]="rechazoForm.invalid">Enviar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
 
-<lib-ng-toast></lib-ng-toast>
+    <lib-ng-toast></lib-ng-toast>
