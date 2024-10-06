@@ -20,7 +20,7 @@ import { ModalDatosCuentaComponent } from './modal-datos-cuenta/modal-datos-cuen
     RegistrarPedidoComponent,
     ModalPedidosComponent,
     ModalEliminarPedidoComponent,
-    ModalDatosCuentaComponent
+    ModalDatosCuentaComponent,
   ],
   imports: [
     CommonModule,
