@@ -5,15 +5,12 @@ import { CajeroRoutingModule } from './cajero-routing.module';
 import { ComponentsModule } from "../../components/components.module";
 import { FormsModule } from '@angular/forms';
 import { ListaCuentasComponent } from './lista-cuentas/lista-cuentas.component';
-import { RegistrarPedidoCComponent } from './registrar-pedido-c/registrar-pedido-c.component';
-
 
 
 @NgModule({
   declarations: [
     MostrarPedidosCComponent,
-    ListaCuentasComponent,
-    RegistrarPedidoCComponent
+    ListaCuentasComponent
   ],
   imports: [
     CommonModule,
