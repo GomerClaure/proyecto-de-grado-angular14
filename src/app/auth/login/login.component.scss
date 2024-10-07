@@ -1,51 +1,71 @@
-.card {
-    // margin-top: 150px;
+/* Fondo de pantalla */
+.fondo-login {
+    background: rgb(254,177,44);
+    background: linear-gradient(0deg, rgba(254,177,44,1) 0%, rgba(25,85,86,1) 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilos del card */
+.login-card {
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo blanco con 20% de opacidad */
     border-radius: 10px;
-    background-color: rgba(253, 253, 253, 0.9); /* Color de fondo semi-transparente */
-    box-shadow: 0px 0px 100px 0px rgba(0, 0, 0, 0.2); /* Ajuste del box-shadow */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Sombra leve para dar profundidad */
+    backdrop-filter: blur(10px); /* Difumina el fondo que está detrás de la card */
+    border: 1px solid rgba(255, 255, 255, 0.4); /* Bordes semitransparentes */
+    max-width: 400px;
+    width: 100%;
+    padding: 30px;
     border: none;
+  }
+
+/* Logo en la parte superior */
+.logo-container {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.card-body {
-    padding: 50px;
+.logo-container svg {
+  width: 80px;
+  height: 80px;
 }
 
-.card-header {
-    text-align: center;
-    background-color: white;
+/* Estilo del botón */
+.btn-login {
+  background-color: #3a8dff;
+  border: none;
+  color: white;
+  transition: background-color 0.3s ease;
 }
 
-.contenedor-icono svg {
-    text-align: center;
-    margin-top: 20px;
-    width: 60px;
-    height: 60px;
-    margin-bottom: 20px;
+.btn-login:hover {
+  background-color: #2e7ae5;
 }
 
-.f {
-    display: flex;
-    justify-content: center;
-}
-
-/* Estilo específico para el input de contraseña */
-.position-relative {
-    position: relative;
-}
-
-.position-relative input {
-    padding-right: 2.5rem; /* Espacio para el icono dentro del input */
-}
-
+/* Estilos para el input de contraseña con icono de ojo */
 .position-relative .fa {
-    position: absolute;
-    top: 50%;
-    right: 1rem;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #6c757d; /* Color del ícono */
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6c757d;
 }
 
 .position-relative .fa:hover {
-    color: #343a40; /* Color al hacer hover en el ícono */
+  color: #343a40;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 576px) {
+  .login-card {
+    padding: 15px;
+  }
+
+  .logo-container img {
+    width: 60px;
+    height: 60px;
+  }
 }
