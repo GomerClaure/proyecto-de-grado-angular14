@@ -13,6 +13,7 @@ import { ComponentsModule } from './components/components.module';
 import { CajeroModule } from './modulos/cajero/cajero.module';
 import { PropietarioModule } from './modulos/propietario/propietario.module';
 import { AdministradorModule} from './modulos/administrador/administrador.module';
+import { EmpleadosModule } from './empleados/empleados.module';
 
 @NgModule({
   declarations: [
