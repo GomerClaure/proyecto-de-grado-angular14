@@ -29,4 +29,7 @@ export class CuentaService {
   getCuenta(id: number) {
     return this.http.get<any>(`${this.BASE_URL}/show/cuenta/${id}`, { headers: this.headers });
   }
+  getCuentasCerradas() {
+    return this.http.get<any>(`${this.BASE_URL}/cuentas/cerradas`, { headers: this.headers });
+  }
 }
