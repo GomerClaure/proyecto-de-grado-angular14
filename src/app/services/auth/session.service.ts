@@ -79,10 +79,17 @@ export class SessionService {
     };
     return usuario;
   }
+
   actualizarDatosUsuario(usuarioForm: FormData) {
     console.log(usuarioForm);
     return this.http.post<any>(`${this.BASE_URL}/actualizar/datos-personales`, usuarioForm, { headers: this.headers });
   }
+
+  actualizarDatosEmpleado(empleadoForm: FormData) {
+    console.log(empleadoForm);
+    return this.http.post<any>(`${this.BASE_URL}/actualizar/datos-empleado`, empleadoForm, { headers: this.headers });
+  }
+
 
   cambiarEstadoEmpleado(idEmpleado: string, estado: boolean) {
     var ruta = '/empleado/dar-baja/';
@@ -130,5 +137,3 @@ export class SessionService {
   }
   
 }
-
-
