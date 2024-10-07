@@ -4,12 +4,13 @@ import { MostrarPedidosCComponent } from './mostrar-pedidos-c/mostrar-pedidos-c.
 import { CajeroRoutingModule } from './cajero-routing.module';
 import { ComponentsModule } from "../../components/components.module";
 import { FormsModule } from '@angular/forms';
-
+import { ListaCuentasComponent } from './lista-cuentas/lista-cuentas.component';
 
 
 @NgModule({
   declarations: [
-    MostrarPedidosCComponent
+    MostrarPedidosCComponent,
+    ListaCuentasComponent
   ],
   imports: [
     CommonModule, 

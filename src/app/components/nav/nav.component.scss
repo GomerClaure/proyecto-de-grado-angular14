@@ -24,6 +24,12 @@
 }
 
 
+@media (max-width: 992px) {
+    .nav-link {
+      font-weight: bold !important;
+    }
+  }
+
 @media (max-width: 470px) {
     .dropdown-menu {
         //300 px en rem
