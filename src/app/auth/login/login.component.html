@@ -11,7 +11,7 @@
     <!-- Formulario de login -->
     <form [formGroup]="formularioLogin">
       <div class="mb-3">
-        <label for="validationServer03" class="form-label">Nombre</label>
+        <label for="validationServer03" class="form-label mt-5">Nombre</label>
         <input class="form-control" aria-describedby="validationServer03Feedback" formControlName="usuario" [class.is-invalid]="formularioLogin.get('usuario')?.invalid && formularioLogin.get('usuario')?.touched">
         <div *ngIf="formularioLogin.get('usuario')?.invalid && formularioLogin.get('usuario')?.touched" class="invalid-feedback">
           El nombre es obligatorio y debe tener al menos 3 caracteres.
@@ -34,7 +34,7 @@
       </div>
 
       <div class="text-center mt-3">
-        <a href="#">¿Olvidaste tu contraseña?</a>
+        <a class="olvidast" href="#">¿Olvidaste tu contraseña?</a>
       </div>
     </form>
   </div>
