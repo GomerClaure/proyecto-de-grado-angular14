@@ -16,7 +16,7 @@ import { MapComponent } from './map/map.component';
     RegistrarCategoriaComponent,
     VistaMenuComponent,
     ModalPlatilloComponent,
-    MapComponent
+    MapComponent,
   ],
   exports:[
     NavComponent, 

@@ -53,12 +53,12 @@
 .form-container {
   padding: 1.5rem;
   margin-inline: 18rem;
-  background-color: rgba(255, 255, 255, 0.173); /* Fondo blanco con 20% de opacidad */
+  background-color: rgb(23 26 31 / 75%);
   border-radius: 10px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Sombra leve para dar profundidad */
-  backdrop-filter: blur(10px); /* Difumina el fondo que está detrás de la card */
+  box-shadow: 0px 4px 15px rgb(0 0 0 / 32%);
+  backdrop-filter: blur(10px);
   border:none !important;
-  color:white;
+  color:rgb(255, 255, 255);
 }
 
 .form-control.input-form {
@@ -90,10 +90,9 @@
   }
 }
 .fondo-registro{
-  background: #0B486B;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to top, #F56217, #0B486B);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to top, #F56217, #0B486B); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  background: #0B486B;
+  background: -webkit-linear-gradient(to top, #F56217, #0B486B);
+  background: linear-gradient(to top, #F56217, #0B486B);
   min-height: 100vh;
   display: flex;
   justify-content: center;

@@ -85,7 +85,7 @@
 }
 .fondo {
   background-color: #ffffff; /* Color de fondo base */
-  background-image: radial-gradient(circle, #918d8d 1px, transparent 1px);
+  background-image: radial-gradient(circle, #183455 1px, transparent 1px);
   background-size: 20px 20px; /* Tamaño del patrón de puntos */
   min-height: 100vh; /* Asegura que cubra al menos la altura de la pantalla */
   height: 100%;
@@ -122,4 +122,8 @@
   background-color:#807b56;
   color: white;
 }
+.body{
+  margin-top: 50px !important;
+}
+
 

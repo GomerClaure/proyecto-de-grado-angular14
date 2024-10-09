@@ -9,8 +9,8 @@
     width: 100%; 
     top: 0;
     z-index: 1000; 
+    position: fixed;
 }
-
 .notificacion{
     width: 318px;
 }
@@ -21,41 +21,27 @@
     height: 40px;
     width: 45px;
 }
-
-
 @media (max-width: 992px) {
     .nav-link {
       font-weight: bold !important;
     }
   }
-
 @media (max-width: 470px) {
     .dropdown-menu {
-        //300 px en rem
         width: 20rem !important;
-        // posicion relativa en el medio de la mpantalla
         right: -650% !important;
       }
 }
-
 @media (max-width: 375px) {
     .dropdown-menu {
-        //300 px en rem
         width: 20rem !important;
-        // posicion relativa en el medio de la mpantalla
         right: -820% !important;
       }
 }
 
 @media (max-width: 320px) {
-    // .navbar-brand{
-    //     font-size: 1rem;
-    
-    // }
     .dropdown-menu {
-        //300 px en rem
         width: 20rem !important;
-        // posicion relativa en el medio de la mpantalla
         right: -970% !important;
       }
 }
