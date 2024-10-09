@@ -1,10 +1,12 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
-
 * {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 0px;
     margin: 0px;
   }
+body{
+    margin-top: 60px !important;
+}
 .titulo{
     text-align: center;
 }
@@ -84,9 +86,11 @@
   border-color: #c0f185;
 }
 .fondo {
-  background-color: #ffffff; /* Color de fondo base */
-  background-image: radial-gradient(circle, #183455 1px, transparent 1px);
-  background-size: 20px 20px; /* Tamaño del patrón de puntos */
+  background:
+radial-gradient(circle at 0% 50%, rgba(96, 16, 48, 0) 9px, rgba(21, 31, 60, 0.388) 10px, rgba(96, 16, 48, 0) 11px) 0px 10px,
+radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px, rgba(36, 24, 63, 0.496) 10px, rgba(96, 16, 48, 0) 11px),
+rgb(255, 255, 255);
+background-size: 20px 20px;
   min-height: 100vh; /* Asegura que cubra al menos la altura de la pantalla */
   height: 100%;
   background-attachment: fixed; /* Mantiene el fondo fijo al hacer scroll */
@@ -121,9 +125,6 @@
 .btn-imprimir:hover{
   background-color:#807b56;
   color: white;
-}
-.body{
-  margin-top: 50px !important;
 }
 
 
