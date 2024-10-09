@@ -7,10 +7,9 @@ body {
 }
 
 header.hero {
-  background: #0B486B;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top, #F56217, #0B486B);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top, #F56217, #0B486B); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
+  background: #0B486B;
+  background: -webkit-linear-gradient(to top, #F56217, #0B486B);
+  background: linear-gradient(to top, #F56217, #0B486B);
   height: 100vh;
   display: flex;
   align-items: center;
@@ -18,9 +17,8 @@ header.hero {
   text-align: center;
   color: white;
 }
-
 .hero-content {
-  max-width: 600px;
+  max-width: 500px;
 }
 
 .hero-content h1 {
@@ -57,10 +55,17 @@ header.hero {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
 }
 
 .about-us .text {
   flex: 1;
+  padding: 20px;
+}
+
+.about-us .image {
+  flex: 1;
+  text-align: center; /* Centra la imagen horizontalmente en pantallas pequeñas */
   padding: 20px;
 }
 
@@ -78,6 +83,33 @@ header.hero {
   font-size: 1.2rem;
   color: #666;
 }
+.about-us .image img {
+  max-width: 100%; /* Se asegura de que la imagen no exceda el ancho disponible */
+  height: auto; /* Mantiene la proporción original de la imagen */
+  object-fit: cover; /* Hace que la imagen cubra su contenedor en caso de que sea más pequeña */
+  border-radius: 10px; /* Le da un aspecto más moderno a la imagen */
+}
+
+/* Media Query para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+  .about-us .container {
+    flex-direction: column; /* Coloca los elementos uno debajo del otro */
+    text-align: center;
+  }
+
+  .about-us .image {
+    margin-top: 20px; /* Añade espacio entre el texto y la imagen */
+  }
+
+  .about-us h2 {
+    font-size: 2rem;
+  }
+
+  .about-us p {
+    font-size: 1rem;
+  }
+}
+
 
 /* Features Section */
 .features {
@@ -89,7 +121,7 @@ header.hero {
 
 .features h2 {
   font-size: 2.5rem;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 }
 
 .feature-list {
@@ -99,28 +131,68 @@ header.hero {
 }
 
 .feature-item {
-  text-align: center;
+  position: relative;
+  background: rgba(255, 255, 255, 0.15); /* Glass effect */
+  backdrop-filter: blur(10px);            /* Glass blur effect */
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+  padding: 40px 20px; /* Espacio suficiente para la imagen */
+  margin:10px;
   flex-basis: 30%;
-  margin: 20px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  overflow: visible; /* Permite que la imagen sobresalga */
 }
 
+.feature-item:hover {
+  transform: scale(1.05); /* Slight hover animation */
+}
+
+/* Imagen sobresaliente */
 .feature-item img {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 20px;
+  width: 70%; /* Tamaño de la imagen ajustado */
+  height: 150px; /* Igualar altura y ancho */
+  position: absolute;
+  top: -50px; /* Ajustar para sobresalir más allá del card */
+  left: 50%;
+  transform: translateX(-50%); /* Centra la imagen horizontalmente */
+  z-index: 2; /* Asegura que la imagen esté encima del contenido */
+  border-radius: 5px; /* Quita el borde redondeado */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Sombra */
+  backdrop-filter: blur(10px); /* Efecto blur */
+  border: none;
 }
-
+ 
 .feature-item h3 {
   font-size: 1.5rem;
+  margin-top: 60px; 
+  padding-top: 20px;
 }
 
 .feature-item p {
   font-size: 1rem;
 }
 
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .feature-item {
+    flex-basis: 45%;
+  }
+}
+
+@media (max-width: 480px) {
+  .feature-item {
+    flex-basis: 100%;
+  }
+}
+
 /* Testimonials Section */
 .testimonials {
+  //background-image: url(../../../assets/image/img-homepage/plato.jpeg);
   background-color: #f4f4f4;
+  //background-position: 0;
+  //background-size: cover;
   padding: 60px 20px;
   text-align: center;
 }
@@ -160,7 +232,7 @@ header.hero {
   background: linear-gradient(135deg, #F8492E, #FF6A3B);
   padding: 80px 20px;
   text-align: center;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 .cta-content {
@@ -183,10 +255,3 @@ header.hero {
   font-size: 1.5rem;
 }
 
-/* Footer */
-footer {
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 20px;
-}
