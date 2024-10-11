@@ -3,19 +3,51 @@
       display: none !important;
     }
   }
-.card-header{
-    background-color: #597e5c;
-    color: white;
-    padding: 5px;
+.card{
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
 }
-.card-body{
-    //background-image: url('../../../../assets/image/5498321695145984-removebg-preview.png');
-    background-position: 0;
-    background-size: cover;
+.card-header{
+    background-color: #5a9893;
+    color: rgb(255, 255, 255);
+    padding-left: 25px;
+    border: none;
+}
+.card-body{ 
+    padding: 0;
+    border: none;
+}
+.card-footer{
+  border: none;
+  background-color: #ffffff;
 }
 .button-group{
     display: flex;
     flex-direction: row;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+}
+.input-container .icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  fill: rgb(32, 32, 57); /* Color de la lupa */
+}
+.input-container .form-control {
+  padding-left: 35px; /* Espacio para el SVG */
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  color: #000000;
+}
+th,td{
+  border-left:none;
+  border-right:none;
 }
 
   

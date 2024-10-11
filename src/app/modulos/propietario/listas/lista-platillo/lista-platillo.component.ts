@@ -17,12 +17,9 @@ export class ListaPlatilloComponent implements OnInit {
   selectedPlatilloId: number | null = null;
   storageUrl = environment.backendStorageUrl;
   textoBuscador: string = '';
-
   id_restaurante: any;
-
-  // Paginación
-  public pageSize: number = 10; // Cantidad de elementos por página
-  public currentPage: number = 1; // Página actual
+  public pageSize: number = 8;
+  public currentPage: number = 1;
 
   constructor(
     private router: Router,
@@ -69,7 +66,7 @@ export class ListaPlatilloComponent implements OnInit {
         platillo.nombre.toLowerCase().includes(this.textoBuscador) || platillo.categoria.nombre.toLowerCase().includes(this.textoBuscador)
       );
     }
-    this.currentPage = 1; // Reinicia la página actual a la primera página
+    this.currentPage = 1;
   }
 
   get pagedPlatillos(): Platillo[] {
@@ -80,26 +77,9 @@ export class ListaPlatilloComponent implements OnInit {
   get pageCount(): number {
     return Math.ceil(this.platillosFiltrados.length / this.pageSize);
   }
-
-  get pagesArray(): number[] {
-    return Array(this.pageCount).fill(0).map((x, i) => i + 1);
-  }
-
-  setPage(page: number) {
+  changePage(page: number) {
     if (page >= 1 && page <= this.pageCount) {
       this.currentPage = page;
-    }
-  }
-
-  nextPage() {
-    if (this.currentPage < this.pageCount) {
-      this.currentPage++;
-    }
-  }
-
-  prevPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
     }
   }
 }

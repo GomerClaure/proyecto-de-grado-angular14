@@ -5,13 +5,15 @@
     margin: 0px;
   }
 body{
-    margin-top: 60px !important;
+  margin-top: 60px;
 }
 .titulo{
     text-align: center;
+    padding-top: 20px;
+    color: rgb(42, 42, 58);
 }
 .btn-aceptar{
-  background-color:#96be64;
+  background-color:#b3c67f;
   border-color: #c0f185;
   color: rgb(255, 255, 255);
   border-radius: 5px;
@@ -41,7 +43,7 @@ body{
   color: white;
 }
 .btn-delete:hover{
-  background-color: #c01818;
+  background-color: #fa3e3e;
   border-color:#bf3636;
 }
 .btn-editar:hover{
@@ -73,24 +75,22 @@ body{
   border-color: rgb(218, 170, 82);
 }
 .btn-registrar{
-  background-color:#96be64;
+  background-color:#6f9f34;
   border-radius: 5px;
-  border-color: #c0f185;
+  border-color: #78a442;
   color: black;
   padding: 6px;
   width: 150px;
   margin-bottom: 20px;
 }
 .btn-registrar:hover{
-  background-color:#96be64;
+  background-color:#789e48;
   border-color: #c0f185;
 }
 .fondo {
-  background:
-radial-gradient(circle at 0% 50%, rgba(96, 16, 48, 0) 9px, rgba(21, 31, 60, 0.388) 10px, rgba(96, 16, 48, 0) 11px) 0px 10px,
-radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px, rgba(36, 24, 63, 0.496) 10px, rgba(96, 16, 48, 0) 11px),
-rgb(255, 255, 255);
-background-size: 20px 20px;
+  background-color: #f0f0f0; /* Color de fondo */
+  background-image: radial-gradient(#0000002e 1px, transparent 1px); /* Puntitos negros */
+  background-size: 10px 10px; /* Tamaño del patrón */
   min-height: 100vh; /* Asegura que cubra al menos la altura de la pantalla */
   height: 100%;
   background-attachment: fixed; /* Mantiene el fondo fijo al hacer scroll */
@@ -118,7 +118,7 @@ background-size: 20px 20px;
 .btn-imprimir{
   background-color:#A69A60;
   border-radius: 5px;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   padding: 6px;
   width: 150px;
 }
@@ -127,4 +127,75 @@ background-size: 20px 20px;
   color: white;
 }
 
+//Estilos para las tablas 
+th,td {
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  border-left: 2px solid rgba(0, 0, 0, 0.1);
+  border-right: 2px solid rgba(0, 0, 0, 0.1);
+}
+th {
+  background-color: #eda136 !important; /* Color de fondo para las celdas */
+  text-align: center;
+  color: white !important;
+}
+//Estilo para paginacion button
+
+.pagination-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  
+}
+.pagination {
+  background-color: rgba(255, 255, 255, 0.552); /* Efecto de vidrio */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.263);
+  border-radius: 10px;
+  padding: 5px;
+  width: fit-content;
+  border: 1px solid rgba(0, 0, 0, 0.29);
+}
+.page-item .page-link {
+  background-color: transparent;
+  color: #1e2446;
+  font-weight: bold;
+  padding: 5px 10px;
+  font-size: 14px;
+  border: none;
+}
+.page-item.active .page-link {
+  background-color: #F4AC45;
+  border-radius: 5px;
+}
+.page-item.disabled .page-link {
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+}
+.pagination .page-link {
+  transition: background-color 0.3s ease;
+}
+//Estilo para el buscador
+.input-container {
+  position: relative;
+  width: 100%;
+}
+.input-container .icon {
+  position: absolute; 
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  fill: rgb(32, 32, 57); /* Color de la lupa */
+}
+.input-container .form-control {
+  padding-left: 35px; /* Espacio para el SVG */
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  color: #000000;
+}
+//Estilo para aceptar button
+//Estilo para eliminar button
+//Estilo para imprimir button
+//Estilo para subir imagen  button
 
