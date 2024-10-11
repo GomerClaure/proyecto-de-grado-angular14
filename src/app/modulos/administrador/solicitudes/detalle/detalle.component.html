@@ -61,7 +61,12 @@
         </div>
       </div>
 
-      <app-map [parentForm]="preRegistroForm" [mapaDeshabilitado]="true"></app-map>
+    
+      <div class="col-12 ">
+        <label for="estado" class="me-2">Ubicación del Restaurante</label>
+        <app-map [parentForm]="preRegistroForm" [mapaDeshabilitado]="true"></app-map>
+      </div>
+      
 
     </div>
   </fieldset>

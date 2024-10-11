@@ -94,7 +94,6 @@
   background: -webkit-linear-gradient(to top, #F56217, #0B486B);
   background: linear-gradient(to top, #F56217, #0B486B);
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100%;
+  background-attachment: fixed;
 }
