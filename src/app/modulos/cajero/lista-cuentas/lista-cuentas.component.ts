@@ -22,7 +22,8 @@ export class ListaCuentasComponent implements OnInit {
   }
 
   getCuentasCerradas(): void {
-    this.cuentaService.getCuentasCerradas().subscribe(
+    const idRestaurante = sessionStorage.getItem('id_restaurante') || '0';
+    this.cuentaService.getCuentasCerradas(idRestaurante).subscribe(
       (data) => {
         this.cuentasCerradas = data.cuentas; 
         this.filteredCuentas = [...this.cuentasCerradas];
