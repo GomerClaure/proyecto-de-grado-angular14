@@ -1,11 +1,7 @@
 <app-nav></app-nav>
-<html>
-  <br><br>
-  <header>
-    <h2 class="text-center my-4">Registro de empleado</h2>
-  </header>
-  <body>
-    <section class="container">
+<body class="fondo">
+    <div class="container">
+      <h2 class="titulo">Registro de empleado</h2>
       <form [formGroup]="formularioEmpleado">
         <div class="col-12">
           <div class="row">
@@ -117,9 +113,24 @@
                 </div>
             </div>
         </div>
+        <!-- Fotografía Empleado -->
+        <div class="row">
+            <div class="col-12 col-md-12 mb-2">
+              <div class="mb-3">
+                  <label for="fotografiaEmpleado" class="form-label">Fotografía del Empleado</label>
+                      <div class="input-group">
+                        <label class="btn btn-outline-secondary" for="fotografiaEmpleado">
+                          <i class="bi bi-person-bounding-box"></i> Subir foto
+                          </label>
+                          <input type="file" class="form-control" id="fotografiaEmpleado" name="fotografiaEmpleado" accept="image/*" (change)="onFileChange($event)" style="display: none;" />
+                          <input type="text" class="form-control" placeholder="Seleccione un archivo..." [value]="fileName" readonly>
+                      </div>
+              </div>
+        </div>
+       </div>
         <div class="row">
           <!--Puestos-->
-          <div class="col-12 col-md-4 mb-2">
+          <div class="col-12 col-md-6 mb-2">
             <label for="puesto" class="form-label">Puesto</label>
             <div class="btn-group w-100" role="group">
               <input type="radio" class="btn-check" name="puesto" id="cocinero" value="Cocinero" formControlName="puesto">
@@ -133,31 +144,17 @@
             </div>
           </div>
             <!--fecha contratacion-->
-            <div class="col-12 col-md-4 mb-2">
+            <div class="col-12 col-md-6 mb-2">
                 <label for="fechaContratacion" class="form-label">Fecha de Contratación</label>
                 <input type="date" class="form-control" id="fechaContratacion" name="fechaContratacion" required formControlName="fechaContratacion">
-            </div>
-             <!-- Fotografía Empleado -->
-            <div class="col-12 col-md-4 mb-2">
-              <div class="mb-3">
-                <label for="fotografiaEmpleado" class="form-label">Fotografía del Empleado</label>
-                <div class="input-group">
-                  <label class="btn btn-outline-secondary" for="fotografiaEmpleado">
-                    <i class="bi bi-person-bounding-box"></i> Subir foto
-                  </label>
-                  <input type="file" class="form-control" id="fotografiaEmpleado" name="fotografiaEmpleado" accept="image/*" (change)="onFileChange($event)" style="display: none;" />
-                  <input type="text" class="form-control" placeholder="Seleccione un archivo..." [value]="fileName" readonly>
-                </div>
-              </div>
             </div>
         </div>
         <!-- Botones de Registrar y Limpiar -->
         <div class="col-12 d-flex justify-content-end">
-          <button type="submit" class="btn btn-primary me-2"(click)="onSubmit()" >Registrar</button>
+          <button type="submit" class="btn btn-aceptar me-2"(click)="onSubmit()" >Registrar</button>
         </div>
     </div>
       </form>
-    </section>
+    </div>
   </body>
-</html>
 <lib-ng-toast></lib-ng-toast>

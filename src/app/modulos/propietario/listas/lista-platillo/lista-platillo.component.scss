@@ -1,1 +1,36 @@
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  padding: 6px 10px;
+  margin: 2px;
+  white-space: nowrap;
+  width: 100%;
+}
+td div {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+@media (max-width: 768px) {
+  .btn {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+  td {
+    font-size: 14px;
+  }
+}
+@media (max-width: 576px) {
+  td{
+    flex-direction: column;
+    gap: 5px;
+    font-size: 10px;
+  }
+  .btn {
+    font-size: 11px;
+    padding: 4px 6px;
+  }
+}
 

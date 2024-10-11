@@ -1,11 +1,11 @@
 <app-nav></app-nav>
-<div class="fondo pt-5">
-  <form [formGroup]="usuarioForm" class="mt-5 container needs-validation shadow-lg"
+<body class="fondo">
+<div class="container">
+  <h2 class="titulo">Datos del Usuario</h2>
+    <form [formGroup]="usuarioForm" class="mt-5 container needs-validation shadow-lg"
     style="position: relative; overflow-y: auto; max-height: 80vh; background-color: white;" novalidate>
     <!-- Sección Datos del Usuario -->
     <fieldset class="p-3 mb-4">
-      <legend class="w-auto px-2">Datos del Usuario</legend>
-
       <div class="row">
         <!-- Columna de 8 para los primeros 5 campos -->
         <div class="col-md-8">
@@ -88,7 +88,7 @@
 
             <!-- Botón para seleccionar imagen, centrado y espaciado -->
             <div class="d-flex justify-content-center">
-              <label for="img-editar-platillo" class="btn btn-primary">
+              <label for="img-editar-platillo" class="btn btn-subir-imagen">
                 Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i>
               </label>
             </div>
@@ -124,11 +124,12 @@
 
       <!-- Botón Actualizar -->
       <div class="row">
-        <div class="col-12 mt-3">
-          <button type="button" class="btn btn-primary" (click)="actualizarUsuario()">Actualizar</button>
+        <div class="col-12 mt-3 justify-content-end">
+          <button type="button" class="btn btn-aceptar" (click)="actualizarUsuario()">Actualizar</button>
         </div>
       </div>
     </fieldset>
   </form>
-  <lib-ng-toast></lib-ng-toast>   
 </div>
+</body>
+<lib-ng-toast></lib-ng-toast>   

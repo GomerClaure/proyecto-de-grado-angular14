@@ -36,7 +36,7 @@ export class RegistrarPlatilloComponent implements OnInit{
       descripcion: [null,Validators.required],
       imagen:['']
     });
-    this.imageUrl = 'assets/image/27002.jpg';
+    this.imageUrl = 'assets/image/platillo.jpg';
   }
 
   // Función para previsualizar la imagen seleccionada
@@ -82,7 +82,7 @@ export class RegistrarPlatilloComponent implements OnInit{
       this.platillosService.storePlatillo(formData).subscribe(
         success => {
           this.formularioPlatillo.reset();
-          this.imageUrl = 'assets/image/27002.jpg';
+          this.imageUrl = 'assets/image/platillo.jpg';
           console.log(success);
           this.toast.success({detail:"SUCCESS",summary:'Platillo Registrado',duration:2000})
         },

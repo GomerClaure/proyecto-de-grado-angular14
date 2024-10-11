@@ -1,14 +1,14 @@
-header {
-  background-color: white;
-  padding-top: 20px;
-}
-
 form {
-  background-color: #fff;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.584);
+  backdrop-filter: blur(10px);
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-wrap: wrap;
-  align-items: center; 
+  align-items: center;
+  padding-top:10px;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
 }
+
