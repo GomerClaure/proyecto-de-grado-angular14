@@ -1,11 +1,14 @@
 <app-nav></app-nav>
+<body>
 <div class="fondo">
-  <br><br><br><br>
-  <h2 class="text-center">Cuentas de pedidos</h2>
-  <br>
+  <h2 class="titulo">Cuentas de pedidos</h2>
   <div class="container">
-    <div class="input-group mb-3">
+    <div class="input-container mb-3">
       <input type="text" class="form-control" placeholder="Buscar por nombre de mesa o razón social" [(ngModel)]="textoBuscador" (ngModelChange)="onSearchChange($event)">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgb(31, 37, 54);">
+        <path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path>
+        <path d="M11.412 8.586c.379.38.588.882.588 1.414h2a3.977 3.977 0 0 0-1.174-2.828c-1.514-1.512-4.139-1.512-5.652 0l1.412 1.416c.76-.758 2.07-.756 2.826-.002z"></path>
+    </svg>
     </div>
     <div class="row">
       <div *ngFor="let pedido of pedidosPorMesa" class="col-lg-3 col-md-4 col-sm-6 mb-3">
@@ -40,7 +43,7 @@
             <div>
               <div class="row no-print">
                 <div class="col-6 pt-0">
-                  <button class="btn btn-aceptar w-100 no-print" (click)="CerrarCuenta(pedido.id)">Cerrar</button>
+                  <button class="btn btn-registrar w-100 no-print" (click)="CerrarCuenta(pedido.id)">Cerrar</button>
                 </div>
                 <div class="col-6 pt-0">
                   <button class="btn btn-imprimir w-100" (click)="imprimir()">Imprimir</button>
@@ -53,3 +56,4 @@
     </div>
   </div>
 </div>
+</body>

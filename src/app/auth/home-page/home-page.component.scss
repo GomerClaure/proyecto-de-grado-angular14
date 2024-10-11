@@ -1,11 +1,3 @@
-/* General Styles */
-body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
-}
-
 header.hero {
   background: #0B486B;
   background: -webkit-linear-gradient(to top, #F56217, #0B486B);
@@ -20,96 +12,70 @@ header.hero {
 .hero-content {
   max-width: 500px;
 }
-
 .hero-content h1 {
   font-size: 3rem;
   margin-bottom: 20px;
 }
-
 .hero-content p {
   font-size: 1.2rem;
   margin-bottom: 30px;
 }
 
-.btn-primary {
-  padding: 10px 20px;
-  background-color: #f8492e;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 1.2rem;
-}
-
-.btn-primary:hover {
-  background-color: #ff4a3b;
-}
-
-/* About Us Section */
+/* Seccion Acerca de nosotros*/
 .about-us {
   background-color: #f9f9f9;
   padding: 60px 20px;
 }
-
 .about-us .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
 }
-
 .about-us .text {
   flex: 1;
   padding: 20px;
 }
-
 .about-us .image {
   flex: 1;
   text-align: center; /* Centra la imagen horizontalmente en pantallas pequeñas */
-  padding: 20px;
+  padding-left: 50px;
 }
-
 .about-us .image img {
   max-width: 100%;
   height: auto;
 }
-
 .about-us h2 {
   font-size: 2.5rem;
   margin-bottom: 20px;
 }
-
 .about-us p {
   font-size: 1.2rem;
   color: #666;
+  text-align: justify;
 }
 .about-us .image img {
-  max-width: 100%; /* Se asegura de que la imagen no exceda el ancho disponible */
-  height: auto; /* Mantiene la proporción original de la imagen */
-  object-fit: cover; /* Hace que la imagen cubra su contenedor en caso de que sea más pequeña */
-  border-radius: 10px; /* Le da un aspecto más moderno a la imagen */
+  max-width: 100%; 
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
 }
-
-/* Media Query para pantallas pequeñas (móviles) */
+/* Media Query para pantallas moviles */
 @media (max-width: 768px) {
   .about-us .container {
-    flex-direction: column; /* Coloca los elementos uno debajo del otro */
+    flex-direction: column;
     text-align: center;
   }
-
   .about-us .image {
-    margin-top: 20px; /* Añade espacio entre el texto y la imagen */
+    margin-top: 20px; 
   }
-
   .about-us h2 {
     font-size: 2rem;
   }
-
   .about-us p {
     font-size: 1rem;
   }
 }
-
 
 /* Features Section */
 .features {
@@ -133,47 +99,39 @@ header.hero {
 .feature-item {
   position: relative;
   background-color: rgb(23 26 31 / 75%);
-    border-radius: 10px;
-    box-shadow: 0px 4px 15px rgb(0 0 0 / 32%);
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgb(0 0 0 / 32%);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
-  padding: 40px 20px; /* Espacio suficiente para la imagen */
-  margin:10px;
+  margin: 10px;
   flex-basis: 30%;
   text-align: center;
   transition: transform 0.3s ease;
-  overflow: visible; /* Permite que la imagen sobresalga */
+  overflow: hidden; /* La imagen no sobresaldrá del contenedor */
+  padding-bottom: 10px;
 }
 
 .feature-item:hover {
   transform: scale(1.05); /* Slight hover animation */
 }
 
-/* Imagen sobresaliente */
+/* Imagen contenida */
 .feature-item img {
-  width: 70%; /* Tamaño de la imagen ajustado */
-  height: 150px; /* Igualar altura y ancho */
-  position: absolute;
-  top: -50px; /* Ajustar para sobresalir más allá del card */
-  left: 50%;
-  transform: translateX(-50%); /* Centra la imagen horizontalmente */
-  z-index: 2; /* Asegura que la imagen esté encima del contenido */
-  border-radius: 5px; /* Quita el borde redondeado */
+  width: 100%; /* Ocupa todo el ancho del card */
+  height: 40%; /* Mantiene la proporción de la imagen */
+  border-radius: 10px; /* Mantén el borde redondeado */
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Sombra */
-  backdrop-filter: blur(10px); /* Efecto blur */
-  border: none;
+  margin-bottom: 20px; /* Añade espacio entre la imagen y el texto */
 }
- 
+
 .feature-item h3 {
   font-size: 1.5rem;
-  margin-top: 60px; 
-  padding-top: 20px;
 }
 
 .feature-item p {
   text-align: justify;
   font-size: 1rem;
+  padding: 15px;
 }
-
 
 /* Responsiveness */
 @media (max-width: 768px) {
@@ -186,7 +144,20 @@ header.hero {
   .feature-item {
     flex-basis: 100%;
   }
+
+  .features h2 {
+    font-size: 2rem;
+  }
+
+  .feature-item h3 {
+    font-size: 1.3rem;
+  }
+
+  .feature-item p {
+    font-size: 0.9rem;
+  }
 }
+
 
 /* Call to Action Section */
 .cta {

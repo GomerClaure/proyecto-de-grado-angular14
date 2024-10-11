@@ -37,6 +37,7 @@ export class DetalleComponent implements OnInit {
       id: [''],
       latitud: [''],
       longitud: [''],
+      numero_mesas: ['']
     });
     this.URL_BACKEND = environment.backendStorageUrl;
     this.previewUrlSafe = '';
