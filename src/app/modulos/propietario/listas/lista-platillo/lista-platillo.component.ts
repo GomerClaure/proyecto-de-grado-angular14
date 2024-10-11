@@ -18,7 +18,7 @@ export class ListaPlatilloComponent implements OnInit {
   storageUrl = environment.backendStorageUrl;
   textoBuscador: string = '';
   id_restaurante: any;
-  public pageSize: number = 8;
+  public pageSize: number = 7;
   public currentPage: number = 1;
 
   constructor(
