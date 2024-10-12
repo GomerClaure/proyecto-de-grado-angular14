@@ -42,26 +42,40 @@
         </div>
       </div>
 
-      <div class="col-12 col-md-6 mt-1">
-        <div class="form-group">
-          <label for="tipo_establecimiento">Tipo de Establecimiento</label>
-          <input type="text" id="tipo_establecimiento" formControlName="tipo_establecimiento" class="form-control"
-            [attr.disabled]="true">
+      <div class="row">
+        <!-- Tipo de Establecimiento -->
+        <div class="col-12 col-md-4 mt-1">
+          <div class="form-group">
+            <label for="tipo_establecimiento">Tipo de Establecimiento</label>
+            <input type="text" id="tipo_establecimiento" formControlName="tipo_establecimiento" class="form-control" [attr.disabled]="true">
+          </div>
         </div>
-      </div>
-
-      <div class="col-12 col-md-6 mt-1">
-        <div class="col-12 col-md-6 mt-1">
+      
+        <!-- Estado del Pre-Registro -->
+        <div class="col-12 col-md-4 mt-1">
           <div class="form-group d-flex align-items-center">
             <label for="estado" class="me-2">Estado del Pre-Registro</label>
             <span [ngClass]="getBadgeClass(preRegistroForm.get('estado')?.value)"
-              style="width: 25px; height: 25px; border-radius: 50%;"></span>
+                  style="width: 25px; height: 25px; border-radius: 50%;"></span>
           </div>
           <input type="text" id="estado" formControlName="estado" class="form-control mt-1" [attr.disabled]="true">
         </div>
+      
+        <!-- Número de Mesas -->
+        <div class="col-12 col-md-4 mt-1">
+          <div class="form-group">
+            <label for="numero_mesas">Número de Mesas</label>
+            <input type="text" id="numero_mesas" formControlName="numero_mesas" class="form-control" [attr.disabled]="true">
+          </div>
+        </div>
       </div>
-
-      <app-map [parentForm]="preRegistroForm" [mapaDeshabilitado]="true"></app-map>
+      
+    
+      <div class="col-12 ">
+        <label for="estado" class="me-2">Ubicación del Restaurante</label>
+        <app-map [parentForm]="preRegistroForm" [mapaDeshabilitado]="true"></app-map>
+      </div>
+      
 
     </div>
   </fieldset>

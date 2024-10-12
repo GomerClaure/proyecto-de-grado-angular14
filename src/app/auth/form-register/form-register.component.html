@@ -1,42 +1,41 @@
 <app-nav></app-nav>
-<body>
-<div class="fondo-registro">
-<div class="form-container border mt-5">
-  <div class="progress-container">
-    <div class="steps">
-      <span class="circle" [class.active]="currentStep >= 1">1</span>
-      <span class="circle" [class.active]="currentStep >= 2">2</span>
-      <span class="circle" [class.active]="currentStep >= 3">3</span>
-    </div>
-    <div class="progress-bar">
-      <span class="indicator" *ngIf="currentStep === 1" [ngStyle]="{ width: '18%' }"></span>
-      <span class="indicator" *ngIf="currentStep === 2" [ngStyle]="{ width: '50%' }"></span>
-      <span class="indicator" *ngIf="currentStep === 3" [ngStyle]="{ width: '100%' }"></span>
-    </div>
-  </div>
-  
-  <div class="mb-2">
-    <h1 class="fs-6 mb-1 text-center">SOLICITUD DE REGISTRO DE RESTAURANTE</h1>
-  </div>
-
-  <div class="by-step-form">
-    <div *ngIf="currentStep >= 0 && currentStep < 2">
-      <app-paso-uno [pasoUnoForm]="pasoUnoForm"></app-paso-uno>
-    </div>
-    <div *ngIf="currentStep === 2">
-      <app-paso-dos [pasoDosForm]="pasoDosForm"></app-paso-dos>
-    </div>
-    <div *ngIf="currentStep === 3">
-      <app-paso-tres [pasoTresForm]="pasoTresForm" [formData]="restauranteForm.value"></app-paso-tres>
+<div class="fondo-registro pt-4 pb-3">
+  <div class="form-container border  ">
+    <div class="progress-container">
+      <div class="steps">
+        <span class="circle" [class.active]="currentStep >= 1">1</span>
+        <span class="circle" [class.active]="currentStep >= 2">2</span>
+        <span class="circle" [class.active]="currentStep >= 3">3</span>
+      </div>
+      <div class="progress-bar">
+        <span class="indicator" *ngIf="currentStep === 1" [ngStyle]="{ width: '18%' }"></span>
+        <span class="indicator" *ngIf="currentStep === 2" [ngStyle]="{ width: '50%' }"></span>
+        <span class="indicator" *ngIf="currentStep === 3" [ngStyle]="{ width: '100%' }"></span>
+      </div>
     </div>
 
-    <div class="navigation-buttons d-flex justify-content-around">
-      <button class="btn btn-secondary" *ngIf="currentStep > 1" (click)="goToPreviousStep()" [disabled]="currentStep === 1">Anterior</button>
-      <button class="btn btn-secondary" *ngIf="currentStep < 3" (click)="goToNextStep()">Siguiente</button>
-      <button class="btn btn-success" *ngIf="currentStep === 3" (click)="onSubmit()">Enviar</button>
+    <div class="mb-2">
+      <h1 class="fs-6 mb-1 text-center">SOLICITUD DE REGISTRO DE RESTAURANTE</h1>
     </div>
-  </div> 
+
+    <div class="by-step-form">
+      <div *ngIf="currentStep >= 0 && currentStep < 2">
+        <app-paso-uno [pasoUnoForm]="pasoUnoForm"></app-paso-uno>
+      </div>
+      <div *ngIf="currentStep === 2">
+        <app-paso-dos [pasoDosForm]="pasoDosForm"></app-paso-dos>
+      </div>
+      <div *ngIf="currentStep === 3">
+        <app-paso-tres [pasoTresForm]="pasoTresForm" [formData]="restauranteForm.value"></app-paso-tres>
+      </div>
+
+      <div class="navigation-buttons d-flex justify-content-around">
+        <button class="btn btn-secondary" *ngIf="currentStep > 1" (click)="goToPreviousStep()"
+          [disabled]="currentStep === 1">Anterior</button>
+        <button class="btn btn-secondary" *ngIf="currentStep < 3" (click)="goToNextStep()">Siguiente</button>
+        <button class="btn btn-success" *ngIf="currentStep === 3" (click)="onSubmit()">Enviar</button>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</body>
 <lib-ng-toast></lib-ng-toast>

@@ -38,7 +38,8 @@ export class FormRegisterComponent implements OnInit, AfterViewInit {
         apellidoMaterno: ['', Validators.required],
         correoPropietario: ['', [Validators.required, Validators.email]],
         cedulaIdentidad: ['', [Validators.required, Validators.pattern('^[0-9]{7}$')]],
-        fotografiaPropietario: [null, [Validators.required, fileValidator(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'], 2)]]
+        fotografiaPropietario: [null, [Validators.required, fileValidator(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'], 2)]],
+        numeroMesas: ['', [Validators.required, Validators.pattern(/^[0-9]+$/), Validators.min(1), Validators.max(20)]],
       })
     });
   }
@@ -124,6 +125,7 @@ export class FormRegisterComponent implements OnInit, AfterViewInit {
     formData.append('fotografia_propietario', this.restauranteForm.get('pasoTres.fotografiaPropietario')?.value);
     formData.append('pais', this.restauranteForm.get('pasoDos.pais')?.value);
     formData.append('departamento', this.restauranteForm.get('pasoDos.departamento')?.value);
+    formData.append('numero_mesas', this.restauranteForm.get('pasoTres.numeroMesas')?.value);
     this.restauranteForm.markAllAsTouched();
     if (this.restauranteForm) {
       this.preRegistroService.savePreRegistro(formData).subscribe({
