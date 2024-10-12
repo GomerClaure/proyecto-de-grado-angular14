@@ -37,6 +37,8 @@ export class RegistrarPedidoComponent implements OnInit {
   textoBuscador: string = '';
   platillosFiltrados: Platillo[] = [];
   id_restaurante: any;
+  nombreMesa:string='';
+  
   constructor(private descripcionPedidoService: DescripcionPedidoService,
     private route: ActivatedRoute,
     private platilloService: PlatillosService,
@@ -53,6 +55,7 @@ export class RegistrarPedidoComponent implements OnInit {
     this.getCategorias();
     this.route.queryParams.subscribe(params => {
       this.numeroMesa = params['mesaSeleccionada'];
+      this.nombreMesa = params['nombreMesa']
     });
   }
   switchStateChanged() {
@@ -224,7 +227,7 @@ export class RegistrarPedidoComponent implements OnInit {
   }
 
   onImgError(event: any) {
-    event.target.src = 'assets/image/27002.jpg';
+    event.target.src = 'assets/image/platillo.jpg';
   }
 
 }
