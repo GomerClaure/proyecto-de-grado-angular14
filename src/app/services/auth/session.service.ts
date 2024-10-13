@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Empleado, Propietario, Usuario } from 'src/app/modelos/usuario/Usuarios';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from "../../../environments/environment";
-import { of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,8 @@ export class SessionService {
   private headers = {
     'Authorization': 'Bearer ' + sessionStorage.getItem('token_access'),
   };
+  private authStatusSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
+  authStatus$ = this.authStatusSubject.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -56,6 +58,7 @@ export class SessionService {
             sessionStorage.setItem('id_restaurante', empleado.id_restaurante.toString());
           }
         }
+        this.authStatusSubject.next(true);
         // return {message: 'Inicio de sesión exitoso.'}
       }),
       catchError(err => {
@@ -68,8 +71,13 @@ export class SessionService {
   public logout() {
     localStorage.clear();
     sessionStorage.clear();
+    this.authStatusSubject.next(false);
     return this.http.get<any>(`${this.BASE_URL}/logout`);
 
+  }
+
+  isLoggedIn(): boolean {
+    return !!sessionStorage.getItem('token_access');
   }
 
   getUsuario() {

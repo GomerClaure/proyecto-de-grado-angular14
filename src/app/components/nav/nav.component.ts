@@ -5,6 +5,7 @@ import { NotificacionService } from 'src/app/services/notificacion/notificacion.
 import { Notificacion } from 'src/app/modelos/Notificacion';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
@@ -12,7 +13,7 @@ import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.ser
   styleUrls: ['./nav.component.scss']
 })
 
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit, OnDestroy {
   private unloadHandler = (event: BeforeUnloadEvent) => {
     console.log('La página se está refrescando o cerrando');
     localStorage.setItem('conexionWebSocket', 'false');
@@ -23,6 +24,8 @@ export class NavComponent implements OnInit {
   public fotoPerfil: string;
   private idRestaurante: number;
   public isMenuCollapsed = true;
+  public isLoggedIn = false;
+  private sessionSubscription: Subscription;
 
   constructor(private sessionService: SessionService, private router: Router,
     private notificacionService: NotificacionService, private webSocketService: WebsocketService,
@@ -31,13 +34,15 @@ export class NavComponent implements OnInit {
     this.idRestaurante = 0;
     this.notificacionesSinLeer = 0;
     this.fotoPerfil = 'assets/image/som.png';
+    this.sessionSubscription = {} as Subscription;
   }
 
   ngOnInit(): void {
     window.addEventListener('beforeunload', this.unloadHandler);
-    if (sessionStorage.getItem('token_access')) {
-
-      this.idRestaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
+    this.sessionSubscription = this.sessionService.authStatus$.subscribe(status => {
+      this.isLoggedIn = status;
+      if (this.isLoggedIn) {
+        this.idRestaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
       const conexionWebSocket = localStorage.getItem('conexionWebSocket');
       console.log('El valor de la conexión websocket es: ', conexionWebSocket);
       if (conexionWebSocket !== 'true') {
@@ -66,15 +71,17 @@ export class NavComponent implements OnInit {
           }
         );
       }
-
-    }
+      } else {
+        this.webSocketService.closeConnection();
+      }
+    });
 
   }
 
   ngOnDestroy(): void {
     
-    // localStorage.setItem('conexionWebSocket', 'false');
-    // this.webSocketService.closeConnection();
+    localStorage.setItem('conexionWebSocket', 'false');
+    this.webSocketService.closeConnection();
     window.removeEventListener('beforeunload', this.unloadHandler);
   }
 
