@@ -102,7 +102,7 @@ export class GenerarComponent implements OnInit {
   }
 
   onImgError(event: any) {
-    event.target.src = 'assets/image/platillo.jpg';
+    event.target.src = 'assets/image/Imagen-rota.jpg';
   }
 
   cambiarTema(event: any) {

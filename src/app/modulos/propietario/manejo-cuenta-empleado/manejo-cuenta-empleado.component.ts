@@ -47,7 +47,7 @@ export class ManejoCuentaEmpleadoComponent implements OnInit {
 
   onImgError(event: any):void {
     const img = event.target as HTMLImageElement;
-    img.src = 'assets/image/Usuario.jpg';
+    img.src = 'assets/image/UsuarioCard1.png';
   }
 
   cambiarEstadoUsuario(idUsuario: number, estado: boolean) {

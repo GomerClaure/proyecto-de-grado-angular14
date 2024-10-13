@@ -13,7 +13,9 @@
 }
 //Fondos para pantallas
 .fondo {
-  min-height: 100vh; /* Asegura que cubra al menos la altura de la pantalla */
+  background: radial-gradient(circle,#f0e6dc 2px, transparent 2px);
+  background-size: 15px 15px;
+  min-height: 100vh;  /* Asegura que cubra al menos la altura de la pantalla */
   height: 100%;
   background-attachment: fixed; /* Mantiene el fondo fijo al hacer scroll */
 }
@@ -58,15 +60,6 @@
   padding-bottom:0px;
   margin: 0;
 }
-.modal-header{
-  background-size: cover;
-  background-position: center;
-  background-color: #044051;
-  color: white;
-}
-.btn-close {
-  filter: brightness(0) invert(1); /* Cambiar el color del botón de cierre a blanco */
-}
 .img-fluid{
    border-radius: 5px;
    border-color: #d1bd58;
@@ -83,7 +76,7 @@ th,td {
   border-right: 2px solid rgba(0, 0, 0, 0.1);
 }
 th {
-  background-color: #1d1c1a !important; /* Color de fondo para las celdas */
+  background-color: #044051 !important; /* Color de fondo para las celdas */
   text-align: center;
   color: white !important;
 }
@@ -104,15 +97,16 @@ th {
 }
 .page-item .page-link {
   background-color: transparent;
-  color: #1e2446;
+  color: #474b61;
   font-weight: bold;
   padding: 5px 10px;
   font-size: 14px;
   border: none;
 }
 .page-item.active .page-link {
-  background-color: #F4AC45;
+  background-color: #044051;
   border-radius: 5px;
+  color: white;
 }
 .page-item.disabled .page-link {
   color: rgba(255, 255, 255, 0.5);
@@ -143,7 +137,7 @@ th {
 }
 // Estilo para generico button//
 .btn-generico {
-  background-color: #3c3f41 !important; 
+  background-color: #526557 !important; 
   border: none;
   font-size: 16px;
   padding: 10px 20px;
@@ -268,7 +262,7 @@ th {
 }
 //Estilo para aceptar button
 .btn-aceptar {
-  background-color: #79d179; /* Verde oliva apagado */
+  background-color: #8ede69; /* Verde oliva apagado */
   border: none;
   font-size: 16px;
   padding: 10px 20px;
@@ -291,7 +285,19 @@ th {
   border: none;
   color: white !important;
 }
-//Estilo para imprimir button
+//Estilo para modales
+.modal-header{
+  background-size: cover;
+  background-position: center;
+  background-color: #044051;
+  color: white;
+}
+.btn-close {
+  filter: brightness(0) invert(1); /* Cambiar el color del botón de cierre a blanco */
+}
+.modal-footer{
+  background-color: #044051;
+}
 
 
 

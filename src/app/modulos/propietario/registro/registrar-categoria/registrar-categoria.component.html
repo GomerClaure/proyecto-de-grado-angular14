@@ -15,7 +15,8 @@
         <div class="row justify-content-center img-c">
         <div class="col-md-6 col-xs-12 d-flex justify-content-center align-items-center">
           <div class="apartadoImg text-center">
-              <img [src]="imageUrl" id="image-platillo" class="img-fluid" alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
+            <img [src]="imageUrl" (error)="onImgError($event)" id="image-platillo" class="img-fluid shadow-img"
+            alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight">       
               <input type="file" id="archivo" class="hidden" (change)="onFileSelected($event)">
               <label for="archivo" class="btn-img btn btn-subir-imagen">Seleccionar Imagen<i class="bi bi-file-earmark-arrow-up"></i></label>
           </div>

@@ -74,5 +74,8 @@ export class RegistrarCategoriaComponent {
     // Llama a clearImage() cuando se cierra el modal
     this.clearImage();
   }
+  onImgError(event: any) {
+    event.target.src = 'assets/image/Imagen-rota.jpg';
+  }
 
 }

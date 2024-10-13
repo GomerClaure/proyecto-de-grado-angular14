@@ -1,6 +1,18 @@
-.fondo-home{
-    background-color: rgb(34, 51, 67);
+.fondo-home {
+    background-color: rgb(252, 250, 235);
     height: 100vh;
     width: 100%;
     color: white;
+    background-image: url(../../../assets/image/FondoCard.png);
+    background-size: cover; /* La imagen cubrirá toda el área, manteniendo su proporción */
+    background-position: center; /* Centra la imagen en el fondo */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 100px;
+    color: rgb(50, 49, 73);
 }

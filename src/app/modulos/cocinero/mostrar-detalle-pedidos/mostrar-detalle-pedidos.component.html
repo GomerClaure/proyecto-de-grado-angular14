@@ -75,9 +75,9 @@
         </div>
         <div class="row-12 d-flex justify-content-center">
           <button *ngIf="pedidoSeleccionado.estado !== 'Servido' && pedidoSeleccionado.estado !== 'En preparación'"
-            type="button" class="btn btn-en-preparacion  col-2" (click)="cambiarEstado('2')">En
+            type="button" class="btn btn-generico  col-2" (click)="cambiarEstado('2')">En
             Curso</button>
-          <button *ngIf="pedidoSeleccionado.estado == 'En preparación'" type="button" class="btn btn-success col-2"
+          <button *ngIf="pedidoSeleccionado.estado == 'En preparación'" type="button" class="btn btn-aceptar col-2"
             (click)="cambiarEstado('4')">Terminado</button>
         </div>
 
