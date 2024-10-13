@@ -1,109 +1,96 @@
 <!-- Barra de navegacion para el propietario -->
-<nav *ngIf="esPropietario()" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark ">
+<nav *ngIf="esPropietario()" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" [routerLink]="'/home'">
+    <a class="navbar-brand" routerLink="/home">
       <strong>Restaurant</strong>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" (click)="toggleMenu()" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" [ngClass]="{ 'show': !isMenuCollapsed }" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- Menu -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Menu
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" [routerLink]="'/propietario/platillo'">Lista de platillos</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" [routerLink]="'/propietario/categoria'">Lista de categorias</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" [routerLink]="'/propietario/generar'">Generar menu </a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" [routerLink]="'/propietario/qr'">Generar Qr</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" (click)="irAMenu()">Ver Menu</a></li>
+            <li><a class="dropdown-item" routerLink="/propietario/platillo" (click)="closeMenu()">Lista de platillos</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" routerLink="/propietario/categoria" (click)="closeMenu()">Lista de categorías</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" routerLink="/propietario/generar" (click)="closeMenu()">Generar menú</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" routerLink="/propietario/qr" (click)="closeMenu()">Generar QR</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" (click)="irAMenu(); closeMenu()">Ver Menú</a></li>
           </ul>
         </li>
+
+        <!-- Registro -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Registro
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" [routerLink]="'/propietario/platillo/registrar'">Registrar platillo</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrar categoria</a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" [routerLink]="'/propietario/empleado'">Registrar empleado</a></li>
+            <li><a class="dropdown-item" routerLink="/propietario/platillo/registrar" (click)="closeMenu()">Registrar platillo</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="closeMenu()">Registrar categoría</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" routerLink="/propietario/empleado" (click)="closeMenu()">Registrar empleado</a></li>
           </ul>
         </li>
+
+        <!-- Reporte -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Reporte
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" [routerLink]="'/propietario/pedidosR'">Pedidos</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" [routerLink]="'/propietario/ventas'">Ventas</a></li>
+            <li><a class="dropdown-item" routerLink="/propietario/pedidosR" (click)="closeMenu()">Pedidos</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" routerLink="/propietario/ventas" (click)="closeMenu()">Ventas</a></li>
           </ul>
         </li>
+
+        <!-- Mi Perfil -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Mi Perfil
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" [routerLink]="'/propietario/datos-personales'">Datos personales</a></li>
-
-            <li><a class="dropdown-item" [routerLink]="'/reset-password'">Cambiar contraseña</a></li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#" (click)="cerrarSesion()">Logout</a></li>
+            <li><a class="dropdown-item" routerLink="/propietario/datos-personales" (click)="closeMenu()">Datos personales</a></li>
+            <li><a class="dropdown-item" routerLink="/reset-password" (click)="closeMenu()">Cambiar contraseña</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#" (click)="cerrarSesion(); closeMenu()">Logout</a></li>
           </ul>
-        <!-- Personal -->
-        <li class="nav-item">
-          <a class="nav-link active" [routerLink]="'/propietario/manejo-cuenta-empleado'" >Empleados</a>
         </li>
+
+        <!-- Empleados -->
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
+          <a class="nav-link active" routerLink="/propietario/manejo-cuenta-empleado" (click)="closeMenu()">Empleados</a>
         </li>
-       
       </ul>
     </div>
   </div>
 </nav>
+
 <!-- Barra de navegacion para el administrador -->
 <nav *ngIf="esAdministrador()" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Administrador</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+    <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page"  [routerLink]="'/administrador/ver-formularios'" >Solicitudes</a>
+          <a class="nav-link active" aria-current="page"  routerLink="/administrador/ver-formularios" >Solicitudes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page"  [routerLink]="'/administrador/manejo-cuentas-propietarios'" >Propietarios</a>
+          <a class="nav-link active" aria-current="page"  routerLink="/administrador/manejo-cuentas-propietarios" >Propietarios</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#" (click)="cerrarSesion()">Logout</a>
@@ -116,7 +103,7 @@
  <!--Si el empleado es mesero-->
 <nav *ngIf="esEmpleado() && getRol()=='1'" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand mx-0" [routerLink]="'/home'"><strong>Restaurante </strong></a>
+    <a class="navbar-brand mx-0" routerLink="/home"><strong>Restaurante </strong></a>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
@@ -125,13 +112,13 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" [routerLink]="'/mesero/lista-mesa'">
+            <a class="nav-link " aria-current="page" routerLink="/mesero/lista-mesa">
               <i class="bi bi-pencil-square me-2 d-lg-none fw-bold"></i> <!-- Ícono visible solo en pantallas pequeñas -->
               Registrar Pedido
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fw-lg-bold" [routerLink]="'/mesero/lista-pedidos'">
+            <a class="nav-link fw-lg-bold" routerLink="/mesero/lista-pedidos">
               <i class="bi bi-list-check me-2 d-lg-none"></i> <!-- Ícono visible solo en pantallas pequeñas -->
               Lista de Pedidos
             </a>
@@ -143,11 +130,11 @@
               Mi Perfil
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" [routerLink]="'/empleados/datos-personales'">
+              <li><a class="dropdown-item" routerLink="/empleados/datos-personales">
                 <i class="bi bi-person me-2 d-lg-none"></i> <!-- Ícono visible solo en pantallas pequeñas -->
                 Datos Personales
               </a></li>
-              <li><a class="dropdown-item" [routerLink]="'/reset-password'">
+              <li><a class="dropdown-item" routerLink="/reset-password">
                 <i class="bi bi-key me-2 d-lg-none"></i> <!-- Ícono visible solo en pantallas pequeñas -->
                 Cambiar Contraseña
               </a></li>
@@ -193,7 +180,7 @@
             </a>
           </li>
           <li *ngIf="notificaciones.length != 0" >
-            <a [routerLink]="'/notificacion/lista-notificacion'" (click)="marcarLeida(0)" class="list-group-item px-2 notificacion text-end">
+            <a routerLink="/notificacion/lista-notificacion" (click)="marcarLeida(0)" class="list-group-item px-2 notificacion text-end">
               Ver todas <i class="bi bi-chevron-right"></i>
             </a>
           </li>
@@ -209,35 +196,35 @@
   </div>
 </nav>
 <!--Si el empleado es cocinero-->
-<nav *ngIf="esEmpleado() && getRol()=='3'" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark ">
+<nav *ngIf="esEmpleado() && getRol()=='3'" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" [routerLink]="'/home'">Empleado Cocinero</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" routerLink="/home">Empleado Cocinero</a>
+    <button class="navbar-toggler" type="button" (click)="toggleMenu()"
+      aria-controls="navbarSupportedContent" aria-expanded="!isMenuCollapsed" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" [ngClass]="{'show': !isMenuCollapsed}" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" [routerLink]="'/cocinero/pedido-cocina'">Ver pedidos</a>
+          <a class="nav-link active" aria-current="page" routerLink="/cocinero/pedido-cocina" (click)="closeMenu()">Ver pedidos</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-person-circle me-2 d-lg-none"></i> <!-- Ícono visible solo en pantallas pequeñas -->
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-circle me-2 d-lg-none"></i>
             Mi Perfil
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" [routerLink]="'/empleados/datos-personales'">
-              <i class="bi bi-person me-2 d-lg-none"></i> <!-- Ícono visible solo en pantallas pequeñas -->
+            <li><a class="dropdown-item" routerLink="/empleados/datos-personales" (click)="closeMenu()">
+              <i class="bi bi-person me-2 d-lg-none"></i>
               Datos Personales
             </a></li>
-            <li><a class="dropdown-item" [routerLink]="'/reset-password'">
-              <i class="bi bi-key me-2 d-lg-none"></i> <!-- Ícono visible solo en pantallas pequeñas -->
+            <li><a class="dropdown-item" routerLink="/reset-password" (click)="closeMenu()">
+              <i class="bi bi-key me-2 d-lg-none"></i>
               Cambiar Contraseña
             </a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item text-danger" href="#" (click)="cerrarSesion()">
-              <i class="bi bi-box-arrow-right me-2 d-lg-none"></i> <!-- Ícono visible solo en pantallas pequeñas -->
+            <li><a class="dropdown-item text-danger" href="#" (click)="cerrarSesion(); closeMenu()">
+              <i class="bi bi-box-arrow-right me-2 d-lg-none"></i>
               Logout
             </a></li>
           </ul>
@@ -246,11 +233,12 @@
     </div>
   </div>
 </nav>
+
 <!--Si el empleado es cajero-->
 <nav *ngIf="esEmpleado() && getRol()=='2'" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark ">
   <div class="container-fluid">
-    <a class="navbar-brand" [routerLink]="'/home'">Empleado Cajero</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+    <a class="navbar-brand" routerLink="/home">Empleado Cajero</a>
+    <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -261,11 +249,11 @@
             Cuentas
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" aria-current="page" [routerLink]="'/cajero/lista-pedidos'">Pedidos</a></li>
+            <li><a class="dropdown-item" aria-current="page" routerLink="/cajero/lista-pedidos">Pedidos</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" aria-current="page" [routerLink]="'/cajero/lista-cuentas-cerradas'">Cerradas</a></li>
+            <li><a class="dropdown-item" aria-current="page" routerLink="/cajero/lista-cuentas-cerradas">Cerradas</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -274,11 +262,11 @@
             Mi Perfil
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" [routerLink]="'/empleados/datos-personales'">
+            <li><a class="dropdown-item" routerLink="/empleados/datos-personales">
               <i class="bi bi-person me-2 d-lg-none"></i> <!-- Ícono visible solo en pantallas pequeñas -->
               Datos Personales
             </a></li>
-            <li><a class="dropdown-item" [routerLink]="'/reset-password'">
+            <li><a class="dropdown-item" routerLink="/reset-password">
               <i class="bi bi-key me-2 d-lg-none"></i> <!-- Ícono visible solo en pantallas pequeñas -->
               Cambiar Contraseña
             </a></li>
@@ -298,22 +286,25 @@
   class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" style="fill: rgb(255, 255, 255)"><path d="M21 15c0-4.625-3.507-8.441-8-8.941V4h-2v2.059c-4.493.5-8 4.316-8 8.941v2h18v-2zM2 18h20v2H2z"></path></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" style="fill: rgb(255, 255, 255)">
+        <path d="M21 15c0-4.625-3.507-8.441-8-8.941V4h-2v2.059c-4.493.5-8 4.316-8 8.941v2h18v-2zM2 18h20v2H2z"></path>
+      </svg>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon text-end"></span>
+    <button class="navbar-toggler" type="button" (click)="toggleMenu()"
+      aria-controls="navbarSupportedContent" aria-expanded="!isMenuCollapsed" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" [ngClass]="{'show': !isMenuCollapsed}" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" [routerLink]="'/login'">Login</a>
+          <a class="nav-link active" aria-current="page" routerLink="/login" (click)="closeMenu()">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/formulario-registro'">Registro</a>
+          <a class="nav-link" routerLink="/formulario-registro" (click)="closeMenu()">Registro</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+
 <app-registrar-categoria></app-registrar-categoria>

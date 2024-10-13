@@ -12,7 +12,7 @@ import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.ser
   styleUrls: ['./nav.component.scss']
 })
 
-export class NavComponent implements OnInit, OnDestroy {
+export class NavComponent implements OnInit {
   private unloadHandler = (event: BeforeUnloadEvent) => {
     console.log('La página se está refrescando o cerrando');
     localStorage.setItem('conexionWebSocket', 'false');
@@ -22,6 +22,7 @@ export class NavComponent implements OnInit, OnDestroy {
   public notificacionesSinLeer: number;
   public fotoPerfil: string;
   private idRestaurante: number;
+  public isMenuCollapsed = true;
 
   constructor(private sessionService: SessionService, private router: Router,
     private notificacionService: NotificacionService, private webSocketService: WebsocketService,
@@ -71,8 +72,9 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    localStorage.setItem('conexionWebSocket', 'false');
-    this.webSocketService.closeConnection();
+    
+    // localStorage.setItem('conexionWebSocket', 'false');
+    // this.webSocketService.closeConnection();
     window.removeEventListener('beforeunload', this.unloadHandler);
   }
 
@@ -123,7 +125,13 @@ export class NavComponent implements OnInit, OnDestroy {
   getRol(){
      return sessionStorage.getItem('rol_empleado');
   }
+  toggleMenu() {
+    this.isMenuCollapsed = !this.isMenuCollapsed;
+  }
 
+  closeMenu() {
+    this.isMenuCollapsed = true;
+  }
   cerrarSesion() {
     this.webSocketService.closeConnection();
     this.sessionService.logout();
