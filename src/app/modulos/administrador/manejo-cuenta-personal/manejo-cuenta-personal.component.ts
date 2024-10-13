@@ -50,9 +50,8 @@ export class ManejoCuentaPersonalComponent implements OnInit {
   }
 
   onImgError(event: any) {
-
-    event.target.src = "https://via.placeholder.com/220"; // URL de imagen de reemplazo
-  }
+    event.target.src = 'assets/image/Usuario.jpg';
+  } 
 
   cambiarEstadoUsuario(idUsuario: number, estado: boolean) {
     this.sessionService.cambiarEstadoUsuario(idUsuario+'', estado).subscribe(

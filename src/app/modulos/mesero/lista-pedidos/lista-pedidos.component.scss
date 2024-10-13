@@ -1,12 +1,48 @@
 .small-card {
-    max-width: 250px; /* Ajusta el ancho según sea necesario */
-    max-height: 250px; /* Ajusta la altura según sea necesario */
-    font-size: 0.9rem; /* Opcional: reduce el tamaño de la fuente */
+  max-width: 250px;
+  max-height: 250px;
+  font-size: 0.9rem;
+  margin: 0 10px;
 }
-.card{
-  //background-image: url("../../../../assets/image/5498321695145984-removebg-preview.png");
+
+.card-title-container {
+  background-color:#044051;
+  text-align: center;
+  padding: 10px 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: rgb(255, 255, 255);
+}
+
+.btn-aceptar, .btn-editar {
+  margin: 0 5px; /* Adds space between the buttons */
+  font-size: 14px;
+}
+.card-title {
+  margin: 0;
+}
+
+.card {
   background-position: 0;
   background-size: cover;
+  padding: 0;
+  margin: 0;
 }
-  
-  
+
+.card-body {
+  background-image: url(../../../../assets/image/Card.jpg);
+  background-position: center;
+  background-size: cover;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+@media (max-width: 576px) {
+  .small-card {
+    max-width: 100%;
+  }
+  .btn-aceptar, .btn-editar {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+}

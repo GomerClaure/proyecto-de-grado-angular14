@@ -1,0 +1,22 @@
+
+.modal-footer{
+  background-image: url(../../../../assets/image/Card1.jpg);
+  background-position: center;
+  background-size: cover; 
+  padding: 15px;
+  border: none;
+}
+.modal-body {
+ background-color:#ffffff;
+ color: rgb(41, 69, 99);
+ border: none;
+
+}
+.modal-header h5 {
+    text-align: center; /* Centrar el título */
+    width: 100%; /* Asegurarse de que ocupa todo el ancho */
+    border: none;
+} 
+.btn-close {
+    filter: brightness(0) invert(1); /* Cambiar el color del botón de cierre a blanco */
+}

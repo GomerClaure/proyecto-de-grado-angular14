@@ -45,13 +45,9 @@ export class ManejoCuentaEmpleadoComponent implements OnInit {
     this.usuarioSeleccionado = usuario;
   }
 
-  getSanitizedImageUrl(fotoPerfil: string): SafeUrl {
-    return this.sanitizer.bypassSecurityTrustUrl(this.URL_BACKEND + fotoPerfil);
-  }
-
-  onImgError(event: any) {
-
-    event.target.src = "https://via.placeholder.com/220"; // URL de imagen de reemplazo
+  onImgError(event: any):void {
+    const img = event.target as HTMLImageElement;
+    img.src = 'assets/image/Usuario.jpg';
   }
 
   cambiarEstadoUsuario(idUsuario: number, estado: boolean) {

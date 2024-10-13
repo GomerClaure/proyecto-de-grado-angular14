@@ -41,45 +41,45 @@ export class NavComponent implements OnInit, OnDestroy {
     window.addEventListener('beforeunload', this.unloadHandler);
     this.sessionSubscription = this.sessionService.authStatus$.subscribe(status => {
       this.isLoggedIn = status;
-      if (this.isLoggedIn) {
-        this.idRestaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
       const conexionWebSocket = localStorage.getItem('conexionWebSocket');
       console.log('El valor de la conexión websocket es: ', conexionWebSocket);
-      if (conexionWebSocket !== 'true') {
-        console.log('Iniciando conexión websocket');
-        localStorage.setItem('conexionWebSocket', 'true');
-        if (sessionStorage.getItem('tipo') === 'Empleado') {
-          this.webSocketService.iniciarConexion();
-          if (sessionStorage.getItem('rol_empleado') === '3' || sessionStorage.getItem('rol_empleado') === '2') {
-            this.suscribirseEventosDePedido();
-          } else {
-            this.suscribirNotificacion();
+      if (this.isLoggedIn ) {
+        this.idRestaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
+
+        if (conexionWebSocket !== 'true') {
+          console.log('Iniciando conexión websocket');
+          localStorage.setItem('conexionWebSocket', 'true');
+          if (sessionStorage.getItem('tipo') === 'Empleado') {
+            this.webSocketService.iniciarConexion();
+            if (sessionStorage.getItem('rol_empleado') === '3' || sessionStorage.getItem('rol_empleado') === '2') {
+              this.suscribirseEventosDePedido();
+            } else {
+              this.suscribirNotificacion();
+            }
           }
         }
-      }
 
-      let sesionComoEmpleado = sessionStorage.getItem('tipo') === 'Empleado';
-      if (sesionComoEmpleado) {
-        this.notificacionService.getNotificaciones(5).subscribe(
-          (data) => {
-            this.notificaciones = data.notificaciones;
-            this.notificacionesSinLeer = data.notificacionesSinLeer;
-            //console.log(this.notificaciones);
-          },
-          (error) => {
-            console.error(error);
-          }
-        );
-      }
-      } else {
-        this.webSocketService.closeConnection();
-      }
+        let sesionComoEmpleado = sessionStorage.getItem('tipo') === 'Empleado';
+        if (sesionComoEmpleado) {
+          this.notificacionService.getNotificaciones(5).subscribe(
+            (data) => {
+              this.notificaciones = data.notificaciones;
+              this.notificacionesSinLeer = data.notificacionesSinLeer;
+              //console.log(this.notificaciones);
+            },
+            (error) => {
+              console.error(error);
+            }
+          );
+        }
+
+      } 
     });
 
   }
 
   ngOnDestroy(): void {
-    
+
     localStorage.setItem('conexionWebSocket', 'false');
     this.webSocketService.closeConnection();
     window.removeEventListener('beforeunload', this.unloadHandler);
@@ -126,11 +126,11 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   esEmpleado(): boolean {
-      return sessionStorage.getItem('tipo') === 'Empleado';
+    return sessionStorage.getItem('tipo') === 'Empleado';
 
   }
-  getRol(){
-     return sessionStorage.getItem('rol_empleado');
+  getRol() {
+    return sessionStorage.getItem('rol_empleado');
   }
   toggleMenu() {
     this.isMenuCollapsed = !this.isMenuCollapsed;
@@ -141,6 +141,7 @@ export class NavComponent implements OnInit, OnDestroy {
   }
   cerrarSesion() {
     this.webSocketService.closeConnection();
+    localStorage.setItem('conexionWebSocket', 'false');
     this.sessionService.logout();
   }
 

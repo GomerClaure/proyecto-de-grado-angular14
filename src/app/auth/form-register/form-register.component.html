@@ -31,8 +31,8 @@
       <div class="navigation-buttons d-flex justify-content-around">
         <button class="btn btn-secondary" *ngIf="currentStep > 1" (click)="goToPreviousStep()"
           [disabled]="currentStep === 1">Anterior</button>
-        <button class="btn btn-secondary" *ngIf="currentStep < 3" (click)="goToNextStep()">Siguiente</button>
-        <button class="btn btn-success" *ngIf="currentStep === 3" (click)="onSubmit()">Enviar</button>
+        <button class="btn btn-generico" *ngIf="currentStep < 3" (click)="goToNextStep()">Siguiente</button>
+        <button class="btn btn-sceptar" *ngIf="currentStep === 3" (click)="onSubmit()">Enviar</button>
       </div>
     </div>
   </div>

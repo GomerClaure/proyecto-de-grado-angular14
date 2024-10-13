@@ -11,9 +11,19 @@
     background-color: #333333;
   }
   
-  input[disabled] {
-    background-color: #f0f0f0;
-    color: #333333;
-    border-radius: 0.375rem !important;
-  }
+  input.form-control {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+}
+
+input.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+input.form-control:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+}
   
