@@ -1,6 +1,9 @@
 .card {
     transition: transform 0.2s, box-shadow 0.2s;
     .card-img-container {
+      background-image: url(../../../../assets/image/Card2.jpg);
+      background-position: center;
+      background-size: cover;
       height: 110px;
       display: flex;
       align-items: center;

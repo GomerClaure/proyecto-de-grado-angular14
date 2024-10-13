@@ -45,32 +45,38 @@ export class ResetPasswordComponent implements OnInit {
     this.toast.success({ detail: 'SUCCESS', summary: message });
 
   }
+ onSubmit() {
+  this.resetPasswordForm.markAllAsTouched();
 
-  onSubmit() {
-    this.resetPasswordForm.markAllAsTouched();
-    if (this.resetPasswordForm.valid) {
-      const formData = new FormData();
-      Object.keys(this.resetPasswordForm.controls).forEach(key => {
-        formData.append(key, this.resetPasswordForm.get(key)?.value);
-      });
-      // Opcional: Log para verificar los datos enviados
-      formData.forEach((value, key) => {
-        console.log(`${key}: ${value}`);
-      });
-      this.sessionService.restablecerContra(formData).subscribe(
-        res => {
-          this.showSuccess('Contraseña restablecida');
-          if (this.token !== '') {
-            this.router.navigate(['/login']);
-          }
+  // Verificamos si el formulario es válido
+  if (this.resetPasswordForm.valid) {
+    const formData = new FormData();
+    Object.keys(this.resetPasswordForm.controls).forEach(key => {
+      formData.append(key, this.resetPasswordForm.get(key)?.value);
+    });
 
-        },
-        err => {
-          this.showError('Error al restablecer contraseña');
-          console.log(err);
+    // Opcional: Log para verificar los datos enviados
+    formData.forEach((value, key) => {
+      console.log(`${key}: ${value}`);
+    });
+
+    this.sessionService.restablecerContra(formData).subscribe(
+      res => {
+        this.showSuccess('Contraseña restablecida');
+        if (this.token !== '') {
+          this.router.navigate(['/login']);
         }
-      );
-    }
+      },
+      err => {
+        this.showError('Error al restablecer contraseña');
+        console.log(err);
+      }
+    );
+  } else {
+    // Si el formulario no es válido, mostramos un mensaje de información
+    this.showInfo('No llenaste ningún campo'); // Llama al método showInfo
   }
+}
+
 
 }

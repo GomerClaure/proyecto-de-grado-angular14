@@ -227,7 +227,7 @@ export class RegistrarPedidoComponent implements OnInit {
   }
 
   onImgError(event: any) {
-    event.target.src = 'assets/image/platillo.jpg';
+    event.target.src = 'assets/image/ImagenNO.png';
   }
 
 }

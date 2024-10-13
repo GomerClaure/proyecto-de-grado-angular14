@@ -10,9 +10,20 @@
 label{
   color: rgb(255, 255, 255);
 }
-input{
-  background-color: #ffffffde;
+input.form-control {
+  background: rgba(255, 255, 255, 0.1);
   border: none;
+  border-radius: 5px;
+  color: #fff;
+}
+
+input.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+input.form-control:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
 }
 .login-card {
   background-color: rgb(23 26 31 / 75%);
