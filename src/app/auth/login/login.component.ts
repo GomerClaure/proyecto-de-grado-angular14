@@ -45,7 +45,7 @@ export class LoginComponent {
   }
 
   showSuccess(message: string) {
-    this.toast.success({ detail: message, summary: 'Success', duration: 500 });
+    this.toast.success({ detail: message, summary: 'Success'});
   }
 
   public login() {
@@ -53,9 +53,12 @@ export class LoginComponent {
     this.sessionService.login(usuario, password).subscribe(
       res => {
         if (res) {
-          alert('Inicio de sesión exitoso.');
           this.showSuccess('Hecho');
-          this.router.navigate(['/home']);
+          //esperar 2 segundos y redirigir a la página de inicio
+          setTimeout(() => {
+            this.router.navigate(['/home']);
+          }, 500);
+          // this.router.navigate(['/home']);
         }
       },
       err => {

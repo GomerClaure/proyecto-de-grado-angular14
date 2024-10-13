@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Lugo';
+  constructor(private router: Router) {}
+
+  shouldShowNav(): boolean {
+    // Rutas en las que no se mostrará el nav
+    const noNavRoutes = [''];
+
+    return !noNavRoutes.includes(this.router.url);
+  }
 }

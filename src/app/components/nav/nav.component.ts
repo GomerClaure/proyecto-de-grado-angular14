@@ -5,6 +5,7 @@ import { NotificacionService } from 'src/app/services/notificacion/notificacion.
 import { Notificacion } from 'src/app/modelos/Notificacion';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
@@ -22,6 +23,9 @@ export class NavComponent implements OnInit, OnDestroy {
   public notificacionesSinLeer: number;
   public fotoPerfil: string;
   private idRestaurante: number;
+  public isMenuCollapsed = true;
+  public isLoggedIn = false;
+  private sessionSubscription: Subscription;
 
   constructor(private sessionService: SessionService, private router: Router,
     private notificacionService: NotificacionService, private webSocketService: WebsocketService,
@@ -30,47 +34,52 @@ export class NavComponent implements OnInit, OnDestroy {
     this.idRestaurante = 0;
     this.notificacionesSinLeer = 0;
     this.fotoPerfil = 'assets/image/som.png';
+    this.sessionSubscription = {} as Subscription;
   }
 
   ngOnInit(): void {
     window.addEventListener('beforeunload', this.unloadHandler);
-    if (sessionStorage.getItem('token_access')) {
-
-      this.idRestaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
+    this.sessionSubscription = this.sessionService.authStatus$.subscribe(status => {
+      this.isLoggedIn = status;
       const conexionWebSocket = localStorage.getItem('conexionWebSocket');
       console.log('El valor de la conexión websocket es: ', conexionWebSocket);
-      if (conexionWebSocket !== 'true') {
-        console.log('Iniciando conexión websocket');
-        localStorage.setItem('conexionWebSocket', 'true');
-        if (sessionStorage.getItem('tipo') === 'Empleado') {
-          this.webSocketService.iniciarConexion();
-          if (sessionStorage.getItem('rol_empleado') === '3' || sessionStorage.getItem('rol_empleado') === '2') {
-            this.suscribirseEventosDePedido();
-          } else {
-            this.suscribirNotificacion();
+      if (this.isLoggedIn ) {
+        this.idRestaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
+
+        if (conexionWebSocket !== 'true') {
+          console.log('Iniciando conexión websocket');
+          localStorage.setItem('conexionWebSocket', 'true');
+          if (sessionStorage.getItem('tipo') === 'Empleado') {
+            this.webSocketService.iniciarConexion();
+            if (sessionStorage.getItem('rol_empleado') === '3' || sessionStorage.getItem('rol_empleado') === '2') {
+              this.suscribirseEventosDePedido();
+            } else {
+              this.suscribirNotificacion();
+            }
           }
         }
-      }
 
-      let sesionComoEmpleado = sessionStorage.getItem('tipo') === 'Empleado';
-      if (sesionComoEmpleado) {
-        this.notificacionService.getNotificaciones(5).subscribe(
-          (data) => {
-            this.notificaciones = data.notificaciones;
-            this.notificacionesSinLeer = data.notificacionesSinLeer;
-            //console.log(this.notificaciones);
-          },
-          (error) => {
-            console.error(error);
-          }
-        );
-      }
+        let sesionComoEmpleado = sessionStorage.getItem('tipo') === 'Empleado';
+        if (sesionComoEmpleado) {
+          this.notificacionService.getNotificaciones(5).subscribe(
+            (data) => {
+              this.notificaciones = data.notificaciones;
+              this.notificacionesSinLeer = data.notificacionesSinLeer;
+              //console.log(this.notificaciones);
+            },
+            (error) => {
+              console.error(error);
+            }
+          );
+        }
 
-    }
+      } 
+    });
 
   }
 
   ngOnDestroy(): void {
+
     localStorage.setItem('conexionWebSocket', 'false');
     this.webSocketService.closeConnection();
     window.removeEventListener('beforeunload', this.unloadHandler);
@@ -117,15 +126,22 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   esEmpleado(): boolean {
-      return sessionStorage.getItem('tipo') === 'Empleado';
+    return sessionStorage.getItem('tipo') === 'Empleado';
 
   }
-  getRol(){
-     return sessionStorage.getItem('rol_empleado');
+  getRol() {
+    return sessionStorage.getItem('rol_empleado');
+  }
+  toggleMenu() {
+    this.isMenuCollapsed = !this.isMenuCollapsed;
   }
 
+  closeMenu() {
+    this.isMenuCollapsed = true;
+  }
   cerrarSesion() {
     this.webSocketService.closeConnection();
+    localStorage.setItem('conexionWebSocket', 'false');
     this.sessionService.logout();
   }
 
