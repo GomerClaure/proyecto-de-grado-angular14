@@ -36,8 +36,8 @@ export class LoginComponent {
     }
   }
 
-  showError() {
-    this.toast.error({ detail: "ERROR", summary: 'Usuario no registrado', sticky: true });
+  showError(message: string) {
+    this.toast.error({ detail: "ERROR", summary: message, sticky: true });
   }
 
   showInfo(message: string) {
@@ -45,7 +45,7 @@ export class LoginComponent {
   }
 
   showSuccess(message: string) {
-    this.toast.success({ detail: message, summary: 'Success'});
+    this.toast.success({ detail: "SUCCESS", summary: message});
   }
 
   public login() {
@@ -53,7 +53,7 @@ export class LoginComponent {
     this.sessionService.login(usuario, password).subscribe(
       res => {
         if (res) {
-          this.showSuccess('Hecho');
+          this.showSuccess('Inicio de sesion exitoso');
           //esperar 2 segundos y redirigir a la página de inicio
           setTimeout(() => {
             this.router.navigate(['/home']);
@@ -62,8 +62,14 @@ export class LoginComponent {
         }
       },
       err => {
-        alert('Usuario o contraseña incorrectos.');
-        this.showError();
+        console.log('Dio error inesperado');
+        if (err.status === 401) {
+          this.showError('Usuario o contraseña incorrectos.');
+        } else if (err.status === 500) {
+          this.showError('Error del servidor. Intente nuevamente más tarde.');
+        } else {
+          this.showError('Ocurrió un error inesperado. Por favor, intente de nuevo.');
+        }
       });
   }
 }

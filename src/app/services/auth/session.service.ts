@@ -61,10 +61,10 @@ export class SessionService {
         this.authStatusSubject.next(true);
         // return {message: 'Inicio de sesión exitoso.'}
       }),
-      catchError(err => {
-        console.log(err);
-        return of(false);
-      })
+      // catchError(err => {
+      //   console.log(err);
+      //   return of(false);
+      // })
     );
   }
 

@@ -33,7 +33,7 @@ export class ListaPlatilloComponent implements OnInit {
   }
 
   editarPlatillo(id: number) {
-    this.router.navigate(['lista/editar-platillo'], { queryParams: { platilloId: id } });
+    this.router.navigate(['propietario/editar-platillo'], { queryParams: { platilloId: id } });
   }
 
   getPlatillos(): void {
