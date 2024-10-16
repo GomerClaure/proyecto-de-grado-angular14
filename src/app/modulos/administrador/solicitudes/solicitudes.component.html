@@ -17,7 +17,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let registro of preRegistros; let i = index">
-                    <th scope="row">{{ i + 1 }}</th>
+                    <td scope="row">{{ i + 1 }}</td>
                     <td>{{ registro.nombre_restaurante }}</td>
                     <td>{{ registro.nit }}</td>
                     <td>{{ registro.celular_restaurante }}</td>
@@ -29,7 +29,7 @@
                         </span>
                     </td>
                     <td>
-                        <button class="btn btn-curso" (click)="verDetalle(registro)">Ver Detalle</button>
+                        <button class="btn btn-generico" (click)="verDetalle(registro)"><i class="bi bi-eye"></i> Detalle</button>
                     </td>
                 </tr>
             </tbody>

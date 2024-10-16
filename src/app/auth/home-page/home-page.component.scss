@@ -1,7 +1,8 @@
 header.hero {
-  background: #0B486B;
-  background: -webkit-linear-gradient(to top, #F56217, #0B486B);
-  background: linear-gradient(to top, #F56217, #0B486B);
+  background: 
+    url(../../../assets/image/Card-removebg-preview.png) no-repeat center, /* The image on top */
+    linear-gradient(to top, #F56217, #0B486B); /* The gradient background */
+  background-size: cover; /* Ensures the image covers the whole section */
   height: 100vh;
   display: flex;
   align-items: center;
@@ -9,6 +10,7 @@ header.hero {
   text-align: center;
   color: white;
 }
+ 
 .hero-content {
   max-width: 500px;
 }

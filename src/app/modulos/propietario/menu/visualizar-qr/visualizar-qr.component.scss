@@ -1,19 +1,18 @@
 .card {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade una sombra */
-    border: none; /* Elimina el borde */
 }
 
 .card-body {
+    background-image: url(../../../../../assets/image/Card2.jpg);
     background-position: center;
     background-size: cover;
     padding: 30px;
     padding-bottom: 5px;
-    background-color: rgb(255, 255, 255);
     box-shadow: inset;
     border-radius: 5px;
 }
 .seccionboton{
-    margin-top: 15px;
+    margin-top: 20px;
     flex-direction: column;
     display: flex;
     align-items: center;

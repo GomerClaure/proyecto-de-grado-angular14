@@ -41,41 +41,34 @@
             <li><a class="dropdown-item" routerLink="/propietario/empleado" (click)="closeMenu()">Registrar empleado</a></li>
           </ul>
         </li>
-
         <!-- Reporte -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Reporte
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" routerLink="/propietario/pedidosR" (click)="closeMenu()">Pedidos</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" routerLink="/propietario/ventas" (click)="closeMenu()">Ventas</a></li>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/propietario/pedidosR" (click)="closeMenu()">Reporte</a>
         </li>
-
-        <!-- Mi Perfil -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Mi Perfil
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" routerLink="/propietario/datos-personales" (click)="closeMenu()">Datos personales</a></li>
-            <li><a class="dropdown-item" routerLink="/reset-password" (click)="closeMenu()">Cambiar contraseña</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#" (click)="cerrarSesion(); closeMenu()">Logout</a></li>
-          </ul>
-        </li>
-
         <!-- Empleados -->
         <li class="nav-item">
           <a class="nav-link active" routerLink="/propietario/manejo-cuenta-empleado" (click)="closeMenu()">Empleados</a>
         </li>
       </ul>
+         <!-- Mi Perfil -->
+      <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+       <a class="nav-link dropdown-toggle my-2 my-sm-0 d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <span class="me-3">Cuenta</span>
+      <img [src]="usuarioFotoUrl" class="rounded-circle me-2 ms-2 " alt="Foto de usuario" width="40" height="40">
+      </a>
+      <ul class="dropdown-menu dropdown-menu-start">
+      <li><a class="dropdown-item" routerLink="/propietario/datos-personales" (click)="closeMenu()">Datos personales</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" routerLink="/reset-password" (click)="closeMenu()">Cambiar contraseña</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" href="#" (click)="cerrarSesion(); closeMenu()"> Logout </a></li>
+      </ul>
+     </li>
+    </ul>
     </div>
   </div>
 </nav>
-
 <!-- Barra de navegacion para el administrador -->
 <nav *ngIf="esAdministrador()" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark">
   <div class="container-fluid">
@@ -233,7 +226,6 @@
     </div>
   </div>
 </nav>
-
 <!--Si el empleado es cajero-->
 <nav *ngIf="esEmpleado() && getRol()=='2'" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark">
   <div class="container-fluid">
@@ -279,7 +271,6 @@
     </div>
   </div>
 </nav>
-
 <!--Barra de navegacion del publico-->
 <nav *ngIf="!esPropietario() && !esEmpleado() && !esAdministrador()"
   class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark">
@@ -305,5 +296,4 @@
     </div>
   </div>
 </nav>
-
 <app-registrar-categoria></app-registrar-categoria>

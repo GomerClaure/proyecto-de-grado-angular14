@@ -26,6 +26,7 @@ export class NavComponent implements OnInit, OnDestroy {
   public isMenuCollapsed = true;
   public isLoggedIn = false;
   private sessionSubscription: Subscription;
+  usuarioFotoUrl: string = 'assets/image/UsuarioCard1.png';
 
   constructor(private sessionService: SessionService, private router: Router,
     private notificacionService: NotificacionService, private webSocketService: WebsocketService,

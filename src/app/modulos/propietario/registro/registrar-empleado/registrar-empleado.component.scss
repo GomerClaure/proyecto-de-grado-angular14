@@ -1,14 +1,20 @@
 form {
   background-color: rgb(255, 255, 255);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.584);
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgb(0 0 0 / 32%);
   backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   padding: 20px;
   border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding-top:10px;
+  padding-top: 20px;
   padding-bottom: 10px;
   margin-bottom: 30px;
+  
 }
-
+input {
+  background-color: rgba(49, 60, 64, 0.379);
+  border: none;
+}

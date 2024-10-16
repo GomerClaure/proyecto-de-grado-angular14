@@ -44,14 +44,10 @@ export class ManejoCuentaPersonalComponent implements OnInit {
   seleccionarUsuario(usuario: Propietario) {
     this.usuarioSeleccionado = usuario;
   }
-
-  getSanitizedImageUrl(fotoPerfil: string): SafeUrl {
-    return this.sanitizer.bypassSecurityTrustUrl(this.URL_BACKEND + fotoPerfil);
+  onImgError(event: any):void {
+    const img = event.target as HTMLImageElement;
+    img.src = 'assets/image/UsuarioCard1.png';
   }
-
-  onImgError(event: any) {
-    event.target.src = 'assets/image/Usuario.jpg';
-  } 
 
   cambiarEstadoUsuario(idUsuario: number, estado: boolean) {
     this.sessionService.cambiarEstadoUsuario(idUsuario+'', estado).subscribe(

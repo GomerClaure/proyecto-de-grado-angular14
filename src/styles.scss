@@ -7,26 +7,25 @@
 //Titulos de las paginas
 .titulo{
     text-align: center;
-    padding-top: 75px;
+    padding-top: 90px;
     padding-bottom: 10px;
     color: rgb(42, 42, 58);
 }
 //Fondos para pantallas
 .fondo {
-  background: radial-gradient(circle,#f0e6dc 2px, transparent 2px);
+ background: radial-gradient(circle,#f0e6dc 2px, transparent 2px);
   background-size: 15px 15px;
   min-height: 100vh;  /* Asegura que cubra al menos la altura de la pantalla */
   height: 100%;
   background-attachment: fixed; /* Mantiene el fondo fijo al hacer scroll */
 }
-//
+
 .btn-curso{
   background-color:#edd590;
   border-color: #edd590;
   color: black;
   border-radius: 5px;
 }
-
 .btn-terminado{
   background-color:#95c575;
   border-color: #95c575;
@@ -55,6 +54,7 @@
   background-color: #d1bd58;
   border-color: rgb(218, 170, 82);
 }
+
 .li{
   width: 350px;
   padding-bottom:0px;
