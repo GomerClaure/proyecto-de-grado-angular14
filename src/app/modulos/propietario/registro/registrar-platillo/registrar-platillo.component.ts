@@ -36,7 +36,7 @@ export class RegistrarPlatilloComponent implements OnInit{
       descripcion: [null,Validators.required],
       imagen:['']
     });
-    this.imageUrl = 'assets/image/platillo.jpg';
+    this.imageUrl = 'assets/image/Imagen-rota.jpg';
   }
 
   // Función para previsualizar la imagen seleccionada

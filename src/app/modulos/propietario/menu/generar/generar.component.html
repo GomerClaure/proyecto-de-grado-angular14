@@ -10,7 +10,6 @@
                                 <div class="d-flex flex-column align-items-center">
                                     <div class="card book-card" [ngClass]="{'dark-mode-card': tema === 'dark-theme'}">
                                         <div class="card-body">
-                                            <h5 class="card-title">Portada del Menu</h5>
                                             <div class="d-flex justify-content-center">
                                                 <img 
                                                 [src]="imgPortada"
@@ -22,7 +21,7 @@
                                         <div class="card-footer d-flex justify-content-between align-items-center">
                                             <label class="form-check form-switch mb-0">
                                                 <input class="form-check-input" type="checkbox" id="themeSwitch" (change)="cambiarTema($event)">
-                                                <span class="form-check-label" for="themeSwitch">Tema Oscuro</span>
+                                                <span class="form-check-label" for="themeSwitch">Tema </span>
                                             </label>
                                             <div class="spacer"></div>
                                             <label for="archivo-portada" class="btn btn-editar mt-2 mx-1" data-bs-toggle="collapse">

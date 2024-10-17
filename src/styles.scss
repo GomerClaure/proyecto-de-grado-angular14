@@ -3,6 +3,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 0px;
     margin: 0px;
+    user-select: none;
   }
 //Titulos de las paginas
 .titulo{
@@ -59,10 +60,6 @@
   width: 350px;
   padding-bottom:0px;
   margin: 0;
-}
-.img-fluid{
-   border-radius: 5px;
-   border-color: #d1bd58;
 }
 .form-control{
   background-color: #ffffff;
@@ -212,7 +209,7 @@ th {
 }
 //Estilo para eliminar button
 .btn-delete {
-  background-color: #e23030; 
+  background-color: #FA5555; 
   border: none;
   font-size: 16px;
   padding: 10px 20px;
@@ -237,7 +234,7 @@ th {
 }
 //Estilo para subir imagen  button
 .btn-subir-imagen {
-  background-color: #f0c677; /* Dorado apagado */
+  background-color: #F3C623; /* Dorado apagado */
   border: none;
   font-size: 16px;
   padding: 10px 20px;
@@ -248,14 +245,14 @@ th {
   color: white;
 }
 .btn-subir-imagen:hover {
-  background-color: #d4b06f; /* Dorado más oscuro para hover */
+  background-color: #cfa91f; /* Dorado más oscuro para hover */
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
   border: none;
   color: white;
 }
 .btn-subir-imagen:active {
-  background-color: #b89c5f !important; /* Dorado profundo para el estado activo */
+  background-color: #ffd12c !important; /* Dorado profundo para el estado activo */
   transform: scale(0.98);
   border: none;
   color: white !important;

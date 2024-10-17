@@ -1,18 +1,86 @@
+/* Estilo del fondo */
 .fondo-home {
-    background-color: rgb(252, 250, 235);
-    height: 100vh;
-    width: 100%;
-    color: white;
-    background-image: url(../../../assets/image/FondoCard.png);
-    background-size: cover; /* La imagen cubrirá toda el área, manteniendo su proporción */
-    background-position: center; /* Centra la imagen en el fondo */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-image: url('../../../assets/image/pixelcut-export.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    min-height: 100vh; 
     display: flex;
-    align-items: center;
     justify-content: center;
-}
+    align-items: center;
+    overflow: hidden; 
+  }
+  .restaurant-title {
+    font-family: 'Permanent Marker', cursive; 
+    font-size:7em !important; 
+    color: #221f29; 
+    text-align: justify;
+    animation: 7s ease 0s infinite beat;
+  }
+  @keyframes beat {
+    0%, 50%, 100% { transform: scale(1, 1); }
+    30%, 80% { transform: scale(0.92, 0.95); }
+  }
+  
+  .welcome-container {
+    position: relative;
+    width: 500px; 
+    height: 500px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 
-h1 {
-    font-size: 100px;
-    color: rgb(50, 49, 73);
-}
+  .circle-content {
+    position: relative;
+  }
+  
+  .restaurant-image {
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .restaurant-title {
+    font-size: 3em;
+    color: #221f29;
+    text-align: center;
+  }
+  
+  @media (max-width: 992px) {
+    .fondo-home {
+      height: 100vh;
+      background-position: top;
+    }
+  
+    .welcome-container {
+      width: 350px; 
+      height: 350px;
+    }
+  
+    .restaurant-title {
+      font-size: 2.5em;
+    }
+  }
+  
+  @media (max-width: 768px) {
+  
+    .fondo-home {
+      height: 100vh;
+    }
+  
+    .welcome-container {
+      width: 300px;
+      height: 300px;
+    }
+  
+    .restaurant-title {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+  }
+  

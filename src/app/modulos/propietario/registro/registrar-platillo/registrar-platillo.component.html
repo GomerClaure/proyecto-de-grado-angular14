@@ -1,10 +1,11 @@
 <body class="fondo">
   <div class="container">
-    <h2 class="titulo">Registrar platillo</h2>
+    <h2 class="titulo"></h2>
     <div class="form">
       <form [formGroup]="formularioPlatillo" class="row">
         <!-- Columna izquierda: Inputs del formulario -->
         <div class="col-12 col-md-6 mb-3">
+          <h2 class="pb-3">Registrar Platillo</h2>
           <!-- Nombre Platillo -->
           <div class="mb-3">
             <label>Nombre del platillo</label>
@@ -41,7 +42,7 @@
           </div>
         </div>
 
-        <div class="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center">
+        <div class="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center lado-img">
           <div class="d-flex justify-content-center mb-3">
             <div class="apartadoImg text-center">
               <img [src]="imageUrl" id="image-platillo" class="img-fluid" alt="Imagen" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
@@ -57,6 +58,7 @@
             <button type="submit" class="btn btn-aceptar me-2"(click)="onSubmit()" >Registrar</button>
           </div>
         </div>
+
       </form>
     </div>
   </div>
