@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { SolicitudesComponent } from './solicitudes/solicitudes.component';
 import { ManejoCuentaPersonalComponent } from './manejo-cuenta-personal/manejo-cuenta-personal.component';
+import { DetalleComponent } from './detalle-solicitudes/detalle.component';
 const routes:Routes=[
   {
     path:'',
@@ -14,6 +15,10 @@ const routes:Routes=[
       {
         path:'manejo-cuentas-propietarios',
         component:ManejoCuentaPersonalComponent
+      },
+      {
+        path: 'detalle-solicitud',
+        component: DetalleComponent
       }
     ]
   }

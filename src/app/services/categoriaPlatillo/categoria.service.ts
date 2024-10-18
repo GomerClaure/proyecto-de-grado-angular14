@@ -15,7 +15,6 @@ export class CategoriaService {
     'Authorization': 'Bearer ' + sessionStorage.getItem('token_access'),
   };
   private categoriaSubject: BehaviorSubject<{accion:string,categoria:Categoria }> ;
-  private modalClosedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) { 
     this.categoriaSubject = new BehaviorSubject<{accion:string,categoria:Categoria }>( {accion:'',categoria:{}as Categoria});
@@ -40,14 +39,7 @@ export class CategoriaService {
   getCategoriaEventos(): Observable<{accion:string,categoria:Categoria }> {
     return this.categoriaSubject.asObservable();
   }
-  // setModalClosed(value: boolean) {
-  //   this.modalClosedSubject.next(value);
-  // }
 
-  // getModalClosed(): Observable<boolean> {
-  //   return this.modalClosedSubject.asObservable();
-  // }
-  
  getCategorias(idRestaurante: any) {
   return this.http.get(`${this.BASE_URL}/menu/categoriaRestaurante/${idRestaurante}`, { headers: this.getHeaders() });
 }
