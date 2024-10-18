@@ -1,3 +1,45 @@
 .oculto {
   display: none;
+}.oculto {
+  display: none;
+}
+input[type="file"].hidden {
+  display: none;
+}
+.apartadoImg {
+  position: relative;
+}
+
+.apartadoImg img {
+  max-width: 100%;
+  height: auto; 
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.182);
+}
+.form-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+form {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.373);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.lado-img{
+  background-image: url(../../../assets/image/pixelcut-export.png);
+  background-position: 0;
+  background-size: cover;
+  padding: 30px;
+  border-radius: 5px;
+}
+textarea{
+  height: 120px;
+  resize: none;
 }

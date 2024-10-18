@@ -16,6 +16,8 @@ export class FormDatosPersonalesComponent implements OnInit {
   selectedFile: File | null = null;
   url_base = environment.backendStorageUrl;
   foto_perfil = 'assets/image/Imagen-rota.jpg';
+  imageWidth: number = 400;
+  imageHeight: number = 350;
 
   constructor(private fb: FormBuilder, private sessionService: SessionService,
     private toast: NgToastService
@@ -46,16 +48,13 @@ export class FormDatosPersonalesComponent implements OnInit {
     const file = event.target.files[0];
   
     if (file) {
-      // Asignar el archivo seleccionado y actualizar el control del formulario
       this.selectedFile = file;
       this.usuarioForm.patchValue({ foto_perfil: file });
       this.usuarioForm.get('foto_perfil')?.markAsTouched();
-      
-      // Verificar si el archivo es válido
       if (this.usuarioForm.get('foto_perfil')?.valid) {
         const reader = new FileReader();
         reader.onload = (e) => {
-          this.foto_perfil = e.target?.result as string; // Mostrar vista previa del archivo
+          this.foto_perfil = e.target?.result as string;
         };
         reader.readAsDataURL(file);
       }else{
@@ -69,7 +68,7 @@ export class FormDatosPersonalesComponent implements OnInit {
 
   onImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
-    img.src = 'assets/image/Imagen-rota.jpg'; // URL de la imagen de reemplazo
+    img.src = 'assets/image/Imagen-rota.jpg';
   }
 
   showError(message: string) {

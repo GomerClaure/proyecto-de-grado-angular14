@@ -4,7 +4,7 @@
     <div class="form">
       <form [formGroup]="usuarioForm" class="row">
         <div class="col-12 col-md-6 mb-3">
-          <h2 class="pb-2">Datos del Usuario</h2>
+          <h2 class="pb-2">Datos Personales</h2>
           <!-- Nombre -->
           <div class="mb-3">
             <label>Nombre</label>
@@ -70,7 +70,7 @@
           <div class="d-flex justify-content-center mb-3">
             <div class="apartadoImg text-center mb-3">
               <img [src]="foto_perfil"
-              [style.width.px]="imageWidth" [style.height.px]="imageHeight"
+                   [style.width.px]="imageWidth" [style.height.px]="imageHeight"
                    (error)="onImageError($event)"
                    class="img-fluid mb-3">
               <input type="file" id="datos-personales" class="hidden"
