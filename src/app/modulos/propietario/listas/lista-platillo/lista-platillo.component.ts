@@ -49,8 +49,9 @@ export class ListaPlatilloComponent implements OnInit {
     );
   }
 
-  eliminarPlatillo(id: number) {
-    this.modalService.openModal(id, this.platillos);
+  eliminarPlatillo(id: number, nombre:string) {
+    this.modalService.openModal(id, this.platillos,nombre);
+    console.log(nombre)
   }
 
   onSearchChange(searchValue: string): void {

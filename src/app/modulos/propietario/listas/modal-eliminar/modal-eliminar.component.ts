@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalEliminarPlatilloService } from 'src/app/services/modales/modal-eliminar-platillo.service';
 import { PlatillosService } from '../../../../services/platillos/platillos.service';
 import { NgToastService } from 'ng-angular-popup';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-modal-eliminar',
@@ -10,16 +11,23 @@ import { NgToastService } from 'ng-angular-popup';
 })
 export class ModalEliminarComponent {
   showModal = false;
+  nombre: string = '';
+  private nombreSubscription: Subscription | undefined;
 
 
   constructor(private modalService: ModalEliminarPlatilloService,
      private platillosService: PlatillosService,
     private toast:NgToastService) {
-
+  }
+  ngOnInit() {
+    this.nombreSubscription = this.modalService.getNombrePlatillo$().subscribe(nombre => {
+      this.nombre = nombre;
+      console.log('Nombre del platillo en modal:', this.nombre);
+    });
   }
 
   eliminarPlatillo() {
-    console.log("Platillo eliminado" + this.modalService.idPlatilloModal());
+    console.log("Platillo eliminado" + this.modalService.idPlatilloModal())
     this.platillosService.deletePlatillo(this.modalService.idPlatilloModal()).subscribe(
       res => {
         console.log(this.modalService.listaPlatillos());
@@ -35,6 +43,12 @@ export class ModalEliminarComponent {
       }
     );
 
+  }
+  ngOnDestroy() {
+    // Limpia la suscripción para evitar fugas de memoria
+    if (this.nombreSubscription) {
+      this.nombreSubscription.unsubscribe();
+    }
   }
 
 }
