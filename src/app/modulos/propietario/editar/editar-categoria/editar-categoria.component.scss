@@ -1,7 +1,14 @@
-.apartadoImg{
+.apartadoImg img{
     align-items: center;
     margin-top: 15px;
+    border-radius: 5px;
+    margin-bottom: 7px;
+    border:1px solid rgba(0, 0, 0, 0.192) !important;
 }
 .hidden {
     display: none;
+}
+.img-fluid{
+    border-radius: 5px !important;
+    padding-bottom: 7px;
 }

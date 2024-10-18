@@ -17,12 +17,12 @@ export class EditarCategoriaComponent implements OnInit {
 
   public imageUrl: string;
   public imageWidth: number = 350;
-  public imageHeight: number = 250;
+  public imageHeight: number = 300;
   private selectedFile: File = new File([''], '');
   public formularioCategoria: FormGroup;
   private categoria: Categoria;
   public backendStorageUrl = environment.backendStorageUrl;
-  //idCategoria:string='';
+  defaultImageUrl: string = 'assets/image/Imagen-rota.jpg';
 
   constructor(private formBuilder: FormBuilder, 
               private modalEditarCategoriaService: ModalEditarCategoriaService,
@@ -108,5 +108,8 @@ export class EditarCategoriaComponent implements OnInit {
       reader.readAsDataURL(this.selectedFile);
     }
   }
+  onImageError() {
+    this.imageUrl = this.defaultImageUrl;
+    }
 
 }

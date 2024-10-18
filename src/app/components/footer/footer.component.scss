@@ -6,22 +6,59 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+
 .footer {
   width: 100%;
-  bottom: 0;
-  left: 0;
   background: #0d202b;
-  padding: 30px 0;
+  padding: 40px 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 }
-.datos{
-    color: rgb(255, 255, 255);
-} 
-.footer p {
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 20px;
+  flex-wrap: wrap;
+}
+
+.footer-info {
   color: #ffffff;
+  margin-right: 30px;
+}
+
+.footer-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.datos {
+  list-style: none;
+  padding: 0;
+}
+
+.datos li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.datos svg {
+  margin-right: 10px;
+}
+
+.footer-description {
+  color: #ffffff;
+  text-align: center;
   font-size: 1rem;
-  font-weight: 300;
+  flex: 1;
+}
+
+.footer-description p {
+  margin-top: 0;
 }

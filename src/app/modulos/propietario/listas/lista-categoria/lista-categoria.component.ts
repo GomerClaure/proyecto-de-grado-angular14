@@ -13,14 +13,17 @@ import { ModalEliminarCategoriaService } from 'src/app/services/modales/modal-el
   styleUrls: ['./lista-categoria.component.scss']
 })
 export class ListaCategoriaComponent implements OnInit {
-
+ 
   categorias:Categoria[]=[];
   storageUrl = environment.backendStorageUrl;
   id_restaurante:any;
+  imageUrl: string | ArrayBuffer | null;
+  defaultImageUrl: string = 'assets/image/Imagen-rota.jpg';
 
   constructor(private router:Router,private categoriasService:CategoriaService,
     private modalEditarCategoriaService:ModalEditarCategoriaService,
     private modalService:ModalEliminarCategoriaService) { 
+      this.imageUrl = 'assets/image/Imagen-rota.jpg';
   }
   ngOnInit(): void {
     //sacamos el id del restaurante para solo mostrar categorias de ese restaurante
@@ -57,6 +60,10 @@ export class ListaCategoriaComponent implements OnInit {
         console.error('Error obteniendo categorías:', error);
       }
     );
+  }
+  onImageError(event: Event) {
+    const target = event.target as HTMLImageElement;
+    target.src = this.defaultImageUrl;
   }
 
 }

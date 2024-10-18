@@ -20,50 +20,7 @@
   height: 100%;
   background-attachment: fixed; /* Mantiene el fondo fijo al hacer scroll */
 }
-.btn-curso{
-  background-color:#edd590;
-  border-color: #edd590;
-  color: black;
-  border-radius: 5px;
-}
-.btn-terminado{
-  background-color:#95c575;
-  border-color: #95c575;
-  color: black;
-  border-radius: 5px;
-}
-.btn-atra{
-  background-color:#f5ed93;
-  border-color: #f5ed93;
-  color: black;
-  border-radius: 5px;
-}
 
-.btn-img{
-  height: 40px;
-  width: 260px;
-  background-color:#eada89;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  padding-top: 6px;
-  margin: 10px;
-  text-align: center;
-}
-.btn-img:hover{
-  background-color: #d1bd58;
-  border-color: rgb(218, 170, 82);
-}
-
-.li{
-  width: 350px;
-  padding-bottom:0px;
-  margin: 0;
-}
-.form{
-  background-color: #ffffff;
-  border-color: #d5d3cd;
-}
 //Estilos para las tablas 
 th,td {
   border-top: 2px solid rgba(0, 0, 0, 0.1);
@@ -291,6 +248,7 @@ th {
 .modal-body{
   background: radial-gradient(circle,#f0e6dc 2px, transparent 2px);
   background-size: 15px 15px;
+  padding: 25px;
 }
 .btn-close {
   filter: brightness(0) invert(1); /* Cambiar el color del botón de cierre a blanco */

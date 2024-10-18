@@ -11,10 +11,15 @@
         </div>
         <div class="row justify-content-center">
         <div class="col-md-6 col-xs-12 d-flex text-center justify-content-center">
-          <div class="apartadoImg text-center"> 
-              <img [src]="imageUrl" id="image-categoria" class="img-fluid" alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
-              <input #fileInput type="file" id="archivo" class="hidden">
-              <label for="archivo" class="btn-img">Seleccionar Imagen<i class="bi bi-file-earmark-arrow-up"></i></label>
+          <div class="apartadoImg"> 
+              <img [src]="imageUrl" alt="Imagen" 
+                   *ngIf="imageUrl" 
+                  [style.width.px]="imageWidth" 
+                  [style.height.px]="imageHeight"
+                  (error)="onImageError()"
+                  >
+              <input type="file" id="archivo" class="hidden">
+              <label for="archivo" class=" btn btn-subir-imagen">Seleccionar Imagen<i class="bi bi-file-earmark-arrow-up"></i></label>
           </div>
       </div>
         </div>

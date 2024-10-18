@@ -68,11 +68,11 @@
         </div>
         <div class="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center lado-img">
           <div class="d-flex justify-content-center mb-3">
-            <div class="apartadoImg text-center">
+            <div class="apartadoImg text-center mb-3">
               <img [src]="foto_perfil"
               [style.width.px]="imageWidth" [style.height.px]="imageHeight"
                    (error)="onImageError($event)"
-                   class="img-fluid">
+                   class="img-fluid mb-3">
               <input type="file" id="datos-personales" class="hidden"
                      (change)="onFileSelected($event)" accept="image/jpeg, image/png, image/jpg, image/webp">
               <label for="datos-personales" class="btn-img btn btn-subir-imagen">

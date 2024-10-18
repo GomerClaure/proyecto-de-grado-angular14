@@ -42,13 +42,13 @@
                   [style.width.px]="imageWidth" [style.height.px]="imageHeight"
                      (error)="onImageError()">
                 <input type="file" id="img-registrar-platillo" class="hidden" (change)="onFileSelected($event)" accept="image/*">
-                <label for="img-registrar-platillo" class="btn-img btn btn-subir-imagen">
+                <label for="img-registrar-platillo" class="btn-img btn btn-subir-imagen mt-2">
                   Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i>
                 </label>
               </div>
             </div>
             <div class="col-12 d-flex justify-content-end">
-              <button type="submit" class="btn btn-aceptar me-2" (click)="registrarPlatillo()">Guardar Cambios</button>
+              <button type="submit" class="btn btn-aceptar me-2" (click)="registrarPlatillo()">Actualizar</button>
             </div>
           </div>
         </form>
