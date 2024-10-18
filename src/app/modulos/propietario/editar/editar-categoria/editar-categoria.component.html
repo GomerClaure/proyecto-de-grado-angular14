@@ -1,8 +1,8 @@
-<div class="modal fade" id="ModalEditarC" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalEditarC" tabindex="-1" role="dialog" aria-labelledby="editCatModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header justify-content-center">
-        <h5 class="modal-title" id="exampleModalLabel"><strong>Editar Categoría</strong></h5>
+        <h5 class="modal-title" id="editCatModalLabel"><strong>Editar Categoría</strong></h5>
       </div>
       <div class="modal-body">
         <div class="form-group" [formGroup]="formularioCategoria">
@@ -10,13 +10,15 @@
           <input type="text" class="form-control" id="categoriaInput" formControlName="nombre">
         </div>
         <div class="row justify-content-center">
-        <div class="col-md-6 col-xs-12 d-flex text-center justify-content-center">
-          <div class="apartadoImg text-center"> 
-              <img [src]="imageUrl" id="image-categoria" class="img-fluid" alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
-              <input #fileInput type="file" id="archivo" class="hidden">
-              <label for="archivo" class="btn-img">Seleccionar Imagen<i class="bi bi-file-earmark-arrow-up"></i></label>
+          <div class="col-md-6 col-xs-12 d-flex text-center justify-content-center">
+            <div class="apartadoImg text-center"> 
+              <img [src]="imageUrl" id="image-categoria" class="img-fluid shadow-img" alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth"
+              (error)="onImageError()" [style.height.px]="imageHeight">
+              <input #fileInput type="file" id="archivoCatFoto" (change)="onFileSelected($event)" class="hidden" 
+              accept="image/jpeg, image/png, image/jpg, image/webp">
+              <label for="archivoCatFoto" class="btn-img btn btn-subir-imagen">Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i></label>
+            </div>
           </div>
-      </div>
         </div>
       </div>
       <div class="modal-footer">

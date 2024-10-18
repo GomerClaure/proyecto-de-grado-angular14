@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
+import { Categoria } from 'src/app/modelos/Categoria';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';	
 
 @Component({
@@ -49,12 +50,13 @@ export class RegistrarCategoriaComponent {
       formData.append('id_restaurante',this.id_restaurante)
   
       this.categoriaService.saveCategoria(formData).subscribe(
-        success => {
-          console.log('Categoría guardada exitosamente:', success);
+        (data: any) => {
+          console.log('Categoría guardada exitosamente:', data);
           this.toast.success({detail:"SUCCESS",summary:'Categoria Registrada',duration:2000})
           this.imageUrl = 'assets/image/27002.jpg';       
           this.formularioCategoria.reset();
-          this.categoriaService.setModalClosed(true);
+          // this.categoriaService.setModalClosed(true);
+          this.categoriaService.categoriaEvento('crear', data.categoria)
         },
         error => {
           console.error('Error al guardar la categoría:', error);
@@ -66,14 +68,14 @@ export class RegistrarCategoriaComponent {
       this.toast.info({detail:"INFO",summary:'Formulario invalido',sticky:true});
     }
   }
-  clearImage() {
-    this.imageUrl = 'assets/image/270021.jpg';
-    this.selectedFile = new File([''], '');
-  }
-  closeModal() {
-    // Llama a clearImage() cuando se cierra el modal
-    this.clearImage();
-  }
+  // clearImage() {
+  //   this.imageUrl = 'assets/image/270021.jpg';
+  //   this.selectedFile = new File([''], '');
+  // }
+  // closeModal() {
+  //   // Llama a clearImage() cuando se cierra el modal
+  //   this.clearImage();
+  // }
   onImgError(event: any) {
     event.target.src = 'assets/image/Imagen-rota.jpg';
   }

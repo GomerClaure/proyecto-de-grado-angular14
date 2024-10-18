@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';	
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Categoria } from 'src/app/modelos/Categoria';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,12 @@ export class CategoriaService {
   private headers = {
     'Authorization': 'Bearer ' + sessionStorage.getItem('token_access'),
   };
-
-  constructor(private http: HttpClient) { }
-
-
+  private categoriaSubject: BehaviorSubject<{accion:string,categoria:Categoria }> ;
   private modalClosedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  constructor(private http: HttpClient) { 
+    this.categoriaSubject = new BehaviorSubject<{accion:string,categoria:Categoria }>( {accion:'',categoria:{}as Categoria});
+  }
 
   private getHeaders(): HttpHeaders {
     const token = sessionStorage.getItem('token_access');
@@ -30,13 +32,21 @@ export class CategoriaService {
     }
   }
 
-  setModalClosed(value: boolean) {
-    this.modalClosedSubject.next(value);
+  //la accion es crear, editar o eliminar
+  categoriaEvento(accion:string,categoria:Categoria ) {
+    this.categoriaSubject.next({accion: accion, categoria:categoria});
   }
 
-  getModalClosed(): Observable<boolean> {
-    return this.modalClosedSubject.asObservable();
+  getCategoriaEventos(): Observable<{accion:string,categoria:Categoria }> {
+    return this.categoriaSubject.asObservable();
   }
+  // setModalClosed(value: boolean) {
+  //   this.modalClosedSubject.next(value);
+  // }
+
+  // getModalClosed(): Observable<boolean> {
+  //   return this.modalClosedSubject.asObservable();
+  // }
   
  getCategorias(idRestaurante: any) {
   return this.http.get(`${this.BASE_URL}/menu/categoriaRestaurante/${idRestaurante}`, { headers: this.getHeaders() });

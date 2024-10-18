@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Categoria } from 'src/app/modelos/Categoria';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
 import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
-import { ModalEditarCategoriaService } from 'src/app/services/modales/modal-editar-categoria.service';
-import { ModalEliminarCategoriaService } from 'src/app/services/modales/modal-eliminar-categoria.service';
 
 
 @Component({
@@ -17,36 +14,28 @@ export class ListaCategoriaComponent implements OnInit {
   categorias:Categoria[]=[];
   storageUrl = environment.backendStorageUrl;
   id_restaurante:any;
+  categoriaSeleccionada: Categoria;
 
-  constructor(private router:Router,private categoriasService:CategoriaService,
-    private modalEditarCategoriaService:ModalEditarCategoriaService,
-    private modalService:ModalEliminarCategoriaService) { 
+  constructor(private categoriasService:CategoriaService) { 
+      this.categoriaSeleccionada = {} as Categoria;
   }
+  
+  onImageError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = 'assets/image/Imagen-rota.jpg'; // URL de la imagen de reemplazo
+  }
+
   ngOnInit(): void {
-    //sacamos el id del restaurante para solo mostrar categorias de ese restaurante
     this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
     this.getCategorias();
-    this.modalEditarCategoriaService.getModalClosed().subscribe(closed => {
-      if (closed) {
-        console.log('Modal cerrado:', closed);
-        // Recargar la lista de categorías
-        window.location.reload();
-        // Poner modalClosed a false después de recargar la lista de categorías
-        this.modalEditarCategoriaService.setModalClosed(false);
-      }
-    });
+    this.suscribirEventos();
   }
 
-  editarCategoria(id: number) {
-    let categoria = this.categorias.find(categoria => categoria.id == id) 
-    || {id: 0, nombre: '', imagen: ''};
-    this.modalEditarCategoriaService.openModal(categoria);
+  seleccionarCategoria(id:number){
+    this.categoriaSeleccionada = this.categorias.find(categoria => categoria.id === id) || {} as Categoria;
+    console.log(this.categoriaSeleccionada)
   }
-
-  eliminarCategoria(id:number){
-   this.modalService.openModal(id,this.categorias);
-  } 
-
+  
   getCategorias() {
     this.categoriasService.getCategorias(this.id_restaurante).subscribe(
       (data: any) => { // Ajusta el tipo de datos esperado
@@ -57,6 +46,26 @@ export class ListaCategoriaComponent implements OnInit {
         console.error('Error obteniendo categorías:', error);
       }
     );
+  }
+
+  suscribirEventos(){
+    this.categoriasService.getCategoriaEventos().subscribe(evento => {
+      if (evento) {
+        switch (evento.accion) {
+          case 'crear':
+            this.categorias.push(evento.categoria);
+            break;
+          case 'editar':
+            this.categorias = this.categorias.map(categoria => 
+              categoria.id === evento.categoria.id ? evento.categoria : categoria
+            ); 
+            break;
+          case 'eliminar':
+            this.categorias = this.categorias.filter(categoria => categoria.id !== evento.categoria.id); // Eliminar categoría
+            break;
+        }
+      }
+    });
   }
 
 }
