@@ -1,5 +1,4 @@
 @media print {
-  /* Oculta los elementos no deseados */
   .no-print {
     display: none !important;
   }
@@ -67,42 +66,34 @@
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
-  fill: rgb(32, 32, 57); /* Color de la lupa */
+  fill: rgb(32, 32, 57); 
 }
 .input-container .form-control {
-  padding-left: 35px; /* Espacio para el SVG */
+  padding-left: 35px; 
   background-color: rgb(255, 255, 255);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 10px;
   color: #000000;
 }
-
-
-/* Media query para pantalla de 827px de ancho */
 @media (max-width: 827px) {
   .btn {
-    font-size: 15px; /* Tamaño de fuente ajustado para 827px de ancho */
+    font-size: 15px;
   }
 }
-
-/* Media query para pantalla de 793x650 */
 @media (max-width: 793px) and (max-height: 650px) {
   .btn {
-    font-size: 14px; /* Tamaño de fuente ajustado para 793x650 */
+    font-size: 14px;
   }
 }
-
-/* Media query para pantallas aún más pequeñas */
 @media (max-width: 768px) {
   .btn {
-    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+    font-size: 12px;
   }
 }
-
 @media (max-width: 576px) {
   .btn {
-    font-size: 10px; /* Tamaño de fuente para pantallas muy pequeñas */
+    font-size: 10px; 
   }
 }
   
