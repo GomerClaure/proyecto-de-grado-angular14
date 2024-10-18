@@ -1,8 +1,8 @@
 <body>
 <div class="fondo">
-  <h2 class="titulo">Cuentas de pedidos</h2>
+  <h2 class="titulo no-print">Cuentas de pedidos</h2>
   <div class="container">
-    <div class="input-container mb-3">
+    <div class="input-container mb-3 no-print">
       <input type="text" class="form-control" placeholder="Buscar por nombre de mesa o razón social" [(ngModel)]="textoBuscador" (ngModelChange)="onSearchChange($event)">
       <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgb(31, 37, 54);">
         <path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path>
@@ -13,9 +13,15 @@
       <div *ngFor="let pedido of pedidosPorMesa" class="col-lg-3 col-md-4 col-sm-6 mb-3">
         <div class="card h-100" #printSection>
           <div class="card-header">
-            <h3 class="text-center">{{ pedido.nombre_mesa }}</h3>
-            <p>Estado: {{ pedido.estado }}<br>Razón Social: {{ pedido.nombre_razon_social }}<br>NIT: {{ pedido.nit }}</p>
+            <div class="contenido-header"> 
+              <h4 class="text-center">{{ pedido.nombre_mesa }}</h4>
+            </div>
           </div>
+         <div class="p-2">
+          <label class="no-print">Estado: {{ pedido.estado }}</label><br>
+          <label>Razón Social: {{ pedido.nombre_razon_social }}</label><br>
+          <label>NIT: {{ pedido.nit }}</label>
+         </div>
           <div class="card-body" style="overflow-y: auto; max-height: 200px;">
             <table class="table">
               <thead class="text-center table-dark">
@@ -45,7 +51,7 @@
                   <button class="btn btn-delete w-100 no-print" (click)="CerrarCuenta(pedido.id)">Cerrar</button>
                 </div>
                 <div class="col-6 pt-0">
-                  <button class="btn btn-generico" (click)="imprimir()">Imprimir</button>
+                  <button class="btn btn-generico w-100 no-print" (click)="imprimir()">Imprimir</button>
                 </div>
               </div>
             </div>
