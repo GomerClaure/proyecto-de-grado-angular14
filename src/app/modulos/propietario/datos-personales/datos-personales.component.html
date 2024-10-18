@@ -1,134 +1,99 @@
 <body class="fondo">
-<div class="container">
-  <h2 class="titulo">Datos del Usuario</h2>
-    <form [formGroup]="usuarioForm" class="container needs-validation shadow-lg"
-    style="position: relative; overflow-y: auto; max-height: 80vh; background-color: white;" novalidate>
-    <!-- Sección Datos del Usuario -->
-    <fieldset class="p-3 mb-4">
-      <div class="row">
-        <!-- Columna de 8 para los primeros 5 campos -->
-        <div class="col-md-8">
+  <div class="container">
+    <h2 class="titulo"></h2>
+    <div class="form">
+      <form [formGroup]="usuarioForm" class="row">
+        <div class="col-12 col-md-6 mb-3">
+          <h2 class="pb-2">Datos del Usuario</h2>
           <!-- Nombre -->
-          <div class="form-group mb-2">
-            <label for="nombre">Nombre</label>
+          <div class="mb-3">
+            <label>Nombre</label>
             <input id="nombre" formControlName="nombre" class="form-control"
               [ngClass]="{
-                'is-invalid': usuarioForm.get('nombre')?.invalid && usuarioForm.get('nombre')?.touched,
-                'is-valid': usuarioForm.get('nombre')?.valid && usuarioForm.get('nombre')?.touched
+                'is-invalid': usuarioForm.get('nombre')?.invalid && usuarioForm.get('nombre')?.touched
               }"
               placeholder="Nombre" required>
             <div class="invalid-feedback">Nombre es requerido</div>
           </div>
-
           <!-- Apellido Paterno -->
-          <div class="form-group mb-2">
-            <label for="apellido_paterno">Apellido Paterno</label>
+          <div class="mb-3">
+            <label>Apellido Paterno</label>
             <input id="apellido_paterno" formControlName="apellido_paterno" class="form-control"
               [ngClass]="{
-                'is-invalid': usuarioForm.get('apellido_paterno')?.invalid && usuarioForm.get('apellido_paterno')?.touched,
-                'is-valid': usuarioForm.get('apellido_paterno')?.valid && usuarioForm.get('apellido_paterno')?.touched
+                'is-invalid': usuarioForm.get('apellido_paterno')?.invalid && usuarioForm.get('apellido_paterno')?.touched
               }"
               placeholder="Apellido Paterno" required>
             <div class="invalid-feedback">Apellido Paterno es requerido</div>
           </div>
-
           <!-- Apellido Materno -->
-          <div class="form-group mb-2">
-            <label for="apellido_materno">Apellido Materno</label>
+          <div class="mb-3">
+            <label>Apellido Materno</label>
             <input id="apellido_materno" formControlName="apellido_materno" class="form-control"
               [ngClass]="{
-                'is-invalid': usuarioForm.get('apellido_materno')?.invalid && usuarioForm.get('apellido_materno')?.touched,
-                'is-valid': usuarioForm.get('apellido_materno')?.valid && usuarioForm.get('apellido_materno')?.touched
+                'is-invalid': usuarioForm.get('apellido_materno')?.invalid && usuarioForm.get('apellido_materno')?.touched
               }"
               placeholder="Apellido Materno" required>
             <div class="invalid-feedback">Apellido Materno es requerido</div>
           </div>
-
           <!-- Correo -->
-          <div class="form-group mb-2">
-            <label for="correo">Correo Electrónico</label>
+          <div class="mb-3">
+            <label>Correo Electrónico</label>
             <input id="correo" type="email" formControlName="correo" class="form-control"
               [ngClass]="{
-                'is-invalid': usuarioForm.get('correo')?.invalid && usuarioForm.get('correo')?.touched,
-                'is-valid': usuarioForm.get('correo')?.valid && usuarioForm.get('correo')?.touched
+                'is-invalid': usuarioForm.get('correo')?.invalid && usuarioForm.get('correo')?.touched 
               }"
               placeholder="Correo" required>
             <div class="invalid-feedback">Correo es requerido y debe ser válido</div>
           </div>
-
           <!-- Cédula -->
-          <div class="form-group mb-2">
-            <label for="ci">Cédula de Identidad</label>
+          <div class="mb-3">
+            <label>Cédula de Identidad</label>
             <input id="ci" formControlName="ci" class="form-control"
               [ngClass]="{
-                'is-invalid': usuarioForm.get('ci')?.invalid && usuarioForm.get('ci')?.touched,
-                'is-valid': usuarioForm.get('ci')?.valid && usuarioForm.get('ci')?.touched
+                'is-invalid': usuarioForm.get('ci')?.invalid && usuarioForm.get('ci')?.touched 
               }"
               placeholder="Cédula de Identidad" required>
-            <div class="invalid-feedback">Cédula es requerida, numeros enteros entre 7 digitos o mas </div>
+            <div class="invalid-feedback">Cédula es requerida, números enteros de al menos 7 dígitos</div>
           </div>
-        </div>
-
-        <!-- Columna de 4 para la imagen de perfil -->
-        <div class="col-md-4 d-flex flex-column align-items-center">
-          <div class="form-group d-flex flex-column flex-grow-1 w-100">
-            <label for="foto_perfil" class="pb-3">Fotografía del Usuario</label>
-
-            <!-- Contenedor de imagen centrado -->
-            <div class="d-flex justify-content-center mb-3">
-              <img [src]="foto_perfil" 
-              (error)="onImageError($event)" class="img-fluid"
-                style="max-width: 220px; max-height: 220px; border: 1px solid #ccc;" alt="Fotografía del Usuario">
-            </div>
-
-            <!-- Input file oculto -->
-            <input type="file" id="img-editar-platillo" class="oculto" 
-            (change)="onFileSelected($event)" accept="image/jpeg, image/png, image/jpg, image/webp">
-
-            <!-- Botón para seleccionar imagen, centrado y espaciado -->
-            <div class="d-flex justify-content-center">
-              <label for="img-editar-platillo" class="btn btn-subir-imagen">
-                Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i>
-              </label>
-            </div>
-
-            <!-- Mensajes de error, centrados también -->
-            <div *ngIf="usuarioForm.get('foto_perfil')?.errors?.['invalidoTipoArchivo'] && usuarioForm.get('foto_perfil')?.touched"
-              class="invalid-feedback text-center archivo-invalido oculto">
-              El tipo de archivo no es válido. Solo se permiten imágenes JPG, PNG, WEBP.
-            </div>
-            <div *ngIf="usuarioForm.get('foto_perfil')?.errors?.['archivoMuyPesado'] && usuarioForm.get('foto_perfil')?.touched"
-              class="invalid-feedback text-center archivo-pesado">
-              El archivo es muy pesado. Debe ser menor de 2 MB.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Columna de 12 para el nickname -->
-      <div class="row">
-        <div class="col-12">
-          <div class="form-group mb-2">
-            <label for="nickname">Nickname</label>
+          <!-- Nickname -->
+          <div class="mb-3">
+            <label>Nickname</label>
             <input id="nickname" formControlName="nickname" class="form-control"
               [ngClass]="{
-                'is-invalid': usuarioForm.get('nickname')?.invalid && usuarioForm.get('nickname')?.touched,
-                'is-valid': usuarioForm.get('nickname')?.valid && usuarioForm.get('nickname')?.touched
+                'is-invalid': usuarioForm.get('nickname')?.invalid && usuarioForm.get('nickname')?.touched 
               }"
               placeholder="Nickname" required>
             <div class="invalid-feedback">Nickname es requerido</div>
           </div>
         </div>
-      </div>
-
-      <!-- Botón Actualizar -->
-      <div class="row">
-        <div class="col-12 mt-3 justify-content-end">
-          <button type="button" class="btn btn-aceptar" (click)="actualizarUsuario()">Actualizar</button>
+        <div class="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center lado-img">
+          <div class="d-flex justify-content-center mb-3">
+            <div class="apartadoImg text-center">
+              <img [src]="foto_perfil"
+              [style.width.px]="imageWidth" [style.height.px]="imageHeight"
+                   (error)="onImageError($event)"
+                   class="img-fluid">
+              <input type="file" id="datos-personales" class="hidden"
+                     (change)="onFileSelected($event)" accept="image/jpeg, image/png, image/jpg, image/webp">
+              <label for="datos-personales" class="btn-img btn btn-subir-imagen">
+                Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i>
+              </label>
+            </div>
+          </div>
+          <div *ngIf="usuarioForm.get('foto_perfil')?.errors?.['invalidoTipoArchivo'] && usuarioForm.get('foto_perfil')?.touched"
+               class="invalid-feedback text-center">
+            El tipo de archivo no es válido. Solo se permiten imágenes JPG, PNG, WEBP.
+          </div>
+          <div *ngIf="usuarioForm.get('foto_perfil')?.errors?.['archivoMuyPesado'] && usuarioForm.get('foto_perfil')?.touched"
+               class="invalid-feedback text-center">
+            El archivo es muy pesado. Debe ser menor de 2 MB.
+          </div>
+          <div class="col-12 d-flex justify-content-end">
+            <button type="button" class="btn btn-aceptar" (click)="actualizarUsuario()">Actualizar</button>
+          </div>
         </div>
-      </div>
-    </fieldset>
-  </form>
-</div>
+      </form>
+    </div>
+  </div>
 </body>
-<lib-ng-toast></lib-ng-toast>   
+<lib-ng-toast></lib-ng-toast>

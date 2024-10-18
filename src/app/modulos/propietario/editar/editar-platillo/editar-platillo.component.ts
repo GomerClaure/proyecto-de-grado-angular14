@@ -23,16 +23,14 @@ export class EditarPlatilloComponent implements OnInit {
   formularioEditarPlatillo: FormGroup;
   categorias: any[] = [];
   id_restaurante:any;
-  //selectedCategoria: number=0;
+  defaultImageUrl: string = 'assets/image/Imagen-rota.jpg';
 
-  constructor(private router: Router, 
-              private activatedRoute: ActivatedRoute,
+  constructor(private activatedRoute: ActivatedRoute,
               private platilloservice: PlatillosService, 
               private formBuilder: FormBuilder,
               private toast:NgToastService,
               private categoriaService:CategoriaService
             ) {
-    this.imageUrl = 'assets/image/27002.jpg';
     this.formularioEditarPlatillo = this.formBuilder.group({
       nombre: [null, Validators.required],
       categoria: [null, Validators.required],
@@ -40,6 +38,7 @@ export class EditarPlatilloComponent implements OnInit {
       descripcion: [null, Validators.required],
       imagen: ['']
     });
+    this.imageUrl = 'assets/image/Imagen-rota.jpg';
   }
 
   ngOnInit(): void {
@@ -85,20 +84,18 @@ export class EditarPlatilloComponent implements OnInit {
   }
 
   fillFormWithPlatilloData() {
-    // Llenar el formulario con los datos del platillo
     this.formularioEditarPlatillo.patchValue({
       nombre: this.platillo.nombre,
       precio: this.platillo.precio,
       descripcion: this.platillo.descripcion,
       categoria: this.platillo.categoria.id
     });
-    //this.selectedCategoria = this.platillo.categoria.id; // Almacena el ID de la categoría seleccionada
     this.imageUrl = environment.backendStorageUrl + this.platillo.imagen;
   }
-  registrarPlatillo() {
 
+  registrarPlatillo() {
     if (this.formularioEditarPlatillo.valid) {
-      // Obtener los valores del formulario
+      
       let datosForm = this.formularioEditarPlatillo.value;
       console.log(datosForm);
       const formData = new FormData();
@@ -114,7 +111,7 @@ export class EditarPlatilloComponent implements OnInit {
         success => {
           console.log(success);
           this.toast.success({detail:"SUCCESS",summary:'Se edito el platillo correctamente',duration:5000})
-          //this.irPagina();
+  
         },
         error => {
           console.log(error);
@@ -127,8 +124,9 @@ export class EditarPlatilloComponent implements OnInit {
       this.toast.error({detail:"ERROR",summary:'Error al editar',sticky:true})
     }
   }
-  irPagina(){
-    this.router.navigate(['/lista/platillo']);
+
+  onImageError() {
+  this.imageUrl = this.defaultImageUrl;
   }
 }
  

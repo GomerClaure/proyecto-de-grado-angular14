@@ -289,12 +289,18 @@ th {
   background-color: #044051;
   color: white;
 }
+.modal-body{
+  background: radial-gradient(circle,#f0e6dc 2px, transparent 2px);
+  background-size: 15px 15px;
+}
 .btn-close {
   filter: brightness(0) invert(1); /* Cambiar el color del botón de cierre a blanco */
 }
 .modal-footer{
   background-color: #044051;
 }
+
+
 
 
 
