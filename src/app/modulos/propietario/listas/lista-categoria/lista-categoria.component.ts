@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./lista-categoria.component.scss']
 })
 export class ListaCategoriaComponent implements OnInit {
-
+ 
   categorias:Categoria[]=[];
   storageUrl = environment.backendStorageUrl;
   id_restaurante:any;

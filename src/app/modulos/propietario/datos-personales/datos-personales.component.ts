@@ -15,7 +15,9 @@ export class DatosPersonalesComponent implements OnInit {
   usuarioForm: FormGroup;
   selectedFile: File | null = null;
   url_base = environment.backendStorageUrl;
-  foto_perfil = 'https://via.placeholder.com/220';
+  foto_perfil = 'assets/image/Imagen-rota.jpg';
+  imageWidth: number = 450;
+  imageHeight: number = 380;
 
   constructor(private fb: FormBuilder, private sessionService: SessionService,
     private toast: NgToastService

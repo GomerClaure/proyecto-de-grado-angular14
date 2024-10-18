@@ -4,8 +4,11 @@
     <div class="row">
       <div class="col-lg-3 col-md-4 col-sm-6 mb-3" *ngFor="let categoria of categorias">
         <div class="card h-100">
-          <img class="card-img-top img-categoria" [src]="storageUrl + categoria.imagen" alt="{{ categoria.nombre }}" 
-          (error)="onImageError($event)">
+          <img class="card-img-top img-categoria" 
+               [src]="storageUrl + categoria.imagen" 
+               alt="{{ categoria.nombre }}"
+               (error)="onImageError($event)"
+               >
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">{{ categoria.nombre }}</h5>
             <div class="mt-auto">

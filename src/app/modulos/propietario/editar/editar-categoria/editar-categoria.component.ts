@@ -13,7 +13,7 @@ import { NgToastService } from 'ng-angular-popup';
 export class EditarCategoriaComponent implements  OnChanges  {
   public imageUrl: string;
   public imageWidth: number = 350;
-  public imageHeight: number = 250;
+  public imageHeight: number = 300;
   private selectedFile: File = new File([''], '');
   public formularioCategoria: FormGroup;
   public backendStorageUrl = environment.backendStorageUrl;
@@ -59,6 +59,7 @@ export class EditarCategoriaComponent implements  OnChanges  {
       reader.readAsDataURL(this.selectedFile);
     }
   }
+
 
   guardarCategoria() {
     const datosForm = this.formularioCategoria.value;

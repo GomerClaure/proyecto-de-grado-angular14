@@ -15,7 +15,7 @@ export class FormDatosPersonalesComponent implements OnInit {
   usuarioForm: FormGroup;
   selectedFile: File | null = null;
   url_base = environment.backendStorageUrl;
-  foto_perfil = 'https://via.placeholder.com/220';
+  foto_perfil = 'assets/image/Imagen-rota.jpg';
 
   constructor(private fb: FormBuilder, private sessionService: SessionService,
     private toast: NgToastService
@@ -69,7 +69,7 @@ export class FormDatosPersonalesComponent implements OnInit {
 
   onImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
-    img.src = 'https://via.placeholder.com/220'; // URL de la imagen de reemplazo
+    img.src = 'assets/image/Imagen-rota.jpg'; // URL de la imagen de reemplazo
   }
 
   showError(message: string) {
