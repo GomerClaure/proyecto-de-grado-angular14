@@ -4,6 +4,7 @@ import { PreRegistroService } from 'src/app/services/pre-registro/pre-registro.s
 import { Location } from '@angular/common';
 import { NgToastService } from 'ng-angular-popup';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-solicitudes',
@@ -24,7 +25,8 @@ export class SolicitudesComponent implements OnInit {
   constructor(private preRegistroService: PreRegistroService,
     private fb: FormBuilder,
     private location: Location,
-    private toast: NgToastService) {
+    private toast: NgToastService,
+    private router: Router) {
     this.preRegistros = [];
     this.preRegistroSeleccionado = {} as FormularioPreRegistro;
     this.mostrarDetalle = false;
@@ -83,13 +85,14 @@ export class SolicitudesComponent implements OnInit {
   verDetalle(registro: FormularioPreRegistro) {
     // Aquí puedes mostrar un modal con todos los detalles del registro
     this.preRegistroSeleccionado = registro;
-    this.mostrarDetalle = true;
+    this.preRegistroService.setPreRegistroSeleccionado(registro);
+    this.router.navigate(['/administrador/detalle-solicitud'])
     // Implementa la lógica para abrir el modal
   }
   ocultarDetalle() {
     this.mostrarDetalle = false;
     this.preRegistroSeleccionado = {} as FormularioPreRegistro;
-    this.location.replaceState('/administrador/ver-formularios');
+    this.location.replaceState('/administrador/detalle-solicitud');
     // Implementa la lógica para cerrar el modal
   }
 

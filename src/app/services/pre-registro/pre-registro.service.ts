@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { FormularioPreRegistro } from 'src/app/modelos/FormularioPreRegistro';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +10,21 @@ import { environment } from 'src/environments/environment';
 export class PreRegistroService {
   private BASE_URL = environment.backendUrl;
   private headers: HttpHeaders;
+  private solicitudFormSubject: BehaviorSubject<FormularioPreRegistro>;
 
   constructor(private http: HttpClient) {
     this.headers = new HttpHeaders({
       'Authorization': 'Bearer ' + sessionStorage.getItem('token_access')
     });
+    this.solicitudFormSubject = new BehaviorSubject<FormularioPreRegistro>({}as FormularioPreRegistro);
+  }
+
+  setPreRegistroSeleccionado(formulario: FormularioPreRegistro){
+    this.solicitudFormSubject.next(formulario);
+  }
+
+  getPreRegistro():  Observable<FormularioPreRegistro>{
+    return this.solicitudFormSubject.asObservable();
   }
 
   public getPreRegistros() {
