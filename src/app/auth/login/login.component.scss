@@ -10,7 +10,7 @@
 label{
   color: rgb(255, 255, 255);
 }
-input.form-control {
+input.form-control , .input-group-text {
   background: rgba(255, 255, 255, 0.1);
   border: none;
   border-radius: 5px;
@@ -56,16 +56,8 @@ input.form-control:focus {
   height: 80px;
   display: block;
 }
-.position-relative .fa {
-  position: absolute;
-  top: 50%;
-  right: 1rem;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: #6c757d;
-}
-.position-relative .fa:hover {
-  color: #343a40;
+.fa-span:hover {
+  color: #a0a4a8;
 }
 .olvidast {
   color: white;

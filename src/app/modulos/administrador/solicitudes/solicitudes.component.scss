@@ -6,7 +6,18 @@
   padding: 10px 0; /* Opcional: espacio alrededor del botón */
 }
 
+// button.btn-generico {
+//   width: auto;
+//   height: auto;
+// }
+
 @media (max-width: 576px) {
+  td, th {
+    font-size: 0.9rem;
+  }
+  button {
+    width: 100%;
+  }
   .d-flex {
     flex-direction: column;
   }
