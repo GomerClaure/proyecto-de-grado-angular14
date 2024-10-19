@@ -6,7 +6,7 @@
   border-radius: 50%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgb(35, 38, 53);
+  //border: 1px solid rgb(35, 38, 53);
 
   &:hover {
     transform: translateY(-5px);
@@ -19,7 +19,7 @@
   }
 
   .card-body {
-    background-image: url('../../../../assets/image/Card2.jpg');
+    background-image: url('../../../../assets/image/pixelcut-export.png');
     background-size: cover;
     background-position: center;
     width: 100%;

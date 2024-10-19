@@ -4,11 +4,11 @@ import { DescripcionPedidoService } from 'src/app/services/detalle-pedido/descri
 
 
 @Component({
-  selector: 'app-modal-pedido',
-  templateUrl: './modal-pedido.component.html',
-  styleUrls: ['./modal-pedido.component.scss']
+  selector: 'app-modal-detalle-pedido',
+  templateUrl: './modal-detalle-pedido.component.html',
+  styleUrls: ['./modal-detalle-pedido.component.scss']
 })
-export class ModalPedidoComponent implements OnInit {
+export class ModalDetallePedidoComponent implements OnInit {
   descripcion: string = '';
   constructor(private descripcionPedidoService:DescripcionPedidoService,private toast:NgToastService) { }
 
