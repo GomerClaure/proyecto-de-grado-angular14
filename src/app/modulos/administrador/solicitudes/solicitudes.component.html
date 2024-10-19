@@ -1,42 +1,46 @@
 <app-nav></app-nav>
 <div class="fondo">
     <div class="container">
-        <h2  class="titulo">Solicitudes</h2>
+        <h2 class="titulo">Solicitudes</h2>
         <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">N°</th>
-                    <th scope="col">Nombre Restaurante</th>
-                    <th scope="col">NIT</th>
-                    <th scope="col">Celular Restaurante</th>
-                    <th scope="col">Correo Restaurante</th>
-                    <th scope="col">Propietario</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let registro of preRegistros; let i = index">
-                    <td scope="row">{{ i + 1 }}</td>
-                    <td>{{ registro.nombre_restaurante }}</td>
-                    <td>{{ registro.nit }}</td>
-                    <td>{{ registro.celular_restaurante }}</td>
-                    <td>{{ registro.correo_restaurante }}</td>
-                    <td>{{ registro.nombre_propietario }} {{ registro.apellido_paterno_propietario }}</td>
-                    <td>
-                        <span class="badge" [ngClass]="getBadgeClass(registro.estado)">
-                            {{ registro.estado }}
-                        </span>
-                    </td>
-                    <td>
-                        <button class="btn btn-generico" (click)="verDetalle(registro)"><i class="bi bi-eye"></i>
-                            Detalle</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">N°</th>
+                        <th scope="col">Nombre Restaurante</th>
+                        <th scope="col">NIT</th>
+                        <th scope="col">Celular Restaurante</th>
+                        <th scope="col">Correo Restaurante</th>
+                        <th scope="col">Propietario</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let registro of preRegistros; let i = index">
+                        <td scope="row">{{ i + 1 }}</td>
+                        <td>{{ registro.nombre_restaurante }}</td>
+                        <td>{{ registro.nit }}</td>
+                        <td>{{ registro.celular_restaurante }}</td>
+                        <td>{{ registro.correo_restaurante }}</td>
+                        <td>{{ registro.nombre_propietario }} {{ registro.apellido_paterno_propietario }}</td>
+                        <td>
+                            <span class="badge" [ngClass]="getBadgeClass(registro.estado)">
+                                {{ registro.estado }}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-generico" (click)="verDetalle(registro)">
+                                <i class="bi bi-eye"></i> Detalle
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
+
+
+
 <lib-ng-toast></lib-ng-toast>
