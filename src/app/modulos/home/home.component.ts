@@ -7,11 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   restaurantName: string = '';
+  tiporestaurante: string = '';
 
   constructor() { }
 
   ngOnInit(): void {
     this.restaurantName = sessionStorage.getItem('nombre_restaurante')||"restaurante";
+    this.tiporestaurante = sessionStorage.getItem('tipo_establecimiento')||'defecto';
   }
 
 }
