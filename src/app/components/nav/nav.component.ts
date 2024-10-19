@@ -6,6 +6,7 @@ import { Notificacion } from 'src/app/modelos/Notificacion';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.service';
 import { Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-nav',
@@ -25,8 +26,11 @@ export class NavComponent implements OnInit, OnDestroy {
   private idRestaurante: number;
   public isMenuCollapsed = true;
   public isLoggedIn = false;
+  private backendUrl = environment.backendStorageUrl;
   private sessionSubscription: Subscription;
-  usuarioFotoUrl: string = 'assets/image/UsuarioCard1.png';
+  public maxIntentos: number = 3;
+  public nombreRestaurante: string;
+  public tipoEstablecimiento:string;
 
   constructor(private sessionService: SessionService, private router: Router,
     private notificacionService: NotificacionService, private webSocketService: WebsocketService,
@@ -34,13 +38,21 @@ export class NavComponent implements OnInit, OnDestroy {
     this.notificaciones = [];
     this.idRestaurante = 0;
     this.notificacionesSinLeer = 0;
-    this.fotoPerfil = 'assets/image/som.png';
+    this.fotoPerfil = '';
+    this.nombreRestaurante = '';
+    this.tipoEstablecimiento = '';
     this.sessionSubscription = {} as Subscription;
   }
 
   ngOnInit(): void {
     window.addEventListener('beforeunload', this.unloadHandler);
     this.sessionSubscription = this.sessionService.authStatus$.subscribe(status => {
+      this.fotoPerfil = this.backendUrl+sessionStorage.getItem('foto_perfil') || '';
+      this.nombreRestaurante = sessionStorage.getItem('nombre_restaurante') || 'Restaurante';
+      this.tipoEstablecimiento = sessionStorage.getItem('tipo_establecimiento') || '';
+      if(this.nombreRestaurante === ''){
+
+      }
       this.isLoggedIn = status;
       const conexionWebSocket = localStorage.getItem('conexionWebSocket');
       console.log('El valor de la conexión websocket es: ', conexionWebSocket);
@@ -75,8 +87,8 @@ export class NavComponent implements OnInit, OnDestroy {
         }
 
       } 
+      this.intentarRecuperarNombre(0);
     });
-
   }
 
   ngOnDestroy(): void {
@@ -225,5 +237,21 @@ export class NavComponent implements OnInit, OnDestroy {
       }
     });
 
+  }
+
+  fotoPerfilError(){
+    this.fotoPerfil = '';
+  }
+
+  intentarRecuperarNombre(intentosRealizados: number) {
+    this.nombreRestaurante = sessionStorage.getItem('nombre_restaurante') || 'Restaurante';
+    this.tipoEstablecimiento = sessionStorage.getItem('tipo_establecimiento') || '';
+    if (this.nombreRestaurante === 'Restaurante' && intentosRealizados < this.maxIntentos) {
+      // Esperar 1 segundo antes de volver a intentar
+      setTimeout(() => {
+        console.log('intento '+intentosRealizados)
+        this.intentarRecuperarNombre(intentosRealizados + 1);
+      }, 1000); 
+    }
   }
 }

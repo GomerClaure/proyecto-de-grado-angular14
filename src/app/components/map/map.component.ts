@@ -67,9 +67,6 @@ export class MapComponent implements AfterViewInit {
     this.parentForm.get('pais')?.setValue(pais);
     this.parentForm.get('departamento')?.setValue(departamento);
     this.parentForm.get('ubicacionRestaurante')?.setValue(this.direccion ? this.direccion.display_name : '');
-    console.log('Latitud:', lat, 'Longitud:', lng);
-    console.log('País:', pais, 'Departamento:', departamento);
-    console.log(this.parentForm.value);
   }
 
   private getAddress(lat: number, lng: number): void {
