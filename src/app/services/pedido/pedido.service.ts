@@ -48,8 +48,8 @@ export class PedidoService {private BASE_URL = environment.backendUrl;
     return this.http.get<any>(`${this.BASE_URL}/pedidos/${id_emp}/${id_rest}`, { headers: this.headers })
   }
 
-  deletePedido(id:number){
-    return this.http.delete<any>(`${this.BASE_URL}/pedidos/${id}`, { headers: this.headers });
+  deletePedido(id_pedido:number, id_restaurante: number){
+    return this.http.delete<any>(`${this.BASE_URL}/pedidos/${id_pedido}/${id_restaurante}`, { headers: this.headers });
   }  
   cambiarEstadoPedido(idPedido: string, idRestaurante: string, idEstado: string): Observable<any> {
     const body = {

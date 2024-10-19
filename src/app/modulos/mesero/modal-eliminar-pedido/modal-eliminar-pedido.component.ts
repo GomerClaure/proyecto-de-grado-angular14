@@ -9,14 +9,21 @@ import { PedidosDeMesaService } from 'src/app/services/pedido/pedidos-de-mesa.se
   styleUrls: ['./modal-eliminar-pedido.component.scss']
 })
 export class ModalEliminarPedidoComponent implements OnInit {
-
-  constructor( private pedidoService:PedidoService,private pedidoMesa:PedidosDeMesaService,private toast:NgToastService) { }
-  IdPedido:number=0;
+  public idRestaurante: number;
+  public idPedido:number;
+  constructor( private pedidoService:PedidoService,private pedidoMesa:PedidosDeMesaService,private toast:NgToastService) { 
+    this.idRestaurante = 0;
+    this.idPedido = 0;
+  }
+  
+  
   ngOnInit(): void {
+    this.idRestaurante = +sessionStorage.getItem('id_restaurante')!;
   }
   eliminarPedido(){
-    this.IdPedido=this.pedidoMesa.getIdpedido();
-    this.pedidoService.deletePedido(this.IdPedido).subscribe(
+    this.idPedido=this.pedidoMesa.getIdpedido();
+    
+    this.pedidoService.deletePedido(this.idPedido, this.idRestaurante).subscribe(
       response => {
         console.log('Pedido eliminado exitosamente:', response);
         this.toast.success({detail:"SUCCESS",summary:'Se elimino el pedido correctamente',duration:2000});
