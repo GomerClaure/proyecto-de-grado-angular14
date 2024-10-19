@@ -6,11 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  restaurantName: string = '';
 
   constructor() { }
 
   ngOnInit(): void {
-    
+    this.restaurantName = sessionStorage.getItem('nombre_restaurante')||"restaurante";
   }
 
 }

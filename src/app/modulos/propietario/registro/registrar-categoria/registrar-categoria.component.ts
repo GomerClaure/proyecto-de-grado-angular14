@@ -12,8 +12,8 @@ import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.s
 })
 export class RegistrarCategoriaComponent {
   imageUrl: string | ArrayBuffer | null;
-  imageWidth: number = 350; 
-  imageHeight: number = 250;
+  imageWidth: number = 380; 
+  imageHeight: number = 280;
   formularioCategoria:FormGroup
   selectedFile: File = new File([''], ''); 
   id_restaurante:any;

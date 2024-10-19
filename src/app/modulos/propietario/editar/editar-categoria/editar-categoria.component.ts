@@ -12,8 +12,8 @@ import { NgToastService } from 'ng-angular-popup';
 })
 export class EditarCategoriaComponent implements  OnChanges  {
   public imageUrl: string;
-  public imageWidth: number = 350;
-  public imageHeight: number = 300;
+  public imageWidth: number = 380;
+  public imageHeight: number = 280;
   private selectedFile: File = new File([''], '');
   public formularioCategoria: FormGroup;
   public backendStorageUrl = environment.backendStorageUrl;

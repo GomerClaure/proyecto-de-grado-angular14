@@ -299,7 +299,7 @@
 <!--Si el empleado es cajero-->
 <nav *ngIf="esEmpleado() && getRol()=='2'" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/home">Empleado Cajero</a>
+    <a class="navbar-brand" routerLink="/home"><strong>{{nombreRestaurante}}</strong></a>
     <button class="navbar-toggler" type="button" (click)="toggleMenu()" aria-controls="navbarSupportedContent"
       aria-expanded="!isMenuCollapsed" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
