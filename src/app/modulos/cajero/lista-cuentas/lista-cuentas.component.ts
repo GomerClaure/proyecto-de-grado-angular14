@@ -14,15 +14,19 @@ export class ListaCuentasComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 10; 
   filterText: string = ''; 
+  id_restaurant: number;
 
-  constructor(private cuentaService: CuentaService) { }
+  constructor(private cuentaService: CuentaService) { 
+    this.id_restaurant=0;
+  }
 
   ngOnInit(): void {
+    this.id_restaurant = +sessionStorage.getItem('id_restaurante')!;
     this.getCuentasCerradas();
   }
 
   getCuentasCerradas(): void {
-    this.cuentaService.getCuentasCerradas().subscribe(
+    this.cuentaService.getCuentasCerradas(this.id_restaurant).subscribe(
       (data) => {
         this.cuentasCerradas = data.cuentas; 
         this.filteredCuentas = [...this.cuentasCerradas];
