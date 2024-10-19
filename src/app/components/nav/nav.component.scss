@@ -23,6 +23,13 @@
     height: 40px;
     width: 45px;
 }
+@media (min-width: 769px) {
+    .dropdown-menu-custom {
+      right: 0 !important;
+      left: auto !important;
+      transform: none;
+    }
+}
 @media (max-width: 992px) {
     .nav-link {
       font-weight: bold !important;

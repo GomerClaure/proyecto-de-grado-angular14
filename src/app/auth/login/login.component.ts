@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/auth/session.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgToastService } from 'ng-angular-popup';
+import { RestauranteService } from 'src/app/services/restaurante/restaurante.service';
+import { Restaurante } from 'src/app/modelos/Restaurante';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,8 @@ export class LoginComponent {
   constructor(private formBuilder: FormBuilder,
               private sessionService: SessionService, 
               private router: Router,
-              private toast: NgToastService) { 
+              private toast: NgToastService,
+              private restauranteService: RestauranteService) { 
 
     this.formularioLogin = this.formBuilder.group({ 
       usuario: [null, [Validators.required, Validators.minLength(4)]],
@@ -53,6 +56,21 @@ export class LoginComponent {
     this.sessionService.login(usuario, password).subscribe(
       res => {
         if (res) {
+          console.log(res)
+          let header = {
+            'Authorization': 'Bearer ' + res.token,
+          };
+          this.restauranteService.getRestaurante(header).subscribe(
+          (res) => {
+            console.log('esta es la respuesta del restaurante '+res)
+            let restaurante: Restaurante = res.restaurante;
+            sessionStorage.setItem('nombre_restaurante', restaurante.nombre);
+            sessionStorage.setItem('tipo_establecimiento', restaurante.tipo_establecimiento);
+          },
+          (error) => {
+
+          }
+          )
           this.showSuccess('Inicio de sesion exitoso');
           //esperar 2 segundos y redirigir a la página de inicio
           setTimeout(() => {

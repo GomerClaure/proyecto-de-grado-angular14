@@ -80,7 +80,7 @@ export class DetalleComponent implements OnInit {
   }
 
   actualizarEstado(estado: string, motivoRechazo?: string) {
-    console.log('actualizarEstado')
+    console.log('actualizarEstado: '+this.preRegistro.id+', estado: '+ estado+' .')
     this.preRegistroService.actualizarEstadoPreRegistro(this.preRegistro.id, estado, motivoRechazo).subscribe(
       (response) => {
         console.log(response);
