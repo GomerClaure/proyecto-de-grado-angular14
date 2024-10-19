@@ -90,7 +90,7 @@ th {
 }
 // Estilo para generico button//
 .btn-generico {
-  background-color: #526557 !important; 
+  background-color: #525465 !important; 
   border: none;
   font-size: 16px;
   padding: 10px 20px;
@@ -109,31 +109,6 @@ th {
 }
 .btn-generico:active {
   background-color: #2b292c !important;
-  transform: scale(0.98);
-  border: none;
-  color: white !important;
-}
-// Estilo para cerrrar button//
-.btn-cerrrar {
-  background-color: #5d5777 !important; 
-  border: none;
-  font-size: 16px;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  color: white;
-}
-.btn-cerrar:hover {
-  background-color: #3f2e45;
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-  transform: scale(1.05);
-  border: none;
-  color: white;
-}
-.btn-cerrar:active {
-  background-color: #4e3e4f !important;
   transform: scale(0.98);
   border: none;
   color: white !important;
