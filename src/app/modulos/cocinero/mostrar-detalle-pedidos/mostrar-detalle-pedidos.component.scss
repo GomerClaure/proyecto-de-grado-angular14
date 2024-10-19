@@ -1,48 +1,59 @@
 .terminado {
-  background-color: rgb(173, 236, 173);
+  background-color: #548898;
+    color: white;
 }
-
-/* Estado: En Preparación */
 .en-preparacion {
-  background-color: rgb(247, 232, 168);
+  background-color: #f3c63f;
+  color: white;
 }
-
-.btn-atras{
-  background-color: #cd5c5c;
-  color: rgb(253, 253, 253);
-}
-
-.btn-en-preparacion{
-  background-color: #ac721a ;
-  color: rgb(247, 243, 243);
-}
-
-/* Estado por defecto */
 .default {
-  background-color: rgb(240, 162, 128);
+  background-color:#FA5555;
+  color: white;
 }
-
+.btn-terminado {
+  background-color: #548898; 
+  border: none;
+  font-size: 16px;
+  padding: 10px 20px; 
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  color: white;
+}
+.btn-terminado:hover {
+  background-color: #4c507b;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+  border: none;
+  color: white;
+}
+.btn-terminado:active {
+  background-color: #221f88 !important;
+  transform: scale(0.98);
+  border: none;
+  color: white !important;
+}
 .detalles-pedido .row {
-  background-color: aliceblue;
+  background-image: url(../../../../assets/image/pixelcut-export.png);
+  background-repeat: repeat-x;
+  background-size:675px; 
+  background-color: white;
 }
-
 .contenedor-slider {
   display: flex;
   flex-direction: column;
 }
-
 .vista-principal {
   position: relative;
-  overflow: hidden; /* Asegura que el contenido que se deslice fuera del contenedor no sea visible */
+  overflow: hidden;
   height: 24.25rem;
   padding: 10px;
-  background-color: #746b6b6e;
-  border: 1px solid #ccc;
   border-radius: 10px;
+  border: none;
 }
-
 .cont {
-  height: 19rem; /* Equivalente a 372px */
+  height: 17.5rem;
   overflow-y: auto;
 }
 
@@ -61,6 +72,7 @@
   display: flex;
   justify-content: space-around;
   transition: transform 0.3s ease;
+  border-radius: 5px;
 }
 
 .lista-miniaturas div {
@@ -75,13 +87,13 @@
 }
 
 .lista-miniaturas div.seleccionado {
-  flex: 0 0 20%; /* Aumenta el tamaño de la miniatura seleccionada */
-  transform: scale(1.1); /* Escala adicional para resaltar la selección */
-  border: 2px solid #007bff; /* Resalta la miniatura seleccionada */
+  flex: 0 0 20%; 
+  transform: scale(1.1); 
+  border-radius: 5px;
 }
 
 .btn-navegacion {
-  background-color: #746b6b6e; /* Color de fondo normal */
+  background-color: #2a2445a2; /* Color de fondo normal */
   border: none;
   font-size: 1.5rem;
   color: #f1f1f1; /* Color de texto que contraste */
@@ -92,7 +104,7 @@
 }
 
 .btn-navegacion:hover {
-  background-color: #5e5a5a6e; /* Un tono más oscuro en hover */
+  background-color: #353558; /* Un tono más oscuro en hover */
   color: #ffffff; /* Color de texto más claro en hover */
 }
 
@@ -123,7 +135,6 @@ button {
   word-wrap: break-word; /* Ajusta el contenido largo a nuevas líneas */
   white-space: normal; /* Permite que el contenido se ajuste en múltiples líneas */
 }
-
 
 .detalles-pedido {
   position: absolute;
@@ -173,4 +184,3 @@ button {
   from { transform: translateX(0); opacity: 1; }
   to { transform: translateX(100%); opacity: 0; }
 }
-

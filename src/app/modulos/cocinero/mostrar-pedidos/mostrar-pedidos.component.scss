@@ -2,75 +2,76 @@
   background-color: white;
 }
 .nav-link::hover{
-  background-color: #cd5c5c;
+  background-color: #000000;
 }
 .card-terminado  .card-header{
-    background-color: rgb(173, 236, 173);
+    background-color: #548898;
+    color: white;
 }
-
 .card-en-preparacion .card-header{
-    background-color: rgb(247, 232, 168);
+    background-color: #f3c63f;
+    color: white;
 }
-
 .card-default .card-header{
-    background-color: rgb(240, 162, 128);
+    background-color:#FA5555;
+    color: white;
 }
 
 .btn-en-preparacion{
     background-color: #ac721a ;
     color: rgb(247, 243, 243);
 }
-
 .btn-en-cola{
     background-color: #cd5c5c;
     color: rgb(253, 253, 253);
 }
-
 .icon-large {
   font-size: 1.5em;
 }
-
-
 .filtro {
   border-bottom: 1px solid #dee2e6;
 }
-
-.pedidos-container {
-  margin-top: 20px;
-}
-
 .card {
   transition: box-shadow 0.3s;
 }
-
 .card:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
   transform: translateY(-4px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
-
 .card-footer {
-  background-color: #f8f9fa;
+  background-color: #ffffff;
   border-top: none;
 }
-
 .alert-warning {
   background-color: #4a5a65;
   color: white;
 }
-
 .nav-link{
   color: black;
   size: 40px;
 }
-
 .icon-large {
   font-size: 30px;
 }
 .card-body{
-  //background-image: url("../../../../assets/image/5498321695145984-removebg-preview.png");
+  background-image: url("../../../../assets/image/pixelcut-export.png");
+  background-size: cover;
   background-position: 0;
   background-size: cover;
+}
+.pedidos-container {
+  margin-top: 20px;
+}
+.contenido-card{
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 15px;
+  color: #2c2a3b;
+  position: relative;
+  z-index: 1;
+  padding: 2px;
+  margin-bottom: 10px;
 }
  
