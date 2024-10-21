@@ -33,45 +33,35 @@
 }
 .offcanvas-body{
     text-align: center;
-    //background-image: ;
-    //background-image: url('../../../../assets/image/f1c.jpg');
+    background: radial-gradient(circle,#f0e6dc 2px, transparent 2px);
+    background-size: 15px 15px;
     width: 100%;
     height: 100vh;
-    background-position: center;
-    background-size: cover;
 }
 .offcanvas-header{
-   background-color: #212020;
+   background-color: #044051;
    text-align: center;
    color: white;
 }
 /* Cambia el color del switch en su estado normal */
+.form-check {
+    margin: 0 20px; /* Ajusta el margen lateral según sea necesario */
+}
+
 .form-check-input {
-    background-color: #b2c597; /* Color de fondo del switch */
+    background-color: #567d9d; /* Color de fondo del switch */
     border: #000000;
 }
 /* Cambia el color del switch cuando está activado */
 .form-check-input:checked {
-    background-color: #484505; /* Color de fondo del switch cuando está activado */
-    border: #484505;
+    background-color: #73c8c6; /* Color de fondo del switch cuando está activado */
+    border: #052048;
 }
 /* Cambia el color del switch cuando está enfocado */
 .form-check-input:focus {
     box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.25); /* Ajusta el color del resplandor cuando está enfocado */
 }
 
-.table {
-    width: 100%;
-    border-collapse: collapse;
-}
-.table th,
-.table td {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-    text-align: center;
-    white-space: nowrap;
-    width: 1%;
-}
 .boton-cantidad
 {
     color: #242323;
@@ -84,26 +74,16 @@
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
-// .number-input .quantity-button {
-//     width: 30px;
-//     height: 40px;
-//     border: none;
-//     border-radius: 50%;
-//     color: white;
-//     font-size: 20px;
-//     cursor: pointer;
-//     transition: background-color 0.3s;
-// }
-// .number-input .quantity-button:hover {
-//     background-color: #0056b3;
-//     width: 20px;
-// }
+.no-platillo{
+    color: rgba(36, 42, 59, 0.8);
+    padding: 5px;
+    border-radius: 5px;
+}
 .foot{
-text-align: center;
+    text-align: center;
     width: 100%;
-    background-position: center;
-    background-size: cover;
+    background-color: #044051;
+    padding-bottom: 2px;
 }
 .bt{
     padding-left: 16px;
@@ -112,4 +92,11 @@ text-align: center;
     text-align: center;
     margin-left: 2px;
     margin-right: 2px;
+}
+.img-animada {
+    transition: transform 0.3s ease; /* Suaviza la transición */
+}
+
+.img-animada.mover-arriba {
+    transform: translateX(+100%); /* Mueve la imagen hacia arriba */
 }
