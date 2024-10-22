@@ -7,10 +7,9 @@
     <h4>{{nombreMesa}}</h4>
     </div>
 </div>
-<!-- Responsive search bar layout -->
-<div class="row g-2 align-items-center">
-    <!-- Search bar -->
-    <div class="col-12 col-md-6 order-1">
+
+<div class="row align-items-center mb-3">
+    <div class="col-12 col-md-4 mb-2 mb-md-0">
         <div class="input-group">
             <input 
                 type="text" 
@@ -22,29 +21,38 @@
             >
         </div>
     </div>
-    
-    <!-- Category select -->
-    <div class="col-12 col-md-3 order-2 order-md-1">
-        <select class="form-select" aria-label="Default select example" (change)="onChangeCategoria($event)">
+    <div class="col-12 col-md-3 mb-2 mb-md-0">
+        <select class="form-select" aria-label="Seleccione una categoría" (change)="onChangeCategoria($event)">
             <option selected disabled>Categoria</option>
             <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
         </select>
     </div>
-
-    <!-- Switch and button -->
-    <div class="col-12 col-md-3 order-3 d-flex align-items-center justify-content-between">
-        <div class="form-check form-switch d-flex align-items-center me-2">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" [(ngModel)]="switchState" (ngModelChange)="switchStateChanged()">
-            <label class="form-check-label" for="flexSwitchCheckChecked">
-                <img src="../../../../assets/image/entrega-de-comida.png" alt="Icono de carrito" style="width: 50px; height: 50px; padding-left: 10px;"class="img-animada" [ngClass]="{'mover-arriba': switchState}">
-            </label>
+    <div class="col-12 col-md-4 d-flex justify-content-between align-items-center mb-2 mb-md-0">
+        <div class="d-flex align-items-center">
+            <img 
+                src="../../../../assets/image/entrega-de-comida.png" 
+                alt="Icono de carrito" 
+                class="me-2 switch-icon"
+                style="width: 24px; height: 40px;"
+            >
+            <label class="form-check-label me-2 mb-0" for="flexSwitchCheckChecked">Para llevar</label>
+            <div class="form-check form-switch">
+                <input  
+                    class="form-check-input" 
+                    type="checkbox" 
+                    id="flexSwitchCheckChecked" 
+                    [(ngModel)]="switchState" 
+                    (ngModelChange)="switchStateChanged()"
+                >
+            </div>
         </div>
         <button class="btn btn-generico" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasOrders" aria-controls="offcanvasOrders">
-            Pedido
+            Visualizar Pedido
         </button>
     </div>
-    
 </div>
+
+
 
 <!--Espacio donde se muestran los platillos-->
 <div>

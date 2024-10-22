@@ -100,3 +100,21 @@
 .img-animada.mover-arriba {
     transform: translateX(+100%); /* Mueve la imagen hacia arriba */
 }
+.custom-switch-container {
+    white-space: nowrap;
+    flex-wrap: nowrap; /* Prevents wrapping */
+}
+.switch-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px; /* Keeps the image size fixed */
+}
+@media (max-width: 991px) {
+    /* Adjust layout for tablets */
+    .custom-switch-container {
+        justify-content: flex-start;
+    }
+    .row.g-2 {
+        gap: 1rem !important; /* Adds more spacing */
+    }
+}
