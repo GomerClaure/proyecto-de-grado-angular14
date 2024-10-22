@@ -10,7 +10,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^14.2.0",
+    "@angular/animations": "^14.3.0",
     "@angular/common": "^14.2.0",
     "@angular/compiler": "^14.2.0",
     "@angular/core": "^14.2.0",
@@ -30,6 +30,7 @@
     "leaflet-geosearch": "^3.11.0",
     "ng-angular-popup": "^0.2.0",
     "ng2-charts": "^3.1.0",
+    "ngx-toastr": "^15.2.2",
     "proyecto-de-grado-angular14": "file:",
     "pusher-js": "^8.4.0-rc2",
     "rxjs": "~7.5.0",

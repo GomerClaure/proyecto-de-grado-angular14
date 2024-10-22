@@ -14,6 +14,8 @@ import { CajeroModule } from './modulos/cajero/cajero.module';
 import { PropietarioModule } from './modulos/propietario/propietario.module';
 import { AdministradorModule} from './modulos/administrador/administrador.module';
 import { EmpleadosModule } from './empleados/empleados.module';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -32,9 +34,16 @@ import { EmpleadosModule } from './empleados/empleados.module';
     CajeroModule,
     ComponentsModule,
     PropietarioModule,
-    AdministradorModule
+    AdministradorModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    })
   ], 
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

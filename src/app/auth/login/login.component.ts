@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/auth/session.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgToastService } from 'ng-angular-popup';
 import { RestauranteService } from 'src/app/services/restaurante/restaurante.service';
 import { Restaurante } from 'src/app/modelos/Restaurante';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginComponent {
   constructor(private formBuilder: FormBuilder,
               private sessionService: SessionService, 
               private router: Router,
-              private toast: NgToastService,
+              private toastr: ToastrService,
               private restauranteService: RestauranteService) { 
 
     this.formularioLogin = this.formBuilder.group({ 
@@ -35,20 +35,20 @@ export class LoginComponent {
     if (this.formularioLogin.valid) {
       this.login();
     } else {
-      this.showInfo('Campos no válidos');
+      this.showInfo('Por favor, complete todos los campos correctamente.');
     }
   }
 
   showError(message: string) {
-    this.toast.error({ detail: "ERROR", summary: message, sticky: true });
+    this.toastr.error(message, 'Error');
   }
 
   showInfo(message: string) {
-    this.toast.info({ detail: "INFO", summary: message, sticky: true });
+    this.toastr.info(message, 'Información');
   }
 
   showSuccess(message: string) {
-    this.toast.success({ detail: "SUCCESS", summary: message});
+    this.toastr.success(message, 'Éxito');
   }
 
   public login() {
@@ -56,31 +56,31 @@ export class LoginComponent {
     this.sessionService.login(usuario, password).subscribe(
       res => {
         if (res) {
-          console.log(res)
+          console.log(res);
           let header = {
             'Authorization': 'Bearer ' + res.token,
           };
           this.restauranteService.getRestaurante(header).subscribe(
-          (res) => {
-            console.log('esta es la respuesta del restaurante '+res)
-            let restaurante: Restaurante = res.restaurante;
-            sessionStorage.setItem('nombre_restaurante', restaurante.nombre);
-            sessionStorage.setItem('tipo_establecimiento', restaurante.tipo_establecimiento);
-          },
-          (error) => {
-
-          }
-          )
-          this.showSuccess('Inicio de sesion exitoso');
-          //esperar 2 segundos y redirigir a la página de inicio
-          setTimeout(() => {
-            this.router.navigate(['/home']);
-          }, 500);
-          // this.router.navigate(['/home']);
+            (res) => {
+              console.log('Respuesta del restaurante: ' + res);
+              let restaurante: Restaurante = res.restaurante;
+              sessionStorage.setItem('nombre_restaurante', restaurante.nombre);
+              sessionStorage.setItem('tipo_establecimiento', restaurante.tipo_establecimiento);
+              this.showSuccess('Inicio de sesión exitoso. ¡Bienvenido a ' + restaurante.nombre + '!');
+              
+              // Redirigir a la página de inicio después de un breve retraso
+              setTimeout(() => {
+                this.router.navigate(['/home']);
+              }, 500);
+            },
+            (error) => {
+              this.showError('No se pudo obtener la información del restaurante.');
+            }
+          );
         }
       },
       err => {
-        console.log('Dio error inesperado');
+        console.log('Error inesperado:', err);
         if (err.status === 401) {
           this.showError('Usuario o contraseña incorrectos.');
         } else if (err.status === 500) {
@@ -88,6 +88,7 @@ export class LoginComponent {
         } else {
           this.showError('Ocurrió un error inesperado. Por favor, intente de nuevo.');
         }
-      });
+      }
+    );
   }
 }

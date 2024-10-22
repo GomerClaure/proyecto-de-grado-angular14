@@ -14,6 +14,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { RequestPasswordResetComponent } from './request-password-reset/request-password-reset.component';
 import { RouterModule } from '@angular/router';
 
+
 @NgModule({
   declarations: [
     LoginComponent,
@@ -23,7 +24,7 @@ import { RouterModule } from '@angular/router';
     PasoDosComponent,
     PasoTresComponent,
     ResetPasswordComponent,
-    RequestPasswordResetComponent,
+    RequestPasswordResetComponent
   ],
   imports: [
     CommonModule,
