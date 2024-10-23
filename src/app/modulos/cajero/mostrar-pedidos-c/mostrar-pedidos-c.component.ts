@@ -5,6 +5,7 @@ import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.service';
 import { Cuenta } from 'src/app/modelos/Cuenta';
 import { NgToastService } from 'ng-angular-popup';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-mostrar-pedidos-c',
@@ -21,7 +22,7 @@ export class MostrarPedidosCComponent implements OnInit {
   textoBuscador: string = '';
 
   constructor(private pedidococinaservice: PedidosCocinaService, private pedidoService: PedidoService, private cuentaService: CuentaService,
-    private pedidoCocinaService: PedidosCocinaService,private toast:NgToastService) { }
+    private pedidoCocinaService: PedidosCocinaService,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.id_restaurante = +sessionStorage.getItem('id_restaurante')!;
@@ -184,11 +185,12 @@ export class MostrarPedidosCComponent implements OnInit {
     this.cuentaService.cerrarCuenta(id).subscribe(
       response => {
         console.log('Cuenta cerrada:', response);
-        this.toast.success({ detail: "SUCCESS", summary: 'Se cerro la cuenta correctamente', duration: 2000 });
+        this.toastr.success('Se cerro la cuenta correctamente','Exito');
         this.pedidosPorMesa=this.pedidosPorMesa.filter(cuenta=>cuenta.id !==id)
       },
       error => {
         console.error('error al cerrar:', error);
+        this.toastr.info('No se puede cerrar la cuenta el pedido no ha sido entregado aun','Información');
       }
     );
   }

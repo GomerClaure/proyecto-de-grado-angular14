@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DescripcionPedidoService } from 'src/app/services/detalle-pedido/descripcion-pedido.service';
 import { SessionService } from 'src/app/services/auth/session.service';
 import { NgToastService } from 'ng-angular-popup';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registrar-pedido',
@@ -45,7 +46,7 @@ export class RegistrarPedidoComponent implements OnInit {
     public pedidoselectService: PedidoService,
     private categoriaService: CategoriaService,
     private sessionService: SessionService,
-    private toast: NgToastService
+    private toastr: ToastrService
   ) { }
 
 
@@ -134,6 +135,11 @@ export class RegistrarPedidoComponent implements OnInit {
     this.platillosAGuardar = this.pedidoselectService.getPlatillosSeleccionados();
     this.platillosDescripciones = this.descripcionPedidoService.getDescripciones();
 
+    if (this.platillosAGuardar.length === 0) {
+      this.toastr.info('No se seleccionó ningún platillo', 'Información');
+      return; // Salir del método si no hay platillos seleccionados
+  }
+
     const platillosConDescripciones: PlatilloPedido[] = [];
     const platillosSinDescripcion: Map<number, PlatilloPedido> = new Map();
 
@@ -194,11 +200,11 @@ export class RegistrarPedidoComponent implements OnInit {
     this.pedidoselectService.storePedido(formData).subscribe(
       (response) => {
         console.error('se registró el pedido', response);
-        this.toast.success({ detail: "SUCCESS", summary: 'Se registró el pedido con éxito', duration: 2000 });
+        this.toastr.success('Se registro el pedido correctamente','Éxito');
       },
       (error) => {
         console.error('Error al almacenar el pedido', error);
-        this.toast.error({ detail: "ERROR", summary: 'No seleccionó ningún platillo', duration: 1500 });
+        this.toastr.error('El pedido no se registro','Error');
       }
     );
 

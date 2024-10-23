@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgToastService } from 'ng-angular-popup';
+import { ToastrService } from 'ngx-toastr';
 import { CuentaService } from 'src/app/services/pedido/cuenta.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class ModalDatosCuentaComponent implements OnInit {
   constructor(
     private fb: FormBuilder,  // FormBuilder for creating form groups
     private cuentaS: CuentaService,
-    private toast: NgToastService
+    private toastr: ToastrService
   ) { 
       // Initialize the form with validations
       this.cuentaForm = this.fb.group({
@@ -34,7 +35,7 @@ export class ModalDatosCuentaComponent implements OnInit {
 
   guardarDatos() {
     if (this.cuentaForm.invalid) {
-      this.toast.error({ detail: "ERROR", summary: 'Por favor, corrija los errores en el formulario', duration: 2000 });
+      this.toastr.info('No lleno ninguno de los campos','Información');
       return;
     }
 
@@ -46,12 +47,12 @@ export class ModalDatosCuentaComponent implements OnInit {
     this.cuentaS.storeDatosCuenta(formData).subscribe(
       (response: any) => {
         console.log('Datos registrados', response);
-        this.toast.success({ detail: "SUCCESS", summary: 'Se registraron los datos correctamente', duration: 2000 });
+        this.toastr.success('Los datos se registraron correctamente','Exito');
         this.limpiarCampos();
       },
       (error: any) => {
         console.error('Error en Datos cuenta', error);
-        this.toast.error({ detail: "ERROR", summary: 'Error al registrar datos', duration: 1500 });
+        this.toastr.error('Los datos no fueron almacenados','Error');
         this.limpiarCampos();
       }
     );

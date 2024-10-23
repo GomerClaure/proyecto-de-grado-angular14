@@ -36,8 +36,8 @@ import { UnauthErrorInterceptor } from './interceptor/unauth-error.interceptor';
       timeOut: 2000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
-      progressBar: true, // Muestra una barra de progreso
-      closeButton: true, // Agrega un botón para cerrar
+      progressBar: true, 
+      closeButton: true, 
     }),
     HomeModule,
   ], 
