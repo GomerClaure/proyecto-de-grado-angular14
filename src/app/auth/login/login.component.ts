@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent {
   formularioLogin: FormGroup;
-  mostrarPassword: boolean = false;  // Propiedad para controlar la visibilidad de la contraseña
+  mostrarPassword: boolean = false;  
 
   constructor(private formBuilder: FormBuilder,
               private sessionService: SessionService, 
@@ -28,7 +28,7 @@ export class LoginComponent {
   }
 
   toggleMostrarPassword() {
-    this.mostrarPassword = !this.mostrarPassword;  // Alternar la visibilidad de la contraseña
+    this.mostrarPassword = !this.mostrarPassword; 
   }
 
   onSubmit() {
@@ -68,7 +68,6 @@ export class LoginComponent {
               sessionStorage.setItem('tipo_establecimiento', restaurante.tipo_establecimiento);
               this.showSuccess('Inicio de sesión exitoso. ¡Bienvenido a ' + restaurante.nombre + '!');
               
-              // Redirigir a la página de inicio después de un breve retraso
               setTimeout(() => {
                 this.router.navigate(['/home']);
               }, 500);
