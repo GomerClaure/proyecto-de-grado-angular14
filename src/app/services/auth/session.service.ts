@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Empleado, Propietario, Usuario } from 'src/app/modelos/usuario/Usuarios';
-import { catchError, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { environment } from "../../../environments/environment";
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,7 @@ export class SessionService {
   };
   private authStatusSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
   authStatus$ = this.authStatusSubject.asObservable();
+  private token: string | null = null;
 
   constructor(private http: HttpClient) { }
 
@@ -25,7 +26,8 @@ export class SessionService {
         console.log(res);
         if (res) {
           let usuario: Usuario = res.user.usuario;
-          sessionStorage.setItem('token_access', res.token);
+          // sessionStorage.setItem('token_access', res.token);
+          this.setToken(res.token);
           sessionStorage.setItem('id_user', usuario.id.toString());
           sessionStorage.setItem('nombre', usuario.nombre);
           sessionStorage.setItem('apellido_paterno', usuario.apellido_paterno);
@@ -74,6 +76,18 @@ export class SessionService {
     this.authStatusSubject.next(false);
     return this.http.get<any>(`${this.BASE_URL}/logout`);
 
+  }
+
+  public setToken(token: string) {
+    this.token = token;
+    this.headers ={
+      'Authorization': 'Bearer ' + token,
+    };
+    sessionStorage.setItem('token_access', token);
+  }
+
+  public getToken(): string | null {
+      return this.token;
   }
 
   isLoggedIn(): boolean {

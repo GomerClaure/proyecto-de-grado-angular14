@@ -17,6 +17,7 @@ export class PlantillaListaPedidosComponent implements OnInit {
 
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       x: {},
       y: {
@@ -32,6 +33,7 @@ export class PlantillaListaPedidosComponent implements OnInit {
 
   public lineChartOptions: ChartConfiguration<'line'>['options'] = {
     responsive: true,
+    maintainAspectRatio: false,
     elements: {
       line: {
         tension: 0.5,
@@ -57,6 +59,7 @@ export class PlantillaListaPedidosComponent implements OnInit {
   };
   public pieChartOptions: ChartConfiguration<'pie'>['options'] = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: true,
@@ -92,7 +95,7 @@ export class PlantillaListaPedidosComponent implements OnInit {
 
   public imprimir() {
     window.print();
-    this.router.navigate(['/reporte/pedidos']);
+    this.router.navigate(['/propietario/pedidosR']);
   }
 
   getPedidoIds(cuentaId: number): string[] {
