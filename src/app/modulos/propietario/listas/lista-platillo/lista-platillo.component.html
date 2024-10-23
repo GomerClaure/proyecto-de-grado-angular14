@@ -47,7 +47,7 @@
           </tbody>
         </table>
       </div>
-      <div class="pagination-container">
+      <div class="pagination-container"  *ngIf="pageCount > 1">
         <nav aria-label="Page navigation">
           <ul class="pagination d-flex justify-content-center">
             <li class="page-item" [class.disabled]="currentPage === 1">
@@ -58,6 +58,7 @@
             <li class="page-item" *ngFor="let page of [].constructor(pageCount); let i = index" 
                 [class.active]="i + 1 === currentPage">
               <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+            </li>
             <li class="page-item" [class.disabled]="currentPage === pageCount">
               <a class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>

@@ -12,7 +12,7 @@ export class AppComponent {
 
   shouldShowNav(): boolean {
     // Rutas en las que no se mostrará el nav
-    const noNavRoutes = [''];
+    const noNavRoutes = ['/propietario/plantilla-pedidos'];
 
     return !noNavRoutes.includes(this.router.url);
   }

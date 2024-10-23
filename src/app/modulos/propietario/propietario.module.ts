@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PropietarioRoutingModule } from './propietario-routing.module';
-import { ComponentsModule } from 'src/app/components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgToastModule } from 'ng-angular-popup';
 import { NgChartsModule } from 'ng2-charts';
@@ -55,7 +54,7 @@ import { DatosPersonalesComponent } from './datos-personales/datos-personales.co
   imports: [
     CommonModule,
     PropietarioRoutingModule,
-    ComponentsModule,
+    // ComponentsModule,
     ReactiveFormsModule,
     FormsModule,
     NgToastModule,

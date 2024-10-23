@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ListaCategoriaComponent } from './listas/lista-categoria/lista-categoria.component';
 import { ListaPlatilloComponent } from './listas/lista-platillo/lista-platillo.component';
@@ -81,11 +80,9 @@ const routes:Routes=[
 ]
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes)
-  ]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule] 
 })
 export class PropietarioRoutingModule { }
+
  

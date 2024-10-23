@@ -11,25 +11,12 @@ export class CategoriaService {
 
   
   private BASE_URL = environment.backendUrl; 
-  private headers = {
-    'Authorization': 'Bearer ' + sessionStorage.getItem('token_access'),
-  };
   private categoriaSubject: BehaviorSubject<{accion:string,categoria:Categoria }> ;
 
   constructor(private http: HttpClient) { 
     this.categoriaSubject = new BehaviorSubject<{accion:string,categoria:Categoria }>( {accion:'',categoria:{}as Categoria});
   }
 
-  private getHeaders(): HttpHeaders {
-    const token = sessionStorage.getItem('token_access');
-    if (token) {
-      return new HttpHeaders({
-        'Authorization': 'Bearer ' + token
-      });
-    } else {
-      throw new Error('No access token found in sessionStorage');
-    }
-  }
 
   //la accion es crear, editar o eliminar
   categoriaEvento(accion:string,categoria:Categoria ) {
@@ -41,26 +28,26 @@ export class CategoriaService {
   }
 
  getCategorias(idRestaurante: any) {
-  return this.http.get(`${this.BASE_URL}/menu/categoriaRestaurante/${idRestaurante}`, { headers: this.getHeaders() });
+  return this.http.get(`${this.BASE_URL}/menu/categoriaRestaurante/${idRestaurante}`);
 }
   // Obtiene una categoria de platillos por su id
   getCategoria(id: string){
-    return this.http.get(`${this.BASE_URL}/menu/categoria/` + id, { headers: this.headers });
+    return this.http.get(`${this.BASE_URL}/menu/categoria/` + id);
   }
 
   // Guarda una nueva categoria de platillos
   saveCategoria(formData:FormData){
-    return this.http.post(`${this.BASE_URL}/menu/categoria`, formData, { headers: this.headers });
+    return this.http.post(`${this.BASE_URL}/menu/categoria`, formData );
   }
 
   // Actualiza una categoria de platillos
   updateCategoria(id: number, formData:FormData){
-    return this.http.post(`${this.BASE_URL}/menu/categoria/` + id, formData, { headers: this.headers });
+    return this.http.post(`${this.BASE_URL}/menu/categoria/` + id, formData);
   }
 
   // Elimina una categoria de platillos
   deleteCategoria(id: number){
-    return this.http.delete<any>(`${this.BASE_URL}/menu/categoria/${id}`, { headers: this.headers });
+    return this.http.delete<any>(`${this.BASE_URL}/menu/categoria/${id}`);
   }
   
 }

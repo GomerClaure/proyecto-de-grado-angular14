@@ -44,6 +44,7 @@ export class RegistrarCategoriaComponent {
       const nombre = this.formularioCategoria.get('nombre')?.value;
   
       const formData = new FormData();
+      this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
 
       formData.append('imagen', this.selectedFile);
       formData.append('nombre', nombre);
