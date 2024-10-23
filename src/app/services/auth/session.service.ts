@@ -18,7 +18,9 @@ export class SessionService {
   authStatus$ = this.authStatusSubject.asObservable();
   private token: string | null = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.token = sessionStorage.getItem('token_access');
+  }
 
   public login(usuario: string, password: string) {
     return this.http.post<any>(`${this.BASE_URL}/login`, { usuario, password }).pipe(
