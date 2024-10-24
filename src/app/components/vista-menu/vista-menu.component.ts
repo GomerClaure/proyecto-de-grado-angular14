@@ -78,13 +78,12 @@ export class VistaMenuComponent implements OnInit {
     console.log(idElemento);
     let contenedor = document.getElementById(idElemento);
     if (contenedor) {
-      contenedor.style.backgroundImage = 'url("assets/image/270021.jpg")';
+      contenedor.style.backgroundImage = 'url("assets/image/Imagen/rota.jpg")';
     }
-    // event.target.src = 'assets/image/2700.jpg';
   }
 
   portadaError(event: any) {
-    event.target.src = 'assets/image/pp.png';
+    event.target.src = 'assets/image/Imagen/rota.jpg';
   }
 
   transformarDatos(platillos: Platillo[]): PlatillosPorCategoria[] {

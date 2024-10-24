@@ -5,7 +5,7 @@ import { MenuService } from 'src/app/services/menu/menu.service';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
 import { Menu } from 'src/app/modelos/Menu';
 import { environment } from 'src/environments/environment';
-import { NgToastComponent, NgToastService } from 'ng-angular-popup';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-generar',
@@ -24,14 +24,17 @@ export class GenerarComponent implements OnInit {
   public baseUrl = environment.backendStorageUrl;
   id_restaurante:any;
 
-  constructor(private menuService: MenuService, private categoriaService: CategoriaService,private toast:NgToastService) {
+  constructor(private menuService: MenuService, 
+              private categoriaService: CategoriaService,
+              private toastr:ToastrService) {
+
+    this.imgPortada='assets/image/Imagen-rota.jpg'
     this.platillos = [];
     this.categorias = [];
     this.platillosFiltrados = [];
     this.selectedFile = new File([''], '');
-    this.imgPortada = 'assets/image/27002.jpg';
     this.tema = 'light-theme';
-    // this.themeSwitch = new ElementRef(null);
+
   }
 
   ngOnInit(): void {
@@ -39,10 +42,11 @@ export class GenerarComponent implements OnInit {
     this.cargarCategorias();
     this.cargarPlatillos();
   }
-  activeCategoria = 0; // Categoría activa inicialmente
+
+  activeCategoria = 0;
 
   cambiarCategoria(idCategoria: number) {
-    this.activeCategoria = idCategoria; // Cambia la categoría activa al hacer clic en un enlace de categoría
+    this.activeCategoria = idCategoria;
     if (idCategoria === 0) {
       this.platillosFiltrados = this.platillos;
     } else {
@@ -114,7 +118,6 @@ export class GenerarComponent implements OnInit {
       body?.classList.add(this.tema);
     } else {
       this.tema = 'light-theme';
-      // Cambiar a tema claro
       body?.classList.remove('dark-theme');
     }
   }
@@ -122,7 +125,7 @@ export class GenerarComponent implements OnInit {
   cambiarDisponibilidadPlato(event: any, idPlato: number) {
     const index = this.platillos.findIndex(platillo => platillo.id === idPlato);
     if (index !== -1) {
-      const platillo = this.platillos[index]; // Obtiene el platillo usando el índice
+      const platillo = this.platillos[index];
       console.log(platillo)
       platillo.plato_disponible_menu = !platillo.plato_disponible_menu;
       
@@ -143,11 +146,11 @@ export class GenerarComponent implements OnInit {
       this.menuService.saveMenu(formData).subscribe(
         res => {
           console.log(res);
-          this.toast.success({detail:"SUCCESS",summary:'Menu guardado',duration:2000});
+          this.toastr.success('Menu guardado correctamente','Exito');
         },
         err => {
           console.log(err);
-          this.toast.error({detail:"ERROR",summary:'Error al generar menu',sticky:true})
+          this.toastr.error('El menu no se pudo generar','Error');
         }
       );
       

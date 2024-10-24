@@ -1,26 +1,36 @@
-.img-fluid{
-    width:100% ;
-    height: 40vh;
+.glass-effect {
+    background: rgba(255, 255, 255, 0.674); /* Fondo blanco semi-transparente */
+    backdrop-filter: blur(10px); /* Desenfoque del fondo */
+    border-radius: 10px; /* Bordes redondeados */
+    border: none; /* Elimina el borde del modal */
 }
-.content-wrapper {
+.img-fluid {
+    width: 90%; /* Ancho completo */
+    max-height: 30vh; /* Limita la altura máxima de la imagen */
+    object-fit: cover; /* Asegura que la imagen mantenga su proporción */
+    border: none; /* Elimina cualquier borde de la imagen */
+    border-radius: 5px;
+}
+.container-wrapper {
     display: flex;
-    flex-direction: column; /* Apila los elementos verticalmente */
+    flex-direction: column;
+    align-items: center; /* Centra el contenido horizontalmente */
 }
 .descripcion {
     width: 100%;
-    padding: 10px; /* Agrega un relleno para separar el contenido del borde */
-    //border: 1px solid #ccc; /* Agrega un borde */
-    overflow: auto; /* Agrega desbordamiento automático si es necesario */
-    max-height: 200px; /* Limita la altura máxima */
-    word-wrap: break-word; /* Permite que las palabras largas se rompan y se muevan a la siguiente línea */
+    padding: 10px;
+    overflow: auto; 
+    max-height: 200px; 
+    word-wrap: break-word; 
+    text-align: center; /* Centra el texto de la descripción */
 }
-.modal-header{
+.modal-header {
     justify-content: center;
-    //background-image: url(../../../../../assets/image/f1.jpg);
-    //background-position: center;
-    background-position: cover;
+    background: transparent; /* Asegúrate de que el fondo sea transparente */
     border: none;
+    color: rgb(40, 36, 57);
 }
-.modal-footer{
+.modal-footer {
     border: none;
+    justify-content: center; /* Centra el botón en el pie del modal */
 }

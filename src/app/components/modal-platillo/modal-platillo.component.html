@@ -1,22 +1,23 @@
 <div class="modal fade" id="MostrarPlatillo" tabindex="-1" aria-labelledby="modalAgregarPlatilloLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
+  <div class="modal-dialog">
+      <div class="modal-content glass-effect">
           <div class="modal-header">
-            <h5 class="modal-title"  id="modalAgregarPlatilloLabel">{{ platillo.nombre }}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h5 class="modal-title" id="modalAgregarPlatilloLabel">{{ platillo.nombre }}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <div>
               <div class="container-wrapper">
-              <img [src]="baseUrl + platillo.imagen" alt="{{platillo.nombre}}" class="img-fluid">
-              <br>
-              <div class="descripcion">
-                  <h6>{{ platillo.descripcion }}</h6>
+                  <img [src]="baseUrl + platillo.imagen" alt="{{ platillo.nombre }}" class="img-fluid">
+                  <br>
+                  <div class="descripcion">
+                      <h6>{{ platillo.descripcion }}</h6>
+                  </div>
               </div>
+              <div class="text-end m-2">
+                <button type="button" class="btn btn-generico" data-bs-dismiss="modal">Cerrar</button>
               </div>
           </div>
-          <div class="modal-footer"> 
-            <button type="button" class="btn btn-delete" data-bs-dismiss="modal">Cerrar</button>
-          </div>
-        </div>
-      </div> 
-    </div>
+
+      </div>
+  </div>
+</div>

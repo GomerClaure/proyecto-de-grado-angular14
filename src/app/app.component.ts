@@ -12,8 +12,7 @@ export class AppComponent {
 
   shouldShowNav(): boolean {
     // Rutas en las que no se mostrará el nav
-    const noNavRoutes = ['/propietario/plantilla-pedidos'];
-
+    const noNavRoutes = ['/propietario/plantilla-pedidos','/vista/1'];
     return !noNavRoutes.includes(this.router.url);
   }
 }

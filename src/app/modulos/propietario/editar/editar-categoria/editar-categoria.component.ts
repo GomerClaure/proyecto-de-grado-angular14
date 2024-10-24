@@ -24,7 +24,7 @@ export class EditarCategoriaComponent implements  OnChanges  {
     private categoriaService: CategoriaService,
     private toastr: ToastrService,
   ) {
-    this.imageUrl = 'assets/image/27002.jpg';
+    this.imageUrl = 'assets/image/Imagen-rota.jpg';
     this.formularioCategoria = this.formBuilder.group({
       nombre: [null, Validators.required],
       imagen: [null],
