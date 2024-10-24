@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalEliminarPlatilloService } from 'src/app/services/modales/modal-eliminar-platillo.service';
 import { PlatillosService } from '../../../../services/platillos/platillos.service';
-import { NgToastService } from 'ng-angular-popup';
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-modal-eliminar',
@@ -16,8 +16,8 @@ export class ModalEliminarComponent {
 
 
   constructor(private modalService: ModalEliminarPlatilloService,
-     private platillosService: PlatillosService,
-    private toast:NgToastService) {
+              private platillosService: PlatillosService,
+              private toastr:ToastrService) {
   }
   ngOnInit() {
     this.nombreSubscription = this.modalService.getNombrePlatillo$().subscribe(nombre => {
@@ -35,17 +35,16 @@ export class ModalEliminarComponent {
           .splice(this.modalService.listaPlatillos()
             .findIndex(platillo => platillo.id === this.modalService.idPlatilloModal()), 1);
         console.log(res);
-        this.toast.success({ detail:'Platillo eliminado', summary: 'Success', duration: 1000});
+        this.toastr.success('Platillo eliminado','Exito');
       },
       err => {
         console.log(err);
-        this.toast.error({detail:"ERROR",summary:'El platillo no se pudo eliminar',sticky:true});
+        this.toastr.error('El platillo no se pudo eliminar','Error');
       }
     );
 
   }
   ngOnDestroy() {
-    // Limpia la suscripción para evitar fugas de memoria
     if (this.nombreSubscription) {
       this.nombreSubscription.unsubscribe();
     }

@@ -21,8 +21,10 @@ export class MostrarPedidosCComponent implements OnInit {
   id_empleado: number = 0;
   textoBuscador: string = '';
 
-  constructor(private pedidococinaservice: PedidosCocinaService, private pedidoService: PedidoService, private cuentaService: CuentaService,
-    private pedidoCocinaService: PedidosCocinaService,private toastr:ToastrService) { }
+  constructor(private pedidoService: PedidoService, 
+              private cuentaService: CuentaService,
+              private pedidoCocinaService: PedidosCocinaService,
+              private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.id_restaurante = +sessionStorage.getItem('id_restaurante')!;
@@ -194,7 +196,6 @@ export class MostrarPedidosCComponent implements OnInit {
       }
     );
   }
-
   imprimir() {
     window.print();
   }

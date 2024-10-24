@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SessionService } from 'src/app/services/auth/session.service';
 import { Propietario } from 'src/app/modelos/usuario/Usuarios';
 import { environment } from 'src/environments/environment';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { NgToastService } from 'ng-angular-popup';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manejo-cuenta-personal',
@@ -18,15 +17,14 @@ export class ManejoCuentaPersonalComponent implements OnInit {
   textoBuscador: string;
   usuariosFiltrados: Propietario[];
 
-  constructor(private sessionService: SessionService, private sanitizer: DomSanitizer,
-    private toast: NgToastService
+  constructor(private sessionService: SessionService, 
+              private toastr:ToastrService
   ) {
     this.usuarios = [];
     this.URL_BACKEND = environment.backendStorageUrl;
     this.usuarioSeleccionado = null;
     this.usuariosFiltrados = [];
     this.textoBuscador = '';
-    
   }
 
   ngOnInit(): void {
@@ -40,7 +38,6 @@ export class ManejoCuentaPersonalComponent implements OnInit {
       }
     );
   }
-
   seleccionarUsuario(usuario: Propietario) {
     this.usuarioSeleccionado = usuario;
   }
@@ -48,7 +45,6 @@ export class ManejoCuentaPersonalComponent implements OnInit {
     const img = event.target as HTMLImageElement;
     img.src = 'assets/image/UsuarioCard1.png';
   }
-
   cambiarEstadoUsuario(idUsuario: number, estado: boolean) {
     this.sessionService.cambiarEstadoUsuario(idUsuario+'', estado).subscribe(
       (res) => {
@@ -64,12 +60,10 @@ export class ManejoCuentaPersonalComponent implements OnInit {
       }
     );
   }
-
   onSearchChange(searchValue: string): void {
     this.textoBuscador = searchValue.trim().toLowerCase();
     this.filtrarUsuarios();
   }
-
   filtrarUsuarios(): void {
     console.log(this.textoBuscador);
     
@@ -83,20 +77,16 @@ export class ManejoCuentaPersonalComponent implements OnInit {
             usuario.usuario.nombre.toLowerCase().includes(this.textoBuscador) ||
             usuario.usuario.apellido_paterno?.toLowerCase().includes(this.textoBuscador) ||
             usuario.usuario.apellido_materno?.toLowerCase().includes(this.textoBuscador) 
-            // usuario.usuario.estado.toString().includes(this.textoBuscador) ||
         );
     }
-}
-
-  showError(message: string) {
-    this.toast.error({ detail: "ERROR", summary: message, sticky: true });
   }
-
+  showError(message: string) {
+    this.toastr.error(message,'Error');
+  }
   showInfo(message: string) {
-    this.toast.info({ detail: "INFO", summary: message, sticky: true });
+    this.toastr.info(message,'Informacion');
   }
   showSuccess(message: string) {
-    this.toast.success({ detail: 'SUCCESS', summary: message });
-
+    this.toastr.success(message,'Exito');
   }
 }

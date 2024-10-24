@@ -5,8 +5,8 @@ import { Platillo } from 'src/app/modelos/Platillo';
 import { PlatillosService } from 'src/app/services/platillos/platillos.service';
 import { RegistrarPlatilloComponent } from '../../registro/registrar-platillo/registrar-platillo.component';
 import { environment } from 'src/environments/environment';
-import { NgToastService } from 'ng-angular-popup';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-editar-platillo',
@@ -28,7 +28,7 @@ export class EditarPlatilloComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private platilloservice: PlatillosService, 
               private formBuilder: FormBuilder,
-              private toast:NgToastService,
+              private toastr:ToastrService,
               private categoriaService:CategoriaService
             ) {
     this.formularioEditarPlatillo = this.formBuilder.group({
@@ -62,7 +62,6 @@ export class EditarPlatilloComponent implements OnInit {
   getCategorias() {
     this.categoriaService.getCategorias(this.id_restaurante).subscribe(
       (data: any) => {
-        // Añade la opción "Todos" al principio de la lista de categorías
         this.categorias = [...data.categorias];
       },
       error => {
@@ -110,18 +109,18 @@ export class EditarPlatilloComponent implements OnInit {
       this.platilloservice.updatePlatillo(formData, parseInt(this.idPlatillo)).subscribe(
         success => {
           console.log(success);
-          this.toast.success({detail:"SUCCESS",summary:'Se edito el platillo correctamente',duration:5000})
+          this.toastr.success('Se edito el platillo correctamente','Exito')
   
         },
         error => {
           console.log(error);
-          this.toast.error({detail:"ERROR",summary:'Error al editar',sticky:true})
+          this.toastr.error('Error al editar','Error')
         }
       );
 
     }
     else {
-      this.toast.error({detail:"ERROR",summary:'Error al editar',sticky:true})
+      this.toastr.error('Error al editar','Error')
     }
   }
 
