@@ -110,7 +110,6 @@ export class EditarPlatilloComponent implements OnInit {
         success => {
           console.log(success);
           this.toastr.success('Se edito el platillo correctamente','Exito')
-  
         },
         error => {
           console.log(error);

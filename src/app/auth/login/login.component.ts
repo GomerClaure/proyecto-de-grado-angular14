@@ -68,9 +68,7 @@ export class LoginComponent {
               sessionStorage.setItem('tipo_establecimiento', restaurante.tipo_establecimiento);
               this.showSuccess('Inicio de sesión exitoso. ¡Bienvenido a ' + restaurante.nombre + '!');
               
-              setTimeout(() => {
                 this.router.navigate(['/home']);
-              }, 500);
             },
             (error) => {
               this.showError('No se pudo obtener la información del restaurante.');

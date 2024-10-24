@@ -1,14 +1,15 @@
 <div class="modal fade" id="MostrarPlatillo" tabindex="-1" aria-labelledby="modalAgregarPlatilloLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content glass-effect">
           <div class="modal-header">
-              <h5 class="modal-title" id="modalAgregarPlatilloLabel">{{ platillo.nombre }}</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <img [src]="baseUrl + platillo.imagen" alt="{{ platillo.nombre }}" class="img-fluid" (error)="onError($event)">
           </div>
           <div>
               <div class="container-wrapper">
-                  <img [src]="baseUrl + platillo.imagen" alt="{{ platillo.nombre }}" class="img-fluid">
-                  <br>
+                <div class="d-flex flex-row justify-content-between">
+                    <h5 class="modal-title" id="modalAgregarPlatilloLabel">{{ platillo.nombre }}</h5>
+                    <h5 class="text-end">{{ platillo.precio }} Bs.</h5>
+                </div>
                   <div class="descripcion">
                       <h6>{{ platillo.descripcion }}</h6>
                   </div>

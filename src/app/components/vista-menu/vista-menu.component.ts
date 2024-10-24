@@ -198,7 +198,8 @@ export class VistaMenuComponent implements OnInit {
     let nom = platillo.nombre;
     let img = platillo.imagen;
     let desc = platillo.descripcion;
+    let precio= platillo.precio;
     this.modalService.openModal(platillo);
-    console.log(nom, img, desc);
+    console.log(nom, img, desc, precio);
   }
 }
