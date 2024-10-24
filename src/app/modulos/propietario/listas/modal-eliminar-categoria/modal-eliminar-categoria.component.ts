@@ -1,5 +1,5 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { NgToastService } from 'ng-angular-popup';
+import { Component, Input, OnChanges} from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Categoria } from 'src/app/modelos/Categoria';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
 
@@ -13,7 +13,7 @@ export class ModalEliminarCategoriaComponent implements OnChanges {
   @Input() categoria: Categoria;  
 
   constructor(private categoriaService:CategoriaService,
-              private toast:NgToastService) { 
+              private toastr:ToastrService) { 
                 this.categoria = {} as Categoria;
               }
 
@@ -21,16 +21,15 @@ export class ModalEliminarCategoriaComponent implements OnChanges {
     console.log(this.categoria)
 
   }
-  
   eliminarCategoria(){ 
    this.categoriaService.deleteCategoria(this.categoria.id).subscribe(
     res => {
       this.categoriaService.categoriaEvento('eliminar', res.categoria);
-      console.log('aqui')
+      this.toastr.success('Categoria eliminada correctamente','Exito');
     },
     err => {
       console.log(err);
-      this.toast.error({detail:"ERROR",summary:'La categoria no se pudo eliminar',sticky:true});
+      this.toastr.error('La categoria no se pudo eliminar','Error');
     }
   );
   }

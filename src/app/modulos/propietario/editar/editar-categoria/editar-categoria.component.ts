@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Categoria } from 'src/app/modelos/Categoria';
 import { environment } from 'src/environments/environment';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
-import { NgToastService } from 'ng-angular-popup';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-editar-categoria',
@@ -22,12 +22,12 @@ export class EditarCategoriaComponent implements  OnChanges  {
   constructor(
     private formBuilder: FormBuilder, 
     private categoriaService: CategoriaService,
-    private toast: NgToastService,
+    private toastr: ToastrService,
   ) {
     this.imageUrl = 'assets/image/27002.jpg';
     this.formularioCategoria = this.formBuilder.group({
       nombre: [null, Validators.required],
-      imagen: [null],  // Control para la imagen
+      imagen: [null],
     });
     
     this.categoria = { id: 0, nombre: '', imagen: '' };
@@ -42,7 +42,7 @@ export class EditarCategoriaComponent implements  OnChanges  {
   }
 
   onImageError(): void {
-    this.imageUrl = 'assets/image/Imagen-rota.jpg'; // URL de la imagen de reemplazo
+    this.imageUrl = 'assets/image/Imagen-rota.jpg';
   }
 
   onFileSelected(event: any) {
@@ -59,8 +59,6 @@ export class EditarCategoriaComponent implements  OnChanges  {
       reader.readAsDataURL(this.selectedFile);
     }
   }
-
-
   guardarCategoria() {
     const datosForm = this.formularioCategoria.value;
     const formData = new FormData();
@@ -74,10 +72,10 @@ export class EditarCategoriaComponent implements  OnChanges  {
       (response: any) => {
         console.log(response.categoria)
         this.categoriaService.categoriaEvento('editar', response.categoria);
-        this.toast.success({ detail: "SUCCESS", summary: 'Categoría guardada', duration: 2000 });
+        this.toastr.success('Categoria editada correctamente','Exito');
       },
       (error) => {
-        this.toast.error({ detail: "ERROR", summary: 'Error al editar categoría', sticky: true });
+        this.toastr.error('Error al editar categoría', 'Error');
       }
     );
   }
