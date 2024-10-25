@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-pedidos',
-  templateUrl: './lista-pedidos.component.html',
-  styleUrls: ['./lista-pedidos.component.scss']
+  templateUrl: './lista-pedidosR.component.html',
+  styleUrls: ['./lista-pedidosR.component.scss']
 })
-export class ListaPedidosComponentR implements OnInit {
+export class ListaPedidosRComponent implements OnInit {
   @ViewChildren(BaseChartDirective) charts!: QueryList<BaseChartDirective>;
 
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {

@@ -22,7 +22,7 @@ import { EditarPlatilloComponent } from './editar/editar-platillo/editar-platill
 //reporte
 import { ListaVentasComponent } from './reporte/lista-ventas/lista-ventas.component';
 import { PlantillaListaPedidosComponent } from './reporte/plantilla-lista-pedidos/plantilla-lista-pedidos.component';
-import { ListaPedidosComponentR } from './reporte/lista-pedidosR/lista-pedidos.component';
+import { ListaPedidosRComponent } from './reporte/lista-pedidosR/lista-pedidosR.component';
 // manejo de cuentas
 import { ManejoCuentaEmpleadoComponent } from './manejo-cuenta-empleado/manejo-cuenta-empleado.component';
 import { DatosPersonalesComponent } from './datos-personales/datos-personales.component';
@@ -44,7 +44,7 @@ import { DatosPersonalesComponent } from './datos-personales/datos-personales.co
     RegistrarEmpleadoComponent,
     EditarPlatilloComponent,
   //reporte
-    ListaPedidosComponentR,
+    ListaPedidosRComponent,
     ListaVentasComponent,
     PlantillaListaPedidosComponent,
   // manejo de cuentas

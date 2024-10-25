@@ -14,10 +14,8 @@ module.exports = function (config) {
     ],
     client: {
       jasmine: {
-        // you can add configuration options for Jasmine here
-        // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
-        // for example, you can disable the random execution with `random: false`
-        // or set a specific seed with `seed: 4321`
+        // You can add configuration options for Jasmine here
+        random: false // Desactiva la ejecución aleatoria de pruebas
       },
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
@@ -39,6 +37,11 @@ module.exports = function (config) {
     autoWatch: true,
     browsers: ['Chrome'],
     singleRun: false,
-    restartOnFileChange: true
+    restartOnFileChange: true,
+    
+    // Agrega la sección 'files' aquí
+    files: [
+      { pattern: './src/**/*.spec.ts', watched: false } // Busca todos los archivos .spec.ts
+    ],
   });
 };
