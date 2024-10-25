@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SessionService } from 'src/app/services/auth/session.service';
 import { passwordsMatchValidator } from 'src/app/validators/file-validator';
-import { NgToastService } from 'ng-angular-popup';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reset-password',
@@ -14,14 +14,16 @@ export class ResetPasswordComponent implements OnInit {
   resetPasswordForm: FormGroup;
   token: string;
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute,
-    private sessionService: SessionService, private toast: NgToastService,
-    private router: Router) {
+  constructor(private fb: FormBuilder, 
+              private route: ActivatedRoute,
+              private sessionService: SessionService, 
+              private toastr: ToastrService,
+              private router: Router) {
     this.resetPasswordForm = this.fb.group({
       oldPassword: ['', [Validators.required]],
       newPassword: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required]]
-    }, { validator: passwordsMatchValidator }); // Usamos el validador importado
+    }, { validator: passwordsMatchValidator }); 
     this.token = '';
   }
 
@@ -33,50 +35,34 @@ export class ResetPasswordComponent implements OnInit {
       this.resetPasswordForm.patchValue({ token: this.token });
     }
   }
-
-  showError(message: string) {
-    this.toast.error({ detail: "ERROR", summary: message, sticky: true });
-  }
-
-  showInfo(message: string) {
-    this.toast.info({ detail: "INFO", summary: message, sticky: true });
-  }
-  showSuccess(message: string) {
-    this.toast.success({ detail: 'SUCCESS', summary: message });
-
-  }
- onSubmit() {
-  this.resetPasswordForm.markAllAsTouched();
-
-  // Verificamos si el formulario es válido
-  if (this.resetPasswordForm.valid) {
-    const formData = new FormData();
-    Object.keys(this.resetPasswordForm.controls).forEach(key => {
-      formData.append(key, this.resetPasswordForm.get(key)?.value);
-    });
-
-    // Opcional: Log para verificar los datos enviados
-    formData.forEach((value, key) => {
-      console.log(`${key}: ${value}`);
-    });
-
-    this.sessionService.restablecerContra(formData).subscribe(
-      res => {
-        this.showSuccess('Contraseña restablecida');
-        if (this.token !== '') {
-          this.router.navigate(['/login']);
+  onSubmit() {
+    this.resetPasswordForm.markAllAsTouched();
+  
+    if (this.resetPasswordForm.valid) {
+      const formData = new FormData();
+      Object.keys(this.resetPasswordForm.controls).forEach(key => {
+        formData.append(key, this.resetPasswordForm.get(key)?.value);
+      });
+  
+      formData.forEach((value, key) => {
+        console.log(`${key}: ${value}`);
+      });
+  
+      this.sessionService.restablecerContra(formData).subscribe(
+        res => {
+          this.toastr.success('Contraseña restablecida', 'Éxito');
+          if (this.token !== '') {
+            this.router.navigate(['/login']);
+          }
+          this.resetPasswordForm.reset();
+        },
+        err => {
+          this.toastr.error('Error al restablecer contraseña', 'Error');
+          console.log(err);
         }
-      },
-      err => {
-        this.showError('Error al restablecer contraseña');
-        console.log(err);
-      }
-    );
-  } else {
-    // Si el formulario no es válido, mostramos un mensaje de información
-    this.showInfo('No llenaste ningún campo'); // Llama al método showInfo
+      );
+    } else {
+      this.toastr.info('No llenaste ningún campo', 'Información'); 
+    }
   }
-}
-
-
 }

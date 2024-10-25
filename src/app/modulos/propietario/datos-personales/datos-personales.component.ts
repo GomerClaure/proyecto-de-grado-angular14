@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Propietario } from 'src/app/modelos/usuario/Usuarios';
 import { SessionService } from 'src/app/services/auth/session.service';
 import { fileValidator } from 'src/app/validators/file-validator';
-import { NgToastService } from 'ng-angular-popup';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -15,12 +15,13 @@ export class DatosPersonalesComponent implements OnInit {
   usuarioForm: FormGroup;
   selectedFile: File | null = null;
   url_base = environment.backendStorageUrl;
-  foto_perfil = 'assets/image/Imagen-rota.jpg';
+  foto_perfil = ' ';
   imageWidth: number = 450;
   imageHeight: number = 380;
 
-  constructor(private fb: FormBuilder, private sessionService: SessionService,
-    private toast: NgToastService
+  constructor(private fb: FormBuilder, 
+              private sessionService: SessionService,
+              private toastr: ToastrService
   ) {
     this.usuarioForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
@@ -51,42 +52,26 @@ export class DatosPersonalesComponent implements OnInit {
     const file = event.target.files[0];
   
     if (file) {
-      // Asignar el archivo seleccionado y actualizar el control del formulario
       this.selectedFile = file;
       this.usuarioForm.patchValue({ foto_perfil: file });
       this.usuarioForm.get('foto_perfil')?.markAsTouched();
       
-      // Verificar si el archivo es válido
       if (this.usuarioForm.get('foto_perfil')?.valid) {
         const reader = new FileReader();
         reader.onload = (e) => {
-          this.foto_perfil = e.target?.result as string; // Mostrar vista previa del archivo
+          this.foto_perfil = e.target?.result as string;
         };
         reader.readAsDataURL(file);
       }else{
-        this.showError('Archivo no válido.');
+        this.toastr.info('Archivo no valido.','Informacion');
         this.selectedFile = null;
         this.usuarioForm.patchValue({ foto_perfil: null });
       }
     }
   }
-  
-
   onImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
-    img.src = 'https://via.placeholder.com/220'; // URL de la imagen de reemplazo
-  }
-
-  showError(message: string) {
-    this.toast.error({ detail: "ERROR", summary: message, sticky: true });
-  }
-
-  showInfo(message: string) {
-    this.toast.info({ detail: "INFO", summary: message, sticky: true });
-  }
-  showSuccess(message: string) {
-    this.toast.success({ detail: 'SUCCESS', summary: message });
-
+    img.src = 'assets/image/Imagen-rota.jpg'; 
   }
 
   actualizarUsuario() {
@@ -109,15 +94,13 @@ export class DatosPersonalesComponent implements OnInit {
       this.sessionService.actualizarDatosUsuario(formData).subscribe(
         (res: any) => {
           console.log(res);
-          this.showSuccess('Datos actualizados correctamente.');
+          this.toastr.success('Datos actualizados correctamente.','Exito');
         },
         (error: any) => {
           console.log(error);
-          this.showError('Error al actualizar los datos.');
+          this.toastr.error('Error al actualizar los datos.','Error');
         }
       );
     }
   }
-  
-
 }

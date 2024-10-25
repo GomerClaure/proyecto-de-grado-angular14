@@ -157,19 +157,18 @@
 .form-check {
   display: inline-block; 
   background-color: #4b5159; 
-  color: white; 
-  padding: 10px 20px; 
+  color: white;  padding: 10px 20px; 
   border-radius: 5px; 
-  cursor: pointer; 
-  transition: background-color 0.3s ease; 
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
-
-.form-check-input:checked + .form-check-label {
-  background-color: #bebebe; 
-  color: black; 
+.form-check:hover{
+  transform: scale(1.05);
 }
 
 .form-check-label {
   display: flex; 
-  align-items: center; 
+  align-items: center;
+  padding-right: 2px; 
 }
