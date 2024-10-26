@@ -5,6 +5,8 @@
         <div class="carousel-item active">
           <div class="card">
             <div class="card-body h-100 portada" [style.background-image]="'url(' + baseUrl + menu.portada + ')'">
+              <img class="categoria-imagen" [src]="baseUrl + menu.portada"
+              (error)="onError($event)">
             </div>
           </div>
         </div>
@@ -15,7 +17,10 @@
                 <div *ngFor="let categoriaElement of categoriasPag">
                   <div class="row h-100">
                     <!-- Imagen de la categoría -->
-                    <div class="col-5 categoria-imagen" [style.background-image]="'url(' + baseUrl + categoriaElement.imagen + ')'"></div>
+                    <div class="col-5 ">
+                      <img class="categoria-imagen" [src]="baseUrl + categoriaElement.imagen" id="{{'img-menu-categoria-' + i+'-'+categoriaElement.id}}" 
+                      (error)="onError($event)">
+                    </div>
                     <div class="col-7 h-100">
                       <div class="p-0">
                         <h1 class="categoria-titulo text-center">{{ categoriaElement.nombre }}</h1>

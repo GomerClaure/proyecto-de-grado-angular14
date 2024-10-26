@@ -26,7 +26,7 @@ import { ListaPedidosComponentR } from './reporte/lista-pedidosR/lista-pedidos.c
 // manejo de cuentas
 import { ManejoCuentaEmpleadoComponent } from './manejo-cuenta-empleado/manejo-cuenta-empleado.component';
 import { DatosPersonalesComponent } from './datos-personales/datos-personales.component';
-
+// import { VistaMenuComponent } from '../../components/vista-menu/vista-menu.component';
 @NgModule({
   declarations: [
     //listas
@@ -49,7 +49,8 @@ import { DatosPersonalesComponent } from './datos-personales/datos-personales.co
     PlantillaListaPedidosComponent,
   // manejo de cuentas
     ManejoCuentaEmpleadoComponent,
-    DatosPersonalesComponent
+    DatosPersonalesComponent,
+    // VistaMenuComponent
   ],
   imports: [
     CommonModule,

@@ -9,11 +9,13 @@ import {
 import { catchError, Observable, throwError } from 'rxjs';
 import { SessionService } from '../services/auth/session.service';
 import { Router } from '@angular/router';
+import { WebsocketService } from '../services/websocket/websocket.service';
 
 @Injectable()
 export class UnauthErrorInterceptor implements HttpInterceptor {
 
-  constructor(private sessionService: SessionService, private router: Router) {}
+  constructor(private sessionService: SessionService, private router: Router,
+    private webSocketService: WebsocketService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
@@ -22,6 +24,7 @@ export class UnauthErrorInterceptor implements HttpInterceptor {
         if (error.status === 401) {
           console.log("Error 401 detectado: Redirigiendo a login");
           // Llamamos al método de logout
+          this.webSocketService.closeConnection();
           this.sessionService.logout();
           // Redirigir al usuario a la página de login
           this.router.navigate(['/login']);

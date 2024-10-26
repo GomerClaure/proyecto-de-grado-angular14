@@ -79,11 +79,10 @@ export class LoginComponent {
       err => {
         console.log('Error inesperado:', err);
         if (err.status === 401) {
-          this.showError('Usuario o contraseña incorrectos.');
-        } else if (err.status === 500) {
-          this.showError('Error del servidor. Intente nuevamente más tarde.');
+          console.log(err)
+          this.toastr.error(err.error.message, 'Error');
         } else {
-          this.showError('Ocurrió un error inesperado. Por favor, intente de nuevo.');
+          this.toastr.error('Ocurrió un error inesperado. Por favor, intente de nuevo.', 'Error');
         }
       }
     );

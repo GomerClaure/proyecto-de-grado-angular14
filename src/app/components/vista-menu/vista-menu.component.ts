@@ -74,16 +74,13 @@ export class VistaMenuComponent implements OnInit {
     this.espacioPorPlatillo = 22.5;
   }
 
-  onImgError(idElemento: string) {
-    console.log(idElemento);
-    let contenedor = document.getElementById(idElemento);
-    if (contenedor) {
-      contenedor.style.backgroundImage = 'url("assets/image/Imagen/rota.jpg")';
-    }
+  onError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = 'assets/image/Card.jpg';
   }
 
   portadaError(event: any) {
-    event.target.src = 'assets/image/Imagen/rota.jpg';
+    event.target.src = '/assets/image/imagen-rota.jpg';
   }
 
   transformarDatos(platillos: Platillo[]): PlatillosPorCategoria[] {

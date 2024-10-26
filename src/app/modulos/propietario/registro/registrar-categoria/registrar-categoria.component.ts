@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
@@ -10,12 +10,13 @@ import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.s
   templateUrl: './registrar-categoria.component.html',
   styleUrls: ['./registrar-categoria.component.scss']
 })
-export class RegistrarCategoriaComponent {
+export class RegistrarCategoriaComponent implements AfterViewInit,OnDestroy {
+  @ViewChild('modalRCategoria') modalElement!: ElementRef;
   imageUrl: string | ArrayBuffer | null;
   imageWidth: number = 380; 
   imageHeight: number = 280;
   formularioCategoria:FormGroup
-  selectedFile: File = new File([''], ''); 
+  selectedFile: File ; 
   id_restaurante:any;
 
   constructor(
@@ -24,10 +25,24 @@ export class RegistrarCategoriaComponent {
       nombre:[null,Validators.required]
     })
     this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
-    this.imageUrl = 'assets/image/27002.jpg';
+    this.imageUrl = 'assets/image/Imagen-rota.jpg';
+    this.selectedFile = new File([''], '');
    }
 
-     // Función para previsualizar la imagen seleccionada
+   ngAfterViewInit(): void {
+    if (this.modalElement) {
+      this.modalElement.nativeElement.addEventListener('hidden.bs.modal', () => {
+        this.limpiarModal();
+      });
+    } else {
+      console.warn("modalElement is undefined");
+    }
+  }
+  
+   ngOnDestroy(): void {
+    this.limpiarModal();
+   }
+
   onFileSelected(event: any) {
     this.selectedFile = <File>event.target.files[0];
     const file = event.target.files[0];
@@ -69,14 +84,12 @@ export class RegistrarCategoriaComponent {
       this.toast.info({detail:"INFO",summary:'Formulario invalido',sticky:true});
     }
   }
-  // clearImage() {
-  //   this.imageUrl = 'assets/image/270021.jpg';
-  //   this.selectedFile = new File([''], '');
-  // }
-  // closeModal() {
-  //   // Llama a clearImage() cuando se cierra el modal
-  //   this.clearImage();
-  // }
+
+  limpiarModal() {
+    this.selectedFile = new File([''], '');
+    this.formularioCategoria.reset();
+    this.imageUrl = 'assets/image/Imagen-rota.jpg';
+  }
   onImgError(event: any) {
     event.target.src = 'assets/image/Imagen-rota.jpg';
   }

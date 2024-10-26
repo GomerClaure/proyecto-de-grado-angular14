@@ -99,7 +99,7 @@ export class VisualizarQrComponent implements OnInit {
     );
   }
   generarQr() {
-    let direccionUrlMenu = environment.frontDominio + '/menu/' + this.menu.id;
+    let direccionUrlMenu = environment.frontDominio + '/vista/' + this.menu.id;
     this.menuService.generarQr(direccionUrlMenu).subscribe(
       (res: any) => {
         this.menu.qr = res.qr;
