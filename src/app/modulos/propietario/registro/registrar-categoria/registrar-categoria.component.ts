@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } fr
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
+import { ToastrService } from 'ngx-toastr';
 import { Categoria } from 'src/app/modelos/Categoria';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';	
 
@@ -19,8 +20,10 @@ export class RegistrarCategoriaComponent implements AfterViewInit,OnDestroy {
   selectedFile: File ; 
   id_restaurante:any;
 
-  constructor(
-    private formBuilder:FormBuilder, private categoriaService:CategoriaService ,private toast:NgToastService,private router:Router) { 
+  constructor(private formBuilder:FormBuilder, 
+              private categoriaService:CategoriaService ,
+              private toastr:ToastrService,
+              ) { 
     this.formularioCategoria=this.formBuilder.group({
       nombre:[null,Validators.required]
     })
@@ -68,20 +71,19 @@ export class RegistrarCategoriaComponent implements AfterViewInit,OnDestroy {
       this.categoriaService.saveCategoria(formData).subscribe(
         (data: any) => {
           console.log('Categoría guardada exitosamente:', data);
-          this.toast.success({detail:"SUCCESS",summary:'Categoria Registrada',duration:2000})
-          this.imageUrl = 'assets/image/27002.jpg';       
+          this.toastr.success('Categoria registrada correctamente','Exito')
+          this.imageUrl = 'assets/image/Imagen-rota.jpg';       
           this.formularioCategoria.reset();
-          // this.categoriaService.setModalClosed(true);
           this.categoriaService.categoriaEvento('crear', data.categoria)
         },
         error => {
           console.error('Error al guardar la categoría:', error);
-          this.toast.error({detail:"ERROR",summary:'Error al registrar la categoria',sticky:true})
+          this.toastr.error('Error al registrar la categoria','Error')
         }
       );
     } else {
       console.error('Formulario inválido o no se ha seleccionado ninguna imagen.');
-      this.toast.info({detail:"INFO",summary:'Formulario invalido',sticky:true});
+      this.toastr.info('Formulario vacio','Informacion');
     }
   }
 

@@ -1,88 +1,88 @@
 <div class="fondo">
     <div class="container">
-            <h2 class="titulo"><strong>Generar Menu</strong></h2>
-       <div class="row">
-            <div class="col">
-                <div class="row">
-                    <div class="col-12 d-flex justify-content-end">
-                        <div class="container mt-0 mb-5 pt-2 rounded-3 t1">
-                            <div class="apartadoImg text-center">
-                                <div class="d-flex flex-column align-items-center">
-                                    <div class="card book-card" [ngClass]="{'dark-mode-card': tema === 'dark-theme'}">
-                                        <div class="card-body">
-                                            <div class="d-flex justify-content-center">
-                                                <img 
+        <h2 class="titulo">Editar Menu</h2>
+        <div class="row">
+            <div class="col-12 col-lg-4 p-0">
+                <div class="col-12 d-flex justify-content-end">
+                    <div class="container mt-0 mb-5 pt-2 rounded-3 t1">
+                        <div class="apartadoImg text-center">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="card book-card" [ngClass]="{'dark-mode-card': tema === 'dark-theme'}">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-center h-100">
+                                            <img 
                                                 [src]="imgPortada"
-                                                class="img-fluid book-image"
+                                                class="w-100 h-100 book-image"
                                                 alt="Imagen seleccionada"
                                                 (error)="onImgError($event)" />
-                                            </div>
                                         </div>
-                                        <div class="card-footer d-flex justify-content-between align-items-center">
-                                            <label class="form-check form-switch mb-0">
-                                                <input class="form-check-input" type="checkbox" id="themeSwitch" (change)="cambiarTema($event)">
-                                                <span class="form-check-label" for="themeSwitch">Tema </span>
+                                    </div>
+                                    <div class="card-footer d-flex justify-content-between align-items-center flex-wrap">
+                                        <label class="form-check form-switch mt-2">
+                                            <input class="form-check-input" type="checkbox" id="themeSwitch" (change)="cambiarTema($event)">
+                                            <span class="form-check-label" for="themeSwitch">
+                                                <i class="bi bi-moon-fill"></i>
+                                                Tema 
+                                            </span>
+                                        </label>
+                                        <div class="d-flex align-items-center"> <!-- Contenedor para los botones -->
+                                            <label for="archivo-portada" class="btn btn-subir-imagen btn-sm mt-2 mx-1" data-bs-toggle="collapse">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" style="fill: rgb(255, 255, 255);">
+                                                    <path d="m9 13 3-4 3 4.5V12h4V5c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h8v-4H5l3-4 1 2z"></path>
+                                                    <path d="M19 14h-2v3h-3v2h3v3h2v-3h3v-2h-3z"></path>
+                                                </svg>
                                             </label>
-                                            <div class="spacer"></div>
-                                            <label for="archivo-portada" class="btn btn-editar mt-2 mx-1" data-bs-toggle="collapse">
-                                                <i class="bi bi-plus-square-dotted"></i> Subir Portada
-                                            </label>
-                                            <label class="btn btn-aceptar mt-2 mx-1" (click)="guardarMenu()">
-                                             Guardar Menu
+                                            <label class="btn btn-aceptar btn-sm mt-2 mx-1" (click)="guardarMenu()">
+                                            Guardar
                                             </label>
                                         </div>
                                     </div>
-                                    <!-- Input para seleccionar imagen -->
-                                    <input type="file" id="archivo-portada" class="visually-hidden" (change)="onFileSelected($event)">
+                                    
                                 </div>
+                                <input type="file" id="archivo-portada" class="visually-hidden" (change)="onFileSelected($event)">
                             </div>
                         </div>
                     </div>
-                    <hr>
-                    <div class="row row-nav">
-                        <ul class="nav nav-underline justify-content-center mb-4">
-                            <li class="nav-item ms-3" (click)="cambiarCategoria(0)">
-                                <a class="nav-link" [class.active]="activeCategoria === 0" role="tab" aria-controls="categoria0"
-                                    aria-selected="true">Todas</a>
-                            </li>
-                            <li class="nav-item ms-3" *ngFor="let categoria of categorias;" (click)="cambiarCategoria(categoria.id)">
-                                <a class="nav-link" [class.active]="activeCategoria === categoria.id" role="tab"
-                                    aria-selected="false">{{ categoria.nombre }}</a>
-                            </li>
-                            <!-- Agrega más elementos de navegación según sea necesario -->
-                        </ul>
-                    </div>
-            
-                    <div class="platillos row">
-            
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" *ngFor="let platillo of platillosFiltrados">
-                            <div class="card mb-3 position-relative" >
-                                <input type="checkbox" class="position-absolute top-0 end-0 m-3 check-img "
-                                    id="{{ 'check-plat' + platillo.id }}" (click)="cambiarDisponibilidadPlato($event,platillo.id)" [checked]="platillo.plato_disponible_menu">
-                                <img [src]="baseUrl+platillo.imagen" id="{{ 'img-card-plat' + platillo.id }}"
-                                    class="card-img-top imgn img-fluid w-100" alt="Platillo" (error)="onImgError($event)" />
-                                <div class="card-body">
+                </div>
+            </div>
+            <div class="col-12 col-lg-8 scrollable-column">
+                <div class="row row-nav">
+                    <ul class="nav nav-underline justify-content-center mb-4">
+                        <li class="nav-item ms-3" (click)="cambiarCategoria(0)">
+                            <a class="nav-link" [class.active]="activeCategoria === 0" role="tab" aria-controls="categoria0"
+                                aria-selected="true">Todas</a>
+                        </li>
+                        <li class="nav-item ms-3" *ngFor="let categoria of categorias;" (click)="cambiarCategoria(categoria.id)">
+                            <a class="nav-link" [class.active]="activeCategoria === categoria.id" role="tab"
+                                aria-selected="false">{{ categoria.nombre }}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="platillos row">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" *ngFor="let platillo of platillosFiltrados">
+                        <div class="card mb-3 position-relative">
+                            <input type="checkbox" class="position-absolute top-0 end-0 m-3 check-img"
+                                id="{{ 'check-plat' + platillo.id }}" (click)="cambiarDisponibilidadPlato($event,platillo.id)" [checked]="platillo.plato_disponible_menu">
+                            <img [src]="baseUrl+platillo.imagen" id="{{ 'img-card-plat' + platillo.id }}"
+                                class="card-img-top imgn img-fluid w-100" alt="Platillo" (error)="onImgError($event)" />
+                            <div class="card-body">
+                                <div class="row">
+                                    <h6 class="card-title mb-1">{{ platillo.nombre }}</h6>
+                                    <p class="card-text small mb-0">{{ platillo.descripcion }}</p>
+                                </div>
+                                <div class="card-footer">
                                     <div class="row">
-                                        <h6 class="card-title mb-1">{{ platillo.nombre }}</h6>
-                                        <p class="card-text small mb-0">{{ platillo.descripcion }}</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="row">
-                                            <div class="d-flex justify-content-between">
-                                                <small class="card-text mb-0">{{ platillo.categoria.nombre }}</small>
-                                                <small class="card-text mb-0">{{ platillo.precio+' bs' }}</small>
-                                            </div>
+                                        <div class="d-flex justify-content-between">
+                                            <small class="card-text mb-0">{{ platillo.categoria.nombre }}</small>
+                                            <small class="card-text mb-0">{{ platillo.precio+' bs' }}</small>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-    
                     </div>
-                </div> 
+                </div>
             </div> 
-       </div>
+        </div>
     </div>
-    <br><br><br>
 </div>
-<lib-ng-toast></lib-ng-toast>

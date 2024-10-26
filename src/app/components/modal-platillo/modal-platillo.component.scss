@@ -10,8 +10,8 @@
     max-height: 30vh;
     object-fit: cover;
     border: none;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .container-wrapper {
@@ -39,4 +39,12 @@
 .modal-footer {
     border: none;
     justify-content: center;
+}
+
+.dark-theme .glass-effect {
+    background: rgb(52 56 70 / 67%) !important;
+}
+
+.dark-theme .modal-cuerpo {
+ color: aliceblue !important;
 }

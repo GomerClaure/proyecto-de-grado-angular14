@@ -34,3 +34,8 @@ input[type="file"].hidden {
     padding: 30px;
     border-radius: 5px;
   }
+  .fixed-textarea {
+    resize: none; /* Desactivar la opción de redimensionar */
+    height: 150px; /* Ajusta la altura según tus necesidades */
+  }
+  
