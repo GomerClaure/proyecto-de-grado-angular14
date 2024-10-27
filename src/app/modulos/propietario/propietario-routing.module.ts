@@ -9,7 +9,7 @@ import { PlantillaQrComponent } from './menu/plantilla-qr/plantilla-qr.component
 import { RegistrarPlatilloComponent } from './registro/registrar-platillo/registrar-platillo.component';
 import { RegistrarCategoriaComponent } from './registro/registrar-categoria/registrar-categoria.component';
 import { RegistrarEmpleadoComponent } from './registro/registrar-empleado/registrar-empleado.component';
-import { ListaPedidosComponentR } from './reporte/lista-pedidosR/lista-pedidosR.component';
+import { ListaPedidosRComponent } from './reporte/lista-pedidosR/lista-pedidosR.component';
 import { ListaVentasComponent } from './reporte/lista-ventas/lista-ventas.component';
 import { PlantillaListaPedidosComponent } from './reporte/plantilla-lista-pedidos/plantilla-lista-pedidos.component';
 import { ManejoCuentaEmpleadoComponent } from './manejo-cuenta-empleado/manejo-cuenta-empleado.component';
@@ -56,7 +56,7 @@ const routes:Routes=[
         },
         {
           path: 'pedidosR',
-          component: ListaPedidosComponentR
+          component: ListaPedidosRComponent
       },
       {
           path: 'ventas',

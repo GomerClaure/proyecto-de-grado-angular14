@@ -9,7 +9,7 @@
           <!-- Nombre Platillo -->
           <div class="mb-3">
             <label>Nombre del platillo</label>
-            <input type="text" class="form-control" formControlName="nombre">
+            <input id='NombrePlatillo' type="text" class="form-control" formControlName="nombre">
             <div *ngIf="formularioPlatillo.get('nombre')?.invalid && formularioPlatillo.get('nombre')?.touched" class="text-danger">
               El nombre es obligatorio y debe tener al menos 3 caracteres.
             </div>

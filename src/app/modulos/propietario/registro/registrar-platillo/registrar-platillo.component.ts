@@ -58,7 +58,8 @@ export class RegistrarPlatilloComponent implements OnInit{
       this.registrarPlatillo();
     }
     else {
-      
+        this.toastr.info('Por favor, complete el formulario', 'Informacion');
+    
     }
   }
 
@@ -80,6 +81,7 @@ export class RegistrarPlatilloComponent implements OnInit{
           this.formularioPlatillo.reset();
          this.imageUrl = 'assets/image/Imagen-rota.jpg'
           console.log(success);
+          alert("Platillo registrado");
           this.toastr.success('Platillo Registrado con exito','Exito')
         },
         error => {
