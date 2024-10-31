@@ -15,11 +15,13 @@ export class ListaPedidosComponent implements OnInit {
   errorMessage: string = '';
   pedidosPorMesa: PedidosPorMesa[] = []; 
   mesa:number=0;
-
+ 
   id_restaurante:any;
   id_empleado:any;
 
-  constructor(private pedidoService: PedidoService,private pedidoServiceMesa:PedidosDeMesaService,private cuentaService:CuentaService) { }
+  constructor(private pedidoService: PedidoService,
+              private pedidoServiceMesa:PedidosDeMesaService,
+              private cuentaService:CuentaService) { }
 
   ngOnInit(): void {
     this.id_restaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
@@ -30,6 +32,7 @@ export class ListaPedidosComponent implements OnInit {
     this.pedidoService.getPedidos(this.id_empleado,this.id_restaurante).subscribe(
       (response) => {
         this.pedidosPorMesa = response.pedidos;
+        console.log("estooooo",this.pedidosPorMesa)
       },
       (error) => {
         this.errorMessage = 'Error al obtener los pedidos';
@@ -38,10 +41,8 @@ export class ListaPedidosComponent implements OnInit {
     );
   }
 
-  mostrar(nombreMesa: string,estado:string) {
-    const pedidosMesa = this.pedidosPorMesa.find(item => item.nombreMesa === nombreMesa)?.pedidos || [];
-    this.pedidoServiceMesa.setPedidosDeMesa(pedidosMesa,nombreMesa,estado);
-    console.log(pedidosMesa)
+  mostrar() {
+    this.pedidoServiceMesa.setPedidosDeMesa(this.pedidosPorMesa);
   }
   IdCuenta(id:number){
     this.cuentaService.saveId(id);
