@@ -32,4 +32,9 @@ export class CuentaService {
   getCuentasCerradas(id:number) {
     return this.http.get<any>(`${this.BASE_URL}/cuentas/cerradas/${id}`, { headers: this.headers });
   }
+
+  getCuentasAbiertas(idRestaurante:number){
+    return this.http.get<any>(`${this.BASE_URL}/cuentas/abiertas/${idRestaurante}`);
+
+  }
 }

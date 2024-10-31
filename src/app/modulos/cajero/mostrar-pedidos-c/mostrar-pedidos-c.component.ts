@@ -70,25 +70,11 @@ export class MostrarPedidosCComponent implements OnInit {
   }
 
   obtenerPedidos(): void {
-    this.pedidoService.getPedidos(this.id_empleado, this.id_restaurante).subscribe(
+    this.cuentaService.getCuentasAbiertas(this.id_restaurante).subscribe(
       (response) => {
-        this.pedidos = response.pedidos;
-        console.log('pedidos que obtengo', this.pedidos)
-        this.pedi = this.pedidos.filter(pedido => pedido.cuenta.estado === 'Abierta').map(pedido => ({
-          cuenta: pedido.cuenta,
-          estado: pedido.estado,
-          monto: pedido.monto,
-          platos: pedido.platos,
-          tipo: pedido.tipo,
-          updatedAt: pedido.updatedAt,
-          id: pedido.id,
-          id_estado: pedido.id_estado,
-          id_cuenta: pedido.id_cuenta,
-          id_empleado: pedido.id_empleado,
-          fecha_hora_pedido: pedido.fecha_hora_pedido
-        }));
-        console.log('Pedidos mapeados:', this.pedi);
-        this.agruparPedidosPorMesa();
+        this.pedidosPorMesa = response.cuentas;
+        console.log('pedidos que obtengo', this.pedidosPorMesa)
+        
       },
       (error) => {
         this.errorMessage = 'Error al obtener los pedidos';
