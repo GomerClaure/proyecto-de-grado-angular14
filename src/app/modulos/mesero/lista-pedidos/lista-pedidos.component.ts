@@ -41,9 +41,13 @@ export class ListaPedidosComponent implements OnInit {
     );
   }
 
-  mostrar() {
-    this.pedidoServiceMesa.setPedidosDeMesa(this.pedidosPorMesa);
+  mostrar(mesa: string) {
+    this.pedidosMostrar = [];
+    this.pedidosMostrar = this.pedidosPorMesa.filter(pedido => pedido.nombreMesa === mesa);
+    this.pedidoServiceMesa.setPedidosDeMesa(this.pedidosMostrar);
+    console.log('Pedidos para la mesa seleccionada:', this.pedidosMostrar);
   }
+  
   IdCuenta(id:number){
     this.cuentaService.saveId(id);
     console.log('este es el id',id);

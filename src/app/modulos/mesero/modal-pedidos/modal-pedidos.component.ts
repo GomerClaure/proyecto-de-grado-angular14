@@ -9,9 +9,7 @@ import { PedidosDeMesaService } from 'src/app/services/pedido/pedidos-de-mesa.se
 })
 export class ModalPedidosComponent implements OnInit {
   pedidosPorMesa: PedidosPorMesa[]  = []; 
-  pagedPedidos: any[] = []; // Para almacenar los pedidos formateados
-  currentPage: number = 1; // Página actual
-  pageCount: number = 0; // Total de páginas
+  pagedPedidos: any[] = [];
 
   constructor(private pedidoServiceMesa: PedidosDeMesaService) { }
 
