@@ -45,16 +45,7 @@
               placeholder="Correo" required>
             <div class="invalid-feedback">Correo es requerido y debe ser válido</div>
           </div>
-          <!-- Cédula -->
-          <div class="mb-3">
-            <label>Cédula de Identidad</label>
-            <input id="ci" formControlName="ci" class="form-control"
-              [ngClass]="{
-                'is-invalid': usuarioForm.get('ci')?.invalid && usuarioForm.get('ci')?.touched 
-              }"
-              placeholder="Cédula de Identidad" required>
-            <div class="invalid-feedback">Cédula es requerida, números enteros de al menos 7 dígitos</div>
-          </div>
+
           <!-- Nickname -->
           <div class="mb-3">
             <label>Nickname</label>

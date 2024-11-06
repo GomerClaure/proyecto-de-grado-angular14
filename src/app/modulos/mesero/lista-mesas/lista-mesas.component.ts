@@ -17,7 +17,8 @@ export class ListaMesasComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.mesaService.getMesas().subscribe(
+    let idRestaurante = sessionStorage.getItem('id_restaurante')||'0';
+    this.mesaService.getMesas(idRestaurante).subscribe(
       (res: any) => {
         this.mesas = res.mesas;
         console.log(this.mesas);

@@ -60,20 +60,24 @@ export class LoginComponent {
           let header = {
             'Authorization': 'Bearer ' + res.token,
           };
-          this.restauranteService.getRestaurante(header).subscribe(
-            (res) => {
-              console.log('Respuesta del restaurante: ' + res);
-              let restaurante: Restaurante = res.restaurante;
-              sessionStorage.setItem('nombre_restaurante', restaurante.nombre);
-              sessionStorage.setItem('tipo_establecimiento', restaurante.tipo_establecimiento);
-              this.showSuccess('Inicio de sesión exitoso. ¡Bienvenido a ' + restaurante.nombre + '!');
+          this.showSuccess('Inicio de sesión exitoso. ¡Bienvenido a LUGO!');
               
-                this.router.navigate(['/home']);
-            },
-            (error) => {
-              this.showError('No se pudo obtener la información del restaurante.');
-            }
-          );
+          this.router.navigate(['/home']);
+          let tipoUsuario = sessionStorage.getItem('tipo');
+          if(tipoUsuario !== 'Administrador'){
+            this.restauranteService.getRestaurante(header).subscribe(
+              (res) => {
+                console.log('Respuesta del restaurante: ' + res);
+                let restaurante: Restaurante = res.restaurante;
+                sessionStorage.setItem('nombre_restaurante', restaurante.nombre);
+                sessionStorage.setItem('tipo_establecimiento', restaurante.tipo_establecimiento);
+              },
+              (error) => {
+                this.showError('No se pudo obtener la información del restaurante.');
+              }
+            );
+          }
+          
         }
       },
       err => {

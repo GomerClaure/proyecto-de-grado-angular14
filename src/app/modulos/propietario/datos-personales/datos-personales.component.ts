@@ -28,7 +28,6 @@ export class DatosPersonalesComponent implements OnInit {
       apellido_paterno: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       apellido_materno: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       correo: ['', [Validators.required, Validators.email]],
-      ci: ['', [Validators.required, Validators.pattern(/^\d+$/), Validators.minLength(7)]],
       nickname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       foto_perfil: [null, fileValidator(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'], 2)]
     });
@@ -40,7 +39,6 @@ export class DatosPersonalesComponent implements OnInit {
       let propietario: Propietario = res.user;
       console.log(propietario);
       this.usuarioForm.patchValue(propietario.usuario);
-      this.usuarioForm.patchValue({ ci: propietario.ci });
       this.usuarioForm.patchValue({ foto_perfil: null });
       this.foto_perfil = this.url_base + propietario.usuario.foto_perfil;
       this.usuarioForm.markAllAsTouched();

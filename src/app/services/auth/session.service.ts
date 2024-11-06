@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Empleado, Propietario, Usuario } from 'src/app/modelos/usuario/Usuarios';
 import { tap } from 'rxjs/operators';
 import { environment } from "../../../environments/environment";
-import { BehaviorSubject} from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class SessionService {
   authStatus$ = this.authStatusSubject.asObservable();
   private token: string | null = null;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.token = sessionStorage.getItem('token_access');
   }
 
@@ -37,9 +37,8 @@ export class SessionService {
           sessionStorage.setItem('correo', usuario.correo);
           sessionStorage.setItem('nickname', usuario.nickname);
           sessionStorage.setItem('foto_perfil', usuario.foto_perfil);
-          if (res.user.tipo === 'Administrador') {
-            sessionStorage.setItem('tipo', 'Administrador');
-          } else if (res.user.tipo === 'Propietario') {
+          sessionStorage.setItem('tipo', usuario.tipo_usuario);
+          if (usuario.tipo_usuario === 'Propietario') {
             let propietario: Propietario = res.user;
             sessionStorage.setItem('id_administrador', propietario.id_administrador.toString());
             sessionStorage.setItem('id_usuario', propietario.id_usuario.toString());
@@ -48,27 +47,20 @@ export class SessionService {
             sessionStorage.setItem('fecha_registro', propietario.fecha_registro.toString());
             sessionStorage.setItem('pais', propietario.pais);
             sessionStorage.setItem('departamento', propietario.departamento);
-            sessionStorage.setItem('tipo', 'Propietario');
             sessionStorage.setItem('id_restaurante', propietario.id_restaurante.toString());
-          } else if (res.user.tipo === 'Empleado') {
+          } else if (usuario.tipo_usuario === 'Empleado') {
             let empleado: Empleado = res.user;
             sessionStorage.setItem('id_empleado', empleado.id.toString());
             sessionStorage.setItem('ci', empleado.ci.toString());
             sessionStorage.setItem('fecha_nacimiento', empleado.fecha_nacimiento.toString());
             sessionStorage.setItem('fecha_contratacion', empleado.fecha_contratacion.toString());
             sessionStorage.setItem('direccion', empleado.direccion);
-            sessionStorage.setItem('tipo', 'Empleado');
             sessionStorage.setItem('rol_empleado', empleado.id_rol.toString());
             sessionStorage.setItem('id_restaurante', empleado.id_restaurante.toString());
           }
         }
         this.authStatusSubject.next(true);
-        // return {message: 'Inicio de sesión exitoso.'}
       }),
-      // catchError(err => {
-      //   console.log(err);
-      //   return of(false);
-      // })
     );
   }
 
@@ -82,14 +74,14 @@ export class SessionService {
 
   public setToken(token: string) {
     this.token = token;
-    this.headers ={
+    this.headers = {
       'Authorization': 'Bearer ' + token,
     };
     sessionStorage.setItem('token_access', token);
   }
 
   public getToken(): string | null {
-      return this.token;
+    return this.token;
   }
 
   isLoggedIn(): boolean {
@@ -98,8 +90,8 @@ export class SessionService {
 
   getUsuario() {
     const usuario = {
-      id: sessionStorage.getItem('id_empleado')||'',
-      nombre: sessionStorage.getItem('nombre')||''
+      id: sessionStorage.getItem('id_empleado') || '',
+      nombre: sessionStorage.getItem('nombre') || ''
     };
     return usuario;
   }
@@ -117,16 +109,16 @@ export class SessionService {
 
   cambiarEstadoEmpleado(idEmpleado: string, estado: boolean) {
     var ruta = '/empleado/dar-baja/';
-    if(estado){
+    if (estado) {
       ruta = '/empleado/dar-alta/';
     }
-    return this.http.put<any>(`${this.BASE_URL}${ruta}${idEmpleado}`,null,{ headers: this.headers });
+    return this.http.put<any>(`${this.BASE_URL}${ruta}${idEmpleado}`, null, { headers: this.headers });
   }
 
   getDatosEmpleado() {
-    return this.http.get<any>(`${this.BASE_URL}/empleados`,{ headers: this.headers });
+    return this.http.get<any>(`${this.BASE_URL}/empleados`, { headers: this.headers });
   }
-  
+
 
   getDatosPersonales(id_usuario: string) {
     const params = new HttpParams().set('id_usuario', id_usuario);
@@ -144,7 +136,7 @@ export class SessionService {
     }
     return this.http.put<any>(`${this.BASE_URL}${ruta}/${id_usuario}`, null, { headers: this.headers });
   }
-  
+
   restablecerContra(contraseniaForm: FormData) {
     // mostrar Datos de contraseniaForm
     console.log(contraseniaForm);
@@ -157,7 +149,7 @@ export class SessionService {
   }
 
   solicitarCambioContra(solicitudForm: FormData) {
-    return this.http.post<any>(`${this.BASE_URL}/solicitar-cambio-contrasenia`, solicitudForm );
+    return this.http.post<any>(`${this.BASE_URL}/solicitar-cambio-contrasenia`, solicitudForm);
   }
-  
+
 }
