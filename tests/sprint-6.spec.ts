@@ -33,6 +33,65 @@ test('Registrar formulario pre-registro de propietarios', async ({ page }) => {
   const confirmationMessage = await page.locator('text=Formulario enviado correctamente');
   expect(await confirmationMessage.isVisible()).toBe(true);
 });
+test('Visualizar formularios de pre-registros de restaurantes recibidos', async ({ page }) => {
+  await page.goto('http://localhost:4200/');
+  await page.getByRole('link', { name: 'Login' }).click();
+  await page.locator('div').filter({ hasText: /^Nombre$/ }).getByRole('textbox').click();
+  await page.locator('div').filter({ hasText: /^Nombre$/ }).getByRole('textbox').fill('administrador');
+  await page.locator('input[type="password"]').click();
+  await page.locator('input[type="password"]').fill('12345678');
+  await page.getByRole('button', { name: 'Iniciar Sesión' }).click();
+  await page.locator('form i').click(); 
+  await page.getByRole('link', { name: 'Solicitudes' }).click();
+  //Aparece la prueba que se realizo como solicitud de restaurante 
+  await page.getByRole('row', { name: '1 Prueba 123456789 Nombre' }).getByRole('button').click();
+});
+test('Validar formulario de pre-registro de restaurantes', async ({ page }) => {
+  await page.goto('http://localhost:4200/');
+  await page.getByRole('link', { name: 'Login' }).click();
+  await page.locator('div').filter({ hasText: /^Nombre$/ }).getByRole('textbox').click();
+  await page.locator('div').filter({ hasText: /^Nombre$/ }).getByRole('textbox').fill('administrador');
+  await page.locator('input[type="password"]').click();
+  await page.locator('input[type="password"]').fill('12345678');
+  await page.getByRole('button', { name: 'Iniciar Sesión' }).click();
+  await page.getByRole('link', { name: 'Solicitudes' }).click();
+  await page.getByRole('row', { name: '1 Prueba 123456789 Nombre' }).getByRole('button').click();
+  await page.getByRole('button', { name: 'Aceptar' }).click();
+  await page.waitForSelector('text=Se acepto la solicitud', { timeout: 10000 });
+  const confirmationMessage = await page.locator('text=Se acepto la solicitud');
+  expect(await confirmationMessage.isVisible()).toBe(true);
+});
+test('Dar de Baja a un propietario', async ({ page }) => {
+  await page.goto('http://localhost:4200/');
+  await page.getByRole('link', { name: 'Login' }).click();
+  await page.locator('div').filter({ hasText: /^Nombre$/ }).getByRole('textbox').click();
+  await page.locator('div').filter({ hasText: /^Nombre$/ }).getByRole('textbox').fill('administrador');
+  await page.locator('input[type="password"]').click();
+  await page.locator('input[type="password"]').fill('12345678');
+  await page.getByRole('button', { name: 'Iniciar Sesión' }).click();
+  await page.getByRole('link', { name: 'Propietarios' }).click();
+  await page.locator('.card-img-container').first().click();
+  await page.getByRole('button', { name: 'Dar de Baja' }).click();
+  await page.waitForSelector('text=Se dio de baja la cuenta del propietario', { timeout: 10000 });
+  const confirmationMessage = await page.locator('text=Se dio de baja la cuenta del propietario');
+  expect(await confirmationMessage.isVisible()).toBe(true);
+});
+test('Dar de Alta a un propietario', async ({ page }) => {
+  await page.goto('http://localhost:4200/');
+  await page.getByRole('link', { name: 'Login' }).click();
+  await page.locator('div').filter({ hasText: /^Nombre$/ }).getByRole('textbox').click();
+  await page.locator('div').filter({ hasText: /^Nombre$/ }).getByRole('textbox').fill('administrador');
+  await page.locator('input[type="password"]').click();
+  await page.locator('input[type="password"]').fill('12345678');
+  await page.getByRole('button', { name: 'Iniciar Sesión' }).click();
+  await page.getByRole('link', { name: 'Propietarios' }).click();
+  await page.locator('.card-img-container').first().click();
+  await page.getByRole('button', { name: 'Dar de Alta' }).click();
+  await page.waitForSelector('text=Se dio de alta la cuenta del propietario', { timeout: 10000 });
+  const confirmationMessage = await page.locator('text=Se dio de alta la cuenta del propietario');
+  expect(await confirmationMessage.isVisible()).toBe(true);
+});
+
 
 
 

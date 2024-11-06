@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
   setColorAndImage(): void {
     switch (this.tiporestaurante.toLowerCase()) {
       case 'restaurante':
-        this.color = '#58d68d';
+        this.color = '#bb4732';
         this.imageUrl = 'assets/image/img-home/Restaurante.png';
         break;
       case 'cafeteria':
@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
         break;
       default:
         this.color = '#2e4053';
-        this.imageUrl = 'assets/image/img-home/Bar.png';
+        this.imageUrl = 'assets/image/img-home/Restaurante.png';
         break;
     }
   }

@@ -64,3 +64,29 @@ test('Editar Menu', async ({ page }) => {
     await page.getByRole('button', { name: 'Iniciar Sesión' }).click();
     await page.getByRole('link', { name: 'Registrar Pedido' }).click();
   });
+  test('Visualizar menú digital generar QR', async ({ page }) => {
+    await page.goto('http://localhost:4200/');
+    await page.getByRole('link', { name: 'Login' }).click();
+    await page.locator('div').filter({ hasText: /^Nombre$/ }).getByRole('textbox').click();
+    await page.locator('div').filter({ hasText: /^Nombre$/ }).getByRole('textbox').fill('propietario');
+    await page.locator('input[type="password"]').click();
+    await page.locator('input[type="password"]').fill('12345678');
+    await page.getByRole('button', { name: 'Iniciar Sesión' }).click();
+    await page.getByRole('button', { name: 'Menu' }).click();
+    await page.getByRole('link', { name: 'Generar QR' }).click();
+    await page.getByRole('button', { name: 'Generar Nuevo QR' }).click();
+  });
+  test('Visualizar menú digital como propietario', async ({ page }) => {
+    await page.goto('http://localhost:4200/');
+    await page.getByRole('link', { name: 'Login' }).click();
+    await page.locator('div').filter({ hasText: /^Nombre$/ }).getByRole('textbox').click();
+    await page.locator('div').filter({ hasText: /^Nombre$/ }).getByRole('textbox').fill('propietario');
+    await page.locator('input[type="password"]').click();
+    await page.locator('input[type="password"]').fill('12345678');
+    await page.getByRole('button', { name: 'Iniciar Sesión' }).click();
+    await page.getByRole('button', { name: 'Menu' }).click();
+    await page.getByText('Ver Menú').click();
+    await page.getByRole('button').nth(1).click();
+    await page.getByRole('cell', { name: 'Picante Mixto' }).click();
+    await page.getByRole('button', { name: 'Cerrar' }).click();
+  });
