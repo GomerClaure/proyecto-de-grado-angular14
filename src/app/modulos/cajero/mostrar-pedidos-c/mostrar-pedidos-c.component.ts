@@ -13,8 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./mostrar-pedidos-c.component.scss']
 })
 export class MostrarPedidosCComponent implements OnInit {
-  pedidos: DetallePedidoCajero[] = [];
-  pedi: DetallePedidoCajero[] = [];
+  pedidosPorMesaCopy: Cuenta[] = [];
   pedidosPorMesa: Cuenta[] = [];
   errorMessage: string = '';
   id_restaurante: number = 0;
@@ -51,10 +50,12 @@ export class MostrarPedidosCComponent implements OnInit {
             console.log('Cuenta existente:', cuentaExistente);
             if (cuentaExistente) {
               cuentaExistente.platos = response.cuenta.platos;
+              cuentaExistente.monto_total = response.cuenta.monto_total
             } else {
               console.log('Cuenta no encontrada, agregando cuenta:', cuentaObtenida);
               this.pedidosPorMesa.push(cuentaObtenida);
             }
+            this.pedidosPorMesaCopy = this.pedidosPorMesa
            console.log('pedidos por mesa:', this.pedidosPorMesa);
 
           },
@@ -74,79 +75,13 @@ export class MostrarPedidosCComponent implements OnInit {
       (response) => {
         this.pedidosPorMesa = response.cuentas;
         console.log('pedidos que obtengo', this.pedidosPorMesa)
-        
+        this.pedidosPorMesaCopy = this.pedidosPorMesa;
       },
       (error) => {
         this.errorMessage = 'Error al obtener los pedidos';
         console.error(error);
       }
     );
-  }
-
-  agruparPedidosPorMesa(): void {
-    this.pedidosPorMesa = [];
-
-    // Recorremos cada pedido y lo agrupamos en el array pedidosPorMesa
-    this.pedi.forEach(pedido => {
-      const nombreMesa = pedido.cuenta.mesa.nombre;
-      const estadoP = pedido.estado.nombre;
-      const idCuenta = pedido.cuenta.id;
-      const razon_social = pedido.cuenta.nombre_razon_social || 'Anonimo';
-      const nit = pedido.cuenta.nit ? Number(pedido.cuenta.nit) : 0;
-
-      // Filtrar cuentas con estado 'Pagada' o 'Cancelada'
-      if (pedido.cuenta.estado === 'Pagada' || pedido.cuenta.estado === 'Cancelada') {
-        return;
-      }
-
-      // Buscar si ya existe la cuenta para la mesa en pedidosPorMesa
-      let cuentaExistente = this.pedidosPorMesa.find(cuenta => cuenta.id_mesa === pedido.cuenta.mesa.id);
-
-      if (!cuentaExistente) {
-        // Si no existe, creamos una nueva cuenta con la estructura Cuenta
-        cuentaExistente = {
-          id: idCuenta,
-          id_mesa: pedido.cuenta.mesa.id,
-          nombre_mesa: nombreMesa,
-          estado: estadoP,
-          nit: nit,
-          nombre_razon_social: razon_social,
-          monto_total: 0,  // Inicializamos el monto total en 0
-          platos: []
-        };
-        // Agregamos la cuenta al array de pedidosPorMesa
-        this.pedidosPorMesa.push(cuentaExistente);
-      }
-
-      // Recorrer los platillos en el pedido
-      pedido.platos.forEach(platillo => {
-        const subtotal = platillo.precio * platillo.pivot.cantidad;
-
-        // Buscar si el platillo ya está en la cuenta
-        const platilloExistente = cuentaExistente!.platos.find(p => p.id_platillo === platillo.id);
-
-        if (platilloExistente) {
-          // Si el platillo ya existe, actualizamos la cantidad y el subtotal
-          platilloExistente.cantidad += platillo.pivot.cantidad;
-          platilloExistente.precio += subtotal;  // Actualizamos el precio
-        } else {
-          // Si el platillo no existe, lo agregamos
-          cuentaExistente!.platos.push({
-            id: platillo.id,
-            nombre: platillo.nombre,
-            precio: subtotal,
-            id_pedido: pedido.id,
-            id_platillo: platillo.id,
-            cantidad: platillo.pivot.cantidad
-          });
-        }
-
-        // Actualizar el monto total de la cuenta
-        cuentaExistente!.monto_total += subtotal;
-      });
-    });
-
-    console.log('pedidos por mesa:', this.pedidosPorMesa);
   }
 
   onSearchChange(searchValue: string): void {
@@ -158,9 +93,10 @@ export class MostrarPedidosCComponent implements OnInit {
   filtrarCuentas(): void {
     if (this.textoBuscador === '') {
       // Resetear la lista al estado original
-      this.agruparPedidosPorMesa();
+      this.pedidosPorMesa= this.pedidosPorMesaCopy;
     } else {
       // Filtrar por nombre de mesa, id de cuenta o razón social
+      this.pedidosPorMesa= this.pedidosPorMesaCopy;
       this.pedidosPorMesa = this.pedidosPorMesa.filter(pedido =>
         pedido.nombre_mesa.trim().toLowerCase().includes(this.textoBuscador) ||
         pedido.nombre_razon_social.toLowerCase().includes(this.textoBuscador)
