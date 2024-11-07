@@ -96,12 +96,15 @@ export class NavComponent implements OnInit, OnDestroy {
     window.removeEventListener('beforeunload', this.unloadHandler);
   }
 
-  marcarLeida(cantidad: number) {
+  marcarLeida() {
+    let cantidad = this.notificaciones.length;
     // [1, 2, 3, 4, 5] por ejemplo
     console.log('Cantidad de notificaciones a marcar como leídas: ', cantidad);
     let ids: any[] = [];
     for (let i = 0; i < cantidad; i++) {
-      if (this.notificaciones[i].read_at === null) {
+      console.log(i);
+      console.log(this.notificaciones[i].read_at )
+      if (this.notificaciones[i].read_at === null || this.notificaciones[i].read_at === '') {
         ids.push(this.notificaciones[i].id);
         this.notificaciones[i].read_at = new Date();
 

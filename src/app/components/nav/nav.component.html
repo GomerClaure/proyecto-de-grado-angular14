@@ -197,7 +197,7 @@
     <!--notificaciones apartado-->
     <div class="d-flex ms-auto ">
       <div class="dropdown-center mx-2">
-        <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" (click)="marcarLeida(5)"
+        <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" (click)="marcarLeida()"
           aria-expanded="false">
           <i class="bi bi-bell"></i>
 
@@ -227,7 +227,7 @@
             </a>
           </li>
           <li *ngIf="notificaciones.length != 0">
-            <a routerLink="/notificacion/lista-notificacion" (click)="marcarLeida(0)"
+            <a routerLink="/notificacion/lista-notificacion" (click)="marcarLeida()"
               class="list-group-item px-2 notificacion text-end">
               Ver todas <i class="bi bi-chevron-right"></i>
             </a>

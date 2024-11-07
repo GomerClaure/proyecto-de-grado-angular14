@@ -10,7 +10,7 @@ export interface Notificacion {
     mensaje: string;
     created_at: Date;
     creado_hace: string;
-    read_at: Date;
+    read_at: any;
 }
 // {
 //     "id": i,
