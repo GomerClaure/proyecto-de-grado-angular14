@@ -10,8 +10,8 @@ export class MenuService {
 
   constructor(private http: HttpClient) { }
 
-  public getMenu() {
-    return this.http.get<any>(`${this.BASE_URL}/menu`);
+  public getMenu(idRest: string) {
+    return this.http.get<any>(`${this.BASE_URL}/menu/datos/`+idRest);
   }
   public getMenuById(id: number) {
     return this.http.get<any>(`${this.BASE_URL}/menu/${id}`);

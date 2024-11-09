@@ -52,8 +52,8 @@ export class VisualizarQrComponent implements OnInit {
   }
 
   obtenerMenu() {
-    let idMenu = 0;
-    this.menuService.getMenu().subscribe(
+    let idRestaurante = sessionStorage.getItem('id_restaurante')||'0';
+    this.menuService.getMenu(idRestaurante).subscribe(
       (res: any) => {
         this.menu = res.menu;
         console.log(this.menu)
@@ -103,6 +103,7 @@ export class VisualizarQrComponent implements OnInit {
     this.menuService.generarQr(direccionUrlMenu).subscribe(
       (res: any) => {
         this.menu.qr = res.qr;
+        this.qrUrl = this.baseUrl + res.qr;
         this.mostrarElemento('campoImprimirQr');
         this.ocultarElemento('btnGenerarQr');
       },

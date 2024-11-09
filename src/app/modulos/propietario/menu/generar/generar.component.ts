@@ -55,7 +55,8 @@ export class GenerarComponent implements OnInit {
   }
 
   cargarPlatillos() {
-    this.menuService.getMenu().subscribe(
+    let idRestaurante = sessionStorage.getItem('id_restaurante')||'0';
+    this.menuService.getMenu(idRestaurante).subscribe(
       res => {
         console.log(res.platillos);
         this.menu = res.menu;
