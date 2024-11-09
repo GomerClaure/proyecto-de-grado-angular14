@@ -41,7 +41,7 @@ export class SessionService {
           if (usuario.tipo_usuario === 'Propietario') {
             let propietario: Propietario = res.user;
             sessionStorage.setItem('id_administrador', propietario.id_administrador.toString());
-            sessionStorage.setItem('id_usuario', propietario.id_usuario.toString());
+            sessionStorage.setItem('id_usuario', propietario.id.toString());
             sessionStorage.setItem('id_restaurante', propietario.id_restaurante.toString());
             sessionStorage.setItem('ci', propietario.ci.toString());
             sessionStorage.setItem('fecha_registro', propietario.fecha_registro.toString());
