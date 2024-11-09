@@ -1,10 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { DetallePedidoCajero } from 'src/app/modelos/PedidosMesa';
+import { Component, OnInit} from '@angular/core';
 import { CuentaService } from 'src/app/services/pedido/cuenta.service';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.service';
 import { Cuenta } from 'src/app/modelos/Cuenta';
-import { NgToastService } from 'ng-angular-popup';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -20,8 +18,7 @@ export class MostrarPedidosCComponent implements OnInit {
   id_empleado: number = 0;
   textoBuscador: string = '';
 
-  constructor(private pedidoService: PedidoService, 
-              private cuentaService: CuentaService,
+  constructor(private cuentaService: CuentaService,
               private pedidoCocinaService: PedidosCocinaService,
               private toastr:ToastrService) { }
 
@@ -35,19 +32,14 @@ export class MostrarPedidosCComponent implements OnInit {
   verificarPedidosNuevos(): void {
     console.log('Verificando pedidos nuevos');
     this.pedidoCocinaService.pedidos$.subscribe(update => {
-      // primero verificar si existe la cuenta en pedidosPorMesa, si existe, actualizarla, agregando el plato depues de hacer la pedicion por id pedido si no entonces pedir cuenta por id
       console.log('Pedido nuevo:', update);
       
-      //busco la cuenta por id
       if (update?.evento === 'PedidoCreado') {
         const idCuenta = update?.datos.idCuenta;
         this.cuentaService.getCuenta(idCuenta).subscribe(
           response => {
-            // Buscar si ya existe la cuenta para la mesa en pedidosPorMesa
             let cuentaExistente: Cuenta | undefined = this.pedidosPorMesa.find(cuenta => cuenta.id=== idCuenta);
             let cuentaObtenida: Cuenta = response.cuenta;
-            console.log('Cuenta obtenida:', cuentaObtenida);
-            console.log('Cuenta existente:', cuentaExistente);
             if (cuentaExistente) {
               cuentaExistente.platos = response.cuenta.platos;
               cuentaExistente.monto_total = response.cuenta.monto_total
@@ -57,7 +49,6 @@ export class MostrarPedidosCComponent implements OnInit {
             }
             this.pedidosPorMesaCopy = this.pedidosPorMesa
            console.log('pedidos por mesa:', this.pedidosPorMesa);
-
           },
           error => {
             console.error('Error al obtener la cuenta:', error);
@@ -65,8 +56,6 @@ export class MostrarPedidosCComponent implements OnInit {
         );
 
       }
-
-
     });
   }
 
@@ -74,12 +63,10 @@ export class MostrarPedidosCComponent implements OnInit {
     this.cuentaService.getCuentasAbiertas(this.id_restaurante).subscribe(
       (response) => {
         this.pedidosPorMesa = response.cuentas;
-        console.log('pedidos que obtengo', this.pedidosPorMesa)
         this.pedidosPorMesaCopy = this.pedidosPorMesa;
       },
       (error) => {
         this.errorMessage = 'Error al obtener los pedidos';
-        console.error(error);
       }
     );
   }
@@ -92,10 +79,8 @@ export class MostrarPedidosCComponent implements OnInit {
 
   filtrarCuentas(): void {
     if (this.textoBuscador === '') {
-      // Resetear la lista al estado original
       this.pedidosPorMesa= this.pedidosPorMesaCopy;
     } else {
-      // Filtrar por nombre de mesa, id de cuenta o razón social
       this.pedidosPorMesa= this.pedidosPorMesaCopy;
       this.pedidosPorMesa = this.pedidosPorMesa.filter(pedido =>
         pedido.nombre_mesa.trim().toLowerCase().includes(this.textoBuscador) ||

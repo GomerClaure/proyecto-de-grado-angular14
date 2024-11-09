@@ -4,6 +4,7 @@ import { Empleado } from 'src/app/modelos/usuario/Usuarios';
 import { environment } from 'src/environments/environment';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { NgToastService } from 'ng-angular-popup';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manejo-cuenta-empleado',
@@ -18,8 +19,8 @@ export class ManejoCuentaEmpleadoComponent implements OnInit {
   textoBuscador: string;
   usuariosFiltrados: Empleado[];
 
-  constructor(private sessionService: SessionService, private sanitizer: DomSanitizer,
-    private toast: NgToastService
+  constructor(private sessionService: SessionService, 
+              private toastr:ToastrService
   ) {
     this.usuarios = [];
     this.URL_BACKEND = environment.backendStorageUrl;
@@ -56,11 +57,11 @@ export class ManejoCuentaEmpleadoComponent implements OnInit {
         let usuario = this.usuarios.find(usuario => usuario.usuario.id == idUsuario);
         if(usuario){
           usuario.usuario.estado = estado
-          this.showSuccess('El estado del usuario ha sido cambiado');
+          this.toastr.success('El estado del usuario ha sido cambiado','Exito');
         }
       },
       (err) => {
-        this.showError('Error al cambiar el estado del usuario');
+        this.toastr.error('Error al cambiar el estado del usuario','Error');
         console.error(err);
       }
     );
@@ -101,16 +102,4 @@ getTipoEmpleado(idRol: number): string {
       return 'Desconocido';
   }
 }
-
-  showError(message: string) {
-    this.toast.error({ detail: "ERROR", summary: message, sticky: true });
-  }
-
-  showInfo(message: string) {
-    this.toast.info({ detail: "INFO", summary: message, sticky: true });
-  }
-  showSuccess(message: string) {
-    this.toast.success({ detail: 'SUCCESS', summary: message });
-
-  }
 }

@@ -51,11 +51,11 @@ export class ManejoCuentaPersonalComponent implements OnInit {
         let usuario = this.usuarios.find(usuario => usuario.id_usuario == idUsuario);
         if(usuario){
           usuario.usuario.estado = estado
-          this.showSuccess('El estado del usuario ha sido cambiado');
+          this.toastr.success('El estado del usuario ha sido cambiado','Exito');
         }
       },
       (err) => {
-        this.showError('Error al cambiar el estado del usuario');
+        this.toastr.error('Error al cambiar el estado del usuario','Error');
         console.error(err);
       }
     );
@@ -68,25 +68,14 @@ export class ManejoCuentaPersonalComponent implements OnInit {
     console.log(this.textoBuscador);
     
     if (this.textoBuscador === '') {
-        // Si el buscador está vacío, mostrar todos los usuarios
         this.usuariosFiltrados = [...this.usuarios];
     } else {
       console.log(this.usuarios);
-        // Filtrar los usuarios que coinciden con el texto del buscador incluido activo o inactivo
         this.usuariosFiltrados = this.usuarios.filter(usuario =>
             usuario.usuario.nombre.toLowerCase().includes(this.textoBuscador) ||
             usuario.usuario.apellido_paterno?.toLowerCase().includes(this.textoBuscador) ||
             usuario.usuario.apellido_materno?.toLowerCase().includes(this.textoBuscador) 
         );
     }
-  }
-  showError(message: string) {
-    this.toastr.error(message,'Error');
-  }
-  showInfo(message: string) {
-    this.toastr.info(message,'Informacion');
-  }
-  showSuccess(message: string) {
-    this.toastr.success(message,'Exito');
   }
 }
