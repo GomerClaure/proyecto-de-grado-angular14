@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.intentarRecuperar(0);
   }
-
   intentarRecuperar(intentosRealizados: number) {
     this.restaurantName = sessionStorage.getItem('nombre_restaurante') || 'Restaurante';
     this.tiporestaurante = sessionStorage.getItem('tipo_establecimiento') || '';
@@ -31,7 +30,6 @@ export class HomeComponent implements OnInit {
       this.cdr.detectChanges();
     }
   }
-
   setColorAndImage(): void {
     switch (this.tiporestaurante.toLowerCase()) {
       case 'restaurante':
@@ -40,7 +38,7 @@ export class HomeComponent implements OnInit {
         break;
       case 'cafeteria':
         this.color = '#6e2c00';
-        this.imageUrl = 'assets/image/img-home/Cafeteria.png';
+        this.imageUrl = 'assets/image/img-home/Cafeteria.png.png';
         break;
       case 'bar':
         this.color = '#f1948a';
@@ -64,7 +62,7 @@ export class HomeComponent implements OnInit {
         break;
       default:
         this.color = '#2e4053';
-        this.imageUrl = 'assets/image/img-home/Bar.png';
+        this.imageUrl = 'assets/image/img-home/Default.png';
         break;
     }
   }

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SessionService } from 'src/app/services/auth/session.service';
 import { environment } from 'src/environments/environment';
 import { NgToastService } from 'ng-angular-popup';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-request-password-reset',
@@ -12,25 +13,13 @@ import { NgToastService } from 'ng-angular-popup';
 export class RequestPasswordResetComponent {
   requestPasswordForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private sessionService: SessionService,
-    private toast: NgToastService) {  
+  constructor(private fb: FormBuilder, 
+              private sessionService: SessionService,
+              private toastr: ToastrService) {  
     this.requestPasswordForm = this.fb.group({
       correo: ['', [Validators.required, Validators.email]]
     });
   }
-
-  showError(message: string) {
-    this.toast.error({ detail: "ERROR", summary: message, sticky: true });
-  }
-
-  showInfo(message: string) {
-    this.toast.info({ detail: "INFO", summary: message, sticky: true });
-  }
-  showSuccess(message: string) {
-    this.toast.success({ detail: 'SUCCESS', summary: message });
-
-  }
-
   onSubmit() {
     if (this.requestPasswordForm.valid) {
       const direccion_frontend = environment.frontDominio+'/reset-password';
@@ -40,13 +29,15 @@ export class RequestPasswordResetComponent {
       this.sessionService.solicitarCambioContra(formData).subscribe(
         res => {
           console.log(res);
-          this.showSuccess('Solicitud de cambio de contraseña enviada');
+          this.toastr.success('Solicitud de cambio de contraseña enviada','Exito');
         },
         err => {
-          this.showError('Error al solicitar cambio de contraseña');
+          this.toastr.error('Error al solicitar cambio de contraseña','Error');
           console.log(err);
         }
       );
+    } else {
+      this.toastr.info('Por favor ingrese un correo válido','Informacion');
+    }
     }
   }
-}
