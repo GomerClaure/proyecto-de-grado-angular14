@@ -9,7 +9,7 @@ export class HomeComponent implements OnInit {
   restaurantName: string = '';
   tiporestaurante: string = '';
   color: string = '';
-  imageUrl: string = '';
+  imageUrl: string = 'assets/image/img-home/Default.png';
   maxIntentos: number = 5;
 
   constructor(private cdr: ChangeDetectorRef) { }
