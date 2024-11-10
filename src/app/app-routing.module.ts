@@ -6,6 +6,7 @@ import { CajeroGuard } from './guards/cajero.guard';
 import { CocineroGuard } from './guards/cocinero.guard';
 import { PropietarioGuard } from './guards/propietario.guard';
 import { VistaMenuComponent } from './components/vista-menu/vista-menu.component';
+import { AdminGuard } from './guards/administrador.guard';
 
 const routes: Routes = [
   { 
@@ -46,7 +47,8 @@ const routes: Routes = [
   },
   {
     path: 'administrador',
-    loadChildren: () => import('../app/modulos/administrador/administrador.module').then(m => m.AdministradorModule)
+    loadChildren: () => import('../app/modulos/administrador/administrador.module').then(m => m.AdministradorModule),
+    canActivate: [AdminGuard]
   },
   {
     path: 'empleados',

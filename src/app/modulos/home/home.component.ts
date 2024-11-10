@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
     this.intentarRecuperar(0);
   }
   intentarRecuperar(intentosRealizados: number) {
-    this.restaurantName = sessionStorage.getItem('nombre_restaurante') || 'Restaurante';
+    this.restaurantName = sessionStorage.getItem('nombre_restaurante') || 'Bienvenido a LUGO';
     this.tiporestaurante = sessionStorage.getItem('tipo_establecimiento') || '';
 
     if ((this.restaurantName === 'Restaurante' || this.tiporestaurante === '') && intentosRealizados < this.maxIntentos) {
