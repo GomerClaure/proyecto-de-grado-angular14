@@ -87,12 +87,13 @@ export class RegistrarPedidoComponent implements OnInit {
   getPlatillos() {
     this.platilloService.getPlatillosMenu().subscribe(
       (res: any) => {
+        console.log(res.platillo);
         // Filtrar solo los platillos de la categoría seleccionada y que coincidan con el término de búsqueda
         let filteredPlatillos = res.platillo.filter((platillo: any) => {
           if (this.idCategoriaSeleccionada && this.idCategoriaSeleccionada !== 0) {
-            return platillo.id_categoria === this.idCategoriaSeleccionada && platillo.disponible === true && platillo.nombre.toLowerCase().includes(this.busquedaNombre.toLowerCase());
+            return platillo.id_categoria === this.idCategoriaSeleccionada && platillo.disponible && platillo.nombre.toLowerCase().includes(this.busquedaNombre.toLowerCase());
           } else {
-            return platillo.disponible === true && platillo.nombre.toLowerCase().includes(this.busquedaNombre.toLowerCase());
+            return platillo.disponible && platillo.nombre.toLowerCase().includes(this.busquedaNombre.toLowerCase());
           }
         });
         this.platillos = filteredPlatillos;

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { SessionService } from 'src/app/services/auth/session.service';
 import { Router } from '@angular/router';
 import { NotificacionService } from 'src/app/services/notificacion/notificacion.service';
@@ -33,7 +33,8 @@ export class NavComponent implements OnInit, OnDestroy {
   public tipoEstablecimiento: string;
 
   constructor(private sessionService: SessionService, private router: Router,
-    private notificacionService: NotificacionService, private webSocketService: WebsocketService,
+    private notificacionService: NotificacionService, private elementRef: ElementRef,
+    private webSocketService: WebsocketService,
     private cocinaService: PedidosCocinaService) {
     this.notificaciones = [];
     this.idRestaurante = 0;
@@ -256,4 +257,15 @@ export class NavComponent implements OnInit, OnDestroy {
       }, 1000);
     }
   }
+
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: Event) {
+    const targetElement = event.target as HTMLElement;
+
+    // Verifica si el clic ocurrió fuera del menú y si el menú está abierto
+    if (this.isMenuCollapsed === false && !this.elementRef.nativeElement.contains(targetElement)) {
+      this.closeMenu(); // Cierra el menú
+    }
+  }
+
 }
