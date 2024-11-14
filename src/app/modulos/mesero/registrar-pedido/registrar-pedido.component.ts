@@ -9,7 +9,6 @@ import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { ActivatedRoute } from '@angular/router';
 import { DescripcionPedidoService } from 'src/app/services/detalle-pedido/descripcion-pedido.service';
 import { SessionService } from 'src/app/services/auth/session.service';
-import { NgToastService } from 'ng-angular-popup';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { SessionService } from 'src/app/services/auth/session.service';
 import { Empleado } from 'src/app/modelos/usuario/Usuarios';
 import { environment } from 'src/environments/environment';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { NgToastService } from 'ng-angular-popup';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

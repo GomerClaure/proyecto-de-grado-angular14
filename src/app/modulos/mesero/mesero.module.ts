@@ -7,7 +7,6 @@ import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
 import { RegistrarPedidoComponent } from './registrar-pedido/registrar-pedido.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgToastModule } from 'ng-angular-popup';
 import { ModalPedidosComponent } from './modal-pedidos/modal-pedidos.component';
 import { ModalEliminarPedidoComponent } from './modal-eliminar-pedido/modal-eliminar-pedido.component';
 import { ModalDatosCuentaComponent } from './modal-datos-cuenta/modal-datos-cuenta.component';
@@ -28,7 +27,6 @@ import { ModalDatosCuentaComponent } from './modal-datos-cuenta/modal-datos-cuen
     ComponentsModule,
     ReactiveFormsModule, 
     FormsModule,
-    NgToastModule 
   ],
 })
 export class MeseroModule { }

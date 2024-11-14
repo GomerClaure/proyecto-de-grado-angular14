@@ -29,7 +29,6 @@
     "jquery": "^3.7.1",
     "leaflet": "^1.9.4",
     "leaflet-geosearch": "^3.11.0",
-    "ng-angular-popup": "^0.2.0",
     "ng2-charts": "^3.1.0",
     "ngx-toastr": "^15.2.2",
     "proyecto-de-grado-angular14": "file:",

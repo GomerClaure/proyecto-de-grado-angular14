@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgToastService } from 'ng-angular-popup';
+import { ToastrService } from 'ngx-toastr';
 import { DescripcionPedidoService } from 'src/app/services/detalle-pedido/descripcion-pedido.service';
 
 
@@ -10,7 +10,7 @@ import { DescripcionPedidoService } from 'src/app/services/detalle-pedido/descri
 })
 export class ModalDetallePedidoComponent implements OnInit {
   descripcion: string = '';
-  constructor(private descripcionPedidoService:DescripcionPedidoService,private toast:NgToastService) { }
+  constructor(private descripcionPedidoService:DescripcionPedidoService,private toastr:ToastrService) { }
 
   ngOnInit(): void {
         
@@ -18,7 +18,7 @@ export class ModalDetallePedidoComponent implements OnInit {
   agregarDescripcion() {
     const isDescriptionAdded = this.descripcionPedidoService.addDescripcion(this.descripcion)
     if (isDescriptionAdded) {
-      this.toast.success({detail:"SUCCESS",summary:'Se agrego la descripcion',duration:2000});
+      this.toastr.success('Se agrego la descripcion','Exito');
     } else {
       // Si no se pudo agregar la descripción, puedes mostrar un mensaje de error o hacer cualquier otra acción necesaria
       console.error('Error al agregar la descripción del platillo');

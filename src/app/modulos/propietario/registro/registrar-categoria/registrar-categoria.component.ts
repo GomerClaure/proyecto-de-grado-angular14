@@ -1,9 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { NgToastService } from 'ng-angular-popup';
 import { ToastrService } from 'ngx-toastr';
-import { Categoria } from 'src/app/modelos/Categoria';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';	
 
 @Component({

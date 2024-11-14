@@ -5,7 +5,6 @@ import { SolicitudesComponent } from './solicitudes/solicitudes.component';
 import { ComponentsModule } from "../../components/components.module";
 import { DetalleComponent } from './detalle-solicitudes/detalle.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgToastModule } from 'ng-angular-popup';
 import { ManejoCuentaPersonalComponent } from './manejo-cuenta-personal/manejo-cuenta-personal.component';
 
 
@@ -21,7 +20,6 @@ import { ManejoCuentaPersonalComponent } from './manejo-cuenta-personal/manejo-c
     AdministradorRoutingModule,
     ComponentsModule,
     ReactiveFormsModule,
-    NgToastModule,
     FormsModule
 ]
 })

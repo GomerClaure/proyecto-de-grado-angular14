@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SessionService } from 'src/app/services/auth/session.service';
 import { environment } from 'src/environments/environment';
-import { NgToastService } from 'ng-angular-popup';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

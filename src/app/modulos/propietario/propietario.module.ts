@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PropietarioRoutingModule } from './propietario-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgToastModule } from 'ng-angular-popup';
 import { NgChartsModule } from 'ng2-charts';
 //listas
 import { ModalEliminarCategoriaComponent } from './listas/modal-eliminar-categoria/modal-eliminar-categoria.component';
@@ -58,7 +57,6 @@ import { DatosPersonalesComponent } from './datos-personales/datos-personales.co
     // ComponentsModule,
     ReactiveFormsModule,
     FormsModule,
-    NgToastModule,
     NgChartsModule
   ]
 })
