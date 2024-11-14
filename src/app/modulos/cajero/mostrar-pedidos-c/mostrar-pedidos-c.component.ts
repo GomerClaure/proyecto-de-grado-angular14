@@ -4,6 +4,9 @@ import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.service';
 import { Cuenta } from 'src/app/modelos/Cuenta';
 import { ToastrService } from 'ngx-toastr';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+
 
 @Component({
   selector: 'app-mostrar-pedidos-c',
@@ -188,5 +191,58 @@ export class MostrarPedidosCComponent implements OnInit {
       printWindow?.document.close();
     }
   }
+
+  descargarCuenta(cuentaId: number) {
+    const cuenta = this.cuentasPorMesa.find(p => p.id === cuentaId);
+    if (cuenta) {
+      // Configuración del documento para ancho de 8.5 cm
+      const doc = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: [85, 200], // Ancho de 8.5 cm y altura ajustable
+      });
+  
+      // Centro del documento en el ancho de 85 mm
+      const pageWidth = 85;
+      const centerX = pageWidth / 2;
+  
+      // Agregar encabezado y detalles de la cuenta centrados
+      doc.setFontSize(12);
+      doc.text('Restaurante LUGO', centerX, 10, { align: 'center' });
+      doc.setFontSize(10);
+      doc.text(`Mesa: ${cuenta.nombre_mesa}`, centerX, 20, { align: 'center' });
+      doc.text(`Razón Social: ${cuenta.nombre_razon_social}`, centerX, 30, { align: 'center' });
+      doc.text(`NIT: ${cuenta.nit}`, centerX, 40, { align: 'center' });
+  
+      // Configuración de la tabla centrada
+      autoTable(doc, {
+        startY: 50,
+        head: [['Plato', 'Cant.', 'Precio', 'Total']],
+        body: cuenta.platos.map(plato => [
+          plato.nombre,
+          plato.cantidad.toString(),
+          `${plato.precio.toString()} Bs`,
+          `${(plato.precio * plato.cantidad).toFixed(2)} Bs`,
+        ]),
+        theme: 'grid',
+        styles: { fontSize: 8, cellPadding: 1 },
+        columnStyles: {
+          0: { cellWidth: 30 }, // Plato
+          1: { cellWidth: 10 }, // Cantidad
+          2: { cellWidth: 20 }, // Precio
+          3: { cellWidth: 20 }, // Total
+        },
+        margin: { left: (pageWidth - 80) / 2 }, // Centrar tabla en 85 mm de ancho
+      });
+  
+      // Obtener la posición final de la tabla para añadir el total
+      const finalY = (doc as any).lastAutoTable.finalY + 10;
+      doc.text(`Total: ${cuenta.monto_total.toString()} Bs`, centerX, finalY, { align: 'center' });
+  
+      // Descargar el PDF
+      doc.save('cuenta_lugo.pdf');
+    }
+  }
+  
   
 }
