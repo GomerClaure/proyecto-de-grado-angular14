@@ -9,13 +9,13 @@ export const environment = {
   backendStorageUrl: 'http://localhost:8000',
   frontDominio: 'http://localhost:4200',
   websocketConfig:{
-    key: '1234',
-    cluster: 'mt1',
+    key: 'd28cefd4194509d86d53',
+    cluster: 'sa1',
     wsHost: 'localhost',
-    wsPort: 6001,
-    forceTLS: false,
-    enabledTransports: ['ws'],
-    wssPort: 6001,
+    // wsPort: 6001,
+    // forceTLS: false,
+    // enabledTransports: ['ws'],
+    // wssPort: 6001,
   }
 };
 /*
