@@ -1,29 +1,47 @@
 @media print {
-  .no-print {
+  /* Ocultar elementos no deseados */
+  .no-print, .container, .input-container, .btn, .fondo {
     display: none !important;
   }
-  body * {
-    visibility: hidden;
-  }
-  .card, .card * {
-    visibility: visible;
-  }
+
+  /* Ajustes para la impresión */
   .card {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
+    position: static !important;
+    width: auto;
+    overflow: visible;
+    page-break-inside: avoid;
   }
-  .card-header {
+
+  /* Evita que la tabla tenga scroll en la vista de impresión */
+  .card-body {
+    overflow: visible !important;
+    max-height: none !important;
+  }
+
+  /* Mostrar razón social y NIT en la parte superior */
+  .card-header, .card-footer {
     background: none !important;
+    text-align: center;
   }
-  .card-header h3, .card-footer h5 {
+
+  .card-header h4, .card-footer h5, .p-2 label {
+    color: #000 !important;
+    font-weight: normal;
     visibility: visible;
   }
-  .card-body table {
+
+  /* Ajustar la tabla al ancho completo */
+  .table {
     width: 100%;
+    border-collapse: collapse;
+  }
+
+  /* Eliminar estilos innecesarios en los bordes */
+  .table th, .table td {
+    border: 1px solid #000 !important;
   }
 }
+
 
 .card{
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);

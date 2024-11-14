@@ -1,6 +1,6 @@
 <body>
 <div class="fondo">
-  <h2 class="titulo no-print">Cuentas de pedidos</h2>
+  <h2 class="titulo no-print">Cuentas de cuentas</h2>
   <div class="container">
     <div class="input-container mb-3 no-print">
       <input type="text" class="form-control" placeholder="Buscar por nombre de mesa o razón social" [(ngModel)]="textoBuscador" (ngModelChange)="onSearchChange($event)">
@@ -10,17 +10,17 @@
     </svg>
     </div>
     <div class="row">
-      <div *ngFor="let pedido of pedidosPorMesa" class="col-lg-3 col-md-4 col-sm-6 mb-3">
-        <div class="card h-100" #printSection>
+      <div *ngFor="let cuenta of cuentasPorMesa" class="col-lg-3 col-md-4 col-sm-6 mb-3">
+        <div class="card h-100 " [id]="'print-section-' + cuenta.id">
           <div class="card-header">
             <div class="contenido-header"> 
-              <h4 class="text-center">{{ pedido.nombre_mesa }}</h4>
+              <h4 class="text-center">{{ cuenta.nombre_mesa }}</h4>
             </div>
           </div>
          <div class="p-2">
-          <label class="no-print">Estado: {{ pedido.estado }}</label><br>
-          <label>Razón Social: {{ pedido.nombre_razon_social }}</label><br>
-          <label>NIT: {{ pedido.nit }}</label>
+          <label class="no-print">Estado: {{ cuenta.estado }}</label><br>
+          <label>Razón Social: {{ cuenta.nombre_razon_social }}</label><br>
+          <label>NIT: {{ cuenta.nit }}</label>
          </div>
           <div class="card-body" style="overflow-y: auto; max-height: 200px;">
             <table class="table">
@@ -32,26 +32,26 @@
                 </tr>
               </thead>
               <tbody class="text-center">
-                <!-- Iterar sobre los pedidos en la mesa -->
-                <ng-container *ngFor="let pedidoItem of pedido.platos">
+                <!-- Iterar sobre los cuentas en la mesa -->
+                <ng-container *ngFor="let cuentaItem of cuenta.platos">
                   <tr>
-                    <td>{{ pedidoItem.nombre }}</td>
-                    <td>{{ pedidoItem.cantidad }}</td>
-                    <td>{{ pedidoItem.precio*pedidoItem.cantidad }} Bs</td>
+                    <td>{{ cuentaItem.nombre }}</td>
+                    <td>{{ cuentaItem.cantidad }}</td>
+                    <td>{{ cuentaItem.precio*cuentaItem.cantidad }} Bs</td>
                   </tr>
                 </ng-container>
               </tbody>
             </table>
           </div>
           <div class="card-footer">
-            <h5 class="text-end">Total: {{ pedido.monto_total }} Bs</h5>
+            <h5 class="text-end">Total: {{ cuenta.monto_total }} Bs</h5>
             <div>
               <div class="row no-print">
                 <div class="col-6 pt-0">
-                  <button class="btn btn-delete w-100 no-print" (click)="CerrarCuenta(pedido.id)">Cerrar</button>
+                  <button class="btn btn-delete w-100 no-print" (click)="CerrarCuenta(cuenta.id)">Cerrar</button>
                 </div>
                 <div class="col-6 pt-0">
-                  <button class="btn btn-subir-imagen w-100 no-print" (click)="imprimir()">Imprimir</button>
+                  <button class="btn btn-subir-imagen w-100 no-print" (click)="imprimirCuenta(cuenta.id)">Imprimir</button>
                 </div>
               </div>
             </div>

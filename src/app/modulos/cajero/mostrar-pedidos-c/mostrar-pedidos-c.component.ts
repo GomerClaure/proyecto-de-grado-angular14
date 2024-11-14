@@ -11,12 +11,13 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./mostrar-pedidos-c.component.scss']
 })
 export class MostrarPedidosCComponent implements OnInit {
-  pedidosPorMesaCopy: Cuenta[] = [];
-  pedidosPorMesa: Cuenta[] = [];
+  cuentasPorMesaCopy: Cuenta[] = [];
+  cuentasPorMesa: Cuenta[] = [];
   errorMessage: string = '';
   id_restaurante: number = 0;
   id_empleado: number = 0;
   textoBuscador: string = '';
+  nombreRestaurante: string = 'LUGO'; 
 
   constructor(private cuentaService: CuentaService,
               private pedidoCocinaService: PedidosCocinaService,
@@ -24,6 +25,7 @@ export class MostrarPedidosCComponent implements OnInit {
 
   ngOnInit(): void {
     this.id_restaurante = +sessionStorage.getItem('id_restaurante')!;
+    this.nombreRestaurante = sessionStorage.getItem('nombre_restaurante') || 'LUGO';
     this.id_empleado = +sessionStorage.getItem('id_empleado')!;
     this.obtenerPedidos();
     this.verificarPedidosNuevos();
@@ -38,17 +40,17 @@ export class MostrarPedidosCComponent implements OnInit {
         const idCuenta = update?.datos.idCuenta;
         this.cuentaService.getCuenta(idCuenta).subscribe(
           response => {
-            let cuentaExistente: Cuenta | undefined = this.pedidosPorMesa.find(cuenta => cuenta.id=== idCuenta);
+            let cuentaExistente: Cuenta | undefined = this.cuentasPorMesa.find(cuenta => cuenta.id=== idCuenta);
             let cuentaObtenida: Cuenta = response.cuenta;
             if (cuentaExistente) {
               cuentaExistente.platos = response.cuenta.platos;
               cuentaExistente.monto_total = response.cuenta.monto_total
             } else {
               console.log('Cuenta no encontrada, agregando cuenta:', cuentaObtenida);
-              this.pedidosPorMesa.push(cuentaObtenida);
+              this.cuentasPorMesa.push(cuentaObtenida);
             }
-            this.pedidosPorMesaCopy = this.pedidosPorMesa
-           console.log('pedidos por mesa:', this.pedidosPorMesa);
+            this.cuentasPorMesaCopy = this.cuentasPorMesa
+           console.log('pedidos por mesa:', this.cuentasPorMesa);
           },
           error => {
             console.error('Error al obtener la cuenta:', error);
@@ -62,8 +64,9 @@ export class MostrarPedidosCComponent implements OnInit {
   obtenerPedidos(): void {
     this.cuentaService.getCuentasAbiertas(this.id_restaurante).subscribe(
       (response) => {
-        this.pedidosPorMesa = response.cuentas;
-        this.pedidosPorMesaCopy = this.pedidosPorMesa;
+        console.log(response)
+        this.cuentasPorMesa = response.cuentas;
+        this.cuentasPorMesaCopy = this.cuentasPorMesa;
       },
       (error) => {
         this.errorMessage = 'Error al obtener los pedidos';
@@ -79,10 +82,10 @@ export class MostrarPedidosCComponent implements OnInit {
 
   filtrarCuentas(): void {
     if (this.textoBuscador === '') {
-      this.pedidosPorMesa= this.pedidosPorMesaCopy;
+      this.cuentasPorMesa= this.cuentasPorMesaCopy;
     } else {
-      this.pedidosPorMesa= this.pedidosPorMesaCopy;
-      this.pedidosPorMesa = this.pedidosPorMesa.filter(pedido =>
+      this.cuentasPorMesa= this.cuentasPorMesaCopy;
+      this.cuentasPorMesa = this.cuentasPorMesa.filter(pedido =>
         pedido.nombre_mesa.trim().toLowerCase().includes(this.textoBuscador) ||
         pedido.nombre_razon_social.toLowerCase().includes(this.textoBuscador)
       );
@@ -95,7 +98,7 @@ export class MostrarPedidosCComponent implements OnInit {
       response => {
         console.log('Cuenta cerrada:', response);
         this.toastr.success('Se cerro la cuenta correctamente','Exito');
-        this.pedidosPorMesa=this.pedidosPorMesa.filter(cuenta=>cuenta.id !==id)
+        this.cuentasPorMesa=this.cuentasPorMesa.filter(cuenta=>cuenta.id !==id)
       },
       error => {
         console.error('error al cerrar:', error);
@@ -103,7 +106,87 @@ export class MostrarPedidosCComponent implements OnInit {
       }
     );
   }
-  imprimir() {
-    window.print();
+  
+  imprimirCuenta(cuentaId: number) {
+    const cuenta = this.cuentasPorMesa.find(p => p.id === cuentaId);
+    if (cuenta) {
+      const printWindow = window.open('', '_blank');
+      printWindow?.document.write(`
+        <html>
+          <head>
+            <title>Imprimir Cuenta</title>
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                margin: 0px;
+              }
+              .container {
+                margin: 0 auto;
+                padding-inline:0px;
+                padding-top: 0px;
+                padding-bottom: 20px;
+              }
+              h1, h2 {
+                text-align: center;
+                color: #333;
+              }
+              .table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+              }
+              .table th, .table td {
+                padding: 10px;
+                text-align: left;
+                border: 1px solid #ddd;
+              }
+              .table th {
+                background-color: #f2f2f2;
+              }
+              .total {
+                text-align: right;
+                font-size: 18px;
+                font-weight: bold;
+                margin-top: 20px;
+              }
+            </style>
+          </head>
+          <body onload="window.print(); window.close();">
+            <div class="container">
+              <h1>Restaurante ${this.nombreRestaurante}</h1>
+              <h2>Mesa: ${cuenta.nombre_mesa}</h2>
+              <p><strong>Razón Social:</strong> ${cuenta.nombre_razon_social}</p>
+              <p><strong>NIT:</strong> ${cuenta.nit}</p>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Plato</th>
+                    <th>Cantidad</th>
+                    <th>Precio (Bs)</th>
+                    <th>Total (Bs)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${cuenta.platos.map(plato => `
+                    <tr>
+                      <td>${plato.nombre}</td>
+                      <td>${plato.cantidad}</td>
+                      <td>${plato.precio} Bs</td>
+                      <td>${(plato.precio * plato.cantidad).toFixed(2)} Bs</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+  
+              <div class="total">
+                <p><strong>Total: ${cuenta.monto_total} Bs</strong></p>
+              </div>
+            </div>
+          </body>
+        </html>
+      `);
+      printWindow?.document.close();
+    }
   }
+  
 }
