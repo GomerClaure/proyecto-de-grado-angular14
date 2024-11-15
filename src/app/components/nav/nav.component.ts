@@ -59,15 +59,19 @@ export class NavComponent implements OnInit, OnDestroy {
       if (this.isLoggedIn) {
         this.idRestaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
         // if (conexionWebSocket !== 'true') {
-          if (sessionStorage.getItem('tipo') === 'Empleado') {
-            console.log('Iniciando conexión websocket');
-            this.webSocketService.iniciarConexion();
-            localStorage.setItem('conexionWebSocket', 'true');
-            if (sessionStorage.getItem('rol_empleado') === '3' || sessionStorage.getItem('rol_empleado') === '2') {
+        if (sessionStorage.getItem('tipo') === 'Empleado') {
+          console.log('Iniciando conexión websocket');
+          this.webSocketService.iniciarConexion();
+          localStorage.setItem('conexionWebSocket', 'true');
+          if (sessionStorage.getItem('rol_empleado') === '3' ||
+            sessionStorage.getItem('rol_empleado') === '2') {
+            this.suscribirseEventosDePedido();
+          } else {
+            if(sessionStorage.getItem('rol_empleado') === '1'){
               this.suscribirseEventosDePedido();
-            } else {
               this.suscribirNotificacion();
             }
+          }
           // }
         }
 
@@ -97,25 +101,22 @@ export class NavComponent implements OnInit, OnDestroy {
     window.removeEventListener('beforeunload', this.unloadHandler);
   }
 
-  marcarLeida() {
+  marcarLeida(all = false) {
     let cantidad = this.notificaciones.length;
     // [1, 2, 3, 4, 5] por ejemplo
-    console.log('Cantidad de notificaciones a marcar como leídas: ', cantidad);
     let ids: any[] = [];
     for (let i = 0; i < cantidad; i++) {
-      console.log(i);
-      console.log(this.notificaciones[i].read_at )
       if (this.notificaciones[i].read_at === null || this.notificaciones[i].read_at === '') {
         ids.push(this.notificaciones[i].id);
         this.notificaciones[i].read_at = new Date();
 
       }
     }
-    if (cantidad === 0) {
+    if (all) {
+      console.log("ALL jejej")
       ids.push('all');
       this.notificacionesSinLeer = 0;
     }
-    console.log('ids', ids);
     if (ids.length > 0) {
       this.notificacionService.marcarLeida(ids, this.idRestaurante).subscribe(
         (data) => {
@@ -167,7 +168,7 @@ export class NavComponent implements OnInit, OnDestroy {
 
   irAMenu() {
 
-    this.router.navigateByUrl('/propietario/vista-menu/'+this.idRestaurante);
+    this.router.navigateByUrl('/propietario/vista-menu/' + this.idRestaurante);
   }
 
 
@@ -181,43 +182,50 @@ export class NavComponent implements OnInit, OnDestroy {
 
   }
 
-  desplegarNotificaciones(titulo: string, mensaje: string) {
-    if ("Notification" in window) {
-
-      // Pide permiso para mostrar notificaciones
-      Notification.requestPermission().then((permission) => {
-        if (permission === "granted") {
-          let direccionIcono = 'assets/image/notificacion.png';
-          if (titulo.includes('creó')) {
-            direccionIcono = 'assets/image/notificacion-icon.png';
-          } else if (titulo.includes('preparación')) {
-            direccionIcono = 'assets/image/notificacion-icon3.png';
-          } else if (titulo.includes('completó')) {
-            direccionIcono = 'assets/image/notificacion-icon2.png';
-          } else if (titulo.includes('canceló')) {
-            direccionIcono = 'assets/image/notificacion-icon5.webp';
-          } else if (titulo.includes('sirvió')) {
-            direccionIcono = 'assets/image/notificacion-icon4.png';
-          }
-          const notification = new Notification(titulo, {
-            body: mensaje,
-            icon: direccionIcono // Asegúrate de que tienes un icono en esta ruta
-          });
-
-          // Opcional: añade eventos a la notificación
-          notification.onclick = () => {
-            console.log("Notificación clicada");
-            // Puedes añadir aquí código para hacer algo cuando se clicke en la notificación
-          };
-        } else {
-          console.log("Notificación denegada");
-        }
-      }).catch((error) => {
-        console.error("Error al pedir permiso para notificaciones: ", error);
-      });
+  desplegarNotificaciones(titulo: string, mensaje: string): void {
+    if ('Notification' in window) {
+      if (Notification.permission === 'granted') {
+        this.mostrarNotificacion(titulo, mensaje);
+      } else if (Notification.permission === 'default') {
+        console.log('Pide permiso al usuario primero.');
+      } else {
+        console.warn('Permiso para notificaciones denegado.');
+      }
     } else {
-      console.error("El navegador no soporta notificaciones.");
+      console.error('Las notificaciones no están soportadas por este navegador.');
     }
+  }
+
+  mostrarNotificacion(titulo: string, mensaje: string): void {
+    const direccionIcono = this.obtenerIconoNotificacion(titulo);
+    const notification = new Notification(titulo, {
+      body: mensaje,
+      icon: direccionIcono
+    });
+
+    notification.onclick = () => {
+      console.log('Notificación clicada.');
+    };
+
+    const audio = document.getElementById('sonidoNotificacionMesero') as HTMLAudioElement;
+    audio?.play().catch(error => {
+      console.warn('No se pudo reproducir el sonido:', error);
+    });
+  }
+
+  obtenerIconoNotificacion(titulo: string): string {
+    if (titulo.includes('creó')) {
+      return 'assets/image/notificacion-icon.png';
+    } else if (titulo.includes('preparación')) {
+      return 'assets/image/notificacion-icon3.png';
+    } else if (titulo.includes('completó')) {
+      return 'assets/image/notificacion-icon2.png';
+    } else if (titulo.includes('canceló')) {
+      return 'assets/image/notificacion-icon5.webp';
+    } else if (titulo.includes('sirvió')) {
+      return 'assets/image/notificacion-icon4.png';
+    }
+    return 'assets/image/notificacion.png';
   }
 
   suscribirNotificacion() {

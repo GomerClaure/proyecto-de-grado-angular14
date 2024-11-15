@@ -213,7 +213,7 @@
             <p class="fs-5  border-bottom border-dark-subtle border-2">Notificaciones</p>
           </div>
           <li *ngIf="notificaciones.length == 0">
-            <a href="" class="list-group-item px-2 " style="width: 278px;">
+            <a routerLink="/home" (click)="closeMenu()" class="list-group-item px-2 " style="width: 278px;">
               No tienes notificaciones
             </a>
           </li>
@@ -227,7 +227,7 @@
             </a>
           </li>
           <li *ngIf="notificaciones.length != 0">
-            <a routerLink="/notificacion/lista-notificacion" (click)="marcarLeida()"
+            <a routerLink="/notificacion/lista-notificacion" (click)="marcarLeida(true)"
               class="list-group-item px-2 notificacion text-end">
               Ver todas <i class="bi bi-chevron-right"></i>
             </a>
@@ -243,6 +243,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
   </div>
+  <audio id="sonidoNotificacionMesero" src="assets/audio/notificacion-mesa-pedido.mp3" preload="auto"></audio>
 </nav>
 <!--Si el empleado es cocinero-->
 <nav *ngIf="esEmpleado() && getRol()=='3'" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark">

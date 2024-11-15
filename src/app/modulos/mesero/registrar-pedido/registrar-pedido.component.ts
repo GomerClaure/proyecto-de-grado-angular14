@@ -86,7 +86,6 @@ export class RegistrarPedidoComponent implements OnInit {
   getPlatillos() {
     this.platilloService.getPlatillosMenu().subscribe(
       (res: any) => {
-        console.log(res.platillo);
         // Filtrar solo los platillos de la categoría seleccionada y que coincidan con el término de búsqueda
         let filteredPlatillos = res.platillo.filter((platillo: any) => {
           if (this.idCategoriaSeleccionada && this.idCategoriaSeleccionada !== 0) {
@@ -97,7 +96,6 @@ export class RegistrarPedidoComponent implements OnInit {
         });
         this.platillos = filteredPlatillos;
         this.platillosFiltrados = this.platillos;
-        console.log(this.platillos);
       },
       err => {
         console.log(err);

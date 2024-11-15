@@ -19,23 +19,12 @@ export class ListaNotificacionComponent implements OnInit {
     this.notificacionService.getNotificacionesTodas().subscribe(
       (data) => {
         this.notificaciones = data.notificaciones;
-        console.log(this.notificaciones);
       },
       (error) => {
         console.error(error);
       }
     );
 
-    this.websocketService.iniciarConexion();
-    this.websocketService.listen('notificaciones'+sessionStorage.getItem('id_restaurante')).bind('Notificacion',
-     (data: Notificacion) => {
-      //guardar al principio del arreglo
-      
-      let nuevaNotificacion: Notificacion = data;
-      console.log(nuevaNotificacion);
-      this.notificaciones.unshift(data);
-    }
-    );
   }
 
 }
