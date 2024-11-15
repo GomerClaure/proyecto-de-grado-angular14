@@ -16,8 +16,8 @@ export class PlatillosService {
   getPlatillos(idRestaurante:any) {
     return this.http.get<any>(`${this.BASE_URL}/menu/platillos/${idRestaurante}`);
   }
-  getPlatillosMenu() {
-    return this.http.get<any>(`${this.BASE_URL}/menu/pedido/platillos`);
+  getPlatillosMenu(idRestaurante: string) {
+    return this.http.get<any>(`${this.BASE_URL}/menu/pedido/platillos/${idRestaurante}`);
   }
   storePlatillo(formData: FormData) {
     return this.http.post<any>(`${this.BASE_URL}/menu/platillo`, formData);

@@ -84,7 +84,8 @@ export class RegistrarPedidoComponent implements OnInit {
     }
   }
   getPlatillos() {
-    this.platilloService.getPlatillosMenu().subscribe(
+    let idPedidos = sessionStorage.getItem('id_restaurante')||'0';
+    this.platilloService.getPlatillosMenu(idPedidos).subscribe(
       (res: any) => {
         // Filtrar solo los platillos de la categoría seleccionada y que coincidan con el término de búsqueda
         let filteredPlatillos = res.platillo.filter((platillo: any) => {
