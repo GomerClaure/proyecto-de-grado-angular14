@@ -222,14 +222,14 @@ export class MostrarPedidosCComponent implements OnInit {
           plato.nombre,
           plato.cantidad.toString(),
           `${plato.precio.toString()} Bs`,
-          `${(plato.precio * plato.cantidad).toFixed(2)} Bs`,
+          // `${(plato.precio * plato.cantidad).toFixed(2)} Bs`,
         ]),
         theme: 'grid',
         styles: { fontSize: 8, cellPadding: 1 },
         columnStyles: {
           0: { cellWidth: 30 }, // Plato
           1: { cellWidth: 10 }, // Cantidad
-          2: { cellWidth: 20 }, // Precio
+          // 2: { cellWidth: 20 }, // Precio
           3: { cellWidth: 20 }, // Total
         },
         margin: { left: (pageWidth - 80) / 2 }, // Centrar tabla en 85 mm de ancho
