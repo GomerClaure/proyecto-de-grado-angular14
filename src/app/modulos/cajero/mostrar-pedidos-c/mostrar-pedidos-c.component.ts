@@ -165,7 +165,6 @@ export class MostrarPedidosCComponent implements OnInit {
                   <tr>
                     <th>Plato</th>
                     <th>Cantidad</th>
-                    <th>Precio (Bs)</th>
                     <th>Total (Bs)</th>
                   </tr>
                 </thead>
@@ -174,7 +173,6 @@ export class MostrarPedidosCComponent implements OnInit {
                     <tr>
                       <td>${plato.nombre}</td>
                       <td>${plato.cantidad}</td>
-                      <td>${plato.precio} Bs</td>
                       <td>${(plato.precio * plato.cantidad).toFixed(2)} Bs</td>
                     </tr>
                   `).join('')}
