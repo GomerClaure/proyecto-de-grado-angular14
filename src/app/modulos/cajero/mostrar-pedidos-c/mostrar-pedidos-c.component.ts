@@ -71,7 +71,8 @@ export class MostrarPedidosCComponent implements OnInit {
         this.cuentasPorMesa = response.cuentas;
         this.cuentasPorMesaCopy = this.cuentasPorMesa;
       },
-      (error) => {
+      error => {
+        console.error('Error al obtener pedidos:', error);
         this.errorMessage = 'Error al obtener los pedidos';
       }
     );
