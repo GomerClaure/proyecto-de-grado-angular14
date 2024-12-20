@@ -15,7 +15,6 @@ test('Notificar estados del pedido al mesero', async ({ page }) => {
 test('Cambiar estado de un pedido', async ({ page }) => {
     await page.goto('http://localhost:4200/');
     await page.getByRole('link', { name: 'Login' }).click();
-    await page.locator('div').filter({ hasText: /^Nombre$/ }).getByRole('textbox').click();
     await page.locator('div').filter({ hasText: /^Nombre$/ }).getByRole('textbox').fill('cocinero');
     await page.locator('input[type="password"]').click();
     await page.locator('input[type="password"]').fill('12345678');

@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { timeout } from 'rxjs';
 
 test('Modificar datos personales del propietario', async ({ page }) => {
   await page.goto('http://localhost:4200/');
@@ -61,6 +62,11 @@ test('Modificar datos de empleado', async ({ page }) => {
     await page.getByRole('button', { name: 'Iniciar Sesión' }).click();
     await page.getByRole('button', { name: 'Foto de perfil' }).click();
     await page.getByRole('link', { name: 'Datos personales' }).click();
+    await page.getByPlaceholder('Nombre').click();
+    await page.getByPlaceholder('Nombre').fill('Raina Prueba');
+    await page.waitForSelector('text=Datos actualizados correctamente',{timeout:10000});
+    const confirmationMessage=await page.locator('text=Datos actualizados correctamente');
+    expect(await confirmationMessage.isVisible()).toBe(true);
   });
 test('Dar de baja empleado', async ({ page }) => {
     await page.goto('http://localhost:4200/');

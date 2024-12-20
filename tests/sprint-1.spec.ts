@@ -75,7 +75,16 @@ test.describe('Sprint 1', () => {
     // Navegar a la lista de platillos y luego a la vista de edición de un platillo
     await page.click('text=Menu');
     await page.waitForSelector('text=Lista de platillos', { state: 'visible' });
-    //await page.waitForURL('http://localhost:4200/propietario/platillo');
+    await page.waitForURL('http://localhost:4200/propietario/platillo');
+    //Editar los datos y guardarlos
+    await page.fill('input[id="NombrePlatillo"]', 'Asado Confirmado');
+    await page.fill('input[formControlName="precio"]', '150');
+    await page.fill('textarea[formControlName="descripcion"]', 'Descripcion confirmada');
+    //Guardar cambios
+    await page.click('button[type="submit"]');
+    await page.waitForSelector('text=Platillo actualizado con exito', { timeout: 10000 });
+    const confirmationMessage = await page.locator('text=Platillo actualizado con exito');
+    expect(await confirmationMessage.isVisible()).toBe(true);
   });
   test('Editar platillo manejo de errores formulario', async ({ page }) => {
     await page.goto('http://localhost:4200/');
