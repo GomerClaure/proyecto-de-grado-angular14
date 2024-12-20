@@ -3,8 +3,10 @@ export interface Restaurante {
     id_menu: number;
     nombre: string;
     nit: number;
-    direccion: string;
+    latitud: string;
+    longitud:string;
     telefono: number;
     correo: string;
     licencia_funcionamiento: string;
+    tipo_establecimiento: string;
 }

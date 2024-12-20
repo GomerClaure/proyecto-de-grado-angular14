@@ -1,6 +1,5 @@
-<app-nav></app-nav><br><br>
 <div class="fondo">
-  <div class="container-fluid mt-4">
+  <div class="container">
     <div class="filtro">
       <ul class="nav nav-underline justify-content-center">
         <li class="nav-item ms-3" (click)="mostrarTodos()">
@@ -48,9 +47,11 @@
               </div>
             </div>
             <div class="card-body text-center pb-0">
+              <div class="contenido-card">
               <p class="fs-5 card-text mb-1">Mesa: <strong>{{pedido.mesa}}</strong></p>
               <p class="fs-5 card-text mb-1">Tipo: <strong>{{pedido.tipoPedido}}</strong></p>
               <p class="fs-5 card-text mb-1">Estado: <strong>{{pedido.estado}}</strong></p>
+            </div>
             </div>
           </div>
         </div>

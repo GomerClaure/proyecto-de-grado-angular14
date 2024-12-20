@@ -9,6 +9,7 @@ export interface Usuario{
     foto_perfil:string;
     token:string;
     estado:boolean;
+    tipo_usuario:string;
 }
 
 export interface Administrador{

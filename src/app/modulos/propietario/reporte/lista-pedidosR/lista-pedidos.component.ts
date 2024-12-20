@@ -185,7 +185,7 @@ export class ListaPedidosComponentR implements OnInit {
   }
 
   public imprimir() {
-    this.router.navigate(['reporte/plantilla-pedidos'], {
+    this.router.navigate(['propietario/plantilla-pedidos'], {
       state: {
         lineChartDataMonto: this.lineChartDataMonto,
         barChartDataCantidad: this.barChartDataCantidad,

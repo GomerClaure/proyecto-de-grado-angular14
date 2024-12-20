@@ -11,11 +11,17 @@ import { environment } from 'src/environments/environment';
 
 export class ModalPlatilloComponent implements OnInit {
   public baseUrl = environment.backendStorageUrl;
+  public imageUrl='';
   platillo: any;
-  constructor(private modalService: ModalMostrarPlatilloService) { }
-
-  ngOnInit(): void {
-    this.platillo = this.modalService.getPlatillo();
+  constructor(private modalService: ModalMostrarPlatilloService) { 
+     this.imageUrl='assets/image/Imagen-rota.jpg'
   }
 
+  ngOnInit(): void {
+    this.platillo = this.modalService.getPlatillo(); 
+  }
+  onError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = this.imageUrl;
+  }
 }

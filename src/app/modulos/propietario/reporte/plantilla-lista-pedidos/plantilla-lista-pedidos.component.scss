@@ -1,0 +1,20 @@
+
+.chart-container canvas {
+    width: 80% !important;
+    height: 300px !important
+}
+
+.chart-container {
+    padding-top: 40px;
+    padding-inline: 10px;
+    margin: 10px;
+}
+.cant-mesa{
+    padding-top: 80px;
+}
+
+@media print {
+    @page {
+      size: letter;
+    }
+}

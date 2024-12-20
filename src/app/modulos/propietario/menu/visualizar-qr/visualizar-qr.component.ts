@@ -35,7 +35,9 @@ export class VisualizarQrComponent implements OnInit {
       id_menu: 0,
       nombre: '',
       nit: 0,
-      direccion: '',
+      latitud: '',
+      longitud: '',
+      tipo_establecimiento:'',
       telefono: 0,
       correo: '',
       licencia_funcionamiento: '',
@@ -50,8 +52,8 @@ export class VisualizarQrComponent implements OnInit {
   }
 
   obtenerMenu() {
-    let idMenu = 0;
-    this.menuService.getMenu().subscribe(
+    let idRestaurante = sessionStorage.getItem('id_restaurante')||'0';
+    this.menuService.getMenu(idRestaurante).subscribe(
       (res: any) => {
         this.menu = res.menu;
         console.log(this.menu)
@@ -97,10 +99,11 @@ export class VisualizarQrComponent implements OnInit {
     );
   }
   generarQr() {
-    let direccionUrlMenu = environment.frontDominio + '/menu/' + this.menu.id;
+    let direccionUrlMenu = environment.frontDominio + '/vista/' + this.menu.id;
     this.menuService.generarQr(direccionUrlMenu).subscribe(
       (res: any) => {
         this.menu.qr = res.qr;
+        this.qrUrl = this.baseUrl + res.qr;
         this.mostrarElemento('campoImprimirQr');
         this.ocultarElemento('btnGenerarQr');
       },
@@ -118,7 +121,7 @@ export class VisualizarQrComponent implements OnInit {
   }
 
   onImgError(event: any) {
-    event.target.src = 'assets/image/27002.jpg';
+    event.target.src = 'assets/image/Imagen-rota.jpg';
   }
 
 }

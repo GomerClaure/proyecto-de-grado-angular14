@@ -73,3 +73,25 @@ export interface DetallePedidoCajero {
   id_empleado: number;
   fecha_hora_pedido: string;
 }
+
+
+export interface PedidosPorMesa {
+    id_cuenta:number;
+    monto_total:number;
+    nombreMesa: string;
+    estado_cuenta:string;
+    pedidos: PlatosPedidos[]; // Aquí puedes definir el tipo específico de los pedidos si lo deseas
+}
+export interface PlatosPedidos{
+  id_pedido:number;
+  estado:string;
+  platos: Platos[];
+  monto:number;
+}
+
+export interface Platos{
+  nombre:any;
+  precio_fijado:number;
+  cantidad:number;
+  detalle:string;
+}

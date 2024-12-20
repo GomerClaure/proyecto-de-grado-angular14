@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes,RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { RegistrarCategoriaComponent } from '../modulos/propietario/registro/registrar-categoria/registrar-categoria.component';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { VistaMenuComponent } from './vista-menu/vista-menu.component';
 import { ModalPlatilloComponent } from './modal-platillo/modal-platillo.component';
 import { MapComponent } from './map/map.component';
@@ -16,7 +16,7 @@ import { MapComponent } from './map/map.component';
     RegistrarCategoriaComponent,
     VistaMenuComponent,
     ModalPlatilloComponent,
-    MapComponent
+    MapComponent,
   ],
   exports:[
     NavComponent, 

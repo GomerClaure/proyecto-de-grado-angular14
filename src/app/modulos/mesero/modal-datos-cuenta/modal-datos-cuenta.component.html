@@ -2,15 +2,43 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalAgregarPlatilloLabel">Agregar datos para la cuenta</h5>
+        <h5 id="modalAgregarPlatilloLabel">Agregar datos para la cuenta</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Razón Social:</p>
-        <input type="text" class="form-control" id="razonSocialInput" [(ngModel)]="razonSocial">
-        <p>NIT:</p>
-        <input type="text" class="form-control" id="nitInput" [(ngModel)]="nit">
-      </div>
+        <form [formGroup]="cuentaForm">
+          <div class="mb-3">
+            <label>Razón Social:</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="razonSocial"
+              [ngClass]="{ 'is-invalid': cuentaForm.get('razonSocial')?.invalid && cuentaForm.get('razonSocial')?.touched }"
+            />
+            <div *ngIf="cuentaForm.get('razonSocial')?.invalid && cuentaForm.get('razonSocial')?.touched" class="invalid-feedback">
+              <div *ngIf="cuentaForm.get('razonSocial')?.errors?.['required']">Razón Social es requerida.</div>
+              <div *ngIf="cuentaForm.get('razonSocial')?.errors?.['pattern']">Debe contener solo letras y espacios.</div>
+              <div *ngIf="cuentaForm.get('razonSocial')?.errors?.['minlength']">Debe tener al menos 2 caracteres.</div>
+              <div *ngIf="cuentaForm.get('razonSocial')?.errors?.['maxlength']">No debe exceder los 100 caracteres.</div>
+            </div>
+        
+            <label>NIT:</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="nit"
+              [ngClass]="{ 'is-invalid': cuentaForm.get('nit')?.invalid && cuentaForm.get('nit')?.touched }"
+            />
+            <div *ngIf="cuentaForm.get('nit')?.invalid && cuentaForm.get('nit')?.touched" class="invalid-feedback">
+              <div *ngIf="cuentaForm.get('nit')?.errors?.['required']">NIT es requerido.</div>
+              <div *ngIf="cuentaForm.get('nit')?.errors?.['pattern']">Debe contener solo números.</div>
+              <div *ngIf="cuentaForm.get('nit')?.errors?.['minlength']">Debe tener al menos 5 caracteres.</div>
+              <div *ngIf="cuentaForm.get('nit')?.errors?.['maxlength']">No debe exceder los 15 caracteres.</div>
+            </div>
+          </div>
+        </form>
+        
+    </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-delete" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-aceptar" data-bs-dismiss="modal" (click)="guardarDatos()">Enviar</button>
@@ -18,4 +46,3 @@
     </div>
   </div>
 </div>
-<lib-ng-toast></lib-ng-toast>

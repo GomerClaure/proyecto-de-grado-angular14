@@ -7,7 +7,7 @@ import { Platillo } from 'src/app/modelos/Platillo';
 export class ModalMostrarPlatilloService {
  private platillo:any;
   constructor() {
-    this.platillo = {nombre:'',imagen:'',descripcion:''};
+    this.platillo = {nombre:'',imagen:'',descripcion:'',precio:''};
    }
 
    getPlatillo() {
@@ -18,5 +18,6 @@ export class ModalMostrarPlatilloService {
     this.platillo.nombre = platillo.nombre;
     this.platillo.imagen = platillo.imagen;
     this.platillo.descripcion=platillo.descripcion;
+    this.platillo.precio=platillo.precio;
   }
 }

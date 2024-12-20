@@ -17,7 +17,8 @@ export class ListaMesasComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.mesaService.getMesas().subscribe(
+    let idRestaurante = sessionStorage.getItem('id_restaurante')||'0';
+    this.mesaService.getMesas(idRestaurante).subscribe(
       (res: any) => {
         this.mesas = res.mesas;
         console.log(this.mesas);
@@ -31,7 +32,7 @@ export class ListaMesasComponent implements OnInit {
   RegistrarMesa(mesaSeleccionada:string){
     this.router.navigate(['mesero/registrar-pedido'],{queryParams:{mesaSeleccionada:mesaSeleccionada}});
   }
-  seleccionarMesa(id: any) {
+  seleccionarMesa(id: any,nombreMesa:string) {
     // Deseleccionamos todas las mesas
     this.mesaSeleccionada=id;
     const mesas = document.querySelectorAll('.card');
@@ -46,6 +47,6 @@ export class ListaMesasComponent implements OnInit {
     }
     const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
     sleep(1000)
-    this.router.navigate(['mesero/registrar-pedido'],{queryParams:{mesaSeleccionada:id}});
+    this.router.navigate(['mesero/registrar-pedido'],{queryParams:{mesaSeleccionada:id,nombreMesa:nombreMesa}});
   }
 }

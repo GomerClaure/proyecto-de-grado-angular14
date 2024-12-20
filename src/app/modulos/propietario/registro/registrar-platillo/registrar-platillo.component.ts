@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlatillosService } from 'src/app/services/platillos/platillos.service';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
-import { NgToastService } from 'ng-angular-popup';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registrar-platillo',
@@ -27,7 +27,7 @@ export class RegistrarPlatilloComponent implements OnInit{
   constructor(private formBuilder: FormBuilder,
               private platillosService:PlatillosService,
               private categoriasService:CategoriaService,
-              private toast:NgToastService
+              private toastr:ToastrService
             ) {
     this.formularioPlatillo = this.formBuilder.group({
       nombre: [null,Validators.required],
@@ -36,10 +36,8 @@ export class RegistrarPlatilloComponent implements OnInit{
       descripcion: [null,Validators.required],
       imagen:['']
     });
-    this.imageUrl = 'assets/image/27002.jpg';
+    this.imageUrl = 'assets/image/Imagen-rota.jpg';
   }
-
-  // Función para previsualizar la imagen seleccionada
   onFileSelected(event: any) {
     this.selectedFile = <File>event.target.files[0];
     const file = event.target.files[0];
@@ -54,7 +52,6 @@ export class RegistrarPlatilloComponent implements OnInit{
 
   onSubmit() {
     if (this.formularioPlatillo.valid) {
-      // Obtener los valores del formulario
       const datosPlatillo = this.formularioPlatillo.value;
       console.log(datosPlatillo);
       console.log(this.selectedFile);
@@ -68,7 +65,6 @@ export class RegistrarPlatilloComponent implements OnInit{
   registrarPlatillo() {
 
     if (this.formularioPlatillo.valid) {
-      // Obtener los valores del formulario
       let id_restaurante = sessionStorage.getItem('id_restaurante')||'';
       let datosForm = this.formularioPlatillo.value;
       console.log(datosForm);
@@ -82,13 +78,13 @@ export class RegistrarPlatilloComponent implements OnInit{
       this.platillosService.storePlatillo(formData).subscribe(
         success => {
           this.formularioPlatillo.reset();
-          this.imageUrl = 'assets/image/27002.jpg';
+         this.imageUrl = 'assets/image/Imagen-rota.jpg'
           console.log(success);
-          this.toast.success({detail:"SUCCESS",summary:'Platillo Registrado',duration:2000})
+          this.toastr.success('Platillo Registrado con exito','Exito')
         },
         error => {
           console.log(error);
-          this.toast.error({detail:"ERROR",summary:'Error al registrar platillo',sticky:true})
+          this.toastr.error('Error al registrar platillo','Error')
         }
       );
 
@@ -98,7 +94,6 @@ export class RegistrarPlatilloComponent implements OnInit{
     }
   }
 
-  // Método para obtener las categorías del servicio
   obtenerCategorias() {
     this.categoriasService.getCategorias(this.id_restaurante).subscribe(
       (data: any) => { 

@@ -1,25 +1,21 @@
-<app-nav></app-nav><br><br>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulación de Mesas</title>
-</head>
 <body class="fondo">
-  <br><br>
   <div class="container">
-    <div class=" row justify-content-center cont">
-      <h2 class="titulo"><strong>Mesas</strong></h2>
-    </div>
-    <br>
+    <h2 class="titulo text-center">Lista de Mesas</h2>
     <div class="row mesas">
-      <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 pb-3 justify-content-center d-flex " *ngFor="let mesa of mesas">
-        <div class="card mb-2" [attr.id]="mesa.id" (click)="seleccionarMesa(mesa.id)">
-          <div class="card-body text-center ">
-            <p class="mesa-nombre ">{{mesa.id}}</p>
+      <div
+        class="col-6 col-sm-4 col-md-3 col-lg-2 pb-3 d-flex justify-content-center"
+        *ngFor="let mesa of mesas"
+      >
+        <div
+          class="card mesa-card"
+          [attr.id]="mesa.id"
+          (click)="seleccionarMesa(mesa.id, mesa.nombre)"
+        >
+          <div class="card-body text-center">
+            <p class="mesa-nombre">{{ mesa.nombre }}</p>
           </div>
         </div>
       </div>
-      
     </div>
   </div>
 </body>

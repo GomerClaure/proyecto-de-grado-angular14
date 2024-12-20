@@ -13,7 +13,7 @@ import { ListaCuentasComponent } from './lista-cuentas/lista-cuentas.component';
     ListaCuentasComponent
   ],
   imports: [
-    CommonModule,
+    CommonModule, 
     CajeroRoutingModule,
     ComponentsModule,
     FormsModule

@@ -1,23 +1,32 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { PedidosPorMesa } from 'src/app/modelos/PedidosMesa';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PedidosDeMesaService {
-  private pedidosMesaSubject = new BehaviorSubject<{ pedidos: any[], nombreMesa: string ,est:string}>({ pedidos: [], nombreMesa: '',est:''});
-  pedidosMesa$ = this.pedidosMesaSubject.asObservable();
+  private pedidosPorMesaSubject = new BehaviorSubject<PedidosPorMesa[]>([]); // BehaviorSubject para `pedidosPorMesa`
   
-  constructor() { }
-  idPedido:number=0;
+  private idPedido: number = 0;
 
-  setPedidosDeMesa(pedidos: any[], nombreMesa: string,est:string) {
-    this.pedidosMesaSubject.next({ pedidos, nombreMesa,est});
+  constructor() { }
+
+  // Método para actualizar los pedidos
+  setPedidosDeMesa(pedidos: PedidosPorMesa[]) {
+    this.pedidosPorMesaSubject.next(pedidos);
   }
-  setIdPedido(id:number){
-    this.idPedido=id;
+
+  // Getter para obtener el observable directamente
+  get pedidosPorMesa$() {
+    return this.pedidosPorMesaSubject.asObservable();
   }
-  getIdpedido(){
+
+  setIdPedido(id: number) {
+    this.idPedido = id;
+  }
+
+  getIdpedido() {
     return this.idPedido;
   }
 }

@@ -9,7 +9,7 @@ import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { ActivatedRoute } from '@angular/router';
 import { DescripcionPedidoService } from 'src/app/services/detalle-pedido/descripcion-pedido.service';
 import { SessionService } from 'src/app/services/auth/session.service';
-import { NgToastService } from 'ng-angular-popup';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registrar-pedido',
@@ -37,13 +37,15 @@ export class RegistrarPedidoComponent implements OnInit {
   textoBuscador: string = '';
   platillosFiltrados: Platillo[] = [];
   id_restaurante: any;
+  nombreMesa:string='';
+  
   constructor(private descripcionPedidoService: DescripcionPedidoService,
     private route: ActivatedRoute,
     private platilloService: PlatillosService,
     public pedidoselectService: PedidoService,
     private categoriaService: CategoriaService,
     private sessionService: SessionService,
-    private toast: NgToastService
+    private toastr: ToastrService
   ) { }
 
 
@@ -53,6 +55,7 @@ export class RegistrarPedidoComponent implements OnInit {
     this.getCategorias();
     this.route.queryParams.subscribe(params => {
       this.numeroMesa = params['mesaSeleccionada'];
+      this.nombreMesa = params['nombreMesa']
     });
   }
   switchStateChanged() {
@@ -81,19 +84,19 @@ export class RegistrarPedidoComponent implements OnInit {
     }
   }
   getPlatillos() {
-    this.platilloService.getPlatillosMenu().subscribe(
+    let idPedidos = sessionStorage.getItem('id_restaurante')||'0';
+    this.platilloService.getPlatillosMenu(idPedidos).subscribe(
       (res: any) => {
         // Filtrar solo los platillos de la categoría seleccionada y que coincidan con el término de búsqueda
         let filteredPlatillos = res.platillo.filter((platillo: any) => {
           if (this.idCategoriaSeleccionada && this.idCategoriaSeleccionada !== 0) {
-            return platillo.id_categoria === this.idCategoriaSeleccionada && platillo.disponible === true && platillo.nombre.toLowerCase().includes(this.busquedaNombre.toLowerCase());
+            return platillo.id_categoria === this.idCategoriaSeleccionada && platillo.disponible && platillo.nombre.toLowerCase().includes(this.busquedaNombre.toLowerCase());
           } else {
-            return platillo.disponible === true && platillo.nombre.toLowerCase().includes(this.busquedaNombre.toLowerCase());
+            return platillo.disponible && platillo.nombre.toLowerCase().includes(this.busquedaNombre.toLowerCase());
           }
         });
         this.platillos = filteredPlatillos;
         this.platillosFiltrados = this.platillos;
-        console.log(this.platillos);
       },
       err => {
         console.log(err);
@@ -130,6 +133,11 @@ export class RegistrarPedidoComponent implements OnInit {
   guardarPedido() {
     this.platillosAGuardar = this.pedidoselectService.getPlatillosSeleccionados();
     this.platillosDescripciones = this.descripcionPedidoService.getDescripciones();
+
+    if (this.platillosAGuardar.length === 0) {
+      this.toastr.info('No se seleccionó ningún platillo', 'Información');
+      return; // Salir del método si no hay platillos seleccionados
+  }
 
     const platillosConDescripciones: PlatilloPedido[] = [];
     const platillosSinDescripcion: Map<number, PlatilloPedido> = new Map();
@@ -191,11 +199,11 @@ export class RegistrarPedidoComponent implements OnInit {
     this.pedidoselectService.storePedido(formData).subscribe(
       (response) => {
         console.error('se registró el pedido', response);
-        this.toast.success({ detail: "SUCCESS", summary: 'Se registró el pedido con éxito', duration: 2000 });
+        this.toastr.success('Se registro el pedido correctamente','Éxito');
       },
       (error) => {
         console.error('Error al almacenar el pedido', error);
-        this.toast.error({ detail: "ERROR", summary: 'No seleccionó ningún platillo', duration: 1500 });
+        this.toastr.error('El pedido no se registro','Error');
       }
     );
 
@@ -224,7 +232,7 @@ export class RegistrarPedidoComponent implements OnInit {
   }
 
   onImgError(event: any) {
-    event.target.src = 'assets/image/27002.jpg';
+    event.target.src = 'assets/image/Imagen-rota.jpg';
   }
 
 }

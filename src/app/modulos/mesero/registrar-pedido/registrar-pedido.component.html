@@ -1,50 +1,59 @@
-<app-nav></app-nav>
+<!-- <app-nav></app-nav> -->
 <div class="fondo">
 <div class="container">
-   <br><br><br>
-   <br>
-   <div class=" row justify-content-center cont">
-    <h2 class="titulo"><strong>Tomar Orden</strong></h2>
-  </div>
+    <h2 class="titulo">Tomar Orden</h2>
 <div class="row">
-    <div class="col">
-    <p>Mesa : {{ numeroMesa }}</p>
-    </div>
-    <div class="col d-flex justify-content-center align-items-center">
-    <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" [(ngModel)]="switchState" (ngModelChange)="switchStateChanged()" >
-        <label class="form-check-label" for="flexSwitchCheckChecked">Para llevar <i class="bi bi-cart-fill"></i></label> 
-    </div>
+    <div class="col-6">
+    <h4>{{nombreMesa}}</h4>
     </div>
 </div>
 
-  <!--Barra de busqueda-->
-<div class="row">
-    <div class="col">
-        <div class="col-md-12">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="textoBuscador" (ngModelChange)="onSearchChange($event)">
+<div class="row align-items-center mb-3">
+    <div class="col-12 col-md-4 mb-2 mb-md-0">
+        <div class="input-group">
+            <input 
+                type="text" 
+                class="form-control" 
+                placeholder="🔍 Buscar platillo"
+                [(ngModel)]="textoBuscador" 
+                (ngModelChange)="onSearchChange($event)"
+                style="padding-left: 1.5rem;" 
+            >
+        </div>
+    </div>
+    <div class="col-12 col-md-3 mb-2 mb-md-0">
+        <select class="form-select" aria-label="Seleccione una categoría" (change)="onChangeCategoria($event)">
+            <option selected disabled>Categoria</option>
+            <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
+        </select>
+    </div>
+    <div class="col-12 col-md-4 d-flex justify-content-between align-items-center mb-2 mb-md-0">
+        <div class="d-flex align-items-center">
+            <img 
+                src="../../../../assets/image/entrega-de-comida.png" 
+                alt="Icono de carrito" 
+                class="me-2 switch-icon"
+                style="width: 24px; height: 40px;"
+            >
+            <label class="form-check-label me-2 mb-0" for="flexSwitchCheckChecked">Para llevar</label>
+            <div class="form-check form-switch">
+                <input  
+                    class="form-check-input" 
+                    type="checkbox" 
+                    id="flexSwitchCheckChecked" 
+                    [(ngModel)]="switchState" 
+                    (ngModelChange)="switchStateChanged()"
+                >
             </div>
         </div>
-    </div> 
- <div class="col">
-        <div class="col-md-12">
-            <select class="form-select" aria-label="Default select example" (change)="onChangeCategoria($event)">
-                <option selected disabled>Categoria</option>
-                <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
-            </select>
-        </div> 
+        <button class="btn btn-generico" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasOrders" aria-controls="offcanvasOrders">
+            Visualizar Pedido
+        </button>
     </div>
-    <div class="col">
-        <div class="col-md-12">
-            <div style="text-align:center">
-                <button class="btn btn-registrar" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasOrders" aria-controls="offcanvasOrders">
-                    Ver Órdenes
-                </button>
-              </div>
-        </div>
-   </div>
 </div>
+
+
+
 <!--Espacio donde se muestran los platillos-->
 <div>
     <br>
@@ -109,12 +118,11 @@
     </ng-container>
      
       <ng-template #noSelection>
-          <p>No se ha seleccionado ningun platillo.</p>
+          <h5 class="no-platillo">No se ha seleccionado ningun platillo.</h5>
       </ng-template>
   </div>
   <div class="foot">
-  <button class="btn-registrar btn-sm justify-content-center" (click)="guardarPedido()">Confirmar Pedido</button>
+  <button class="btn-aceptar btn-sm justify-content-center m-2"  (click)="guardarPedido()">Confirmar Pedido</button>
   </div>
-  <lib-ng-toast></lib-ng-toast>
 </div>
-<app-modal-pedido></app-modal-pedido>
+<app-modal-detalle-pedido></app-modal-detalle-pedido>

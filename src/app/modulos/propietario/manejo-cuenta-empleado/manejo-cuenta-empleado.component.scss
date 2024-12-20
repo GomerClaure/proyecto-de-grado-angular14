@@ -1,6 +1,9 @@
 .card {
     transition: transform 0.2s, box-shadow 0.2s;
     .card-img-container {
+      background-image: url(../../../../assets/image/Card-removebg-preview.png);
+      background-position: center;
+      background-size: cover;
       height: 110px;
       display: flex;
       align-items: center;
@@ -16,9 +19,9 @@
       box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     }
   }
-  
-//   .modal-body img {
-//     max-width: 100%;
-//     height: auto;
-//   }
-  
+  .custom-shadow {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fff;
+  }

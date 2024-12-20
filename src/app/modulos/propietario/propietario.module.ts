@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PropietarioRoutingModule } from './propietario-routing.module';
-import { ComponentsModule } from 'src/app/components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgToastModule } from 'ng-angular-popup';
 import { NgChartsModule } from 'ng2-charts';
 //listas
 import { ModalEliminarCategoriaComponent } from './listas/modal-eliminar-categoria/modal-eliminar-categoria.component';
@@ -27,7 +25,7 @@ import { ListaPedidosComponentR } from './reporte/lista-pedidosR/lista-pedidos.c
 // manejo de cuentas
 import { ManejoCuentaEmpleadoComponent } from './manejo-cuenta-empleado/manejo-cuenta-empleado.component';
 import { DatosPersonalesComponent } from './datos-personales/datos-personales.component';
-
+// import { VistaMenuComponent } from '../../components/vista-menu/vista-menu.component';
 @NgModule({
   declarations: [
     //listas
@@ -50,15 +48,15 @@ import { DatosPersonalesComponent } from './datos-personales/datos-personales.co
     PlantillaListaPedidosComponent,
   // manejo de cuentas
     ManejoCuentaEmpleadoComponent,
-    DatosPersonalesComponent
+    DatosPersonalesComponent,
+    // VistaMenuComponent
   ],
   imports: [
     CommonModule,
     PropietarioRoutingModule,
-    ComponentsModule,
+    // ComponentsModule,
     ReactiveFormsModule,
     FormsModule,
-    NgToastModule,
     NgChartsModule
   ]
 })

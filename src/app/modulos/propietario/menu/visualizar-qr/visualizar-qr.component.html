@@ -1,11 +1,8 @@
-<app-nav></app-nav><br> 
 <div class="fondo">
-    <div class="container mt-5">
-        <div class="d-flex flex-column align-items-center">
+    <div class="container">
             <h2 class="titulo"><strong>Generar QR</strong></h2>
-            <br>
-          </div>
-        <div class="row">
+            <div>
+                  <div class="row">
             <div class="col-md-6 mx-auto">
                 <div class="card">
                     <div class="card-body d-flex flex-column align-items-center justify-content-center">
@@ -13,17 +10,17 @@
                              class="card-img-top img-fluid mb-4"
                              alt="Portada del menú" style="max-width: 300px; max-height: 300px;">
                     </div>
-                    <h5 class="text-center">{{'Menu de: '+restaurante.nombre}}</h5>
+                    <h5 class="text-center mt-2">{{'Menu de: '+restaurante.nombre}}</h5>
                    <br>
                 </div>
                 <div class="seccionboton">
                     <form>
-                        <button class="btn-registrar" id="btnGenerarQr" style="display: none;" (click)="generarQr()">
+                        <button class="btn btn-generico" id="btnGenerarQr" style="display: none;" (click)="generarQr()">
                             Generar Nuevo QR
                         </button>
                         <div id="campoImprimirQr" style="display: none;">
                             <div class="d-flex justify-content-center align-items-center mb-3">
-                                <button class="btn btn-primary mx-2" id="btnImprimirQr" (click)="imprimirQr()">Imprimir QR</button>
+                                <button class="btn btn-subir-imagen mx-2" id="btn btn-generico" (click)="imprimirQr()">Imprimir QR</button>
                                 <!-- Input para la cantidad de copias -->
                                 <input class="form-control w-25" type="number" id="cantidadQr" [(ngModel)]="cantidadQr" name="cantidadQr" min="1">
                             </div>
@@ -32,5 +29,6 @@
                 </div>
             </div>
         </div>
+            </div>
     </div>
 </div>

@@ -29,10 +29,12 @@ export class CuentaService {
   getCuenta(id: number) {
     return this.http.get<any>(`${this.BASE_URL}/show/cuenta/${id}`, { headers: this.headers });
   }
-  getCuentasAbiertas(idRestaurante: string) {
-    return this.http.get<any>(`${this.BASE_URL}/cuentas/abiertas/`+idRestaurante, { headers: this.headers });
+  getCuentasCerradas(id:number) {
+    return this.http.get<any>(`${this.BASE_URL}/cuentas/cerradas/${id}`, { headers: this.headers });
   }
-  getCuentasCerradas(idRestaurante: string) {
-    return this.http.get<any>(`${this.BASE_URL}/cuentas/cerradas/`+idRestaurante, { headers: this.headers });
+
+  getCuentasAbiertas(idRestaurante:number){
+    return this.http.get<any>(`${this.BASE_URL}/cuentas/abiertas/${idRestaurante}`);
+
   }
 }

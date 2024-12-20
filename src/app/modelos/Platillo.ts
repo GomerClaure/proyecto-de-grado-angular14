@@ -7,6 +7,8 @@ export interface Platillo {
     precio: number;
     imagen: string;
     id_menu: number;
+    id_categoria:number;
+    disponible:Boolean;
     categoria: Categoria;
     plato_disponible_menu: boolean;
 }

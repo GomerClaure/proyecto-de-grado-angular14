@@ -19,19 +19,11 @@ export class WebsocketService {
     this.closeConnection();
     this.socket = new Pusher(environment.websocketConfig.key, {
       cluster: environment.websocketConfig.cluster,
-      wsHost: environment.websocketConfig.wsHost,
-      wsPort: environment.websocketConfig.wsPort,
-      forceTLS: environment.websocketConfig.forceTLS,
-      //cambiar por wss si es cifrado
-      enabledTransports: ['ws'],
-      wssPort: environment.websocketConfig.wssPort,
-      // authEndpoint: 'http://localhost:8000/broadcasting/auth',
-      // auth: {
-      //   headers: {
-      //    'Authorization': 'Bearer ' + sessionStorage.getItem('token_access'),
-      //    "Access-Control-Allow-Origin": "*"
-      //   }
-      // }
+      // wsHost: environment.websocketConfig.wsHost,
+      // wsPort: environment.websocketConfig.wsPort,
+      // forceTLS: environment.websocketConfig.forceTLS,
+      // enabledTransports: ['ws'],
+      // wssPort: environment.websocketConfig.wssPort,
 
     })
   }

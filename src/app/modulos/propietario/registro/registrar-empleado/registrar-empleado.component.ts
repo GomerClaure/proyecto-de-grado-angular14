@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { NgToastComponent, NgToastService } from 'ng-angular-popup';
+import { ToastrService } from 'ngx-toastr';
 import { RegistroEmpleadoService } from 'src/app/services/registro-empleado/registro-empleado.service';
 
 @Component({
@@ -18,7 +18,10 @@ export class RegistrarEmpleadoComponent implements OnInit {
 
   @ViewChild('fotografiaEmpleado', { static: false }) fotografiaEmpleado!: ElementRef; // Referencia al input de archivo
   
-  constructor(private formBuilder: FormBuilder , private toast: NgToastService, private empleadoService:RegistroEmpleadoService) {
+  constructor(private formBuilder: FormBuilder , 
+              private toastr: ToastrService, 
+              private empleadoService:RegistroEmpleadoService) {
+
     this.formularioEmpleado = this.formBuilder.group({
       nombre: [null, Validators.required],
       apellidoPaterno: [null, Validators.required],
@@ -59,11 +62,7 @@ export class RegistrarEmpleadoComponent implements OnInit {
   onSubmit() {
     if (this.formularioEmpleado.invalid) {
       console.log("form invalido")
-      this.toast.info({
-        detail: 'Error',
-        summary: 'Por favor, complete todos los campos.',
-        duration: 2000
-      });
+      this.toastr.info('Por favor, complete todos los campos.','Informacion');
       return;
     }
      
@@ -95,7 +94,7 @@ export class RegistrarEmpleadoComponent implements OnInit {
         idRol = '3';
         formData.append('id_rol', idRol); 
     } 
-    console.log("id_rol:", idRol);
+  
     
     // Añadir la imagen solo si ha sido seleccionada
     if (this.imagenSeleccionada) {
@@ -114,12 +113,7 @@ export class RegistrarEmpleadoComponent implements OnInit {
 
     this.empleadoService.storeEmpleado(formData).subscribe(
       (response:any) => {
-        console.log('Empleado registrado con éxito:', response);
-        this.toast.success({
-          detail: 'Éxito',
-          summary: 'Empleado registrado correctamente.',
-          duration: 2000
-        });
+        this.toastr.success('Empleado registrado con exito.','Exito');
         this.formularioEmpleado.reset();
         this.fileName = 'Seleccione un archivo...';
         this.imagenSeleccionada = null;
@@ -127,11 +121,7 @@ export class RegistrarEmpleadoComponent implements OnInit {
       },
       (error: any) => {
         console.error('Error al registrar empleado:', error);
-        this.toast.error({
-          detail: 'Error',
-          summary: 'Error al registrar el empleado.',
-          duration: 2000
-        });
+        this.toastr.error('Error al registrar empleado.','Informacion');
       }
     );
   }

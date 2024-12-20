@@ -16,4 +16,5 @@ export interface FormularioPreRegistro{
     fotografia_propietario: string;
     estado: string;
     created_at: string;
+    numero_mesas: number;
 };

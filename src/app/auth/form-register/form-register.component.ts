@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PreRegistroService } from 'src/app/services/pre-registro/pre-registro.service';
 import { fileValidator } from 'src/app/validators/file-validator';
-import { NgToastService } from 'ng-angular-popup';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-form-register',
@@ -15,7 +15,7 @@ export class FormRegisterComponent implements OnInit, AfterViewInit {
   currentStep = 0;
 
   constructor(private fb: FormBuilder, private preRegistroService: PreRegistroService,
-    private toast: NgToastService
+    private toastr: ToastrService
   ) {
     this.restauranteForm = this.fb.group({
       pasoUno: this.fb.group({
@@ -38,7 +38,8 @@ export class FormRegisterComponent implements OnInit, AfterViewInit {
         apellidoMaterno: ['', Validators.required],
         correoPropietario: ['', [Validators.required, Validators.email]],
         cedulaIdentidad: ['', [Validators.required, Validators.pattern('^[0-9]{7}$')]],
-        fotografiaPropietario: [null, [Validators.required, fileValidator(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'], 2)]]
+        fotografiaPropietario: [null, [Validators.required, fileValidator(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'], 2)]],
+        numeroMesas: ['', [Validators.required, Validators.pattern(/^[0-9]+$/), Validators.min(1), Validators.max(20)]],
       })
     });
   }
@@ -94,18 +95,6 @@ export class FormRegisterComponent implements OnInit, AfterViewInit {
 
   }
 
-  showError(message: string) {
-    this.toast.error({ detail: "ERROR", summary: message, sticky: true });
-  }
-
-  showInfo(message: string) {
-    this.toast.info({ detail: "INFO", summary: message, sticky: true });
-  }
-  showSuccess(message: string) {
-    this.toast.success({ detail: 'SUCCESS', summary: message });
-
-  }
-
   onSubmit(): void {
     let formData = new FormData();
     formData.append('nombre_restaurante', this.restauranteForm.get('pasoUno.nombreRestaurante')?.value);
@@ -124,25 +113,26 @@ export class FormRegisterComponent implements OnInit, AfterViewInit {
     formData.append('fotografia_propietario', this.restauranteForm.get('pasoTres.fotografiaPropietario')?.value);
     formData.append('pais', this.restauranteForm.get('pasoDos.pais')?.value);
     formData.append('departamento', this.restauranteForm.get('pasoDos.departamento')?.value);
+    formData.append('numero_mesas', this.restauranteForm.get('pasoTres.numeroMesas')?.value);
     this.restauranteForm.markAllAsTouched();
     if (this.restauranteForm) {
       this.preRegistroService.savePreRegistro(formData).subscribe({
         next: response => {
           console.log('Respuesta del servidor:', response);
-          this.showSuccess('Formulario enviado correctamente');
+          this.toastr.success('Formulario enviado correctamente', 'Éxito');
           this.restauranteForm.reset();
           this.currentStep = 1;
         },
         error: error => {
           console.error('Error al enviar el formulario:', error);
-          this.showError('Error al enviar el formulario');
+          this.toastr.error('Error al enviar el formulario', 'Error');
         },
         complete: () => {
           console.log('Envio completado');
         }
       });
     } else {
-      this.showInfo('Campos no validos')
+      this.toastr.info('Campos no validos', 'Información');
     }
   }
 }

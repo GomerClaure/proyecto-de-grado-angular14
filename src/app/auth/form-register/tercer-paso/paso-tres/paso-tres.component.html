@@ -61,7 +61,7 @@
 
   <div class="row">
     <!-- Correo Electrónico del Propietario -->
-    <div class="form-group col-md-12 mb-1 p-1">
+    <div class="form-group col-md-6 mb-1 p-1">
       <label for="correoPropietario">Correo Electrónico del Propietario</label>
       <div class="input-group has-validation">
         <input id="correoPropietario" type="email" class="form-control" formControlName="correoPropietario" [ngClass]="{
@@ -73,7 +73,31 @@
         </div>
       </div>
     </div>
+    <div class="form-group col-md-6 mb-1 p-1">
+      <label for="mesasEstablecimiento">Mesas del Establecimiento</label>
+      <div class="input-group has-validation">
+        <input id="mesasEstablecimiento" type="number" class="form-control" formControlName="numeroMesas"
+          [ngClass]="{
+          'is-invalid': pasoTresForm.get('numeroMesas')?.invalid && pasoTresForm.get('numeroMesas')?.touched,
+          'is-valid': pasoTresForm.get('numeroMesas')?.valid && pasoTresForm.get('numeroMesas')?.touched
+        }" placeholder="Número de mesas" required />
+         <div *ngIf="pasoTresForm.get('numeroMesas')?.errors?.['required']" class="invalid-feedback">
+          El número de mesas es requerido.
+        </div>
+        <div *ngIf="pasoTresForm.get('numeroMesas')?.errors?.['min']" class="invalid-feedback">
+          El número de mesas debe ser al menos 1.
+        </div>
+        <div *ngIf="pasoTresForm.get('numeroMesas')?.errors?.['max']" class="invalid-feedback">
+          El número de mesas no puede ser mayor a 20.
+        </div>
+        <div *ngIf="pasoTresForm.get('numeroMesas')?.errors?.['pattern']" class="invalid-feedback">
+          Solo se permiten números enteros positivos.
+        </div>  
+      </div>
+    </div>
   </div>
+  <!-- Dropdown de mesas del establecimeinto -->
+  
 
   <div class="row">
     <!-- Fotografía del Propietario -->

@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/auth/session.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgToastService } from 'ng-angular-popup';
+import { RestauranteService } from 'src/app/services/restaurante/restaurante.service';
+import { Restaurante } from 'src/app/modelos/Restaurante';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +13,13 @@ import { NgToastService } from 'ng-angular-popup';
 })
 export class LoginComponent {
   formularioLogin: FormGroup;
-  mostrarPassword: boolean = false;  // Propiedad para controlar la visibilidad de la contraseña
+  mostrarPassword: boolean = false;  
 
   constructor(private formBuilder: FormBuilder,
               private sessionService: SessionService, 
               private router: Router,
-              private toast: NgToastService) { 
+              private toastr: ToastrService,
+              private restauranteService: RestauranteService) { 
 
     this.formularioLogin = this.formBuilder.group({ 
       usuario: [null, [Validators.required, Validators.minLength(4)]],
@@ -25,27 +28,27 @@ export class LoginComponent {
   }
 
   toggleMostrarPassword() {
-    this.mostrarPassword = !this.mostrarPassword;  // Alternar la visibilidad de la contraseña
+    this.mostrarPassword = !this.mostrarPassword; 
   }
 
   onSubmit() {
     if (this.formularioLogin.valid) {
       this.login();
     } else {
-      this.showInfo('Campos no válidos');
+      this.showInfo('Por favor, complete todos los campos correctamente.');
     }
   }
 
-  showError() {
-    this.toast.error({ detail: "ERROR", summary: 'Usuario no registrado', sticky: true });
+  showError(message: string) {
+    this.toastr.error(message, 'Error');
   }
 
   showInfo(message: string) {
-    this.toast.info({ detail: "INFO", summary: message, sticky: true });
+    this.toastr.info(message, 'Información');
   }
 
   showSuccess(message: string) {
-    this.toast.success({ detail: message, summary: 'Success', duration: 500 });
+    this.toastr.success(message, 'Éxito');
   }
 
   public login() {
@@ -53,14 +56,39 @@ export class LoginComponent {
     this.sessionService.login(usuario, password).subscribe(
       res => {
         if (res) {
-          alert('Inicio de sesión exitoso.');
-          this.showSuccess('Hecho');
+          console.log(res);
+          let header = {
+            'Authorization': 'Bearer ' + res.token,
+          };
+          this.showSuccess('Inicio de sesión exitoso. ¡Bienvenido a LUGO!');
+              
           this.router.navigate(['/home']);
+          let tipoUsuario = sessionStorage.getItem('tipo');
+          if(tipoUsuario !== 'Administrador'){
+            this.restauranteService.getRestaurante(header).subscribe(
+              (res) => {
+                console.log('Respuesta del restaurante: ' + res);
+                let restaurante: Restaurante = res.restaurante;
+                sessionStorage.setItem('nombre_restaurante', restaurante.nombre);
+                sessionStorage.setItem('tipo_establecimiento', restaurante.tipo_establecimiento);
+              },
+              (error) => {
+                this.showError('No se pudo obtener la información del restaurante.');
+              }
+            );
+          }
+          
         }
       },
       err => {
-        alert('Usuario o contraseña incorrectos.');
-        this.showError();
-      });
+        console.log('Error inesperado:', err);
+        if (err.status === 401) {
+          console.log(err)
+          this.toastr.error(err.error.message, 'Error');
+        } else {
+          this.toastr.error('Ocurrió un error inesperado. Por favor, intente de nuevo.', 'Error');
+        }
+      }
+    );
   }
 }

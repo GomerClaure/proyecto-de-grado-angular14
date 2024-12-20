@@ -74,17 +74,13 @@ export class VistaMenuComponent implements OnInit {
     this.espacioPorPlatillo = 22.5;
   }
 
-  onImgError(idElemento: string) {
-    console.log(idElemento);
-    let contenedor = document.getElementById(idElemento);
-    if (contenedor) {
-      contenedor.style.backgroundImage = 'url("assets/image/270021.jpg")';
-    }
-    // event.target.src = 'assets/image/2700.jpg';
+  onError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = 'assets/image/Card.jpg';
   }
 
   portadaError(event: any) {
-    event.target.src = 'assets/image/pp.png';
+    event.target.src = '/assets/image/imagen-rota.jpg';
   }
 
   transformarDatos(platillos: Platillo[]): PlatillosPorCategoria[] {
@@ -199,7 +195,8 @@ export class VistaMenuComponent implements OnInit {
     let nom = platillo.nombre;
     let img = platillo.imagen;
     let desc = platillo.descripcion;
+    let precio= platillo.precio;
     this.modalService.openModal(platillo);
-    console.log(nom, img, desc);
+    console.log(nom, img, desc, precio);
   }
 }
