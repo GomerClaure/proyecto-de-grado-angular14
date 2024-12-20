@@ -14,7 +14,7 @@ export class RestauranteService {
 
   constructor(private http: HttpClient) { }
 
-  public getRestaurante() {
-    return this.http.get<any>(`${this.BASE_URL}/restaurante`, { headers: this.headers });
+  public getRestaurante(header = this.headers) {
+    return this.http.get<any>(`${this.BASE_URL}/restaurante`, { headers: header });
   }
 }

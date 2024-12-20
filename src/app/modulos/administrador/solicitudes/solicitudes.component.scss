@@ -1,0 +1,34 @@
+.fixed-button-container {
+  position: sticky; /* o position: fixed; dependiendo de la necesidad */
+  top: 0;
+  z-index: 1000;
+  background-color: white; /* Asegúrate de que el botón no quede superpuesto con el contenido */
+  padding: 10px 0; /* Opcional: espacio alrededor del botón */
+}
+
+// button.btn-generico {
+//   width: auto;
+//   height: auto;
+// }
+
+@media (max-width: 576px) {
+  td, th {
+    font-size: 0.9rem;
+  }
+  button {
+    width: 100%;
+  }
+  .d-flex {
+    flex-direction: column;
+  }
+
+  .d-flex button {
+    position: relative !important;
+    align-self: flex-start !important;
+  }
+
+  .d-flex h1 {
+    margin-top: 10px;
+    text-align: center;
+  }
+}

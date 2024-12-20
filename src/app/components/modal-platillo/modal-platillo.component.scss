@@ -1,0 +1,50 @@
+.glass-effect {
+    background: rgba(255, 255, 255, 0.674);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: none;
+}
+
+.img-fluid {
+    width: 100%;
+    max-height: 30vh;
+    object-fit: cover;
+    border: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.container-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 3%;
+}
+
+.descripcion {
+    width: 100%;
+    padding: 10px;
+    overflow: auto;
+    max-height: 200px;
+    word-wrap: break-word;
+}
+
+.modal-header {
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: rgb(40, 36, 57);
+    padding: 0;
+}
+
+.modal-footer {
+    border: none;
+    justify-content: center;
+}
+
+.dark-theme .glass-effect {
+    background: rgb(52 56 70 / 67%) !important;
+}
+
+.dark-theme .modal-cuerpo {
+ color: aliceblue !important;
+}

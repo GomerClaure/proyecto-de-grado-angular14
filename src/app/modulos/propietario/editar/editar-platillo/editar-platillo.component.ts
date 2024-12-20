@@ -5,8 +5,8 @@ import { Platillo } from 'src/app/modelos/Platillo';
 import { PlatillosService } from 'src/app/services/platillos/platillos.service';
 import { RegistrarPlatilloComponent } from '../../registro/registrar-platillo/registrar-platillo.component';
 import { environment } from 'src/environments/environment';
-import { NgToastService } from 'ng-angular-popup';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-editar-platillo',
@@ -23,16 +23,14 @@ export class EditarPlatilloComponent implements OnInit {
   formularioEditarPlatillo: FormGroup;
   categorias: any[] = [];
   id_restaurante:any;
-  //selectedCategoria: number=0;
+  defaultImageUrl: string = 'assets/image/Imagen-rota.jpg';
 
-  constructor(private router: Router, 
-              private activatedRoute: ActivatedRoute,
+  constructor(private activatedRoute: ActivatedRoute,
               private platilloservice: PlatillosService, 
               private formBuilder: FormBuilder,
-              private toast:NgToastService,
+              private toastr:ToastrService,
               private categoriaService:CategoriaService
             ) {
-    this.imageUrl = 'assets/image/27002.jpg';
     this.formularioEditarPlatillo = this.formBuilder.group({
       nombre: [null, Validators.required],
       categoria: [null, Validators.required],
@@ -40,6 +38,7 @@ export class EditarPlatilloComponent implements OnInit {
       descripcion: [null, Validators.required],
       imagen: ['']
     });
+    this.imageUrl = 'assets/image/Imagen-rota.jpg';
   }
 
   ngOnInit(): void {
@@ -63,7 +62,6 @@ export class EditarPlatilloComponent implements OnInit {
   getCategorias() {
     this.categoriaService.getCategorias(this.id_restaurante).subscribe(
       (data: any) => {
-        // Añade la opción "Todos" al principio de la lista de categorías
         this.categorias = [...data.categorias];
       },
       error => {
@@ -85,20 +83,18 @@ export class EditarPlatilloComponent implements OnInit {
   }
 
   fillFormWithPlatilloData() {
-    // Llenar el formulario con los datos del platillo
     this.formularioEditarPlatillo.patchValue({
       nombre: this.platillo.nombre,
       precio: this.platillo.precio,
       descripcion: this.platillo.descripcion,
       categoria: this.platillo.categoria.id
     });
-    //this.selectedCategoria = this.platillo.categoria.id; // Almacena el ID de la categoría seleccionada
     this.imageUrl = environment.backendStorageUrl + this.platillo.imagen;
   }
-  registrarPlatillo() {
 
+  registrarPlatillo() {
     if (this.formularioEditarPlatillo.valid) {
-      // Obtener los valores del formulario
+      
       let datosForm = this.formularioEditarPlatillo.value;
       console.log(datosForm);
       const formData = new FormData();
@@ -113,22 +109,22 @@ export class EditarPlatilloComponent implements OnInit {
       this.platilloservice.updatePlatillo(formData, parseInt(this.idPlatillo)).subscribe(
         success => {
           console.log(success);
-          this.toast.success({detail:"SUCCESS",summary:'Se edito el platillo correctamente',duration:5000})
-          //this.irPagina();
+          this.toastr.success('Se edito el platillo correctamente','Exito')
         },
         error => {
           console.log(error);
-          this.toast.error({detail:"ERROR",summary:'Error al editar',sticky:true})
+          this.toastr.error('Error al editar','Error')
         }
       );
 
     }
     else {
-      this.toast.error({detail:"ERROR",summary:'Error al editar',sticky:true})
+      this.toastr.error('Error al editar','Error')
     }
   }
-  irPagina(){
-    this.router.navigate(['/lista/platillo']);
+
+  onImageError() {
+  this.imageUrl = this.defaultImageUrl;
   }
 }
  

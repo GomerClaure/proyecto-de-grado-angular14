@@ -13,7 +13,7 @@ export class MesaService {
   constructor(private http: HttpClient) {
    }
 
-  getMesas() {
-    return this.http.get(`${this.BASE_URL}/restaurante/mesas`, { headers: this.headers });
+  getMesas(idRestaurante: string) {
+    return this.http.get(`${this.BASE_URL}/restaurante/mesas/`+idRestaurante, { headers: this.headers });
   }
 }

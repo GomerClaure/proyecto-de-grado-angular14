@@ -1,40 +1,39 @@
-<<<<<<< HEAD
-<app-nav></app-nav>
-<div class="fondo pur">
-  <br><br><br><br>
-  <div class="d-flex flex-column align-items-center">
-    <h2 class="titulo"><strong>Lista de Pedidos</strong></h2>
-    <img class="li" src="../../../../../assets/image/linea.png">
-  </div>
-  <br>
+<div class="fondo">
+  <h2 class="titulo">Lista de Pedidos</h2>
   <div class="container">
     <div class="row">
-      <!-- Aquí se insertarían las tarjetas de datos -->
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" *ngFor="let mesa of pedidosPorMesa">
+      <div
+        class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 justify-content-center d-flex"
+        *ngFor="let mesa of pedidosPorMesa"
+      >
         <div class="card shadow-sm h-100 d-flex flex-column justify-content-between small-card">
-          <div class="card-body">
-            <h5 class="card-title text-center">{{ mesa.nombreMesa }}</h5>
-            <div class="row">
-              <div class="mt-auto col-5">
-                <button type="button" class="btn btn-aceptar" data-bs-toggle="modal" data-bs-target="#pedidosmesa" (click)="mostrar(mesa.nombreMesa,mesa.estadoP)">
-                 Pedidos
-                </button>
-              </div>
-              <div class="mt-auto col-7">
-                <button type="button" class="btn btn-editar">
-                  <i class="bi bi-receipt"></i> Cuenta
-                </button>
-              </div>
+          <div class="card-title-container">
+            <h5 class="card-title">{{ mesa.nombreMesa }}</h5>
+          </div>
+          <div class="card-body d-flex flex-column justify-content-center">
+            <div class="d-flex justify-content-around">
+              <button 
+                type="button"
+                class="btn btn-aceptar"
+                data-bs-toggle="modal"
+                data-bs-target="#pedidosmesa"
+                (click)="mostrar(mesa.nombreMesa)">
+                Pedidos
+              </button>
+              <button
+                type="button"
+                class="btn btn-editar"
+                data-bs-toggle="modal"
+                data-bs-target="#MiModal"
+                (click)="IdCuenta(mesa.id_cuenta)">
+                Cuenta
+              </button>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
-      <br><br>
     </div>
   </div>
 </div>
 <app-modal-pedidos></app-modal-pedidos>
-=======
-<app-nav></app-nav><br><br><br>
-<p>lista-pedidos works!</p>
->>>>>>> master
+<app-modal-datos-cuenta></app-modal-datos-cuenta>

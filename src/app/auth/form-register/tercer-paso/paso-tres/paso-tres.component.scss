@@ -1,0 +1,29 @@
+.btn-custom {
+    background-color: #1E1E1E;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .btn-custom:hover {
+    background-color: #333333;
+  }
+  
+  input.form-control {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+}
+
+input.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+input.form-control:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+}
+  

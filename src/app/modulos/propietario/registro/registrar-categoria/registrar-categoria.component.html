@@ -1,8 +1,8 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalRCategoria" #modalRCategoria tabindex="-1" role="dialog" aria-labelledby="modalRCategoriaLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header justify-content-center">
-        <h5 class="modal-title" id="exampleModalLabel"><strong>Registrar Categoría</strong></h5>
+        <h5 class="modal-title" id="modalRCategoriaLabel"><strong>Registrar Categoría</strong></h5>
       </div>
       <div class="modal-body">
         <div class="form-group" [formGroup]="formularioCategoria">
@@ -12,12 +12,13 @@
            El nombre de la categoria debe tener mas de 3 letras
           </div>
         </div>
-        <div class="row justify-content-center img-c">
-        <div class="col-md-6 col-xs-12 d-flex justify-content-center align-items-center">
+        <div class="row justify-content-center">
+        <div class="col-xs-12 d-flex justify-content-center align-items-center">
           <div class="apartadoImg text-center">
-              <img [src]="imageUrl" id="image-platillo" class="img-fluid" alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
+            <img [src]="imageUrl" (error)="onImgError($event)" id="image-platillo" class="img-fluid shadow-img"
+            alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight">       
               <input type="file" id="archivo" class="hidden" (change)="onFileSelected($event)">
-              <label for="archivo" class="btn-img">Seleccionar Imagen<i class="bi bi-file-earmark-arrow-up"></i></label>
+              <label for="archivo" class="btn-img btn btn-subir-imagen">Seleccionar Imagen<i class="bi bi-file-earmark-arrow-up"></i></label>
           </div>
         </div>
         </div>

@@ -1,27 +1,74 @@
+.fondo-login {
+  background: #0B486B;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #F56217, #0B486B);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #F56217, #0B486B); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+label{
+  color: rgb(255, 255, 255);
+}
+input.form-control , .input-group-text {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+}
 
-.card {
-    margin-top: 150px;
-    border-radius: 10px;
-    background-color: rgba(253, 253, 253, 0.9); /* Color de fondo semi-transparente */
-    box-shadow: 0px 0px 100px 0px rgba(0, 0, 0, 0.2); /* Ajuste del box-shadow */
-    border: none;
-    //position: relative;
+input.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);
 }
-.card-body{
-    padding: 50px;
+
+input.form-control:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
 }
-.card-header{
-    text-align: center;
-    background-color: white;
+.login-card {
+  background-color: rgb(23 26 31 / 75%);
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgb(0 0 0 / 32%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  max-width: 400px;
+  width: 100%;
+  padding: 30px;
+  border: none;
+  position: relative;
+  margin: 20px;
+}
+.logo-container {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.874);
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.logo-container svg {
+  width: 80px;
+  height: 80px;
+  display: block;
+}
+.fa-span:hover {
+  color: #a0a4a8;
+}
+.olvidast {
+  color: white;
+}
+@media (max-width: 576px) {
+  .login-card {
+      padding: 15px;
   }
-.contenedor-icono svg{
-    text-align: center;
-    margin-top: 20px;
-    width: 60px;
-    height: 60px;
-    margin-bottom: 20px;
-}
-.f{
-    display:flex;
-    justify-content: center;
+  .logo-container svg {
+      width: 60px;
+      height: 60px;
+      top: -30px;
+  }
 }
