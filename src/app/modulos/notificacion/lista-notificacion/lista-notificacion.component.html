@@ -1,11 +1,7 @@
-<app-nav></app-nav><br><br><br>
+<body class="fondo">
 <div class="container">
-    <div class="container-titulo border-bottom mb-3">
-        <h1 class="fs-3">Notificaciones</h1>
-    </div>
+        <h1 class="titulo">Notificaciones</h1>
     <div class="container-notificaciones">
-        <!-- Si no tiene notificaciones entonces aparece un mensaje de  "No tienes notificaciones" -->
-        
         <div class="alert alert-warning fs-3" role="alert" *ngIf="notificaciones.length == 0">
             No tienes notificaciones
         </div>
@@ -18,17 +14,7 @@
               <p class="mb-1 small">{{notificacion.mensaje}}</p>
             </a>
         </div>
-        <!-- <div class="notificacion" *ngFor="let notificacion of notificaciones">
-            <div class="notificacion-titulo">
-                <h2>{{notificacion.titulo}}</h2>
-            </div>
-            <div class="notificacion-contenido">
-                <p>{{notificacion.mensaje}}</p>
-            </div>
-            <div class="notificacion-fecha">
-                <p>{{notificacion.created_at}}</p>
-            </div>
-        </div> -->
     </div>
 </div>
+</body>
 

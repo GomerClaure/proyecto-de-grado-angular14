@@ -2,12 +2,6 @@
   display: flex;
   justify-content: center;
 }
-
-.boton {
-  display: flex;
-  justify-content: center;
-}
-
 /* Estilos responsivos */
 @media (max-width: 576px) {
   .modal-lg {
@@ -41,6 +35,7 @@
 .modal-footer {
   padding: 5px !important;
   margin: 0 !important;
+  color: white;
 }
 
 .modal-footer .row {

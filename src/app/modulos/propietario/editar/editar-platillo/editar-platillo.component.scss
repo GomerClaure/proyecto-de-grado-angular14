@@ -1,39 +1,40 @@
-.container{
-    align-items: center;
-}
-.form{
-    padding: 20px;
-}
-.imagen-platillo{
-    width:80% ;
+input[type="file"].hidden {
+    display: none;
+  }
+  .apartadoImg {
+    position: relative;
+  }
+  
+  .apartadoImg img {
+    max-width: 100%;
     height: auto;
-}
-.img-fluid{
-    width: 450px;
-    height: 300px;
-}
-.botones-group{
-    //background-color: red;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.182);
+  }
+  .form-image {
+    display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 20px;
-    display: flex;
-    gap: 50px;
-    padding-bottom: 10px;
-}
-.apartadoImg{
-    display: flex;
     flex-direction: column;
+  }
+  form {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.373);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-}
-.hidden {
-    display: none;
-}
+  }
+  .lado-img{
+    background-image: url(../../../../../assets/image/pixelcut-export.png);
+    background-position: 0;
+    background-size: cover;
+    padding: 30px;
+    border-radius: 5px;
+  }
 textarea{
+    height: 120px;
     resize: none;
-    width: 100%;
-    height: 150px; 
-}  
-.form-control{
-    border: 1px solid black;
 }

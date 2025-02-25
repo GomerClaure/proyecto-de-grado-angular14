@@ -1,15 +1,15 @@
-import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { PlatillosService } from 'src/app/services/platillos/platillos.service';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
 import { Platillo } from 'src/app/modelos/Platillo';
-import{PlatilloPedido} from 'src/app/modelos/PlatilloPedido';
+import { PlatilloPedido } from 'src/app/modelos/PlatilloPedido';
 import { Categoria } from 'src/app/modelos/Categoria';
 import { environment } from 'src/environments/environment';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { ActivatedRoute } from '@angular/router';
 import { DescripcionPedidoService } from 'src/app/services/detalle-pedido/descripcion-pedido.service';
 import { SessionService } from 'src/app/services/auth/session.service';
-import { NgToastService } from 'ng-angular-popup';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registrar-pedido',
@@ -21,9 +21,9 @@ export class RegistrarPedidoComponent implements OnInit {
   idCategoriaSeleccionada: number | undefined;
   busquedaNombre: string = '';
   //Array donde estan los platillos seleccionados
-  platillosAGuardar:Platillo[]=[];
+  platillosAGuardar: Platillo[] = [];
   //Array de descripciones 
-  platillosDescripciones:{ id:number, descripcion: string }[] = [];
+  platillosDescripciones: { id: number, descripcion: string }[] = [];
   //Array de cantidades
   diccionarioDeCantidades: { [id: number]: number } = {};
   numeroMesa: string = '';
@@ -31,45 +31,48 @@ export class RegistrarPedidoComponent implements OnInit {
   categoria: Categoria[] = [];
   categorias: any[] = [];
   switchState: boolean = false;
-  tipo:string='Local';
+  tipo: string = 'Local';
   descripcion: string = '';
   storageUrl = environment.backendStorageUrl;
-  textoBuscador:string = '';
-  platillosFiltrados:Platillo[]=[];
-  id_restaurante:any;
+  textoBuscador: string = '';
+  platillosFiltrados: Platillo[] = [];
+  id_restaurante: any;
+  nombreMesa:string='';
+  
   constructor(private descripcionPedidoService: DescripcionPedidoService,
-              private route: ActivatedRoute, 
-              private platilloService: PlatillosService,
-              public pedidoselectService: PedidoService, 
-              private categoriaService: CategoriaService,
-              private sessionService:SessionService,
-              private toast:NgToastService
-            ) { }
-              
- 
+    private route: ActivatedRoute,
+    private platilloService: PlatillosService,
+    public pedidoselectService: PedidoService,
+    private categoriaService: CategoriaService,
+    private sessionService: SessionService,
+    private toastr: ToastrService
+  ) { }
+
+
   ngOnInit(): void {
-    this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
+    this.id_restaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
     this.getPlatillos();
     this.getCategorias();
     this.route.queryParams.subscribe(params => {
       this.numeroMesa = params['mesaSeleccionada'];
+      this.nombreMesa = params['nombreMesa']
     });
   }
   switchStateChanged() {
     if (this.switchState) {
-      this.tipo='Llevar'
+      this.tipo = 'Llevar'
       console.log(this.tipo);
     } else {
-      this.tipo='Local'
+      this.tipo = 'Local'
       console.log(this.tipo)
     }
   }
-  onSearchChange(searchValue: string): void {  
+  onSearchChange(searchValue: string): void {
     console.log(searchValue);
     this.textoBuscador = searchValue.trim().toLowerCase();
     this.filtrarPlatillos();
   }
-  filtrarPlatillos():void{
+  filtrarPlatillos(): void {
     if (this.textoBuscador === '') {
       // Si el campo de búsqueda está vacío, mostrar todos los platillos
       this.platillosFiltrados = this.platillos;
@@ -80,25 +83,25 @@ export class RegistrarPedidoComponent implements OnInit {
       );
     }
   }
-  getPlatillos() { 
-    this.platilloService.getPlatillosMenu().subscribe(
+  getPlatillos() {
+    let idPedidos = sessionStorage.getItem('id_restaurante')||'0';
+    this.platilloService.getPlatillosMenu(idPedidos).subscribe(
       (res: any) => {
         // Filtrar solo los platillos de la categoría seleccionada y que coincidan con el término de búsqueda
         let filteredPlatillos = res.platillo.filter((platillo: any) => {
           if (this.idCategoriaSeleccionada && this.idCategoriaSeleccionada !== 0) {
-            return platillo.id_categoria === this.idCategoriaSeleccionada && platillo.disponible === true && platillo.nombre.toLowerCase().includes(this.busquedaNombre.toLowerCase());
+            return platillo.id_categoria === this.idCategoriaSeleccionada && platillo.disponible && platillo.nombre.toLowerCase().includes(this.busquedaNombre.toLowerCase());
           } else {
-            return platillo.disponible === true && platillo.nombre.toLowerCase().includes(this.busquedaNombre.toLowerCase());
+            return platillo.disponible && platillo.nombre.toLowerCase().includes(this.busquedaNombre.toLowerCase());
           }
         });
         this.platillos = filteredPlatillos;
-        this.platillosFiltrados=this.platillos;
-        console.log(this.platillos);
+        this.platillosFiltrados = this.platillos;
       },
       err => {
-        console.log(err); 
+        console.log(err);
       }
-      
+
     );
   }
   onChangeCategoria(event: any) {
@@ -130,32 +133,56 @@ export class RegistrarPedidoComponent implements OnInit {
   guardarPedido() {
     this.platillosAGuardar = this.pedidoselectService.getPlatillosSeleccionados();
     this.platillosDescripciones = this.descripcionPedidoService.getDescripciones();
-    
+
+    if (this.platillosAGuardar.length === 0) {
+      this.toastr.info('No se seleccionó ningún platillo', 'Información');
+      return; // Salir del método si no hay platillos seleccionados
+  }
+
     const platillosConDescripciones: PlatilloPedido[] = [];
-    
+    const platillosSinDescripcion: Map<number, PlatilloPedido> = new Map();
+
     this.platillosAGuardar.forEach((platillo, index) => {
-        // Obtener la cantidad del platillo utilizando el índice
-        const cantidad = this.diccionarioDeCantidades[index] || 1;
-        
-        // Obtener la descripción correspondiente utilizando el índice
-        const descripcion = this.platillosDescripciones[index]?.descripcion || '';
-        
-        // Crear un nuevo objeto PlatilloPedido con la información del platillo, su cantidad y su descripción
+      // Obtener la cantidad del platillo utilizando el índice
+      const cantidad = this.diccionarioDeCantidades[index] || 1;
+
+      // Obtener la descripción correspondiente utilizando el índice
+      const descripcion = this.platillosDescripciones[index]?.descripcion || '';
+
+      if (descripcion) {
+        // Si el platillo tiene descripción, lo agregamos directamente
         const platilloConDescripcion: PlatilloPedido = {
+          id_platillo: platillo.id,
+          precio_unitario: platillo.precio,
+          cantidad: cantidad,
+          detalle: descripcion
+        };
+        platillosConDescripciones.push(platilloConDescripcion);
+      } else {
+        // Si el platillo no tiene descripción, verificamos si ya existe en el Map para sumar la cantidad
+        if (platillosSinDescripcion.has(platillo.id)) {
+          let platilloExistente = platillosSinDescripcion.get(platillo.id)!;
+          platilloExistente.cantidad += cantidad;
+        } else {
+          // Si no existe, lo agregamos al Map
+          platillosSinDescripcion.set(platillo.id, {
             id_platillo: platillo.id,
             precio_unitario: platillo.precio,
             cantidad: cantidad,
-            detalle: descripcion
-        };
-        // Agregar el platillo combinado con su descripción al arreglo platillosConDescripciones
-        platillosConDescripciones.push(platilloConDescripcion);
+            detalle: ''
+          });
+        }
+      }
     });
+
+    // Convertimos los platillos sin descripción a un array y los combinamos con los de descripción
+    const todosLosPlatillos = [...platillosConDescripciones, ...Array.from(platillosSinDescripcion.values())];
 
     const id_mesa = this.numeroMesa;
     const id_empleado = this.sessionService.getUsuario()?.id || '';
 
     const pedidoCompleto = {
-      platillos: platillosConDescripciones,
+      platillos: todosLosPlatillos,
       id_mesa: id_mesa,
       tipo: this.tipo.toLowerCase(),
       id_empleado: id_empleado
@@ -171,49 +198,41 @@ export class RegistrarPedidoComponent implements OnInit {
 
     this.pedidoselectService.storePedido(formData).subscribe(
       (response) => {
-        console.error('se registro el pedido', response);
-        this.toast.success({detail:"SUCCESS",summary:'Se agrego registro el pedido con exito',duration:2000});
+        console.error('se registró el pedido', response);
+        this.toastr.success('Se registro el pedido correctamente','Éxito');
       },
       (error) => {
         console.error('Error al almacenar el pedido', error);
-        console.log("entra")
-        this.toast.error({detail:"ERROR",summary:'No selecciono ningun platillo',duration:1500})
+        this.toastr.error('El pedido no se registro','Error');
       }
     );
 
     this.pedidoselectService.limpiarSeleccion();
     this.descripcionPedidoService.limpiarDescripciones();
     this.diccionarioDeCantidades = {};
-    // Restablecer la variable tipo
     this.tipo = 'Local';
-    // Restablecer la búsqueda de platillos
     this.busquedaNombre = '';
-    // Restablecer la categoría seleccionada
     this.idCategoriaSeleccionada = undefined;
-
-    // Restablecer la lista de platillos
     this.platillos = [];
-
-    // Restablecer el switchState
     this.switchState = false;
+    this.getPlatillos();
+  }
 
-    this.getPlatillos()
-}
 
-increment(index: number) {
-  let cantidad =   this.diccionarioDeCantidades[index]||1;
-  if (cantidad < 100) cantidad++;
-  this.diccionarioDeCantidades[index] = cantidad;
-}
+  increment(index: number) {
+    let cantidad = this.diccionarioDeCantidades[index] || 1;
+    if (cantidad < 100) cantidad++;
+    this.diccionarioDeCantidades[index] = cantidad;
+  }
 
-decrement(index: number) {
-  let cantidad = this.diccionarioDeCantidades[index]||1;
-  if (cantidad > 1) cantidad--;
-  this.diccionarioDeCantidades[index] = cantidad;
-}
+  decrement(index: number) {
+    let cantidad = this.diccionarioDeCantidades[index] || 1;
+    if (cantidad > 1) cantidad--;
+    this.diccionarioDeCantidades[index] = cantidad;
+  }
 
-onImgError(event: any) {
-  event.target.src = 'assets/image/27002.jpg';
-}
+  onImgError(event: any) {
+    event.target.src = 'assets/image/Imagen-rota.jpg';
+  }
 
 }

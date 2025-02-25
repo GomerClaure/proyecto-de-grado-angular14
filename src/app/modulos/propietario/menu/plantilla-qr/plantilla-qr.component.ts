@@ -34,7 +34,7 @@ export class PlantillaQrComponent implements OnInit {
     }else{
       setTimeout(() => {
         this.printQR();
-        this.router.navigate(['/menu/qr']);
+        this.router.navigate(['/propietario/qr']);
       }, 1000);
     }
 
@@ -42,7 +42,6 @@ export class PlantillaQrComponent implements OnInit {
   }
  
   printQR() {
-    
     window.print();
   }
 }

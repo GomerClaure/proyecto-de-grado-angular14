@@ -1,0 +1,117 @@
+@media print {
+  /* Ocultar elementos no deseados */
+  .no-print, .container, .input-container, .btn, .fondo {
+    display: none !important;
+  }
+
+  /* Ajustes para la impresión */
+  .card {
+    position: static !important;
+    width: auto;
+    overflow: visible;
+    page-break-inside: avoid;
+  }
+
+  /* Evita que la tabla tenga scroll en la vista de impresión */
+  .card-body {
+    overflow: visible !important;
+    max-height: none !important;
+  }
+
+  /* Mostrar razón social y NIT en la parte superior */
+  .card-header, .card-footer {
+    background: none !important;
+    text-align: center;
+  }
+
+  .card-header h4, .card-footer h5, .p-2 label {
+    color: #000 !important;
+    font-weight: normal;
+    visibility: visible;
+  }
+
+  /* Ajustar la tabla al ancho completo */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  /* Eliminar estilos innecesarios en los bordes */
+  .table th, .table td {
+    border: 1px solid #000 !important;
+  }
+}
+
+
+.card{
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+.card-header{
+    background-image: url(../../../../assets/image/pixelcut-export.png);
+    background-position: 0;
+    background-size: cover;
+    padding-left: 25px;
+    border: none;
+}
+.contenido-header {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 15px;
+  color: #2c2a3b;
+  position: relative;
+  z-index: 1;
+
+}
+.card-body{ 
+    padding: 0;
+    border: none; 
+}
+.card-footer{
+  border: none;
+  padding-top: 0;
+}
+.button-group{
+    display: flex;
+    flex-direction: row;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+}
+.input-container .icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  fill: rgb(32, 32, 57); 
+}
+.input-container .form-control {
+  padding-left: 35px; 
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  color: #000000;
+}
+@media (max-width: 827px) {
+  .btn {
+    font-size: 15px;
+  }
+}
+@media (max-width: 793px) and (max-height: 650px) {
+  .btn {
+    font-size: 14px;
+  }
+}
+@media (max-width: 768px) {
+  .btn {
+    font-size: 12px;
+  }
+}
+@media (max-width: 576px) {
+  .btn {
+    font-size: 10px; 
+  }
+}
+  

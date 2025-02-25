@@ -1,126 +1,234 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
-
+@import '~ngx-toastr/toastr.css';
 * {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 0px;
     margin: 0px;
+    user-select: none;
   }
+//Titulos de las paginas
 .titulo{
     text-align: center;
-    //padding:50px;
-    
+    padding-top: 90px;
+    padding-bottom: 10px;
+    color: rgb(42, 42, 58);
 }
-.btn-aceptar{
-  background-color:#96be64;
-  border-color: #c0f185;
-  color: black;
-  border-radius: 5px;
-}
-.btn-curso{
-  background-color:#edd590;
-  border-color: #edd590;
-  color: black;
-  border-radius: 5px;
+//Fondos para pantallas
+.fondo {
+ background: radial-gradient(circle,#f0e6dc 2px, transparent 2px);
+  background-size: 15px 15px;
+  min-height: 100vh;  /* Asegura que cubra al menos la altura de la pantalla */
+  height: 100%;
+  background-attachment: fixed; /* Mantiene el fondo fijo al hacer scroll */
 }
 
-.btn-terminado{
-  background-color:#95c575;
-  border-color: #95c575;
-  color: black;
-  border-radius: 5px;
+//Estilos para las tablas 
+th,td {
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  border-left: 2px solid rgba(0, 0, 0, 0.1);
+  border-right: 2px solid rgba(0, 0, 0, 0.1);
 }
-.btn-atra{
-  background-color:#f5ed93;
-  border-color: #f5ed93;
-  color: black;
-  border-radius: 5px;
-}
-.btn-aceptar:hover{
-  background-color: #719841;
-  border-color: #719841;
-}
-.btn-delete:hover{
-  background-color: #c01818;
-  border-color:#bf3636;
-}
-.btn-editar:hover{
-  background-color: rgb(221, 165, 61);
-  border-color:rgb(218, 170, 82);
-}
-.btn-delete{
-  background-color: rgb(220, 108, 71);
- border-color:rgb(220, 108, 71) ;
- border-radius: 5px;
-}
-.btn-editar{
-  background-color:#edc97b;
-  border-color: #edc97b ;
-}
-.btn-img{
-  height: 40px;
-  width: 260px;
-  background-color:#eada89;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  padding-top: 6px;
-  margin: 10px;
+th {
+  background-color: #044051 !important; /* Color de fondo para las celdas */
   text-align: center;
+  color: white !important;
 }
-.btn-img:hover{
-  background-color: #d1bd58;
-  border-color: rgb(218, 170, 82);
-}
-.btn-registrar{
-  background-color:#96be64;
-  border-radius: 5px;
-  border-color: #c0f185;
-  color: black;
-  padding: 6px;
-  width: 150px;
-  margin-bottom: 20px;
-}
-.btn-registrar:hover{
-  background-color:#96be64;
+//Estilo para paginacion button
+.pagination-container {
+  display: flex;
+  justify-content: center;
 
-  border-color: #c0f185;
 }
-.fondo{
-  background-image: url('./assets/image/f1c.jpg');
-  //background-color: rgb(245, 236, 220);
+.pagination {
+  background-color: rgba(255, 255, 255, 0.552);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.263);
+  border-radius: 10px;
+  padding: 5px;
+  width: fit-content;
+  border: 1px solid rgba(0, 0, 0, 0.29);
+}
+.page-item .page-link {
+  background-color: transparent;
+  color: #474b61;
+  font-weight: bold;
+  padding: 5px 10px;
+  font-size: 14px;
+  border: none;
+}
+.page-item.active .page-link {
+  background-color: #044051;
+  border-radius: 5px;
+  color: white;
+}
+.page-item.disabled .page-link {
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+}
+.pagination .page-link {
+  transition: background-color 0.3s ease;
+}
+//Estilo para los buscadores
+.input-container {
+  position: relative;
   width: 100%;
-  height: 100vh;
-  background-size: cover; /* Ajusta el tamaño de la imagen al contenedor */
-  background-position: center; /* Centra la imagen en el contenedor */
-  // position: fixed;
-  overflow-y: auto;
 }
-.li{
-  width: 350px;
-  padding-bottom:0px;
-  margin: 0;
+.input-container .icon {
+  position: absolute; 
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  fill: rgb(32, 32, 57);
 }
+.input-container .form-control {
+  padding-left: 35px; 
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  color: #000000;
+}
+// Estilo para generico button//
+.btn-generico {
+  background-color: #525465 !important; 
+  border: none;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  color: white;
+}
+.btn-generico:hover {
+  background-color: #302e31;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+  border: none;
+  color: white;
+}
+.btn-generico:active {
+  background-color: #2b292c !important;
+  transform: scale(0.98);
+  border: none;
+  color: white !important;
+}
+// Estilo para editar button//
+.btn-editar {
+  background-color: #5f6a7d; 
+  border: none;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  color: white;
+}
+.btn-editar:hover {
+  background-color: #4c5563;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+  border: none;
+  color: white;
+}
+.btn-editar:active {
+  background-color: #3e474f !important;
+  transform: scale(0.98);
+  border: none;
+  color: white;
+}
+//Estilo para eliminar button
+.btn-delete {
+  background-color: #FA5555; 
+  border: none;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  color: white;
+}
+.btn-delete:hover {
+  background-color: #b62525;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+  border: none;
+  color: white;
+}
+.btn-delete:active {
+  background-color: #f12727 !important;
+  transform: scale(0.98);
+  border: none;
+  color: white !important;
+}
+//Estilo para subir imagen  button
+.btn-subir-imagen {
+  background-color: #c5a01c; /* Dorado apagado */
+  border: none;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  color: white;
+}
+.btn-subir-imagen:hover {
+  background-color: #cfa91f; /* Dorado más oscuro para hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+  border: none;
+  color: white;
+}
+.btn-subir-imagen:active {
+  background-color: #ffd12c !important; /* Dorado profundo para el estado activo */
+  transform: scale(0.98);
+  border: none;
+  color: white !important;
+}
+//Estilo para aceptar button
+.btn-aceptar {
+  background-color: #64b140; /* Verde oliva apagado */
+  border: none;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  color: white;
+}
+.btn-aceptar:hover {
+  background-color: #5b9660; /* Verde más oscuro para hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+  border: none;
+  color: white;
+}
+.btn-aceptar:active {
+  background-color: #4a7c4d !important; /* Verde oliva más profundo para estado activo */
+  transform: scale(0.98);
+  border: none;
+  color: white !important;
+}
+//Estilo para modales
 .modal-header{
-  //background-image: url('./assets/image/f1c.jpg');
   background-size: cover;
   background-position: center;
-  background-color: #eecf7b;
-}
-.modal-footer{
-   background-image: url('./assets/image/f1c.jpg');
-   background-size: cover;
-   background-position: center;
+  background-color: #044051;
+  color: white;
 }
 .modal-body{
-  background-image: url('./assets/image/f1c.jpg');
-   background-size: cover;
-   background-position: center;
+  background: radial-gradient(circle,#f0e6dc 2px, transparent 2px);
+  background-size: 15px 15px;
+  padding: 25px;
 }
-.img-fluid{
-   border-radius: 5px;
-   border-color: #d1bd58;
+.btn-close {
+  filter: brightness(0) invert(1); /* Cambiar el color del botón de cierre a blanco */
 }
-.form-control{
-  background-color: #ffffff;
-  border-color: #d5d3cd;
+.modal-footer{
+  background-color: #044051;
 }

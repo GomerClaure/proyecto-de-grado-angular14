@@ -1,0 +1,39 @@
+<div class="fondo">
+    <div class="container">
+        <h2 class="titulo">Solicitudes</h2>
+        <div class="table-responsive">
+            <table class="table table-striped text-center align-middle">
+              <thead>
+                <tr class="text-center align-middle">
+                  <th scope="col">N°</th>
+                  <th scope="col">Nombre Restaurante</th>
+                  <th scope="col">NIT</th>
+                  <th scope="col">Propietario</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let registro of preRegistros; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ registro.nombre_restaurante }}</td>
+                  <td>{{ registro.nit }}</td>
+                  <td>{{ registro.nombre_propietario }} {{ registro.apellido_paterno_propietario }}</td>
+                  <td>
+                    <span class="badge" [ngClass]="getBadgeClass(registro.estado)">
+                      {{ registro.estado }}
+                    </span>
+                  </td>
+                  <td>
+                    <div class="d-flex justify-content-center">
+                      <button class="btn btn-generico" (click)="verDetalle(registro)" >
+                        <i class="bi bi-eye"></i> Detalle
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </div>
+</div>

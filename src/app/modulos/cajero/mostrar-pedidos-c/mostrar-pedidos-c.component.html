@@ -1,0 +1,65 @@
+<body>
+<div class="fondo">
+  <h2 class="titulo no-print">Cuentas de cuentas</h2>
+  <div class="container">
+    <div class="input-container mb-3 no-print">
+      <input type="text" class="form-control" placeholder="Buscar por nombre de mesa o razón social" [(ngModel)]="textoBuscador" (ngModelChange)="onSearchChange($event)">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgb(31, 37, 54);">
+        <path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path>
+        <path d="M11.412 8.586c.379.38.588.882.588 1.414h2a3.977 3.977 0 0 0-1.174-2.828c-1.514-1.512-4.139-1.512-5.652 0l1.412 1.416c.76-.758 2.07-.756 2.826-.002z"></path>
+    </svg>
+    </div>
+    <div class="row">
+      <div *ngFor="let cuenta of cuentasPorMesa" class="col-lg-3 col-md-4 col-sm-6 mb-3">
+        <div class="card h-100 " [id]="'print-section-' + cuenta.id">
+          <div class="card-header">
+            <div class="contenido-header"> 
+              <h4 class="text-center">{{ cuenta.nombre_mesa }}</h4>
+            </div>
+          </div>
+         <div class="p-2">
+          <label class="no-print">Estado: {{ cuenta.estado }}</label><br>
+          <label>Razón Social: {{ cuenta.nombre_razon_social }}</label><br>
+          <label>NIT: {{ cuenta.nit }}</label>
+         </div>
+          <div class="card-body" style="overflow-y: auto; max-height: 200px;">
+            <table class="table">
+              <thead class="text-center table-dark">
+                <tr>
+                  <th>Plato</th>
+                  <th>Cantidad</th>
+                  <th>Precio</th>
+                </tr>
+              </thead>
+              <tbody class="text-center">
+                <!-- Iterar sobre los cuentas en la mesa -->
+                <ng-container *ngFor="let cuentaItem of cuenta.platos">
+                  <tr>
+                    <td>{{ cuentaItem.nombre }}</td>
+                    <td>{{ cuentaItem.cantidad }}</td>
+                    <td>{{ cuentaItem.precio*cuentaItem.cantidad }} Bs</td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer">
+            <h5 class="text-end">Total: {{ cuenta.monto_total }} Bs</h5>
+            <div>
+              <div class="row no-print">
+                <div class="col-6 pt-0">
+                  <button class="btn btn-delete w-100 no-print" (click)="CerrarCuenta(cuenta.id)">Cerrar</button>
+                </div>
+                <div class="col-6 pt-0">
+                  <button class="btn btn-subir-imagen w-100 no-print " (click)="imprimirCuenta(cuenta.id)">Imprimir</button>
+                  <button class="btn btn-subir-imagen w-100 no-print d-none" (click)="descargarCuenta(cuenta.id)"><i class="bi bi-file-earmark-arrow-down"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

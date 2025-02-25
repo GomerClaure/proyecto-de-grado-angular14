@@ -1,0 +1,81 @@
+<app-nav></app-nav>
+<body class="fondo">
+<div class="container">
+  <h2 class="titulo"></h2>
+  <div class="form">
+  <form [formGroup]="usuarioForm" class="row">
+        <div class="col-12 col-md-6 mb-3">
+          <h2 class="pb-2">Datos Personales</h2>
+          <!-- Nombre -->
+          <div class="mb-3">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" formControlName="nombre" class="form-control"
+              [ngClass]="{ 
+                'is-invalid': usuarioForm.get('nombre')?.invalid && usuarioForm.get('nombre')?.touched
+              }"
+              placeholder="Nombre" required>
+            <div class="invalid-feedback">Nombre es requerido</div>
+          </div>
+          <!-- Apellido Paterno -->
+          <div class="mb-3">
+            <label for="apellido_paterno">Apellido Paterno</label>
+            <input id="apellido_paterno" formControlName="apellido_paterno" class="form-control"
+              [ngClass]="{
+                'is-invalid': usuarioForm.get('apellido_paterno')?.invalid && usuarioForm.get('apellido_paterno')?.touched
+              }"
+              placeholder="Apellido Paterno" required>
+            <div class="invalid-feedback">Apellido Paterno es requerido</div>
+          </div>
+          <!-- Apellido Materno -->
+          <div class="mb-3">
+            <label for="apellido_materno">Apellido Materno</label>
+            <input id="apellido_materno" formControlName="apellido_materno" class="form-control"
+              [ngClass]="{
+                'is-invalid': usuarioForm.get('apellido_materno')?.invalid && usuarioForm.get('apellido_materno')?.touched
+              }"
+              placeholder="Apellido Materno" required>
+            <div class="invalid-feedback">Apellido Materno es requerido</div>
+          </div>
+          <div class="mb-3">
+            <label for="nickname">Nickname</label>
+            <input id="nickname" formControlName="nickname" class="form-control"
+              [ngClass]="{
+                'is-invalid': usuarioForm.get('nickname')?.invalid && usuarioForm.get('nickname')?.touched
+              }"
+              placeholder="Nickname" required>
+            <div class="invalid-feedback">Nickname es requerido</div>
+          </div>   
+        </div>
+        <div class="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center lado-img">
+          <div class="form-group d-flex flex-column flex-grow-1 w-100">
+            <div class="d-flex justify-content-center mb-3">
+             <div class="apartadoImg text-center mb-3">
+            <img [src]="foto_perfil" 
+                 (error)="onImageError($event)" 
+                 class="img-fluid mb-3"
+                 [style.width.px]="imageWidth" [style.height.px]="imageHeight"
+                  alt="Fotografía del Usuario">
+            <input type="file" id="img-editar-platillo" class="hidden" 
+            (change)="onFileSelected($event)" accept="image/jpeg, image/png, image/jpg, image/webp">
+            <label for="img-editar-platillo" class="btn-img btn btn-subir-imagen">
+              Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i>
+            </label>
+          </div>
+          </div>
+          </div>
+            <div *ngIf="usuarioForm.get('foto_perfil')?.errors?.['invalidoTipoArchivo'] && usuarioForm.get('foto_perfil')?.touched"
+              class="invalid-feedback text-center archivo-invalido oculto">
+              El tipo de archivo no es válido. Solo se permiten imágenes JPG, PNG, WEBP.
+            </div>
+            <div *ngIf="usuarioForm.get('foto_perfil')?.errors?.['archivoMuyPesado'] && usuarioForm.get('foto_perfil')?.touched"
+              class="invalid-feedback text-center archivo-pesado">
+              El archivo es muy pesado. Debe ser menor de 2 MB.
+            </div>
+            <div class="col-12 d-flex justify-content-end">
+              <button type="button" class="btn btn-aceptar" (click)="actualizarUsuario()">Actualizar</button>
+            </div>
+          </div>
+  </form>
+   </div>
+  </div>
+</body> 

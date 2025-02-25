@@ -1,17 +1,17 @@
 <div class="contenedor-slider">
   <!-- Vista Principal -->
   <div class="vista-principal position-relative rounded">
+
     <!-- Botón Anterior -->
     <button class="btn-navegacion anterior position-absolute top-50 start-0 translate-middle-y"
-      (click)="mostrarPedidoAnterior()">
-      <i class="bi bi-chevron-left"></i>
-    </button>
-
+    (click)="mostrarPedidoAnterior()">
+    <i class="bi bi-chevron-left"></i>
+  </button>
     <!-- Detalles del Pedido -->
     <div class="detalles-pedido px-5">
       <div class="row  mx-5 h-100">
         <div class="col-12 px-0">
-          <div class="detalles-pedido-header card-title d-flex justify-content-between" [ngClass]="{
+          <div class="detalles-pedido-header card-title d-flex justify-content-between p-2" [ngClass]="{
             'terminado': pedidoSeleccionado.estado === 'Servido',
             'en-preparacion': pedidoSeleccionado.estado === 'En preparación',
             'default': pedidoSeleccionado.estado !== 'Servido' && pedidoSeleccionado.estado !== 'En preparación'
@@ -75,9 +75,9 @@
         </div>
         <div class="row-12 d-flex justify-content-center">
           <button *ngIf="pedidoSeleccionado.estado !== 'Servido' && pedidoSeleccionado.estado !== 'En preparación'"
-            type="button" class="btn btn-en-preparacion  col-2" (click)="cambiarEstado('2')">En
+            type="button" class="btn btn-subir-imagen  col-2 mb-5" (click)="cambiarEstado('2')">En
             Curso</button>
-          <button *ngIf="pedidoSeleccionado.estado == 'En preparación'" type="button" class="btn btn-success col-2"
+          <button *ngIf="pedidoSeleccionado.estado == 'En preparación'" type="button" class="btn btn-terminado col-2 mb-15"
             (click)="cambiarEstado('4')">Terminado</button>
         </div>
 

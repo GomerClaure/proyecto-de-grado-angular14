@@ -1,0 +1,30 @@
+@media print {
+    body * {
+      visibility: hidden;
+    }
+  
+    .fondo, .fondo * {
+      visibility: visible;
+    }
+  
+    .fondo {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      padding: 20px;
+    }
+  
+    .no-print {
+      display: none !important;
+    }
+  
+    .chart-container, .reporte {
+      page-break-inside: avoid;
+    }
+  
+    .reporte {
+      page-break-before: always;
+    }
+  }
+  

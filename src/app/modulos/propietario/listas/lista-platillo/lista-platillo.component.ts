@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platillo } from 'src/app/modelos/Platillo';
 import { PlatillosService } from 'src/app/services/platillos/platillos.service';
@@ -17,12 +17,9 @@ export class ListaPlatilloComponent implements OnInit {
   selectedPlatilloId: number | null = null;
   storageUrl = environment.backendStorageUrl;
   textoBuscador: string = '';
-
   id_restaurante: any;
-
-  // Paginación
-  public pageSize: number = 10; // Cantidad de elementos por página
-  public currentPage: number = 1; // Página actual
+  public pageSize: number = 7;
+  public currentPage: number = 1;
 
   constructor(
     private router: Router,
@@ -36,7 +33,7 @@ export class ListaPlatilloComponent implements OnInit {
   }
 
   editarPlatillo(id: number) {
-    this.router.navigate(['lista/editar-platillo'], { queryParams: { platilloId: id } });
+    this.router.navigate(['propietario/editar-platillo'], { queryParams: { platilloId: id } });
   }
 
   getPlatillos(): void {
@@ -52,8 +49,9 @@ export class ListaPlatilloComponent implements OnInit {
     );
   }
 
-  eliminarPlatillo(id: number) {
-    this.modalService.openModal(id, this.platillos);
+  eliminarPlatillo(id: number, nombre:string) {
+    this.modalService.openModal(id, this.platillos,nombre);
+    console.log(nombre)
   }
 
   onSearchChange(searchValue: string): void {
@@ -69,7 +67,7 @@ export class ListaPlatilloComponent implements OnInit {
         platillo.nombre.toLowerCase().includes(this.textoBuscador) || platillo.categoria.nombre.toLowerCase().includes(this.textoBuscador)
       );
     }
-    this.currentPage = 1; // Reinicia la página actual a la primera página
+    this.currentPage = 1;
   }
 
   get pagedPlatillos(): Platillo[] {
@@ -80,26 +78,9 @@ export class ListaPlatilloComponent implements OnInit {
   get pageCount(): number {
     return Math.ceil(this.platillosFiltrados.length / this.pageSize);
   }
-
-  get pagesArray(): number[] {
-    return Array(this.pageCount).fill(0).map((x, i) => i + 1);
-  }
-
-  setPage(page: number) {
+  changePage(page: number) {
     if (page >= 1 && page <= this.pageCount) {
       this.currentPage = page;
-    }
-  }
-
-  nextPage() {
-    if (this.currentPage < this.pageCount) {
-      this.currentPage++;
-    }
-  }
-
-  prevPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
     }
   }
 }

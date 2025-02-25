@@ -1,0 +1,89 @@
+<body class="fondo">
+  <div class="container">
+    <h2 class="titulo"></h2>
+    <div class="form">
+      <form [formGroup]="usuarioForm" class="row">
+        <div class="col-12 col-md-6 mb-3">
+          <h2 class="pb-2">Datos Personales</h2>
+          <!-- Nombre -->
+          <div class="mb-3">
+            <label>Nombre</label>
+            <input id="nombre" formControlName="nombre" class="form-control"
+              [ngClass]="{
+                'is-invalid': usuarioForm.get('nombre')?.invalid && usuarioForm.get('nombre')?.touched
+              }"
+              placeholder="Nombre" required>
+            <div class="invalid-feedback">Nombre es requerido</div>
+          </div>
+          <!-- Apellido Paterno -->
+          <div class="mb-3">
+            <label>Apellido Paterno</label>
+            <input id="apellido_paterno" formControlName="apellido_paterno" class="form-control"
+              [ngClass]="{
+                'is-invalid': usuarioForm.get('apellido_paterno')?.invalid && usuarioForm.get('apellido_paterno')?.touched
+              }"
+              placeholder="Apellido Paterno" required>
+            <div class="invalid-feedback">Apellido Paterno es requerido</div>
+          </div>
+          <!-- Apellido Materno -->
+          <div class="mb-3">
+            <label>Apellido Materno</label>
+            <input id="apellido_materno" formControlName="apellido_materno" class="form-control"
+              [ngClass]="{
+                'is-invalid': usuarioForm.get('apellido_materno')?.invalid && usuarioForm.get('apellido_materno')?.touched
+              }"
+              placeholder="Apellido Materno" required>
+            <div class="invalid-feedback">Apellido Materno es requerido</div>
+          </div>
+          <!-- Correo -->
+          <div class="mb-3">
+            <label>Correo Electrónico</label>
+            <input id="correo" type="email" formControlName="correo" class="form-control"
+              [ngClass]="{
+                'is-invalid': usuarioForm.get('correo')?.invalid && usuarioForm.get('correo')?.touched 
+              }"
+              placeholder="Correo" required>
+            <div class="invalid-feedback">Correo es requerido y debe ser válido</div>
+          </div>
+
+          <!-- Nickname -->
+          <div class="mb-3">
+            <label>Nickname</label>
+            <input id="nickname" formControlName="nickname" class="form-control"
+              [ngClass]="{
+                'is-invalid': usuarioForm.get('nickname')?.invalid && usuarioForm.get('nickname')?.touched 
+              }"
+              placeholder="Nickname" required>
+            <div class="invalid-feedback">Nickname es requerido</div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center lado-img">
+          <div class="d-flex justify-content-center mb-3">
+            <div class="apartadoImg text-center mb-3">
+              <img [src]="foto_perfil"
+                   [style.width.px]="imageWidth" [style.height.px]="imageHeight"
+                   (error)="onImageError($event)"
+                   class="img-fluid mb-3">
+              <input type="file" id="datos-personales" class="hidden"
+                     (change)="onFileSelected($event)" accept="image/jpeg, image/png, image/jpg, image/webp">
+              <label for="datos-personales" class="btn-img btn btn-subir-imagen">
+                Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i>
+              </label>
+            </div>
+          </div>
+          <div *ngIf="usuarioForm.get('foto_perfil')?.errors?.['invalidoTipoArchivo'] && usuarioForm.get('foto_perfil')?.touched"
+               class="invalid-feedback text-center">
+            El tipo de archivo no es válido. Solo se permiten imágenes JPG, PNG, WEBP.
+          </div>
+          <div *ngIf="usuarioForm.get('foto_perfil')?.errors?.['archivoMuyPesado'] && usuarioForm.get('foto_perfil')?.touched"
+               class="invalid-feedback text-center">
+            El archivo es muy pesado. Debe ser menor de 2 MB.
+          </div>
+          <div class="col-12 d-flex justify-content-end">
+            <button type="button" class="btn btn-aceptar" (click)="actualizarUsuario()">Actualizar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>

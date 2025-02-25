@@ -1,55 +1,58 @@
-.card {
-  cursor: pointer; /* Cambia el cursor al pasar sobre la tarjeta */
-  background-color: rgb(255, 255, 255); /* Color de fondo transparente */
-  min-width: 128px !important;
-  min-height: 128px !important;
-  max-width: 216px !important;
-  max-height: 216px !important;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  transition: all 0.3s ease; /* Transición suave para cambios */
-  border: none;
-  margin-bottom: 5px;
-}
-
-.card:hover {
-  transform: translateY(-5px); /* Eleva la tarjeta ligeramente */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
-  //background-color: rgb(255, 222, 172);
-}
-
-.card:active {
-  transform: translateY(0); /* Devuelve la tarjeta a su posición original cuando se presiona */
-  box-shadow: none; /* Quita la sombra cuando se presiona */
-}
-
-.mesa-nombre {
-  margin-top: 25px;
-}
-
-.card-body {
-  padding-bottom: 0px;
-  background-color: #faf3e9;
-  font-size: 20px;
-  background-image: url('../../../../assets/image/tenedores.png');
-  background-position: center;
+.mesa-card {
+  cursor: pointer;
+  background-color: #fff;
   width: 100%;
-  height: 120px;
-  background-size: cover;
-}
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  //border: 1px solid rgb(35, 38, 53);
 
-.card-header {
-  text-align: center;
-} 
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
 
-.card-footer {
-  background-image: url('../../../../assets/image/lll.png');
-  background-position: center;
-  background-size: cover;
-  height: 50px;
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+  .card-body {
+    background-image: url('../../../../assets/image/pixelcut-export.png');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    color: rgb(38, 35, 62);
+  }
+  .mesa-nombre {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%; /* Make it circular */
+    padding: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #26233e;
+    text-align: center;
+    width: 60%; /* Adjust size for the circle */
+    height: 60%; /* Make it a smaller circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media (max-width:500px) {
+    .mesa-nombre {
+      font-size: 1em; /* Reduced font size */
+      padding: 8px; /* Optionally adjust padding */
+    }
+  }
 }
 
 .container {
-  padding: 10px;
-  align-items: center;
+  padding: 20px;
 }

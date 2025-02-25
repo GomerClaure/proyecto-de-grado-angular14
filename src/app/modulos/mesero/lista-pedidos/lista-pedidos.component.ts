@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
-import { PedidosMesa } from 'src/app/modelos/PedidosMesa';
+import { PedidosMesa, PedidosPorMesa } from 'src/app/modelos/PedidosMesa';
 import { PedidosDeMesaService } from 'src/app/services/pedido/pedidos-de-mesa.service';
+import { CuentaService } from 'src/app/services/pedido/cuenta.service';
+import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.service';
 
 @Component({
   selector: 'app-lista-pedidos',
@@ -9,27 +11,30 @@ import { PedidosDeMesaService } from 'src/app/services/pedido/pedidos-de-mesa.se
   styleUrls: ['./lista-pedidos.component.scss']
 })
 export class ListaPedidosComponent implements OnInit {
-  pedidos: any[] = [];
-  pedidosMostrar:any[]=[];
+  pedidosMostrar:PedidosPorMesa[]=[];
   errorMessage: string = '';
-  pedidosPorMesa: PedidosMesa[] = []; 
-
+  pedidosPorMesa: PedidosPorMesa[] = []; 
+  mesa:number=0;
+ 
   id_restaurante:any;
   id_empleado:any;
 
-  constructor(private pedidoService: PedidoService,private pedidoServiceMesa:PedidosDeMesaService) { }
+  constructor(private pedidoService: PedidoService,
+              private pedidoServiceMesa:PedidosDeMesaService,
+              private cocinaService : PedidosCocinaService,
+              private cuentaService:CuentaService) { }
 
   ngOnInit(): void {
     this.id_restaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
     this.id_empleado= parseInt(sessionStorage.getItem('id_empleado')||'0');
     this.obtenerPedidos();
+    this.suscribirCambios();
   } 
   obtenerPedidos(): void {
     this.pedidoService.getPedidos(this.id_empleado,this.id_restaurante).subscribe(
       (response) => {
-        this.pedidos = response.pedidos;
-        console.log("Obteniendo pedidos",this.pedidos);
-        this.agruparPedidosPorMesa();
+        this.pedidosPorMesa = response.pedidos;
+        console.log("estooooo",this.pedidosPorMesa)
       },
       (error) => {
         this.errorMessage = 'Error al obtener los pedidos';
@@ -37,24 +42,50 @@ export class ListaPedidosComponent implements OnInit {
       }
     );
   }
-  agruparPedidosPorMesa(): void {
-    this.pedidos.forEach(pedido => {
-      const nombreMesa = pedido.cuenta.mesa.nombre;
-      const est=pedido.estado.nombre;
-      const pedidosMesa = this.pedidosPorMesa.find(item => item.nombreMesa === nombreMesa); 
 
-       console.log(pedido.cuenta.estado)
-       if (pedido.cuenta.estado === 'cerrada') {
-        return;
-      }else if (!pedidosMesa) { 
-        this.pedidosPorMesa.push({ nombreMesa: nombreMesa,estadoP:est, pedidos: [pedido]});
-      } else { 
-        pedidosMesa.pedidos.push(pedido); 
+  mostrar(mesa: string) {
+    this.pedidosMostrar = [];
+    this.pedidosMostrar = this.pedidosPorMesa.filter(pedido => pedido.nombreMesa === mesa);
+    this.pedidoServiceMesa.setPedidosDeMesa(this.pedidosMostrar);
+  }
+  
+  IdCuenta(id:number){
+    this.cuentaService.saveId(id);
+    console.log('este es el id',id);
+  }
+
+  suscribirCambios(){
+    this.cocinaService.pedidos$.subscribe(update => {
+      if (update) {
+        const { evento, datos } = update;
+        let idPedido = datos.idPedido;
+        // Dependiendo del tipo de evento, maneja el pedido de manera diferente
+        switch (evento) {
+          case 'PedidoEnPreparacion':
+            this.actualizarEstadoPedido(idPedido, 'En preparación');
+            break;
+          case 'PedidoServido':
+            this.actualizarEstadoPedido(idPedido, 'Servido');
+            break;
+          default:
+            console.warn(`Evento no manejado: ${evento}`);
+        }
+        
       }
     });
-  } 
-  mostrar(nombreMesa: string,estado:string) {
-    const pedidosMesa = this.pedidosPorMesa.find(item => item.nombreMesa === nombreMesa)?.pedidos || [];
-    this.pedidoServiceMesa.setPedidosDeMesa(pedidosMesa,nombreMesa,estado);
   }
+
+  actualizarEstadoPedido(idPedido: number, nuevoEstado: string): void {
+    for (let mesa of this.pedidosPorMesa) {
+      for (let pedido of mesa.pedidos) {
+        if (pedido.id_pedido === idPedido) {
+          pedido.estado = nuevoEstado;
+          console.log(`Pedido actualizado:`, pedido);
+          return;
+        }
+      }
+    }
+    console.warn(`No se encontró el pedido con id ${idPedido}`);
+  }
+  
 }

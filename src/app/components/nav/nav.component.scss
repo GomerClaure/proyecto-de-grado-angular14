@@ -1,51 +1,59 @@
 .custom-navbar-color {
-    background-color:#f4d596;
-    //background-image: url(../../../assets/image/fondito.jpg);
-    background-size: cover; /* Ajusta el tamaño de la imagen al contenedor */
-    background-position: center; /* Centra la imagen en el contenedor */
-    color: rgb(0, 0, 0);
+    background-color:#0d202b !important;
+    background-size: cover;
+    background-position: center;
+    color: rgb(255, 255, 255);
     position: fixed;
     padding: 14px; 
-    width: 100%; /* Asegura que ocupe toda la anchura */
-    top: 0; /* La barra de navegación se fija en la parte superior */
+    width: 100%; 
+    top: 0;
     z-index: 1000; 
-
+    position: fixed;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> develop
+.offcanvas {
+    background-color:#0d202b !important;
+}
 .notificacion{
     width: 318px;
 }
-
+.bi-cup{
+    font-size: 30px;
+}
+.icono{
+    height: 40px;
+    width: 45px;
+}
+.lugo{
+    padding-left: 10px;
+}
+@media (min-width: 769px) {
+    .dropdown-menu-custom {
+      right: 0 !important;
+      left: auto !important;
+      transform: none;
+    }
+}
+@media (max-width: 992px) {
+    .nav-link {
+      font-weight: bold !important;
+    }
+  }
 @media (max-width: 470px) {
     .dropdown-menu {
-        //300 px en rem
         width: 20rem !important;
-        // posicion relativa en el medio de la mpantalla
-        right: -650% !important;
+        right: -150% !important;
       }
 }
-
 @media (max-width: 375px) {
     .dropdown-menu {
-        //300 px en rem
         width: 20rem !important;
-        // posicion relativa en el medio de la mpantalla
-        right: -820% !important;
+        right: -250% !important;
       }
 }
 
 @media (max-width: 320px) {
-    // .navbar-brand{
-    //     font-size: 1rem;
-    
-    // }
     .dropdown-menu {
-        //300 px en rem
         width: 20rem !important;
-        // posicion relativa en el medio de la mpantalla
-        right: -970% !important;
+        right: -70% !important;
       }
 }

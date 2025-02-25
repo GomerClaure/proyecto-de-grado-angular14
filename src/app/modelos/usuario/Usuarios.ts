@@ -8,6 +8,8 @@ export interface Usuario{
     nickname:string;
     foto_perfil:string;
     token:string;
+    estado:boolean;
+    tipo_usuario:string;
 }
 
 export interface Administrador{
