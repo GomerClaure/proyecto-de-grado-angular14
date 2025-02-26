@@ -4,6 +4,34 @@
 .nav-link::hover{
   background-color: #000000;
 }
+.nav.nav-underline {
+  white-space: nowrap;
+  display: block !important;
+  flex-wrap: nowrap;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  text-align: center;
+}
+
+.nav.nav-underline li {
+  display: inline-block;
+  margin-inline-start: 10px;
+}
+
+.nav-underline a, nav-link.active {
+  color: #1a1212;
+}
+
+.nav-underline nav-link.active {
+  font-weight: bold !important;
+}
+
+.dark-theme .nav-underline a, a.active {
+  color: #f0e6e6;
+}
+
 .card-terminado  .card-header{
     background-color: #548898;
     color: white;

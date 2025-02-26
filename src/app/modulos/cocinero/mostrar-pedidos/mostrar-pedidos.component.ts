@@ -22,11 +22,13 @@ export class MostrarPedidosComponent implements OnInit {
   id_empleado: number;
   id_pedido_detallado: number;
   mostrarDetalle: boolean = false;
+  activeCategoria: number;
 
   constructor(private pedidoService: PedidoService, private cocinaService : PedidosCocinaService) {
     this.id_restaurante = 0;
     this.id_empleado = 0;
     this.id_pedido_detallado = 0;
+    this.activeCategoria = 0;
    }
 
   ngOnInit(): void {
@@ -41,10 +43,10 @@ export class MostrarPedidosComponent implements OnInit {
       // Dependiendo del tipo de evento, maneja el pedido de manera diferente
       switch (evento) {
         case 'PedidoEnPreparacion':
-          this.actualizarEstadoPedido(datos, 'En preparación');
+          this.actualizarEstadoPedido(2, datos, 'En preparación');
           break;
         case 'PedidoServido':
-          this.actualizarEstadoPedido(datos, 'Servido');
+          this.actualizarEstadoPedido(3, datos, 'Servido');
           break;
         case 'pedidoCancelado':
           this.eliminarPedidoDeLista(datos);
@@ -67,7 +69,7 @@ export class MostrarPedidosComponent implements OnInit {
             }
           );
 
-          this.mostrarped(this.pedidosP);
+          this.mostrarped(0, this.pedidosP);
           var audio = document.getElementById('sonidoNotificacion') as HTMLAudioElement;
           audio?.play();
           break;
@@ -83,7 +85,7 @@ export class MostrarPedidosComponent implements OnInit {
   });
 }
 // Método para actualizar el estado del pedido y moverlo al final de la lista
-actualizarEstadoPedido(pedido: any, estado:string): void {
+actualizarEstadoPedido(idTabActivo: number, pedido: any, estado:string): void {
   var pedidoAnterior = this.pedidosP.find(p => p.id === pedido.idPedido);
   if(pedidoAnterior){
     if(pedidoAnterior.estado == 'En espera'){
@@ -106,7 +108,7 @@ actualizarEstadoPedido(pedido: any, estado:string): void {
       this.pedidosEnEspera.push(pedidoAnterior);
     }
     this.pedidosP = [...this.pedidosEnEspera, ...this.pedidosPreparacion, ...this.pedidosTerminado];
-    this.mostrarped(this.pedidosP);
+    this.mostrarped(idTabActivo, this.pedidosP);
   }
 }
 
@@ -131,8 +133,9 @@ eliminarPedidoDeLista(pedido: any): void {
     );
   }
 
-  mostrarDetallePedido(): void {
+  mostrarDetallePedido(idTabActivo: number): void {
     this.mostrarDetalle = true;
+    this.activeCategoria = idTabActivo
   }
 
   extractHour(datetime: string): string {
@@ -169,44 +172,48 @@ eliminarPedidoDeLista(pedido: any): void {
 
     console.log(this.pedidosP)
 
-    this.mostrarped(this.pedidosP);
+    this.mostrarped(0, this.pedidosP);
   }
 
-  mostrarped(p: PedidosCocina[]): void {
+  mostrarped(idActivo: number,p: PedidosCocina[]): void {
     this.pedidosMostrar = p;
+    this.activeCategoria = idActivo;
+
   }
 
-  mostrarTodos(){
+  mostrarTodos(idActive: number){
     this.mostrarDetalle = false;
-    this.mostrarped(this.pedidosP);
+    this.mostrarped(idActive, this.pedidosP);
   }
 
-  enPreparacion(): void {
+  enPreparacion(idActive: number): void {
     this.mostrarDetalle = false;
+    this.activeCategoria = idActive;
 
 
-    this.mostrarped(this.pedidosPreparacion);
+    this.mostrarped(idActive, this.pedidosPreparacion);
   }
 
-  terminado(): void {
+  terminado(idActive: number): void {
     this.mostrarDetalle = false;
-    this.mostrarped(this.pedidosTerminado);
+    this.mostrarped(idActive, this.pedidosTerminado);
   }
 
-  paraLlevar(): void {
+  paraLlevar(idActive: number): void {
     this.mostrarDetalle = false;
-    this.mostrarped(this.pedidosP.filter(ped => ped.tipoPedido === 'llevar'));
+    this.mostrarped(idActive, this.pedidosP.filter(ped => ped.tipoPedido === 'llevar'));
   }
 
-  paraAqui(): void {
+  paraAqui(idActive: number): void {
     this.mostrarDetalle = false;
-    this.mostrarped(this.pedidosP.filter(ped => ped.tipoPedido === 'local'));
+    this.mostrarped(idActive, this.pedidosP.filter(ped => ped.tipoPedido === 'local'));
   }
 
   verPlatos(id: number): void {
     this.id_pedido_detallado = id;
     this.cocinaService.actualizarPedidoDetallado(this.id_pedido_detallado);
     this.mostrarDetalle = true;
+    this.activeCategoria = 1;
 
   }
 

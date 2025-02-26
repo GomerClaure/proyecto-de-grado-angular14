@@ -1,43 +1,41 @@
 <div class="fondo">
-  <div class="container">
-    <div class="filtro">
-      <ul class="nav nav-underline justify-content-center">
-        <li class="nav-item ms-3" (click)="mostrarTodos()">
-          <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true">Todos los pedidos</a>
-        </li>
-        <li class="nav-item ms-3" (click)="mostrarDetallePedido()">
-          <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true">Mostrar detalle</a>
-        </li>
-        <li class="nav-item ms-3">
-          <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true" (click)="enPreparacion()">En
-            preparación</a>
-        </li>
-        <li class="nav-item ms-3">
-          <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true"
-            (click)="terminado()">Terminados</a>
-        </li>
-        <li class="nav-item ms-3" (click)="paraLlevar()">
-          <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true">Para Llevar</a>
-        </li>
-        <li class="nav-item ms-3" (click)="paraAqui()">
-          <a class="nav-link" role="tab" aria-controls="categoria0" aria-selected="true">Para Aquí</a>
-        </li>
-      </ul>
-    </div>
+  <div class="filtro mb-2">
+    <ul class="nav nav-underline justify-content-center">
+      <li class="nav-item ms-3" (click)="mostrarTodos(0)">
+        <a class="nav-link" [class.active]="activeCategoria === 0" role="tab">Todos los pedidos</a>
+      </li>
+      <li class="nav-item ms-3" (click)="mostrarDetallePedido(1)">
+        <a class="nav-link" [class.active]="activeCategoria === 1" role="tab">Mostrar detalle</a>
+      </li>
+      <li class="nav-item ms-3" (click)="enPreparacion(2)">
+        <a class="nav-link" [class.active]="activeCategoria === 2" role="tab">En preparación</a>
+      </li>
+      <li class="nav-item ms-3" (click)="terminado(3)">
+        <a class="nav-link" [class.active]="activeCategoria ===3" role="tab">Terminados</a>
+      </li>
+      <li class="nav-item ms-3" (click)="paraLlevar(4)">
+        <a class="nav-link" [class.active]="activeCategoria === 4" role="tab">Para Llevar</a>
+      </li>
+      <li class="nav-item ms-3" (click)="paraAqui(5)">
+        <a class="nav-link" [class.active]="activeCategoria === 5" role="tab">Para Aquí</a>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="container-fluid">
     <div *ngIf="!mostrarDetalle">
-      <div class="mt-3 pedidos row" *ngIf="pedidosMostrar.length > 0; else noPedidos">
+      <div class="pedidos row" *ngIf="pedidosMostrar.length > 0; else noPedidos">
         <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-3" *ngFor="let pedido of pedidosMostrar">
           <div class="card custom-card" [ngClass]="{
-            'card-terminado': pedido.estado === 'Servido',
-            'card-en-preparacion': pedido.estado === 'En preparación',
-            'card-default': pedido.estado !== 'Servido' && pedido.estado !== 'En preparación'
-          }"
-          (click)="verPlatos(pedido.id)">
+          'card-terminado': pedido.estado === 'Servido',
+          'card-en-preparacion': pedido.estado === 'En preparación',
+          'card-default': pedido.estado !== 'Servido' && pedido.estado !== 'En preparación'
+        }" (click)="verPlatos(pedido.id)">
             <div class="card-header d-flex justify-content-between align-items-center">
               <div>
                 <h5>{{pedido.hora}}</h5>
               </div>
-              
+
               <div>
                 <i *ngIf="pedido.tipoPedido === 'llevar'" class="bi bi-bag-fill icon-large"></i>
                 <i *ngIf="pedido.tipoPedido === 'local'" class="bi bi-house-door-fill icon-large"></i>
@@ -48,24 +46,26 @@
             </div>
             <div class="card-body text-center pb-0">
               <div class="contenido-card">
-              <p class="fs-5 card-text mb-1">Mesa: <strong>{{pedido.mesa}}</strong></p>
-              <p class="fs-5 card-text mb-1">Tipo: <strong>{{pedido.tipoPedido}}</strong></p>
-              <p class="fs-5 card-text mb-1">Estado: <strong>{{pedido.estado}}</strong></p>
-            </div>
+                <p class="fs-5 card-text mb-1">Mesa: <strong>{{pedido.mesa}}</strong></p>
+                <p class="fs-5 card-text mb-1">Tipo: <strong>{{pedido.tipoPedido}}</strong></p>
+                <p class="fs-5 card-text mb-1">Estado: <strong>{{pedido.estado}}</strong></p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <audio id="sonidoNotificacion" src="assets/audio/notificacion-cocina-pedido.mp3" preload="auto"></audio>
 
   </div>
-  <app-mostrar-detalle-pedidos *ngIf="mostrarDetalle"
-   [pedidosP]="pedidosP"
-    [id_empleado]="id_empleado"
-    [id_restaurante]="id_restaurante"
-    [id_pedido_detallado]="id_pedido_detallado"
-  ></app-mostrar-detalle-pedidos>
+
+  <!-- Mover el componente dentro del contenedor -->
+  <app-mostrar-detalle-pedidos *ngIf="mostrarDetalle" [pedidosP]="pedidosP" [id_empleado]="id_empleado"
+    [id_restaurante]="id_restaurante" [id_pedido_detallado]="id_pedido_detallado" class="mt-3">
+
+  </app-mostrar-detalle-pedidos>
+
+  <audio id="sonidoNotificacion" src="assets/audio/notificacion-cocina-pedido.mp3" preload="auto"></audio>
+
 </div>
 <ng-template #noPedidos>
   <div class="alert alert-warning text-center mt-3 mensaje-reporte" role="alert">
