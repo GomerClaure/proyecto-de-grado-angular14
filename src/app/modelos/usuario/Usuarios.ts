@@ -27,6 +27,7 @@ export interface Propietario{
     pais:string;
     departamento:string;
     usuario: Usuario;
+    foto_perfil:string;
 }
 
 export interface Empleado{
@@ -38,4 +39,5 @@ export interface Empleado{
     usuario: Usuario;
     id_rol:number;
     id_restaurante:number;
+    foto_perfil:string;
 }

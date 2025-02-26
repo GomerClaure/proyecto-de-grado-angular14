@@ -36,10 +36,10 @@ export class FormDatosPersonalesComponent implements OnInit {
     let idUsuario = sessionStorage.getItem('id_user') || '';
     this.sessionService.getDatosPersonales(idUsuario).subscribe((res: any) => {
       let propietario: Propietario = res.user;
-      console.log(propietario);
-      this.usuarioForm.patchValue(propietario.usuario);
+      console.log(res);
+      this.usuarioForm.patchValue(propietario);
       this.usuarioForm.patchValue({ foto_perfil: null });
-      this.foto_perfil = this.url_base + propietario.usuario.foto_perfil;
+      this.foto_perfil = this.url_base + propietario.foto_perfil;
       this.usuarioForm.markAllAsTouched();
     }
     );

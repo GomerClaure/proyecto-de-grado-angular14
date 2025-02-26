@@ -5,9 +5,9 @@
 export const environment = {
   production: false,
 
-  backendUrl: 'http://192.168.0.18:8000/api',
-  backendStorageUrl: 'http://192.168.0.18:8000',
-  frontDominio: 'http://192.168.0.18:4200',
+  backendUrl: 'http://localhost:8000/api',
+  backendStorageUrl: 'http://localhost:8000',
+  frontDominio: 'http://localhost:4200',
   websocketConfig:{
     key: 'd28cefd4194509d86d53',
     cluster: 'sa1',
