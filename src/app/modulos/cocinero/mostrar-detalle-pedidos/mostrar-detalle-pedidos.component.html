@@ -1,5 +1,5 @@
 <div class="contenedor-slider">
-  <div class="vista-principal position-relative">
+  <div class="vista-principal position-relative mx-2">
     <button class="btn-navegacion p-lg-3 anterior position-absolute top-50 start-0 translate-middle-y"
       (click)="mostrarPedidoAnterior()">
       <i class="bi bi-chevron-left"></i>
@@ -7,7 +7,7 @@
 
     <div class="detalles-pedido px-lg-5 px-1 pt-lg-0 pt-5 pb-3">
       <div class="row h-100">
-        <div class="detalles-pedido-header card-title d-flex justify-content-between p-1" [ngClass]="{
+        <div class="detalles-pedido-header rounded-top d-flex justify-content-between p-1" [ngClass]="{
           'terminado': pedidoSeleccionado.estado === 'Servido',
           'en-preparacion': pedidoSeleccionado.estado === 'En preparación',
           'default': pedidoSeleccionado.estado !== 'Servido' && pedidoSeleccionado.estado !== 'En preparación'
@@ -29,23 +29,76 @@
 
           </div>
           <div>
-            <h5 class="modal-title ms-2 me-2" id="exampleModalLabel">Pedido #{{pedidoSeleccionado.id}}</h5>
+            <h5 class="modal-title ms-2 me-lg-2 me-4" id="exampleModalLabel">Pedido #{{pedidoSeleccionado.id}}</h5>
           </div>
         </div>
 
-        <div class="detalles-pedido-body row g-2 mx-0 mb-2 mt-0">
-          <div *ngFor="let plato of platosMostrar" class="col-12">
-            <div class="card p-2">
+        <div class="detalles-pedido-body row-12 mx-0 px-1 mb-2 mt-0">
+          <!-- Vista en móviles -->
+          <ul class="list-unstyled col-12 d-block d-lg-none px-1">
+            <li *ngFor="let plato of platosMostrar" class="detalles-pedido-body-element mb-1 pt-2 px-2">
               <div class="d-flex justify-content-between">
-                <strong>{{ plato.nombre }}</strong>
-                <span class="badge bg-primary">x{{ plato.cantidad }}</span>
+                <span>{{ plato.nombre }}</span>
+                <span>Cantidad: {{ plato.cantidad }}</span>
               </div>
-              <div *ngIf="plato.detalle" class="text-muted mt-1">
+              <div *ngIf="plato.detalle" class="detalle-descripcion mb-1">
                 {{ plato.detalle }}
+              </div>
+            </li>
+          </ul>
+          
+          <!-- Vista en pantallas grandes -->
+          <div class="row d-none d-lg-flex">
+            <!-- Tabla con detalles -->
+            <div class="col-lg-6">
+              <div class="cont">
+                <div class="table-container">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Cantidad</th>
+                        <th>Platillo</th>
+                        <th>Detalle</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let d of platosMostrar">
+                        <tr *ngIf="d.detalle" class="fs-6">
+                          <td>{{ d.cantidad }}</td>
+                          <td>{{ d.nombre }}</td>
+                          <td class="detalle-td">{{ d.detalle }}</td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+        
+            <!-- Tabla sin detalles -->
+            <div class="col-lg-6">
+              <div class="cont">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Cantidad</th>
+                      <th>Platillo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let d of platosMostrar">
+                      <tr *ngIf="!d.detalle" class="fs-5">
+                        <td>{{ d.cantidad }}</td>
+                        <td>{{ d.nombre }}</td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
+        
         
 
         <div class="detalles-pedido-footer d-flex justify-content-center align-items-center">
@@ -82,7 +135,7 @@
             <i *ngIf="pedido.tipoPedido === 'local'" class="bi bi-house-door-fill icon-large"></i>
           </div>
           <div class="p-0">
-            <h4 class="m-0">#{{pedido.id}}</h4>
+            <h4 class="m-0">{{pedido.id}}</h4>
           </div>
         </div>
       </div>

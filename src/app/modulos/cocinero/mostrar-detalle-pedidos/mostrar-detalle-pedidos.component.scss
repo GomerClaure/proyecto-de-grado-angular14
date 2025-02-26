@@ -183,6 +183,13 @@ button {
   }
   .navegacion-miniaturas{
     height: 12%;
+  }.detalles-pedido-body-element {
+    background-color: rgb(222 226 230 / 95%);
+    border-bottom: 3px dotted #353558; /* Grosor mayor para mayor separación */
+  }
+  .detalle-descripcion{
+    background-color: rgb(222, 226, 230);
+    border: 1px solid #353558;
   }
 }
 
