@@ -86,7 +86,7 @@ export class FormDatosPersonalesComponent implements OnInit {
     } else {
       console.log("No se seleccionó ningún archivo para foto_perfil.");
     }
-    formData.append('id_usuario', sessionStorage.getItem('id_user') || '');
+    // formData.append('id_usuario', sessionStorage.getItem('id_user') || '');
   
     if (this.usuarioForm.valid) {
       this.sessionService.actualizarDatosEmpleado(formData).subscribe(
