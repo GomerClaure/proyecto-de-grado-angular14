@@ -10,6 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 import { DescripcionPedidoService } from 'src/app/services/detalle-pedido/descripcion-pedido.service';
 import { SessionService } from 'src/app/services/auth/session.service';
 import { ToastrService } from 'ngx-toastr';
+import { MesaService } from './../../../services/mesas/mesa.service'  ;
+import { Mesa } from 'src/app/modelos/Mesa'; 
 
 @Component({
   selector: 'app-registrar-pedido',
@@ -38,6 +40,8 @@ export class RegistrarPedidoComponent implements OnInit {
   platillosFiltrados: Platillo[] = [];
   id_restaurante: any;
   nombreMesa:string='';
+  user:any='';
+  mesa: Mesa | undefined;
   
   constructor(private descripcionPedidoService: DescripcionPedidoService,
     private route: ActivatedRoute,
@@ -45,7 +49,8 @@ export class RegistrarPedidoComponent implements OnInit {
     public pedidoselectService: PedidoService,
     private categoriaService: CategoriaService,
     private sessionService: SessionService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private mesaService: MesaService 
   ) { }
 
 
@@ -54,10 +59,30 @@ export class RegistrarPedidoComponent implements OnInit {
     this.getPlatillos();
     this.getCategorias();
     this.route.queryParams.subscribe(params => {
-      this.numeroMesa = params['mesaSeleccionada'];
-      this.nombreMesa = params['nombreMesa']
+      this.user = parseInt(sessionStorage.getItem('rol_empleado') || '0');
+      if (this.user === 2) {
+        this.getPrimerMesa();
+      } else {
+        this.numeroMesa = params['mesaSeleccionada'];
+        this.nombreMesa = params['nombreMesa'];
+      }
     });
   }
+
+  getPrimerMesa(): void {
+    this.mesaService.getMesas(this.id_restaurante.toString()).subscribe((res:any) => {
+      console.log(res.mesas[0]);
+      if (res && res.mesas[0] && res.mesas.length > 0) {
+        // Asignar la primera mesa
+        this.numeroMesa = res.mesas[0].id.toString();
+        this.nombreMesa = res.mesas[0].nombre;
+      } else {
+        this.numeroMesa = '0';
+        this.nombreMesa = 'Sin mesas';
+      }
+    });
+  }
+  
   switchStateChanged() {
     if (this.switchState) {
       this.tipo = 'Llevar'
@@ -187,6 +212,7 @@ export class RegistrarPedidoComponent implements OnInit {
       tipo: this.tipo.toLowerCase(),
       id_empleado: id_empleado
     };
+    console.log(pedidoCompleto)
 
     const formData = new FormData();
     formData.append('platillos', JSON.stringify(pedidoCompleto.platillos));

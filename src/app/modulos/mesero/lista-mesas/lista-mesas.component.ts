@@ -20,7 +20,7 @@ export class ListaMesasComponent implements OnInit {
     let idRestaurante = sessionStorage.getItem('id_restaurante')||'0';
     this.mesaService.getMesas(idRestaurante).subscribe(
       (res: any) => {
-        this.mesas = res.mesas;
+        this.mesas = res.mesas.slice(1);
         console.log(this.mesas);
       },
       err => {
