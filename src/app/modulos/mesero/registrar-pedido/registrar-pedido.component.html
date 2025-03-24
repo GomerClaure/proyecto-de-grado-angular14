@@ -121,7 +121,11 @@
       </ng-template>
   </div>
   <div class="foot">
-  <button class="btn-aceptar btn-sm justify-content-center m-2"  (click)="guardarPedido()">Confirmar Pedido</button>
+    <!-- El modal se mostrará solo si mostrarModal es verdadero -->
+    <app-modal-datos-cuenta *ngIf="mostrarModal" (cerrar)="mostrarModal = false"></app-modal-datos-cuenta>
+    <!-- Botón para confirmar el pedido -->
+    <button class="btn-aceptar btn-sm justify-content-center m-2" (click)="guardarPedido()">
+      Confirmar Pedido
+    </button>
   </div>
-</div>
 <app-modal-detalle-pedido></app-modal-detalle-pedido>
