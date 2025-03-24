@@ -58,6 +58,7 @@ export class RegistrarPedidoComponent implements OnInit {
       this.rol_user = parseInt(sessionStorage.getItem('rol_empleado') || '0');
       if (this.rol_user === 2) {
         this.getPrimerMesa();
+        this.mostrarModal=true;
       } else {
         this.numeroMesa = params['mesaSeleccionada'];
         this.nombreMesa = params['nombreMesa'];
