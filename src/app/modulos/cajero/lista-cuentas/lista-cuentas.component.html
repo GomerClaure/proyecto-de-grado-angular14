@@ -31,16 +31,17 @@
                         <td>{{ cuenta.nit }}</td>
                         <td>{{ cuenta.estado }}</td>
                         <td>{{ cuenta.monto_total }}</td>
-                        <td>
+                        <td class="text-center">
                             <button 
-                                class="btn btn-primary" 
-                                (click)="imprimirCuenta(cuenta.id)"
+                                class="btn btn-subir-imagen" 
+                                (click)="imprimirCuenta(cuenta.id)"   
                             >
-                                Ver Detalle
+                                Imprimir
+                                <i class="bi bi-printer"></i>
                             </button>
                         </td>
                     </tr>
-                </tbody>
+                </tbody> 
             </table>
         </div>
         <div class="pagination-container">
