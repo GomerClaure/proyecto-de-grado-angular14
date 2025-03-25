@@ -18,6 +18,9 @@ export class CuentaService {
     this.idCuentaSubject.next(id); 
     console.log('ID cuenta actualizado:', id); 
   }
+  get idCuentaValue(): number | null {
+    return this.idCuentaSubject.getValue();
+  }
   storeDatosCuenta(formData: FormData): any {
     const idCuenta = this.idCuentaSubject.getValue();  // Obtener el último valor del idCuenta
     console.log('Formulario enviado con ID cuenta:', idCuenta, formData);

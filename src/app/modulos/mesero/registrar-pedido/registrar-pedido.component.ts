@@ -235,7 +235,7 @@ export class RegistrarPedidoComponent implements OnInit {
     this.platillos = [];
     this.switchState = false;
     this.getPlatillos();
-    this.mostrarModal = false; // Cerrar el modal después de registrar el pedido
+    // this.mostrarModal = false; // Cerrar el modal después de registrar el pedido
   }
 
   increment(index: number) {
