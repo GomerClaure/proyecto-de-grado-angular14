@@ -12,6 +12,8 @@ import { SessionService } from 'src/app/services/auth/session.service';
 import { ToastrService } from 'ngx-toastr';
 import { MesaService } from './../../../services/mesas/mesa.service';
 import { Mesa } from 'src/app/modelos/Mesa'; 
+import { Cuenta } from 'src/app/modelos/Cuenta';
+import { CuentaService } from 'src/app/services/pedido/cuenta.service';
 
 @Component({
   selector: 'app-registrar-pedido',
@@ -40,6 +42,8 @@ export class RegistrarPedidoComponent implements OnInit {
   nombreMesa: string = '';
   rol_user: any = '';
   mesa: Mesa | undefined;
+  //el id de la cuenta 
+  id_cuenta:number=0;
   
   constructor(private descripcionPedidoService: DescripcionPedidoService,
     private route: ActivatedRoute,
@@ -48,6 +52,7 @@ export class RegistrarPedidoComponent implements OnInit {
     private categoriaService: CategoriaService,
     private sessionService: SessionService,
     private toastr: ToastrService,
+    private cuentasS:CuentaService,
     private mesaService: MesaService) { }
 
   ngOnInit(): void {
@@ -211,6 +216,8 @@ export class RegistrarPedidoComponent implements OnInit {
 
     this.pedidoselectService.storePedido(formData).subscribe(
       (response) => {
+        this.id_cuenta=(response.pedido.id_cuenta);
+        this.cuentasS.saveId(this.id_cuenta);
         console.log('Se registró el pedido', response);
         this.toastr.success('Se registró el pedido correctamente', 'Éxito');
       },

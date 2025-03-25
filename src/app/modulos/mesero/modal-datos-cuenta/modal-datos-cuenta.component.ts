@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CuentaService } from 'src/app/services/pedido/cuenta.service';
 
@@ -12,7 +13,7 @@ export class ModalDatosCuentaComponent implements OnInit {
   
   cuentaForm: FormGroup;  // Form group for validation
   id_restaurante: number = 0;
-  idCuenta: number = 0;
+  @Input() idCuenta: number = 0;
 
   constructor(
     private fb: FormBuilder,  // FormBuilder for creating form groups
@@ -29,7 +30,6 @@ export class ModalDatosCuentaComponent implements OnInit {
   ngOnInit(): void {
     this.id_restaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
     this.idCuenta = parseInt(sessionStorage.getItem('idCuenta') || '0');
-
   }
 
   guardarDatos() {
@@ -37,11 +37,11 @@ export class ModalDatosCuentaComponent implements OnInit {
       this.toastr.info('No lleno ninguno de los campos','Información');
       return;
     }
-
     const formData = new FormData();
     formData.append('razon_social', this.cuentaForm.get('razonSocial')?.value);
     formData.append('nit', this.cuentaForm.get('nit')?.value);
 
+    //this.cuentaS.saveId(this.idCuenta);
     // Make sure to pass idCuenta to the service
     this.cuentaS.storeDatosCuenta(formData).subscribe(
       (response: any) => {

@@ -1,6 +1,6 @@
 <div class="fondo">
-    <app-modal-datos-cuenta></app-modal-datos-cuenta>
-<div class="container">
+<app-modal-datos-cuenta></app-modal-datos-cuenta>
+    <div class="container">
     <h2 class="titulo">Tomar Orden</h2>
 <div class="row">
     <div class="col-6">
@@ -125,7 +125,8 @@
     *ngIf="mostrarModal"  
     class="btn-aceptar btn-sm justify-content-center m-2"  
     data-bs-toggle="modal"
-    data-bs-target="#MiModal">
+    data-bs-target="#MiModal "
+    (click)="guardarPedido()">
         Confirmar Pedido
       </button>
     <!-- Botón para confirmar el pedido -->
