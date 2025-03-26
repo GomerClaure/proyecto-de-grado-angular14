@@ -216,7 +216,7 @@ eliminarPedidoDeLista(pedido: any): void {
     this.activeCategoria = 1;
 
   }
-
+ 
   getButtonClass(estado: string): string {
     switch (estado) {
       case 'Servido':
