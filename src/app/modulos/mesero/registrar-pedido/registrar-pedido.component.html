@@ -1,13 +1,12 @@
-<!-- <app-nav></app-nav> -->
 <div class="fondo">
-<div class="container">
+<app-modal-datos-cuenta></app-modal-datos-cuenta>
+    <div class="container">
     <h2 class="titulo">Tomar Orden</h2>
 <div class="row">
     <div class="col-6">
     <h4>{{nombreMesa}}</h4>
     </div>
 </div>
-
 <div class="row align-items-center mb-3">
     <div class="col-12 col-md-4 mb-2 mb-md-0">
         <div class="input-group">
@@ -122,7 +121,17 @@
       </ng-template>
   </div>
   <div class="foot">
-  <button class="btn-aceptar btn-sm justify-content-center m-2"  (click)="guardarPedido()">Confirmar Pedido</button>
+    <button
+    *ngIf="mostrarModal"  
+    class="btn-aceptar btn-sm justify-content-center m-2"  
+    data-bs-toggle="modal"
+    data-bs-target="#MiModal "
+    (click)="guardarPedido()">
+        Confirmar Pedido
+      </button>
+    <!-- Botón para confirmar el pedido -->
+    <button *ngIf="!mostrarModal" class="btn-aceptar btn-sm justify-content-center m-2" (click)="guardarPedido()">
+      Confirmar Pedido
+    </button>
   </div>
-</div>
 <app-modal-detalle-pedido></app-modal-detalle-pedido>

@@ -10,7 +10,7 @@ import { ListaCuentasComponent } from './lista-cuentas/lista-cuentas.component';
 @NgModule({
   declarations: [
     MostrarPedidosCComponent,
-    ListaCuentasComponent
+    ListaCuentasComponent,
   ],
   imports: [
     CommonModule, 

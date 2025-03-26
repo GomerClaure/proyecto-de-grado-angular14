@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
-import { DetallePedido, PedidosCocina, PedidosPlatos } from 'src/app/modelos/PedidosMesa';
+import { PedidosCocina, PedidosPlatos } from 'src/app/modelos/PedidosMesa';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.service';
 
@@ -10,169 +10,113 @@ import { PedidosCocinaService } from 'src/app/services/pedido/pedidos-cocina.ser
 })
 export class MostrarDetallePedidosComponent implements OnInit, OnChanges {
 
-  // @Input() pedidos: DetallePedido[] = [];
   @Input() pedidosP: PedidosCocina[] = [];
-  // @Input() platillos: any[] = [];
+  @Input() id_restaurante = 0;
+  @Input() id_empleado = 0;
+  @Input() id_pedido_detallado = 0;
 
-  @Input() id_restaurante: number;
-  @Input() id_empleado: number;
-  @Input() id_pedido_detallado: number;
-
-  indicePedidoActual: number; // Índice del pedido actualmente visible
+  indicePedidoActual = 0;
   maximoMiniaturasVisibles = 5;
-  pedidoSeleccionado: PedidosCocina = this.pedidosP[0];
+  pedidoSeleccionado!: PedidosCocina;
   platosMostrar: PedidosPlatos[] = [];
+  touchStartX = 0;
+  touchEndX = 0;
+  minSwipeDistance = 50;
 
-  constructor(private pedidoService: PedidoService, private pedidoCocinaService: PedidosCocinaService) {
-    console.log(this.pedidosP);
-    this.id_restaurante = 0;
-    this.id_empleado = 0;
-    this.id_pedido_detallado = 0;
-    this.indicePedidoActual = 0;
-  }
+  constructor(private pedidoService: PedidoService, private pedidoCocinaService: PedidosCocinaService) {}
 
   ngOnChanges(): void {
     if (this.pedidosP.length > 0) {
-      console.log(this.pedidosP);
-      if (this.id_pedido_detallado == 0 && this.pedidosP.length > 0) {
-        this.pedidoSeleccionado = this.pedidosP.find(pedido => pedido.id == this.indicePedidoActual) || this.pedidosP[0];
-        this.indicePedidoActual = this.pedidosP.indexOf(this.pedidoSeleccionado);
-        this.ordenar(this.pedidoSeleccionado.platos);
-      }
-      else
-        console.log(this.id_pedido_detallado);
-      this.seleccionarPedido(this.id_pedido_detallado);
-
+      this.pedidoSeleccionado = this.pedidosP.find(p => p.id === this.id_pedido_detallado) || this.pedidosP[0];
+      this.indicePedidoActual = this.pedidosP.indexOf(this.pedidoSeleccionado);
+      this.ordenarPlatos(this.pedidoSeleccionado.platos);
     }
   }
 
   ngOnInit(): void {
     this.seleccionarPedido(this.id_pedido_detallado);
-    this.pedidoCocinaService.pedidoDetallado$.subscribe(id => {
-      this.id_pedido_detallado = id;
-      this.seleccionarPedido(id);
-    });
-
-    // Detectar flechas izquierda y derecha para TV
+    this.pedidoCocinaService.pedidoDetallado$.subscribe(id => this.seleccionarPedido(id));
     window.addEventListener('keydown', this.detectarFlechas.bind(this));
   }
 
-  ordenar(platillosP: any) {
+  ordenarPlatos(platillos: any[]): void {
+    const platosMap = new Map<string, PedidosPlatos>();
     this.platosMostrar = [];
-    const platosMap: { [key: string]: { nombre: string, cantidad: number, detalle: string | null } } = {};
 
-    platillosP.forEach((platosP: any) => {
-      // platosP.forEach((elem: any) => {
-      const nomb = platosP.nombre;
-      const cant = platosP.pivot.cantidad;
-      const det = platosP.pivot.detalle || null;
-
-      if (det === null) {
-        if (platosMap[nomb]) {
-          platosMap[nomb].cantidad += cant;
-        } else {
-          platosMap[nomb] = { nombre: nomb, cantidad: cant, detalle: det };
-        }
+    platillos.forEach(({ nombre, pivot }: any) => {
+      if (!pivot.detalle) {
+        platosMap.has(nombre)
+          ? platosMap.get(nombre)!.cantidad += pivot.cantidad
+          : platosMap.set(nombre, { nombre, cantidad: pivot.cantidad, detalle: '' });
       } else {
-        this.platosMostrar.push({ nombre: nomb, cantidad: cant, detalle: det as string });
+        this.platosMostrar.push({ nombre, cantidad: pivot.cantidad, detalle: pivot.detalle });
       }
-      // });
     });
 
-    for (const key in platosMap) {
-      this.platosMostrar.push(platosMap[key] as PedidosPlatos);
+    this.platosMostrar.push(...Array.from(platosMap.values()));
+  }
+
+  cambiarEstado(idEstado: string): void {
+    if (this.pedidoSeleccionado.estado !== 'Terminado') {
+      this.pedidoService.cambiarEstadoPedido(this.pedidoSeleccionado.id.toString(), this.id_restaurante.toString(), idEstado)
+        .subscribe(res => console.log(res));
     }
   }
 
-  cambiarEstado(idEstado: any) {
-    if (this.pedidoSeleccionado.estado == 'Terminado') {
-      console.log("Ya termino")
-    } else {
-      let idPedido = this.pedidoSeleccionado.id.toString();
-      console.log(idPedido, this.id_restaurante, idEstado)
-      this.pedidoService.cambiarEstadoPedido(idPedido, this.id_restaurante.toString(), idEstado).subscribe((res) => {
-        console.log(res)
-      });
-    }
+  get pedidosVisibles(): PedidosCocina[] {
+    const total = this.pedidosP.length;
+    if (total <= this.maximoMiniaturasVisibles) return this.pedidosP;
+    
+    const inicio = (this.indicePedidoActual - Math.floor(this.maximoMiniaturasVisibles / 2) + total) % total;
+    const fin = (inicio + this.maximoMiniaturasVisibles) % total;
+    
+    return fin <= inicio ? [...this.pedidosP.slice(inicio), ...this.pedidosP.slice(0, fin)] : this.pedidosP.slice(inicio, fin);
   }
 
-  get pedidosVisibles() {
-    const totalPedidos = this.pedidosP.length;
-    const mitadVisible = Math.floor(this.maximoMiniaturasVisibles / 2);
-
-    let inicio = (this.indicePedidoActual - mitadVisible + totalPedidos) % totalPedidos;
-    let fin = (inicio + this.maximoMiniaturasVisibles) % totalPedidos;
-
-    if (totalPedidos < this.maximoMiniaturasVisibles) {
-      return this.pedidosP;
-    }
-
-    if (fin <= inicio) {
-      return this.pedidosP.slice(inicio).concat(this.pedidosP.slice(0, fin));
-    }
-
-    return this.pedidosP.slice(inicio, fin);
-  }
-
-  seleccionarPedido(idPedido: number) {
-    console.log(idPedido);
-
-    // Encuentra el índice del nuevo pedido en el array
-    const nuevoIndice = this.pedidosP.findIndex(pedido => pedido.id === idPedido);
-
-    // Verifica si el índice encontrado es válido
-    if (nuevoIndice === -1) {
-      console.error('Pedido no encontrado en la lista.');
-      return;
-    }
-
-    // Determina si el nuevo índice es mayor o menor que el índice actual
-    if (nuevoIndice > this.indicePedidoActual) {
-      this.toggleAnimacion('saliendo-hacia-izquierda');
-      setTimeout(() => {
-        this.toggleAnimacion('entrando-desde-derecha');
-      }, 200);
-    } else if (nuevoIndice < this.indicePedidoActual) {
-      this.toggleAnimacion('saliendo-hacia-derecha');
-      setTimeout(() => {
-        this.toggleAnimacion('entrando-desde-izquierda');
-      }, 200);
-    }
-
-    // Actualiza el pedido seleccionado y el índice actual
-    this.pedidoSeleccionado = this.pedidosP[nuevoIndice];
+  seleccionarPedido(idPedido: number): void {
+    const nuevoIndice = this.pedidosP.findIndex(p => p.id === idPedido);
+    if (nuevoIndice === -1) return console.error('Pedido no encontrado en la lista.');
+    
     this.indicePedidoActual = nuevoIndice;
+    this.pedidoSeleccionado = this.pedidosP[nuevoIndice];
     this.id_pedido_detallado = idPedido;
-    this.ordenar(this.pedidoSeleccionado.platos);
+    this.ordenarPlatos(this.pedidoSeleccionado.platos);
   }
 
-
-  mostrarPedidoAnterior() {
-
-    this.indicePedidoActual = (this.indicePedidoActual - 1 + this.pedidosP.length) % this.pedidosP.length;
+  cambiarPedido(direccion: number, scroll: boolean = false): void {
+    console.log('Se llama  a cambiar pedido');
+    this.indicePedidoActual = (this.indicePedidoActual + direccion + this.pedidosP.length) % this.pedidosP.length;
     this.pedidoSeleccionado = this.pedidosP[this.indicePedidoActual];
     this.id_pedido_detallado = this.pedidoSeleccionado.id;
-    this.ordenar(this.pedidoSeleccionado.platos);
-    this.toggleAnimacion('saliendo-hacia-derecha');
+    this.ordenarPlatos(this.pedidoSeleccionado.platos);
     this.pedidoCocinaService.actualizarPedidoDetallado(this.id_pedido_detallado);
-    setTimeout(() => {
-
-      this.toggleAnimacion('entrando-desde-izquierda');
-    }, 200); // Duración de la transición
+    if (scroll){
+      if (direccion === 1) this.desplazarIzquierda();
+      else this.desplazarDerecha();
+    }else{
+      if (direccion === 1) this.desplazarDerecha();
+      else this.desplazarIzquierda();
+    }
   }
 
-  mostrarPedidoSiguiente() {
-    this.indicePedidoActual = (this.indicePedidoActual + 1) % this.pedidosP.length;
-    this.pedidoSeleccionado = this.pedidosP[this.indicePedidoActual];
-    this.id_pedido_detallado = this.pedidoSeleccionado.id;
-    this.ordenar(this.pedidoSeleccionado.platos);
-    this.pedidoCocinaService.actualizarPedidoDetallado(this.id_pedido_detallado);
+  detectarFlechas(event: KeyboardEvent): void {
+    if (event.key === 'ArrowRight') this.cambiarPedido(1);
+    else if (event.key === 'ArrowLeft') this.cambiarPedido(-1);
+  }
 
-    this.toggleAnimacion('saliendo-hacia-izquierda');
-    setTimeout(() => {
+  onTouchStart(event: TouchEvent): void {
+    this.touchStartX = event.touches[0].clientX;
+  }
 
-      this.toggleAnimacion('entrando-desde-derecha');
-    }, 200); // Duración de la transición
+  onTouchMove(event: TouchEvent): void {
+    this.touchEndX = event.touches[0].clientX;
+  }
+
+  onTouchEnd(): void {
+    if (Math.abs(this.touchEndX - this.touchStartX) > this.minSwipeDistance) {
+      console.log('sera raro pero no deberia entrar aqui');
+      this.cambiarPedido(this.touchEndX > this.touchStartX ? -1 : 1, true);
+    }
   }
 
   toggleAnimacion(clase: string) {
@@ -181,13 +125,18 @@ export class MostrarDetallePedidosComponent implements OnInit, OnChanges {
     detallesPedido.classList.add(clase);
   }
 
-  detectarFlechas(event: KeyboardEvent) {
-    console.log('Presiona ')
-    if (event.key === 'ArrowRight') {
-      this.mostrarPedidoSiguiente();
-    } else if (event.key === 'ArrowLeft') {
-      this.mostrarPedidoAnterior();
-    }
+  desplazarDerecha(){
+    this.toggleAnimacion('saliendo-hacia-izquierda');
+    setTimeout(() => {
+      this.toggleAnimacion('entrando-desde-derecha');
+    }, 200); // Duración de la transición
+  }
+
+  desplazarIzquierda(){
+    this.toggleAnimacion('saliendo-hacia-derecha');
+    setTimeout(() => {
+      this.toggleAnimacion('entrando-desde-izquierda');
+    }, 200); // Duración de la transición
   }
 }
 //pedido es el id_pedido_detallado

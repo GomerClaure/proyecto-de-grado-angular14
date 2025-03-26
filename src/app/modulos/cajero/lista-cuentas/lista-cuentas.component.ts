@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CuentaService } from 'src/app/services/pedido/cuenta.service';
 import { Cuenta } from 'src/app/modelos/Cuenta';
+import { get } from 'jquery';
 
 @Component({
   selector: 'app-lista-cuentas',
@@ -15,6 +16,7 @@ export class ListaCuentasComponent implements OnInit {
   itemsPerPage = 10; 
   filterText: string = ''; 
   id_restaurant: number;
+  nombreRestaurante: string =  sessionStorage.getItem('nombre_restaurante') || 'LUGO'; 
 
   constructor(private cuentaService: CuentaService) { 
     this.id_restaurant=0;
@@ -68,4 +70,86 @@ export class ListaCuentasComponent implements OnInit {
     this.currentPage = 1; 
     this.updatePaginatedCuentas();
   }
+
+  imprimirCuenta(cuentaId: number) {
+    const cuenta = this.paginatedCuentas.find(p => p.id === cuentaId);
+    if (cuenta) {
+      console.log('Imprimir cuenta:', cuenta);
+      const printWindow = window.open('', '_blank');
+      printWindow?.document.write(`
+        <html>
+          <head>
+            <title>Imprimir Cuenta</title>
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                margin: 0px;
+              }
+              .container {
+                margin: 0 auto;
+                padding-inline:0px;
+                padding-top: 0px;
+                padding-bottom: 20px;
+              }
+              h1, h2 {
+                text-align: center;
+                color: #333;
+              }
+              .table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+              }
+              .table th, .table td {
+                padding: 10px;
+                text-align: left;
+                border: 1px solid #ddd;
+              }
+              .table th {
+                background-color: #f2f2f2;
+              }
+              .total {
+                text-align: right;
+                font-size: 18px;
+                font-weight: bold;
+                margin-top: 20px;
+              }
+            </style>
+          </head>
+          <body onload="window.print(); window.close();">
+            <div class="container">
+              <h1>Restaurante ${this.nombreRestaurante}</h1>
+              <h2>Mesa: ${cuenta.nombre_mesa}</h2>
+              <p><strong>Razón Social:</strong> ${cuenta.nombre_razon_social}</p>
+              <p><strong>NIT:</strong> ${cuenta.nit}</p>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Plato</th>
+                    <th>Cantidad</th>
+                    <th>Total (Bs)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${cuenta.platos.map(plato => `
+                    <tr>
+                      <td>${plato.nombre}</td>
+                      <td>${plato.cantidad}</td>
+                      <td>${(plato.precio * plato.cantidad).toFixed(2)} Bs</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+  
+              <div class="total">
+                <p><strong>Total: ${cuenta.monto_total} Bs</strong></p>
+              </div>
+            </div>
+          </body>
+        </html>
+      `);
+      printWindow?.document.close();
+    }
+  }
+
 }

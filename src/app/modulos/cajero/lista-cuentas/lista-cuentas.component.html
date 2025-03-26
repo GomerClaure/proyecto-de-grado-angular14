@@ -22,6 +22,7 @@
                         <th scope="col">NIT</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Monto Total</th>
+                        <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,8 +31,17 @@
                         <td>{{ cuenta.nit }}</td>
                         <td>{{ cuenta.estado }}</td>
                         <td>{{ cuenta.monto_total }}</td>
+                        <td class="text-center">
+                            <button 
+                                class="btn btn-subir-imagen" 
+                                (click)="imprimirCuenta(cuenta.id)"   
+                            >
+                                Imprimir
+                                <i class="bi bi-printer"></i>
+                            </button>
+                        </td>
                     </tr>
-                </tbody>
+                </tbody> 
             </table>
         </div>
         <div class="pagination-container">

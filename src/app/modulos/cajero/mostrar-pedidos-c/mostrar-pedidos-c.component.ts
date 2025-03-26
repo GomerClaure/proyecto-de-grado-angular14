@@ -21,7 +21,7 @@ export class MostrarPedidosCComponent implements OnInit {
   id_restaurante: number = 0;
   id_empleado: number = 0;
   textoBuscador: string = '';
-  nombreRestaurante: string = 'LUGO'; 
+  nombreRestaurante: string =  sessionStorage.getItem('nombre_restaurante') || 'LUGO'; 
 
   constructor(private cuentaService: CuentaService,
               private pedidoCocinaService: PedidosCocinaService,

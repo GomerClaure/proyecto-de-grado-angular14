@@ -38,9 +38,9 @@ export class DatosPersonalesComponent implements OnInit {
     this.sessionService.getDatosPersonales(idUsuario).subscribe((res: any) => {
       let propietario: Propietario = res.user;
       console.log(propietario);
-      this.usuarioForm.patchValue(propietario.usuario);
+      this.usuarioForm.patchValue(propietario);
       this.usuarioForm.patchValue({ foto_perfil: null });
-      this.foto_perfil = this.url_base + propietario.usuario.foto_perfil;
+      this.foto_perfil = this.url_base + propietario.foto_perfil;
       this.usuarioForm.markAllAsTouched();
     }
     );
@@ -86,7 +86,7 @@ export class DatosPersonalesComponent implements OnInit {
     } else {
       console.log("No se seleccionó ningún archivo para foto_perfil.");
     }
-    formData.append('id_usuario', sessionStorage.getItem('id_user') || '');
+    // formData.append('id_usuario', sessionStorage.getItem('id_user') || '');
   
     if (this.usuarioForm.valid) {
       this.sessionService.actualizarDatosUsuario(formData).subscribe(

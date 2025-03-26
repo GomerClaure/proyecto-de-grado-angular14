@@ -34,33 +34,24 @@
   border: none;
   color: white !important;
 }
-.detalles-pedido .row {
-  background-image: url(../../../../assets/image/pixelcut-export.png);
-  background-repeat: repeat-x;
-  background-size:675px; 
-  background-color: white;
-}
+
 .contenedor-slider {
-  display: flex;
-  flex-direction: column;
+ height: 79.5vh;
 }
 .vista-principal {
-  position: relative;
+  height: 80%;
+  padding-inline: 2%;
   overflow: hidden;
-  height: 24.25rem;
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
 }
 .cont {
-  height: 17.5rem;
+  // height: 17.5rem;
   overflow-y: auto;
 }
 
 .navegacion-miniaturas {
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  height: 20%;
 }
 
 .contenedor-miniaturas {
@@ -76,19 +67,16 @@
 }
 
 .lista-miniaturas div {
-  flex: 0 0 15%; /* Un poco más pequeño para las miniaturas no seleccionadas */
   box-sizing: border-box;
   cursor: pointer;
   padding: 5px;
   margin: 5px;
-  // transform: scale(0.9);
   transition: transform 0.3s ease, border 0.3s ease, flex 0.3s ease;
   
 }
 
 .lista-miniaturas div.seleccionado {
-  flex: 0 0 20%; 
-  transform: scale(1.1); 
+  transform: scale(1.5); 
   border-radius: 5px;
 }
 
@@ -98,7 +86,6 @@
   font-size: 1.5rem;
   color: #f1f1f1; /* Color de texto que contraste */
   border-radius: 5px; /* Borde redondeado */
-  padding: 0.5rem 1rem; /* Espaciado interno */
   transition: background-color 0.3s, color 0.3s; /* Suaviza la transición de color */
   z-index: 10;
 }
@@ -122,20 +109,6 @@ button {
 }
 
 
-.table-container {
-  overflow: hidden;
-}
-
-.table {
-  width: 100%;
-  table-layout: fixed; /* Hace que las columnas tengan un ancho fijo */
-}
-
-.table th, .table td {
-  word-wrap: break-word; /* Ajusta el contenido largo a nuevas líneas */
-  white-space: normal; /* Permite que el contenido se ajuste en múltiples líneas */
-}
-
 .detalles-pedido {
   position: absolute;
   width: 100%;
@@ -143,6 +116,22 @@ button {
   top: 0;
   left: 0;
   transition: transform 0.5s ease; /* Transición para la animación suave */
+}
+
+.detalles-pedido-header{
+  height: 10%;
+}
+
+.detalles-pedido-body{
+  height: 80%;
+  overflow-y: auto;
+  background-image: url(../../../../assets/image/pixelcut-export.png);
+  background-repeat: repeat-x;
+  background-color: #e2e2e2b3;
+}
+
+.detalles-pedido-footer{
+  height: 10%;
 }
 
 /* Cuando el pedido entra desde la derecha */
@@ -184,3 +173,30 @@ button {
   from { transform: translateX(0); opacity: 1; }
   to { transform: translateX(100%); opacity: 0; }
 }
+
+@media (max-width: 992px) {
+  .top-50 {
+    top: 3% !important; /* Lo sube en pantallas pequeñas */
+  }
+  .vista-principal {
+    height: 27rem;
+  }
+  .navegacion-miniaturas{
+    height: 12%;
+  }.detalles-pedido-body-element {
+    background-color: rgb(222 226 230 / 95%);
+    border-bottom: 3px dotted #353558; /* Grosor mayor para mayor separación */
+  }
+  .detalle-descripcion{
+    background-color: rgb(222, 226, 230);
+    border: 1px solid #353558;
+  }
+}
+
+@media (min-width: 992px) {
+  .px-lg-5{
+    padding-left: 5rem !important;
+    padding-right: 5rem !important;
+  }
+}
+

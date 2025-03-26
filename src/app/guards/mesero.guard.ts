@@ -19,7 +19,7 @@ export class MeseroGuard implements CanActivate {
       this.router.navigate(['/login']);
       return false;
     }
-    if (userType === '1') {
+    if (userType === '1' || userType== '2') {
       return true;
     } else {
       this.router.navigate(['/home']); 
