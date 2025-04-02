@@ -14,7 +14,7 @@ import { MesaService } from './../../../services/mesas/mesa.service';
 import { Mesa } from 'src/app/modelos/Mesa'; 
 import { Cuenta } from 'src/app/modelos/Cuenta';
 import { CuentaService } from 'src/app/services/pedido/cuenta.service';
-
+ 
 @Component({
   selector: 'app-registrar-pedido',
   templateUrl: './registrar-pedido.component.html',
