@@ -17,11 +17,12 @@ export class ModalDetallePedidoComponent implements OnInit {
   } 
   agregarDescripcion() {
     const isDescriptionAdded = this.descripcionPedidoService.addDescripcion(this.descripcion)
+    console.log(this.descripcion);
     if (isDescriptionAdded) {
       this.toastr.success('Se agrego la descripcion','Exito');
     } else {
       // Si no se pudo agregar la descripción, puedes mostrar un mensaje de error o hacer cualquier otra acción necesaria
-      console.error('Error al agregar la descripción del platillo');
+      this.toastr.info('No hay descripcion para agregar','Informacion');
     }
     this.descripcion = ''; 
     isDescriptionAdded==false;
