@@ -58,7 +58,8 @@ export class RegistrarPlatilloComponent implements OnInit{
       this.registrarPlatillo();
     }
     else {
-      
+      console.log('Formulario inválido');
+      this.formularioPlatillo.markAllAsTouched();
     }
   }
 
@@ -80,7 +81,7 @@ export class RegistrarPlatilloComponent implements OnInit{
           this.formularioPlatillo.reset();
          this.imageUrl = 'assets/image/Imagen-rota.jpg'
           console.log(success);
-          this.toastr.success('Platillo Registrado con exito','Exito')
+          this.toastr.success('Producto Registrado con exito','Exito')
         },
         error => {
           console.log(error);

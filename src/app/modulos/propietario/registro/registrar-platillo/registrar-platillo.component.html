@@ -2,51 +2,97 @@
   <div class="container">
     <h2 class="titulo"></h2>
     <div class="form">
-      <form [formGroup]="formularioPlatillo" class="row">
+      <form [formGroup]="formularioPlatillo" class="row needs-validation" novalidate>
         <!-- Columna izquierda: Inputs del formulario -->
         <div class="col-12 col-md-6 mb-3">
-          <h2 class="pb-3">Registrar Platillo</h2>
+          <h2 class="pb-3">Registrar Producto</h2>
+
           <!-- Nombre Platillo -->
           <div class="mb-3">
-            <label>Nombre del platillo</label>
-            <input type="text" class="form-control" formControlName="nombre">
-            <div *ngIf="formularioPlatillo.get('nombre')?.invalid && formularioPlatillo.get('nombre')?.touched" class="text-danger">
-              El nombre es obligatorio y debe tener al menos 3 caracteres.
+            <label>Nombre del producto</label>
+            <div class="input-group has-validation">
+              <input type="text" class="form-control"
+                     formControlName="nombre"
+                     placeholder="Empanada"
+                     [ngClass]="{
+                       'is-invalid': formularioPlatillo.get('nombre')?.invalid && formularioPlatillo.get('nombre')?.touched,
+                       'is-valid': formularioPlatillo.get('nombre')?.valid && formularioPlatillo.get('nombre')?.touched
+                     }" required />
+              <div class="invalid-feedback">
+                El nombre es obligatorio y debe tener al menos 3 caracteres.
+              </div>
             </div>
           </div>
 
           <!-- Categoría -->
           <div class="mb-3">
             <label for="exampleFormControlSelect1">Categoría</label>
-            <select class="form-control form-select" formControlName="categoria">
-              <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
-            </select>
-            <div *ngIf="formularioPlatillo.get('categoria')?.invalid && formularioPlatillo.get('categoria')?.touched" class="text-danger">
-              Seleccione una categoría.
+            <div class="input-group has-validation">
+              <select class="form-control form-select"
+                      formControlName="categoria"
+                      [ngClass]="{
+                        'is-invalid': formularioPlatillo.get('categoria')?.invalid && formularioPlatillo.get('categoria')?.touched,
+                        'is-valid': formularioPlatillo.get('categoria')?.valid && formularioPlatillo.get('categoria')?.touched
+                      }" required>
+                <option *ngFor="let categoria of categorias" [value]="categoria.id">
+                  {{ categoria.nombre }}
+                </option>
+              </select>
+              <div class="invalid-feedback">
+                Seleccione una categoría.
+              </div>
             </div>
           </div>
 
           <!-- Precio -->
           <div class="mb-3">
             <label>Precio</label>
-            <input type="text" class="form-control" formControlName="precio">
-            <div *ngIf="formularioPlatillo.get('precio')?.invalid && formularioPlatillo.get('precio')?.touched" class="text-danger">
-              Ingrese solo números.
+            <div class="input-group has-validation">
+              <input type="text" class="form-control"
+                     formControlName="precio"
+                     placeholder="15"
+                     [ngClass]="{
+                       'is-invalid': formularioPlatillo.get('precio')?.invalid && formularioPlatillo.get('precio')?.touched,
+                       'is-valid': formularioPlatillo.get('precio')?.valid && formularioPlatillo.get('precio')?.touched
+                     }" required />
+              <div class="invalid-feedback">
+                Ingrese solo números.
+              </div>
             </div>
           </div>
 
           <!-- Descripción -->
           <div class="mb-3">
             <label>Descripción</label>
-            <textarea class="form-control fixed-textarea" formControlName="descripcion"></textarea>
+            <div class="input-group has-validation">
+              <textarea class="form-control fixed-textarea"
+                        formControlName="descripcion"
+                        placeholder="Breve descripción del producto"
+                        [ngClass]="{
+                          'is-invalid': formularioPlatillo.get('descripcion')?.invalid && formularioPlatillo.get('descripcion')?.touched,
+                          'is-valid': formularioPlatillo.get('descripcion')?.valid && formularioPlatillo.get('descripcion')?.touched
+                        }" required></textarea>
+              <div class="invalid-feedback">
+                La descripción es obligatoria.
+              </div>
+            </div>
           </div>
         </div>
 
+        <!-- Imagen y botón de registro -->
         <div class="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center lado-img">
           <div class="d-flex justify-content-center mb-3">
             <div class="apartadoImg text-center">
-              <img [src]="imageUrl" id="image-platillo" class="img-fluid" alt="Imagen" [style.width.px]="imageWidth" [style.height.px]="imageHeight">
-              <input type="file" id="img-registrar-platillo" class="hidden" (change)="onFileSelected($event)" accept="image/*">
+              <img [src]="imageUrl"
+                   id="image-platillo"
+                   class="img-fluid"
+                   alt="Imagen"
+                   [style.width.px]="imageWidth"
+                   [style.height.px]="imageHeight">
+              <input type="file" id="img-registrar-platillo"
+                     class="hidden"
+                     (change)="onFileSelected($event)"
+                     accept="image/*" />
               <label for="img-registrar-platillo" class="btn-img btn btn-subir-imagen mt-2">
                 Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i>
               </label>
@@ -55,7 +101,9 @@
 
           <!-- Botón de Registro -->
           <div class="col-12 d-flex justify-content-end">
-            <button type="submit" class="btn btn-aceptar me-2"(click)="onSubmit()" >Registrar</button>
+            <button type="submit" class="btn btn-aceptar me-2" (click)="onSubmit()">
+              Registrar
+            </button>
           </div>
         </div>
 

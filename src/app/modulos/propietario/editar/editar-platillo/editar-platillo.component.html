@@ -4,9 +4,9 @@
       <div class="form">
         <form [formGroup]="formularioEditarPlatillo" class="row">
           <div class="col-12 col-md-6 mb-3">
-            <h2 class="pb-2">Editar Platillo</h2>
+            <h2 class="pb-2">Editar Producto</h2>
             <div class="mb-3">
-              <label>Nombre del platillo</label>
+              <label>Nombre del producto</label>
               <input type="text" class="form-control" formControlName="nombre" required>
               <div *ngIf="formularioEditarPlatillo.get('nombre')?.invalid && formularioEditarPlatillo.get('nombre')?.touched" class="text-danger">
                 El nombre es obligatorio y debe tener al menos 3 caracteres.

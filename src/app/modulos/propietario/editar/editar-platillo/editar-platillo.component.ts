@@ -109,7 +109,7 @@ export class EditarPlatilloComponent implements OnInit {
       this.platilloservice.updatePlatillo(formData, parseInt(this.idPlatillo)).subscribe(
         success => {
           console.log(success);
-          this.toastr.success('Se edito el platillo correctamente','Exito')
+          this.toastr.success('Se edito el producto correctamente','Exito')
         },
         error => {
           console.log(error);
