@@ -103,8 +103,7 @@
 
         <div class="detalles-pedido-footer d-flex justify-content-center align-items-center">
           <button *ngIf="pedidoSeleccionado.estado !== 'Servido' && pedidoSeleccionado.estado !== 'En preparación'"
-            type="button" class="btn btn-subir-imagen " (click)="cambiarEstado('2')">En
-            Curso</button>
+            type="button" class="btn btn-subir-imagen " (click)="cambiarEstado('2')">En preparacion</button>
           <button *ngIf="pedidoSeleccionado.estado == 'En preparación'" type="button" class="btn btn-terminado "
             (click)="cambiarEstado('4')">Terminado</button>
         </div>

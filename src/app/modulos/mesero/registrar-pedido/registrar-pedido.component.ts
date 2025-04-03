@@ -44,6 +44,7 @@ export class RegistrarPedidoComponent implements OnInit {
   mesa: Mesa | undefined;
   //el id de la cuenta 
   id_cuenta:number=0;
+  modalDetalleAbierto=true;
   
   constructor(private descripcionPedidoService: DescripcionPedidoService,
     private route: ActivatedRoute,
