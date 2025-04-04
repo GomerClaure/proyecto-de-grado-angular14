@@ -7,6 +7,7 @@ import { RegistrarPlatilloComponent } from '../../registro/registrar-platillo/re
 import { environment } from 'src/environments/environment';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
 import { ToastrService } from 'ngx-toastr';
+import { fileValidator } from 'src/app/validators/file-validator';
 
 @Component({
   selector: 'app-editar-platillo',
@@ -36,7 +37,7 @@ export class EditarPlatilloComponent implements OnInit {
       categoria: [null, Validators.required],
       precio: [null, [Validators.required, Validators.pattern(RegistrarPlatilloComponent.numbersOnlyPattern)]],
       descripcion: [null, Validators.required],
-      imagen: ['']
+      imagen: [null, [Validators.required, fileValidator(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'], 2)]],
     });
     this.imageUrl = 'assets/image/Imagen-rota.jpg';
   }
@@ -74,11 +75,17 @@ export class EditarPlatilloComponent implements OnInit {
     this.selectedFile = <File>event.target.files[0];
     const file = event.target.files[0];
     if (file) {
+      // this.selectedFile = file;
       const reader = new FileReader();
+      reader.readAsDataURL(file);
       reader.onload = (e: any) => {
         this.imageUrl = e.target.result;
       };
-      reader.readAsDataURL(file);
+      this.formularioEditarPlatillo.patchValue({
+        imagen: file
+      });
+      
+      this.formularioEditarPlatillo.get('imagen')?.markAsTouched();
     }
   }
 

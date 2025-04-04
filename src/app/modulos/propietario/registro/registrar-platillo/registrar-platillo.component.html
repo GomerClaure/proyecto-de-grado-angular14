@@ -11,13 +11,14 @@
           <div class="mb-3">
             <label>Nombre del producto</label>
             <div class="input-group has-validation">
-              <input type="text" class="form-control"
-                     formControlName="nombre"
-                     placeholder="Empanada"
-                     [ngClass]="{
-                       'is-invalid': formularioPlatillo.get('nombre')?.invalid && formularioPlatillo.get('nombre')?.touched,
-                       'is-valid': formularioPlatillo.get('nombre')?.valid && formularioPlatillo.get('nombre')?.touched
-                     }" required />
+              <input type="text" class="form-control" formControlName="nombre" placeholder="Empanada" [ngClass]="{
+                  'is-invalid':
+                    formularioPlatillo.get('nombre')?.invalid &&
+                    formularioPlatillo.get('nombre')?.touched,
+                  'is-valid':
+                    formularioPlatillo.get('nombre')?.valid &&
+                    formularioPlatillo.get('nombre')?.touched
+                }" required />
               <div class="invalid-feedback">
                 El nombre es obligatorio y debe tener al menos 3 caracteres.
               </div>
@@ -28,19 +29,19 @@
           <div class="mb-3">
             <label for="exampleFormControlSelect1">Categoría</label>
             <div class="input-group has-validation">
-              <select class="form-control form-select"
-                      formControlName="categoria"
-                      [ngClass]="{
-                        'is-invalid': formularioPlatillo.get('categoria')?.invalid && formularioPlatillo.get('categoria')?.touched,
-                        'is-valid': formularioPlatillo.get('categoria')?.valid && formularioPlatillo.get('categoria')?.touched
-                      }" required>
+              <select class="form-control form-select" formControlName="categoria" [ngClass]="{
+                  'is-invalid':
+                    formularioPlatillo.get('categoria')?.invalid &&
+                    formularioPlatillo.get('categoria')?.touched,
+                  'is-valid':
+                    formularioPlatillo.get('categoria')?.valid &&
+                    formularioPlatillo.get('categoria')?.touched
+                }" required>
                 <option *ngFor="let categoria of categorias" [value]="categoria.id">
                   {{ categoria.nombre }}
                 </option>
               </select>
-              <div class="invalid-feedback">
-                Seleccione una categoría.
-              </div>
+              <div class="invalid-feedback">Seleccione una categoría.</div>
             </div>
           </div>
 
@@ -48,16 +49,15 @@
           <div class="mb-3">
             <label>Precio</label>
             <div class="input-group has-validation">
-              <input type="text" class="form-control"
-                     formControlName="precio"
-                     placeholder="15"
-                     [ngClass]="{
-                       'is-invalid': formularioPlatillo.get('precio')?.invalid && formularioPlatillo.get('precio')?.touched,
-                       'is-valid': formularioPlatillo.get('precio')?.valid && formularioPlatillo.get('precio')?.touched
-                     }" required />
-              <div class="invalid-feedback">
-                Ingrese solo números.
-              </div>
+              <input type="text" class="form-control" formControlName="precio" placeholder="15" [ngClass]="{
+                  'is-invalid':
+                    formularioPlatillo.get('precio')?.invalid &&
+                    formularioPlatillo.get('precio')?.touched,
+                  'is-valid':
+                    formularioPlatillo.get('precio')?.valid &&
+                    formularioPlatillo.get('precio')?.touched
+                }" required />
+              <div class="invalid-feedback">Ingrese solo números.</div>
             </div>
           </div>
 
@@ -65,16 +65,16 @@
           <div class="mb-3">
             <label>Descripción</label>
             <div class="input-group has-validation">
-              <textarea class="form-control fixed-textarea"
-                        formControlName="descripcion"
-                        placeholder="Breve descripción del producto"
-                        [ngClass]="{
-                          'is-invalid': formularioPlatillo.get('descripcion')?.invalid && formularioPlatillo.get('descripcion')?.touched,
-                          'is-valid': formularioPlatillo.get('descripcion')?.valid && formularioPlatillo.get('descripcion')?.touched
-                        }" required></textarea>
-              <div class="invalid-feedback">
-                La descripción es obligatoria.
-              </div>
+              <textarea class="form-control fixed-textarea" formControlName="descripcion"
+                placeholder="Breve descripción del producto" [ngClass]="{
+                  'is-invalid':
+                    formularioPlatillo.get('descripcion')?.invalid &&
+                    formularioPlatillo.get('descripcion')?.touched,
+                  'is-valid':
+                    formularioPlatillo.get('descripcion')?.valid &&
+                    formularioPlatillo.get('descripcion')?.touched
+                }" required></textarea>
+              <div class="invalid-feedback">La descripción es obligatoria.</div>
             </div>
           </div>
         </div>
@@ -83,30 +83,50 @@
         <div class="col-12 col-md-6 d-flex flex-column align-items-center justify-content-center lado-img">
           <div class="d-flex justify-content-center mb-3">
             <div class="apartadoImg text-center">
-              <img [src]="imageUrl"
-                   id="image-platillo"
-                   class="img-fluid"
-                   alt="Imagen"
-                   [style.width.px]="imageWidth"
-                   [style.height.px]="imageHeight">
-              <input type="file" id="img-registrar-platillo"
-                     class="hidden"
-                     (change)="onFileSelected($event)"
-                     accept="image/*" />
-              <label for="img-registrar-platillo" class="btn-img btn btn-subir-imagen mt-2">
-                Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i>
-              </label>
+              <!-- Vista previa de la imagen -->
+              <img [src]="imageUrl" id="image-platillo" class="img-fluid" alt="Imagen del platillo"
+                [style.width.px]="imageWidth" [style.height.px]="imageHeight" (error)="onImgError($event)"/>
+
+              <!-- Input de archivo con validación -->
+              <div class="input-group has-validation d-flex flex-column align-items-center">
+                <input type="file" id="img-registrar-platillo" class="hidden" (change)="onFileSelected($event)"
+                  accept="image/jpeg, image/png, image/jpg, image/webp" [ngClass]="{
+                    'is-invalid':
+                      formularioPlatillo.get('imagen')?.invalid &&
+                      formularioPlatillo.get('imagen')?.touched,
+                    'is-valid':
+                      formularioPlatillo.get('imagen')?.valid &&
+                      formularioPlatillo.get('imagen')?.touched
+                  }" required />
+
+                <!-- Mensajes de error -->
+                <div class="invalid-feedback">
+                  <span *ngIf="formularioPlatillo.get('imagen')?.errors?.['required'] &&
+                  formularioPlatillo.get('imagen')?.touched" class="glass-effect">
+                    La imagen es obligatoria.
+                  </span>
+                  <span *ngIf="formularioPlatillo.get('imagen')?.errors?.['invalidoTipoArchivo'] &&
+                  formularioPlatillo.get('imagen')?.touched" class="glass-effect">
+                    Formato no permitido. Solo imágenes JPEG, PNG, JPG, WEBP.
+                  </span>
+                  <span *ngIf="formularioPlatillo.get('imagen')?.errors?.['archivoMuyPesado'] &&
+                  formularioPlatillo.get('imagen')?.touched" class="glass-effect">
+                    Tamaño máximo 2MB.
+                  </span>
+                </div>
+                <label for="img-registrar-platillo" class="btn-img btn btn-subir-imagen mt-2">
+                  Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i>
+                </label>
+                <!-- Botón de Registro -->
+                <div class="col-12 d-flex justify-content-end">
+                  <button type="submit" class="btn btn-aceptar me-2" (click)="onSubmit()">
+                    Registrar
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-
-          <!-- Botón de Registro -->
-          <div class="col-12 d-flex justify-content-end">
-            <button type="submit" class="btn btn-aceptar me-2" (click)="onSubmit()">
-              Registrar
-            </button>
-          </div>
         </div>
-
       </form>
     </div>
   </div>
