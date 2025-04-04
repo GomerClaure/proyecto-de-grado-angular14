@@ -40,7 +40,7 @@ export class MostrarPedidosCComponent implements OnInit {
     this.pedidoCocinaService.pedidos$.subscribe(update => {
       console.log('Pedido nuevo:', update);
       
-      if (update?.evento === 'PedidoCreado') {
+      if (update?.evento === 'PedidoCreado' || update?.evento === 'DatosCuentaAgregado') {
         const idCuenta = update?.datos.idCuenta;
         this.cuentaService.getCuenta(idCuenta).subscribe(
           response => {
@@ -49,6 +49,8 @@ export class MostrarPedidosCComponent implements OnInit {
             if (cuentaExistente) {
               cuentaExistente.platos = response.cuenta.platos;
               cuentaExistente.monto_total = response.cuenta.monto_total
+              cuentaExistente.nit = response.cuenta.nit;
+              cuentaExistente.nombre_razon_social = response.cuenta.nombre_razon_social;
             } else {
               console.log('Cuenta no encontrada, agregando cuenta:', cuentaObtenida);
               this.cuentasPorMesa.push(cuentaObtenida);
