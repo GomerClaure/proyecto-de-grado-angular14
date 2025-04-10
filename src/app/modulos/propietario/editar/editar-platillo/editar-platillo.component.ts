@@ -37,7 +37,7 @@ export class EditarPlatilloComponent implements OnInit {
       categoria: [null, Validators.required],
       precio: [null, [Validators.required, Validators.pattern(RegistrarPlatilloComponent.numbersOnlyPattern)]],
       descripcion: [null, Validators.required],
-      imagen: [null, [Validators.required, fileValidator(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'], 2)]],
+      imagen: [null, [fileValidator(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'], 2)]],
     });
     this.imageUrl = 'assets/image/Imagen-rota.jpg';
   }

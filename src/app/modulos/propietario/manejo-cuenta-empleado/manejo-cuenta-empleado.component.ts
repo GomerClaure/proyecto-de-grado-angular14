@@ -16,6 +16,7 @@ export class ManejoCuentaEmpleadoComponent implements OnInit {
   usuarioSeleccionado: Empleado | null;
   textoBuscador: string;
   usuariosFiltrados: Empleado[];
+  noHayUsuarios: boolean = false;
 
   constructor(private sessionService: SessionService, 
               private toastr:ToastrService
@@ -31,10 +32,12 @@ export class ManejoCuentaEmpleadoComponent implements OnInit {
   ngOnInit(): void {
     this.sessionService.getDatosEmpleado().subscribe(
       (res) => {
+        this.noHayUsuarios = res.data.length === 0;
         this.usuarios = res.data;
         this.usuariosFiltrados = [...this.usuarios];
       },
       (err) => {
+        this.noHayUsuarios = true;
         console.error(err);
       }
     );

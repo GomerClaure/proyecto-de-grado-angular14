@@ -15,9 +15,11 @@ export class ListaCategoriaComponent implements OnInit {
   storageUrl = environment.backendStorageUrl;
   id_restaurante:any;
   categoriaSeleccionada: Categoria;
+  noHayCategorias:boolean;
 
   constructor(private categoriasService:CategoriaService) { 
       this.categoriaSeleccionada = {} as Categoria;
+      this.noHayCategorias = false;
   }
   
   onImageError(event: Event): void {
@@ -39,10 +41,12 @@ export class ListaCategoriaComponent implements OnInit {
   getCategorias() {
     this.categoriasService.getCategorias(this.id_restaurante).subscribe(
       (data: any) => { // Ajusta el tipo de datos esperado
+        this.noHayCategorias = data.categorias.length === 0;
         this.categorias = data.categorias; // Almacena las categorías obtenidas en la variable categorias
         console.log(data)
       },
       error => {
+        this.noHayCategorias = true;
         console.error('Error obteniendo categorías:', error);
       }
     );
