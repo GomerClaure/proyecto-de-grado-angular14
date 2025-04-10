@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlatillosService } from 'src/app/services/platillos/platillos.service';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
 import { ToastrService } from 'ngx-toastr';
+import { fileValidator } from 'src/app/validators/file-validator';
 
 @Component({
   selector: 'app-registrar-platillo',
@@ -34,7 +35,7 @@ export class RegistrarPlatilloComponent implements OnInit{
       categoria: [null,Validators.required],
       precio: [null, [Validators.required, Validators.pattern(RegistrarPlatilloComponent.numbersOnlyPattern)]],
       descripcion: [null,Validators.required],
-      imagen:['']
+      imagen: [null, [Validators.required, fileValidator(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'], 2)]],
     });
     this.imageUrl = 'assets/image/Imagen-rota.jpg';
   }
@@ -42,11 +43,17 @@ export class RegistrarPlatilloComponent implements OnInit{
     this.selectedFile = <File>event.target.files[0];
     const file = event.target.files[0];
     if (file) {
+      // this.selectedFile = file;
       const reader = new FileReader();
+      reader.readAsDataURL(file);
       reader.onload = (e: any) => {
         this.imageUrl = e.target.result;
       };
-      reader.readAsDataURL(file);
+      this.formularioPlatillo.patchValue({
+        imagen: file
+      });
+      
+      this.formularioPlatillo.get('imagen')?.markAsTouched();
     }
   }
 
@@ -58,8 +65,13 @@ export class RegistrarPlatilloComponent implements OnInit{
       this.registrarPlatillo();
     }
     else {
-      
+      console.log('Formulario inválido');
+      this.formularioPlatillo.markAllAsTouched();
     }
+  }
+
+  onImgError(event: any) {
+    event.target.src = 'assets/image/Imagen-rota.jpg';
   }
 
   registrarPlatillo() {
@@ -80,7 +92,7 @@ export class RegistrarPlatilloComponent implements OnInit{
           this.formularioPlatillo.reset();
          this.imageUrl = 'assets/image/Imagen-rota.jpg'
           console.log(success);
-          this.toastr.success('Platillo Registrado con exito','Exito')
+          this.toastr.success('Producto Registrado con exito','Exito')
         },
         error => {
           console.log(error);

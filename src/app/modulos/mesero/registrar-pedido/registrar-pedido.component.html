@@ -75,6 +75,7 @@
 </div>
 
 <!--Este es el espacio donde ves el pedido que seleccionaste-->
+<app-modal-detalle-pedido></app-modal-detalle-pedido>
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasOrders" aria-labelledby="offcanvasOrdersLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasOrdersLabel"><P>Pedido</P></h5>
@@ -125,8 +126,9 @@
     *ngIf="mostrarModal"  
     class="btn-aceptar btn-sm justify-content-center m-2"  
     data-bs-toggle="modal"
+    (click)="guardarPedido()"
     data-bs-target="#MiModal "
-    (click)="guardarPedido()">
+    >
         Confirmar Pedido
       </button>
     <!-- Botón para confirmar el pedido -->
@@ -134,4 +136,3 @@
       Confirmar Pedido
     </button>
   </div>
-<app-modal-detalle-pedido></app-modal-detalle-pedido>

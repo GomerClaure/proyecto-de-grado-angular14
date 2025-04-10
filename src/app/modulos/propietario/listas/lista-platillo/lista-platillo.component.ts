@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platillo } from 'src/app/modelos/Platillo';
-import { PlatillosService } from 'src/app/services/platillos/platillos.service';
 import { environment } from 'src/environments/environment';
 import { ModalEliminarPlatilloService } from 'src/app/services/modales/modal-eliminar-platillo.service';
+import { MenuService } from 'src/app/services/menu/menu.service';
 
 @Component({
   selector: 'app-lista-platillo',
@@ -23,7 +23,7 @@ export class ListaPlatilloComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private platilloService: PlatillosService,
+    private menuService: MenuService,
     private modalService: ModalEliminarPlatilloService,
   ) { }
 
@@ -37,7 +37,7 @@ export class ListaPlatilloComponent implements OnInit {
   }
 
   getPlatillos(): void {
-    this.platilloService.getPlatillos(this.id_restaurante).subscribe(
+    this.menuService.getMenu(this.id_restaurante).subscribe(
       res => {
         console.log("Response from service:", res);
         this.platillos = res.platillos;

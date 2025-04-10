@@ -38,4 +38,11 @@ input[type="file"].hidden {
     resize: none; /* Desactivar la opción de redimensionar */
     height: 150px; /* Ajusta la altura según tus necesidades */
   }
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
+    backdrop-filter: blur(10px); /* Desenfoque */
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
   

@@ -44,6 +44,7 @@ export class RegistrarPedidoComponent implements OnInit {
   mesa: Mesa | undefined;
   //el id de la cuenta 
   id_cuenta:number=0;
+  modalDetalleAbierto=true;
   
   constructor(private descripcionPedidoService: DescripcionPedidoService,
     private route: ActivatedRoute,
@@ -235,7 +236,7 @@ export class RegistrarPedidoComponent implements OnInit {
     this.platillos = [];
     this.switchState = false;
     this.getPlatillos();
-    this.mostrarModal = false; // Cerrar el modal después de registrar el pedido
+    // this.mostrarModal = false; // Cerrar el modal después de registrar el pedido
   }
 
   increment(index: number) {

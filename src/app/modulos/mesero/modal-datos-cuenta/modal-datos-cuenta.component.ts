@@ -37,24 +37,28 @@ export class ModalDatosCuentaComponent implements OnInit {
       this.toastr.info('No lleno ninguno de los campos','Información');
       return;
     }
-    const formData = new FormData();
-    formData.append('razon_social', this.cuentaForm.get('razonSocial')?.value);
-    formData.append('nit', this.cuentaForm.get('nit')?.value);
-
-    //this.cuentaS.saveId(this.idCuenta);
-    // Make sure to pass idCuenta to the service
-    this.cuentaS.storeDatosCuenta(formData).subscribe(
-      (response: any) => {
-        console.log('Datos registrados', response);
-        this.toastr.success('Los datos se registraron correctamente','Exito');
-        this.limpiarCampos();
-      },
-      (error: any) => {
-        console.error('Error en Datos cuenta', error);
-        this.toastr.error('Los datos no fueron almacenados','Error');
-        this.limpiarCampos();
-      }
-    );
+    if(this.cuentaS.idCuentaValue == null){
+      this.toastr.info('Espere un momeno, datos procesando...','Información');
+    }else{
+      const formData = new FormData();
+      formData.append('razon_social', this.cuentaForm.get('razonSocial')?.value);
+      formData.append('nit', this.cuentaForm.get('nit')?.value);
+  
+      //this.cuentaS.saveId(this.idCuenta);
+      // Make sure to pass idCuenta to the service
+      this.cuentaS.storeDatosCuenta(formData).subscribe(
+        (response: any) => {
+          console.log('Datos registrados', response);
+          this.toastr.success('Los datos se registraron correctamente','Exito');
+          this.limpiarCampos();
+        },
+        (error: any) => {
+          console.error('Error en Datos cuenta', error);
+          this.toastr.error('Los datos no fueron almacenados','Error');
+          this.limpiarCampos();
+        }
+      );
+    }
   }
 
   limpiarCampos() {

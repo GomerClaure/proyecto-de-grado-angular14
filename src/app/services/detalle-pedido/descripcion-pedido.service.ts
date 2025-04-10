@@ -12,6 +12,9 @@ export class DescripcionPedidoService {
     this.index=id;
   }
   addDescripcion(descripcion: string) {
+    if (!descripcion.trim()) {
+      return false; // Retorna falso si la descripción está vacía
+  }
     if (this.index >= 0) {
         const descripcionExistente = this.descripciones.find(desc => desc.id === this.index);
         if (descripcionExistente) {
@@ -19,14 +22,13 @@ export class DescripcionPedidoService {
         } else {
             this.descripciones.push({ id: this.index, descripcion: descripcion });
         }
-        
         console.log(this.descripciones);
     }
     console.log(descripcion);
     console.log(this.index);
     // Restablecer el índice después de agregar la descripción
     this.index = 0;
-    return false
+    return true
 }
   getDescripciones(){
     return this.descripciones; 
