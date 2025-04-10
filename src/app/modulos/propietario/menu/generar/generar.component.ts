@@ -58,7 +58,7 @@ export class GenerarComponent implements OnInit {
     let idRestaurante = sessionStorage.getItem('id_restaurante')||'0';
     this.menuService.getMenu(idRestaurante).subscribe(
       res => {
-        console.log(res.platillos);
+        console.log(res.menu);
         this.menu = res.menu;
         this.tema = this.menu.tema;
         let checkSwitch = document.getElementById('themeSwitch');

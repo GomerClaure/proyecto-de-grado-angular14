@@ -23,8 +23,8 @@
               'is-invalid': pasoUnoForm.get('nit')?.invalid && pasoUnoForm.get('nit')?.touched,
               'is-valid': pasoUnoForm.get('nit')?.valid && pasoUnoForm.get('nit')?.touched
             }" required />
-        <div class="invalid-feedback">
-          NIT es requerido y solo puede contener números
+        <div class="invalid-feedback" *ngIf="pasoUnoForm.get('nit')?.invalid && pasoUnoForm.get('nit')?.touched">
+          NIT es requerido y solo puede contener de 8 a 12 números
         </div>
       </div>
     </div>

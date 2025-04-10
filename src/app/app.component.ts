@@ -11,9 +11,13 @@ export class AppComponent {
   constructor(private router: Router) {}
 
   shouldShowNav(): boolean {
-    // Rutas en las que no se mostrará el nav
-    const noNavRoutes = ['/propietario/plantilla-pedidos','/vista/4','/vista/5','/vista/6',
-      '/vista/2','/vista/3','/vista/1'];
-    return !noNavRoutes.includes(this.router.url);
+    const noNavRoutes = ['/propietario/plantilla-pedidos'];
+    const url = this.router.url;
+  
+    // Oculta nav si está en la lista exacta o si la ruta comienza con "/vista/"
+    return !(
+      noNavRoutes.includes(url) ||
+      url.startsWith('/vista/')
+    );
   }
 }

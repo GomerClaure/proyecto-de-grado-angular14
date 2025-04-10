@@ -20,7 +20,7 @@ export class FormRegisterComponent implements OnInit, AfterViewInit {
     this.restauranteForm = this.fb.group({
       pasoUno: this.fb.group({
         nombreRestaurante: ['', [Validators.required, Validators.minLength(3)]],
-        nit: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+        nit: ['', [Validators.required, Validators.pattern('^[0-9]{8,12}$')]],
         numeroCelular: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
         correoRestaurante: ['', [Validators.required, Validators.email]],
         licenciaFuncionamiento: ['', [Validators.required, fileValidator(['application/pdf'], 5)]],

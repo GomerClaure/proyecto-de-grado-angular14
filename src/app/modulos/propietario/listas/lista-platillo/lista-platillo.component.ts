@@ -20,6 +20,7 @@ export class ListaPlatilloComponent implements OnInit {
   id_restaurante: any;
   public pageSize: number = 7;
   public currentPage: number = 1;
+  public noHayPlatillos: boolean = false;
 
   constructor(
     private router: Router,
@@ -39,11 +40,13 @@ export class ListaPlatilloComponent implements OnInit {
   getPlatillos(): void {
     this.menuService.getMenu(this.id_restaurante).subscribe(
       res => {
-        console.log("Response from service:", res);
+        this.noHayPlatillos = res.platillos.length === 0;
         this.platillos = res.platillos;
         this.filtrarPlatillos();
+
       },
       error => {
+        this.noHayPlatillos = true;
         console.error("Error fetching platillos:", error);
       }
     );

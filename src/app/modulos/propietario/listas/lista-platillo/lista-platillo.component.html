@@ -67,6 +67,9 @@
           </ul>
         </nav>
       </div>
+      <div class="alert alert-warning  text-center mt-3 mensaje-reporte" *ngIf="noHayPlatillos" role="alert">
+        No existen productos registrados.
+      </div>
     </div>
 </body>
 <app-modal-eliminar></app-modal-eliminar>

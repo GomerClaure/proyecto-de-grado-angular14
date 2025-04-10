@@ -167,8 +167,9 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   irAMenu() {
-
-    this.router.navigateByUrl('/propietario/vista-menu/' + this.idRestaurante);
+// quiero abrir en otra pestaña e el menu con la ruta vista/id_restaurante
+    const url = `/vista/${this.idRestaurante}`;
+    window.open(url, '_blank'); // Abre en una nueva pestaña
   }
 
 
