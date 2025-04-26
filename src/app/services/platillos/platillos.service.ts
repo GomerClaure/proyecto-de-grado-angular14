@@ -14,6 +14,7 @@ export class PlatillosService {
   constructor(private http: HttpClient) { }
 
   getPlatillos(idRestaurante:any) {
+    console.log('Esta obteniendo platillos')
     return this.http.get<any>(`${this.BASE_URL}/menu/platillos/${idRestaurante}`);
   }
   getPlatillosMenu(idRestaurante: string) {
@@ -33,5 +34,10 @@ export class PlatillosService {
 
   deletePlatillo(id: number) {
     return this.http.delete<any>(`${this.BASE_URL}/menu/platillo/${id}`);
+  }
+
+  validarNombre(nombre: string, id_restaurante: string) {
+    // enviar parmetros al backend
+    return this.http.get<any>(`${this.BASE_URL}/menu/platillo/validar/nombre/${id_restaurante}?nombre=${nombre}`);
   }
 }

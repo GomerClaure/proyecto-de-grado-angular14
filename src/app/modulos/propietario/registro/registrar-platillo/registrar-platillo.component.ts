@@ -4,6 +4,8 @@ import { PlatillosService } from 'src/app/services/platillos/platillos.service';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
 import { ToastrService } from 'ngx-toastr';
 import { fileValidator } from 'src/app/validators/file-validator';
+import { uniqueFieldValidator } from 'src/app/validators/unique-field.validator';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-registrar-platillo',
@@ -20,8 +22,7 @@ export class RegistrarPlatilloComponent implements OnInit{
   categorias:any[]=[];
   id_restaurante:any;
 
-  ngOnInit(): void {
-    this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
+  ngOnInit(): void {   
       this.obtenerCategorias();
   }
  
@@ -30,8 +31,9 @@ export class RegistrarPlatilloComponent implements OnInit{
               private categoriasService:CategoriaService,
               private toastr:ToastrService
             ) {
+    this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
     this.formularioPlatillo = this.formBuilder.group({
-      nombre: [null,Validators.required],
+      nombre: [null,[Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       categoria: [null,Validators.required],
       precio: [null, [Validators.required, Validators.pattern(RegistrarPlatilloComponent.numbersOnlyPattern)]],
       descripcion: [null,Validators.required],
@@ -40,10 +42,9 @@ export class RegistrarPlatilloComponent implements OnInit{
     this.imageUrl = 'assets/image/Imagen-rota.jpg';
   }
   onFileSelected(event: any) {
-    this.selectedFile = <File>event.target.files[0];
     const file = event.target.files[0];
     if (file) {
-      // this.selectedFile = file;
+      this.selectedFile = file;
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = (e: any) => {
@@ -117,4 +118,26 @@ export class RegistrarPlatilloComponent implements OnInit{
       }
     );
   }
+  validarNombreUnico() {
+    const control = this.formularioPlatillo.get('nombre');
+    if (control && control.valid) {
+      const result$ = uniqueFieldValidator(
+        this.platillosService,
+        'validarNombre',
+        { id_restaurante: this.id_restaurante },
+        'nombreNoUnico'
+      )(control);
+
+      from(result$).subscribe(error => {
+        if (error) {
+          control.setErrors({ ...control.errors, ...error });
+        } else {
+          // Elimina solo el error async si estaba presente
+          const { nombreNoUnico, ...rest } = control.errors || {};
+          control.setErrors(Object.keys(rest).length ? rest : null);
+        }
+      });
+    }
+  }
+  
 }

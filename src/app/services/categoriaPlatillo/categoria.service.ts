@@ -49,6 +49,11 @@ export class CategoriaService {
   deleteCategoria(id: number){
     return this.http.delete<any>(`${this.BASE_URL}/menu/categoria/${id}`);
   }
+
+  validarNombre(nombre: string, id_restaurante: number): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.get<any>(`${this.BASE_URL}/menu/categoria/validar/nombre/${id_restaurante }?nombre=${nombre}`);
+  }
   
 }
 

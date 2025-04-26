@@ -1,7 +1,10 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { from } from 'rxjs';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';	
+import { fileValidator } from 'src/app/validators/file-validator';
+import { uniqueFieldValidator } from 'src/app/validators/unique-field.validator';
 
 @Component({
   selector: 'app-registrar-categoria',
@@ -22,7 +25,9 @@ export class RegistrarCategoriaComponent implements AfterViewInit,OnDestroy {
               private toastr:ToastrService,
               ) { 
     this.formularioCategoria=this.formBuilder.group({
-      nombre:[null,Validators.required]
+      nombre: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      // imagen:[null,[Validators.required, fileValidator(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'], 2)]]
+      imagen: [null,[Validators.required]]
     })
     this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
     this.imageUrl = 'assets/image/Imagen-rota.jpg';
@@ -44,17 +49,31 @@ export class RegistrarCategoriaComponent implements AfterViewInit,OnDestroy {
    }
 
   onFileSelected(event: any) {
-    this.selectedFile = <File>event.target.files[0];
     const file = event.target.files[0];
     if (file) {
+      this.selectedFile = file;
       const reader = new FileReader();
+      reader.readAsDataURL(file);
       reader.onload = (e: any) => {
         this.imageUrl = e.target.result;
       };
-      reader.readAsDataURL(file);
+      this.formularioCategoria.patchValue({
+        imagen: file
+      });
+      
+      this.formularioCategoria.get('imagen')?.markAsTouched();
     }
   }
   guardarCategoria() {
+    console.log('Es Valido:', this.formularioCategoria.valid);
+    // cual es el error del formulario
+    Object.keys(this.formularioCategoria.controls).forEach(controlName => {
+      const control = this.formularioCategoria.get(controlName);
+      if (control && control.invalid) {
+        console.log(`Errores en '${controlName}':`, control.errors);
+      }
+    });
+    console.log('Imagen:', this.selectedFile);
     if (this.formularioCategoria.valid && this.selectedFile) {
       const nombre = this.formularioCategoria.get('nombre')?.value;
   
@@ -92,5 +111,22 @@ export class RegistrarCategoriaComponent implements AfterViewInit,OnDestroy {
   onImgError(event: any) {
     event.target.src = 'assets/image/Imagen-rota.jpg';
   }
+  validarNombreUnico() {
+      const control = this.formularioCategoria.get('nombre');
+      if (control && control.valid) {
+        const result$ = uniqueFieldValidator(this.categoriaService, 'validarNombre',
+          { id_restaurante: this.id_restaurante }, 'nombreNoUnico')(control);
+  
+        from(result$).subscribe(error => {
+          if (error) {
+            control.setErrors({ ...control.errors, ...error });
+          } else {
+            // Elimina solo el error async si estaba presente
+            const { nombreNoUnico, ...rest } = control.errors || {};
+            control.setErrors(Object.keys(rest).length ? rest : null);
+          }
+        });
+      }
+    }
 
 }

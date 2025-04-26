@@ -4,6 +4,8 @@ import { Categoria } from 'src/app/modelos/Categoria';
 import { environment } from 'src/environments/environment';
 import { CategoriaService } from 'src/app/services/categoriaPlatillo/categoria.service';
 import { ToastrService } from 'ngx-toastr';
+import { uniqueFieldValidator } from 'src/app/validators/unique-field.validator';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-editar-categoria',
@@ -17,6 +19,7 @@ export class EditarCategoriaComponent implements  OnChanges  {
   private selectedFile: File = new File([''], '');
   public formularioCategoria: FormGroup;
   public backendStorageUrl = environment.backendStorageUrl;
+  public id_restaurante: any 
   @Input() categoria: Categoria;  
 
   constructor(
@@ -26,11 +29,12 @@ export class EditarCategoriaComponent implements  OnChanges  {
   ) {
     this.imageUrl = 'assets/image/Imagen-rota.jpg';
     this.formularioCategoria = this.formBuilder.group({
-      nombre: [null, Validators.required],
-      imagen: [null],
+      nombre: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      imagen: [null, [Validators.required]],
     });
     
     this.categoria = { id: 0, nombre: '', imagen: '' };
+    this.id_restaurante = parseInt(sessionStorage.getItem('id_restaurante') || '0');
   }
 
   ngOnChanges(): void {
@@ -79,5 +83,27 @@ export class EditarCategoriaComponent implements  OnChanges  {
       }
     );
   }
+
+   validarNombreUnico() {
+        const control = this.formularioCategoria.get('nombre');
+        if (control && control.valid && control.value !== this.categoria.nombre) { // Verifica si el valor es diferente al original no lo borres al refactorizar karis
+          const result$ = uniqueFieldValidator(
+            this.categoriaService,
+            'validarNombre',
+            { id_restaurante: this.id_restaurante },
+            'nombreNoUnico'
+          )(control);
+          
+          from(result$).subscribe(error => {
+            if (error) {
+              control.setErrors({ ...control.errors, ...error });
+            } else {
+              // Elimina solo el error async si estaba presente
+              const { nombreNoUnico, ...rest } = control.errors || {};
+              control.setErrors(Object.keys(rest).length ? rest : null);
+            }
+          });
+        }
+      }
 
 }

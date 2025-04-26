@@ -7,7 +7,28 @@
       <div class="modal-body">
         <div class="form-group" [formGroup]="formularioCategoria">
           <label for="categoriaInput">Nombre de la Categoría</label>
-          <input type="text" class="form-control" id="categoriaInput" formControlName="nombre">
+          <input type="text" class="form-control" id="categoriaInput" formControlName="nombre" (blur)="validarNombreUnico()"
+            [ngClass]="{
+              'is-invalid': formularioCategoria.get('nombre')?.invalid && formularioCategoria.get('nombre')?.touched,
+              'is-valid': formularioCategoria.get('nombre')?.valid && formularioCategoria.get('nombre')?.touched
+            }" placeholder="Entradas" />
+          <div *ngIf="formularioCategoria.get('nombre')?.errors?.['required'] && formularioCategoria.get('nombre')?.touched"
+            class="text-danger">
+            El nombre es obligatorio.
+          </div>
+          <div *ngIf="formularioCategoria.get('nombre')?.errors?.['minlength'] && formularioCategoria.get('nombre')?.touched"
+            class="text-danger">
+            El nombre debe tener al menos 3 caracteres.
+          </div>
+          <div *ngIf="formularioCategoria.get('nombre')?.errors?.['maxlength'] && formularioCategoria.get('nombre')?.touched"
+            class="text-danger">
+            El nombre no puede exceder los 20 caracteres.
+          </div>
+          <div
+            *ngIf="formularioCategoria.get('nombre')?.errors?.['nombreNoUnico'] && formularioCategoria.get('nombre')?.touched"
+            class="text-danger">
+            El nombre ya está en uso.
+          </div>
         </div>
         <div class="row justify-content-center">
           <div class="col-xs-12 d-flex text-center justify-content-center">

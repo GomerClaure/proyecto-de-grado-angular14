@@ -18,10 +18,26 @@
                   'is-valid':
                     formularioPlatillo.get('nombre')?.valid &&
                     formularioPlatillo.get('nombre')?.touched
-                }" required />
-              <div class="invalid-feedback">
-                El nombre es obligatorio y debe tener al menos 3 caracteres.
-              </div>
+                }"
+                (blur)="validarNombreUnico()"/>
+               <div class="invalid-feedback">
+                <span *ngIf="formularioPlatillo.get('nombre')?.errors?.['required'] &&
+                formularioPlatillo.get('nombre')?.touched">
+                  El nombre es obligatorio.
+                </span>
+                <span *ngIf="formularioPlatillo.get('nombre')?.errors?.['minlength'] &&
+                formularioPlatillo.get('nombre')?.touched">
+                  El nombre debe tener al menos 3 caracteres.
+                </span>
+                <span *ngIf="formularioPlatillo.get('nombre')?.errors?.['maxlength'] &&
+                formularioPlatillo.get('nombre')?.touched">
+                  El nombre no puede exceder los 20 caracteres.
+                </span>
+                <span *ngIf="formularioPlatillo.get('nombre')?.errors?.['nombreNoUnico'] &&
+                formularioPlatillo.get('nombre')?.touched">
+                  El nombre ya está en uso.
+                </span>
+            </div>
             </div>
           </div>
 

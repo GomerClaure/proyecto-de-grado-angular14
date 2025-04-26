@@ -7,26 +7,75 @@
       <div class="modal-body">
         <div class="form-group" [formGroup]="formularioCategoria">
           <label for="categoriaInput">Nombre de la Categoría</label>
-          <input type="text" class="form-control" id="categoriaInput" formControlName="nombre">
-          <div *ngIf="formularioCategoria.get('nombre')?.invalid && formularioCategoria.get('nombre')?.touched" class="text-danger">
-           El nombre de la categoria debe tener mas de 3 letras
+          <input type="text" class="form-control" id="categoriaInput" formControlName="nombre" (blur)="validarNombreUnico()"
+            [ngClass]="{
+              'is-invalid': formularioCategoria.get('nombre')?.invalid && formularioCategoria.get('nombre')?.touched,
+              'is-valid': formularioCategoria.get('nombre')?.valid && formularioCategoria.get('nombre')?.touched
+            }" placeholder="Entradas" />
+          <div *ngIf="formularioCategoria.get('nombre')?.errors?.['required'] && formularioCategoria.get('nombre')?.touched"
+            class="text-danger">
+            El nombre es obligatorio.
           </div>
-        </div>
-        <div class="row justify-content-center">
-        <div class="col-xs-12 d-flex justify-content-center align-items-center">
-          <div class="apartadoImg text-center">
-            <img [src]="imageUrl" (error)="onImgError($event)" id="image-platillo" class="img-fluid shadow-img"
-            alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight">       
-              <input type="file" id="archivo" class="hidden" (change)="onFileSelected($event)">
-              <label for="archivo" class="btn-img btn btn-subir-imagen">Seleccionar Imagen<i class="bi bi-file-earmark-arrow-up"></i></label>
+          <div *ngIf="formularioCategoria.get('nombre')?.errors?.['minlength'] && formularioCategoria.get('nombre')?.touched"
+            class="text-danger">
+            El nombre debe tener al menos 3 caracteres.
           </div>
-        </div>
+          <div *ngIf="formularioCategoria.get('nombre')?.errors?.['maxlength'] && formularioCategoria.get('nombre')?.touched"
+            class="text-danger">
+            El nombre no puede exceder los 20 caracteres.
+          </div>
+          <div
+            *ngIf="formularioCategoria.get('nombre')?.errors?.['nombreNoUnico'] && formularioCategoria.get('nombre')?.touched"
+            class="text-danger">
+            El nombre ya está en uso.
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-xs-12 d-flex justify-content-center align-items-center">
+              <div class="apartadoImg text-center">
+                <!-- Vista previa de la imagen -->
+                <img [src]="imageUrl" (error)="onImgError($event)" id="image-platillo" class="img-fluid shadow-img"
+                  alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight" />
+
+                <!-- Input de archivo con validación visual -->
+                <div class="input-group has-validation d-flex flex-column align-items-center">
+                  <input type="file" id="img-categoria" class="hidden" (change)="onFileSelected($event)"
+                    accept="image/jpeg, image/png, image/jpg, image/webp" formControlName="imagen" [ngClass]="{
+                  'is-invalid': formularioCategoria.get('imagen')?.invalid && formularioCategoria.get('imagen')?.touched,
+                  'is-valid': formularioCategoria.get('imagen')?.valid && formularioCategoria.get('imagen')?.touched
+                }" />
+
+                  <!-- Mensajes de error -->
+                  <div class="invalid-feedback">
+                    <span *ngIf="formularioCategoria.get('imagen')?.errors?.['required'] &&
+                             formularioCategoria.get('imagen')?.touched">
+                      La imagen es obligatoria.
+                    </span>
+                    <span *ngIf="formularioCategoria.get('imagen')?.errors?.['fileSize'] &&
+                             formularioCategoria.get('imagen')?.touched">
+                      Tamaño máximo 2MB.
+                    </span>
+                    <span *ngIf="formularioCategoria.get('imagen')?.errors?.['fileType'] &&
+                             formularioCategoria.get('imagen')?.touched">
+                      Formato no permitido. Solo imágenes JPEG, PNG, JPG, WEBP.
+                    </span>
+                  </div>
+
+                  <!-- Botón para subir imagen -->
+                  <label for="img-categoria" class="btn-img btn btn-subir-imagen mt-2">
+                    Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i>
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-delete" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-aceptar" (click)="guardarCategoria()" data-bs-dismiss="modal">Registrar</button>
+        <button type="button" class="btn btn-aceptar" (click)="guardarCategoria()"
+          data-bs-dismiss="modal">Registrar</button>
       </div>
     </div>
   </div>
-</div>
