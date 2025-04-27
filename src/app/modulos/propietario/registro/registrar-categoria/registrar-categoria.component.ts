@@ -61,7 +61,6 @@ export class RegistrarCategoriaComponent implements AfterViewInit,OnDestroy {
         this.imageUrl = e.target.result;
       };
   
-      // Validaciones manuales
       const maxSizeMB = 2;
       const validTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
   
@@ -70,7 +69,7 @@ export class RegistrarCategoriaComponent implements AfterViewInit,OnDestroy {
       } else if (file.size > maxSizeMB * 1024 * 1024) {
         control.setErrors({ fileSize: true });
       } else {
-        control.setErrors(null); // Sin errores
+        control.setErrors(null); 
       }
   
       control.markAsTouched();
