@@ -145,9 +145,26 @@
           </div>
             <!--fecha contratacion-->
             <div class="col-12 col-md-6 mb-2">
-                <label for="fechaContratacion" class="form-label">Fecha de Contratación</label>
-                <input type="date" class="form-control" id="fechaContratacion" name="fechaContratacion" required formControlName="fechaContratacion">
+              <label for="fechaContratacion" class="form-label">Fecha de Contratación</label>
+              <input 
+                type="date" 
+                class="form-control" 
+                id="fechaContratacion" 
+                name="fechaContratacion" 
+                required 
+                formControlName="fechaContratacion" 
+                [ngClass]="{
+                  'is-invalid': formularioEmpleado.get('fechaContratacion')?.invalid && formularioEmpleado.get('fechaContratacion')?.touched,
+                  'is-valid': formularioEmpleado.get('fechaContratacion')?.valid && formularioEmpleado.get('fechaContratacion')?.touched
+                }"
+              />
+            
+              <!-- Mensaje de error -->
+              <div *ngIf="formularioEmpleado.get('fechaContratacion')?.hasError('fechaFutura') && formularioEmpleado.get('fechaContratacion')?.touched" class="invalid-feedback">
+                La fecha de contratación no puede ser futura.
+              </div>
             </div>
+            
         </div>
         <!-- Botones de Registrar y Limpiar -->
         <div class="col-12 d-flex justify-content-end">

@@ -32,7 +32,7 @@ export class RegistrarEmpleadoComponent implements OnInit {
       direccion: [null, Validators.required],
       correoElectronico: [null, [Validators.required, Validators.email]],
       puesto: ['', Validators.required],
-      fechaContratacion: [null, Validators.required],
+      fechaContratacion: [null, [Validators.required, this.validarFechaNoFutura]],
       fotografiaEmpleado: [null, Validators.required], // Añadir campo para la imagen
     });
   }
@@ -124,6 +124,16 @@ export class RegistrarEmpleadoComponent implements OnInit {
         this.toastr.error('Error al registrar empleado.','Informacion');
       }
     );
+  }
+  validarFechaNoFutura(control: AbstractControl) {
+    if (!control.value) {
+      return null; 
+    }
+    const fechaContratacion = new Date(control.value);
+    const hoy = new Date();
+    fechaContratacion.setHours(0, 0, 0, 0);
+    hoy.setHours(0, 0, 0, 0);
+    return fechaContratacion > hoy ? { fechaFutura: true } : null;
   }
 }
 
