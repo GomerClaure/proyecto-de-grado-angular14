@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, Input, ViewChild } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { from } from 'rxjs';
@@ -18,7 +18,7 @@ export class RegistrarCategoriaComponent implements AfterViewInit,OnDestroy {
   imageHeight: number = 280;
   formularioCategoria:FormGroup
   selectedFile: File ; 
-  id_restaurante:any;
+  @Input() id_restaurante !: string;
 
   constructor(private formBuilder:FormBuilder, 
               private categoriaService:CategoriaService ,
@@ -29,7 +29,7 @@ export class RegistrarCategoriaComponent implements AfterViewInit,OnDestroy {
       imagen:[null,[Validators.required, fileValidator(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'], 2)]]
       //imagen: [null,[Validators.required]]
     })
-    this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
+    
     this.imageUrl = 'assets/image/Imagen-rota.jpg';
     this.selectedFile = new File([''], '');
    }
@@ -90,7 +90,8 @@ export class RegistrarCategoriaComponent implements AfterViewInit,OnDestroy {
       const nombre = this.formularioCategoria.get('nombre')?.value;
   
       const formData = new FormData();
-      this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
+      // this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
+      console.log('ID Restaurante:', this.id_restaurante);
 
       formData.append('imagen', this.selectedFile);
       formData.append('nombre', nombre);

@@ -1,176 +1,202 @@
 <body class="fondo">
-    <div class="container">
-      <h2 class="titulo"></h2>
-      <form [formGroup]="formularioEmpleado">
-        <div class="col-12">
-          <div class="row">
-            <h3>Registro de empleado</h3>
-            <!--Nombre-->
-            <div class="col-12 col-md-6 mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input id="nombre" formControlName="nombre" class="form-control"
-                  [ngClass]="{
+  <div class="container">
+    <h2 class="titulo"></h2>
+    <form [formGroup]="formularioEmpleado">
+      <div class="col-12">
+        <div class="row">
+          <h3>Registro de empleado</h3>
+          <!--Nombre-->
+          <div class="col-12 col-md-6 mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input id="nombre" formControlName="nombre" class="form-control" [ngClass]="{
                     'is-invalid':formularioEmpleado.get('nombre')?.invalid && formularioEmpleado.get('nombre')?.touched,
                     'is-valid': formularioEmpleado.get('nombre')?.valid && formularioEmpleado.get('nombre')?.touched
                   }" required />
-              
-                <div *ngIf="formularioEmpleado.get('nombre')?.invalid && formularioEmpleado.get('nombre')?.touched" class="invalid-feedback">
-                  El nombre es requerido y debe tener al menos 3 caracteres.
+
+            <div *ngIf="formularioEmpleado.get('nombre')?.invalid && formularioEmpleado.get('nombre')?.touched"
+              class="invalid-feedback">
+              El nombre es requerido y debe tener al menos 3 caracteres.
             </div>
-            </div>
-            <!-- Apellido Paterno -->
-            <div class="col-12 col-md-6 mb-3">
-                            <label for="apellidoPaterno" class="form-label">Apellido Paterno</label>
-                            <input type="text" class="form-control" id="apellidoPaterno" name="apellidoPaterno" required formControlName="apellidoPaterno"
-                            [ngClass]="{
+          </div>
+          <!-- Apellido Paterno -->
+          <div class="col-12 col-md-6 mb-3">
+            <label for="apellidoPaterno" class="form-label">Apellido Paterno</label>
+            <input type="text" class="form-control" id="apellidoPaterno" name="apellidoPaterno" required
+              formControlName="apellidoPaterno" [ngClass]="{
                               'is-invalid':formularioEmpleado.get('apellidoPaterno')?.invalid && formularioEmpleado.get('apellidoPaterno')?.touched,
                               'is-valid': formularioEmpleado.get('apellidoPaterno')?.valid && formularioEmpleado.get('apellidoPaterno')?.touched
                             }" required />
-                            <div *ngIf="formularioEmpleado.get('apellidoPaterno')?.invalid && formularioEmpleado.get('apellidoPaterno')?.touched" class="invalid-feedback">
-                              Apellido paterno es requerido y debe tener al menos 3 caracteres.
-                            </div>
-            </div>      
+            <div
+              *ngIf="formularioEmpleado.get('apellidoPaterno')?.invalid && formularioEmpleado.get('apellidoPaterno')?.touched"
+              class="invalid-feedback">
+              Apellido paterno es requerido y debe tener al menos 3 caracteres.
+            </div>
           </div>
+        </div>
         <div class="row">
           <!-- Apellido Materno -->
-            <div class="col-12 col-md-6 mb-3">
-                <label for="apellidoMaterno" class="form-label">Apellido Materno</label>
-                <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno" required formControlName="apellidoMaterno"
-                  [ngClass]="{
+          <div class="col-12 col-md-6 mb-3">
+            <label for="apellidoMaterno" class="form-label">Apellido Materno</label>
+            <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno" required
+              formControlName="apellidoMaterno" [ngClass]="{
                     'is-invalid':formularioEmpleado.get('apellidoMaterno')?.invalid && formularioEmpleado.get('apellidoPaterno')?.touched,
                       'is-valid': formularioEmpleado.get('apellidoMaterno')?.valid && formularioEmpleado.get('apellidoMaterno')?.touched
                   }" required />
-                <div *ngIf="formularioEmpleado.get('apellidoMaterno')?.invalid && formularioEmpleado.get('apellidoMaterno')?.touched" class="invalid-feedback">
-                   Apellido materno es requerido y debe tener al menos 3 caracteres.
-                </div>
+            <div
+              *ngIf="formularioEmpleado.get('apellidoMaterno')?.invalid && formularioEmpleado.get('apellidoMaterno')?.touched"
+              class="invalid-feedback">
+              Apellido materno es requerido y debe tener al menos 3 caracteres.
+            </div>
           </div>
-           <!-- Fecha de Nacimiento -->
+          <!-- Fecha de Nacimiento -->
           <div class="col-12 col-md-6 mb-3">
             <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-            <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required formControlName="fechaNacimiento"
-             [ngClass]="{
+            <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required
+              formControlName="fechaNacimiento" [ngClass]="{
                 'is-invalid': formularioEmpleado.get('fechaNacimiento')?.invalid && formularioEmpleado.get('fechaNacimiento')?.touched
-               }" required
-               />
-              <div *ngIf="formularioEmpleado.get('fechaNacimiento')?.hasError('menorDeEdad') && formularioEmpleado.get('fechaNacimiento')?.touched" class="invalid-feedback">
-                   El empleado debe ser mayor de edad.
-              </div>
-        </div>
+               }" required />
+            <div
+              *ngIf="formularioEmpleado.get('fechaNacimiento')?.hasError('menorDeEdad') && formularioEmpleado.get('fechaNacimiento')?.touched"
+              class="invalid-feedback">
+              El empleado debe ser mayor de edad.
+            </div>
+          </div>
 
         </div>
         <div class="row">
-            <!-- Telefono -->
-            <div class="col-12 col-md-6 mb-3">
-                <label for="telefono" class="form-label">Teléfono</label>
-                <input type="tel" class="form-control" id="telefono" name="telefono" required formControlName="telefono"
-                  [ngClass]="{
+          <!-- Telefono -->
+          <div class="col-12 col-md-6 mb-3">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="tel" class="form-control" id="telefono" name="telefono" required formControlName="telefono"
+              [ngClass]="{
                     'is-invalid':formularioEmpleado.get('telefono')?.invalid && formularioEmpleado.get('telefono')?.touched,
                     'is-valid': formularioEmpleado.get('telefono')?.valid && formularioEmpleado.get('telefono')?.touched
-                  }" required
-                />
-                <div *ngIf="formularioEmpleado.get('telefono')?.invalid && formularioEmpleado.get('telefono')?.touched" class="invalid-feedback">
-                  Número de teléfono o celular inválido.
-                </div>
+                  }" required />
+            <div *ngIf="formularioEmpleado.get('telefono')?.invalid && formularioEmpleado.get('telefono')?.touched"
+              class="invalid-feedback">
+              Número de teléfono o celular inválido.
             </div>
-            <!-- Carnet -->
-            <div class="col-12 col-md-6 mb-3">
-                <label for="ci" class="form-label">Carnet de Identidad</label>
-                <input type="text" class="form-control" id="ci" name="ci" required formControlName="carnetIdentidad"
-                  [ngClass]="{
+          </div>
+          <!-- Carnet -->
+          <div class="col-12 col-md-6 mb-3">
+            <label for="ci" class="form-label">Carnet de Identidad</label>
+            <input type="text" class="form-control" id="ci" name="ci" required formControlName="carnetIdentidad"
+              [ngClass]="{
                     'is-invalid':formularioEmpleado.get('carnetIdentidad')?.invalid && formularioEmpleado.get('carnetIdentidad')?.touched,
                     'is-valid': formularioEmpleado.get('carnetIdentidad')?.valid && formularioEmpleado.get('carnetIdentidad')?.touched
-                  }"
-                />
-                <div *ngIf="formularioEmpleado.get('carnetIdentidad')?.invalid && formularioEmpleado.get('carnetIdentidad')?.touched" class="invalid-feedback">
-                  Carnet de identidad requerido.
-                </div>
-              </div>
+                  }" />
+            <div
+              *ngIf="formularioEmpleado.get('carnetIdentidad')?.invalid && formularioEmpleado.get('carnetIdentidad')?.touched"
+              class="invalid-feedback">
+              Carnet de identidad requerido.
+            </div>
+          </div>
         </div>
         <div class="row">
-             <!-- Dirección-->
-            <div class="col-12 col-md-6 mb-2">
-                <label for="direccion" class="form-label">Dirección</label>
-                <input type="text" class="form-control mb-3" id="direccion" name="direccion" required formControlName="direccion"
-                [ngClass]="{
+          <!-- Dirección-->
+          <div class="col-12 col-md-6 mb-2">
+            <label for="direccion" class="form-label">Dirección</label>
+            <input type="text" class="form-control mb-3" id="direccion" name="direccion" required
+              formControlName="direccion" [ngClass]="{
                   'is-invalid':formularioEmpleado.get('direccion')?.invalid && formularioEmpleado.get('direccion')?.touched,
                   'is-valid': formularioEmpleado.get('direccion')?.valid && formularioEmpleado.get('direccion')?.touched
-                }"/>    
-                <div *ngIf="formularioEmpleado.get('direccion')?.invalid && formularioEmpleado.get('direccion')?.touched" class="invalid-feedback">
-                  Direccion requerida ingrese la direccion de su vivienda
-                </div>
+                }" />
+            <div *ngIf="formularioEmpleado.get('direccion')?.invalid && formularioEmpleado.get('direccion')?.touched"
+              class="invalid-feedback">
+              Direccion requerida ingrese la direccion de su vivienda
             </div>
-             <!-- Correo-->
-            <div class="col-12 col-md-6 mb-2">
-                <label for="email" class="form-label">Correo Electrónico</label>
-                <input type="email" class="form-control" id="email" name="email" required formControlName="correoElectronico"
-                  [ngClass]="{
+          </div>
+          <!-- Correo-->
+          <div class="col-12 col-md-6 mb-2">
+            <label for="email" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" id="email" name="email" required
+              formControlName="correoElectronico" [ngClass]="{
                     'is-invalid':formularioEmpleado.get('correoElectronico')?.invalid && formularioEmpleado.get('correoElectronico')?.touched,
                     'is-valid': formularioEmpleado.get('correoElectronico')?.valid && formularioEmpleado.get('correoElectronico')?.touched
                   }" />
-                
-                <div *ngIf="formularioEmpleado.get('correoElectronico')?.invalid && formularioEmpleado.get('correoElectronico')?.touched" class="invalid-feedback">
-                  Correo electrónico inválido.
-                </div>
+
+            <div
+              *ngIf="formularioEmpleado.get('correoElectronico')?.invalid && formularioEmpleado.get('correoElectronico')?.touched"
+              class="invalid-feedback">
+              Correo electrónico inválido.
             </div>
+          </div>
         </div>
         <!-- Fotografía Empleado -->
         <div class="row">
-            <div class="col-12 col-md-12 mb-2">
-              <div class="mb-3">
-                  <label for="fotografiaEmpleado" class="form-label">Fotografía del Empleado</label>
-                      <div class="input-group">
-                        <label class="btn btn-subir-imagen" for="fotografiaEmpleado">
-                          <i class="bi bi-person-bounding-box"></i> Subir foto
-                          </label>
-                          <input type="file" class="form-control" id="fotografiaEmpleado" name="fotografiaEmpleado" accept="image/*" (change)="onFileChange($event)" style="display: none;" />
-                          <input type="text" class="form-control" placeholder="Seleccione un archivo..." [value]="fileName" readonly>
-                      </div>
+          <div class="col-12 col-md-12 mb-2">
+            <div class="mb-3">
+              <label for="fotografiaEmpleado" class="form-label">Fotografía del Empleado</label>
+              <div class="input-group">
+                <label class="btn btn-subir-imagen" for="fotografiaEmpleado">
+                  <i class="bi bi-person-bounding-box"></i> Subir foto
+                </label>
+                <input type="file" class="form-control" id="fotografiaEmpleado" name="fotografiaEmpleado"
+                  accept="image/*" (change)="onFileChange($event)" style="display: none;" />
+                <input type="text" class="form-control" [value]="fileName" readonly
+                  [ngClass]="{
+                    'is-invalid': formularioEmpleado.get('fotografiaEmpleado')?.invalid && formularioEmpleado.get('fotografiaEmpleado')?.touched,
+                    'is-valid': formularioEmpleado.get('fotografiaEmpleado')?.valid && formularioEmpleado.get('fotografiaEmpleado')?.touched
+                  }" />
               </div>
+            </div>
+            <div *ngIf="formularioEmpleado.get('fotografiaEmpleado')?.errors?.['required'] &&
+              formularioEmpleado.get('fotografiaEmpleado')?.touched" class="invalid-feedback d-block">
+              La fotografía del empleado es obligatoria.
+            </div>
+            <div *ngIf="formularioEmpleado.get('fotografiaEmpleado')?.errors?.['archivoMuyPesado'] &&
+              formularioEmpleado.get('fotografiaEmpleado')?.touched" class="invalid-feedback d-block">
+              El tamaño máximo de la imagen es de 2MB.
+            </div>
+            <div *ngIf="formularioEmpleado.get('fotografiaEmpleado')?.errors?.['invalidoTipoArchivo'] &&
+              formularioEmpleado.get('fotografiaEmpleado')?.touched" class="invalid-feedback d-block">
+              Formato no permitido. Solo imágenes JPEG, PNG, JPG, WEBP.
+            </div>
+          </div>
         </div>
-       </div>
         <div class="row">
           <!--Puestos-->
           <div class="col-12 col-md-6 mb-2">
             <label for="puesto" class="form-label">Puesto</label>
             <div class="btn-group w-100" role="group">
-              <input type="radio" class="btn-check" name="puesto" id="cocinero" value="Cocinero" formControlName="puesto">
+              <input type="radio" class="btn-check" name="puesto" id="cocinero" value="Cocinero"
+                formControlName="puesto">
               <label class="btn btn-outline-secondary" for="cocinero">Cocinero</label>
-          
+
               <input type="radio" class="btn-check" name="puesto" id="mesero" value="Mesero" formControlName="puesto">
               <label class="btn btn-outline-secondary" for="mesero">Mesero</label>
-          
+
               <input type="radio" class="btn-check" name="puesto" id="cajero" value="Cajero" formControlName="puesto">
               <label class="btn btn-outline-secondary" for="cajero">Cajero</label>
             </div>
+            <div *ngIf="formularioEmpleado.get('puesto')?.errors?.['required'] &&
+              formularioEmpleado.get('puesto')?.touched" class="invalid-feedback d-block">
+              Seleccione un puesto.
+            </div>
           </div>
-            <!--fecha contratacion-->
-            <div class="col-12 col-md-6 mb-2">
-              <label for="fechaContratacion" class="form-label">Fecha de Contratación</label>
-              <input 
-                type="date" 
-                class="form-control" 
-                id="fechaContratacion" 
-                name="fechaContratacion" 
-                required 
-                formControlName="fechaContratacion" 
-                [ngClass]="{
+          <!--fecha contratacion-->
+          <div class="col-12 col-md-6 mb-2">
+            <label for="fechaContratacion" class="form-label">Fecha de Contratación</label>
+            <input type="date" class="form-control" id="fechaContratacion" name="fechaContratacion" required
+              formControlName="fechaContratacion" [ngClass]="{
                   'is-invalid': formularioEmpleado.get('fechaContratacion')?.invalid && formularioEmpleado.get('fechaContratacion')?.touched,
                   'is-valid': formularioEmpleado.get('fechaContratacion')?.valid && formularioEmpleado.get('fechaContratacion')?.touched
-                }"
-              />
-            
-              <!-- Mensaje de error -->
-              <div *ngIf="formularioEmpleado.get('fechaContratacion')?.hasError('fechaFutura') && formularioEmpleado.get('fechaContratacion')?.touched" class="invalid-feedback">
-                La fecha de contratación no puede ser futura.
-              </div>
+                }" />
+
+            <!-- Mensaje de error -->
+            <div
+              *ngIf="formularioEmpleado.get('fechaContratacion')?.errors?.['required'] &&
+                formularioEmpleado.get('fechaContratacion')?.touched" class="invalid-feedback d-block">
+              La fecha de contratación es obligatoria.
             </div>
-            
+          </div>
+
         </div>
         <!-- Botones de Registrar y Limpiar -->
         <div class="col-12 d-flex justify-content-end">
-          <button type="submit" class="btn btn-aceptar me-2"(click)="onSubmit()" >Registrar</button>
+          <button type="submit" class="btn btn-aceptar me-2" (click)="onSubmit()">Registrar</button>
         </div>
-    </div>
-      </form>
-    </div>
-  </body>
+      </div>
+    </form>
+  </div>
+</body>

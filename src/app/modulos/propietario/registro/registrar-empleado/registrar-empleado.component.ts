@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { RegistroEmpleadoService } from 'src/app/services/registro-empleado/registro-empleado.service';
+import { fileValidator } from 'src/app/validators/file-validator';
 
 @Component({
   selector: 'app-registrar-empleado',
@@ -33,7 +34,7 @@ export class RegistrarEmpleadoComponent implements OnInit {
       correoElectronico: [null, [Validators.required, Validators.email]],
       puesto: ['', Validators.required],
       fechaContratacion: [null, [Validators.required, this.validarFechaNoFutura]],
-      fotografiaEmpleado: [null, Validators.required], // Añadir campo para la imagen
+      fotografiaEmpleado: [null, [Validators.required, fileValidator(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'], 2)]], // Añadir campo para la imagen
     });
   }
 
@@ -57,11 +58,17 @@ export class RegistrarEmpleadoComponent implements OnInit {
       });
     }
     console.log(this.imagenSeleccionada)
+    this.formularioEmpleado.get('fotografiaEmpleado')?.markAsTouched();
+    
   }
 
   onSubmit() {
     if (this.formularioEmpleado.invalid) {
       console.log("form invalido")
+      // que errores hay
+      console.log(this.formularioEmpleado.errors)
+      console.log(this.formularioEmpleado.get('fotografiaEmpleado')?.errors)
+      this.formularioEmpleado.markAllAsTouched(); // Marca todos los campos como tocados para mostrar errores
       this.toastr.info('Por favor, complete todos los campos.','Informacion');
       return;
     }

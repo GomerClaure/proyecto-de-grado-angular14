@@ -277,4 +277,8 @@ export class NavComponent implements OnInit, OnDestroy {
     }
   }
 
+  get idRestauranteSession(): string {
+    return sessionStorage.getItem('id_restaurante') || '0';
+  }
+
 }
