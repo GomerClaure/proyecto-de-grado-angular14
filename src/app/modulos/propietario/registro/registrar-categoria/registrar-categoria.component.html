@@ -35,7 +35,6 @@
                 <!-- Vista previa de la imagen -->
                 <img [src]="imageUrl" (error)="onImgError($event)" id="image-platillo" class="img-fluid shadow-img"
                   alt="Imagen" *ngIf="imageUrl" [style.width.px]="imageWidth" [style.height.px]="imageHeight" />
-
                 <!-- Input de archivo con validación visual -->
                 <div class="input-group has-validation d-flex flex-column align-items-center">
                   <input type="file" id="img-categoria" class="hidden" (change)="onFileSelected($event)"

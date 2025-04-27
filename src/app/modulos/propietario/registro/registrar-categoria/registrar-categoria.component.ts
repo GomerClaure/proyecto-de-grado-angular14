@@ -26,8 +26,8 @@ export class RegistrarCategoriaComponent implements AfterViewInit,OnDestroy {
               ) { 
     this.formularioCategoria=this.formBuilder.group({
       nombre: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      // imagen:[null,[Validators.required, fileValidator(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'], 2)]]
-      imagen: [null,[Validators.required]]
+      imagen:[null,[Validators.required, fileValidator(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'], 2)]]
+      //imagen: [null,[Validators.required]]
     })
     this.id_restaurante=parseInt(sessionStorage.getItem('id_restaurante')||'0');
     this.imageUrl = 'assets/image/Imagen-rota.jpg';
@@ -48,22 +48,35 @@ export class RegistrarCategoriaComponent implements AfterViewInit,OnDestroy {
     this.limpiarModal();
    }
 
-  onFileSelected(event: any) {
+   onFileSelected(event: any) {
     const file = event.target.files[0];
-    if (file) {
+    const control = this.formularioCategoria.get('imagen');
+  
+    if (file && control) {
       this.selectedFile = file;
+  
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = (e: any) => {
         this.imageUrl = e.target.result;
       };
-      this.formularioCategoria.patchValue({
-        imagen: file
-      });
-      
-      this.formularioCategoria.get('imagen')?.markAsTouched();
+  
+      // Validaciones manuales
+      const maxSizeMB = 2;
+      const validTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+  
+      if (!validTypes.includes(file.type)) {
+        control.setErrors({ fileType: true });
+      } else if (file.size > maxSizeMB * 1024 * 1024) {
+        control.setErrors({ fileSize: true });
+      } else {
+        control.setErrors(null); // Sin errores
+      }
+  
+      control.markAsTouched();
     }
   }
+  
   guardarCategoria() {
     console.log('Es Valido:', this.formularioCategoria.valid);
     // cual es el error del formulario
