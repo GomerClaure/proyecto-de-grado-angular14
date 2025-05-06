@@ -6,7 +6,7 @@
       </div>
       <div class="modal-body">
         <div class="form-group" [formGroup]="formularioCategoria">
-          <label for="categoriaInput">Nombre de la Categoría</label>
+          <label for="categoriaInput">Nombre de la Categoría *</label>
           <input type="text" class="form-control" id="categoriaInput" formControlName="nombre" (blur)="validarNombreUnico()"
             [ngClass]="{
               'is-invalid': formularioCategoria.get('nombre')?.invalid && formularioCategoria.get('nombre')?.touched,
