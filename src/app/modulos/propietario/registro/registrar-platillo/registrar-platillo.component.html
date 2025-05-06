@@ -72,8 +72,19 @@
                   'is-valid':
                     formularioPlatillo.get('precio')?.valid &&
                     formularioPlatillo.get('precio')?.touched
-                }" required />
-              <div class="invalid-feedback">Ingrese solo números.</div>
+                }"  />
+            </div>
+            <div *ngIf="formularioPlatillo.get('precio')?.touched">
+              <div
+                *ngIf="formularioPlatillo.get('precio')?.errors?.['required']"
+                class="invalid-feedback d-block">
+                El precio es obligatorio.
+              </div>
+              <div
+                *ngIf="formularioPlatillo.get('precio')?.errors?.['pattern']"
+                class="invalid-feedback d-block">
+                Ingrese un precio válido entre 1 y 1000.
+              </div>
             </div>
           </div>
 

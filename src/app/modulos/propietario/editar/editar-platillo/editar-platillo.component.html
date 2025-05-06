@@ -63,6 +63,18 @@
                 }" required />
               <div class="invalid-feedback">Ingrese solo números.</div>
             </div>
+            <div *ngIf="formularioEditarPlatillo.get('precio')?.touched">
+              <div
+                *ngIf="formularioEditarPlatillo.get('precio')?.errors?.['required']"
+                class="invalid-feedback d-block">
+                El precio es obligatorio.
+              </div>
+              <div
+                *ngIf="formularioEditarPlatillo.get('precio')?.errors?.['pattern']"
+                class="invalid-feedback d-block">
+                Ingrese un precio válido entre 1 y 1000.
+              </div>
+            </div>
           </div>
 
           <!-- Descripción -->

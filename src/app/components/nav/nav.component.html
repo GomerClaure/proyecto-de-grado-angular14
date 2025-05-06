@@ -108,7 +108,7 @@
 <!-- Barra de navegacion para el administrador -->
 <nav *ngIf="esAdministrador()" class="navbar navbar-expand-lg custom-navbar-color navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand"  href="#">Administrador</a>
+    <a class="navbar-brand"  routerLink="/home">Administrador</a>
     <button class="navbar-toggler" type="button" (click)="toggleMenu()" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

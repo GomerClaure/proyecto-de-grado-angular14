@@ -33,7 +33,7 @@ export class RegistrarEmpleadoComponent implements OnInit {
       direccion: [null, Validators.required],
       correoElectronico: [null, [Validators.required, Validators.email]],
       puesto: ['', Validators.required],
-      fechaContratacion: [null, [Validators.required, this.validarFechaNoFutura]],
+      fechaContratacion: ['', [Validators.required, this.validarFechaNoFutura]],
       fotografiaEmpleado: [null, [Validators.required, fileValidator(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'], 2)]], // Añadir campo para la imagen
     });
   }
@@ -140,7 +140,7 @@ export class RegistrarEmpleadoComponent implements OnInit {
     const hoy = new Date();
     fechaContratacion.setHours(0, 0, 0, 0);
     hoy.setHours(0, 0, 0, 0);
-    return fechaContratacion > hoy ? { fechaFutura: true } : null;
+    return fechaContratacion >= hoy ? { fechaFutura: true } : null;
   }
 }
 

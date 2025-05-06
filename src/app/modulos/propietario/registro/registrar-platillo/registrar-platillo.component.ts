@@ -14,7 +14,7 @@ import { from } from 'rxjs';
 })
 export class RegistrarPlatilloComponent implements OnInit{
   formularioPlatillo: FormGroup;
-  static numbersOnlyPattern: RegExp = /^[0-9]*$/;
+  static numbersOnlyOneToFour = '^(?:[1-9]\\d{0,2}|1000)$';
   imageUrl: string | ArrayBuffer | null;
   imageWidth: number = 450; 
   imageHeight: number = 300;
@@ -35,7 +35,7 @@ export class RegistrarPlatilloComponent implements OnInit{
     this.formularioPlatillo = this.formBuilder.group({
       nombre: [null,[Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       categoria: [null,Validators.required],
-      precio: [null, [Validators.required, Validators.pattern(RegistrarPlatilloComponent.numbersOnlyPattern)]],
+      precio: [null, [Validators.required, Validators.pattern(RegistrarPlatilloComponent.numbersOnlyOneToFour)]],
       descripcion: [null,Validators.required],
       imagen: [null, [Validators.required, fileValidator(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'], 2)]],
     });

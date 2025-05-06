@@ -189,6 +189,13 @@
                 formularioEmpleado.get('fechaContratacion')?.touched" class="invalid-feedback d-block">
               La fecha de contratación es obligatoria.
             </div>
+            <div
+              *ngIf="formularioEmpleado.get('fechaContratacion')?.errors?.['fechaFutura'] &&
+                    formularioEmpleado.get('fechaContratacion')?.touched"
+              class="invalid-feedback d-block">
+              La fecha de contratación no puede ser futura.
+            </div>
+
           </div>
 
         </div>

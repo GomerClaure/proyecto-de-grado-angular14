@@ -17,6 +17,7 @@ import { from } from 'rxjs';
   styleUrls: ['./editar-platillo.component.scss']
 })
 export class EditarPlatilloComponent implements OnInit {
+  static numbersOnlyOneToFour = '^(?:[1-9]\\d{0,2}|1000)$';
   idPlatillo: string = '';
   platillo: Platillo = {} as Platillo;
   imageUrl: string | ArrayBuffer | null;
@@ -37,7 +38,7 @@ export class EditarPlatilloComponent implements OnInit {
     this.formularioEditarPlatillo = this.formBuilder.group({
       nombre: [null,[Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       categoria: [null, Validators.required],
-      precio: [null, [Validators.required, Validators.pattern(RegistrarPlatilloComponent.numbersOnlyPattern)]],
+      precio: [null, [Validators.required, Validators.pattern(RegistrarPlatilloComponent.numbersOnlyOneToFour)]],
       descripcion: [null, Validators.required],
       imagen: [null, [fileValidator(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'], 2)]],
     });
