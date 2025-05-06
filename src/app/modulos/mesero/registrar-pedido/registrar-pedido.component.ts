@@ -63,6 +63,8 @@ export class RegistrarPedidoComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.rol_user = parseInt(sessionStorage.getItem('rol_empleado') || '0');
       if (this.rol_user === 2) {
+        this.switchState = true;
+        this.tipo = 'Llevar';
         this.getPrimerMesa();
         this.mostrarModal=true;
       } else {
