@@ -2,7 +2,7 @@
   <div class="row">
     <!-- Nombre del Propietario -->
     <div class="form-group col-md-6 mb-1 p-1">
-      <label for="nombrePropietario">Nombre del Propietario</label>
+      <label for="nombrePropietario">Nombre del Propietario *</label>
       <div class="input-group has-validation">
         <input id="nombrePropietario" type="text" class="form-control" formControlName="nombrePropietario" [ngClass]="{
             'is-invalid': pasoTresForm.get('nombrePropietario')?.invalid && pasoTresForm.get('nombrePropietario')?.touched,
@@ -16,7 +16,7 @@
 
     <!-- Apellido Paterno -->
     <div class="form-group col-md-6 mb-1 p-1">
-      <label for="apellidoPaterno">Apellido Paterno</label>
+      <label for="apellidoPaterno">Apellido Paterno *</label>
       <div class="input-group has-validation">
         <input id="apellidoPaterno" type="text" class="form-control" formControlName="apellidoPaterno" [ngClass]="{
             'is-invalid': pasoTresForm.get('apellidoPaterno')?.invalid && pasoTresForm.get('apellidoPaterno')?.touched,
@@ -32,7 +32,7 @@
   <div class="row">
     <!-- Apellido Materno -->
     <div class="form-group col-md-6 mb-1 p-1">
-      <label for="apellidoMaterno">Apellido Materno</label>
+      <label for="apellidoMaterno">Apellido Materno *</label>
       <div class="input-group has-validation">
         <input id="apellidoMaterno" type="text" class="form-control" formControlName="apellidoMaterno" [ngClass]="{
             'is-invalid': pasoTresForm.get('apellidoMaterno')?.invalid && pasoTresForm.get('apellidoMaterno')?.touched,
@@ -46,7 +46,7 @@
 
     <!-- Cédula de Identidad -->
     <div class="form-group col-md-6 mb-1 p-1">
-      <label for="cedulaIdentidad">Cédula de Identidad</label>
+      <label for="cedulaIdentidad">Cédula de Identidad *</label>
       <div class="input-group has-validation">
         <input id="cedulaIdentidad" type="text" class="form-control" formControlName="cedulaIdentidad" [ngClass]="{
             'is-invalid': pasoTresForm.get('cedulaIdentidad')?.invalid && pasoTresForm.get('cedulaIdentidad')?.touched,
@@ -62,7 +62,7 @@
   <div class="row">
     <!-- Correo Electrónico del Propietario -->
     <div class="form-group col-md-6 mb-1 p-1">
-      <label for="correoPropietario">Correo Electrónico del Propietario</label>
+      <label for="correoPropietario">Correo Electrónico del Propietario *</label>
       <div class="input-group has-validation">
         <input id="correoPropietario" type="email" class="form-control" formControlName="correoPropietario" [ngClass]="{
             'is-invalid': pasoTresForm.get('correoPropietario')?.invalid && pasoTresForm.get('correoPropietario')?.touched,
@@ -74,7 +74,7 @@
       </div>
     </div>
     <div class="form-group col-md-6 mb-1 p-1">
-      <label for="mesasEstablecimiento">Mesas del Establecimiento</label>
+      <label for="mesasEstablecimiento">Mesas del Establecimiento *</label>
       <div class="input-group has-validation">
         <input id="mesasEstablecimiento" type="number" class="form-control" formControlName="numeroMesas"
           [ngClass]="{
@@ -102,7 +102,7 @@
   <div class="row">
     <!-- Fotografía del Propietario -->
     <div class="form-group col-md-12 mb-3 p-1">
-      <label for="fotografiaPropietario">Fotografía del Propietario</label>
+      <label for="fotografiaPropietario">Fotografía del Propietario *</label>
       <div class="input-group has-validation">
         <button type="button" class="btn btn-custom" (click)="fileInputPaso3.click()">
           <i class="bi bi-person-bounding-box"></i> Seleccionar foto

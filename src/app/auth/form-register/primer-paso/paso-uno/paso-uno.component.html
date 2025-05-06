@@ -2,7 +2,7 @@
   <div class="row">
     <!-- Nombre del restaurante -->
     <div class="form-group col-md-12 mb-1 p-1">
-      <label for="nombreRestaurante">Nombre del restaurante</label>
+      <label for="nombreRestaurante">Nombre del restaurante *</label>
       <div class="input-group has-validation">
         <input id="nombreRestaurante" formControlName="nombreRestaurante" class="form-control"
           placeholder="La Casa de las Empanadas" [ngClass]="{
@@ -17,7 +17,7 @@
 
     <!-- NIT -->
     <div class="form-group col-md-6 mb-1 p-1">
-      <label for="nit">NIT</label>
+      <label for="nit">NIT *</label>
       <div class="input-group has-validation">
         <input id="nit" formControlName="nit" class="form-control" placeholder="123456789" [ngClass]="{
               'is-invalid': pasoUnoForm.get('nit')?.invalid && pasoUnoForm.get('nit')?.touched,
@@ -31,7 +31,7 @@
 
     <!-- Número de celular -->
     <div class="form-group col-md-6 mb-1 p-1">
-      <label for="numeroCelular">Número de celular</label>
+      <label for="numeroCelular">Número de celular *</label>
       <div class="input-group has-validation">
         <input id="numeroCelular" formControlName="numeroCelular" class="form-control" placeholder="6001234567"
           [ngClass]="{
@@ -46,7 +46,7 @@
 
     <!-- Correo del restaurante -->
     <div class="form-group col-md-12 mb-1 p-1">
-      <label for="correoRestaurante">Correo electrónico del restaurante</label>
+      <label for="correoRestaurante">Correo electrónico del restaurante *</label>
       <div class="input-group has-validation">
         <input id="correoRestaurante" formControlName="correoRestaurante" class="form-control"
           placeholder="restaurante@example.com" [ngClass]="{
@@ -61,7 +61,7 @@
 
     <!-- Licencia de funcionamiento -->
     <div class="form-group col-md-12 p-1 mb-3">
-      <label for="licenciaFuncionamiento">Licencia de funcionamiento (PDF)</label>
+      <label for="licenciaFuncionamiento">Licencia de funcionamiento (PDF) *</label>
       <div class="input-group has-validation">
         <button type="button" class="btn btn-custom" (click)="fileInput.click()">
           <i class="bi bi-file-earmark-pdf"></i> Seleccionar archivo
