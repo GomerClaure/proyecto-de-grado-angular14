@@ -11,7 +11,7 @@
           <div class="mb-3">
             <label>Nombre del producto *</label>
             <div class="input-group has-validation">
-              <input type="text" class="form-control" formControlName="nombre" placeholder="Empanada" [ngClass]="{
+              <input type="text" class="form-control" formControlName="nombre" [ngClass]="{
                   'is-invalid':
                     formularioPlatillo.get('nombre')?.invalid &&
                     formularioPlatillo.get('nombre')?.touched,
@@ -65,7 +65,7 @@
           <div class="mb-3">
             <label>Precio *</label>
             <div class="input-group has-validation">
-              <input type="text" class="form-control" formControlName="precio" placeholder="15" [ngClass]="{
+              <input type="text" class="form-control" formControlName="precio" [ngClass]="{
                   'is-invalid':
                     formularioPlatillo.get('precio')?.invalid &&
                     formularioPlatillo.get('precio')?.touched,
@@ -93,7 +93,7 @@
             <label>Descripción *</label>
             <div class="input-group has-validation">
               <textarea class="form-control fixed-textarea" formControlName="descripcion"
-                placeholder="Breve descripción del producto" [ngClass]="{
+                [ngClass]="{
                   'is-invalid':
                     formularioPlatillo.get('descripcion')?.invalid &&
                     formularioPlatillo.get('descripcion')?.touched,

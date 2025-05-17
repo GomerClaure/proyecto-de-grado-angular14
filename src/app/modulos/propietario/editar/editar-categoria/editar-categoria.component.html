@@ -6,12 +6,12 @@
       </div>
       <div class="modal-body">
         <div class="form-group" [formGroup]="formularioCategoria">
-          <label for="categoriaInput">Nombre de la Categoría</label>
+          <label for="categoriaInput">Nombre de la Categoría *</label>
           <input type="text" class="form-control" id="categoriaInput" formControlName="nombre" (blur)="validarNombreUnico()"
             [ngClass]="{
               'is-invalid': formularioCategoria.get('nombre')?.invalid && formularioCategoria.get('nombre')?.touched,
               'is-valid': formularioCategoria.get('nombre')?.valid && formularioCategoria.get('nombre')?.touched
-            }" placeholder="Entradas" />
+            }" />
           <div *ngIf="formularioCategoria.get('nombre')?.errors?.['required'] && formularioCategoria.get('nombre')?.touched"
             class="text-danger">
             El nombre es obligatorio.
@@ -37,7 +37,7 @@
               (error)="onImageError()" [style.height.px]="imageHeight">
               <input #fileInput type="file" id="archivoCatFoto" (change)="onFileSelected($event)" class="hidden" 
               accept="image/jpeg, image/png, image/jpg, image/webp">
-              <label for="archivoCatFoto" class="btn-img btn btn-subir-imagen">Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i></label>
+              <label for="archivoCatFoto" class="btn-img btn btn-subir-imagen">Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i> *</label>
             </div>
           </div>
         </div>

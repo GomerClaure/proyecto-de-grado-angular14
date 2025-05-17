@@ -230,3 +230,22 @@ th {
 .modal-footer{
   background-color: #044051;
 }
+
+//Estilo para badges
+.badge-pendiente{
+  background-color: #2c190dc5;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.badge-aceptado{
+  background-color: #112c0dc5;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.badge-rechazado{
+  background-color: #280d2cc5;
+  color: #ffffff;
+  font-weight: bold;
+}

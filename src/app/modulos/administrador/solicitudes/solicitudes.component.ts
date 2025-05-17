@@ -70,11 +70,11 @@ export class SolicitudesComponent implements OnInit {
   getBadgeClass(estado: string): string {
     switch (estado.toLowerCase()) {
       case 'pendiente':
-        return 'bg-secondary ';
+        return 'badge-pendiente ';
       case 'rechazado':
-        return 'bg-danger';
+        return 'badge-rechazado';
       case 'aceptado':
-        return 'bg-success';
+        return 'badge-aceptado';
       default:
         return 'bg-secondary';
     }

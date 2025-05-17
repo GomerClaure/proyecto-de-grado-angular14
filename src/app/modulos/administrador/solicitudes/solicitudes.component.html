@@ -20,7 +20,7 @@
                   <td>{{ registro.nit }}</td>
                   <td>{{ registro.nombre_propietario }} {{ registro.apellido_paterno_propietario }}</td>
                   <td>
-                    <span class="badge" [ngClass]="getBadgeClass(registro.estado)">
+                    <span class="badge rounded-pill text-capitalize" [ngClass]="getBadgeClass(registro.estado)">
                       {{ registro.estado }}
                     </span>
                   </td>

@@ -7,7 +7,7 @@
         <input id="nombrePropietario" type="text" class="form-control" formControlName="nombrePropietario" [ngClass]="{
             'is-invalid': pasoTresForm.get('nombrePropietario')?.invalid && pasoTresForm.get('nombrePropietario')?.touched,
             'is-valid': pasoTresForm.get('nombrePropietario')?.valid && pasoTresForm.get('nombrePropietario')?.touched
-          }" placeholder="Nombre del Propietario" required />
+          }" required />
         <div class="invalid-feedback">
           El nombre del propietario es requerido.
         </div>
@@ -21,7 +21,7 @@
         <input id="apellidoPaterno" type="text" class="form-control" formControlName="apellidoPaterno" [ngClass]="{
             'is-invalid': pasoTresForm.get('apellidoPaterno')?.invalid && pasoTresForm.get('apellidoPaterno')?.touched,
             'is-valid': pasoTresForm.get('apellidoPaterno')?.valid && pasoTresForm.get('apellidoPaterno')?.touched
-          }" placeholder="Apellido Paterno" required />
+          }" required />
         <div class="invalid-feedback">
           El apellido paterno es requerido.
         </div>
@@ -37,7 +37,7 @@
         <input id="apellidoMaterno" type="text" class="form-control" formControlName="apellidoMaterno" [ngClass]="{
             'is-invalid': pasoTresForm.get('apellidoMaterno')?.invalid && pasoTresForm.get('apellidoMaterno')?.touched,
             'is-valid': pasoTresForm.get('apellidoMaterno')?.valid && pasoTresForm.get('apellidoMaterno')?.touched
-          }" placeholder="Apellido Materno" required />
+          }" required />
         <div class="invalid-feedback">
           El apellido materno es requerido.
         </div>
@@ -51,7 +51,7 @@
         <input id="cedulaIdentidad" type="text" class="form-control" formControlName="cedulaIdentidad" [ngClass]="{
             'is-invalid': pasoTresForm.get('cedulaIdentidad')?.invalid && pasoTresForm.get('cedulaIdentidad')?.touched,
             'is-valid': pasoTresForm.get('cedulaIdentidad')?.valid && pasoTresForm.get('cedulaIdentidad')?.touched
-          }" placeholder="Cédula de Identidad" required />
+          }" required />
         <div class="invalid-feedback">
           La cédula de identidad es requerida y no debe tener mas de 7 digitos.
         </div>
@@ -67,7 +67,7 @@
         <input id="correoPropietario" type="email" class="form-control" formControlName="correoPropietario" [ngClass]="{
             'is-invalid': pasoTresForm.get('correoPropietario')?.invalid && pasoTresForm.get('correoPropietario')?.touched,
             'is-valid': pasoTresForm.get('correoPropietario')?.valid && pasoTresForm.get('correoPropietario')?.touched
-          }" placeholder="Correo Electrónico" required />
+          }" required />
         <div class="invalid-feedback">
           El correo electrónico es requerido y debe tener un formato válido.
         </div>
@@ -80,7 +80,7 @@
           [ngClass]="{
           'is-invalid': pasoTresForm.get('numeroMesas')?.invalid && pasoTresForm.get('numeroMesas')?.touched,
           'is-valid': pasoTresForm.get('numeroMesas')?.valid && pasoTresForm.get('numeroMesas')?.touched
-        }" placeholder="Número de mesas" required />
+        }" required />
          <div *ngIf="pasoTresForm.get('numeroMesas')?.errors?.['required']" class="invalid-feedback">
           El número de mesas es requerido.
         </div>
@@ -116,7 +116,7 @@
               pasoTresForm.get('fotografiaPropietario')?.touched
           }" [value]="
             pasoTresForm.get('fotografiaPropietario')?.value?.name || ''
-          " placeholder="No se ha seleccionado ningún archivo" disabled />
+          "  disabled />
         <input id="fileInputPaso3" type="file" (change)="onFileChange($event, 'fotografiaPropietario')" #fileInputPaso3
           style="display: none;" accept="image/png, image/jpeg, image/jpg, image/webp" />
       </div>

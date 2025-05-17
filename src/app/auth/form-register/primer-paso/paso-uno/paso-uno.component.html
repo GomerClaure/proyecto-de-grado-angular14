@@ -5,7 +5,7 @@
       <label for="nombreRestaurante">Nombre del restaurante *</label>
       <div class="input-group has-validation">
         <input id="nombreRestaurante" formControlName="nombreRestaurante" class="form-control"
-          placeholder="La Casa de las Empanadas" [ngClass]="{
+          [ngClass]="{
               'is-invalid': pasoUnoForm.get('nombreRestaurante')?.invalid && pasoUnoForm.get('nombreRestaurante')?.touched,
               'is-valid': pasoUnoForm.get('nombreRestaurante')?.valid && pasoUnoForm.get('nombreRestaurante')?.touched
             }" required />
@@ -19,7 +19,7 @@
     <div class="form-group col-md-6 mb-1 p-1">
       <label for="nit">NIT *</label>
       <div class="input-group has-validation">
-        <input id="nit" formControlName="nit" class="form-control" placeholder="123456789" [ngClass]="{
+        <input id="nit" formControlName="nit" class="form-control" [ngClass]="{
               'is-invalid': pasoUnoForm.get('nit')?.invalid && pasoUnoForm.get('nit')?.touched,
               'is-valid': pasoUnoForm.get('nit')?.valid && pasoUnoForm.get('nit')?.touched
             }" required />
@@ -33,7 +33,7 @@
     <div class="form-group col-md-6 mb-1 p-1">
       <label for="numeroCelular">Número de celular *</label>
       <div class="input-group has-validation">
-        <input id="numeroCelular" formControlName="numeroCelular" class="form-control" placeholder="6001234567"
+        <input id="numeroCelular" formControlName="numeroCelular" class="form-control"
           [ngClass]="{
               'is-invalid': pasoUnoForm.get('numeroCelular')?.invalid && pasoUnoForm.get('numeroCelular')?.touched,
               'is-valid': pasoUnoForm.get('numeroCelular')?.valid && pasoUnoForm.get('numeroCelular')?.touched
@@ -49,7 +49,7 @@
       <label for="correoRestaurante">Correo electrónico del restaurante *</label>
       <div class="input-group has-validation">
         <input id="correoRestaurante" formControlName="correoRestaurante" class="form-control"
-          placeholder="restaurante@example.com" [ngClass]="{
+          [ngClass]="{
               'is-invalid': pasoUnoForm.get('correoRestaurante')?.invalid && pasoUnoForm.get('correoRestaurante')?.touched,
               'is-valid': pasoUnoForm.get('correoRestaurante')?.valid && pasoUnoForm.get('correoRestaurante')?.touched
             }" required />
@@ -70,7 +70,7 @@
       'is-invalid': pasoUnoForm.get('licenciaFuncionamiento')?.invalid && pasoUnoForm.get('licenciaFuncionamiento')?.touched,
       'is-valid': pasoUnoForm.get('licenciaFuncionamiento')?.valid && pasoUnoForm.get('licenciaFuncionamiento')?.touched
     }" [value]="pasoUnoForm.get('licenciaFuncionamiento')?.value?.name || ''"
-          placeholder="No se ha seleccionado ningún archivo" disabled>
+          disabled>
     <!-- solo extensiones.pdf -->
         <input id="fileInput" type="file" (change)="onFileChange($event, 'licenciaFuncionamiento')" #fileInput
           style="display: none;" accept="application/pdf"  required>

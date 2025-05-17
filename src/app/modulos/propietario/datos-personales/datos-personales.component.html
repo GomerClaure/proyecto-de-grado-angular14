@@ -7,53 +7,53 @@
           <h2 class="pb-2">Datos Personales</h2>
           <!-- Nombre -->
           <div class="mb-3">
-            <label>Nombre</label>
+            <label>Nombre *</label>
             <input id="nombre" formControlName="nombre" class="form-control"
               [ngClass]="{
                 'is-invalid': usuarioForm.get('nombre')?.invalid && usuarioForm.get('nombre')?.touched
               }"
-              placeholder="Nombre" required>
+             required>
             <div class="invalid-feedback">Nombre es requerido</div>
           </div>
           <!-- Apellido Paterno -->
           <div class="mb-3">
-            <label>Apellido Paterno</label>
+            <label>Apellido Paterno *</label>
             <input id="apellido_paterno" formControlName="apellido_paterno" class="form-control"
               [ngClass]="{
                 'is-invalid': usuarioForm.get('apellido_paterno')?.invalid && usuarioForm.get('apellido_paterno')?.touched
               }"
-              placeholder="Apellido Paterno" required>
+              required>
             <div class="invalid-feedback">Apellido Paterno es requerido</div>
           </div>
           <!-- Apellido Materno -->
           <div class="mb-3">
-            <label>Apellido Materno</label>
+            <label>Apellido Materno *</label>
             <input id="apellido_materno" formControlName="apellido_materno" class="form-control"
               [ngClass]="{
                 'is-invalid': usuarioForm.get('apellido_materno')?.invalid && usuarioForm.get('apellido_materno')?.touched
               }"
-              placeholder="Apellido Materno" required>
+              required>
             <div class="invalid-feedback">Apellido Materno es requerido</div>
           </div>
           <!-- Correo -->
           <div class="mb-3">
-            <label>Correo Electrónico</label>
+            <label>Correo Electrónico *</label>
             <input id="correo" type="email" formControlName="correo" class="form-control"
               [ngClass]="{
                 'is-invalid': usuarioForm.get('correo')?.invalid && usuarioForm.get('correo')?.touched 
               }"
-              placeholder="Correo" required>
+             required>
             <div class="invalid-feedback">Correo es requerido y debe ser válido</div>
           </div>
 
           <!-- Nickname -->
           <div class="mb-3">
-            <label>Nickname</label>
+            <label>Nickname *</label>
             <input id="nickname" formControlName="nickname" class="form-control"
               [ngClass]="{
                 'is-invalid': usuarioForm.get('nickname')?.invalid && usuarioForm.get('nickname')?.touched 
               }"
-              placeholder="Nickname" required>
+              required>
             <div class="invalid-feedback">Nickname es requerido</div>
           </div>
         </div>
@@ -68,7 +68,7 @@
                      (change)="onFileSelected($event)" accept="image/jpeg, image/png, image/jpg, image/webp">
               <label for="datos-personales" class="btn-img btn btn-subir-imagen">
                 Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i>
-              </label>
+               </label>
             </div>
           </div>
           <div *ngIf="usuarioForm.get('foto_perfil')?.errors?.['invalidoTipoArchivo'] && usuarioForm.get('foto_perfil')?.touched"

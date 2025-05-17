@@ -11,7 +11,7 @@
             [ngClass]="{
               'is-invalid': formularioCategoria.get('nombre')?.invalid && formularioCategoria.get('nombre')?.touched,
               'is-valid': formularioCategoria.get('nombre')?.valid && formularioCategoria.get('nombre')?.touched
-            }" placeholder="Entradas" />
+            }" />
           <div *ngIf="formularioCategoria.get('nombre')?.errors?.['required'] && formularioCategoria.get('nombre')?.touched"
             class="text-danger">
             El nombre es obligatorio.

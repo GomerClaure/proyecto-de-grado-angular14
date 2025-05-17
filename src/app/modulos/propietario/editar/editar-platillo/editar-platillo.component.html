@@ -8,9 +8,9 @@
 
           <!-- Nombre -->
           <div class="mb-3">
-            <label>Nombre del producto</label>
+            <label>Nombre del producto *</label>
             <div class="input-group has-validation">
-              <input type="text" class="form-control" formControlName="nombre" placeholder="Empanada" 
+              <input type="text" class="form-control" formControlName="nombre"
                 [ngClass]="{
                   'is-invalid': formularioEditarPlatillo.get('nombre')?.invalid && formularioEditarPlatillo.get('nombre')?.touched,
                   'is-valid': formularioEditarPlatillo.get('nombre')?.valid && formularioEditarPlatillo.get('nombre')?.touched
@@ -39,7 +39,7 @@
 
           <!-- Categoría -->
           <div class="mb-3">
-            <label for="exampleFormControlSelect1">Categoría</label>
+            <label for="exampleFormControlSelect1">Categoría *</label>
             <div class="input-group has-validation">
               <select class="form-control form-select" formControlName="categoria"
                 [ngClass]="{
@@ -54,9 +54,9 @@
 
           <!-- Precio -->
           <div class="mb-3">
-            <label>Precio</label>
+            <label>Precio *</label>
             <div class="input-group has-validation">
-              <input type="text" class="form-control" formControlName="precio" placeholder="15" 
+              <input type="text" class="form-control" formControlName="precio" 
                 [ngClass]="{
                   'is-invalid': formularioEditarPlatillo.get('precio')?.invalid && formularioEditarPlatillo.get('precio')?.touched,
                   'is-valid': formularioEditarPlatillo.get('precio')?.valid && formularioEditarPlatillo.get('precio')?.touched
@@ -79,9 +79,9 @@
 
           <!-- Descripción -->
           <div class="mb-4">
-            <label>Descripción</label>
+            <label>Descripción *</label>
             <div class="input-group has-validation">
-              <textarea class="form-control" formControlName="descripcion" placeholder="Descripción del producto"
+              <textarea class="form-control" formControlName="descripcion"
                 [ngClass]="{
                   'is-invalid': formularioEditarPlatillo.get('descripcion')?.invalid && formularioEditarPlatillo.get('descripcion')?.touched,
                   'is-valid': formularioEditarPlatillo.get('descripcion')?.valid && formularioEditarPlatillo.get('descripcion')?.touched
@@ -114,7 +114,7 @@
 
                 <label for="img-registrar-platillo" class="btn-img btn btn-subir-imagen mt-2">
                   Seleccionar Imagen <i class="bi bi-file-earmark-arrow-up"></i>
-                </label>
+                 </label>
               </div>
             </div>
           </div>

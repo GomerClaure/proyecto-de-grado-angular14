@@ -11,20 +11,27 @@
       <!-- Formulario de login -->
       <form [formGroup]="formularioLogin">
         <div class="mb-3">
-          <label for="validationServer03" class="form-label mt-5">Nombre</label>
+          <label for="validationServer03" class="form-label mt-5">Nombre *</label>
           <input class="form-control" aria-describedby="validationServer03Feedback" formControlName="usuario" [class.is-invalid]="formularioLogin.get('usuario')?.invalid && formularioLogin.get('usuario')?.touched">
           <div *ngIf="formularioLogin.get('usuario')?.invalid && formularioLogin.get('usuario')?.touched" class="invalid-feedback">
             El nombre es obligatorio.
           </div>
         </div>
   
-        <div class="input-group">
-          <input [type]="mostrarPassword ? 'text' : 'password'" class="form-control" aria-describedby="validationServer03Feedback" formControlName="password" [class.is-invalid]="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched">
-          <span class="input-group-text fa-span" (click)="toggleMostrarPassword()" style="cursor: pointer;">
-            <i class="fa" [ngClass]="mostrarPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
-          </span>
-          <div *ngIf="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched" class="invalid-feedback">
-            La contraseña es obligatoria y debe tener al menos 8 caracteres.
+        <div class="mb-3">
+          <label for="validationPassword" class="form-label">Contraseña *</label>
+          <div class="input-group">
+            <input [type]="mostrarPassword ? 'text' : 'password'" id="validationPassword"
+                   class="form-control" aria-describedby="validationPasswordFeedback"
+                   formControlName="password"
+                   [class.is-invalid]="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched">
+            <span class="input-group-text fa-span" (click)="toggleMostrarPassword()" style="cursor: pointer;">
+              <i class="fa" [ngClass]="mostrarPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+            </span>
+            <div *ngIf="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched"
+                 class="invalid-feedback">
+              La contraseña es obligatoria y debe tener al menos 8 caracteres.
+            </div>
           </div>
         </div>
   
