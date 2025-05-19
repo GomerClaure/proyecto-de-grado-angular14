@@ -11,11 +11,9 @@
     overflow: hidden; 
   }
   .restaurant-title {
-    font-family: 'Permanent Marker', cursive; 
     font-size:7em !important; 
     color: #221f29; 
     text-align: justify;
-    animation: 7s ease 0s infinite beat;
   }
   @keyframes beat {
     0%, 50%, 100% { transform: scale(1, 1); }

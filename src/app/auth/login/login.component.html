@@ -11,7 +11,7 @@
       <!-- Formulario de login -->
       <form [formGroup]="formularioLogin">
         <div class="mb-3">
-          <label for="validationServer03" class="form-label mt-5">Nombre *</label>
+          <label for="validationServer03" class="form-label mt-5">Nombre</label>
           <input class="form-control" aria-describedby="validationServer03Feedback" formControlName="usuario" [class.is-invalid]="formularioLogin.get('usuario')?.invalid && formularioLogin.get('usuario')?.touched">
           <div *ngIf="formularioLogin.get('usuario')?.invalid && formularioLogin.get('usuario')?.touched" class="invalid-feedback">
             El nombre es obligatorio.
@@ -19,7 +19,7 @@
         </div>
   
         <div class="mb-3">
-          <label for="validationPassword" class="form-label">Contraseña *</label>
+          <label for="validationPassword" class="form-label">Contraseña</label>
           <div class="input-group">
             <input [type]="mostrarPassword ? 'text' : 'password'" id="validationPassword"
                    class="form-control" aria-describedby="validationPasswordFeedback"
